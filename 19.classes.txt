@@ -1,0 +1,4290 @@
+// classes w3 schools - a good flow overview 
+
+console.log("JavaScript Classes")
+
+// ECMAScript 2015, also known as ES6, 
+// introduced JavaScript Classes.
+// JavaScript Classes are templates 
+// for JavaScript Objects.
+
+// JavaScript Class Syntax
+// Use the keyword class to create a class.
+
+// Always add a method named constructor():
+
+// Syntax
+class ClassName {
+    constructor() { ... }
+}
+// Example
+class Car {
+    constructor(name, year) {
+        this.name = name;
+        this.year = year;
+    }
+}
+// The example above creates a class named "Car".
+// The class has two initial properties: "name" and "year".
+
+// A JavaScript class is not an object.
+// It is a template for JavaScript objects.
+
+// Using a Class
+// When you have a class, you can 
+// use the class to create objects:
+
+// Example
+const myCar1 = new Car("Ford", 2014);
+const myCar2 = new Car("Audi", 2019);
+
+// The example above uses the Car class 
+// to create two Car objects.
+
+// The constructor method is called 
+// automatically when a new object is created.
+
+// The Constructor Method
+// The constructor method is a special method:
+
+// It has to have the exact name "constructor"
+// It is executed automatically when a new object is created
+// It is used to initialize object properties
+// If you do not define a constructor method, 
+// JavaScript will add an empty constructor method.
+
+// Class Methods
+// Class methods are created with the 
+// same syntax as object methods.
+// Use the keyword class to create a class.
+// Always add a constructor() method.
+// Then add any number of methods.
+
+// Syntax
+class ClassName {
+    constructor() { ... }
+    method_1() { ... }
+    method_2() { ... }
+    method_3() { ... }
+}
+// Create a Class method named "age", 
+// that returns the Car age:
+
+// Example
+class Car {
+    constructor(name, year) {
+        this.name = name;
+        this.year = year;
+    }
+    age() {
+        const date = new Date();
+        return date.getFullYear() - this.year;
+    }
+}
+
+const myCar = new Car("Ford", 2014);
+document.getElementById("demo").innerHTML =
+    "My car is " + myCar.age() + " years old.";
+
+// You can send parameters to Class methods:
+
+// Example
+class Car {
+    constructor(name, year) {
+        this.name = name;
+        this.year = year;
+    }
+    age(x) {
+        return x - this.year;
+    }
+}
+
+const date = new Date();
+let year = date.getFullYear();
+
+const myCar = new Car("Ford", 2014);
+document.getElementById("demo").innerHTML =
+    "My car is " + myCar.age(year) + " years old.";
+
+// Browser Support
+// The following table defines the first 
+// browser version with full support for 
+// Classes in JavaScript:
+
+// Chrome 49	Edge 12	Firefox 45	Safari 9	Opera 36
+// Mar, 2016	Jul, 2015	Mar, 2016	Oct, 2015	Mar, 2016
+
+
+// "use strict"
+// The syntax in classes must be 
+// written in "strict mode".
+
+// You will get an error if you do not 
+// follow the "strict mode" rules.
+
+// Example
+// In "strict mode" you will get an 
+// error if you use a variable without declaring it:
+
+class Car {
+    constructor(name, year) {
+        this.name = name;
+        this.year = year;
+    }
+    age() {
+        // date = new Date();  // This will not work
+        const date = new Date(); // This will work
+        return date.getFullYear() - this.year;
+    }
+}
+
+
+
+console.log("JavaScript Class Inheritance")
+
+// Class Inheritance
+// To create a class inheritance, use 
+// the extends keyword.
+
+// A class created with a class inheritance 
+// inherits all the methods from another class:
+
+// Example
+// Create a class named "Model" which will 
+// inherit the methods from the "Car" class:
+
+class Car {
+    constructor(brand) {
+        this.carname = brand;
+    }
+    present() {
+        return 'I have a ' + this.carname;
+    }
+}
+
+class Model extends Car {
+    constructor(brand, mod) {
+        super(brand);
+        this.model = mod;
+    }
+    show() {
+        return this.present() + ', it is a ' + this.model;
+    }
+}
+
+let myCar = new Model("Ford", "Mustang");
+document.getElementById("demo").innerHTML = myCar.show();
+
+// The super() method refers to the parent class.
+// By calling the super() method in the constructor method, 
+// we call the parent's constructor method and gets access 
+// to the parent's properties and methods.
+// Inheritance is useful for code reusability: reuse 
+// properties and methods of an existing class when you 
+// create a new class.
+
+// Getters and Setters
+// Classes also allows you to use getters and setters.
+
+// It can be smart to use getters and setters for your 
+// properties, especially if you want to do something 
+// special with the value before returning them, or before 
+// you set them.
+// To add getters and setters in the class,
+//  use the get and set keywords.
+
+// Example
+// Create a getter and a setter for the "carname" property:
+
+class Car {
+    constructor(brand) {
+        this.carname = brand;
+    }
+    get cnam() {
+        return this.carname;
+    }
+    set cnam(x) {
+        this.carname = x;
+    }
+}
+
+const myCar = new Car("Ford");
+
+document.getElementById("demo").innerHTML = myCar.cnam;
+
+// Note: even if the getter is a method, you do not use 
+// parentheses when you want to get the property value.
+// The name of the getter/setter method cannot be the same 
+// as the name of the property, in this case carname.
+// Many programmers use an underscore character _ before 
+// the property name to separate the getter/setter from 
+// the actual property:
+
+// Example
+// You can use the underscore character to 
+// separate the getter/setter from the actual property:
+
+class Car {
+    constructor(brand) {
+        this._carname = brand;
+    }
+    get carname() {
+        return this._carname;
+    }
+    set carname(x) {
+        this._carname = x;
+    }
+}
+
+const myCar = new Car("Ford");
+
+document.getElementById("demo").innerHTML = myCar.carname;
+
+// To use a setter, use the same syntax as when 
+// you set a property value, without parentheses:
+
+// Example
+// Use a setter to change the carname to "Volvo":
+
+class Car {
+    constructor(brand) {
+        this._carname = brand;
+    }
+    get carname() {
+        return this._carname;
+    }
+    set carname(x) {
+        this._carname = x;
+    }
+}
+
+const myCar = new Car("Ford");
+myCar.carname = "Volvo";
+document.getElementById("demo").innerHTML = myCar.carname;
+
+// Hoisting
+// Unlike functions, and other JavaScript declarations,
+//  class declarations are not hoisted.
+
+// That means that you must declare a class before
+//  you can use it:
+
+// Example
+//You cannot use the class yet.
+//myCar = new Car("Ford") will raise an error.
+
+class Car {
+    constructor(brand) {
+        this.carname = brand;
+    }
+}
+
+//Now you can use the class:
+const myCar = new Car("Ford")
+// Note: For other declarations, like functions, you will 
+// NOT get an error when you try to use it before it is 
+// declared, because the default behavior of JavaScript 
+// declarations are hoisting (moving the declaration to 
+// the top).
+
+
+console.log("JavaScript Static Methods")
+
+// Static class methods are defined on the class itself.
+// You cannot call a static method on an object, only on an object class.
+
+// Example
+class Car {
+    constructor(name) {
+        this.name = name;
+    }
+    static hello() {
+        return "Hello!!";
+    }
+}
+
+const myCar = new Car("Ford");
+
+// You can call 'hello()' on the Car Class:
+document.getElementById("demo").innerHTML = Car.hello();
+
+// But NOT on a Car Object:
+// document.getElementById("demo").innerHTML = myCar.hello();
+// this will raise an error.
+
+// If you want to use the myCar object inside 
+// the static method, you can send it as a parameter:
+
+Example
+class Car {
+    constructor(name) {
+        this.name = name;
+    }
+    static hello(x) {
+        return "Hello " + x.name;
+    }
+}
+const myCar = new Car("Ford");
+// document.getElementById("demo").innerHTML = Car.hello(myCar);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+classes mdn - the pure power 
+
+// Using classes
+// JavaScript is a prototype-based language — an object's behaviors 
+// are specified by its own properties and its prototype's properties. 
+// However, with the addition of classes, the creation of hierarchies 
+// of objects and the inheritance of properties and their values 
+// are much more in line with other object-oriented languages such 
+// as Java. In this section, we will demonstrate how objects can 
+// be created from classes.
+
+// In many other languages, classes, or constructors, are clearly 
+// distinguished from objects, or instances. In JavaScript, classes
+//  are mainly an abstraction over the existing prototypical 
+// inheritance mechanism — all patterns are convertible to 
+// prototype-based inheritance. Classes themselves are normal
+//  JavaScript values as well, and have their own prototype chains. 
+//  fact, most plain JavaScript functions can be used as constructors 
+// — you use the new operator with a constructor function to create 
+// a new object.
+
+// We will be playing with the well-abstracted class model in 
+// this tutorial, and discuss what semantics classes offer. 
+// If you want to dive deep into the underlying prototype system, 
+// you can read the Inheritance and the prototype chain guide.
+
+// This chapter assumes that you are already somewhat familiar 
+// with JavaScript and that you have used ordinary objects.
+
+// Overview of classes
+// If you have some hands-on experience with JavaScript, or 
+// have followed along with the guide, you probably have 
+// already used classes, even if you haven't created one. 
+// For example, this may seem familiar to you:
+
+// JS
+// Copy to Clipboard
+const bigDay = new Date(2019, 6, 19);
+console.log(bigDay.toLocaleDateString());
+if (bigDay.getTime() < Date.now()) {
+    console.log("Once upon a time...");
+}
+// On the first line, we created an instance of the class Date,
+//  and called it bigDay. On the second line, we called a method 
+// toLocaleDateString() on the bigDay instance, which returns a string. 
+// Then, we compared two numbers: one returned from the getTime() method, 
+// the other directly called from the Date class itself, as Date.now().
+
+// Date is a built-in class of JavaScript. From this example, we can 
+// get some basic ideas of what classes do:
+
+// Classes create objects through the new operator.
+// Each object has some properties (data or method) added by the class.
+// The class stores some properties (data or method) itself, which are 
+// usually used to interact with instances.
+// These correspond to the three key features of classes:
+
+// Constructor;
+// Instance methods and instance fields;
+// Static methods and static fields.
+// Declaring a class
+// Classes are usually created with class declarations.
+
+// JS
+// Copy to Clipboard
+class MyClass {
+    // class body...
+}
+// Within a class body, there are a range of features available.
+
+// JS
+// Copy to Clipboard
+class MyClass {
+    // Constructor
+    constructor() {
+        // Constructor body
+    }
+    // Instance field
+    myField = "foo";
+    // Instance method
+    myMethod() {
+        // myMethod body
+    }
+    // Static field
+    static myStaticField = "bar";
+    // Static method
+    static myStaticMethod() {
+        // myStaticMethod body
+    }
+    // Static block
+    static {
+        // Static initialization code
+    }
+    // Fields, methods, static fields, and static methods all have
+    // "private" forms
+    #myPrivateField = "bar";
+}
+// If you came from a pre-ES6 world, you may be more familiar with 
+// using functions as constructors. The pattern above would roughly 
+// translate to the following with function constructors:
+
+// JS
+// Copy to Clipboard
+function MyClass() {
+    this.myField = "foo";
+    // Constructor body
+}
+MyClass.myStaticField = "bar";
+MyClass.myStaticMethod = function () {
+    // myStaticMethod body
+};
+MyClass.prototype.myMethod = function () {
+    // myMethod body
+};
+
+(function () {
+    // Static initialization code
+})();
+// Note: Private fields and methods are new features in classes with 
+// no trivial equivalent in function constructors.
+
+// Constructing a class
+// After a class has been declared, you can create instances of it 
+// using the new operator.
+
+// JS
+// Copy to Clipboard
+const myInstance = new MyClass();
+console.log(myInstance.myField); // 'foo'
+myInstance.myMethod();
+// Typical function constructors can both be constructed with new 
+// and called without new. However, attempting to "call" a class 
+// without new will result in an error.
+
+// JS
+// Copy to Clipboard
+const myInstance = MyClass(); // TypeError: Class constructor MyClass cannot be invoked without 'new'
+// Class declaration hoisting
+// Unlike function declarations, class declarations are not hoisted 
+// (or, in some interpretations, hoisted but with the temporal dead 
+// zone restriction), which means you cannot use a class before it is declared.
+
+// JS
+// Copy to Clipboard
+new MyClass(); // ReferenceError: Cannot access 'MyClass' before initialization
+
+class MyClass { }
+// This behavior is similar to variables declared with let and const.
+
+// Class expressions
+// Similar to functions, class declarations also have their expression counterparts.
+
+// JS
+// Copy to Clipboard
+const MyClass = class {
+    // Class body...
+};
+// Class expressions can have names as well. The expression's name 
+// is only visible to the class's body.
+
+// JS
+// Copy to Clipboard
+const MyClass = class MyClassLongerName {
+    // Class body. Here MyClass and MyClassLongerName point to the same class.
+};
+new MyClassLongerName(); // ReferenceError: MyClassLongerName is not defined
+
+// Constructor
+// Perhaps the most important job of a class is to act as 
+// a "factory" for objects. For example, when we use the Date constructor, 
+// we expect it to give a new object which represents the date data 
+// we passed in — which we can then manipulate with other methods 
+// the instance exposes. In classes, the instance creation is done 
+// by the constructor.
+
+// As an example, we would create a class called Color, which represents 
+// a specific color. Users create colors through passing in an RGB triplet.
+
+// JS
+// Copy to Clipboard
+class Color {
+    constructor(r, g, b) {
+        // Assign the RGB values as a property of `this`.
+        this.values = [r, g, b];
+    }
+}
+// Open your browser's devtools, paste the above code into the console,
+//  and then create an instance:
+
+// JS
+// Copy to Clipboard
+const red = new Color(255, 0, 0);
+console.log(red);
+// You should see some output like this:
+
+// Object { values: (3) […] }
+//   values: Array(3) [ 255, 0, 0 ]
+// You have successfully created a Color instance, and the 
+// instance has a values property, which is an array of 
+// the RGB values you passed in. That is pretty much 
+// equivalent to the following:
+
+// JS
+// Copy to Clipboard
+function createColor(r, g, b) {
+    return {
+        values: [r, g, b],
+    };
+}
+// The constructor's syntax is exactly the same as 
+// a normal function — which means you can use other 
+// syntaxes, like rest parameters:
+
+// JS
+// Copy to Clipboard
+class Color {
+    constructor(...values) {
+        this.values = values;
+    }
+}
+
+const red = new Color(255, 0, 0);
+// // Creates an instance with the same shape as above.
+// Each time you call new, a different instance is created.
+
+const red = new Color(255, 0, 0);
+const anotherRed = new Color(255, 0, 0);
+console.log(red === anotherRed); // false
+// Within a class constructor, the value of this points to 
+// the newly created instance. You can assign properties to it, 
+// or read existing properties (especially methods — which 
+// we will cover next).
+
+// The this value will be automatically returned as the result 
+// of new. You are advised to not return any value from the constructor — 
+// because if you return a non-primitive value, it will become the value 
+// of the new expression, and the value of this is dropped. 
+// (You can read more about what new does in its description.)
+
+// JS
+// Copy to Clipboard
+class MyClass {
+    constructor() {
+        this.myField = "foo";
+        return {};
+    }
+}
+
+console.log(new MyClass().myField); // undefined
+
+// Instance methods
+// If a class only has a constructor, it is not much different 
+// from a createX factory function which just creates plain objects.
+//  However, the power of classes is that they can be used as "templates"
+//  which automatically assign methods to instances.
+
+// For example, for Date instances, you can use a range of methods to 
+// get different information from a single date value, such as the year,
+//  month, day of the week, etc. You can also set those values through 
+// the setX counterparts like setFullYear.
+
+// For our own Color class, we can add a method called getRed which returns 
+// the red value of the color.
+
+// JS
+// Copy to Clipboard
+class Color {
+    constructor(r, g, b) {
+        this.values = [r, g, b];
+    }
+    getRed() {
+        return this.values[0];
+    }
+}
+
+const red = new Color(255, 0, 0);
+console.log(red.getRed()); // 255
+// Without methods, you may be tempted to define the function 
+// within the constructor:
+
+// JS
+// Copy to Clipboard
+class Color {
+    constructor(r, g, b) {
+        this.values = [r, g, b];
+        this.getRed = function () {
+            return this.values[0];
+        };
+    }
+}
+// This also works. However, a problem is that this creates 
+// a new function every time a Color instance is created, even 
+// when they all do the same thing!
+
+// JS
+// Copy to Clipboard
+console.log(new Color().getRed === new Color().getRed); // false
+// In contrast, if you use a method, it will be shared between 
+// all instances. A function can be shared between all instances, 
+// but still have its behavior differ when different instances 
+// call it, because the value of this is different. If you are 
+// curious where this method is stored in — it's defined on 
+// the prototype of all instances, or Color.prototype, which 
+// is explained in more detail in Inheritance and the prototype chain.
+
+// Similarly, we can create a new method called setRed, which 
+// sets the red value of the color.
+
+class Color {
+    constructor(r, g, b) {
+        this.values = [r, g, b];
+    }
+    getRed() {
+        return this.values[0];
+    }
+    setRed(value) {
+        this.values[0] = value;
+    }
+}
+
+const red = new Color(255, 0, 0);
+red.setRed(0);
+console.log(red.getRed()); // 0; of course, it should be called "black" at this stage!
+
+// Private fields
+// You might be wondering: why do we want to go to the trouble 
+// of using getRed and setRed methods, when we can directly 
+// access the values array on the instance?
+
+class Color {
+    constructor(r, g, b) {
+        this.values = [r, g, b];
+    }
+}
+
+const red = new Color(255, 0, 0);
+red.values[0] = 0;
+console.log(red.values[0]); // 0
+// There is a philosophy in object-oriented programming 
+// called "encapsulation". This means you should not access 
+// the underlying implementation of an object, but instead
+//  use well-abstracted methods to interact with it. 
+// For example, if we suddenly decided to represent colors as HSL instead:
+
+class Color {
+    constructor(r, g, b) {
+        // values is now an HSL array!
+        this.values = rgbToHSL([r, g, b]);
+    }
+    getRed() {
+        return this.values[0];
+    }
+    setRed(value) {
+        this.values[0] = value;
+    }
+}
+
+const red = new Color(255, 0, 0);
+console.log(red.values[0]); // 0; It's not 255 anymore, because the H value for pure red is 0
+// The user assumption that values means the RGB value 
+// suddenly collapses, and it may cause their logic to break. 
+// So, if you are an implementor of a class, you would want 
+// to hide the internal data structure of your instance from 
+// your user, both to keep the API clean and to prevent the user's 
+// code from breaking when you do some "harmless refactors". 
+// In classes, this is done through private fields.
+
+// A private field is an identifier prefixed with # (the hash symbol). The hash 
+// is an integral part of the field's name, which means a private property can 
+// never have name clash with a public property. In order to refer to a private 
+// field anywhere in the class, you must declare it in the class body (you can't create a private property on the fly). Apart from this, a private field is pretty 
+// much equivalent to a normal property.
+
+// JS
+// Copy to Clipboard
+class Color {
+    // Declare: every Color instance has a private field called #values.
+    #values;
+    constructor(r, g, b) {
+        this.#values = [r, g, b];
+    }
+    getRed() {
+        return this.#values[0];
+    }
+    setRed(value) {
+        this.#values[0] = value;
+    }
+}
+
+const red = new Color(255, 0, 0);
+console.log(red.getRed()); // 255
+// Accessing private fields outside the class is an early syntax error. 
+// The language can guard against this because #privateField is a special syntax, 
+// so it can do some static analysis and find all usage of private fields before 
+// even evaluating the code.
+
+console.log(red.#values); // SyntaxError: Private field '#values' must be declared 
+// in an enclosing class
+// Note: Code run in the Chrome console can access private properties outside 
+// the class. This is a DevTools-only relaxation of the JavaScript syntax restriction.
+
+// Private fields in JavaScript are hard private: if the class does not implement methods that expose these private fields, there's absolutely no mechanism to 
+// retrieve them from outside the class. This means you are safe to do any 
+// refactors to your class's private fields, as long as the behavior of 
+// exposed methods stay the same.
+
+// After we've made the values field private, we can add some more logic in the 
+// getRed and setRed methods, instead of making them simple pass-through methods. 
+// For example, we can add a check in setRed to see if it's a valid R value:
+
+class Color {
+    #values;
+    constructor(r, g, b) {
+        this.#values = [r, g, b];
+    }
+    getRed() {
+        return this.#values[0];
+    }
+    setRed(value) {
+        if (value < 0 || value > 255) {
+            throw new RangeError("Invalid R value");
+        }
+        this.#values[0] = value;
+    }
+}
+
+const red = new Color(255, 0, 0);
+red.setRed(1000); // RangeError: Invalid R value
+// If we leave the values property exposed, our users can easily circumvent that 
+// check by assigning to values[0] directly, and create invalid colors. But with 
+// a well-encapsulated API, we can make our code more robust and prevent logic
+//  errors downstream.
+
+// A class method can read the private fields of other instances, as long as they belong to the same class.
+
+class Color {
+    #values;
+    constructor(r, g, b) {
+        this.#values = [r, g, b];
+    }
+    redDifference(anotherColor) {
+        // #values doesn't necessarily need to be accessed from this:
+        // you can access private fields of other instances belonging
+        // to the same class.
+        return this.#values[0] - anotherColor.#values[0];
+    }
+}
+
+const red = new Color(255, 0, 0);
+const crimson = new Color(220, 20, 60);
+red.redDifference(crimson); // 35
+// However, if anotherColor is not a Color instance, #values won't exist. (Even 
+// if another class has an identically named #values private field, it's not 
+// referring to the same thing and cannot be accessed here.) Accessing 
+// a nonexistent private property throws an error instead of returning undefined 
+// like normal properties do. If you don't know if a private field exists on 
+// an object and you wish to access it without using try/catch to handle 
+// the error, you can use the in operator.
+
+class Color {
+    #values;
+    constructor(r, g, b) {
+        this.#values = [r, g, b];
+    }
+    redDifference(anotherColor) {
+        if (!(#values in anotherColor)) {
+            throw new TypeError("Color instance expected");
+        }
+        return this.#values[0] - anotherColor.#values[0];
+    }
+}
+// Note: Keep in mind that the # is a special identifier syntax, and you can't use 
+// the field name as if it's a string. "#values" in anotherColor would look for 
+// a property name literally called "#values", instead of a private field.
+
+// There are some limitations in using private properties: the same name can't 
+// be declared twice in a single class, and they can't be deleted. Both lead 
+// to early syntax errors.
+
+class BadIdeas {
+    #firstName;
+    #firstName; // syntax error occurs here
+    #lastName;
+    constructor() {
+        delete this.#lastName; // also a syntax error
+    }
+}
+
+// Methods, getters, and setters can be private as well. They're useful when 
+// you have something complex that the class needs to do internally but no 
+// other part of the code should be allowed to call.
+
+// For example, imagine creating HTML custom elements that should do 
+// something somewhat complicated when clicked/tapped/otherwise 
+// activated. Furthermore, the somewhat complicated things that happen when the element 
+// is clicked should be restricted to this class, because no other part of the JavaScript will (or should) ever access it.
+
+class Counter extends HTMLElement {
+    #xValue = 0;
+    constructor() {
+        super();
+        this.onclick = this.#clicked.bind(this);
+    }
+    get #x() {
+        return this.#xValue;
+    }
+    set #x(value) {
+        this.#xValue = value;
+        window.requestAnimationFrame(this.#render.bind(this));
+    }
+    #clicked() {
+        this.#x++;
+    }
+    #render() {
+        this.textContent = this.#x.toString();
+    }
+    connectedCallback() {
+        this.#render();
+    }
+}
+
+customElements.define("num-counter", Counter);
+// In this case, pretty much every field and method is private to the class. 
+// Thus, it presents an interface to the rest of the code that's essentially 
+// just like a built-in HTML element. No other part of the program has 
+// the power to affect any of the internals of Counter.
+
+// Accessor fields
+// color.getRed() and color.setRed() allow us to read and write to the red value 
+// of a color. If you come from languages like Java, you will be very familiar 
+// with this pattern. However, using methods to simply access a property is 
+// still somewhat unergonomic in JavaScript. Accessor fields allow us to 
+// manipulate something as if its an "actual property".
+
+class Color {
+    constructor(r, g, b) {
+        this.values = [r, g, b];
+    }
+    get red() {
+        return this.values[0];
+    }
+    set red(value) {
+        this.values[0] = value;
+    }
+}
+
+const red = new Color(255, 0, 0);
+red.red = 0;
+console.log(red.red); // 0
+// It looks as if the object has a property called red — but actually, no 
+// such property exists on the instance! There are only two methods, but they 
+// are prefixed with get and set, which allows them to be manipulated as if 
+// they were properties.
+
+// If a field only has a getter but no setter, it will be effectively read-only.
+
+class Color {
+    constructor(r, g, b) {
+        this.values = [r, g, b];
+    }
+    get red() {
+        return this.values[0];
+    }
+}
+
+const red = new Color(255, 0, 0);
+red.red = 0;
+console.log(red.red); // 255
+// In strict mode, the red.red = 0 line will throw a type error: "Cannot set 
+// property red of #<Color> which has only a getter". In non-strict mode, 
+// the assignment is silently ignored.
+
+// Public fields
+// Private fields also have their public counterparts, which allow every instance 
+// to have a property. Fields are usually designed to be independent of 
+// the constructor's parameters.
+
+class MyClass {
+    luckyNumber = Math.random();
+}
+console.log(new MyClass().luckyNumber); // 0.5
+console.log(new MyClass().luckyNumber); // 0.3
+// Public fields are almost equivalent to assigning a property to this. For example, the above example can also be converted to:
+
+class MyClass {
+    constructor() {
+        this.luckyNumber = Math.random();
+    }
+}
+// Static properties
+// With the Date example, we have also encountered the Date.now() method, 
+// which returns the current date. This method does not belong to any date 
+// instance — it belongs to the class itself. However, it's put on the Date 
+// class instead of being exposed as a global DateNow() function, because 
+// it's mostly useful when dealing with date instances.
+
+// Note: Prefixing utility methods with what they deal with is called 
+// "namespacing" and is considered a good practice. For example, in addition to 
+// the older, unprefixed parseInt() method, JavaScript also later added the 
+// prefixed Number.parseInt() method to indicate that it's for dealing with numbers.
+
+// Static properties are a group of class features that are defined on the 
+// class itself, rather than on individual instances of the class. These 
+// features include:
+
+// Static methods
+// Static fields
+// Static getters and setters
+// Everything also has private counterparts. For example, for our Color class, 
+// we can create a static method that checks whether a given triplet is a valid RGB value:
+
+class Color {
+    static isValid(r, g, b) {
+        return r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255;
+    }
+}
+
+Color.isValid(255, 0, 0); // true
+Color.isValid(1000, 0, 0); // false
+// Static properties are very similar to their instance counterparts, except that:
+
+// They are all prefixed with static, and
+// They are not accessible from instances.
+console.log(new Color(0, 0, 0).isValid); // undefined
+// There is also a special construct called a static initialization block, which is 
+// a block of code that runs when the class is first loaded.
+
+class MyClass {
+    static {
+        MyClass.myStaticProperty = "foo";
+    }
+}
+
+console.log(MyClass.myStaticProperty); // 'foo'
+// Static initialization blocks are almost equivalent to immediately executing 
+// some code after a class has been declared. The only difference is that they 
+// have access to static private properties.
+
+// Extends and inheritance
+// A key feature that classes bring about (in addition to ergonomic encapsulation 
+// with private fields) is inheritance, which means one object can "borrow" a 
+// large part of another object's behaviors, while overriding or enhancing certain parts with its own logic.
+
+// For example, suppose our Color class now needs to support transparency. 
+// We may be tempted to add a new field that indicates its transparency:
+
+class Color {
+    #values;
+    constructor(r, g, b, a = 1) {
+        this.#values = [r, g, b, a];
+    }
+    get alpha() {
+        return this.#values[3];
+    }
+    set alpha(value) {
+        if (value < 0 || value > 1) {
+            throw new RangeError("Alpha value must be between 0 and 1");
+        }
+        this.#values[3] = value;
+    }
+}
+// However, this means every instance — even the vast majority which 
+// aren't transparent (those with an alpha value of 1) — will have to have 
+// the extra alpha value, which is not very elegant. Plus, if the features 
+// keep growing, our Color class will become very bloated and hard to maintain.
+
+// Instead, in object-oriented programming, we would create a derived class. 
+// The derived class has access to all public properties of the parent class. 
+// In JavaScript, derived classes are declared with an extends clause, 
+// which indicates the class it extends from.
+
+class ColorWithAlpha extends Color {
+    #alpha;
+    constructor(r, g, b, a) {
+        super(r, g, b);
+        this.#alpha = a;
+    }
+    get alpha() {
+        return this.#alpha;
+    }
+    set alpha(value) {
+        if (value < 0 || value > 1) {
+            throw new RangeError("Alpha value must be between 0 and 1");
+        }
+        this.#alpha = value;
+    }
+}
+// There are a few things that have immediately come to attention. First is that 
+// in the constructor, we are calling super(r, g, b). It is a language requirement 
+// to call super() before accessing this. The super() call calls the parent 
+// class's constructor to initialize this — here it's roughly equivalent to 
+// this = new Color(r, g, b). You can have code before super(), but you cannot 
+// access this before super() — the language prevents you from accessing the uninitialized this.
+
+// After the parent class is done with modifying this, the derived class can 
+// do its own logic. Here we added a private field called #alpha, and also 
+// provided a pair of getter/setters to interact with them.
+
+// A derived class inherits all methods from its parent. For example, 
+// although ColorWithAlpha doesn't declare a get red() accessor itself,
+//  you can still access red because this behavior is specified by the parent class:
+
+const color = new ColorWithAlpha(255, 0, 0, 0.5);
+console.log(color.red); // 255
+// Derived classes can also override methods from the parent class. For example,
+//  all classes implicitly inherit the Object class, which defines some basic 
+// methods like toString(). However, the base toString() method is 
+// notoriously useless, because it prints [object Object] in most cases:
+
+console.log(red.toString()); // [object Object]
+// Instead, our class can override it to print the color's RGB values:
+
+class Color {
+    #values;
+    // …
+    toString() {
+        return this.#values.join(", ");
+    }
+}
+
+console.log(new Color(255, 0, 0).toString()); // '255, 0, 0'
+// Within derived classes, you can access the parent class's methods by using 
+// super. This allows you to build enhancement methods and avoid code duplication.
+
+class ColorWithAlpha extends Color {
+    #alpha;
+    // …
+    toString() {
+        // Call the parent class's toString() and build on the return value
+        return `${super.toString()}, ${this.#alpha}`;
+    }
+}
+
+console.log(new ColorWithAlpha(255, 0, 0, 0.5).toString()); // '255, 0, 0, 0.5'
+// When you use extends, the static methods inherit from each other as well, 
+// so you can also override or enhance them.
+
+class ColorWithAlpha extends Color {
+    // ...
+    static isValid(r, g, b, a) {
+        // Call the parent class's isValid() and build on the return value
+        return super.isValid(r, g, b) && a >= 0 && a <= 1;
+    }
+}
+console.log(ColorWithAlpha.isValid(255, 0, 0, -1)); // false
+// Derived classes don't have access to the parent class's private fields — this 
+// is another key aspect to JavaScript private fields being "hard private". 
+// Private fields are scoped to the class body itself and do not grant access 
+// to any outside code.
+
+class ColorWithAlpha extends Color {
+    log() {
+        console.log(this.#values); // SyntaxError: Private field '#values' must be declared in an enclosing class
+    }
+}
+// A class can only extend from one class. This prevents problems in 
+// multiple inheritance like the diamond problem. However, due to the dynamic 
+// nature of JavaScript, it's still possible to achieve the effect of 
+// multiple inheritance through class composition and mixins.
+
+// Instances of derived classes are also instances of the base class.
+
+const color = new ColorWithAlpha(255, 0, 0, 0.5);
+console.log(color instanceof Color); // true
+console.log(color instanceof ColorWithAlpha); // true
+// Why classes?
+// The guide has been pragmatic so far: we are focusing on how classes can be 
+// used, but there's one question unanswered: why would one use a class? The 
+// answer is: it depends.
+
+// Classes introduce a paradigm, or a way to organize your code. Classes are 
+// the foundations of object-oriented programming, which is built on concepts 
+// like inheritance and polymorphism (especially subtype polymorphism). However, 
+// many people are philosophically against certain OOP practices and don't use 
+// classes as a result.
+
+// For example, one thing that makes Date objects infamous is that they're mutable.
+
+function incrementDay(date) {
+    return date.setDate(date.getDate() + 1);
+}
+const date = new Date(); // 2019-06-19
+const newDay = incrementDay(date);
+console.log(newDay); // 2019-06-20
+// The old date is modified as well!?
+console.log(date); // 2019-06-20
+// Mutability and internal state are important aspects of object-oriented 
+// programming, but often make code hard to reason with — because any 
+// seemingly innocent operation may have unexpected side effects and 
+// change the behavior in other parts of the program.
+
+// In order to reuse code, we usually resort to extending classes, which can create big hierarchies of inheritance patterns.
+
+// A typical OOP inheritance tree, with five classes and three levels
+// However, it is often hard to describe inheritance cleanly when one class can 
+// only extend one other class. Often, we want the behavior of multiple classes.
+//  In Java, this is done through interfaces; in JavaScript, it can be done 
+// through mixins. But at the end of the day, it's still not very convenient.
+
+// On the brighter side, classes are a very powerful way to organize our code 
+// on a higher level. For example, without the Color class, we may need to 
+// create a dozen of utility functions:
+
+function isRed(color) {
+    return color.red === 255;
+}
+function isValidColor(color) {
+    return (
+        color.red >= 0 &&
+        color.red <= 255 &&
+        color.green >= 0 &&
+        color.green <= 255 &&
+        color.blue >= 0 &&
+        color.blue <= 255
+    );
+}
+// ...
+// But with classes, we can congregate them all under the Color namespace,
+// which improves readability. In addition, the introduction of private fields
+// allows us to hide certain data from downstream users, creating a clean API.
+
+// In general, you should consider using classes when you want to create objects
+//  that store their own internal data and expose a lot of behavior. Take
+// built-in JavaScript classes as examples:
+
+// The Map and Set classes store a collection of elements and allow you to
+//  access them by key using get(), set(), has(), etc.
+// The Date class stores a date as a Unix timestamp (a number) and allows
+// you to format, update, and read individual date components.
+// The Error class stores information about a particular exception, including
+// the error message, stack trace, cause, etc. It's one of the few classes that
+// come with a rich inheritance structure: there are multiple built-in classes
+// like TypeError and ReferenceError that extend Error. In the case of errors,
+// this inheritance allows refining the semantics of errors: each error
+//  class represents a specific type of error, which can be easily checked with instanceof.
+// JavaScript offers the mechanism to organize your code in a canonical object-oriented way, but whether and how to use it is entirely up to the programmer's discretion.
+
+
+console.log("basics of  constructor and extends ")
+
+console.log("constructor and extends ")
+
+// JavaScript Snippet
+'use strict';
+
+// Example 1: Creating a new class (declaration-form)
+// ===============================================================
+
+// A base class is defined using the new reserved 'class' keyword
+class Polygon {
+    // ..and an (optional) custom class constructor. If one is
+    // not supplied, a default constructor is used instead:
+    // constructor() { }
+    constructor(height, width) {
+        this.name = 'Polygon';
+        this.height = height;
+        this.width = width;
+    }
+
+    // Simple class instance methods using short-hand method
+    // declaration
+    sayName() {
+        ChromeSamples.log('Hi, I am a ', this.name + '.');
+    }
+
+    sayHistory() {
+        ChromeSamples.log('"Polygon" is derived from the Greek polus (many) ' +
+            'and gonia (angle).');
+    }
+
+    // We will look at static and subclassed methods shortly
+}
+
+// Classes are used just like ES5 constructor functions:
+let p = new Polygon(300, 400);
+p.sayName();
+ChromeSamples.log('The width of this polygon is ' + p.width);
+
+// Example 2: Creating a new class (expression-form)
+// ===============================================================
+
+// Our Polygon class above is an example of a Class declaration.
+// ES6 classes also support Class expressions - just another way
+// of defining a new class. For example:
+const MyPoly = class Poly {
+    getPolyName() {
+        ChromeSamples.log('Hi. I was created with a Class expression. My name is ' +
+            Poly.name);
+    }
+};
+
+let inst = new MyPoly();
+inst.getPolyName();
+
+// Example 3: Extending an existing class
+// ===============================================================
+
+// Classes support extending other classes, but can also extend
+// other objects. Whatever you extend must be a constructor.
+//
+// Let's extend the Polygon class to create a new derived class
+// called Square.
+class Square extends Polygon {
+    constructor(length) {
+        // The reserved 'super' keyword is for making super-constructor
+        // calls and allows access to parent methods.
+        //
+        // Here, it will call the parent class' constructor with lengths
+        // provided for the Polygon's width and height
+        super(length, length);
+        // Note: In derived classes, super() must be called before you
+        // can use 'this'. Leaving this out will cause a reference error.
+        this.name = 'Square';
+    }
+
+    // Getter/setter methods are supported in classes,
+    // similar to their ES5 equivalents
+    get area() {
+        return this.height * this.width;
+    }
+
+    set area(value) {
+        this.area = value;
+    }
+}
+
+let s = new Square(5);
+
+s.sayName();
+ChromeSamples.log('The area of this square is ' + s.area);
+
+// Example 4: Subclassing methods of a parent class
+// ===============================================================
+
+class Rectangle extends Polygon {
+    constructor(height, width) {
+        super(height, width);
+        this.name = 'Rectangle';
+    }
+    // Here, sayName() is a subclassed method which
+    // overrides their superclass method of the same name.
+    sayName() {
+        ChromeSamples.log('Sup! My name is ', this.name + '.');
+        super.sayHistory();
+    }
+}
+
+let r = new Rectangle(50, 60);
+r.sayName();
+
+// Example 5: Defining static methods
+// ===============================================================
+
+// Classes support static members which can be accessed without an
+// instance being present.
+class Triple {
+    // Using the 'static' keyword creates a method which is associated
+    // with a class, but not with an instance of the class.
+    static triple(n) {
+        n = n || 1;
+        return n * 3;
+    }
+}
+
+// super.prop in this example is used for accessing super-properties from
+// a parent class. This works fine in static methods too:
+class BiggerTriple extends Triple {
+    static triple(n) {
+        return super.triple(n) * super.triple(n);
+    }
+}
+
+ChromeSamples.log(Triple.triple());
+ChromeSamples.log(Triple.triple(6));
+ChromeSamples.log(BiggerTriple.triple(3));
+// var tp = new Triple();
+// ChromeSamples.log(tp.triple()); tp.triple is not a function
+
+// Example 6: Subclassing built-in classes and DOM
+// ===============================================================
+
+// Extend Date built-in
+class MyDate extends Date {
+    constructor() {
+        super();
+    }
+
+    getFormattedDate() {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+            'Oct', 'Nov', 'Dec'];
+        return this.getDate() + '-' + months[this.getMonth()] + '-' +
+            this.getFullYear();
+    }
+}
+
+var aDate = new MyDate();
+ChromeSamples.log(aDate.getTime());
+ChromeSamples.log(aDate.getFormattedDate());
+
+// Extend Uint8Array
+class ExtendedUint8Array extends Uint8Array {
+    constructor() {
+        super(10);
+        this[0] = 255;
+        this[1] = 0xFFA;
+    }
+}
+
+var eua = new ExtendedUint8Array();
+ChromeSamples.log(eua.byteLength);
+
+// Extend DOM Audio element
+class MyAudio extends Audio {
+    constructor() {
+        super();
+        this._lyrics = '';
+    }
+
+    get lyrics() {
+        return this._lyrics;
+    }
+
+    set lyrics(str) {
+        this._lyrics = str;
+    }
+}
+
+var player = new MyAudio();
+player.controls = true;
+player.lyrics = 'Never gonna give you up';
+document.querySelector('body').appendChild(player);
+ChromeSamples.log(player.lyrics);
+
+// Note: The V8 in Chrome 42 supports subclassing built-ins but Arrays.
+// Subclassing arrays supported in Chrome 43.
+
+class Stack extends Array {
+    constructor() {
+        super();
+    }
+
+    top() {
+        return this[this.length - 1];
+    }
+}
+
+var stack = new Stack();
+stack.push('world');
+stack.push('hello');
+ChromeSamples.log(stack.top());
+ChromeSamples.log(stack.length);
+
+//////////////////////////////////////////////////////////////////////////
+
+// The extends keyword is used in class declarations or class 
+//expressions to create a class that is a child of another 
+//class.
+
+class DateFormatter extends Date {
+    getFormattedDate() {
+        const months = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+        ];
+        return `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`;
+    }
+}
+
+console.log(new DateFormatter('August 19, 1975 23:15:30').getFormattedDate());
+//  output: "19-Aug-1975"
+
+// Syntax
+class ChildClass extends ParentClass { /* … */ }
+
+
+// Description
+// The extends keyword can be used to subclass custom 
+// classes as well as built-in objects.
+// Any constructor that can be called with new and has the 
+// prototype property can be the candidate for the parent 
+// class. The two conditions must both hold — for example, 
+// bound functions and Proxy can be constructed, but they 
+// don't have a prototype property, so they cannot be subclassed.
+
+function OldStyleClass() {
+    this.someProperty = 1;
+}
+OldStyleClass.prototype.someMethod = function () { };
+
+class ChildClass extends OldStyleClass { }
+
+class ModernClass {
+    someProperty = 1;
+    someMethod() { }
+}
+
+class AnotherChildClass extends ModernClass { }
+
+// The prototype property of the ParentClass must be an 
+//Object or null, but you would rarely worry about this in 
+//practice, because a non-object prototype doesn't behave as 
+//it should anyway. (It's ignored by the new operator.)
+
+function ParentClass() { }
+ParentClass.prototype = 3;
+
+class ChildClass extends ParentClass { }
+// Uncaught TypeError: Class extends value does not have valid 
+//prototype property 3
+
+console.log(Object.getPrototypeOf(new ParentClass()));
+// [Object: null prototype] {}
+// Not actually a number!
+
+// extends sets the prototype for both ChildClass and ChildClass.prototype.
+
+//                          Prototype of ChildClass	        Prototype of ChildClass.prototype
+// extends clause absent	Function.prototype	            Object.prototype
+// extends null	            Function.prototype	                null
+// extends ParentClass	    ParentClass	                    ParentClass.prototype
+
+class ParentClass { }
+class ChildClass extends ParentClass { }
+
+// Allows inheritance of static properties
+Object.getPrototypeOf(ChildClass) === ParentClass;
+// Allows inheritance of instance properties
+Object.getPrototypeOf(ChildClass.prototype) === ParentClass.prototype;
+
+// The right-hand side of extends does not have to be an 
+//identifier. You can use any expression that evaluates to 
+//a constructor. This is often useful to create mixins. The 
+//this value in the extends expression is the this surrounding 
+//the class definition, and referring to the class's name is 
+//a ReferenceError because the class is not initialized yet. 
+//await and yield work as expected in this expression.
+
+class SomeClass extends class {
+    constructor() {
+        console.log("Base class");
+    }
+} {
+    constructor() {
+        super();
+        console.log("Derived class");
+    }
+}
+
+new SomeClass();
+// Base class
+// Derived class
+
+// While the base class may return anything from its 
+//constructor, the derived class must return an object or 
+//undefined, or a TypeError will be thrown.
+
+// Extending null
+// extends null was designed to allow easy creation of objects 
+//that do not inherit from Object.prototype.However, due to 
+//unsettled decisions about whether super() should be called 
+//within the constructor, it's not possible to construct such 
+//a class in practice using any constructor implementation 
+//that doesn't return an object
+
+// Examples
+// Using extends
+// The first example creates a class called Square from 
+//a class called Polygon.
+
+// Extending plain objects
+// Classes cannot extend regular(non - constructible) 
+//objects.If you want to inherit from a regular object by 
+//making all properties of this object available on inherited 
+//instances, you can instead use Object.setPrototypeOf():
+
+const Animal = {
+    speak() {
+        console.log(`${this.name} makes a noise.`);
+    },
+};
+
+class Dog {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+Object.setPrototypeOf(Dog.prototype, Animal);
+
+const d = new Dog("Mitzie");
+d.speak(); // Mitzie makes a noise.
+
+
+//   Extending built -in objects
+// This example extends the built -in Date object.
+
+class MyDate extends Date {
+    getFormattedDate() {
+        const months = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        ];
+        return `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`;
+    }
+}
+
+// The constructor method is a special method of a class for 
+//creating and initializing an object instance of that class.
+// Note: This page introduces the constructor syntax. For the 
+//constructor property present on all objects, see 
+//Object.prototype.constructor.
+
+class Polygon {
+    constructor() {
+        this.name = 'Polygon';
+    }
+}
+
+const poly1 = new Polygon();
+
+console.log(poly1.name);
+//  output: "Polygon"
+
+// Syntax
+// constructor(argument0, argument1, /* …, */ argumentN) { /* … */ }
+
+// There are some additional syntax restrictions:
+// A class method called constructor cannot be a getter, 
+//setter, async, or generator.
+// A class cannot have more than one constructor method.
+
+// Description
+// A constructor enables you to provide any custom 
+//initialization that must be done before any other methods 
+//can be called on an instantiated object.
+
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    introduce() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+}
+
+const otto = new Person("Otto");
+
+otto.introduce(); // Hello, my name is Otto
+
+// If you don't provide your own constructor, then a default 
+//constructor will be supplied for you. If your class is a 
+//base class, the default constructor is empty:
+
+// constructor() {}
+
+// If your class is a derived class, the default constructor 
+//calls the parent constructor, passing along any arguments 
+//that were provided:
+
+// constructor(...args) {
+//     super(...args);
+// }
+
+//   That enables code like this to work:
+
+class ValidationError extends Error {
+    printCustomerMessage() {
+        return `Validation failed :-( (details: ${this.message})`;
+    }
+}
+
+try {
+    throw new ValidationError("Not a valid phone number");
+} catch (error) {
+    if (error instanceof ValidationError) {
+        console.log(error.name); // This is Error instead of ValidationError!
+        console.log(error.printCustomerMessage());
+    } else {
+        console.log("Unknown error", error);
+        throw error;
+    }
+}
+
+// The ValidationError class doesn't need an explicit 
+//constructor, because it doesn't need to do any custom 
+//initialization. The default constructor then takes care of 
+//initializing the parent Error from the argument it is given.
+// However, if you provide your own constructor, and your 
+//class derives from some parent class, then you must 
+//explicitly call the parent class constructor using super(). 
+//For example:
+
+class ValidationError extends Error {
+    constructor(message) {
+        super(message); // call parent class constructor
+        this.name = "ValidationError";
+        this.code = "42";
+    }
+
+    printCustomerMessage() {
+        return `Validation failed :-( (details: ${this.message}, code: ${this.code})`;
+    }
+}
+
+try {
+    throw new ValidationError("Not a valid phone number");
+} catch (error) {
+    if (error instanceof ValidationError) {
+        console.log(error.name); // Now this is ValidationError!
+        console.log(error.printCustomerMessage());
+    } else {
+        console.log("Unknown error", error);
+        throw error;
+    }
+}
+
+// Using new on a class goes through the following steps:
+
+// (If it's a derived class) The constructor body before 
+//the super() call is evaluated. This part should not access 
+//this because it's not yet initialized.
+// (If it's a derived class) The super() call is evaluated, 
+//which initializes the parent class through the same process.
+// The current class's fields are initialized.
+// The constructor body after the super() call (or the 
+//entire body, if it's a base class) is evaluated.
+// Within the constructor body, you can access the object 
+//being created through this and access the class that is 
+//called with new through new.target. Note that methods 
+//(including getters and setters) and the prototype chain 
+//are already initialized on this before the constructor 
+//is executed, so you can even access methods of the subclass 
+//from the constructor of the superclass. However, if those 
+//methods use this, the this will not have been fully 
+//initialized yet. This means reading public fields of 
+//the derived class will result in undefined, while reading 
+//private fields will result in a TypeError.
+
+new (class C extends class B {
+    constructor() {
+        console.log(this.foo());
+    }
+} {
+    #a = 1;
+    foo() {
+        return this.#a; 
+        // TypeError: Cannot read private member #a from 
+        //an object whose class did not declare it
+        // It's not really because the class didn't declare it,
+        // but because the private field isn't initialized yet
+        // when the superclass constructor is running
+    }
+})();
+
+//The constructor method may have a return value. 
+//While the base class may return anything from its 
+//constructor, the derived class must return an object or 
+//undefined, or a TypeError will be thrown.
+
+class ParentClass {
+    constructor() {
+        return 1;
+    }
+}
+
+console.log(new ParentClass()); // ParentClass {}
+// The return value is ignored because it's not an object
+// This is consistent with function constructors
+
+class ChildClass extends ParentClass {
+    constructor() {
+        return 1;
+    }
+}
+
+console.log(new ChildClass()); 
+// TypeError: Derived constructors may only return object 
+//or undefined
+
+// If the parent class constructor returns an object, that 
+//object will be used as the this value on which class fields 
+//of the derived class will be defined. This trick is called 
+//"return overriding", which allows a derived class's fields 
+//(including private ones) to be defined on unrelated objects.
+
+// The constructor follows normal method syntax, so parameter 
+//default values, rest parameters, etc. can all be used.
+
+class Person {
+    constructor(name = "Anonymous") {
+        this.name = name;
+    }
+    introduce() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+}
+
+const person = new Person();
+person.introduce(); // Hello, my name is Anonymous
+
+//The constructor must be a literal name. Computed properties 
+//cannot become constructors.
+
+
+class Foo {
+    // This is a computed property. It will not be picked up 
+    //as a constructor.
+    ["constructor"]() {
+        console.log("called");
+        this.a = 1;
+    }
+}
+
+const foo = new Foo(); // No log
+console.log(foo); // Foo {}
+foo.constructor(); // Logs "called"
+console.log(foo); // Foo { a: 1 }
+
+//Async methods, generator methods, accessors, and class 
+//fields are forbidden from being called constructor. 
+//Private names cannot be called #constructor. Any member 
+//named constructor must be a plain method.
+
+
+// Classes
+// Baseline Widely available
+// Classes are a template for creating objects. 
+// They encapsulate data with code to work on that 
+// data. Classes in JS are built on prototypes but 
+// also have some syntax and semantics that are 
+// unique to classes.
+
+// For more examples and explanations, see the
+//  Using classes guide.
+
+// Description
+// Defining classes
+// Classes are in fact "special functions", and 
+// just as you can define function expressions 
+// and function declarations, a class can be 
+// defined in two ways: a class expression 
+// or a class declaration.
+
+// JS
+// Copy to Clipboard
+// Declaration
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+
+// Expression; the class is anonymous 
+// but assigned to a variable
+const Rectangle = class {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+};
+
+// Expression; the class has its own name
+const Rectangle = class Rectangle2 {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+};
+// Like function expressions, class expressions 
+// may be anonymous, or have a name that's 
+// different from the variable that it's assigned 
+// to. However, unlike function declarations, 
+// class declarations have the same temporal 
+// dead zone restrictions as let or const and 
+// behave as if they are not hoisted.
+
+// Class body
+// The body of a class is the part that is in 
+// curly braces {}. This is where you define 
+// class members, such as methods or constructor.
+
+// The body of a class is executed in strict 
+// mode even without the "use strict" directive.
+
+// A class element can be characterized 
+// by three aspects:
+
+// Kind: Getter, setter, method, or field
+// Location: Static or instance
+// Visibility: Public or private
+// Together, they add up to 16 possible 
+// combinations. To divide the reference 
+// more logically and avoid overlapping 
+// content, the different elements are 
+// introduced in detail in different pages:
+
+// Method definitions
+// Public instance method
+
+// getter
+// Public instance getter
+
+// setter
+// Public instance setter
+
+// Public class fields
+// Public instance field
+
+// static
+// Public static method, getter, setter, and field
+
+// Private properties
+// Everything that's private
+
+// Note: Private features have the restriction 
+// that all property names declared in the same 
+// class must be unique. All other public 
+// properties do not have this restriction 
+// — you can have multiple public properties 
+// with the same name, and the last one 
+// overwrites the others. This is the same 
+// behavior as in object initializers.
+
+// In addition, there are two special class 
+// element syntaxes: constructor and static 
+// initialization blocks, with their own references.
+
+// Constructor
+// The constructor method is a special method 
+// for creating and initializing an object 
+// created with a class. There can only be 
+// one special method with the name "constructor" 
+// in a class — a SyntaxError is thrown if the 
+// class contains more than one occurrence 
+// of a constructor method.
+
+// A constructor can use the super keyword 
+// to call the constructor of the super class.
+
+// You can create instance properties 
+// inside the constructor:
+
+// JS
+// Copy to Clipboard
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+// Alternatively, if your instance properties' 
+// values do not depend on the constructor's 
+// arguments, you can define them as class fields.
+
+// Static initialization blocks
+// Static initialization blocks allow flexible
+//  initialization of static properties, 
+// including the evaluation of statements 
+// during initialization, while granting 
+// access to the private scope.
+
+// Multiple static blocks can be declared, 
+// and these can be interleaved with the 
+// declaration of static fields and methods
+//  (all static items are evaluated in 
+// declaration order).
+
+// Methods
+// Methods are defined on the prototype of 
+// each class instance and are shared by all 
+// instances. Methods can be plain functions, 
+// async functions, generator functions, or 
+// async generator functions. For more information, 
+// see method definitions.
+
+// JS
+// Copy to Clipboard
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+  // Getter
+  get area() {
+    return this.calcArea();
+  }
+  // Method
+  calcArea() {
+    return this.height * this.width;
+  }
+  *getSides() {
+    yield this.height;
+    yield this.width;
+    yield this.height;
+    yield this.width;
+  }
+}
+
+const square = new Rectangle(10, 10);
+
+console.log(square.area); // 100
+console.log([...square.getSides()]); // [10, 10, 10, 10]
+// Static methods and fields
+// The static keyword defines a static method 
+// or field for a class. Static properties 
+// (fields and methods) are defined on the 
+// class itself instead of each instance. 
+// Static methods are often used to create 
+// utility functions for an application, 
+// whereas static fields are useful for caches, 
+// fixed-configuration, or any other data that 
+// doesn't need to be replicated across instances.
+
+// JS
+// Copy to Clipboard
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  static displayName = "Point";
+  static distance(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+
+    return Math.hypot(dx, dy);
+  }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+p1.displayName; // undefined
+p1.distance; // undefined
+p2.displayName; // undefined
+p2.distance; // undefined
+
+console.log(Point.displayName); // "Point"
+console.log(Point.distance(p1, p2)); // 7.0710678118654755
+// Field declarations
+// With the class field declaration syntax, 
+// the constructor example can be written as:
+
+// JS
+// Copy to Clipboard
+class Rectangle {
+  height = 0;
+  width;
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+// Class fields are similar to object 
+// properties, not variables, so we don't 
+// use keywords such as const to declare
+//  them. In JavaScript, private features 
+// use a special identifier syntax, so
+//  modifier keywords like public and 
+// private should not be used either.
+
+// As seen above, the fields can be declared 
+// with or without a default value. Fields 
+// without default values default to undefined. 
+// By declaring fields up-front, class 
+// definitions become more self-documenting, 
+// and the fields are always present, which 
+// help with optimizations.
+
+// See public class fields for more information.
+
+// Private properties
+// Using private fields, the definition 
+// can be refined as below.
+
+// JS
+// Copy to Clipboard
+class Rectangle {
+  #height = 0;
+  #width;
+  constructor(height, width) {
+    this.#height = height;
+    this.#width = width;
+  }
+}
+// It's an error to reference private 
+// fields from outside of the class; 
+// they can only be read or written 
+// within the class body. By defining 
+// things that are not visible outside 
+// of the class, you ensure that your 
+// classes' users can't depend on internals, 
+// which may change from version to version.
+
+// Private fields can only be declared 
+// up-front in a field declaration. They 
+// cannot be created later through assigning 
+// to them, the way that normal properties can.
+
+// For more information, see private properties.
+
+// Inheritance
+// The extends keyword is used in class 
+// declarations or class expressions to 
+// create a class as a child of another 
+// constructor (either a class or a function).
+
+// JS
+// Copy to Clipboard
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name) {
+    super(name); // call the super class constructor and pass in the name parameter
+  }
+
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+}
+
+const d = new Dog("Mitzie");
+d.speak(); // Mitzie barks.
+// If there is a constructor present in 
+// the subclass, it needs to first call 
+// super() before using this. The super 
+// keyword can also be used to call 
+// corresponding methods of super class.
+
+// JS
+// Copy to Clipboard
+class Cat {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  }
+}
+
+class Lion extends Cat {
+  speak() {
+    super.speak();
+    console.log(`${this.name} roars.`);
+  }
+}
+
+const l = new Lion("Fuzzy");
+l.speak();
+// Fuzzy makes a noise.
+// Fuzzy roars.
+// Evaluation order
+// When a class declaration or class 
+// expression is evaluated, its various 
+// components are evaluated in the 
+// following order:
+
+// The extends clause, if present, is 
+// first evaluated. It must evaluate to 
+// a valid constructor function or null, 
+// or a TypeError is thrown.
+
+// The constructor method is extracted, 
+// substituted with a default implementation 
+// if constructor is not present. However, 
+// because the constructor definition is 
+// only a method definition, this step 
+// is not observable.
+
+// The class elements' property keys are 
+// evaluated in the order of declaration. 
+// If the property key is computed, the 
+// computed expression is evaluated, with
+//  the this value set to the this value 
+// surrounding the class (not the class 
+// itself). None of the property values 
+// are evaluated yet.
+
+// Methods and accessors are installed in 
+// the order of declaration. Instance methods 
+// and accessors are installed on the 
+// prototype property of the current class, 
+// and static methods and accessors are 
+// installed on the class itself. Private 
+// instance methods and accessors are saved 
+// to be installed on the instance directly 
+// later. This step is not observable.
+
+// The class is now initialized with the 
+// prototype specified by extends and 
+// implementation specified by constructor. 
+// For all steps above, if an evaluated 
+// expression tries to access the name of 
+// the class, a ReferenceError is thrown 
+// because the class is not initialized yet.
+// 
+// The class elements' values are evaluated 
+// in the order of declaration:
+
+// For each instance field (public or private), 
+// its initializer expression is saved. The 
+// initializer is evaluated during instance 
+// creation, at the start of the constructor 
+// (for base classes) or immediately before 
+// the super() call returns (for derived classes).
+
+// For each static field (public or private), 
+// its initializer is evaluated with this set 
+// to the class itself, and the property is 
+// created on the class.
+
+// Static initialization blocks are evaluated
+//  with this set to the class itself.
+
+// The class is now fully initialized and 
+// can be used as a constructor function.
+// For how instances are created, see the 
+// constructor reference.
+
+// Examples
+// Binding this with instance and static methods
+// When a static or instance method is called 
+// without a value for this, such as by 
+// assigning the method to a variable and 
+// then calling it, the this value will be
+//  undefined inside the method. This behavior 
+// is the same even if the "use strict" 
+// directive isn't present, because code 
+// within the class body is always executed 
+// in strict mode.
+
+// JS
+// Copy to Clipboard
+class Animal {
+  speak() {
+    return this;
+  }
+  static eat() {
+    return this;
+  }
+}
+
+const obj = new Animal();
+obj.speak(); // the Animal object
+const speak = obj.speak;
+speak(); // undefined
+
+Animal.eat(); // class Animal
+const eat = Animal.eat;
+eat(); // undefined
+// If we rewrite the above using traditional 
+// function-based syntax in non–strict mode, 
+// then this method calls are automatically 
+// bound to globalThis. In strict mode, the 
+// value of this remains as undefined.
+
+// JS
+// Copy to Clipboard
+function Animal() {}
+
+Animal.prototype.speak = function () {
+  return this;
+};
+
+Animal.eat = function () {
+  return this;
+};
+
+const obj = new Animal();
+const speak = obj.speak;
+speak(); // global object (in non–strict mode)
+
+const eat = Animal.eat;
+eat(); // global object (in non-strict mode)
+
+// constructor
+// Baseline Widely available
+// The constructor method is a special method of 
+// a class for creating and initializing an object 
+// instance of that class.
+
+// Note: This page introduces the constructor syntax. 
+// For the constructor property present on all objects, 
+// see Object.prototype.constructor.
+
+// Try it
+class Polygon {
+  constructor() {
+    this.name = 'Polygon';
+  }
+}
+
+const poly1 = new Polygon();
+
+console.log(poly1.name);
+// Expected output: "Polygon"
+
+
+// Syntax
+constructor() { /* … */ }
+constructor(argument0) { /* … */ }
+constructor(argument0, argument1) { /* … */ }
+constructor(argument0, argument1, /* …, */ argumentN) { /* … */ }
+// There are some additional syntax restrictions:
+
+// A class method called constructor cannot be 
+// a getter, setter, async, or generator.
+
+// A class cannot have more than one constructor method.
+
+// Description
+// A constructor enables you to provide any custom 
+// initialization that must be done before any other 
+// methods can be called on an instantiated object.
+
+// JS
+// Copy to Clipboard
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  introduce() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+}
+
+const otto = new Person("Otto");
+
+otto.introduce(); // Hello, my name is Otto
+// If you don't provide your own constructor, 
+// then a default constructor will be supplied 
+// for you. If your class is a base class, the 
+// default constructor is empty:
+
+// JS
+// Copy to Clipboard
+constructor() {}
+// If your class is a derived class, the 
+// default constructor calls the parent 
+// constructor, passing along any arguments 
+// that were provided:
+
+// JS
+// Copy to Clipboard
+constructor(...args) {
+  super(...args);
+}
+// Note: The difference between an explicit 
+// constructor like the one above and the 
+// default constructor is that the latter 
+// doesn't actually invoke the array iterator 
+// through argument spreading.
+
+// That enables code like this to work:
+
+// JS
+// Copy to Clipboard
+class ValidationError extends Error {
+  printCustomerMessage() {
+    return `Validation failed :-( (details: ${this.message})`;
+  }
+}
+
+try {
+  throw new ValidationError("Not a valid phone number");
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.log(error.name); // This is Error instead of ValidationError!
+    console.log(error.printCustomerMessage());
+  } else {
+    console.log("Unknown error", error);
+    throw error;
+  }
+}
+// The ValidationError class doesn't need 
+// an explicit constructor, because it 
+// doesn't need to do any custom initialization. 
+// The default constructor then takes care of 
+// initializing the parent Error from the 
+// argument it is given.
+
+// However, if you provide your own constructor, 
+// and your class derives from some parent class, 
+// then you must explicitly call the parent class 
+// constructor using super(). For example:
+
+// JS
+// Copy to Clipboard
+class ValidationError extends Error {
+  constructor(message) {
+    super(message); // call parent class constructor
+    this.name = "ValidationError";
+    this.code = "42";
+  }
+
+  printCustomerMessage() {
+    return `Validation failed :-( (details: ${this.message}, code: ${this.code})`;
+  }
+}
+
+try {
+  throw new ValidationError("Not a valid phone number");
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.log(error.name); // Now this is ValidationError!
+    console.log(error.printCustomerMessage());
+  } else {
+    console.log("Unknown error", error);
+    throw error;
+  }
+}
+// Using new on a class goes through the following steps:
+
+// (If it's a derived class) The constructor 
+// body before the super() call is evaluated. 
+// This part should not access this because 
+// it's not yet initialized.
+
+// (If it's a derived class) The super() call 
+// is evaluated, which initializes the parent 
+// class through the same process.
+
+// The current class's fields are initialized.
+
+// The constructor body after the super() call 
+// (or the entire body, if it's a base class) 
+// is evaluated.
+
+// Within the constructor body, you can access 
+// the object being created through this and 
+// access the class that is called with new 
+// through new.target. Note that methods 
+// (including getters and setters) and the 
+// prototype chain are already initialized 
+// on this before the constructor is executed, 
+// so you can even access methods of the 
+// subclass from the constructor of the 
+// superclass. However, if those methods use 
+// this, the this will not have been fully 
+// initialized yet. This means reading public 
+// fields of the derived class will result 
+// in undefined, while reading private fields 
+// will result in a TypeError.
+
+// JS
+// Copy to Clipboard
+new (class C extends class B {
+  constructor() {
+    console.log(this.foo());
+  }
+} {
+  #a = 1;
+  foo() {
+    return this.#a; // TypeError: Cannot read private member #a from an object whose class did not declare it
+    // It's not really because the class didn't declare it,
+    // but because the private field isn't initialized yet
+    // when the superclass constructor is running
+  }
+})();
+// The constructor method may have a 
+// return value. While the base class 
+// may return anything from its constructor,
+//  the derived class must return an object 
+// or undefined, or a TypeError will be thrown.
+
+// JS
+// Copy to Clipboard
+class ParentClass {
+  constructor() {
+    return 1;
+  }
+}
+
+console.log(new ParentClass()); // ParentClass {}
+// The return value is ignored 
+// because it's not an object
+// This is consistent with function 
+// constructors
+
+class ChildClass extends ParentClass {
+  constructor() {
+    return 1;
+  }
+}
+
+console.log(new ChildClass()); // TypeError: Derived constructors may only return object or undefined
+// If the parent class constructor 
+// returns an object, that object will 
+// be used as the this value on which 
+// class fields of the derived class 
+// will be defined. This trick is called 
+// "return overriding", which allows a 
+// derived class's fields (including 
+// private ones) to be defined on unrelated
+//  objects.
+
+// The constructor follows normal method 
+// syntax, so parameter default values, 
+// rest parameters, etc. can all be used.
+
+// JS
+// Copy to Clipboard
+class Person {
+  constructor(name = "Anonymous") {
+    this.name = name;
+  }
+  introduce() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+}
+
+const person = new Person();
+person.introduce(); // Hello, my name is Anonymous
+// The constructor must be a literal name. 
+// Computed properties cannot become constructors.
+
+// JS
+// Copy to Clipboard
+class Foo {
+  // This is a computed property. It will 
+  // not be picked up as a constructor.
+  ["constructor"]() {
+    console.log("called");
+    this.a = 1;
+  }
+}
+
+const foo = new Foo(); // No log
+console.log(foo); // Foo {}
+foo.constructor(); // Logs "called"
+console.log(foo); // Foo { a: 1 }
+// Async methods, generator methods, 
+// accessors, and class fields are 
+// forbidden from being called constructor. 
+// Private names cannot be called #constructor.
+//  Any member named constructor must be a 
+// plain method.
+
+// Examples
+// Using the constructor
+// This code snippet is taken from the 
+// classes sample (live demo).
+
+// JS
+// Copy to Clipboard
+class Square extends Polygon {
+  constructor(length) {
+    // Here, it calls the parent class' constructor with lengths
+    // provided for the Polygon's width and height
+    super(length, length);
+    // NOTE: In derived classes, `super()` must be called before you
+    // can use `this`. Leaving this out will cause a ReferenceError.
+    this.name = "Square";
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+
+  set area(value) {
+    this.height = value ** 0.5;
+    this.width = value ** 0.5;
+  }
+}
+// Calling super in a constructor 
+// bound to a different prototype
+
+// super() calls the constructor that's 
+// the prototype of the current class. 
+// If you change the prototype of the 
+// current class itself, super() will 
+// call the constructor that's the new 
+// prototype. Changing the prototype of 
+// the current class's prototype property
+//  doesn't affect which constructor super() calls.
+
+// JS
+// Copy to Clipboard
+class Polygon {
+  constructor() {
+    this.name = "Polygon";
+  }
+}
+
+class Rectangle {
+  constructor() {
+    this.name = "Rectangle";
+  }
+}
+
+class Square extends Polygon {
+  constructor() {
+    super();
+  }
+}
+
+// Make Square extend Rectangle 
+// (which is a base class) instead 
+// of Polygon
+Object.setPrototypeOf(Square, Rectangle);
+
+const newInstance = new Square();
+
+// newInstance is still an instance 
+// of Polygon, because we didn't
+// change the prototype of Square.prototype, 
+// so the prototype chain
+// of newInstance is still
+//   newInstance --> Square.prototype --> Polygon.prototype
+console.log(newInstance instanceof Polygon); // true
+console.log(newInstance instanceof Rectangle); // false
+
+// However, because super() calls 
+// Rectangle as constructor, the name property
+// of newInstance is initialized with the 
+// logic in Rectangle
+console.log(newInstance.name); // Rectangle
+
+// extends
+// Baseline Widely available
+// The extends keyword is used in class declarations 
+// or class expressions to create a class that is a 
+// child of another class.
+
+// Try it
+class DateFormatter extends Date {
+  getFormattedDate() {
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    return `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`;
+  }
+}
+
+console.log(new DateFormatter('August 19, 1975 23:15:30').getFormattedDate());
+// Expected output: "19-Aug-1975"
+
+
+// Syntax
+// JS
+// Copy to Clipboard
+class ChildClass extends ParentClass { /* … */ }
+// ParentClass
+// An expression that evaluates to a constructor 
+// function (including a class) or null.
+
+// Description
+// The extends keyword can be used to subclass 
+// custom classes as well as built-in objects.
+
+// Any constructor that can be called with
+//  new and has the prototype property can 
+// be the candidate for the parent class. 
+// The two conditions must both hold — for 
+// example, bound functions and Proxy can be
+//  constructed, but they don't have a 
+// prototype property, so they cannot be 
+// subclassed.
+
+// JS
+// Copy to Clipboard
+function OldStyleClass() {
+  this.someProperty = 1;
+}
+OldStyleClass.prototype.someMethod = function () {};
+
+class ChildClass extends OldStyleClass {}
+
+class ModernClass {
+  someProperty = 1;
+  someMethod() {}
+}
+
+class AnotherChildClass extends ModernClass {}
+// The prototype property of the ParentClass 
+// must be an Object or null, but you would 
+// rarely worry about this in practice, 
+// because a non-object prototype doesn't 
+// behave as it should anyway. (It's ignored 
+// by the new operator.)
+
+// JS
+// Copy to Clipboard
+function ParentClass() {}
+ParentClass.prototype = 3;
+
+class ChildClass extends ParentClass {}
+// Uncaught TypeError: Class extends 
+// value does not have valid prototype 
+// property 3
+
+console.log(Object.getPrototypeOf(new ParentClass()));
+// [Object: null prototype] {}
+// Not actually a number!
+// extends sets the prototype for both
+//  ChildClass and ChildClass.prototype.
+
+// Prototype of ChildClass	Prototype of ChildClass.prototype
+// extends clause absent	Function.prototype	Object.prototype
+// extends null	Function.prototype	null
+// extends ParentClass	ParentClass	ParentClass.prototype
+// JS
+// Copy to Clipboard
+class ParentClass {}
+class ChildClass extends ParentClass {}
+
+// Allows inheritance of static properties
+Object.getPrototypeOf(ChildClass) === ParentClass;
+// Allows inheritance of instance properties
+Object.getPrototypeOf(ChildClass.prototype) === ParentClass.prototype;
+// The right-hand side of extends does not have 
+// to be an identifier. You can use any expression
+//  that evaluates to a constructor. This is 
+// often useful to create mixins. The this 
+// value in the extends expression is the 
+// this surrounding the class definition, 
+// and referring to the class's name is a 
+// ReferenceError because the class is not 
+// initialized yet. await and yield work as 
+// expected in this expression.
+
+// JS
+// Copy to Clipboard
+class SomeClass extends class {
+  constructor() {
+    console.log("Base class");
+  }
+} {
+  constructor() {
+    super();
+    console.log("Derived class");
+  }
+}
+
+new SomeClass();
+// Base class
+// Derived class
+// While the base class may return anything 
+// from its constructor, the derived class 
+// must return an object or undefined, or 
+// a TypeError will be thrown.
+
+// JS
+// Copy to Clipboard
+class ParentClass {
+  constructor() {
+    return 1;
+  }
+}
+
+console.log(new ParentClass()); // ParentClass {}
+// The return value is ignored because 
+// it's not an object
+// This is consistent with function constructors
+
+class ChildClass extends ParentClass {
+  constructor() {
+    super();
+    return 1;
+  }
+}
+
+console.log(new ChildClass()); // TypeError: Derived constructors may only return object or undefined
+// If the parent class constructor returns 
+// an object, that object will be used as 
+// the this value for the derived class when 
+// further initializing class fields. This 
+// trick is called "return overriding", 
+// which allows a derived class's fields
+//  (including private ones) to be defined
+//  on unrelated objects.
+
+// Subclassing built-ins
+// Warning: The standard committee now holds 
+// the position that the built-in subclassing 
+// mechanism in previous spec versions is 
+// over-engineered and causes non-negligible
+//  performance and security impacts. New 
+// built-in methods consider less about 
+// subclasses, and engine implementers are
+//  investigating whether to remove certain
+//  subclassing mechanisms. Consider using 
+// composition instead of inheritance when 
+// enhancing built-ins.
+
+// Here are some things you may expect 
+// when extending a class:
+
+// When calling a static factory method 
+// (like Promise.resolve() or Array.from()) 
+// on a subclass, the returned instance is 
+// always an instance of the subclass.
+
+// When calling an instance method that 
+// returns a new instance (like
+//  Promise.prototype.then() or Array.prototype.map()) 
+// on a subclass, the returned instance is 
+// always an instance of the subclass.
+
+// Instance methods try to delegate to 
+// a minimal set of primitive methods where 
+// possible. For example, for a subclass of
+//  Promise, overriding then() automatically
+//  causes the behavior of catch() to change; 
+// or for a subclass of Map, overriding set() 
+// automatically causes the behavior of the
+//  Map() constructor to change.
+
+// However, the above expectations take 
+// non-trivial efforts to implement properly.
+
+// The first one requires the static method 
+// to read the value of this to get the 
+// constructor for constructing the returned 
+// instance. This means [p1, p2, p3].map(Promise.resolve) 
+// throws an error because the this inside 
+// Promise.resolve is undefined. A way to 
+// fix this is to fall back to the base class 
+// if this is not a constructor, like 
+// Array.from() does, but that still means 
+// the base class is special-cased.
+
+// The second one requires the instance method 
+// to read this.constructor to get the 
+// constructor function. However, new 
+// this.constructor() may break legacy code,
+//  because the constructor property is both 
+// writable and configurable and is not 
+// protected in any way. Therefore, many 
+// copying built-in methods use the 
+// constructor's @@species property instead 
+// (which by default just returns this, the 
+// constructor itself). However, @@species allows
+//  running arbitrary code and creating 
+// instances of arbitrary type, which poses 
+// a security concern and greatly complicates 
+// subclassing semantics.
+
+
+// The third one leads to visible invocations 
+// of custom code, which makes a lot of 
+// optimizations harder to implement. For 
+// example, if the Map() constructor is 
+// called with an iterable of x elements, 
+// then it must visibly invoke the set() 
+// method x times, instead of just copying 
+// the elements into the internal storage.
+
+// These problems are not unique to 
+// built-in classes. For your own classes, 
+// you will likely have to make the same 
+// decisions. However, for built-in classes,
+//  optimizability and security are a much 
+// bigger concern. New built-in methods 
+// always construct the base class and 
+// call as few custom methods as possible. 
+// If you want to subclass built-ins while 
+// achieving the above expectations, you 
+// need to override all methods that have 
+// the default behavior baked into them. 
+// Any addition of new methods on the base 
+// class may also break the semantics of 
+// your subclass because they are inherited
+//  by default. Therefore, a better way to
+//  extend built-ins is to use composition.
+
+// Extending null
+// extends null was designed to allow easy 
+// creation of objects that do not inherit 
+// from Object.prototype. However, due to 
+// unsettled decisions about whether super() 
+// should be called within the constructor, 
+// it's not possible to construct such a class 
+// in practice using any constructor 
+// implementation that doesn't return an 
+// object. The TC39 committee is working 
+// on re-enabling this feature.
+
+// JS
+// Copy to Clipboard
+new (class extends null {})();
+// TypeError: Super constructor null of 
+// anonymous class is not a constructor
+
+new (class extends null {
+  constructor() {}
+})();
+// ReferenceError: Must call super 
+// constructor in derived class before 
+// accessing 'this' or returning from 
+// derived constructor
+
+new (class extends null {
+  constructor() {
+    super();
+  }
+})();
+// TypeError: Super constructor null 
+// of anonymous class is not a constructor
+// Instead, you need to explicitly 
+// return an instance from the constructor.
+
+// JS
+// Copy to Clipboard
+class NullClass extends null {
+  constructor() {
+    // Using new.target allows derived classes to
+    // have the correct prototype chain
+    return Object.create(new.target.prototype);
+  }
+}
+
+const proto = Object.getPrototypeOf;
+console.log(proto(proto(new NullClass()))); // null
+// Examples
+// Using extends
+// The first example creates a class 
+// called Square from a class called 
+// Polygon. This example is extracted 
+// from this live demo (source).
+
+// JS
+// Copy to Clipboard
+class Square extends Polygon {
+  constructor(length) {
+    // Here, it calls the parent class' constructor with lengths
+    // provided for the Polygon's width and height
+    super(length, length);
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = "Square";
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+}
+// Extending plain objects
+// Classes cannot extend regular 
+// (non-constructible) objects. If 
+// you want to inherit from a regular
+//  object by making all properties of 
+// this object available on inherited 
+// instances, you can instead use 
+// Object.setPrototypeOf():
+
+// JS
+// Copy to Clipboard
+const Animal = {
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  },
+};
+
+class Dog {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+Object.setPrototypeOf(Dog.prototype, Animal);
+
+const d = new Dog("Mitzie");
+d.speak(); // Mitzie makes a noise.
+// Extending built-in objects
+// This example extends the built-in 
+// Date object. This example is extracted
+//  from this live demo (source).
+
+// JS
+// Copy to Clipboard
+class MyDate extends Date {
+  getFormattedDate() {
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    ];
+    return `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`;
+  }
+}
+// Extending Object
+// All JavaScript objects inherit from 
+// Object.prototype by default, so writing
+//  extends Object at first glance seems 
+// redundant. The only difference from 
+// not writing extends at all is that the 
+// constructor itself inherits static 
+// methods from Object, such as Object.keys(). 
+// However, because no Object static method 
+// uses the this value, there's still no 
+// value in inheriting these static methods.
+
+// The Object() constructor special-cases 
+// the subclassing scenario. If it's 
+// implicitly called via super(), it 
+// always initializes a new object with 
+// new.target.prototype as its prototype. 
+// Any value passed to super() is ignored.
+// 
+
+// JS
+// Copy to Clipboard
+class C extends Object {
+  constructor(v) {
+    super(v);
+  }
+}
+
+console.log(new C(1) instanceof Number); // false
+console.log(C.keys({ a: 1, b: 2 })); // [ 'a', 'b' ]
+// Compare this behavior with a custom 
+// wrapper that does not special-case 
+// subclassing:
+
+// JS
+// Copy to Clipboard
+function MyObject(v) {
+  return new Object(v);
+}
+class D extends MyObject {
+  constructor(v) {
+    super(v);
+  }
+}
+console.log(new D(1) instanceof Number); // true
+// Species
+// You might want to return Array 
+// objects in your derived array 
+// class MyArray. The species pattern 
+// lets you override default constructors.
+
+// For example, when using methods such 
+// as Array.prototype.map() that return 
+// the default constructor, you want these 
+// methods to return a parent Array object, 
+// instead of the MyArray object. The 
+// Symbol.species symbol lets you do this:
+
+// JS
+// Copy to Clipboard
+class MyArray extends Array {
+  // Overwrite species to the parent Array constructor
+  static get [Symbol.species]() {
+    return Array;
+  }
+}
+
+const a = new MyArray(1, 2, 3);
+const mapped = a.map((x) => x * x);
+
+console.log(mapped instanceof MyArray); // false
+console.log(mapped instanceof Array); // true
+// This behavior is implemented by 
+// many built-in copying methods. 
+// For caveats of this feature, see 
+// the subclassing built-ins discussion.
+
+// Mix-ins
+// Abstract subclasses or mix-ins are 
+// templates for classes. A class can 
+// only have a single superclass, so 
+// multiple inheritance from tooling 
+// classes, for example, is not possible.
+//  The functionality must be provided 
+// by the superclass.
+
+// A function with a superclass as input
+//  and a subclass extending that 
+// superclass as output can be used 
+// to implement mix-ins:
+
+// JS
+// Copy to Clipboard
+const calculatorMixin = (Base) =>
+  class extends Base {
+    calc() {}
+  };
+
+const randomizerMixin = (Base) =>
+  class extends Base {
+    randomize() {}
+  };
+// A class that uses these mix-ins 
+// can then be written like this:
+
+// JS
+// Copy to Clipboard
+class Foo {}
+class Bar extends calculatorMixin(randomizerMixin(Foo)) {}
+// Avoiding inheritance
+// Inheritance is a very strong coupling 
+// relationship in object-oriented programming.
+//  It means all behaviors of the base class 
+// are inherited by the subclass by default, 
+// which may not always be what you want. For 
+// example, consider the implementation of 
+// a ReadOnlyMap:
+// 
+
+
+// JS
+// Copy to Clipboard
+class ReadOnlyMap extends Map {
+  set() {
+    throw new TypeError("A read-only map must be set at construction time.");
+  }
+}
+// It turns out that ReadOnlyMap is not 
+// constructible, because the Map() 
+// constructor calls the instance's set() method.
+
+// JS
+// Copy to Clipboard
+const m = new ReadOnlyMap([["a", 1]]); // TypeError: A read-only map must be set at construction time.
+// We may get around this by using a 
+// private flag to indicate whether 
+// the instance is being constructed. 
+// However, a more significant problem 
+// with this design is that it breaks the
+//  Liskov substitution principle, which 
+// states that a subclass should be 
+// substitutable for its superclass. 
+// If a function expects a Map object,
+//  it should be able to use a ReadOnlyMap 
+// object as well, which will break here.
+
+// Inheritance often leads to the 
+// circle-ellipse problem, because 
+// neither type perfectly entails 
+// the behavior of the other, although 
+// they share a lot of common traits. 
+// In general, unless there's a very 
+// good reason to use inheritance, it's 
+// better to use composition instead. 
+// Composition means that a class has 
+// a reference to an object of another 
+// class, and only uses that object as 
+// an implementation detail.
+
+// JS
+// Copy to Clipboard
+class ReadOnlyMap {
+  #data;
+  constructor(values) {
+    this.#data = new Map(values);
+  }
+  get(key) {
+    return this.#data.get(key);
+  }
+  has(key) {
+    return this.#data.has(key);
+  }
+  get size() {
+    return this.#data.size;
+  }
+  *keys() {
+    yield* this.#data.keys();
+  }
+  *values() {
+    yield* this.#data.values();
+  }
+  *entries() {
+    yield* this.#data.entries();
+  }
+  *[Symbol.iterator]() {
+    yield* this.#data[Symbol.iterator]();
+  }
+}
+// In this case, the ReadOnlyMap class 
+// is not a subclass of Map, but it still 
+// implements most of the same methods. 
+// This means more code duplication, but 
+// it also means that the ReadOnlyMap class
+//  is not strongly coupled to the Map class, 
+// and does not easily break if the Map class 
+// is changed, avoiding the semantic issues 
+// of built-in subclassing. For example, if 
+// the Map class adds an emplace() method 
+// that does not call set(), it would cause 
+// the ReadOnlyMap class to no longer be 
+// read-only unless the latter is updated 
+// accordingly to override emplace() as 
+// well. Moreover, ReadOnlyMap objects do
+//  not have the set method at all, which 
+// is more accurate than throwing an error 
+// at runtime.
+
+// Private properties
+// Private properties are counterparts of the 
+// regular class properties which are public, 
+// including class fields, class methods, etc. 
+// Private properties get created by using a 
+// hash # prefix and cannot be legally referenced 
+// outside of the class. The privacy encapsulation 
+// of these class properties is enforced by JavaScript itself.
+
+// Private properties were not native to 
+// the language before this syntax existed. 
+// In prototypal inheritance, its behavior 
+// may be emulated with WeakMap objects or 
+// closures, but they can't compare to the 
+// # syntax in terms of ergonomics.
+
+// Syntax
+class ClassWithPrivate {
+  #privateField;
+  #privateFieldWithInitializer = 42;
+
+  #privateMethod() {
+    // …
+  }
+
+  static #privateStaticField;
+  static #privateStaticFieldWithInitializer = 42;
+
+  static #privateStaticMethod() {
+    // …
+  }
+}
+// There are some additional syntax restrictions:
+
+// All private identifiers declared within a 
+// class must be unique. The namespace is 
+// shared between static and instance 
+// properties. The only exception is when 
+// the two declarations define a getter-setter pair.
+// The private identifier cannot be #constructor.
+// Description
+// Most class properties have their private counterparts:
+
+// Private fields
+// Private methods
+// Private static fields
+// Private static methods
+// Private getters
+// Private setters
+// Private static getters
+// Private static setters
+// These features are collectively called 
+// private properties. However, constructors 
+// cannot be private in JavaScript. To prevent 
+// classes from being constructed outside of 
+// the class, you have to use a private flag.
+
+// Private properties are declared with # names 
+// (pronounced "hash names"), which are identifiers 
+// prefixed with #. The hash prefix is an inherent 
+// part of the property name — you can draw relationship 
+// with the old underscore prefix convention 
+// _privateField — but it's not an ordinary 
+// string property, so you can't dynamically 
+// access it with the bracket notation.
+
+// It is a syntax error to refer to # names 
+// from outside of the class. It is also a 
+// syntax error to refer to private properties 
+// that were not declared in the class body, or 
+// to attempt to remove declared properties with delete.
+// 
+
+// JS
+// Copy to Clipboard
+class ClassWithPrivateField {
+  #privateField;
+
+  constructor() {;
+    delete this.#privateField; // Syntax error
+    this.#undeclaredField = 42; // Syntax error
+  }
+}
+
+const instance = new ClassWithPrivateField();
+instance.#privateField; // Syntax error
+// JavaScript, being a dynamic language, 
+// is able to perform this compile-time 
+// check because of the special hash 
+// identifier syntax, making it different 
+// from normal properties on the syntax level.
+
+// Note: Code run in the Chrome console can 
+// access private properties outside the class. 
+// This is a DevTools-only relaxation of the 
+// JavaScript syntax restriction.
+
+// If you access a private property from an
+//  object that doesn't have the property, 
+// a TypeError is thrown, instead of returning 
+// undefined as normal properties do.
+
+// JS
+// Copy to Clipboard
+class C {
+  #x;
+
+  static getX(obj) {
+    return obj.#x;
+  }
+}
+
+console.log(C.getX(new C())); // undefined
+console.log(C.getX({})); // TypeError: Cannot read private member #x from an object whose class did not declare it
+// This example also illustrates that you can 
+// access private properties within static 
+// functions too, and on externally defined 
+// instances of the class.
+
+// You can use the in operator to check whether 
+// an externally defined object possesses a private 
+// property. This will return true if the private 
+// field or method exists, and false otherwise.
+
+// JS
+// Copy to Clipboard
+class C {
+  #x;
+  constructor(x) {
+    this.#x = x;
+  }
+  static getX(obj) {
+    if (#x in obj) return obj.#x;
+
+    return "obj must be an instance of C";
+  }
+}
+console.log(C.getX(new C("foo"))); // "foo"
+console.log(C.getX(new C(0.196))); // 0.196
+console.log(C.getX(new C(new Date()))); // the current date and time
+console.log(C.getX({})); // "obj must be an instance of C"
+// Note a corollary of private names being 
+// always pre-declared and non-deletable: 
+// if you found that an object possesses 
+// one private property of the current class 
+// (either from a try...catch or an in check), 
+// it must possess all other private properties. 
+// An object possessing the private properties 
+// of a class generally means it was constructed 
+// by that class (although not always).
+
+// Private properties are not part of the 
+// prototypical inheritance model since they 
+// can only be accessed within the current 
+// class's body and aren't inherited by 
+// subclasses. Private properties with the 
+// same name within different classes are 
+// entirely different and do not interoperate 
+// with each other. See them as external 
+// metadata attached to each instance, managed 
+// by the class. For this reason, Object.freeze() 
+// and Object.seal() have no effect on private properties.
+
+// For more information on how and when private 
+// fields are initialized, see public class fields.
+
+// Examples
+// Private fields
+// Private fields include private instance fields 
+// and private static fields. Private fields are 
+// only accessible from inside the class declaration.
+
+// Private instance fields
+// Like their public counterparts, private instance fields:
+
+// are added before the constructor runs in a 
+// base class, or immediately after super() 
+// is invoked in a subclass, and
+// are only available on instances of the class.
+// JS
+// Copy to Clipboard
+class ClassWithPrivateField {
+  #privateField;
+
+  constructor() {
+    this.#privateField = 42;
+  }
+}
+
+class Subclass extends ClassWithPrivateField {
+  #subPrivateField;
+
+  constructor() {
+    super();
+    this.#subPrivateField = 23;
+  }
+}
+
+new Subclass(); // In some dev tools, it shows Subclass {#privateField: 42, #subPrivateField: 23}
+// Note: #privateField from the 
+// ClassWithPrivateField base class 
+// is private to ClassWithPrivateField 
+// and is not accessible from the derived Subclass.
+
+// Returning overriding object
+// A class's constructor can return a 
+// different object, which will be used 
+// as the new this for the derived class 
+// constructor. The derived class may then 
+// define private fields on that returned 
+// object — meaning it is possible to "stamp" 
+// private fields onto unrelated objects.
+
+// JS
+// Copy to Clipboard
+class Stamper extends class {
+  // A base class whose constructor returns the object it's given
+  constructor(obj) {
+    return obj;
+  }
+} {
+  // This declaration will "stamp" the private field onto the object
+  // returned by the base class constructor
+  #stamp = 42;
+  static getStamp(obj) {
+    return obj.#stamp;
+  }
+}
+
+const obj = {};
+new Stamper(obj);
+// `Stamper` calls `Base`, which returns `obj`, so `obj` is
+// now the `this` value. `Stamper` then defines `#stamp` on `obj`
+
+console.log(obj); // In some dev tools, it shows {#stamp: 42}
+console.log(Stamper.getStamp(obj)); // 42
+console.log(obj instanceof Stamper); // false
+
+// You cannot stamp private properties twice
+new Stamper(obj); // Error: Initializing an object twice is an error with private fields
+// Warning: This is a potentially very confusing 
+// thing to do. You are generally advised to avoid 
+// returning anything from the constructor — 
+// especially something unrelated to this.
+
+// Private static fields
+// Like their public counterparts, private static fields:
+
+// are added to the class constructor at class evaluation time, and
+// are only available on the class itself.
+// JS
+// Copy to Clipboard
+class ClassWithPrivateStaticField {
+  static #privateStaticField = 42;
+
+  static publicStaticMethod() {
+    return ClassWithPrivateStaticField.#privateStaticField;
+  }
+}
+
+console.log(ClassWithPrivateStaticField.publicStaticMethod()); // 42
+// There is a restriction on private static fields:
+//  only the class which defines the private static 
+// field can access the field. This can lead to 
+// unexpected behavior when using this. In the 
+// following example, this refers to the Subclass 
+// class (not the ClassWithPrivateStaticField class) 
+// when we try to call Subclass.publicStaticMethod(), 
+// and so causes a TypeError.
+
+// JS
+// Copy to Clipboard
+class ClassWithPrivateStaticField {
+  static #privateStaticField = 42;
+
+  static publicStaticMethod() {
+    return this.#privateStaticField;
+  }
+}
+
+class Subclass extends ClassWithPrivateStaticField {}
+
+Subclass.publicStaticMethod(); // TypeError: Cannot read private member #privateStaticField from an object whose class did not declare it
+// This is the same if you call the method with 
+// super, because super methods are not called 
+// with the super class as this.
+
+// JS
+// Copy to Clipboard
+class ClassWithPrivateStaticField {
+  static #privateStaticField = 42;
+
+  static publicStaticMethod() {
+    // When invoked through super, `this` still refers to Subclass
+    return this.#privateStaticField;
+  }
+}
+
+class Subclass extends ClassWithPrivateStaticField {
+  static callSuperMethod() {
+    return super.publicStaticMethod();
+  }
+}
+
+Subclass.callSuperMethod(); // TypeError: Cannot read private member #privateStaticField from an object whose class did not declare it
+// You are advised to always access private 
+// static fields through the class name, not 
+// through this, so inheritance doesn't break the method.
+
+// Private methods
+// Private methods include private instance 
+// methods and private static methods. Private 
+// methods are only accessible from inside the class declaration.
+
+// Private instance methods
+// Unlike their public counterparts, private 
+// instance methods:
+
+// are installed immediately before the instance 
+// fields are installed, and
+// are only available on instances of the class, 
+// not on its .prototype property.
+// JS
+// Copy to Clipboard
+class ClassWithPrivateMethod {
+  #privateMethod() {
+    return 42;
+  }
+
+  publicMethod() {
+    return this.#privateMethod();
+  }
+}
+
+const instance = new ClassWithPrivateMethod();
+console.log(instance.publicMethod()); // 42
+// Private instance methods may be generator, 
+// async, or async generator functions. Private 
+// getters and setters are also possible, and 
+// follow the same syntax requirements as 
+// their public getter and setter counterparts.
+
+// JS
+// Copy to Clipboard
+class ClassWithPrivateAccessor {
+  #message;
+
+  get #decoratedMessage() {
+    return `🎬${this.#message}🛑`;
+  }
+  set #decoratedMessage(msg) {
+    this.#message = msg;
+  }
+
+  constructor() {
+    this.#decoratedMessage = "hello world";
+    console.log(this.#decoratedMessage);
+  }
+}
+
+new ClassWithPrivateAccessor(); // 🎬hello world🛑
+// Unlike public methods, private methods are 
+// not accessible on the .prototype property of their class.
+
+// JS
+// Copy to Clipboard
+class C {
+  #method() {}
+
+  static getMethod(x) {
+    return x.#method;
+  }
+}
+
+console.log(C.getMethod(new C())); // [Function: #method]
+console.log(C.getMethod(C.prototype)); // TypeError: Receiver must be an instance of class C
+// Private static methods
+// Like their public counterparts, private static methods:
+
+// are added to the class constructor at class evaluation time, and
+// are only available on the class itself.
+// JS
+// Copy to Clipboard
+class ClassWithPrivateStaticMethod {
+  static #privateStaticMethod() {
+    return 42;
+  }
+
+  static publicStaticMethod() {
+    return ClassWithPrivateStaticMethod.#privateStaticMethod();
+  }
+}
+
+console.log(ClassWithPrivateStaticMethod.publicStaticMethod()); // 42
+// Private static methods may be generator, 
+// async, and async generator functions.
+
+// The same restriction previously mentioned 
+// for private static fields holds for private 
+// static methods, and similarly can lead to 
+// unexpected behavior when using this. In the 
+// following example, when we try to call 
+// Subclass.publicStaticMethod(), this refers 
+// to the Subclass class (not the 
+// ClassWithPrivateStaticMethod class) and 
+// so causes a TypeError.
+
+// JS
+// Copy to Clipboard
+class ClassWithPrivateStaticMethod {
+  static #privateStaticMethod() {
+    return 42;
+  }
+
+  static publicStaticMethod() {
+    return this.#privateStaticMethod();
+  }
+}
+
+class Subclass extends ClassWithPrivateStaticMethod {}
+
+console.log(Subclass.publicStaticMethod()); // TypeError: Cannot read private member #privateStaticMethod from an object whose class did not declare it
+// Simulating private constructors
+// Many other languages include the capability 
+// to mark a constructor as private, which prevents 
+// the class from being instantiated outside of 
+// the class itself — you can only use static 
+// factory methods that create instances, or not 
+// be able to create instances at all. JavaScript 
+// does not have a native way to do this, but it 
+// can be accomplished by using a private static flag.
+
+// JS
+// Copy to Clipboard
+class PrivateConstructor {
+  static #isInternalConstructing = false;
+
+  constructor() {
+    if (!PrivateConstructor.#isInternalConstructing) {
+      throw new TypeError("PrivateConstructor is not constructable");
+    }
+    PrivateConstructor.#isInternalConstructing = false;
+    // More initialization logic
+  }
+
+  static create() {
+    PrivateConstructor.#isInternalConstructing = true;
+    const instance = new PrivateConstructor();
+    return instance;
+  }
+}
+
+new PrivateConstructor(); // TypeError: PrivateConstructor is not constructable
+PrivateConstructor.create(); // PrivateConstructor {}
+
+// Public class fields
+// Public fields are writable, enumerable, and 
+// configurable properties. As such, unlike 
+// their private counterparts, they participate 
+// in prototype inheritance.
+
+// Syntax
+class ClassWithField {
+  instanceField;
+  instanceFieldWithInitializer = "instance field";
+  static staticField;
+  static staticFieldWithInitializer = "static field";
+}
+// There are some additional syntax restrictions:
+
+// The name of a static property (field or method) cannot be prototype.
+// The name of a class field (static or instance) cannot be constructor.
+// Description
+// This page introduces public instance fields in detail.
+
+// For public static fields, see static.
+// For private fields, see private properties.
+// For public methods, see method definitions.
+// For public accessors, see getter and setter.
+// Public instance fields exist on every created 
+// instance of a class. By declaring a public field, 
+// you can ensure the field is always present, and 
+// the class definition is more self-documenting.
+
+// Public instance fields are added to the instance 
+// either at construction time in the base class 
+// (before the constructor body runs), or just after 
+// super() returns in a subclass. Fields without
+//  initializers are initialized to undefined. 
+// Like properties, field names may be computed.
+
+// JS
+// Copy to Clipboard
+const PREFIX = "prefix";
+
+class ClassWithField {
+  field;
+  fieldWithInitializer = "instance field";
+  [`${PREFIX}Field`] = "prefixed field";
+}
+
+const instance = new ClassWithField();
+console.log(Object.hasOwn(instance, "field")); // true
+console.log(instance.field); // undefined
+console.log(instance.fieldWithInitializer); // "instance field"
+console.log(instance.prefixField); // "prefixed field"
+// Computed field names are only evaluated once, 
+// at class definition time. This means that 
+// each class always has a fixed set of field 
+// names, and two instances cannot have different 
+// field names via computed names. The this value 
+// in the computed expression is the this surrounding 
+// the class definition, and referring to the class's 
+// name is a ReferenceError because the class is not 
+// initialized yet. await and yield work as expected 
+// in this expression.
+
+// JS
+// Copy to Clipboard
+class C {
+  [Math.random()] = 1;
+}
+
+console.log(new C());
+console.log(new C());
+// Both instances have the same field name
+// In the field initializer, this refers to the 
+// class instance under construction, and super 
+// refers to the prototype property of the base 
+// class, which contains the base class's instance 
+// methods, but not its instance fields.
+
+// JS
+// Copy to Clipboard
+class Base {
+  baseField = "base field";
+  anotherBaseField = this.baseField;
+  baseMethod() {
+    return "base method output";
+  }
+}
+
+class Derived extends Base {
+  subField = super.baseMethod();
+}
+
+const base = new Base();
+const sub = new Derived();
+
+console.log(base.anotherBaseField); // "base field"
+
+console.log(sub.subField); // "base method output"
+// The field initializer expression is evaluated 
+// each time a new instance is created. (Because 
+// the this value is different for each instance, 
+// the initializer expression can access instance-specific properties.)
+
+// JS
+// Copy to Clipboard
+class C {
+  obj = {};
+}
+
+const instance1 = new C();
+const instance2 = new C();
+console.log(instance1.obj === instance2.obj); // false
+// The expression is evaluated synchronously. 
+// You cannot use await or yield in the 
+// initializer expression. (Think of the 
+// initializer expression as being implicitly 
+// wrapped in a function.)
+
+// Because instance fields of a class are added 
+// before the respective constructor runs, you 
+// can access the fields' values within the 
+// constructor. However, because instance 
+// fields of a derived class are defined after 
+// super() returns, the base class's constructor 
+// does not have access to the derived class's fields.
+
+// JS
+// Copy to Clipboard
+class Base {
+  constructor() {
+    console.log("Base constructor:", this.field);
+  }
+}
+
+class Derived extends Base {
+  field = 1;
+  constructor() {
+    super();
+    console.log("Derived constructor:", this.field);
+    this.field = 2;
+  }
+}
+
+const instance = new Derived();
+// Base constructor: undefined
+// Derived constructor: 1
+console.log(instance.field); // 2
+// Fields are added one-by-one. Field initializers 
+// can refer to field values above it, but not 
+// below it. All instance and static methods are 
+// added beforehand and can be accessed, although 
+// calling them may not behave as expected if they 
+// refer to fields below the one being initialized.
+
+// JS
+// Copy to Clipboard
+class C {
+  a = 1;
+  b = this.c;
+  c = this.a + 1;
+  d = this.c + 1;
+}
+
+const instance = new C();
+console.log(instance.d); // 3
+console.log(instance.b); // undefined
+// Note: This is more important with private 
+// fields, because accessing a non-initialized 
+// private field throws a TypeError, even if the 
+// private field is declared below. (If the private 
+// field is not declared, it would be an early SyntaxError.)
+
+// Because class fields are added using the 
+// [[DefineOwnProperty]] semantic (which is 
+// essentially Object.defineProperty()), field
+//  declarations in derived classes do not 
+// invoke setters in the base class. This 
+// behavior differs from using 
+// this.field = … in the constructor.
+
+// JS
+// Copy to Clipboard
+class Base {
+  set field(val) {
+    console.log(val);
+  }
+}
+
+class DerivedWithField extends Base {
+  field = 1;
+}
+
+const instance = new DerivedWithField(); // No log
+
+class DerivedWithConstructor extends Base {
+  constructor() {
+    super();
+    this.field = 1;
+  }
+}
+
+const instance2 = new DerivedWithConstructor(); // Logs 1
+// Note: Before the class fields specification 
+// was finalized with the [[DefineOwnProperty]] 
+// semantic, most transpilers, including Babel 
+// and tsc, transformed class fields to the 
+// DerivedWithConstructor form, which has 
+// caused subtle bugs after class fields were standardized.
+
+// Examples
+// Using class fields
+// Class fields cannot depend on arguments of 
+// the constructor, so field initializers 
+// usually evaluate to the same value for 
+// each instance (unless the same expression 
+// can evaluate to different values each time, 
+// such as Date.now() or object initializers).
+
+// JS
+// Copy to Clipboard
+class Person {
+  name = nameArg; // nameArg is out of scope of the constructor
+  constructor(nameArg) {}
+}
+// JS
+// Copy to Clipboard
+class Person {
+  // All instances of Person will have the same name
+  name = "Dragomir";
+}
+// However, even declaring an empty class field 
+// is beneficial, because it indicates the 
+// existence of the field, which allows type 
+// checkers as well as human readers to 
+// statically analyze the shape of the class.
+
+// JS
+// Copy to Clipboard
+class Person {
+  name;
+  age;
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+// The code above seems repetitive, but 
+// consider the case where this is dynamically 
+// mutated: the explicit field declaration makes 
+// it clear which fields will definitely be 
+// present on the instance.
+
+// JS
+// Copy to Clipboard
+class Person {
+  name;
+  age;
+  constructor(properties) {
+    Object.assign(this, properties);
+  }
+}
+// Because initializers are evaluated after 
+// the base class has executed, you can access 
+// properties created by the base class constructor.
+
+// JS
+// Copy to Clipboard
+class Person {
+  name;
+  age;
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+class Professor extends Person {
+  name = `Professor ${this.name}`;
+}
+
+console.log(new Professor("Radev", 54).name); // "Professor Radev"
+
+// Static initialization blocks
+// Static initialization blocks are declared 
+//within a class. It contains statements to be 
+// evaluated during class initialization. 
+// This permits more flexible initialization 
+// logic than static properties, such as using 
+// try...catch or setting multiple fields from 
+// a single value. Initialization is performed 
+// in the context of the current class 
+// declaration, with access to private state, 
+// which allows the class to share information 
+// of its private properties with other classes 
+// or functions declared in the same scope 
+// (analogous to "friend" classes in C++).
+
+// Try it
+
+// Syntax
+class ClassWithSIB {
+  static {
+    // …
+  }
+}
+// Description
+// Without static initialization blocks, complex 
+// static initialization might be achieved by 
+// calling a static method after the class declaration:
+
+// JS
+// Copy to Clipboard
+class MyClass {
+  static init() {
+    // Access to private static fields is allowed here
+  }
+}
+
+MyClass.init();
+// However, this approach exposes an implementation 
+// detail (the init() method) to the user of the 
+// class. On the other hand, any initialization 
+// logic declared outside the class does not have 
+// access to private static fields. Static 
+// initialization blocks allow arbitrary 
+// initialization logic to be declared within 
+// the class and executed during class evaluation.
+
+// A class can have any number of static {} 
+// initialization blocks in its class body. 
+// These are evaluated, along with any interleaved 
+// static field initializers, in the order they 
+// are declared. Any static initialization of a 
+// super class is performed first, before that
+//  of its sub classes.
+
+// The scope of the variables declared inside the 
+// static block is local to the block. This includes 
+// var, function, const, and let declarations. var 
+// declarations in the block are not hoisted.
+
+// JS
+// Copy to Clipboard
+var y = "Outer y";
+
+class A {
+  static field = "Inner y";
+  static {
+    var y = this.field;
+  }
+}
+
+// var defined in static block is not hoisted
+console.log(y); // 'Outer y'
+// The this inside a static block refers to the 
+// constructor object of the class. super.property
+//  can be used to access static properties of 
+// the super class. Note however that it is a 
+// syntax error to call super() in a class 
+// static initialization block, or to use 
+// the arguments object.
+
+// The statements are evaluated synchronously. 
+// You cannot use await or yield in this block.
+//  (Think of the initialization statements as 
+// being implicitly wrapped in a function.)
+
+// The scope of the static block is nested within 
+// the lexical scope of the class body, and can 
+// access private names declared within the 
+// class without causing a syntax error.
+
+// Static field initializers and static 
+// initialization blocks are evaluated 
+// one-by-one. The initialization block 
+// can refer to field values above it, 
+// but not below it. All static methods 
+//are added beforehand and can be accessed, 
+// although calling them may not behave 
+// as expected if they refer to fields 
+// below the current block.
+
+// Note: This is more important with private 
+// static fields, because accessing a 
+// non-initialized private field throws 
+// a TypeError, even if the private field 
+// is declared below. (If the private field 
+// is not declared, it would be an early SyntaxError.)
+
+// A static initialization block may not 
+// have decorators (the class itself may).
+
+// Examples
+// Multiple blocks
+// The code below demonstrates a class with 
+// static initialization blocks and interleaved 
+// static field initializers. The output shows 
+// that the blocks and fields are evaluated 
+// in execution order.
+
+// JS
+// Copy to Clipboard
+class MyClass {
+  static field1 = console.log("static field1");
+  static {
+    console.log("static block1");
+  }
+  static field2 = console.log("static field2");
+  static {
+    console.log("static block2");
+  }
+}
+// 'static field1'
+// 'static block1'
+// 'static field2'
+// 'static block2'
+// Note that any static initialization of a 
+// super class is performed first, before 
+// that of its sub classes.
+
+// Using this and super
+// The this inside a static block refers to 
+// the constructor object of the class. This 
+// code shows how to access a public static field.
+
+// JS
+// Copy to Clipboard
+class A {
+  static field = "static field";
+  static {
+    console.log(this.field);
+  }
+}
+// 'static field'
+// The super.property syntax can be used 
+// inside a static block to reference static 
+// properties of a super class.
+
+// JS
+// Copy to Clipboard
+class A {
+  static field = "static field";
+}
+
+class B extends A {
+  static {
+    console.log(super.field);
+  }
+}
+// 'static field'
+// Access to private properties
+// This example below shows how access 
+// can be granted to a private instance 
+// field of a class from an object outside 
+// the class (example from the v8.dev blog):
+
+// JS
+// Copy to Clipboard
+let getDPrivateField;
+
+class D {
+  #privateField;
+  constructor(v) {
+    this.#privateField = v;
+  }
+  static {
+    getDPrivateField = (d) => d.#privateField;
+  }
+}
+
+console.log(getDPrivateField(new D("private"))); // 'private'
+
+// static
+// Baseline Widely available
+// The static keyword defines a static 
+// method or field for a class, or a 
+// static initialization block (see the 
+// link for more information about this usage). 
+// Static properties cannot be directly 
+// accessed on instances of the class. 
+// Instead, they're accessed on the class itself.
+
+// Static methods are often utility functions, 
+// such as functions to create or clone objects, 
+// whereas static properties are useful for 
+// caches, fixed-configuration, or any other 
+// data you don't need to be replicated across instances.
+
+// Note: In the context of classes, MDN Web 
+// Docs content uses the terms properties 
+// and fields interchangeably.
+
+// Try it
+
+// Syntax
+class ClassWithStatic {
+  static staticField;
+  static staticFieldWithInitializer = value;
+  static staticMethod() {
+    // …
+  }
+}
+// There are some additional syntax restrictions:
+
+// The name of a static property 
+// (field or method) cannot be prototype.
+// The name of a class field (static or 
+// instance) cannot be constructor.
+// Description
+// This page introduces public static 
+// properties of classes, which include 
+// static methods, static accessors, and static fields.
+
+// For private static features, see 
+// private properties.
+// For instance features, see methods 
+// definitions, getter, setter, and public class fields.
+// Public static features are declared 
+// using the static keyword. They are added 
+// to the class constructor at the time of 
+// class evaluation using the [[DefineOwnProperty]] 
+// semantic (which is essentially Object.defineProperty()). 
+// They are accessed again from the class constructor.
+
+// Static methods are often utility functions, such 
+// as functions to create or clone instances. Public 
+// static fields are useful when you want a field to 
+// exist only once per class, not on every class instance 
+// you create. This is useful for caches, fixed-configuration, 
+// or any other data you don't need to be replicated 
+// across instances.
+
+// Static field names can be computed. The this value 
+// in the computed expression is the this surrounding 
+// the class definition, and referring to the class's 
+// name is a ReferenceError because the class is not 
+// initialized yet. await and yield work as expected 
+// in this expression.
+
+// Static fields can have an initializer. Static fields 
+// without initializers are initialized to undefined. 
+// Public static fields are not reinitialized on 
+// subclasses, but can be accessed via the prototype chain.
+
+// JS
+// Copy to Clipboard
+class ClassWithStaticField {
+  static staticField;
+  static staticFieldWithInitializer = "static field";
+}
+
+class SubclassWithStaticField extends ClassWithStaticField {
+  static subStaticField = "subclass field";
+}
+
+console.log(Object.hasOwn(ClassWithStaticField, "staticField")); // true
+console.log(ClassWithStaticField.staticField); // undefined
+console.log(ClassWithStaticField.staticFieldWithInitializer); // "static field"
+console.log(SubclassWithStaticField.staticFieldWithInitializer); // "static field"
+console.log(SubclassWithStaticField.subStaticField); // "subclass field"
+// In the field initializer, this refers to the current class (which you can also access through its name), and super refers to the base class constructor.
+
+// JS
+// Copy to Clipboard
+class ClassWithStaticField {
+  static baseStaticField = "base static field";
+  static anotherBaseStaticField = this.baseStaticField;
+
+  static baseStaticMethod() {
+    return "base static method output";
+  }
+}
+
+class SubClassWithStaticField extends ClassWithStaticField {
+  static subStaticField = super.baseStaticMethod();
+}
+
+console.log(ClassWithStaticField.anotherBaseStaticField); // "base static field"
+console.log(SubClassWithStaticField.subStaticField); // "base static method output"
+// The expression is evaluated synchronously. You 
+// cannot use await or yield in the initializer 
+// expression. (Think of the initializer expression 
+// as being implicitly wrapped in a function.)
+
+// Static field initializers and static initialization 
+// blocks are evaluated one-by-one. Field initializers 
+// can refer to field values above it, but not below it. 
+// All static methods are added beforehand and can be 
+// accessed, although calling them may not behave as 
+// expected if they refer to fields below the one 
+// being initialized.
+
+// Note: This is more important with private static 
+// fields, because accessing a non-initialized private 
+// field throws a TypeError, even if the private field 
+// is declared below. (If the private field is not 
+// declared, it would be an early SyntaxError.)
+
+// Examples
+// Using static members in classes
+// The following example demonstrates several things:
+
+// How a static member (method or property) is defined on a class.
+// That a class with a static member can be sub-classed.
+// How a static member can and cannot be called.
+// JS
+// Copy to Clipboard
+class Triple {
+  static customName = "Tripler";
+  static description = "I triple any number you provide";
+  static calculate(n = 1) {
+    return n * 3;
+  }
+}
+
+class SquaredTriple extends Triple {
+  static longDescription;
+  static description = "I square the triple of any number you provide";
+  static calculate(n) {
+    return super.calculate(n) * super.calculate(n);
+  }
+}
+
+console.log(Triple.description); // 'I triple any number you provide'
+console.log(Triple.calculate()); // 3
+console.log(Triple.calculate(6)); // 18
+
+const tp = new Triple();
+
+console.log(SquaredTriple.calculate(3)); // 81 (not affected by parent's instantiation)
+console.log(SquaredTriple.description); // 'I square the triple of any number you provide'
+console.log(SquaredTriple.longDescription); // undefined
+console.log(SquaredTriple.customName); // 'Tripler'
+
+// This throws because calculate() is a static member, not an instance member.
+console.log(tp.calculate()); // 'tp.calculate is not a function'
+// Calling static members from another static method
+// In order to call a static method or property 
+// within another static method of the same class, 
+// you can use the this keyword.
+
+// JS
+// Copy to Clipboard
+class StaticMethodCall {
+  static staticProperty = "static property";
+  static staticMethod() {
+    return `Static method and ${this.staticProperty} has been called`;
+  }
+  static anotherStaticMethod() {
+    return `${this.staticMethod()} from another static method`;
+  }
+}
+StaticMethodCall.staticMethod();
+// 'Static method and static property has been called'
+
+StaticMethodCall.anotherStaticMethod();
+// 'Static method and static property has been 
+// called from another static method'
+// Calling static members from a class 
+// constructor and other methods
+// Static members are not directly accessible 
+// using the this keyword from non-static methods. 
+// You need to call them using the class name: 
+// CLASSNAME.STATIC_METHOD_NAME() / 
+// CLASSNAME.STATIC_PROPERTY_NAME or by calling 
+// the method as a property of the constructor: 
+// this.constructor.STATIC_METHOD_NAME() / 
+// this.constructor.STATIC_PROPERTY_NAME
+
+// JS
+// Copy to Clipboard
+class StaticMethodCall {
+  constructor() {
+    console.log(StaticMethodCall.staticProperty); // 'static property'
+    console.log(this.constructor.staticProperty); // 'static property'
+    console.log(StaticMethodCall.staticMethod()); // 'static method has been called.'
+    console.log(this.constructor.staticMethod()); // 'static method has been called.'
+  }
+
+  static staticProperty = "static property";
+  static staticMethod() {
+    return "static method has been called.";
+  }
+}
+
+ 

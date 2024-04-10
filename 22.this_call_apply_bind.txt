@@ -1,0 +1,1508 @@
+// mdn
+//this
+
+console.log("this kyword ")
+// note : "this" is very very important , 
+//it may seem that the use is samll but 
+// The this keyword in JavaScript is indeed very 
+//important. It’s a special keyword that refers 
+//to the context in which a function is called, 
+//and it plays a crucial role in object-oriented 
+//programming (OOP) and event handling in JavaScript.
+// Understanding this can indeed be a significant step 
+//in mastering JavaScript, as it’s used behind the scenes 
+//in many built-in methods and functions. It’s used in 
+//various contexts, such as in methods within objects, 
+//in constructor functions, and in event handlers, 
+//each with slightly different behavior.
+// So, yes, getting a solid grasp on how this works 
+//in JavaScript is like gearing up your understanding 
+//of the whole language. Keep going with your learning! 👍
+
+// It also has some differences between 
+//strict mode and non-strict mode.
+// In most cases, the value of this is determined by 
+//how a function is called (runtime binding). 
+//It can't be set by assignment during execution, and
+// it may be different each time the function is called. 
+//The Function.prototype.bind() method can set the value 
+//of a function's this regardless of how it's called, and 
+//arrow functions don't provide their own this binding 
+//(it retains the this value of the enclosing lexical context).
+
+// Try it
+const test = {
+    prop: 42,
+    func: function () {
+        return this.prop;
+    },
+};
+
+console.log(test.func());
+//  output: 42
+
+// Value
+// In non–strict mode, this is always a reference to an object.
+// In strict mode, it can be any value. For more information 
+//on how the value is determined, see the description below.
+
+// Description
+// The value of this depends on in which context it appears: 
+//function, class, or global.
+
+// Function context
+// Inside a function, the value of this depends on how 
+//the function is called. Think about this as a hidden 
+//parameter of a function — just like the parameters declared 
+//in the function definition, this is a binding that 
+//the language creates for you when the function body 
+//is evaluated.
+// For a typical function, the value of this is the object 
+//that the function is accessed on. In other words, 
+//if the function call is in the form obj.f(), 
+//then this refers to obj. For example:
+
+function getThis() {
+    return this;
+}
+
+const obj1 = { name: "obj1" };
+const obj2 = { name: "obj2" };
+
+obj1.getThis = getThis;
+obj2.getThis = getThis;
+
+console.log(obj1.getThis()); // { name: 'obj1', getThis: [Function: getThis] }
+console.log(obj2.getThis()); // { name: 'obj2', getThis: [Function: getThis] }
+
+// The value of this is not the object that has the 
+//function as an own property, but the object that is used 
+//to call the function. You can prove this by calling a 
+//method of an object up in the prototype chain.
+
+const obj3 = {
+    __proto__: obj1,
+    name: "obj3",
+};
+
+console.log(obj3.getThis()); // { name: 'obj3' }
+
+// The value of this always changes based on how a 
+//function is called, even when the function was defined 
+//on an object at creation:
+
+const obj4 = {
+    name: "obj4",
+    getThis() {
+        return this;
+    },
+};
+
+const obj5 = { name: "obj5" };
+
+obj5.getThis = obj4.getThis;
+console.log(obj5.getThis()); // { name: 'obj5', getThis: [Function: getThis] }
+
+//   If the value that the method is accessed on is 
+//a primitive, this will be a primitive value as well 
+//— but only if the function is in strict mode.
+
+function getThisStrict() {
+    "use strict"; // Enter strict mode
+    return this;
+}
+
+// Only for demonstration — you should not mutate built-in 
+//prototypes
+Number.prototype.getThisStrict = getThisStrict;
+console.log(typeof (1).getThisStrict()); // "number"
+
+//   If the function is called without being accessed on 
+//anything, this will be undefined — but only if the 
+//function is in strict mode.
+console.log(typeof getThisStrict()); // "undefined"
+
+//   In non-strict mode, a special process called this 
+//substitution ensures that the value of this is always 
+//an object. This means:
+// If a function is called with this set to undefined or null,
+// this gets substituted with globalThis.
+// If the function is called with this set to a primitive value, 
+//this gets substituted with the primitive value's wrapper object.
+
+function getThis() {
+    return this;
+}
+
+// Only for demonstration — you should not mutate built-in prototypes
+Number.prototype.getThis = getThis;
+console.log(typeof (1).getThis()); // "object"
+console.log(getThis() === globalThis); // true
+
+// In typical function calls, this is implicitly passed like 
+//a parameter through the function's prefix (the part before the dot).
+// You can also explicitly set the value of this using the 
+//Function.prototype.call(), Function.prototype.apply(), or Reflect.apply() methods. 
+//Using Function.prototype.bind(), you can create 
+//a new function with a specific value of this that 
+//doesn't change regardless of how the function is called. 
+//When using these methods, the this substitution rules 
+//above still apply if the function is non-strict.
+
+
+//   Callbacks
+// When a function is passed as a callback, the value of 
+//this depends on how the callback is called, which is 
+//determined by the implementor of the API. Callbacks 
+//are typically called with a this value of undefined 
+//(calling it directly without attaching it to any object), 
+//which means if the function is non–strict, the value of 
+//this is the global object (globalThis). This is the case 
+//for iterative array methods, the Promise() constructor, etc.
+function logThis() {
+    "use strict";
+    console.log(this);
+}
+
+[1, 2, 3].forEach(logThis); // undefined, undefined, undefined
+
+//Some APIs allow you to set a this value for invocations 
+//of the callback. For example, all iterative array methods 
+//and related ones like Set.prototype.forEach() accept an 
+//optional thisArg parameter.
+
+
+[1, 2, 3].forEach(logThis, { name: "obj" });
+// { name: 'obj' }, { name: 'obj' }, { name: 'obj' }
+
+//Occasionally, a callback is called with a this value other 
+//than undefined. For example, the reviver parameter of 
+//JSON.parse() and the replacer parameter of JSON.stringify() 
+//are both called with this set to the object that the property 
+//being parsed/serialized belongs to.
+
+// Arrow functions
+// In arrow functions, this retains the value of the 
+//enclosing lexical context's this. In other words, 
+//when evaluating an arrow function's body, the language 
+//does not create a new this binding.
+// For example, in global code, this is always globalThis 
+//regardless of strictness, because of the global context 
+//binding:
+
+const globalObject = this;
+const foo = () => this;
+console.log(foo() === globalObject); // true
+
+// Arrow functions create a closure over the this value of 
+//its surrounding scope, which means arrow functions behave 
+//as if they are "auto-bound" — no matter how it's invoked, 
+//this is bound to what it was when the function was created 
+//(in the example above, the global object). The same applies
+// to arrow functions created inside other functions: their 
+//this remains that of the enclosing lexical context.
+// Furthermore, when invoking arrow functions using 
+//call(), bind(), or apply(), the thisArg parameter is ignored.
+//You can still pass other arguments using these methods, 
+//though.
+
+const obj = { name: "obj" };
+
+// Attempt to set this using call
+console.log(foo.call(obj) === globalObject); // true
+
+// Attempt to set this using bind
+const boundFoo = foo.bind(obj);
+console.log(boundFoo() === globalObject); // true
+
+
+// Constructors
+// When a function is used as a constructor(with the new 
+//keyword), its this is bound to the new object being 
+//constructed, no matter which object the constructor 
+//function is accessed on.The value of this becomes the 
+//value of the new expression unless the constructor returns 
+//another non–primitive value.
+
+function C() {
+    this.a = 37;
+}
+
+// let o = new C();
+console.log(o.a); // 37
+
+function C2() {
+    this.a = 37;
+    return { a: 38 };
+}
+
+o = new C2();
+console.log(o.a); // 38
+
+//   In the second example(C2), because an object was 
+//returned during construction, the new object that this 
+//was bound to gets discarded. (This essentially makes 
+//the statement this.a = 37; dead code.It's not exactly 
+//dead because it gets executed, but it can be eliminated 
+//with no outside effects.)
+// super
+//   When a function is invoked in the super.method() form, 
+//the this inside the method function is the same value as 
+//the this value around the super.method() call, 
+//and is generally not equal to the object that super refers to.This is because super.method is not an object member access like the ones above — it's a special syntax with different binding rules. For examples, see the super reference.
+
+//   Class context
+//   A class can be split into two contexts: 
+//static and instance.Constructors, methods, and 
+//instance field initializers(public or private) belong 
+//to the instance context.Static methods, static field 
+//initializers, and static initialization blocks belong 
+//to the static context.The this value is different in each context.
+// Class constructors are always called with new, 
+//so their behavior is the same as function constructors: 
+//the this value is the new instance being created.Class 
+//methods behave like methods in object literals — the this 
+//value is the object that the method was accessed on.If 
+//the method is not transferred to another object, this 
+//is generally an instance of the class.
+// Static methods are not properties of this.They are 
+//properties of the class itself.Therefore, they are 
+//generally accessed on the class, and this is the value 
+//of the class (or a subclass). Static initialization blocks 
+//are also evaluated with this set to the current class.
+// Field initializers are also evaluated in the context 
+//of the class. Instance fields are evaluated with this 
+//set to the instance being constructed.Static fields are 
+//evaluated with this set to the current class. This is why 
+//arrow functions in field initializers are bound to the 
+//instance for instance fields and to the class for static fields.
+
+class C {
+    instanceField = this;
+    static staticField = this;
+}
+
+const c = new C();
+console.log(c.instanceField === c); // true
+console.log(C.staticField === C); // true
+
+//   Global context
+// In the global execution context(outside of 
+//any functions or classes; may be inside blocks or 
+//arrow functions defined in the global scope), 
+//the this value depends on what execution context 
+//the script runs in.Like callbacks, the this value 
+//is determined by the runtime environment(the caller).
+// At the top level of a script, this refers to globalThis 
+//whether in strict mode or not.This is generally the same 
+//as the global object — for example, if the source is put 
+//inside an HTML < script > element and executed as a script,
+// this === window.
+//  Note: globalThis is generally the same concept as the 
+//global object(i.e.adding properties to globalThis makes 
+//them global variables) — this is the case for browsers 
+//and Node — but hosts are allowed to provide a different 
+//value for globalThis that's unrelated to the global object.
+// // In web browsers, the window object is also the global 
+//object:
+console.log(this === window); // true
+
+this.b = "MDN";
+console.log(window.b); // "MDN"
+console.log(b); // "MDN"
+
+// If the source is loaded as a module(for HTML, this 
+//means adding type = "module" to the < script > tag), 
+//this is always undefined at the top level.
+// If the source is executed with eval(), this is the same 
+//as the enclosing context for direct eval, or 
+//globalThis(as if it's run in a separate global script) 
+//for indirect eval.
+
+function test() {
+    // Direct eval
+    console.log(eval("this") === this);
+    // Indirect eval, non-strict
+    console.log(eval?.("this") === globalThis);
+    // Indirect eval, strict
+    console.log(eval?.("'use strict'; this") === globalThis);
+}
+
+test.call({ name: "obj" }); // Logs 3 "true"
+
+
+// Examples
+// this in function contexts
+// The value of the this parameter depends on 
+//how the function is called, not on how it's defined.
+
+// An object can be passed as the first argument to 'call'
+// or 'apply' and 'this' will be bound to it.
+// const obj = { a: "Custom" };
+
+// Variables declared with var become properties of 'globalThis'.
+var a = "Global";
+
+function whatsThis() {
+    return this.a; // 'this' depends on how the function is called
+}
+
+whatsThis(); // 'Global'; the 'this' parameter defaults to 'globalThis' 
+//in non–strict mode
+obj.whatsThis = whatsThis;
+obj.whatsThis(); // 'Custom'; the 'this' parameter is bound to obj
+
+// Using call() and apply(), you can pass the value of this as if 
+//it's an explicit parameter.
+
+function add(c, d) {
+    return this.a + this.b + c + d;
+}
+// const o = { a: 1, b: 3 };
+
+// The first argument is bound to the implicit 
+//'this' parameter; the remaining
+// arguments are bound to the named parameters.
+add.call(o, 5, 7); // 16
+
+// The first argument is bound to the implicit 'this' 
+//parameter; the second
+// argument is an array whose members are bound to 
+//the named parameters.
+add.apply(o, [10, 20]); // 34
+
+
+// this and object conversion
+// In non–strict mode, if a function is called with a 
+//this value that's not an object, the this value is 
+//substituted with an object. null and undefined become 
+//globalThis. Primitives like 7 or 'foo' are converted 
+//to an object using the related constructor, so the 
+//primitive number 7 is converted to a Number wrapper 
+//class and the string 'foo' to a String wrapper class.
+
+function bar() {
+    console.log(Object.prototype.toString.call(this));
+}
+
+bar.call(7); // [object Number]
+bar.call("foo"); // [object String]
+bar.call(undefined); // [object Window]
+
+// The bind() method
+// Calling f.bind(someObject) creates a new function 
+//with the same body and scope as f, but the value of 
+//this is permanently bound to the first argument of bind, 
+//regardless of how the function is being called.
+
+function f() {
+    return this.a;
+}
+
+const g = f.bind({ a: "azerty" });
+console.log(g()); // azerty
+
+const h = g.bind({ a: "yoo" }); // bind only works once!
+console.log(h()); // azerty
+
+const o = { a: 37, f, g, h };
+console.log(o.a, o.f(), o.g(), o.h()); // 37 37 azerty azerty
+
+// this in arrow functions
+// Arrow functions create closures over the this value 
+//of the enclosing execution context.In the following example,
+// we create obj with a method getThisGetter that returns a
+// function that returns the value of this.The returned 
+//function is created as an arrow function, so its this 
+//is permanently bound to the this of its enclosing function.
+// The value of this inside getThisGetter can be set in the 
+//call, which in turn sets the return value of the returned 
+//function. We will assume that getThisGetter is a 
+//non - strict function, which means it's contained 
+//in a non-strict script and not further nested in a 
+//class or strict function.
+
+const obj = {
+    getThisGetter() {
+        const getter = () => this;
+        return getter;
+    },
+};
+
+// We can call getThisGetter as a method of obj,
+// which binds this to obj inside its body.The 
+//returned function is assigned to a variable fn.
+//Now, when calling fn, the value of this returned 
+//is still the one set by the call to getThisGetter, 
+//which is obj.If the returned function was not an 
+//arrow function, such calls would cause the this 
+//value to be globalThis, because getThisGetter is 
+//non - strict.
+
+const fn = obj.getThisGetter();
+console.log(fn() === obj); // true
+
+// But be careful if you unbind the method of obj without 
+//calling it, because getThisGetter is still a method that 
+//has a varying this value.Calling fn2()() in the following 
+//example returns globalThis, because it follows the this 
+//from fn2(), which is globalThis since it's called without 
+//being attached to any object.
+
+const fn2 = obj.getThisGetter;
+console.log(fn2()() === globalThis); // true in non-strict 
+//mode
+
+// This behavior is very useful when defining 
+//callbacks.Usually, each function expression creates 
+//its own this binding, which shadows the this value of 
+//the upper scope.Now, you can define functions as arrow 
+//functions if you don't care about the this value, and 
+//only create this bindings where you do (e.g. in class methods).
+// this with a getter or setter
+// this in getters and setters is based on which object 
+//the property is accessed on, not which object the property 
+//is defined on.A function used as getter or setter has its 
+//this bound to the object from which the property is being 
+//set or gotten.
+
+function sum() {
+    return this.a + this.b + this.c;
+}
+
+// const o = {
+//     a: 1,
+//     b: 2,
+//     c: 3,
+//     get average() {
+//         return (this.a + this.b + this.c) / 3;
+//     },
+// };
+
+Object.defineProperty(o, "sum", {
+    get: sum,
+    enumerable: true,
+    configurable: true,
+});
+
+console.log(o.average, o.sum); // 2 6
+
+// this in inline event handlers
+// When the code is called from an inline event handler 
+//attribute, its this is bound to the DOM element on which 
+//the listener is placed:
+
+ <button onclick="alert(this.tagName.toLowerCase());">Show this</button> 
+
+// The above alert shows button.Note, however, that only 
+//the outer scope has its this bound this way:
+
+<button onclick="alert((function () { return this; })());">
+    Show inner this
+</button>
+
+// In this case, the this parameter of the inner function 
+//is bound to globalThis(i.e.the default object in non–strict 
+//mode where this isn't passed in the call).
+// Bound methods in classes
+// Just like with regular functions, the value of this 
+//within methods depends on how they are called.Sometimes 
+//it is useful to override this behavior so that this within
+// classes always refers to the class instance. To achieve 
+//this, bind the class methods in the constructor:
+
+class Car {
+    constructor() {
+        // Bind sayBye but not sayHi to show the difference
+        this.sayBye = this.sayBye.bind(this);
+    }
+
+    sayHi() {
+        console.log(`Hello from ${this.name}`);
+    }
+
+    sayBye() {
+        console.log(`Bye from ${this.name}`);
+    }
+
+    get name() {
+        return "Ferrari";
+    }
+}
+
+class Bird {
+    get name() {
+        return "Tweety";
+    }
+}
+
+const car = new Car();
+const bird = new Bird();
+
+// The value of 'this' in methods depends on their caller
+car.sayHi(); // Hello from Ferrari
+bird.sayHi = car.sayHi;
+bird.sayHi(); // Hello from Tweety
+
+// For bound methods, 'this' doesn't depend on the caller
+bird.sayBye = car.sayBye;
+bird.sayBye(); // Bye from Ferrari
+
+
+// this in with statements
+// Although with statements are deprecated and not available
+// in strict mode, they still serve as an exception to the 
+// normal this binding rules.If a function is called within 
+// a with statement and that function is a property of the 
+// scope object, the this value is bound to the scope object, 
+// as if the obj1.prefix exists.
+
+const obj1 = {
+    foo() {
+        return this;
+    },
+};
+
+with (obj1) {
+    console.log(foo() === obj1); // true
+}
+
+// The JavaScript this Keyword
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+};
+// What is this?
+// In JavaScript, the this keyword refers to an object.
+
+// Which object depends on how this is being invoked 
+// (used or called).
+
+// The this keyword refers to different objects 
+// depending on how it is used:
+
+// In an object method, this refers to the object.
+// Alone, this refers to the global object.
+// In a function, this refers to the global object.
+// In a function, in strict mode, this is undefined.
+
+// In an event, this refers to the element that received 
+// the event.
+
+// Methods like call(), apply(), and bind() can refer this 
+// to any object.
+
+// Note
+// this is not a variable. It is a keyword. You cannot 
+// change the value of this.
+
+// this in a Method
+// When used in an object method, this refers to the object.
+
+// In the example on top of this page, this refers to 
+// the person object.
+
+// Because the fullName method is a method of the person 
+// object.
+
+fullName: function() {
+    return this.firstName + " " + this.lastName;
+}
+// this Alone
+// When used alone, this refers to the global object.
+
+// Because this is running in the global scope.
+
+// In a browser window the global object is [object Window]:
+
+// Example
+let x = this;
+//  In strict mode, when used alone, this also refers to 
+// the global object:
+
+// Example
+"use strict";
+let x = this;
+// this in a Function (Default)
+// In a function, the global object is the default binding 
+// for this.
+
+// In a browser window the global object is [object Window]:
+
+
+function myFunction() {
+    return this;
+}
+// this in a Function (Strict)
+// JavaScript strict mode does not allow default binding.
+
+// So, when used in a function, in strict mode, this is 
+// undefined.
+
+
+"use strict";
+function myFunction() {
+    return this;
+}
+// this in Event Handlers
+// In HTML event handlers, this refers to the HTML element 
+// that received the event:
+
+
+<button onclick="this.style.display='none'">
+    Click to Remove Me!
+</button>
+
+// Object Method Binding
+// In these examples, this is the person object:
+
+
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    myFunction: function () {
+        return this;
+    }
+};
+
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+};
+// i.e. this.firstName is the firstName property of this
+//  (the person object).
+
+// Explicit Function Binding
+// The call() and apply() methods are predefined JavaScript 
+// methods.
+
+// They can both be used to call an object method with 
+// another object as argument.
+
+// The example below calls person1.fullName with person2 
+// as an argument, this refers to person2, even if fullName 
+// is a method of person1:
+
+
+const person1 = {
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+const person2 = {
+    firstName: "John",
+    lastName: "Doe",
+}
+
+// Return "John Doe":
+person1.fullName.call(person2);
+
+// Function Borrowing
+// With the bind() method, an object can borrow a method 
+// from another object.
+
+// This example creates 2 objects (person and member).
+
+// The member object borrows the fullname method from the
+//  person object:
+
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+const member = {
+    firstName: "Hege",
+    lastName: "Nilsen",
+}
+
+let fullName = person.fullName.bind(member);
+// This Precedence
+// To determine which object this refers to; use the 
+// following precedence of order.
+
+// Precedence	Object
+// 1	bind()
+// 2	apply() and call()
+// 3	Object method
+// 4	Global scope
+// Is this in a function being called using bind()?
+
+// Is this in a function being called using apply()?
+
+// Is this in a function being called using call()?
+
+// Is this in an object function (method)?
+
+// Is this in a function in the global scope.
+
+// we can manually  set the value of 'this' keyword using 
+//"call and apply"
+
+// so call and apply are used whenever we need to change 
+//the reference of 'this' keyword 
+// in other words we can say , we have a particular 
+//function which we want to use other than that object 
+
+"use strict"
+
+let mainPlane = {
+    airline: "Fly India",
+    iatacode: "F1",
+    bookings: [],
+    book: function (flightNum, name) { // this function is used to book the customer's plain ticket 
+        console.log(`${name} Booked Flight on ${this.airline} with flight number ${this.iatacode} `)
+        this.bookings.push({ flightName: `${this.airline}`, name: name, flightNum: `${this.iatacode}${flightNum}` }) // and we are pushing the booking inside/into the bookings aarray 
+    }
+}
+// book is a function which is written in 
+//the context of mainPlane
+// and mainPlane.book is a method 
+// and methods = function of an object 
+mainPlane.book(553, "Carlos");
+mainPlane.book(234, "Jack");
+// so we are passing some data and the rest is the object 
+//gets from itself / internal properties 
+console.log(mainPlane)
+
+// lets assume that a new airline has been launched in 
+//this same group 
+//which also has the same functionalities  
+
+let childPlane = {
+    airline: "Child Plain",
+    iatacode: "CP",
+    bookings: []
+}
+// and lets use the book function of the main/mainPlane 
+//like 
+let book = mainPlane.book;
+// now what is mainPlane.book 
+// mainPlane.book is a function is a function 
+//that have not executed 
+// which means the book is also a function  so 
+// book(892,'Aloke')// book is a regular function 
+// but now its giving an error saying 
+//Uncaught TypeError: can't access property "push", 
+//this.bookings is undefined
+
+// the reason is it can not understand the keyword this 
+// so it does not understand on which context the 
+//book function is running 
+// as i have taken it out 
+
+// even though both are same but it does 
+//not understand the context 
+// for that we will use "use strict" mode of js 
+// by adding this "use strict" onto the top of the file 
+
+// but now the error says 
+//Uncaught TypeError: can't access property "airline",
+// this is undefined
+
+// "this" calue is undefinded at least in strict mode 
+// means "this" is not valid when function is called 
+//outside / for outside functions 
+
+//solution is to use "call" method 
+// what it will do is , it put book(892,'Aloke') in 
+//any object context 
+// so i will write 
+book.call(childPlane, 324, 'Aloke')
+console.log(childPlane)
+// so childPlane has now 1 booking 
+
+// so , if we get a function from a particular object 
+/// of that context 
+// then we can change the context of that function to another object ,
+
+// so now , if we want to chenge the context of book 
+//to mainPlane again 
+book.call(mainPlane, 789, 'lurie')
+console.log(mainPlane)
+
+// remember ,purpose of  changing the context to diff 
+//object comes  when we need to use a particular info 
+//which only tht object is using 
+
+
+// now the apply method 
+book.apply(childPlane, [324, 'rahan'])
+// in this we just have to put arguments in the array 
+
+
+// so the only difference between call and apply is 
+// you give the arguments in an array in apply 
+// but you can give it normally in case of call 
+
+// the difference between call and apply 
+// i am not concerned about their syntax i want to 
+//know situation wise when , how they shows they are 
+//differnent bcz if i want to use context of another 
+//obj i can use call or apply any ... so where are 
+//they different ?
+
+// Sure, let's discuss the practical differences 
+//between `call` and `apply` in terms of their usage:
+
+// 1. **When you have individual arguments**: If you
+// have individual arguments, not in an array, `call` 
+//is more convenient because it accepts an argument 
+//list. For example, if you have a function that 
+//calculates the area of a rectangle, and you want to 
+//use it to calculate the area of a specific rectangle 
+//object, you can use `call`.
+
+//     ```javascript
+function calculateArea(width, height) {
+    return width * height;
+}
+
+let rectangle = { width: 5, height: 10 };
+
+let area = calculateArea.call(rectangle, rectangle.width, rectangle.height);
+//     ```
+// 2. **When arguments are in an array**: If your arguments 
+//are already in an array (or if the number of arguments 
+//is variable or not known in advance), `apply` is more
+// convenient because it accepts a single array of 
+//arguments. For example, if you have an array of numbers 
+//and you want to find the maximum value, you can use 
+//`apply`.
+//     ```javascript
+let numbers = [1, 2, 3, 4, 5];
+
+let max = Math.max.apply(null, numbers);
+//     ```
+// So, the choice between `call` and `apply` depends 
+//on how your arguments are stored or how you want to 
+//pass them. 
+
+// In terms of setting the context (`this` value) for
+// a function, both `call` and `apply` can be used 
+//interchangeably. They only differ in how they handle 
+//the function arguments. I hope this helps clarify 
+//the differences! 👍
+
+
+// // showing with examples  difference between call and apply 
+// // object or dictionary ? what is it .. 
+// // In JavaScript, the term “dictionary” is not 
+//typically used. Instead, we use “object”. An object 
+//in JavaScript is indeed a complex data structure 
+//that allows you to store multiple values in a 
+//key-value pair format.
+// // In other programming languages like Python, 
+//a similar data structure is called a “dictionary”.
+// Despite the difference in terminology, the concept 
+//is the same: both JavaScript objects and Python 
+//dictionaries allow you to store and access data in 
+//a key-value pair format.
+
+
+// // call , apply , bind - these 3 methods is used to 
+//set the value of "this" 
+
+// call method - in programming when we want a function 
+//return different output using values of another object 
+//we use call method 
+// call method is used to call/invoke a function in 
+//context of an object 
+let objt = {
+    myName: "ALoke",
+    age: 20,
+    gender: "male"
+}
+console.log(objt) // print the current obj 
+// a standalone function 
+function sayMyName() {
+    return `my name is ${this.myName} and my age is ${this.age} `
+}
+// apply this kyword in the context of obj to print what 
+//sayMyName returns 
+console.log(sayMyName.call(objt));
+console.log(objt) // prints the same object ,the obj is 
+//not changed bcz we have not added the saymyname into 
+//hte obj 
+// sayMyName as a standalone function and then used 
+//call() to invoke it with this set to obj. However, 
+//this doesn’t add sayMyName to obj.
+// we invoked it not added .  
+// the noraml syntax of call method 
+// func.call(object, argforfunction1, argforfunction2,
+// argforfunction3), it means that func is being called 
+//with this set to object, and argforfunction1, 
+//argforfunction2 ...
+
+
+// apply method 
+function greet(greeting, punctuation) {
+    console.log(greeting + ', ' + this.name + punctuation);
+}
+
+let person2 = { name: 'Alice' };
+let args = ['Hello', '!'];
+
+greet.apply(person2, args); //Hello, Alice!
+greet.call(person2, args);  // Hello,!, Aliceundefined
+// so why are they differenet in output bcz 
+// The call and apply methods in JavaScript are used to 
+//invoke a function with a specified this context and 
+//arguments. The difference lies in how they handle 
+//the arguments:
+
+// call: The call() method takes arguments separately. 
+//In your example, greet.call(person, args), the args 
+//array is passed as a single argument to the greet 
+//function. So, greeting is set to the args array 
+//(['Hello', '!']), and punctuation is undefined 
+//because no second argument is provided. That’s 
+//why you see “Hello,!, Aliceundefined”.
+
+// apply: The apply() method takes arguments as an array. 
+//In your example, greet.apply(person, args), each 
+//element of the args array is passed as a separate 
+//argument to the greet function. So, greeting is set 
+//to 'Hello' and punctuation is set to '!'. That’s why 
+//you see “Hello, Alice!”.
+
+// now what if we do this!
+greet.call(person2, 'Hello', '!', "sda", "safj"); // Hello, Alice!
+// nothing changes cz it works like this , it sees as ok 
+//two argument , pass two values from the user have given .
+// and it works same for apply also 
+
+
+book.call(mainPlane, 789, 'lurie')
+console.log(mainPlane)
+
+book.apply(childPlane, [324, 'rahan'])
+
+// the only difference between call and apply is how they 
+//handles arguments 
+// call: The call() method takes arguments separately. 
+//For example, func.call(thisArg, arg1, arg2, arg3).
+// apply: The apply() method takes arguments as an array. 
+//For example, func.apply(thisArg, [arg1, arg2, arg3]).
+// but as we can see the difference between when to use 
+//what exactly is quite slim so here is a definitive 
+//answer to when to use what ? 
+// You're correct that the difference between `call` 
+//and `apply` is quite slim - they both allow you to 
+//specify the `this` context and arguments for a function 
+//call. The choice between `call` and `apply` usually 
+//depends on how your arguments are stored or how you 
+//want to pass them.
+
+// Here are some scenarios where you might prefer one over 
+//the other:
+
+// 1. **Use `call` when you know the number of arguments**: 
+//`call` is often used when you know the number of 
+//arguments that the function takes. You can list them 
+//out individually as parameters in the `call` method.
+
+// ```javascript
+// function greet(greeting, punctuation) {
+// console.log(greeting + ', ' + this.name + punctuation);
+// }
+
+// let person = {name: 'Alice'};
+
+// greet.call(person, 'Hello', '!');  // logs "Hello, Alice!"
+// ```
+// 2. **Use `apply` when arguments are in an array or 
+//array-like object**: `apply` is useful when the 
+//arguments are already in an array (or array-like object), 
+//or when the number of arguments is not known in advance.
+// ```javascript
+// function greet(greeting, punctuation) {
+//   console.log(greeting + ', ' + this.name + punctuation);
+// }
+
+// let person = {name: 'Alice'};
+// let args = ['Hello', '!'];
+
+// greet.apply(person, args);  // logs "Hello, Alice!"
+// ```
+// In this case, `apply` allows us to easily pass all 
+//elements of `args` as arguments to `greet`.
+// Remember, both `call` and `apply` allow you to 
+//control the `this` context and pass arguments to a 
+//function, so you can choose the one that's more 
+//convenient for your specific situation. Keep up the 
+//good work! 👍
+
+
+
+// when an object has a function where it is using this 
+//so that it works on its context  and 
+// there is another object that want to use that function 
+//to its own context but 
+// the this is bound to its og object and it does not 
+//works for another 
+// object so in that case we use call to change the context 
+
+
+// bind method 
+// bind method 
+
+
+// so we have seen call and apply to change context 
+// but bind is also used to change context but it used to 
+// capture the context on the time its been applied , like it
+//  gets binds to those values  , and dont change if try 
+//to re-declare it which was possible with call and apply . 
+
+// Yes, you're correct! The `bind` method in JavaScript 
+//creates a new function that, when called, has its 
+//`this` keyword set to the provided value. The bound 
+//function has the same body and scope as the original 
+//function.
+
+// The key difference between `bind` and `call` or `apply` 
+//is that `bind` does not immediately invoke the function. 
+//Instead, it returns a new function with the context 
+//(`this`) and initial arguments set to the provided 
+//values. This new function can be called later with 
+//any additional arguments.
+
+// Moreover, once a function has been bound using `bind`, 
+//the `this` value cannot be changed, not even with 
+//`call` or `apply`. This makes `bind` useful in 
+//scenarios where you want to "lock in" the `this` value 
+//for certain function calls, particularly in event 
+//handlers and callbacks.
+
+// Here's an example:
+
+// ```javascript
+let personu = {
+    name: 'Alice',
+    greet: function () {
+        console.log(`Hello, ${this.name}`);
+    }
+};
+
+let greetAlice = personu.greet.bind(person);
+
+greetAlice();  // logs "Hello, Alice"
+// ```
+
+// In this case, `greetAlice` is a new function that's 
+//bound to `person`, so when it's called, `this.name` 
+//will always refer to `person.name`.
+
+// proof of - 
+// once a function has been bound using `bind`, the `this` 
+//value cannot be changed, not even with `call` or `apply`.
+// Sure, let's illustrate this with an example:
+
+// ```javascript
+let personx = {
+    name: 'Alice'
+};
+
+let persony = {
+    name: 'Bob'
+};
+
+function greet() {
+    console.log(`Hello, ${this.name}`);
+}
+// proof that bind binds to the current this value , 
+//and dont change even after redeclaration 
+let name1 = {
+    firstName: "Aloke", // this is only accepted
+    lastName: "Pramanik" // this is only accepted 
+}
+function sayFullName() {
+    return (this.firstName + "    " + this.lastName)
+}
+let fullName = sayFullName.bind(name1)
+console.log(fullName())
+
+// redeclare the name1 
+// bind dont accepts this 
+name1 = {
+    firstName: "ewir",
+    lastName: "wqire"
+}
+
+// proof of you cant change the after bind the value can 
+//not be changed 
+let person99 = {
+    name: 'Alice'
+};
+
+let person100 = {
+    name: 'Bob'
+};
+
+function greet() {
+    console.log(`Hello, ${this.name}`);
+}
+
+// Create a bound function with 'this' set to 'person1'
+let boundGreet = greet.bind(person99); //"Hello, Alice"
+
+// Try to call the bound function with 'this' set to 'person2'
+boundGreet.call(person100);  // logs "Hello, Alice"
+
+
+//  "use strict" in js 
+// Sure, when you use `"use strict"` at the top of your 
+//JavaScript file, it enables strict mode for the 
+//entire script. Here's what it does:
+// ```javascript
+"use strict";
+
+// This will cause an error because x is not declared
+x = 3.14;
+
+function myFunction() {
+    // This will also cause an error because y is not declared
+    y = 3.14;
+}
+// ```
+
+// In the above code, `"use strict"` is placed at the top 
+//of the script, so it has global scope. This means all 
+//the code in the script will execute in strict mode¹.
+
+// Strict mode in JavaScript was introduced in ECMAScript 5
+//5 and has the following effects¹²:
+
+// 1. It catches common coding errors and "unsafe" actions 
+//by throwing errors. For example, it throws an error when 
+//you try to use a variable that has not been declared.
+// 2. It prevents the use of some features that are likely 
+//to be defined in future versions of ECMAScript.
+// 3. It can sometimes make your code run faster by 
+//enabling better optimization by the JavaScript engine.
+
+// Please note that strict mode can also be enabled for 
+//individual functions by placing `"use strict"` at the 
+//beginning of the function body¹. This restricts the 
+//strict mode to the function scope. If strict mode is 
+//enabled inside a function, it doesn't affect the code 
+//outside the function¹.
+
+// ```javascript
+x = 3.14; // This will not cause an error.
+
+function myFunction() {
+    "use strict";
+    // This will cause an error because y is not declared
+    y = 3.14;
+}
+// ```
+
+// In the above code, `"use strict"` is placed inside the 
+//`myFunction` function. So, only the code inside this 
+//function is in strict mode¹. The assignment of `3.14` 
+//to `x` outside the function does not cause an error 
+//because it's not in strict mode¹. However, the assignment 
+//of `3.14` to `y` inside the function causes an error 
+//because `y` is not declared and the function is in strict 
+//mode¹.
+
+// It's important to note that all modern browsers 
+//support `"use strict"` except for Internet Explorer 9 
+//and lower¹. Also, the entire contents of JavaScript 
+//modules and classes are automatically in strict mode, 
+//with no statement needed to initiate it². 
+
+
+//  why the last greets does not returns  - welcome 
+//sushant singh  on coder dost?
+
+
+// The `bind` method in JavaScript creates a new function 
+//that, when called, has its `this` keyword set to the 
+//provided value. In your case, when you did 
+//`let greets = greet.bind(user)`, you created 
+//a new function `greets` that has its `this` keyword 
+//set to the `user` object at that point in time.
+
+// When you later change the `user` object, it doesn't 
+//affect the `greets` function because `greets` is already 
+//bound to the original `user` object. The `bind` method 
+//doesn't keep a reference to the original object, but 
+//rather to the value of the object at the time `bind` 
+//was called.
+
+// So, even after reassigning `user` to a new object, 
+//`greets` still refers to the original `user` object 
+//(`{firstName:'Aloke', lastName:'pramanik'}`), and 
+//that's why it still prints 'welcome Aloke pramanik 
+//on coder dost'. 
+
+// If you want `greets` to always use the current value 
+//of `user`, you would need to bind `greet` to `user` 
+//every time `user` changes. For example:
+
+// ```javascript
+user = {
+    firstName: 'sushant',
+    lastName: 'singh'
+};
+greets = greet.bind(user);
+greets(); // Outputs: 'welcome sushant singh on coder dost'
+// ```
+
+// In this case, `greets` is now bound to the new `user` 
+//object, and it correctly prints 'welcome sushant singh 
+//on coder dost'. This is because `bind` creates a new 
+//function each time it's called, and that new function 
+//is permanently associated with the value of `this` at 
+//the time `bind` was called. It doesn't update if the 
+//original object changes afterwards.
+
+
+// oh , isee  the bind  binds the current this value at 
+//that time right ?
+
+// Yes, that's correct! The `bind` method in JavaScript 
+//creates a new function that, when called, has its `this` 
+//keyword set to the provided value at the time `bind` was 
+//called. It doesn't update if the original object changes 
+//afterwards. This is why it's often used to ensure that 
+//a function has the correct context, or `this` value, 
+//regardless of how or where it's called. It's a powerful 
+//tool for managing scope in JavaScript.
+
+// ok can i apply bind if there is not this keyword  ?
+
+// Yes, you can still use the `bind` method even if there's 
+//no `this` keyword in the function. However, it might not 
+//be very useful in that case. 
+
+// The primary use of `bind` is to set the `this` value 
+//for a function, which is useful when the function 
+//relies on `this` to access the context in which it's 
+//supposed to operate. If the function doesn't use `this`, 
+//then binding it to an object won't have any effect on how 
+//the function works.
+
+// However, `bind` can also be used for partial function 
+//application, where you create a new function by 
+//effectively fixing one or more arguments of the original 
+//function. Here's an example:
+
+// ```javascript
+function multiply(a, b) {
+    return a * b;
+}
+
+let double = multiply.bind(null, 2);
+
+console.log(double(5)); // Outputs: 10
+// ```
+
+// In this example, `multiply` doesn't use `this`, but 
+//we're still able to use `bind` to create a new function 
+//`double` that multiplies its argument by 2. We pass 
+//`null` as the first argument to `bind` because we don't 
+//need to set a specific `this` context in this case. 
+//The `bind` method is used here purely for its ability 
+//to partially apply arguments to a function. 
+
+// So, while you can use `bind` without `this`, its 
+//usefulness depends on what you're trying to achieve
+// with your code. It's always important to understand 
+//the tools you're using and choose the best one for your 
+//specific use case.
+
+
+
+// when do i want / in which situation do i want to bind 
+//function  to a object  in functional programming ?
+
+// In functional programming, you might want to bind a 
+//function to an object in certain situations:
+
+// 1. **Function Context**: The `bind` method allows you 
+//to fix the context (`this`) of a function⁴. This is 
+//particularly useful when you want a function to operate 
+//in a specific context.
+
+// 2. **Function Composition**: If another bind expression 
+//(another function) was passed directly into the initial 
+//call to bind, then bind performs function composition. 
+//Instead of passing the function object that the bind 
+//subexpression would return, the subexpression is 
+//invoked eagerly, and its return value is passed to 
+//the outer invokable object³.
+
+// 3. **Closures and Bind Method**: In JavaScript, for 
+//example, you might use the `bind` method in a situation 
+//where you want to create a closure. The `bind` method 
+//can create a new function that, when called, has its 
+//`this` keyword set to the provided value, with a given 
+//sequence of arguments preceding any provided when the 
+//new function is called².
+
+// Remember, the choice to use `bind` depends on the 
+//specific requirements of your code and the behavior 
+//you want to implement. It's always important to 
+//understand the implications of using `bind` and how 
+//it interacts with the rest of your code.
+
+// Function Context: The bind method allows you to fix 
+//the context (this) of a function1. This is particularly 
+//useful when you want a function to operate in a specific 
+//context. - give me an example code fot this ?
+
+// Sure, here's an example of how you might use the `bind` 
+//method to fix the context of a function in JavaScript:
+
+// ```javascript
+// Define an object with a property and a method
+let obj69 = {
+    value: 'Hello, world!',
+    printValue: function () {
+        console.log(this.value);
+    }
+};
+
+// Define a function that calls the method on the obj69ect
+function callPrintValue() {
+    obj69.printValue();
+}
+
+// The function works as expected
+callPrintValue(); // Outputs: 'Hello, world!'
+
+// Now, let's change the obj69ect
+obj69 = {
+    value: 'Goodbye, world!'
+};
+
+// If we call the function again, it outputs the new value
+callPrintValue(); // Outputs: 'Goodbye, world!'
+
+// But what if we want the function to always output 
+// 'Hello, world!'?
+// We can bind the function to the original obj69ect
+let boundPrintValue = obj69.printValue.bind({ value: 'Hello, world!' });
+
+// Now, even though the object has changed, the bound
+//  function still outputs the original value
+boundPrintValue(); // Outputs: 'Hello, world!'
+// ```
+
+// In this example, the `bind` method is used to create 
+// a new function (`boundPrintValue`) that, when called, 
+// has its `this` keyword set to the provided value 
+// (`{value: 'Hello, world!'}`), regardless of the current 
+// value of `obj`. This allows the function to always 
+// operate in the original context.
+
+// Function Composition: If another bind expression 
+// (another function) was passed directly into the initial 
+// call to bind, then bind performs function composition. 
+// Instead of passing the function object that the bind 
+// subexpression would return, the subexpression is invoked 
+// eagerly, and its return value is passed to the outer 
+// invokable object2. -  - give me an example code fot this ?
+
+
+// Sure, here's an example of function composition using 
+// `bind` in JavaScript:
+
+// ```javascript
+// Define two simple functions
+function addOne(x) {
+    return x + 1;
+}
+
+function double(x) {
+    return x * 2;
+}
+
+// We can create a new function that applies both functions to its argument
+let addOneThenDouble = double.bind(null, addOne(5));
+
+console.log(addOneThenDouble()); // Outputs: 12
+// ```
+
+// In this example, `addOne(5)` is evaluated immediately 
+// (eagerly), and its return value (`6`) is passed to 
+// `double` when `addOneThenDouble` is called. This is 
+// an example of function composition using `bind`, 
+// where the output of one function is used as the input 
+// to another. Note that we use `null` as the first argument
+//  to `bind` because we don't need to set a specific 
+// `this` context in this case. The `bind` method is used 
+// here purely for its ability to partially apply arguments 
+// to a function. 
+// 
+
+// Please note that this is a simplified example and actual 
+// function composition in functional programming languages 
+// might involve more complex scenarios. Also, in JavaScript, 
+// there are other ways to achieve function composition, 
+// such as using higher-order functions. The `bind` method 
+// is just one of the tools available. Always choose the 
+// best tool for your specific use case.
+
+
+// Sure, here's an example of how you might use the `bind` 
+// method to create a closure in JavaScript:
+
+// ```javascript
+// Define an object with a property
+
+
+
+// let obj = {
+//     value: 'Hello, world!'
+// };
+
+// // Define a function that uses the object's property
+// function printValue(suffix) {
+//     console.log(this.value + ' ' + suffix);
+// }
+
+// // Without binding, `this` inside the function doesn't 
+// refer to `obj`
+// printValue('from function'); // Outputs: 'undefined from function'
+
+// // We can bind the function to the object to create a closure
+// let boundPrintValue = printValue.bind(obj);
+
+// // Now, `this` inside the function refers to `obj`
+// boundPrintValue('from bound function'); 
+// Outputs: 'Hello, world! from bound function'
+
+// ```
+// In this example, the `bind` method is used to create a 
+// new function (`boundPrintValue`) that, when called, has 
+// its `this` keyword set to `obj`, regardless of how or 
+// where the function is called. This is a form of closure, 
+// as the function "closes over" the `obj` variable and 
+// retains access to its properties even when called 
+// outside of its original context. Note that any arguments 
+// provided when calling the bound function 
+// (`'from bound function'` in this case) are passed to 
+// the original function after the bound arguments. This 
+// allows you to partially apply arguments to the function, 
+// another powerful feature of closures. 
+
+
+

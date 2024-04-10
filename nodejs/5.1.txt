@@ -1,0 +1,1205 @@
+assert module node js 
+// The assert module in Node.js provides 
+// a set of functions for making assertions 
+// about the correctness of your code.
+
+// What Is the Assert Module?
+// These functions help you verify invariants,
+//  assumptions, and expected behavior
+//  within your program.
+
+// How Does Assertion Work?
+// When you use an assertion function, 
+// it checks whether 
+// the given condition holds true.
+
+// If the condition is true, the assertion passes silently.
+// If the condition is false, an assertion error is thrown.
+
+
+let x = 4;
+let y = 5;
+
+try {
+    // Checking condition 
+    assert(x == y);
+}
+catch {
+    // Error output 
+    console.log(
+        `${x} is not equal to ${y}`);
+}
+// Output:
+// 4 is not equal to 5
+
+const assert = require('assert');
+
+let x = 4;
+let y = 5;
+
+assert(x > y);
+// Note: In this example, no try-catch is
+// given so an assertion error of the kind
+// given below will be the output.
+
+// Output:
+// AssertionError .......
+
+
+// Node.js assert.deepStrictEqual() Function
+
+
+// Purpose:
+
+// The deepStrictEqual() function 
+// checks if two objects (and their 
+// nested properties) are equal in 
+// both value and type.
+
+// If the objects are not equal, 
+// an assertion error is raised.
+
+// Comparison Mechanism:
+
+// It uses the strict equality operator (===) 
+// to compare values and types.
+
+// Unlike assert.deepEqual(), which only 
+// checks for value equality, deepStrictEqual() 
+// ensures that the types match as well.
+
+// Syntax: 
+assert.deepStrictEqual(actual, expected[, message])
+
+// Return Value: This function returns 
+// assertion error of object type. 
+
+npm version assert
+
+//4. After that, you can just create 
+// a folder and add a file for example, 
+// index.js as shown below.
+
+
+const assert = require('assert');
+
+const x = { a: { n: 0 } };
+const y = { a: { n: 0 } };
+const z = { a: { n: '0' } };
+
+assert.deepStrictEqual(x, y); // OK
+assert.deepStrictEqual(x, z); // Throws an AssertionError
+// Output (Assertion Error):
+// AssertionError [ERR_ASSERTION]: { a: { n: 0 } } deepStrictEqual { a: { n: '0' } }
+
+
+// When to Use It:
+// Use deepStrictEqual() when you need to compare objects considering both value and type.
+// For loose value comparison, stick to assert.deepEqual().
+
+// assert.deepStrictEqual(actual, expected[, message])
+// Let’s break down the syntax of assert.deepStrictEqual() in a simplified way:
+// actual: This represents the value or object you want to compare.
+// expected: This is the value or object you expect actual to be equal to.
+// message (optional): You can provide an additional message to describe the assertion (e.g., for better error reporting).
+
+// The square brackets [] in syntax notation 
+// typically indicate optional components. 
+// When you encounter them in a function signature 
+// or method description, it means that you can
+//  choose to include or omit those parts based
+//  on your specific use case.
+
+// For example:
+
+// If you see functionName(arg1[, arg2]), it implies 
+// that arg2 is optional. You can call the function 
+// with just arg1, or you can provide both arg1 and arg2.
+
+// Similarly, if you encounter functionName(arg1[, arg2[, arg3]]), 
+// it means that arg2 and arg3 are both optional. You can 
+// omit them entirely or include any combination of 
+// the three arguments.
+
+// Remember, these notations help clarify 
+// the flexibility of function parameters, making 
+// it easier for developers to understand 
+// how to use them effectively! 
+
+// Example 1: Filename: index.js
+// Requiring the module
+const assert = require('assert').strict;
+
+// Function call
+try {
+    assert.deepStrictEqual({ a: 1 }, { a: '1' });
+} catch (error) {
+    console.log("Error: ", error)
+}
+// Steps to run the program:
+// The project structure will look like this: 
+
+// Run index.js file using below command: 
+node index.js
+
+//3. Output: 
+flg
+// Error:  AssertionError [ERR_ASSERTION]: 
+// Expected values to be strictly 
+// deep-equal: + actual – expected  { +   a: 1 –   a: ‘1’  }    
+// at Object. .... 
+
+// Example 2: Filename: index.js
+
+// Requiring the module
+const assert = require('assert').strict;
+
+// Function call
+try {
+    assert.deepStrictEqual({ a: '5' }, { a: '5' });
+    console.log("No Error Occurred")
+} catch (error) {
+    console.log("Error: ", error)
+}
+// Steps to run the program:
+// The project structure will look like this: 
+
+// Run index.js file using below command: 
+ 
+node index.js
+//3. Output:
+// No Error Occurred
+
+// but the fact is with alll this i 
+// just know what will be the output 
+// i mean  i can see and  know immediately 
+// that whether they are equal or not so 
+// why  would i use this ... ? 
+// show me where it shiines ? with code . 
+
+// Certainly! Let's explore where 
+// the **`assert.deepStrictEqual()`** 
+// shines and why it's valuable, 
+// even when the equality is visually apparent.
+
+// 1. **Deep Equality with Type Checking**:
+//    - The primary purpose of `deepStrictEqual()` is 
+// to compare objects (and their nested properties) for **deep equality**.
+//    - Unlike a simple visual check, it ensures 
+// that not only the values but also the **data types** match.
+//    - In your example, `x` and `z` have the 
+// same structure, but their innermost value 
+// types differ (`0` vs. `'0'`).
+
+// 2. **Use Cases**:
+//    - **Testing Complex Objects**:
+//      - When dealing with complex data 
+            // structures (e.g., nested objects, arrays, or custom classes), 
+            // visual inspection might miss subtle differences.
+//      - `deepStrictEqual()` helps catch 
+            // unexpected type mismatches.
+//    - **Unit Testing**:
+//      - In unit tests, you want to ensure that 
+            // your functions return the expected results.
+//      - Using `deepStrictEqual()` helps verify that 
+// the output matches the expected structure and types.
+//    - **Serialization and Deserialization**:
+//      - When serializing data (e.g., to JSON) and 
+            // then deserializing it, you want to ensure that
+            // the round-trip preserves both values and types.
+//      - `deepStrictEqual()` helps 
+            // validate this process.
+
+// 3. **Example: Unit Test Scenario**:
+//    - Imagine you're testing a function that processes user input and returns an object.
+//    - The function should always return an object with specific properties and correct data types.
+//    - Using `deepStrictEqual()` ensures that the output adheres to these expectations.
+
+// 4. **Visual Inspection vs. Automated Checks**:
+//    - While you can visually compare simple objects, automated checks like `deepStrictEqual()` are essential for maintaining code quality.
+//    - They catch subtle issues that might be overlooked during manual inspection.
+
+// Remember, `deepStrictEqual()` is your 
+// ally when precision matters, especially 
+// in scenarios involving complex data 
+// structures or automated testing! 🚀🔍
+
+// For more examples and details, you can 
+// refer to the [W3Schools documentation 
+// on
+//  `assert.deepStrictEqual()`](https://www.w3schools.com/nodejs/met_assert_deepstrictequal.asp) ¹.
+
+// Certainly! Let's explore some practical 
+// examples where the **`assert.deepStrictEqual()`** 
+// method shines by comparing actual code snippets:
+
+// 1. **Testing Complex Objects**:
+//    - Imagine you're building an application that 
+        // processes user data. You want to ensure that
+        //  the data transformation functions work correctly.
+
+//    - Let's say you have a function that converts 
+        // user input into an object with specific properties:
+
+//```javascript
+function processUserInput(input) {
+    // ... some processing logic ...
+    return {
+        name: input.name,
+        age: parseInt(input.age),
+        isAdmin: input.role === 'admin',
+    };
+}
+//```
+//- In your unit tests, you can use `deepStrictEqual()` 
+// to verify that the output matches the expected structure and types:
+//```javascript
+const assert = require('assert');
+
+const input = {
+    name: 'Alice',
+    age: '25',
+    role: 'admin',
+};
+
+const expectedOutput = {
+    name: 'Alice',
+    age: 25,
+    isAdmin: true,
+};
+
+const actualOutput = processUserInput(input);
+assert.deepStrictEqual(actualOutput, expectedOutput, 'User data transformation failed');
+//```
+
+// 2. **Serialization and Deserialization**:
+//    - Suppose you're working with a REST API that serializes data to JSON and then deserializes it back.
+//    - You want to ensure that the round-trip preserves both values and types:
+//```javascript
+const assert = require('assert');
+
+const originalData = {
+    name: 'Bob',
+    age: 30,
+    isAdmin: false,
+};
+
+const serializedData = JSON.stringify(originalData);
+const deserializedData = JSON.parse(serializedData);
+
+assert.deepStrictEqual(deserializedData, originalData, 'Serialization/deserialization mismatch');
+//```
+
+// 3. **Custom Classes and Equality**:
+//    - If you're working with custom classes, `deepStrictEqual()` helps validate their equality.
+//    - Consider a simple class representing a point in 2D space:
+//```javascript
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+const pointA = new Point(1, 2);
+const pointB = new Point(1, 2);
+
+assert.deepStrictEqual(pointA, pointB, 'Custom class equality check failed');
+// ```
+
+// In all these scenarios, `deepStrictEqual()` ensures 
+// that not only the values but also the data types match, 
+// catching unexpected issues during development. 
+// It's a valuable tool for maintaining code quality! 🚀🔍
+
+
+Again , why the aassert module exists ? what is really use to do ? 
+
+ok i think , when we create a web app / website  we have to avoid error in any case and an error can stop the site from running  thats why we have to know whethear whats going to work and  what will not so assert module just does that , shows us what's going to work or not ,  am i correct ?
+Absolutely! You've hit the nail on the head. The **assert module** in Node.js is indeed a valuable tool for ensuring the reliability and correctness of your code, especially when building web apps or websites
+
+ Let’s break it down into simpler terms:
+
+Why Use Assertions?
+When building a web app or website, avoiding errors is crucial.
+Errors can cause your site to break or behave unexpectedly.
+The assert module helps you catch potential issues early, ensuring your code works as expected.
+
+What Do Assertions Do?
+They verify that specific parts of your code behave correctly.
+For example, you can check if a function returns the right values or doesn’t throw errors.
+Think of them as safety checks for your code.
+
+When Are Assertions Useful?(-yu mean when do we have to assure that this will work and wont five error (safety check) )
+During testing: You want to make sure your functions work as intended.
+Handling unexpected cases: Assertions catch edge scenarios.
+Debugging: They provide clues when things go wrong.
+Remember, assertions act like a safety net, helping you build reliable and bug-free web applications!
+
+yeah -> 
+
+Testing Assurance:
+During testing, assertions ensure that your functions behave as intended.
+They act as a safety net, catching any unexpected issues early.
+So yes, when you want to be sure that your code works correctly, assertions are your go-to tool.
+
+Handling Unexpected Situations:
+Sometimes, code encounters unexpected scenarios (edge cases).
+Assertions help you identify these situations and handle them gracefully.
+By using assertions, you’re prepared for the unexpected.
+
+Debugging Clues:
+When things go wrong in your application, assertions provide valuable clues.
+They pinpoint where the issue occurred, making debugging more efficient.
+So, yes, assertions are like breadcrumbs for troubleshooting.
+In summary, while you don’t need assertions everywhere, using them strategically ensures a robust and reliable web app or website! 
+
+// Node.js assert.doesNotThrow() Function
+
+// The assert module provides a set of assertion 
+// functions for verifying invariants. 
+// The assert.doesNotThrow() function asserts/assures 
+// that the function fn does not throw an error
+// verifying that a given function does not throw an error.
+
+// Node.js assert.doesNotThrow() Function
+
+// The assert module provides a set of assertion 
+// functions for verifying invariants. 
+// The assert.doesNotThrow() function asserts/assures 
+// that the function fn does not throw an error
+// verifying that a given function does not throw an error.
+
+// Syntax:
+assert.doesNotThrow(fn[, error][, message])
+
+// Parameters: This function accepts the following 
+// parameters as mentioned above and described below:
+// fn: This parameter is a function which does not throw an error.
+// error: This parameter is a regular expression or function. 
+// It is the specified error. It is an optional parameter.
+// message (optional): An error message to provide 
+// context (useful for debugging). It is an optional parameter.
+
+// Purpose:
+// The assert.doesNotThrow() function ensures 
+// that a specified function (fn) does not throw any errors.
+// If the function throws an error, 
+// an assertion error is raised.
+
+// Use Cases:
+    // Unit Testing:
+        // In unit tests, you want to verify that specific functions behave as expected.
+        // Use assert.doesNotThrow() to ensure that critical functions don’t unexpectedly throw errors.
+    // Error Handling:
+        // When writing error-handling code, you can use this assertion to validate that certain functions remain error-free.
+    // Expected Behavior:
+        // If your application relies on specific behavior (e.g., a function returning a value), use doesNotThrow() to catch unexpected exceptions.
+
+// Return Value: This function returns assertion error of 
+// object type. Installation of assert module:
+
+// You can visit the link to Install assert module. 
+// You can install this package by using this command.
+
+npm install assert
+// Note: Installation is an optional step 
+// as it is inbuilt Node.js module.
+
+// After installing the assert module, 
+// you can check your assert version in 
+// command prompt using the command.
+
+npm version assert
+// After that, you can just create a folder 
+// and add a file for example, index.js as shown below.
+
+// Example 1: Filename: index.js
+
+// Requiring the module 
+const assert = require('assert').strict;
+
+// Function call 
+try {
+    assert.doesNotThrow(
+        () => {
+            throw new TypeError('Wrong value');
+        },
+    );
+} catch (error) {
+    console.log("Error:", error)
+}
+// Steps to run the program:
+
+// The project structure will look like this:
+
+// Run index.js file using below command:
+node index.js
+// Output:
+// Error: AssertionError [ERR_ASSERTION]: Got unwanted exception. 
+// Actual message: “Wrong value” at Object.
+
+
+// Example 2: Filename: index.js
+
+// Requiring the module 
+const assert = require('assert').strict;
+
+// Function call 
+try {
+    assert.doesNotThrow(
+        () => {
+            throw new TypeError('The Wrong value error');
+        },
+        /abcd/,
+        'Whoops'
+    );
+} catch (error) {
+    console.log("Error:", error)
+}
+// Steps to run the program:
+// The project structure will look like this:
+// Run index.js file using below command:
+node index.js
+// Output:
+// Error: TypeError: The Wrong value error at C:\Users\Lenovo\Downloads\Geeksforgeeks Internship\NEW\Assert\index.js:8:17 at getActual (assert.js:657:5) at Function.doesNotThrow (assert.js:805:32) at Object. (C:\Internship\NEW\Assert Function\index.js:6:12) at Module._compile (internal/modules/cjs/loader.js:1138:30) at Object.Module._extensions..js (internal/modules/cjs/loader.js:1158:10) at Module.load (internal/modules/cjs/loader.js:986:32) at Function.Module._load (internal/modules/cjs/loader.js:879:14) at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12) at internal/main/run_main_module.js:17:47
+
+// Let’s explore a real-world scenario where
+//  the assert.doesNotThrow() function is used 
+// with all three parameters. Imagine you’re 
+// building a web application that processes 
+// user input. One critical function in your 
+// application should not throw any exceptions. 
+
+// Let’s see how you can use assert.doesNotThrow() 
+// to verify this behavior:
+
+const assert = require('assert');
+
+// Suppose you have a function that processes user input
+function processUserInput(input) {
+    // ... some processing logic ...
+    if (input === null) {
+        throw new Error('Input cannot be null');
+    }
+    // ... more processing ...
+}
+
+// Now let's test this function
+describe('processUserInput', () => {
+    it('should not throw an exception for valid input', () => {
+        const validInput = 'some valid input';
+        assert.doesNotThrow(() => {
+            processUserInput(validInput);
+        }, Error, 'Valid input should not throw an exception');
+    });
+
+    it('should throw an exception for null input', () => {
+        const nullInput = null;
+        assert.throws(() => {
+            processUserInput(nullInput);
+        }, Error, 'Null input should throw an exception');
+    });
+});
+
+
+// Let’s break down what this code does:
+
+// Function Definition:
+        // You’ve defined a function called processUserInput.
+        // This function takes an input parameter.
+// Processing Logic:
+        // Inside processUserInput, there’s some 
+        // processing logic (which is not explicitly 
+        // shown in the code snippet).
+        // This logic likely involves manipulating 
+        // or analyzing the input data.
+// Error Handling:
+        // If the input is null, the function 
+        // throws an error with the message “Input cannot be null.”
+        // This ensures that the function 
+        // doesn’t proceed with invalid input.
+// Testing:
+        // The code then sets up tests for 
+        // the processUserInput function using 
+        // the describe and it functions.
+
+        // The first test checks whether 
+        // the function works correctly for 
+        // valid input (i.e., it should 
+        // not throw an exception).
+
+        // The second test verifies that 
+        // the function throws an exception 
+        // when given null input.
+
+// In summary, this code defines a function, 
+// handles potential errors, and sets up tests 
+// to verify its behavior. It’s a common pattern 
+// in software development to ensure 
+// that critical functions behave as expected!
+
+
+// what  are this describe and it ?? never seeen them is it provided by node js ?
+
+// Certainly! Let’s explore what describe 
+// and it are in the context of testing frameworks, 
+// especially when using tools 
+// like Mocha or Jest (commonly used with Node.js).
+
+// describe:
+
+            // describe is a function provided 
+            // by testing frameworks (such as Mocha or Jest).
+
+            // It is used to group related test cases
+            //  (also known as “specs” or “test suites”) together.
+
+            // The purpose of describe is to organize 
+            // your tests into logical sections.
+
+            // Typically, you use describe to group 
+            // tests related to a specific
+            //  module, function, or feature.
+
+describe('User Authentication', () => {
+    // Tests related to login functionality
+    it('should allow valid users to log in');
+    it('should reject invalid credentials');
+
+    // Tests related to registration functionality
+    it('should create a new user account');
+    it('should validate user input');
+});
+
+// it:
+
+// it (short for “itinerary” or “individual test”) 
+
+// is another function provided by testing frameworks.
+// It represents a single test case or assertion.
+
+// Inside an it block, you write the code that 
+// exercises a specific behavior and makes 
+// assertions about it.
+
+describe('Math Operations', () => {
+    it('should add two numbers correctly', () => {
+        const result = add(3, 5);
+        assert.strictEqual(result, 8);
+    });
+
+    it('should handle negative numbers', () => {
+        const result = add(-2, 7);
+        assert.strictEqual(result, 5);
+    });
+});
+
+// Why Use Them?
+// describe and it help structure your tests, 
+// making them more organized and readable.
+
+// They provide context for what you’re testing 
+// and allow you to express expectations clearly.
+
+// When tests fail, the output includes information 
+// from these descriptions, aiding in debugging.
+
+// In summary, describe groups related tests, 
+// and it defines individual test cases.
+//  These functions are essential for effective 
+// testing in Node.js applications! 🚀🔍
+
+
+// Node.js assert.equal() Function
+
+// The assert module provides a set 
+// of assertion functions for verifying 
+// invariants. The assert.equal() 
+// function tests for equality between 
+// the actual and the expected parameters. 
+// If the condition is true it will not 
+// produce an output else an assertion
+//  error is raised. 
+
+// Syntax:
+
+assert.equal(actual, expected[, message])
+// Parameters: This function accepts 
+// the following parameters as mentioned 
+// above and described below:
+
+// actual: This parameter holds the actual 
+// value that needs to be evaluated. It is of any type.
+
+// expected: This parameter holds the expected 
+// value which is matched against the actual value. 
+// It is of any type.
+
+// message: This parameter holds the error message 
+// of string or error type. It is an optional parameter.
+// Return Value: This function returns 
+// an assertion error of object type.
+
+// The **`assert.equal()`** function in Node.js 
+// is used to test whether two values are equal. 
+// Let's break it down:
+
+// 1. **Purpose**:
+//    - The `assert.equal()` function checks if two values are equal using the `==` operator.
+//    - If the values are not equal, an **assertion error** is raised.
+
+// 2. **Syntax**:
+//    ```javascript
+   assert.equal(value1, value2, message);
+//    ```
+//    - Parameters:
+//      - `value1`: The first value to be compared.
+//      - `value2`: The second value to be compared.
+//      - `message` (optional): An error message to describe 
+//                  the assertion (useful for debugging).
+
+// 3. **Use Cases**:
+//    - **Simple Equality Check**:
+//      - When you want to verify that two values are equal (without considering data types), use `assert.equal()`.
+//      - Example: `assert.equal(42, '42')` will not throw 
+//                  an error because `42` and `'42'` are considered equal using `==`.
+
+// 4. **Example**:
+//    ```javascript
+   const assert = require('assert');
+
+   assert.equal(50, 50); // OK
+   assert.equal(50, '50'); // OK
+   assert.equal(50, 70); // Throws an AssertionError
+//    ```
+//    Output (Assertion Error):
+//    ```
+//    AssertionError [ERR_ASSERTION]: 50 == 70
+//    ```
+// Remember, `assert.equal()` helps you verify 
+// simple equality between values, but it doesn't 
+// consider data types. For strict equality 
+// (considering data types), use `assert.strictEqual()` instead! 🚀🔍
+
+// For more details, you can explore 
+// the [W3Schools documentation on `assert.equal()`]
+// (https://www.w3schools.com/nodejs/met_assert_equal.asp) ¹..
+
+// Let’s explore a real-world scenario where 
+// the assert.equal() function shines beyond obvious cases.
+// Imagine you’re building an e-commerce platform, 
+// and you want to validate product prices. 
+// Here’s how you might use assert.equal() to ensure consistency:
+
+const assert = require('assert');
+
+// Function to calculate the discounted price
+function calculateDiscountedPrice(originalPrice, discountPercentage) {
+    const discountAmount = (originalPrice * discountPercentage) / 100;
+    return originalPrice - discountAmount;
+}
+
+// Test cases for product prices
+describe('Product Prices', () => {
+    it('should calculate discounted price correctly', () => {
+        const originalPrice = 100;
+        const discountPercentage = 20;
+        const expectedDiscountedPrice = 80;
+
+        const actualDiscountedPrice = calculateDiscountedPrice(originalPrice, discountPercentage);
+        assert.equal(actualDiscountedPrice, expectedDiscountedPrice, 'Discounted price mismatch');
+    });
+
+    it('should handle zero discount', () => {
+        const originalPrice = 150;
+        const discountPercentage = 0;
+        const expectedDiscountedPrice = 150;
+
+        const actualDiscountedPrice = calculateDiscountedPrice(originalPrice, discountPercentage);
+        assert.equal(actualDiscountedPrice, expectedDiscountedPrice, 'Zero discount failed');
+    });
+});
+
+// In this example:
+
+// We have a function calculateDiscountedPrice 
+// that computes the discounted price based 
+// on the original price and discount percentage.
+
+// The first test case checks if 
+// the discounted price is calculated correctly (20% off).
+
+// The second test case ensures that applying 
+// a zero discount doesn’t alter the price.
+
+// By using assert.equal(), we validate that 
+// the actual discounted price matches 
+// the expected value. This helps maintain 
+// consistent pricing behavior for 
+// your e-commerce platform! 🚀🛒
+
+// For more details, you can explore 
+// the GoLinuxCloud article on JavaScript assert.equal()1.
+
+// Node.js assert.fail() Function
+
+// The assert module provides a set of assertion 
+// functions for verifying invariants. 
+// The assert.fail() function throws 
+// an AssertionError with the provided 
+// the error message or with a default 
+// error message.
+// The assert.fail() function in Node.js 
+// is a powerful tool for intentionally 
+// causing test failures or signaling 
+// unexpected conditions. 
+
+// Purpose:
+
+// The assert.fail() function throws 
+// an AssertionError with the provided 
+// error message or a default error message.
+
+// It’s typically used when you want 
+// to explicitly indicate that a test case should fail.
+
+// Syntax:
+assert.fail([message])
+// Parameters: This function accepts 
+// following parameters as mentioned 
+// above and described below:
+
+// message This parameter holds 
+// the error message of string or 
+// error type./ 
+// An error message to describe the assertion (useful for debugging). 
+// It is an optional parameter.
+
+// Return Value: This function returns 
+// assertion error of object type. 
+
+// Use Cases:
+// Intentional Failures:
+// When you intentionally want a test to fail 
+// (e.g., to indicate incomplete functionality 
+// or to create a placeholder for future work).
+// It’s like saying, “This part of the code 
+// isn’t ready yet, and the test should fail.”
+
+
+// Installation of assert module:
+
+// You can visit the link to Install 
+// assert module. You can install 
+// this package by using this command.
+
+npm install assert
+// Note: Installation is an optional 
+// step as it is inbuilt Node.js module.
+// After installing the assert module, 
+// you can check your assert version 
+// in command prompt using the command.
+npm version assert
+// After that, you can just create 
+// a folder and add a file for example,
+//  index.js as shown below.
+
+// Example 1: Filename: index.js
+
+// Requiring the module 
+const assert = require('assert').strict;
+
+// Function call 
+try {
+    assert.fail();
+} catch (error) {
+    console.log("Error:", error)
+}
+// Steps to run the program:
+// The project structure will look like this:
+// Run index.js file using below command:
+node index.js
+// Output:
+// Error: AssertionError [ERR_ASSERTION]: 
+// Failed at Object......................
+
+// Example 2: Filename: index.js
+
+// Requiring the module 
+const assert = require('assert').strict;
+
+// Function call 
+try {
+    assert.fail(new TypeError('My custom defined error'));
+} catch (error) {
+    console.log("Error:", error)
+}
+
+// Steps to run the program:
+// The project structure will look like this:
+// Run index.js file using below command:
+node index.js
+
+// Output:
+// Error: TypeError: My custom defined error at Object. 
+// .........................
+
+// example 3 
+const assert = require('assert').strict;
+
+// Example 1: Default error message
+assert.fail(); // Throws the default error message
+
+// Example 2: Custom error message
+assert.fail('Custom error message'); // Throws the custom error message
+
+// Output (Example 1):
+// AssertionError [ERR_ASSERTION]: Failed
+// Output (Example 2):
+// AssertionError [ERR_ASSERTION]: Custom error message
+
+// Let’s explore a real-world scenario where the assert.fail() function shines beyond obvious cases. Imagine you’re building a web application that handles user authentication. Here’s how you might use assert.fail() to indicate incomplete functionality or to create placeholders for future work:
+const assert = require('assert').strict;
+
+// Function to authenticate a user
+function authenticateUser(username, password) {
+    // ... some authentication logic ...
+    if (username === 'admin' && password === 'secret') {
+        // Authentication successful
+        return true;
+    } else {
+        // Authentication failed
+        assert.fail('User authentication not implemented yet');
+    }
+}
+
+// Test case for user authentication
+describe('User Authentication', () => {
+    it('should authenticate valid users', () => {
+        const isAuthenticated = authenticateUser('admin', 'secret');
+        assert.strictEqual(isAuthenticated, true, 'Valid user authentication failed');
+    });
+
+    it('should fail authentication for invalid users', () => {
+        const isAuthenticated = authenticateUser('guest', 'password123');
+        assert.strictEqual(isAuthenticated, false, 'Invalid user authentication succeeded');
+    });
+});
+
+
+// In this example:
+
+// We have a function authenticateUser that simulates user authentication.
+// The first test case checks if valid users are authenticated successfully.
+// The second test case ensures that invalid users fail authentication.
+// By using assert.fail(), we explicitly indicate that the authentication
+//  functionality is not yet implemented. This helps track incomplete
+// features during development! 🚀🔍
+
+// For more details, you can explore the Stack Overflow discussion on assert.fail()1
+
+
+// Reference: https://nodejs.org/dist/latest-v12.x/docs/api/assert.html#assert_assert_fail_message
+
+
+// Node.js assert.ifError() Function
+
+// The assert.ifError() function in Node.js 
+// serves a specific purpose: it checks for 
+// errors in asynchronous operations 
+// and raises an error if one occurs.
+
+// Purpose:
+// The assert.ifError() function is used 
+// to test whether a value is an error 
+// (typically an instance of the Error class).
+
+// If the argument is an error (not null 
+// or undefined), it throws an assertion error.
+
+// Syntax: 
+assert.ifError(value)
+
+// Parameters:
+// value: The value to be checked. 
+// If it’s an error, an assertion error is thrown.
+// This parameter holds the actual value. 
+// This value is thrown if value is not undefined 
+// or null. It is of any type.
+
+// Return Value: This function returns 
+// assertion error of object type.
+
+// Use Cases:
+// Testing Error Conditions:
+// When working with asynchronous code 
+// (e.g., callbacks or promises), you can 
+// use assert.ifError() to verify that 
+// an error condition is handled correctly.
+// If an error occurs, the test fails.
+
+// example 
+const assert = require('assert').strict;
+
+// Example 1: Testing an error
+try {
+    assert.ifError(new Error('Something went wrong'));
+} catch (error) {
+    console.log('Error:', error.message);
+}
+
+// Example 2: No error (no assertion error)
+assert.ifError(null);
+
+// Output (Example 1):
+// Error: AssertionError [ERR_ASSERTION]: ifError got unwanted exception: 'Something went wrong'
+
+// Real-World Scenario:
+// Imagine you’re building an API that 
+// fetches data from an external service.
+// You want to ensure that any errors 
+// returned by the service are handled gracefully.
+// Use assert.ifError() to verify that 
+// your error-handling code works as expected.
+// Remember, assert.ifError() helps you 
+// catch unexpected errors during 
+// asynchronous operations, ensuring robust 
+// error handling in your Node.js applications! 🚀🔍
+
+// For more details, you can explore 
+// the official Node.js documentation 
+// on assert.ifError()1.
+
+// Installation of assert module:
+
+// You can visit the link to Install assert module. 
+// You can install this package by using this command.
+
+npm install assert
+// Note: Installation is an optional step as 
+// it is inbuilt Node.js module. 
+
+// After installing the assert module,
+//  you can check your assert version 
+// in command prompt using the command. 
+ 
+npm version assert
+// After that, you can just create a folder 
+// and add a file for example, index.js as shown below.
+
+// Example 1: Filename: index.js 
+
+// Requiring the module
+const assert = require('assert').strict;
+
+// Function call
+try {
+    assert.ifError('error');
+} catch (error) {
+    console.log("Error:", error)
+}
+// Steps to run the program: 
+
+// The project structure will look like this: 
+
+// Run index.js file using below command: 
+ 
+node index.js
+
+// Output: 
+// Error: AssertionError [ERR_ASSERTION]:
+//  ifError got unwanted exception: ‘error’ at Object.
+// ........................
+
+
+// Example 2: Filename: index.js
+
+// Requiring the module
+const assert = require('assert').strict;
+
+// Function call
+try {
+    assert.ifError(null);
+    console.log("No Error Occurred")
+} catch (error) {
+    console.log("Error:", error)
+}
+// Steps to run the program: 
+
+// The project structure will look like this:
+// Run index.js file using below command:
+node index.js
+// Output:
+// No Error Occurred
+
+// When testing 
+// the error argument in callbacks, 
+// this function is very useful.
+// Let’s dive into the concept 
+// of error-first callbacks 
+// in Node.js and explore how 
+// they work with an example.
+
+// Error-First Callbacks:
+
+// In Node.js, it’s a common convention 
+// to use error-first callbacks in asynchronous functions.
+
+// An error-first callback is a function 
+// that takes two arguments: an error object
+//  (if an error occurs) and the result data
+//  (if the operation is successful).
+
+// The first argument is reserved for 
+// the error object, and the second 
+// argument is for the data.
+
+// Why Use Error-First Callbacks?:
+
+// They ensure consistent error handling 
+// across asynchronous operations.
+
+// Developers can easily check for 
+// errors and handle them appropriately.
+
+// Example: Reading a File Using fs.readFile():
+// Let’s use the fs.readFile() function, which reads a file asynchronously.
+// It follows the error-first callback pattern.
+const fs = require('fs');
+
+const filename = 'example.txt';
+
+// Read the file asynchronously
+fs.readFile(filename, 'utf8', (err, data) => {
+    if (err) {
+        console.error('Error reading file:', err.message);
+    } else {
+        console.log('File content:', data);
+    }
+});
+// In this example:
+// If an error occurs during file reading (e.g., file not found), the error object is passed as the first argument to the callback.
+// If the operation is successful, the second argument contains the file content.
+
+// Real-World Scenario:
+// Imagine you’re building a web server that handles requests.
+// When processing requests, you’ll often encounter 
+// asynchronous operations (like reading files or making database queries).
+// Error-first callbacks help you handle errors gracefully.
+
+// Remember, error-first callbacks are a fundamental 
+// part of Node.js development, ensuring robust error
+//  handling in asynchronous code! 🚀🔍
+
+// For more details, you can explore the GeeksforGeeks article on error-first callbacks in Node.js1.
+
+
+// Reference: https://nodejs.org/dist/latest-v12.x/docs/api/assert.html#assert_assert_iferror_value
+
+
+// The **`assert.match()`** function in Node.js 
+// is used to verify whether a given string 
+// matches a specified regular expression. 
+
+// Let's break it down:
+
+// 1. **Purpose**:
+//    - The `assert.match()` function checks if a string conforms to a particular pattern defined by a regular expression.
+//    - If the string matches the regex, no output is produced (i.e., the assertion passes).
+//    - If the string does not match the regex, an assertion error is raised.
+
+// 2. **Syntax**:
+//    ```javascript
+assert.match(string, regexp[, message]);
+//    ```
+//    - Parameters:
+//      - `string`: The input string that needs to be evaluated.
+//      - `regexp`: The regular expression to match against the given string.
+//      - `message` (optional): An error message (if the assertion fails).
+
+// 3. **Use Cases**:
+//    - **Pattern Validation**:
+//      - When you want to ensure that a string adheres to a specific format (e.g., email addresses, URLs, or custom patterns).
+//      - Useful for validating user input or data from external sources.
+
+// 4. **Example**:
+//    ```javascript
+const assert = require('assert').strict;
+
+try {
+    assert.match('I will try to pass', /fail/);
+} catch (error) {
+    console.log('Error:', error);
+}
+//    ```
+//    Output:
+//    ```
+//    Error: AssertionError [ERR_ASSERTION]: The input did not match the regular expression /fail/.
+//    Input: 'I will try to pass'
+//    ```
+
+//In this example, the string "I will try to pass" 
+// does not match the regex `/fail/`, so the assertion fails.
+
+// Remember, `assert.match()` helps you validate 
+// string patterns using regular expressions, 
+// ensuring data consistency and correctness 
+// in your Node.js applications! 🚀🔍
+
+// For more details, you can explore the
+//  [official Node.js documentation on 
+// `assert.match()`](https://nodejs.org/dist/latest-v12.x/docs/api/assert.html) ¹.
+
+
+// Certainly! Let's explore a real-world scenario where 
+// // the **`assert.fail()`** function is useful beyond 
+// // obvious cases. Imagine you're building a web 
+// application that handles user authentication. 
+// Here's how you might use `assert.fail()` to indicate 
+// incomplete functionality or create placeholders 
+// for future work:
+
+// ```javascript
+const assert = require('assert').strict;
+
+// Function to authenticate a user
+function authenticateUser(username, password) {
+    // ... some authentication logic ...
+    if (username === 'admin' && password === 'secret') {
+        // Authentication successful
+        return true;
+    } else {
+        // Authentication failed
+        assert.fail('User authentication not implemented yet');
+    }
+}
+
+// Test case for user authentication
+describe('User Authentication', () => {
+    it('should authenticate valid users', () => {
+        const isAuthenticated = authenticateUser('admin', 'secret');
+        assert.strictEqual(isAuthenticated, true, 'Valid user authentication failed');
+    });
+
+    it('should fail authentication for invalid users', () => {
+        const isAuthenticated = authenticateUser('guest', 'password123');
+        assert.strictEqual(isAuthenticated, false, 'Invalid user authentication succeeded');
+    });
+});
+// ```
+
+// In this example:
+// - We have a function `authenticateUser` that simulates user authentication.
+// - The first test case checks if valid users are authenticated successfully.
+// - The second test case ensures that invalid users fail authentication.
+
+// By using `assert.fail()`, we explicitly indicate that the 
+authentication functionality is not yet implemented. This helps
+ track incomplete features during development! 🚀🔍
+
+// For more details, you can explore the [Stack Overflow discussion on `assert.fail()`](https://stackoverflow.com/questions/120648/is-assert-fail-considered-bad-practice) ¹.
+
+
+
+

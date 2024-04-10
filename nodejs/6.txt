@@ -1,0 +1,2620 @@
+// Node.js is an open-source project that 
+// can be used for server-side scripting. 
+
+// Node.js Global Objects are the objects 
+// that are available in all modules.
+//  Global Objects are built-in objects 
+// that are part of the JavaScript and 
+// can be used directly in the application 
+// without importing any particular module. 
+
+// The Node.js Global Objects are listed below: 
+// 1.Class: Buffer 
+// console
+// process
+// global
+// TextEncoder
+// 3.TextDecoder
+// 4.Class
+// 5.URLSearchParams
+// 6.WebAssembly
+
+// 1.Class: Buffer 
+// The Buffer class is 
+// an inbuilt globally accessible class 
+// that means it can be used without importing 
+// any module.  Buffer class objects 
+// are used to represent binary data as 
+// a sequence of bytes.
+
+// console: It is an inbuilt global object 
+// used to print to stdout and stderr. 
+
+// process: It is an inbuilt global object 
+// that is an instance of EventEmitter used 
+// to get information on current process.
+
+// global: It is a global namespace. Defining 
+// a variable within this namespace makes 
+// it globally accessible. 
+
+// setImmediate() method: It schedules 
+// the immediate execution of the callback. 
+
+// 5.URLSearchParams: URLSearchParams API is 
+// used to perform read and write operations
+//  on the query of a URL. 
+
+const myURL = new URL('https://www.register.com/?name=gfg');
+
+// It prints gfg
+console.log(myURL.searchParams.get('name'));
+
+myURL.searchParams.append('name', 'xyz');
+
+// It prints https://www.register.com/?name=gfg&name=xyz
+console.log(myURL.href);
+
+// Node.js Modules
+// Modules can
+//  be a single file or a collection of 
+// multiple files/folders.
+//The reason 
+// programmers are heavily reliant on modules 
+// is because of their reusability as well as 
+// the ability to break down a complex piece 
+// of code into manageable chunks.
+
+// Modules are of three types:
+// Core Modules
+// local Modules
+// Third-party Modules
+
+// Core Modules: Node.js has many built-in 
+// modules that are part of the platform and 
+// come with Node.js installation. These modules 
+// can be loaded into the program by using 
+// the required function.
+
+// Here’s a list of some essential built-in modules:
+
+// assert: Provides a set of assertion tests to verify conditions in your code.
+// buffer: Handles binary data, allowing you to work with raw bytes.
+// child_process: Enables running child processes from your Node.js application.
+// cluster: Splits a single Node process into multiple processes to improve performance and utilize multiple CPU cores.
+// crypto: Handles cryptographic functions using OpenSSL.
+// dgram: Implements UDP datagram sockets for network communication.
+// dns: Performs DNS lookups and name resolution functions.
+// domain (deprecated): Previously used to handle unhandled errors but is no longer recommended.
+// events: Facilitates event handling and custom event emitters.
+// fs: Interacts with the file system, allowing file read/write operations.
+// http: Enables creating an HTTP server.
+// https: Similar to http, but for HTTPS servers.
+// net: Used for creating servers and clients for network communication.
+// os: Provides information about the operating system.
+// path: Handles file paths and directory structures.
+// punycode (deprecated): Previously used for character encoding but is no longer recommended.
+// querystring: Parses and manipulates URL query strings.
+// readline: Helps read input from readable streams line by line.
+// stream: Deals with streaming data.
+// string_decoder: Decodes buffer objects into strings.
+// timers: Allows scheduling functions to run after a specified delay.
+// tls: Implements TLS and SSL protocols for secure communication.
+// tty: Provides classes used by text terminals.
+// url: Parses and manipulates URL strings.
+// util: Gives access to utility functions.
+// v8: Provides information about the V8 JavaScript engine.
+// vm: Compiles JavaScript code in a virtual machine.
+// zlib: Compresses or decompresses files.
+
+
+// The following example demonstrates 
+// how to use the Node.js http module 
+// to create a web server. 
+const http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('Welcome to this page!');
+    res.end();
+}).listen(3000);
+
+// response.writeHead(statusCode[, statusMessage][, headers])
+// Sends a response header to the request. The status code 
+// is a 3-digit HTTP status code, like 404. The last argument, 
+// headers, are the response headers. Optionally one can give 
+// a human-readable statusMessage as the second argument.
+
+response.writeHead(200, { 'Content-Type': 'text/plain', 'Trailer': 'Content-MD5' });
+response.write(fileData);
+response.addTrailers({ 'Content-MD5': '7895bf4b8828b55ceaf47747b4bca667' });
+response.end();
+
+response.connection
+// Use response.socket.
+
+response.end([data[, encoding]][, callback])
+response.finished
+// The response.finished property will be 
+// true if response.end() has been called.
+
+response.flushHeaders()
+// Flushes the response headers. 
+
+response.getHeader(name)
+// Reads out a header that's already been 
+// queued but not sent to the client. 
+
+response.setHeader('Content-Type', 'text/html');
+response.setHeader('Content-Length', Buffer.byteLength(body));
+response.setHeader('Set-Cookie', ['type=ninja', 'language=javascript']);
+const contentType = response.getHeader('content-type');
+// contentType is 'text/html'
+const contentLength = response.getHeader('Content-Length');
+// contentLength is of type number
+const setCookie = response.getHeader('set-cookie');
+// setCookie is of type string[] 
+
+response.getHeaderNames()
+// Returns an array containing the unique 
+// names of the current outgoing headers. 
+// All header names are lowercase.
+response.setHeader('Foo', 'bar');
+response.setHeader('Set-Cookie', ['foo=bar', 'bar=baz']);
+const headerNames = response.getHeaderNames();
+// headerNames === ['foo', 'set-cookie'] 
+
+response.getHeaders()
+// Returns a shallow copy of the current 
+// outgoing headers. Since a shallow copy 
+// is used, array values may be mutated 
+// without additional calls to various 
+// header-related http module methods. 
+// The keys of the returned object are 
+// the header names and the values are 
+// the respective header values. 
+
+
+// The object returned by 
+// the response.getHeaders() method does 
+// not prototypically inherit from 
+// the JavaScript Object. This means 
+// that typical Object methods such 
+// as obj.toString(), obj.hasOwnProperty(), 
+// and others are not defined and will not work.
+response.setHeader('Foo', 'bar');
+response.setHeader('Set-Cookie', ['foo=bar', 'bar=baz']);
+
+const headers = response.getHeaders();
+// headers === { foo: 'bar', 'set-cookie': ['foo=bar', 'bar=baz'] } 
+
+
+response.hasHeader(name)
+// Returns true if the header identified by 
+// name is currently set in the outgoing headers. 
+// The header name matching is case-insensitive.
+const hasContentType = response.hasHeader('content-type'); 
+
+response.headersSent
+// Boolean (read-only). True if headers were sent, false otherwise.
+
+response.removeHeader(name)
+// Removes a header that's queued for implicit sending.
+response.removeHeader('Content-Encoding'); 
+
+response.sendDate
+
+response.setHeader(name, value)
+// Sets a single header value for implicit headers. 
+
+
+response.setHeader('Content-Type', 'text/html');
+// or
+response.setHeader('Set-Cookie', ['type=ninja', 'language=javascript']);
+
+// When headers have been set with response.setHeader(), 
+// they will be merged with any headers passed to 
+// response.writeHead(), with the headers passed 
+// to response.writeHead() given precedence.
+const server = http.createServer((req, res) => {
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('X-Foo', 'bar');
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('ok');
+}); 
+
+response.setTimeout(msecs[, callback])
+
+response.socket
+
+import http from 'node:http';
+const server = http.createServer((req, res) => {
+    const ip = res.socket.remoteAddress;
+    const port = res.socket.remotePort;
+    res.end(`Your IP address is ${ip} and your source port is ${port}.`);
+}).listen(3000);
+
+
+response.sendDate
+response.setTimeout(msecs[, callback])
+response.socket
+response.setHeader('Set-Cookie', ['type=ninja', 'language=javascript']);
+response.setHeader('Content-Type', 'text/html');
+response.getHeaders();
+response.setHeader('Foo', 'bar');
+response.setHeader('Set-Cookie', ['foo=bar', 'bar=baz']);
+response.statusCode
+response.statusMessage
+response.strictContentLength
+response.uncork()
+response.writableEnded
+response.writableFinished
+response.write(chunk[, encoding][, callback])
+response.writeContinue()
+response.writeEarlyHints(hints[, callback])
+
+
+// the require() function 
+// returns an object because the Http module 
+// returns its functionality as an object. 
+// The function http.createServer() method 
+// will be executed when someone tries to 
+// access the computer on port 3000. 
+
+
+// Core Modules	            Description
+// http	                    creates an HTTP server in Node.js.
+// assert	                set of assertion functions useful for testing.
+// fs	                    used to handle file system.
+// path	                    includes methods to deal with file paths.
+// process	                provides information and control about the current Node.js process.
+// os	                    provides information about the operating system.
+// querystring	            utility used for parsing and formatting URL query strings.
+// url	                    module provides utilities for URL resolution and parsing.
+
+
+// Local Modules: Unlike built-in and external modules, 
+// local modules are created locally in your Node.js 
+// application. Let’s create a simple calculating module 
+// that calculates various operations. 
+
+                // Third-party modules: Third-party modules 
+                // are modules that are available online using 
+                // the Node Package Manager(NPM). These modules 
+                // can be installed in the project folder or globally. 
+                // Some of the popular third-party modules are 
+                // Mongoose, express, angular, and React. 
+
+// Example:
+npm install express
+npm install mongoose
+npm install - g @angular/cli
+
+// Defining local module:
+// Step 1: Create a local module with 
+// the filename Welcome.js 
+const welcome = {
+    sayHello: function () {
+        console.log("Hello GeekforGeeks user");
+    },
+    currTime: new Date().toLocaleDateString(),
+    companyName: "GeekforGeeks"
+}
+module.exports = welcome
+
+// Part 2: In this part, use 
+// the above module in the app.js file. 
+const local = require("./Welcome.js");
+local.sayHello();
+console.log(local.currTime);
+console.log(local.companyName);
+
+// Explanation: Here, we import our 
+// local module ‘sayHello’ in a variable 
+// ‘local’ and consume the function and 
+// variables of the created modules.
+
+// Output:
+// Hello GeekforGeeks user
+// 12/6/2019
+// GeekforGeeks
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// node js assert module 
+// The assert module in Node.js provides 
+// a set of functions for making assertions 
+// about the correctness of your code.
+
+// What Is the Assert Module?
+// These functions help you verify invariants,
+//  assumptions, and expected behavior
+//  within your program.
+
+// How Does Assertion Work?
+// When you use an assertion function, 
+// it checks whether 
+// the given condition holds true.
+
+// If the condition is true, the assertion passes silently.
+// If the condition is false, an assertion error is thrown.
+
+npm install assert
+const assert = require("assert");
+let x = 4;
+let y = 5;
+
+try {
+    // Checking condition 
+    assert(x == y);
+}
+catch {
+    // Error output 
+    console.log(
+        `${x} is not equal to ${y}`);
+}
+// Output:
+// 4 is not equal to 5
+
+
+// The assert.deepStrictEqual() method in
+//  Node.js is a powerful tool for testing
+//  deep equality between two objects and 
+// their child objects. 
+// If the condition is true 
+// it will not produce an output else 
+// an assertion error is raised.
+
+// Purpose:
+// The deepStrictEqual() function 
+// checks if two objects (and their 
+// nested properties) are equal in 
+// both value and type(===) .
+
+// assert.deepStrictEqual(actual, expected[, message])
+
+// If the objects are not equal, 
+// an assertion error is raised.
+
+const assert = require('assert');
+
+const x = { a: { n: 0 } };
+const y = { a: { n: 0 } };
+const z = { a: { n: '0' } };
+
+assert.deepStrictEqual(x, y); // OK
+assert.deepStrictEqual(x, z); // Throws an AssertionError
+// Output (Assertion Error):
+// AssertionError [ERR_ASSERTION]: { a: { n: 0 } } deepStrictEqual { a: { n: '0' } }
+
+// The square brackets [] in syntax notation 
+// typically indicate optional components. 
+// If you see functionName(arg1[, arg2]), it implies 
+// that arg2 is optional.
+
+
+//**Notable Use Cases**:
+//    - **Testing Complex Objects**:
+//      - When dealing with complex data 
+            // structures (e.g., nested objects, arrays, or custom classes), 
+            // visual inspection might miss subtle differences.
+//      - `deepStrictEqual()` helps catch 
+            // unexpected type mismatches.
+//    - **Unit Testing**:
+//      - In unit tests, you want to ensure that 
+            // your functions return the expected results.
+//      - Using `deepStrictEqual()` helps verify that 
+//        the output matches the expected structure and types.
+//    - **Serialization and Deserialization**:
+//      - When serializing data (e.g., to JSON) and 
+            // then deserializing it, you want to ensure that
+            // the round-trip preserves both values and types.
+//      - `deepStrictEqual()` helps 
+            // validate this process.
+
+// 3. **Example: Unit Test Scenario**:
+//    - Imagine you're testing a function that processes user input and returns an object.
+//    - The function should always return an object with specific properties and correct data types.
+//    - Using `deepStrictEqual()` ensures that the output adheres to these expectations.
+
+// 4. **Visual Inspection vs. Automated Checks**:
+//    - While you can visually compare simple objects, automated checks like `deepStrictEqual()` are essential for maintaining code quality.
+//    - They catch subtle issues that might be overlooked during manual inspection.
+
+// Certainly! Let's explore some practical 
+// examples where the **`assert.deepStrictEqual()`** 
+// method shines by comparing actual code snippets
+
+// 1. **Testing Complex Objects**:
+//    - Imagine you're building an application that 
+        // processes user data. You want to ensure that
+        //  the data transformation functions work correctly.
+
+//    - Let's say you have a function that converts 
+        // user input into an object with specific properties:
+
+
+function processUserInput(input) {
+    // ... some processing logic ...
+    return {
+        name: input.name,
+        age: parseInt(input.age),
+        isAdmin: input.role === 'admin',
+    };
+}
+//- In your unit tests, you can use `deepStrictEqual()` 
+// to verify that the output matches the expected structure and types:
+const assert = require('assert');
+
+const input = {
+    name: 'Alice',
+    age: '25',
+    role: 'admin',
+};
+
+const expectedOutput = {
+    name: 'Alice',
+    age: 25,
+    isAdmin: true,
+};
+
+const actualOutput = processUserInput(input);
+assert.deepStrictEqual(actualOutput, expectedOutput, 'User data transformation failed');
+
+
+// 2. **Serialization and Deserialization**:
+//    - Suppose you're working with a REST API that serializes data to JSON and then deserializes it back.
+//    - You want to ensure that the round-trip preserves both values and types:
+//```javascript
+const assert = require('assert');
+
+const originalData = {
+    name: 'Bob',
+    age: 30,
+    isAdmin: false,
+};
+
+const serializedData = JSON.stringify(originalData);
+const deserializedData = JSON.parse(serializedData);
+
+assert.deepStrictEqual(deserializedData, originalData, 'Serialization/deserialization mismatch');
+
+// Node.js assert.doesNotThrow() Function
+// The assert.doesNotThrow() function asserts/assures 
+// that the function fn does not throw an error
+// verifying that a given function does not throw an error.
+
+assert.doesNotThrow(fn[, error][, message])
+
+// Purpose:
+// The assert.doesNotThrow() function ensures 
+// that a specified function (fn) does not throw any errors.
+// If the function throws an error, 
+// an assertion error is raised.
+
+// Use Cases:
+    // Unit Testing:
+        // In unit tests, you want to verify that specific functions behave as expected.
+        // Use assert.doesNotThrow() to ensure that critical functions don’t unexpectedly throw errors.
+    // Error Handling:
+        // When writing error-handling code, you can use this assertion to validate that certain functions remain error-free.
+    // Expected Behavior:
+        // If your application relies on specific behavior (e.g., a function returning a value), use doesNotThrow() to catch unexpected exceptions.
+
+Imagine you’re 
+// building a web application that processes 
+// user input. One critical function in your 
+// application should not throw any exceptions. 
+
+// Node.js assert.equal() Function
+//The assert.equal() 
+// function tests for equality between 
+// the actual and the expected parameters. 
+// If the condition is true it will not 
+// produce an output else an assertion
+//  error is raised. 
+
+// Syntax:
+assert.equal(actual, expected[, message])
+assert.equal(value1, value2, message);
+const assert = require('assert');
+
+assert.equal(50, 50); // OK
+assert.equal(50, '50'); // OK
+assert.equal(50, 70); // Throws an AssertionError
+
+// Imagine you’re building an e-commerce platform, 
+// and you want to validate product prices. 
+assert.equal(actualDiscountedPrice, expectedDiscountedPrice, 'Discounted price mismatch');
+
+// Node.js assert.fail() Function
+// The assert.fail() function in Node.js 
+// is a powerful tool for intentionally 
+// causing test failures
+// It’s typically used when you want 
+// to explicitly indicate that a test case should fail.
+
+// Syntax:
+assert.fail([message])
+
+//Imagine you’re 
+// building a web application that handles user authentication. 
+// Here’s how you might use assert.fail() to indicate incomplete 
+// functionality or to create placeholders for future work:
+
+// Function to authenticate a user
+function authenticateUser(username, password) {
+    // ... some authentication logic ...
+    if (username === 'admin' && password === 'secret') {
+        // Authentication successful
+        return true;
+    } else {
+        // Authentication failed
+        assert.fail('User authentication not implemented yet');
+    }
+}
+
+// Node.js assert.ifError() Function
+
+// The assert.ifError() function is used 
+// to test whether a value is an error 
+// If the argument is an error (not null 
+// or undefined), it throws an assertion error.
+
+// Syntax: 
+assert.ifError(value)
+
+// Use Cases:
+// When working with asynchronous code 
+// (e.g., callbacks or promises), you can 
+// use assert.ifError() to verify that 
+// an error condition is handled correctly.
+// If an error occurs, the test fails.
+
+// Real-World Scenario:
+// Imagine you’re building an API that 
+// fetches data from an external service.
+// You want to ensure that any errors 
+// returned by the service are handled gracefully.
+// Use assert.ifError() to verify that 
+// your error-handling code works as expected.
+// Remember, assert.ifError() helps you 
+// catch unexpected errors during 
+// asynchronous operations, ensuring robust 
+// error handling in your Node.js applications! 
+
+// The **`assert.match()`** function 
+//    - The `assert.match()` function checks if a string conforms to a particular pattern defined by a regular expression.
+//    - If the string matches the regex, no output is produced (i.e., the assertion passes).
+//    - If the string does not match the regex, an assertion error is raised.
+assert.match(string, regexp[, message]);
+
+// **Use Cases**:
+//    - **Pattern Validation**:
+//      - When you want to ensure that a string adheres to a specific format (e.g., email addresses, URLs, or custom patterns).
+//      - Useful for validating user input or data from external sources.
+
+//`assert.match()` helps you validate 
+// string patterns using regular expressions, 
+// ensuring data consistency and correctness 
+// in your Node.js applications!
+
+
+// Node.js assert.notDeepEqual() Function
+// The assert.notDeepEqual() function in Node.js 
+// is a powerful tool for verifying that two 
+// values or objects are not deeply equal. 
+
+assert.notDeepEqual(actual, expected[, message])
+
+// Use Cases:
+// Complex Data Structures:
+// When comparing complex objects, arrays,
+//  or nested data structures, 
+// assert.notDeepEqual() ensures that 
+// they are not identical.
+// Useful for verifying that 
+// transformations or modifications have occurred.
+//assert.notDeepEqual() helps you catch unexpected 
+// equality in complex data structures, ensuring robust 
+// comparisons in your Node.js applications!
+//In this case, it ensures that the updated shopping cart 
+//is different from the initial cart after a product quantity update
+//Ensuring the updated shopping cart differs from the initial cart after a product quantity update is crucial for consistency, validation, and preventing unintended side effects in the app. It helps maintain data integrity and enhances the user experience. 
+
+
+// The assert.notDeepStrictEqual() function 
+// tests for deep strict inequality. 
+// If the condition is true it will not produce 
+// an output else an assertion error is raised.
+Imagine you're 
+// building a social media platform, and you want 
+// to ensure that user profiles are correctly 
+// updated when users modify their personal information. 
+assert.notDeepStrictEqual(updatedProfile, initialProfile, 'Name update failed');
+// - We have a function `updateUserProfile` that modifies user profile information.
+// - The first test case checks if the user's name is updated correctly.
+// - The second test case ensures that other profile properties (like age) remain unchanged.
+
+// The assert.ok() function tests if the value 
+// is true or not. If the condition is true it 
+// will not produce an output else an assertion 
+// error is raised.
+assert.ok(value[, message])
+// If the value is truthy, no output 
+// is produced (i.e., the assertion passes).
+
+// If the value is falsy (e.g., 0, false, null,
+//  or undefined), an assertion error is raised.
+
+// The assert module provides a set of assertion 
+// functions for verifying invariants. 
+// The assert.rejects() function awaits 
+// the asyncFn promise or if the asyncFn 
+// is a function then it immediately calls 
+// the function and awaits the returned promise 
+// to complete and after that it will then check 
+// that the promise is rejected. 
+
+// It checks whether the function is rejected 
+//assert.rejects() helps you catch 
+// unexpected rejections in asynchronous code, 
+// ensuring robust error handling in 
+// your Node.js applications!
+
+// an application that interacts with 
+// an external API to fetch user data. 
+// You want to ensure that your code 
+// correctly handles API errors and rejects 
+// the promise when an error occurs.
+
+//Ensure fetchUserData rejects the promise for invalid user ID
+(async () => {
+    await assert.rejects(
+        async () => {
+            await fetchUserData('invalidId');
+        },
+        { name: 'Error', message: 'User not found' },
+        'fetchUserData should reject with specific error'
+    );
+
+    console.log('Test passed: fetchUserData correctly rejects for invalid user ID');
+})();
+
+
+// 1. We define an `async` function `fetchUserData` 
+// that simulates fetching user data from an API. 
+// If the provided `userId` is `'invalidId'`, it throws an error.
+
+// 2. The test case uses `assert.rejects()` 
+// to verify that calling `fetchUserData('invalidId')` 
+// results in the expected rejection with the specified error message.
+
+// 3. The third argument to `assert.rejects()` 
+// is an optional custom error message for better test reporting.
+
+// When you run this test, it will fail 
+// if `fetchUserData` doesn't reject with 
+// the expected error. This ensures that 
+// your code correctly handles API errors 
+// and provides meaningful feedback during testing.
+
+// Remember that `assert.rejects()` is 
+// particularly useful when you want to verify 
+// that asynchronous functions reject promises 
+// with specific errors. It helps catch unexpected
+//  behavior and ensures robust error handling in your codebase.
+
+
+// The assert.strictEqual() function in Node.js is a  tool 
+// for verifying strict equality between two values.
+assert.strictEqual(actual, expected[, message])
+
+assert.strictEqual(50, 50); // OK
+assert.strictEqual(50, "50"); // AssertionError: 50 === '50'
+
+// Using the message parameter:
+assert.strictEqual(50, "50", "My custom message");
+
+// Node.js Buffers
+// Buffers are instances of the Buffer 
+// class in Node.js
+
+// Create an uninitiated buffer: It creates 
+// the uninitiated buffer of given size( 5 octets).
+// Create a buffer from array: 
+var abuf = new Buffer([16, 32, 48, 64]);
+
+// Create a buffer from string: 
+// It creates buffer from given 
+// string with optional encoding.
+var sbuf = new Buffer("GeeksforGeeks", "ascii");
+
+// Writing to Buffers in Node.js: The buf.write() 
+// is used to write data into a node buffer.
+buf.write( string, offset, length, encoding )
+// example 
+cbuf = new Buffer(256);
+bufferlen = cbuf.write("Learn Programming with GeeksforGeeks!!!");
+console.log("No. of Octets in which string is written : "+  bufferlen);
+
+// Reading from Buffers: The buf.toString() method 
+// is used to read data from a node buffer. 
+buf.toString( encoding, start, end )
+
+rbuf = new Buffer(26); 
+var j; 
+for (var i = 65, j = 0; i < 90, j < 26; i++, j++) {  
+    rbuf[j] = i ;  
+}  
+console.log( rbuf.toString('ascii'));  
+
+//Read the data from Node.js buffer 
+// specifying the start and end point of reading. 
+rbuf = new Buffer(26);  
+var j;
+for (var i = 65, j = 0; i < 90, j < 26; i++, j++) {  
+    rbuf[j] = i ;  
+}
+console.log( rbuf.toString('utf-8', 3, 9));  
+
+// The Buffer.copy() method in Node.js 
+// is a  function for copying data 
+// from one buffer object to another. 
+buffer.copy(target, targetStart, sourceStart, sourceEnd)
+
+// Use Cases:
+// Buffer Manipulation:
+// When you want to manipulate or modify data within buffers.
+// Useful for tasks like concatenating buffers 
+// or extracting specific portions of data.
+
+// Example:
+const buf1 = Buffer.from('abcdefghijkl');
+const buf2 = Buffer.from('HELLO');
+// Copy buf2 into buf1 starting from index 2
+buf2.copy(buf1, 2);
+console.log(buf1.toString()); // Output: abHELLOijkl
+// We copy the contents of buf2 into buf1 starting from index 2.
+// The resulting buf1 contains the combined data.
+
+// Suppose you're building a file processing 
+// utility that reads binary data from a source 
+// file and needs to transform specific portions 
+// of that data
+// Copy the transformed timestamp into the output buffer
+transformedTimestamp.copy(outputBuffer, 2);
+console.log(outputBuffer.toString()); // Display the transformed data
+// `Buffer.copy()` efficiently handles 
+// data transformation within buffers
+
+// The Buffer.includes() method in Node.js is a  
+// tool for checking whether a specified value 
+// is included within a buffer.
+buffer.includes(value, byteOffset, encoding);
+// value: It holds the value that you want to find in buffer.
+//byteOffset: It is optional parameter.It refers 
+// to the starting index from which the elements 
+// of input buffer will be searched.The default value is 0.
+
+//This method returns a Boolean value 
+// either True or False 
+
+const buffer = Buffer.from('Geek One');
+console.log(buffer.includes('Geek')); // Output: true
+console.log(buffer.includes('Hello')); // Output: false
+// Buffer.includes() helps you efficiently search 
+// for values within buffers, making it useful 
+// for various scenarios in Node.js! 🚀🔍
+
+const buffer = Buffer.from('GeeksforGeeks: A computer science portal');
+// Started checking the value from index 15 only 
+const output = buffer.includes('Geek', 15);
+console.log(output);
+// Output:
+// false
+
+//Buffer.compare() method 
+// compares the two given buffers. 
+//returns a number indicating their differences.
+buffer1.compare(targetBuffer, targetStart, targetEnd, sourceStart, sourceEnd);
+
+// Return Value:
+// A number:
+// 0 if the buffers are equal.
+// 1 if buffer1 is higher than buffer2.
+// -1 if buffer1 is lower than buffer2.
+
+// JavaScript
+const buf1 = Buffer.from('Hello, World', 'utf8');
+const buf2 = Buffer.from('Hello, World', 'utf8');
+const buf3 = Buffer.from('Different buffer', 'utf8');
+
+console.log(Buffer.compare(buf1, buf2)); // Output: 0 (buffers are equal)
+console.log(Buffer.compare(buf1, buf3)); // Output: 1 (buf1 > buf3)
+
+
+// Node.js program to demonstrate the
+// Buffer.compare() Method
+
+// Creating a buffer
+const buffer1 = Buffer.from('2');
+const buffer2 = Buffer.from('1');
+const buffer3 = Buffer.from('3');
+const array = [buffer1, buffer2, buffer3];
+// Before sorting
+console.log(array);
+// After sorting array
+console.log(array.sort(Buffer.compare));
+// Output:
+// [ <Buffer 32>, <Buffer 31>, <Buffer 33> ]
+// [ <Buffer 31>, <Buffer 32>, <Buffer 33> ]
+
+//The below example illustrates 
+// the Buffer.compare() Method in Node.js: 
+
+// Node.js program to demonstrate the
+// Buffer.compare() Method
+
+const buffer1 = Buffer.from('GeeksOne');
+const buffer2 = Buffer.from('GeekTwo');
+
+// Print: -1 as size of buffer1 starting
+// from index 4 is less than buffer2 size
+let op = buffer1.compare(buffer2, 4);
+
+// Print: 1 as the size of buffer2 starting
+// from index 5 is less than size of buffer1
+// starting from 0th index
+let op1 = buffer1.compare(buffer2, 0, 7, 5);
+
+console.log(op);
+console.log(op1);
+// Output:
+// -1
+// 1
+// Note: The above program will compile and 
+// run by using the node index.js command. 
+
+// The Buffer.alloc() method is used 
+// to create a new buffer object of 
+// the specified size.
+// Syntax
+Buffer.alloc(size, fill, encoding)
+
+var buf = Buffer.alloc(6);
+// Prints: <Buffer 00 00 00 00 00 00> 
+console.log(buf);
+// Output:
+// <Buffer 00 00 00 00 00 00>
+
+// Node.js program to demonstrate the    
+// Buffer.alloc() Method 
+
+// Allocate buffer of given size 
+// using buffer.alloc() method 
+var buf = Buffer.alloc(6, 'a');
+// Prints <Buffer 61 61 61 61 61> 
+console.log(buf);
+// Output: <Buffer 61 61 61 61 61> 
+
+//Remember, `Buffer.alloc()` is a reliable way to allocate memory for buffers, 
+// especially when dealing with sensitive data or security requirements! 
+
+// Efficient Data Storage for Sensor Readings
+// Suppose you're building an IoT (Internet of Things) 
+// application that collects sensor readings from 
+// various devices. Each sensor generates data 
+// at regular intervals, and you need 
+// to store this data efficiently. 
+
+const numSensorReadings = 1000; // Assuming 1000 sensor readings
+const bytesPerReading = 12; // Assuming 12 bytes per reading (timestamp + value)
+const totalBufferSize = numSensorReadings * bytesPerReading;
+
+// Allocate memory for sensor readings
+const sensorDataBuffer = Buffer.alloc(totalBufferSize);
+
+// Simulate storing sensor readings (replace with actual data)
+for (let i = 0; i < numSensorReadings; i++) {
+   // Simulate timestamp and value (replace with actual data)
+   const timestamp = Date.now();
+   const value = Math.random() * 100;
+
+   // Write data to the buffer (assuming fixed format)
+   sensorDataBuffer.writeBigInt64LE(BigInt(timestamp), i * bytesPerReading);
+   sensorDataBuffer.writeFloatLE(value, i * bytesPerReading + 8);
+}
+
+console.log('Sensor data buffer created:', sensorDataBuffer.length, 'bytes');
+//    Remember, `Buffer.alloc()` ensures secure memory 
+// allocation for efficient data storage, especially 
+// when dealing with large datasets!
+
+// The Buffer.equals() method is used to 
+// compare two buffer objects and returns
+//  True of both buffer objects are 
+// the same otherwise returns False. 
+
+// Syntax:
+buffer.equals(buf)
+
+// Create two bufferes 
+var buf1 = Buffer.from('Hi');
+var buf2 = Buffer.from('Hi');
+
+// Prints true(boolean value) 
+console.log(buf1.equals(buf2));
+// Output:
+// true
+
+//Imagine you're building a secure messaging 
+// application, and you need to verify whether two 
+// encrypted messages are identical. Let's create 
+// a test case for this scenario:
+
+const user1Message = Buffer.from('Encrypted message from User 1', 'base64');
+const user2Message = Buffer.from('Encrypted message from User 2', 'base64');
+
+// Compare the encrypted messages
+const messagesAreEqual = user1Message.equals(user2Message);
+
+console.log('Messages are equal:', messagesAreEqual);
+// Remember, `Buffer.equals()` ensures 
+// accurate comparison of sensitive data, 
+// making it useful for security-related scenarios! 🚀🔍
+
+// The buffer.subarray() method
+// is used to crop a part of array 
+// i.e. create sub-array from an array.
+
+// Syntax: 
+Buffer.subarray( starting_index, ending_index )
+
+// Node.js program to demonstrate the   
+// Buffer.subarray() method
+
+// Allocating buffer 
+const buf = Buffer.from('GeeksforGeeks', 'ascii');
+// Printing original buffer
+console.log("Original buffer is: " + buf);
+// Cropping buffer, here starting index
+// is 5 and ending index is 10
+cropped_buf = buf.subarray(5, 10);
+// Printing cropped buffer
+console.log("Cropped buffer is: " + cropped_buf);
+// Modifying cropped buffer
+cropped_buf[0] = 70;  // F
+cropped_buf[1] = 79;  // O
+cropped_buf[2] = 82;  // R
+// Printing cropped buffer
+console.log("Cropped buffer after modification is: " + cropped_buf);
+// Printing original buffer
+console.log("Original buffer after modification is: " + buf);
+// Output: 
+// Original buffer is: GeeksforGeeks
+// Cropped buffer is: forGe
+// Cropped buffer after modification is: FORGe
+// Original buffer after modification is: GeeksFORGeeks
+
+// Cropping buffer, here starting index
+// is -10 and ending index is -1
+cropped_buf = buf.subarray(-12, -1);
+// Cropping buffer again, here starting
+// index is -10 and ending index is -5
+cropped_buf = buf.subarray(-10, -5);
+
+   // Certainly! Let's explore a real-world scenario where 
+   // `Buffer.subarray()` shines beyond the obvious cases. 
+   // In web development, one common use case for `Buffer.subarray()` 
+   // is when handling binary data, such as parsing and manipulating 
+   // image files. We'll create an example related to image processing:
+
+// ### Real-World Scenario: Image Thumbnail Generation
+
+// Suppose you're building an image processing 
+// service that generates thumbnails for
+//  user-uploaded images. Thumbnails are 
+// smaller versions of the original images, 
+// often used for faster loading in web applications. 
+// Let's create a test case for this scenario:
+
+//    1. ** Scenario Description **:
+//    - Users upload high - resolution images(e.g., JPEGs) to your web application.
+//    - You need to create thumbnail images from these originals.
+//    - Thumbnails should be a cropped portion of the original image.
+
+// 2. ** Test Case **:
+// - We want to demonstrate how `Buffer.subarray()` 
+// can efficiently extract a cropped portion of an image buffer.
+
+   const originalImageBuffer = fs.readFileSync('user_uploaded_image.jpg');
+
+   // Define the cropping region (e.g., top-left corner)
+   const startX = 50;
+   const startY = 30;
+   const width = 100;
+   const height = 80;
+
+   // Create a subarray (thumbnail) from the original image buffer
+   const thumbnailBuffer = originalImageBuffer.subarray(
+      startY * imageWidth + startX,
+      (startY + height) * imageWidth + startX + width
+   );
+
+   // Save the thumbnail buffer to a file (e.g., thumbnail.jpg)
+
+   console.log('Thumbnail created successfully!');
+
+// 4. ** Explanation **:
+// - We simulate reading an image file(you'd replace this with actual file reading logic).
+//    - The cropping region is defined by`startX`, `startY`, `width`, and`height`.
+//    - We create a subarray(thumbnail) from the original image buffer using`Buffer.subarray()`.
+//    - The thumbnail buffer contains the cropped portion of the image.
+
+// 5. ** Expected Output **:
+//    - The thumbnail buffer can be saved as a separate image file(e.g., `thumbnail.jpg`).
+
+//    Remember, `Buffer.subarray()` efficiently extracts portions of binary data, making it useful for image processing and other data manipulation tasks! 🚀🔍
+
+
+// The Buffer.readIntBE() method is used 
+// to read the number of bytes for a buffer 
+// at a given offset 
+buffer.readIntBE( offset, byteLen )
+//offset: It specifies 
+// the position of buffer object. 
+// It represents the number of bytes 
+// to skip before starting to read. 
+// The value of offset lies between 
+// the range 0 to buffer.length – byteLen. 
+
+const buff = Buffer.from([0x11, 0x12, 0x34, 0x56, 0x89, 0xcd]); 
+console.log(buff.readIntBE(0, 5).toString(16)); 
+console.log(buff.readIntBE(0, 4).toString(16)); 
+// Output:
+// 1112345689
+// 11123456
+
+const buff = Buffer.from([0x11, 0x12, 0x34, 0x56, 0x89, 0xcd]); 
+console.log(buff.readIntBE(4, 6).toString(16)); 
+console.log(buff.readIntBE(3, 0).toString(16)); 
+// Output:
+// buffer.js:831
+//     throw new RangeError('Index out of range');
+
+// The Buffer.write() method writes 
+// the specified string into a buffer, 
+// at the specified position. If buffer 
+// did not contain enough space to fit 
+// the entire string, only part of string 
+// will be written.
+
+// Syntax:
+buffer.write( string, offset, length, encoding )
+
+var buf = Buffer.from('GeeksforGeeks');
+buf.write('EE', 1);
+console.log(buf.toString());
+// Output:
+// GEEksforGeeks
+
+  const buf = Buffer.allocUnsafe(100);
+  const len = buf.write('GeeksforGeeks', 2, 5, 'utf8');
+  console.log(len); // Output: 5
+
+  const buf = Buffer.alloc(100);
+  const len = buf.write('Hello world!');
+  console.log(len); // Output: 12
+
+
+// ### Real-World Scenario: Image Metadata Extraction
+
+// Suppose you're building an image processing 
+// service that extracts metadata from user-uploaded 
+// images. Metadata includes information like 
+// image dimensions, color profiles, and camera 
+// details. Let's create a test case for this scenario:
+
+//    1. ** Scenario Description **:
+// - Users upload various image files(JPEG, PNG, etc.) to your web application.
+//    - You need to extract specific metadata from these images.
+//    - One common metadata field is the image's color space (e.g., RGB or CMYK).
+
+// 2. ** Test Case **:
+// - We want to demonstrate how `Buffer.write()` can efficiently 
+// extract color space information from an image buffer.
+
+// 3. ** Test Implementation **:
+// ```javascript
+   // Simulate reading an image file (replace with actual file reading logic)
+   const imageBuffer = fs.readFileSync('user_uploaded_image.jpg');
+   // Extract color space information (assuming it's stored at a specific offset)
+   const colorSpaceBuffer = imageBuffer.subarray(100, 104); // Example: 4 bytes for color space
+   // Convert the buffer to a string (assuming it's encoded in ASCII)
+   const colorSpace = colorSpaceBuffer.toString('ascii');
+   console.log('Image color space:', colorSpace);
+//    ```
+
+// 4. ** Explanation **:
+//    - We simulate reading an image file(you'd replace this with actual file reading logic).
+//    - The color space information is assumed to be stored at a specific offset(e.g., byte 100 to 103).
+//    - We create a subarray(`colorSpaceBuffer`) from the original image buffer.
+//    - The color space is extracted and converted to a string.
+
+// 5. ** Expected Output **:
+//    - The output should display the image's color space (e.g., "RGB" or "CMYK").
+
+// Remember, `Buffer.write()` efficiently handles writing strings 
+// into buffers, making it useful for extracting metadata 
+// and other data manipulation tasks! 🚀🔍
+
+// The Buffer.readUInt8() method is used 
+// to read an unsigned 8 bit integer 
+// from a Buffer object. 
+buffer.readUInt8(offset)
+// It represents the number of bytes 
+// to skip before starting to read. 
+
+// Node.js program to demonstrate the 
+// buffer.readUInt8() method  
+const ob1 = Buffer.from([0X32, 0X44, 0X48]);
+
+// It returns the first value 
+console.log(ob1.readUInt8(0));
+
+// It returns the third value 
+console.log(ob1.readUInt8(2));
+const t = Buffer.from("abc");
+
+// It returns the ASCII value of 'a' 
+console.log(t.readUInt8(0));
+// Output:
+// 68
+// 72
+// 97
+
+// ** Use Case: Parsing Binary Data from Network Protocols **
+
+//Imagine you're building a web application that 
+// communicates with an external device or service 
+// over a network protocol. These protocols often 
+// involve binary data transmission. One such example 
+// is handling data from IoT devices, sensors, 
+// or APIs that return binary-encoded responses.
+
+// Suppose you're working on a project that 
+// interacts with a weather station. 
+// The weather station sends data packets 
+// containing various measurements (temperature, 
+// humidity, wind speed, etc.) in a binary format. 
+// Your task is to extract specific values from 
+// these packets and display them on your web application.
+
+const weatherData = Buffer.from([
+  0x01, // Packet type (e.g., 0x01 for temperature)
+  0x7F, // High byte of temperature (127°C)
+  0x01, // Low byte of temperature (1°C)
+  // Other data fields...
+]);
+
+// Extract temperature from the weather data
+const temperature = weatherData.readUInt8(1) + weatherData.readUInt8(2) / 100;
+
+console.log(`Temperature: ${ temperature }°C`);
+
+
+// In this example:
+// 1. The weather station sends a binary packet with a specific structure.
+// 2. We use `readUInt8()` to extract the high and low bytes of the temperature value.
+// 3. The temperature is calculated by combining the high and low bytes(e.g., 127 + 0.01 = 27.01°C).
+
+// ** Why`buf.readUInt8()` Shines Here:**
+
+//    1. ** Efficient Data Extraction:** When dealing with binary data, using`readUInt8()` allows you to efficiently extract specific bytes without unnecessary conversions.
+// 2. ** Network Protocols:** Many network protocols(e.g., MQTT, CoAP) transmit data in binary format. `readUInt8()` helps you decode these packets.
+// 3. ** Custom APIs:** If you're building custom APIs that return binary data, this method enables you to parse the payload accurately.
+
+
+// The Buffer.indexOf() method firstly 
+// checks for the input value, if it present 
+// in the buffer then it returns 
+// the first position (index) from where 
+// the value is starting
+
+// **Use Case: Parsing Binary Data from Network Protocols**
+
+// Imagine you're building a web application that 
+// communicates with an external device or service 
+// over a network protocol. These protocols often 
+// involve binary data transmission. One such 
+// example is handling data from IoT devices, 
+// sensors, or APIs that return binary-encoded responses.
+
+// Suppose you're working on a project that interacts 
+// with a weather station. The weather station sends 
+// data packets containing various measurements 
+// (temperature, humidity, wind speed, etc.) in 
+// a binary format. Your task is to extract 
+// specific values from these packets and
+
+// The Buffer.allocUnsafeSlow() method is 
+// used to allocate a new Buffer of given 
+// size in bytes.but do not initialize it. 
+
+// The Buffer.toString() method is used to decode 
+// a buffer data to string according to 
+// the specified encoding type. The start 
+// and end offset is used to decode only particular 
+// subset of a buffer.
+Buffer.toString(encoding, start, end)
+
+var buffer = new Buffer.alloc(5);
+// Loop to add value to the buffer 
+for (var i = 0; i < 5; i++) {
+   buffer[i] = i + 97;
+}
+console.log(buffer.toString());
+console.log(buffer.toString('utf-8', 1, 4));
+console.log(buffer.toString('hex'));
+console.log(buffer.toString(undefined));
+
+//The ** `Buffer.toString()` ** method in Node.js is 
+// a fundamental tool for converting binary data stored 
+// in a buffer into a human - readable string.
+
+   // When you receive binary data(e.g., from network protocols, 
+   // file I / O, or other sources), it's often stored in 
+   // buffers. Using `toString()`, you can transform this binary
+   //  data into a format that can be easily manipulated and displayed.
+
+// The **`Buffer.values()`** method in Node.js is a powerful tool 
+// for iterating through each byte of a buffer.
+// Buffer is like 
+// an array of integers.
+//The Buffer.values() 
+// Method is used to create a loop and iterating 
+// object which contains value of each byte of
+//  buffer instance. This method is called 
+// automatically when a Buffer is used in 
+// a for…of statement.
+
+const buffer = Buffer.from('geek'); 
+// Display the buffer ASCII character 
+for (const value of buffer.values()) { 
+      console.log(value); 
+} 
+// Output:
+// 103
+// 101
+// 101
+// 107
+
+//    - The `values()` method creates an **iterator** that loops through each byte of a buffer instance.
+//    - When you need to examine the individual bytes within a buffer (e.g., for processing or analysis), this method becomes handy.
+//    - It's automatically called when a buffer is used in a **`for...of`** loop.
+// **Use Cases**:
+//    - **Binary Data Processing**: When dealing with binary data (e.g., network protocols, file I/O), you can use `values()` to inspect individual bytes.
+//    - **Custom Parsing Logic**: If you're building custom parsers or decoders, this method helps you access raw data.
+
+// **Use Case: Decoding Binary Data from External APIs**
+
+// Imagine you're working on a web application that 
+// integrates with external APIs. These APIs return 
+// data in various formats, including binary data. 
+// Your task is to decode this binary data and present 
+// it to users in a readable format.
+
+// Here's an example where `Buffer.toString()` plays a crucial role:
+
+// 1. **Fetching Image Metadata from an API**:
+//    - Suppose your web app interacts with an image metadata service. When a user uploads an image, your app sends it to the API for analysis.
+//    - The API responds with binary-encoded metadata (e.g., EXIF data, color profiles, geolocation).
+//    - Your task is to extract relevant information and display it to the user.
+
+// 2. **Scenario**:
+//    - You're building a photo-sharing platform. Users upload images, and you want to display details like camera make, exposure settings, and location.
+//    - The API returns binary metadata in a buffer.
+
+
+// 4. **Why `Buffer.toString()` Shines Here**:
+//    - The API returns binary metadata as a buffer. Using `toString()`, you convert it to a readable string.
+//    - You can then parse the string (e.g., as JSON) to extract camera details, exposure settings, and geolocation.
+
+// Remember that this example is simplified for illustration. In real-world scenarios, you'd handle error handling, API authentication, and more complex metadata structures. But the essence remains: `Buffer.toString()` is essential for handling binary data in web development. 🌐🔍
+
+   const fetchImageMetadata = async (imageBuffer) => {
+   // Send the image buffer to the API and get metadata in response
+   const metadataBuffer = await callImageMetadataAPI(imageBuffer);
+
+   // Convert the metadata buffer to a string
+   const metadataString = metadataBuffer.toString('utf8');
+
+   // Parse the metadata (assuming it's in JSON format)
+   const metadata = JSON.parse(metadataString);
+
+   console.log('Image Metadata:');
+   console.log(`Camera Make: ${metadata.cameraMake}`);
+   console.log(`Exposure Time: ${metadata.exposureTime}`);
+   console.log(`Location: ${metadata.location}`);
+};
+
+// Usage
+const userUploadedImage = fs.readFileSync('user-image.jpg');
+fetchImageMetadata(userUploadedImage);
+
+// The ** `Buffer.from()` ** method in Node.js is 
+// a  tool for creating a new buffer from various 
+// sources, such as strings, arrays, or other
+//  buffers.
+//    - You can use it to convert different types of input(e.g., strings, arrays) into a buffer.
+//Syntax: `Buffer.from(object [, encoding])`
+//It's commonly used for handling binary data, encoding, and decoding.
+// Convert between different data formats(e.g., base64, hex).
+
+   // ** Use Case: Handling Binary Data from External APIs **
+
+   //    Imagine you're building a web application that 
+   //    integrates with external APIs. These APIs return 
+   //    data in various formats, including binary data. 
+   //    Your task is to convert this binary data into 
+   //    a format that your application can process and display.
+
+// The Buffer.concat() method is used to 
+// concat all buffer objects in a given 
+// array into one buffer object. 
+Buffer.concat(list, length)
+// list: Contains the list of buffers to concat.
+// length: It defines the length of 
+// the concatenated buffer.
+
+const buf1 = Buffer.from("Geeks");
+// Returns another buffer with
+// copy of the passed string
+const buf2 = Buffer.from("for");
+const buf3 = Buffer.from("Geeks");
+// Creates an array of buffers
+const list = [buf1, buf2, buf3];
+// Concatenates all buffer objects into one buffer
+const newbuff = Buffer.concat(list);
+console.log("The concatenated buffer:");
+// Displays the concatenated buffer
+console.log(newbuff);
+// Output:
+// The concatenated buffer:
+// <Buffer 47 65 65 6b 73 66 6f 72 47 65 65 6b 73>
+
+// - Suppose you're reading chunks of 
+// a large file and want to combine them 
+// into a single buffer:
+const chunk1 = fs.readFileSync('file-part1.bin');
+const chunk2 = fs.readFileSync('file-part2.bin');
+
+const combinedBuffer = Buffer.concat([chunk1, chunk2]);
+
+//** Use Cases **:
+   - ** File I / O **: When reading or writing large files, you can concatenate chunks efficiently.
+   - ** Network Communication **: Combining data received from network sockets or APIs.
+   - ** Stream Processing **: Handling data streams by merging chunks.
+
+Remember that while `Buffer.concat()` might not be an everyday tool, 
+it's essential for handling data in web development. 🌐🔍
+
+
+// ** Use Case: Handling Chunked Data Streams **
+
+// Imagine you're building a web application that 
+// deals with large files or data streams. These 
+// files might be too large to load entirely into 
+// memory at once. Instead, they arrive in smaller 
+// chunks or segments. Your task is to efficiently 
+// combine these chunks into a complete data stream.
+
+// Here's an example where `Buffer.concat()` plays a crucial role:
+
+// 1. ** Streaming Video Playback **:
+//    - Suppose you're building a video streaming platform.
+//    - Videos are divided into chunks(e.g., 10 - second segments) for efficient delivery over the network.
+//    - Your application needs to concatenate these chunks into a continuous video stream for playback.
+
+// 2. ** Scenario **:
+//    - The video chunks arrive as buffers (e.g., from an API or a file stream).
+//    - You want to assemble these chunks into a single buffer representing the complete video.
+
+// Simulated video chunks (buffers)
+const chunk1 = getVideoChunkFromAPI(1); // Assume this function fetches the chunk
+const chunk2 = getVideoChunkFromAPI(2);
+
+// Combine the chunks into a single buffer
+const fullVideoBuffer = Buffer.concat([chunk1, chunk2]);
+
+// Now you can play the video using the fullVideoBuffer
+// (e.g., send it to the client for streaming)
+
+console.log('Video chunks concatenated successfully!');
+// 4. ** Why`Buffer.concat()` Shines Here **:
+//    - The`Buffer.concat()` method efficiently combines the video chunks without unnecessary memory overhead.
+//    - It ensures smooth video playback by assembling the segments seamlessly.
+
+//The **`Buffer.fill()`** method in Node.js allows 
+// you to create a buffer, allocate a size, and fill it with 
+// a specified value.
+//    - The `fill()` method sets the entire buffer (or a portion of it) with a specified value.
+//    - You can use it to initialize a buffer with specific data, such as setting up a template for a packet structure in network communication.
+
+//    - Syntax: `buffer.fill(value [, offset [, end]] [, encoding])`
+//      - `value`: The data you want to put into the buffer.
+//      - `offset` (optional): The index from which you want to start filling the buffer (default is 0).
+//      - `end` (optional): The index until which you want to fill the buffer (default is the buffer's length).
+//      - `encoding` (optional): The encoding for data if it's in string format (default is `'utf8'`).
+
+const buf = Buffer.alloc(10);
+buf.fill('a');
+console.log(buf.toString());
+// Output: aaaaaaaaaa
+
+// **Use Cases**:
+//    - **Network Communication**: When you need to create consistent packet structures for communication protocols.
+//    - **Initializing Buffers**: Setting up default values or templates for binary data.
+
+// **Use Case: Handling Binary Data for Network Protocols**
+
+// 1. **Custom API Communication**:
+//    - Suppose your web app interacts with a custom API that sends and receives binary packets.
+//    - Each packet has a specific structure (e.g., header, payload, checksum).
+//    - You need to create buffers with predefined templates to construct these packets.
+
+// 2. **Scenario**:
+//    - The custom API expects data packets with a fixed structure: 
+//    // a 4-byte header, followed by a payload, and ending with a checksum.
+//    - You want to create a buffer template for constructing these packets.
+
+// Create a buffer template for a data packet
+const packetSize = 16; // Total size of the packet
+const packetTemplate = Buffer.alloc(packetSize);
+
+// Fill the header with a specific value (e.g., 0x55AA)
+packetTemplate.fill(0x55AA, 0, 4);
+
+// Now you can use this template to construct actual data packets
+const actualPacket = packetTemplate.slice(); // Clone the template
+
+// Set the payload data (e.g., sensor readings)
+const payload = Buffer.from('SensorData123');
+payload.copy(actualPacket, 4); // Copy payload into the packet
+
+// Calculate and set the checksum (not shown here)
+console.log('Constructed data packet:');
+console.log(actualPacket.toString('hex'));
+
+// **Why `Buffer.fill()` Shines Here**:
+//    - The `Buffer.fill()` method allows you to create a buffer template with specific values (e.g., header).
+//    - You can then customize the payload and other fields while maintaining the fixed structure.
+
+
+// The Buffer.isBuffer() method checks whether 
+// the provided object is a buffer or not. 
+
+  // ** Use Case: Handling Binary Data in WebSocket Communication **
+
+// Imagine you're building a real-time chat application using WebSockets.
+//  WebSockets allow bidirectional communication between clients 
+// and servers, making them ideal for chat, notifications, and live
+//  updates. In this context, `Buffer.isBuffer()` can be valuable.
+
+// Here's an example where `Buffer.isBuffer()` plays a crucial role:
+
+// 1. ** WebSocket Message Serialization **:
+//   - Suppose your chat application sends messages as binary data over WebSockets.
+//    - Each message consists of a header(metadata) and a payload(actual message content).
+//    - You need to ensure that the payload is a buffer before sending it.
+
+// 2. ** Scenario **:
+//   - A user types a chat message(e.g., "Hello, world!").
+//    - Before sending it over WebSockets, you convert it to a buffer.
+const userMessage = 'Hello, world!';
+
+// Convert the message to a buffer
+const messageBuffer = Buffer.from(userMessage, 'utf8');
+
+// Check if it's a buffer before sending
+if (Buffer.isBuffer(messageBuffer)) {
+  // Send the message over WebSockets
+  console.log('Message sent successfully!');
+} else {
+  console.log('Invalid message format.');
+}
+// ** Why`Buffer.isBuffer()` Shines Here **:
+//   - The`Buffer.isBuffer()` method ensures that the payload is a valid buffer before sending it over WebSockets.
+//    - It helps prevent accidental data corruption due to incorrect serialization.
+
+// The Buffer.keys() method is used to 
+// return an iterator object, containing 
+// the key of every byte in a buffer object.
+
+
+  const buf = Buffer.from('Hello World');
+
+  // Iterate through the buffer's keys
+  for (const index of buf.keys()) {
+    console.log(index);
+  }
+  // Output: 0 1 2 3 4 5 6 7 8 9 10
+
+//   - ** Purpose and Behavior **:
+//    - The`keys()` method provides a way to iterate through each byte in a buffer.
+//   - It's useful when you need to access individual bytes within a buffer.
+
+//   ** Use Case: Custom Binary Protocol Parsing **
+
+//     Imagine you're working on a web application 
+//     that communicates with a custom hardware device 
+//     over a binary protocol. This device sends data 
+//     packets containing various sensor readings, 
+//     and your application needs to extract 
+//     specific information from these packets.
+
+// Here's an example where `Buffer.keys()` plays a crucial role:
+
+// 1. ** Custom Sensor Data Processing **:
+// - Suppose you're building a smart home application that receives sensor data from IoT devices.
+//   - Each device sends binary packets containing temperature, humidity, and light intensity readings.
+//    - Your task is to parse these packets and display the relevant data.
+
+// 2. ** Scenario **:
+// - The IoT device sends binary packets with a fixed structure: a 2 - byte temperature reading, a 1 - byte humidity reading, and a 1 - byte light intensity reading.
+//    - You want to extract these values from the received buffer.
+
+// Simulated binary data received from the IoT device
+const sensorData = Buffer.from([0x7F, 0x01, 0x64, 0x32]);
+
+// Extract temperature, humidity, and light intensity
+const temperature = sensorData.readUInt16BE(0) / 100;
+const humidity = sensorData.readUInt8(2);
+const lightIntensity = sensorData.readUInt8(3);
+
+console.log(`Temperature: ${temperature}°C`);
+console.log(`Humidity: ${humidity}% `);
+console.log(`Light Intensity: ${lightIntensity} lux`);
+
+// ** Why`Buffer.keys()` Shines Here **:
+//    - The`Buffer.keys()` method isn't directly used in this example, but it highlights the importance of iterating through the buffer's keys(indices).
+//    - It allows you to access specific bytes efficiently, which is crucial for parsing custom binary protocols.
+
+// In a real - world application, you'd handle error handling, 
+// more complex packet structures, and additional sensors. 
+// But the essence remains: `Buffer.keys()` (or iterating 
+// through buffer indices) is essential for handling 
+// binary data in web development. 🌐🔍
+
+// The Buffer.poolSize property is an inbuilt 
+// application programming interface of class Buffer 
+// with in Buffer module that gives the size (in bytes) 
+// of pre-allocated internal Buffer instances used 
+// for pooling. 
+
+// Node.js Buffer.byteLength() Method
+// The Buffer.byteLength() method is used 
+// to return the length in bytes of the 
+// specified buffer object. 
+
+Buffer.byteLength( string, encoding )
+const buf = Buffer.alloc(20);
+// Check the length of a buffer object:
+const lenobj = Buffer.byteLength(buf);
+console.log(lenobj);
+// Output:
+// 20
+
+//The Buffer.toJSON() method 
+// returns the buffer in JSON format. 
+// Note: The JSON.Stringify() is the method 
+// which can also be used to return the data 
+// in JSON format. When we call 
+// the JSON.Stringify() method, it directly 
+// in the background calls 
+// the buffer.toJSON() Method.
+
+const buffer = Buffer.from([1, 2, 3, 4]);
+const output = JSON.stringify(buffer);
+// Prints: {"type":"Buffer", "data":[1, 2, 3, 4]} 
+console.log(output);
+// Output:
+// {"type":"Buffer", "data":[1, 2, 3, 4]}
+
+// The Buffer.lastIndexOf() Method checks 
+// for a given value in the buffer and returns 
+// its index where it is present. If the same 
+// value is present more than once, then it 
+// returns the last index where the value is present. 
+
+Buffer.lastIndexOf( value, byteOffset, encoding )
+// value: It specifies the data that need 
+// to be searched in the buffer.
+// byteOffset: The index from which you need 
+// to start searching the buffer. 
+// Its default value is 0. ....
+
+const buffer = Buffer.from('GeeksForGeeks');
+console.log(buffer.lastIndexOf(101));
+// Prints : 10
+
+// The Buffer.byteOffset property is an 
+// inbuilt application programming interface 
+// of class Buffer within buffer module which 
+// is used to get the byte offset value 
+// of this buffer.
+
+// The Buffer.buffer property....
+
+// The Buffer.length propertyis used 
+// to get the length of this buffer object.
+
+// Creating and initializing arraybuffer object
+const arrbuff = new ArrayBuffer(16);
+
+// Getting buffer object from existing
+// arraybuffer object
+const buffer = Buffer.from(arrbuff);
+
+// Getting length of buffer
+// by using length property
+const length = buffer.length;
+
+// Creating and initializing Int8Array object
+const buff = new Int8Array(buffer, buffer.byteoffset, length);
+
+// Display the result
+console.log("Int8Arry object :- " + buff);
+
+// Output:
+// Int8Arry object :- 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Node.js console module is 
+// a global object that provides 
+// a simple debugging console,It is provided 
+// by web browsers. 
+// The console module contains two components:
+
+// Console class: The console class methods 
+// are console.log(), console.error() and 
+// console.warn() to display Node.js stream.
+
+// global console: It is used without 
+// calling require(‘console’).
+
+
+
+// Example of Console class: Make a file 
+// and save it as example_console_class.js 
+// with the following code in the file.
+
+// It requires the fs module  
+const fs = require('fs');
+
+const out = fs.createWriteStream('./stdout.log');
+const err = fs.createWriteStream('./stderr.log');
+
+const myobject = new console.Console(out, err);
+
+// It will display 'This is the first example' to out 
+myobject.log('This is the first example');
+
+// It will display 'This is the second example' to out 
+myobject.log('This is the %s example', 'second');
+
+// It will display 'Error: In this we creating some error' to err 
+myobject.error(new Error('In this we creating some error'));
+
+const num = 'third';
+
+// It will display 'This is the third error' to err 
+myobject.warn(`This is the ${num} example`);
+
+// If you observe above example, we have created
+//  a simple object using Console class with 
+// configurable output streams and we have 
+// created a Console class object by using 
+// console.Console Now, we will execute 
+// example_console_class.js script file 
+// in command prompt by navigating to 
+// the folder where it exists like as shown below.
+// The above node.js example will create 
+// a log files(stdout & stderr) in the folder 
+// where example_console_class.js file exists 
+// with required messages like as shown below.
+// Example of Global Console Object: Create 
+// a file and save it as example_console_object.js 
+// with the following code in the file.
+
+// It will display 'This is the first object example' to stdout 
+console.log('This is the first object example');
+
+// It will display 'This is the second object example' to stdout 
+console.log('This is the %s example', 'second object');
+
+// It will display 'Error: New Error has happened' to stderr 
+console.error(new Error('New Error has happened'));
+
+const obj = 'third object';
+
+// It will display 'This is the third object example' to stderr 
+console.warn(`This is the ${obj} example`);
+// If you observe above code, we are trying to write
+// a messages to node.js stream by using global console
+// object methods such as console.log(), console.error()
+// and console.warn(). Here, we are accessing
+// global console object without importing it using
+// require directive. Now, we will execute
+// example_console_object.js file, for that open
+// a command prompt (cmd) and navigate to the folder
+// that contains a example_console_object.js file
+// and write the command node example_console_object.js
+// and hit enter button like as shown below.
+// If you observe result, we are able to write
+// a required messages to node.js stream by using
+// global console object. Console Methods: Apart from
+// above three methods (console.log(), console.error(),
+// console.warn()), few other methods also available
+// in node.js console object to write or print
+// a messages in node.js stream.
+
+
+// Node.js console.assert() Method
+it checks whether the value is true 
+// or not, and prints an error message, 
+// if provided and failed to assert the value.
+console.assert(value, messages)
+// value: This parameter specifies the value to be asserted.
+//messages: It specifies the messages to be used 
+// as error messages.
+
+// Accessing console module
+const console = require('console');
+// Calling console.assert() method
+console.assert(true, "error message 1");
+console.assert(false, "error message 2");
+// Output:
+// Assertion failed: error message 2
+
+// Accessing console module
+const console = require('console');
+// Calling console.assert()
+let a = 10, b = 5;
+console.assert(1 == 1, "error at 1==1");
+console.assert(1 != 1, "error at 1!=1");
+console.assert(3 & 9, "error at 3&9");
+console.assert(1 & 6, "error at 1&6");
+console.assert(0 && 9, "error at 0&&9");
+console.assert(1 && 8, "error at 1&&8");
+console.assert(a % b == 1, "error at a%b==1");
+console.assert(a > b, "error at a>b");
+console.assert(b > a, "error at b>a");
+// Output:
+// Assertion failed: error at 1 != 1
+// Assertion failed: error at 1 & 6
+// Assertion failed: error at 0 && 9
+// Assertion failed: error at a % b == 1
+// Assertion failed: error at b > a
+
+// The console.count() method is used to count 
+// label passed to it as a parameter.
+// by maintaining an internal counter 
+// for that specific label. 
+
+
+// Example 1:
+// Node.js program to demonstrate the    
+// console.count() Method 
+
+// Accessing console module 
+const console = require('console');
+
+// Calling console.count()  
+console.count("a");
+console.count("b");
+console.count("a");
+console.count("a");
+console.count("a");
+console.count("b");
+console.count("b");
+console.count("b");
+// Output:
+// a: 1
+// b: 1
+// a: 2
+// a: 3
+// a: 4
+// b: 2
+// b: 3
+// b: 4
+
+// Example 2:
+
+// Node.js program to demonstrate the    
+// console.count() Method 
+
+// Accessing console module 
+const console = require('console');
+
+// Calling console.count() method 
+// with no parameter to count 
+// default label 
+console.count();
+console.count("a");
+console.count("b");
+console.count("a");
+console.count("a");
+console.count();
+console.count();
+console.count();
+console.count("b");
+// Output:
+// default: 1
+// a: 1
+// b: 1
+// a: 2
+// a: 3
+// default: 2
+// default: 3
+// default: 4
+// b: 2
+
+
+// The console.countReset() methodis used to 
+// reset the count for the specific label 
+// passed to it as a parameter. 
+// Syntax:
+console.countReset(label);
+
+// Calling console.count() method 
+// with no parameter to count 
+// default label 
+console.count();
+console.count("a");
+console.count("b");
+console.count("a");
+console.count("a");
+console.count();
+console.count();
+
+// Resetting counter 
+console.countReset();
+console.countReset("a");
+console.countReset("b");
+
+console.count();
+console.count("a");
+console.count("b");
+
+// Output:
+// default: 1
+// a: 1
+// b: 1
+// a: 2
+// a: 3
+// default: 2
+// default: 3
+// default: 1
+// a: 1
+// b: 1
+
+
+// The console.debug() method isused to print 
+// messages to stdout in a newline.
+console.debug(data, args);
+
+// Accessing console module
+const console = require('console');
+// Calling console.debug()
+console.debug("This is a sample debug message!");
+console.debug("Sample debug message with args: %d", 39);
+// Output:
+// This is a sample debug message!
+// Sample debug message with args: 39
+
+// The console.dir() method is used to 
+// get the list of object properties of 
+// a specified object.
+
+// The console.error() function from 
+// the console class of Node.js is used 
+// to display an error message on the console. 
+
+// Store number to variable
+x = 20;
+y = 50;
+
+// Check condition
+if (x > y) {
+    console.error('%d is greater than %d', x, y);
+}
+else {
+    console.error('%d is less than or equal to %d', x, y);
+}
+// Output:
+// 20 is less than or equal to 50
+
+
+// The console.info() method is an
+is used to print
+//  messages to stdout in a newline. It is 
+// similar to the console.log() method.
+
+// The console.timeLog() method is an inbuilt 
+// function in Nodejs that is used to display
+//  the time for each execution. This function 
+// is proved to be effective when used in a loop. 
+
+// Time started 
+console.time("executionTime");
+for (let i = 0; i < 10; i++) {
+    // Printing execution time for each 
+    console.timeLog("executionTime");
+}
+
+// Time started 
+console.time("totalExecutionTime");
+
+// Time started 
+console.time("executionTime");
+for (let i = 0; i < 10; i++) {
+    // Printing execution time for each 
+    console.timeLog("executionTime");
+}
+// Printing total execution time 
+console.timeLog("totalExecutionTime");
+
+// Node.js console.time() Method
+// The console.time() method is the console 
+// class of Node.js. It is used to starts 
+// a timer that is used to compute the time 
+// taken by a piece of code or function. 
+// The method console.timeEnd() is used 
+// to stop the timer and output the elapsed 
+// time in milliseconds to stdout. The timer 
+// can be accurate to the sub-millisecond. 
+
+// Sample function 
+function addCount() { 
+  // Variable declaration 
+  var sum = 0; 
+  for (var i = 1; i < 100000; i++) { 
+    // Adding i to the sum variable 
+    sum += i; 
+  } 
+  // Return sum value 
+  return sum; 
+} 
+  
+// Starts the timer 
+console.time(); 
+  
+// Function call 
+addCount(); 
+  
+// Ends the timer and print the time 
+// taken by the piece of code 
+console.timeEnd(); 
+// Output:
+// default: 8.760ms
+
+
+// Example 2:
+ 
+// Node.js program to demonstrate the 
+// console.time() method 
+  
+// Sample function 
+function addCount() { 
+  // Variable declaration 
+  var sum = 0; 
+  for (var i = 1; i < 100000; i++) { 
+    // Adding i to the sum variable 
+    sum += i; 
+  } 
+  return sum; // returning sum 
+} 
+var timetaken = "Time taken by addCount function"; 
+  
+// Starts the timer. The label value is timetaken 
+console.time(timetaken); 
+addCount(); // function call 
+  
+// Ends the timer and print the time 
+// taken by the piece of code 
+console.timeEnd(timetaken); 
+// Output:
+// Time taken by addCount function: 7.380ms
+
+// The console.table() method
+// is used to print the table constructed 
+// from it’s parameters into the console. 
+// Syntax:
+console.table(data, properties);
+
+// Accessing console module 
+const console = require('console');
+
+// Calling console.table()  
+// without construction rule 
+console.table([
+    { a: 1, b: 2 },
+    { a: 3, b: 7, c: 'y' }
+]);
+
+// With construction rule 
+console.table([
+    { a: 1, b: 2 },
+    { a: 3, b: 7, c: 'y' }],
+    ["a", "b"]
+);
+// Output:
+// ┌─────────┬───┬───┬─────┐
+// │ (index) │ a │ b │ c   │
+// ├─────────┼───┼───┼─────┤
+// │    0    │ 1 │ 2 │     │
+// │    1    │ 3 │ 7 │ 'y' │
+// └─────────┴───┴───┴─────┘
+
+// ┌─────────┬───┬───┐
+// │ (index) │ a │ b │
+// ├─────────┼───┼───┤
+// │    0    │ 1 │ 2 │
+// │    1    │ 3 │ 7 │
+// └─────────┴───┴───┘
+
+// Example 2: Filename: app.js
+// Node.js program to demonstrate the    
+// console.table() method 
+
+// Accessing console module 
+const console = require('console');
+
+// Calling console.table()  
+// fails to parse, so simply  
+// print the argument 
+console.table("arg");
+
+// Blank table 
+console.table([]);
+// Run the app.js file using the following command:
+node app.js
+// Output:
+// arg
+// ┌─────────┐
+// │ (index) │
+// ├─────────┤
+// └─────────┘
+
+// Node.js new Console() Method
+// The console module provides a simple 
+// debugging console that is provided by 
+// web browsers which export two specific components:
+
+// A Console class that can be used to write 
+// to any Node.js stream. 
+// Example: console.log(), console.error(), etc.
+
+// A global console that can be used without 
+// importing console. 
+// Example: process.stdout, process.stderr, etc.
+
+// The new Console()  method 
+// is an inbuilt application programming interface 
+// of the ‘console’ module which creates 
+// a new Console with single or multiple writable 
+// stream instances in which stdout is a writable 
+// stream and stderr is used for warning or error 
+// output. If stderr is not provided, stdout is 
+// used for stderr. It is a console whose output
+//  is sent to process.stdout and process.stderr.
+
+// Syntax:
+new Console(options);
+
+// Using require to access fs module 
+const fs = require('fs');
+ 
+// Using require to access console module 
+const { Console } = require('console');
+ 
+// Creating write Stream
+const output = fs.createWriteStream('./out.log');
+const errorOutput = fs.createWriteStream('./err.log');
+ 
+const options = { stdout: output, stderr: errorOutput, 
+ignoreErrors: true, colorMode: false };
+const logger = new Console(options);
+const count = 5;
+ 
+// Using like console
+logger.log('count: %d', count);
+console.log("Successfully created and logged via console...", )
+// Run index.js file using the following command:
+
+node index.js
+// Output:
+
+// Note: The above node.js example will create 
+// log files (out & err) in the same folder 
+// where index.js file exists.
+
+// >> Successfully created and logged via console…
+
+// Example 2:  Filename: index.js
+
+// Node.js program to demonstrate the 
+// new Console() method
+ 
+// Using require to access fs module 
+const fs = require('fs');
+ 
+// Using require to access console module 
+const console = require('console');
+const { Console } = console;
+ 
+try {
+ // Creating write Stream
+ const output = fs.createWriteStream('./outputlog.txt');
+ const error = fs.createWriteStream('./errlog.txt');
+ 
+ // Creating new Console
+ const objLogger   = new Console(
+    { stdout: output, stderr: error, 
+     ignoreErrors: true, colorMode: true }
+);
+ 
+ // Custom write Stream
+ const outt = fs.createWriteStream('./output.log'); 
+ const err = fs.createWriteStream('./error.log'); 
+   
+ // Another way to create console 
+ // (default values are passed to options)
+ const logObject = new console.Console(outt, err); 
+ 
+ // Creating family object
+ var family = {};
+ family.Head = 'Miss Sanno';
+ family.headDesignation = 'Teacher';
+ family.Member1 = 'Miss Sanchi';
+ family.member1Designation = 'Kid';
+ family.Member2 = 'Master Amit';
+ family.member2Designation = 'Student'; 
+ 
+ // Creating constant value count
+ const count = 25+75*5-5/2;
+ // Writing via console
+ objLogger.log('Family: %s', family);
+ // Printing Family Object to console
+ console.log('Family Stream Created: ', family);
+ // Writing via console
+ logObject.log('Count: %s', count);
+ // Printing count to console
+ console.log('Count Stream Created: ', count);
+ // console.log(logObject.family.error)
+ }
+catch {
+  console.error(new Error(
+    'Oops, some error happened in family...'));
+  // Prints: [Error: Oops, some error 
+  // happened in family...], to stderr
+}
+// Run index.js file using the following command:
+
+node index.js
+// Output:
+
+// Note: The above node.js example will 
+// create log files (output & error) in 
+// the same folder where index.js file exists. 
+
+// Family Stream Created: { 
+// Head: ‘Miss Sanno’, 
+// headDesignation: ‘Teacher’, 
+// Member1: ‘Miss Sanchi’, 
+// member1Designation: ‘Kid’, 
+// Member2: ‘Master Amit’, 
+// member2Designation: ‘Student’ 
+// } 
+
+// Count Stream Created:  397.5 
+
+// Starting MyLabel console profile
+console.profile('MyLabel');
+ 
+// Doing some task
+for (let i = 0; i < 4; i++) {
+    // Printing some task
+    console.log('Doing task no:', i);
+}
+ 
+// Finishing MyLabel profile
+console.profileEnd('MyLabel');
+// Run the index.js file using the following command:
+
+node index.js
+// Output in Console:
+
+// Doing task no: 0
+// Doing task no: 1
+// Doing task no: 2
+// Doing task no: 3
+// Output in Inspector:
+
+// The console module provides a simple debugging 
+// console that is provided by web browsers
+//  which export two specific components:
+
+// The console class can be used to write 
+// to any Node.js stream. 
+// Example: console.log(), console.error(), etc.
+
+// A global console can be used without 
+// importing a console. 
+// Example: process.stdout, process.stderr, etc.
+
+// The console.profileEnd() (Added in v8.0.0) 
+// method is an inbuilt application programming 
+// interface of the ‘console’ module which does 
+// not display anything unless used in the inspector. 
+// It actually stops the current 
+// JavaScript CPU profiling session if 
+// one has been started and prints 
+// the report to the Profiles panel of 
+// the inspector and if this method is 
+// called without a label, 
+// the most recently started profile is stopped.
+
+// Starting MyLabel console profile
+console.profile('MyLabel');
+ 
+// Doing some task
+for (let i = 0; i < 4; i++) {
+    // Printing some task
+    console.log('Doing task no:', i);
+}
+ 
+// Finishing MyLabel profile
+console.profileEnd('MyLabel');
+// Run the index.js file using the following command:
+node index.js
+// Output in Console:
+
+// Doing task no: 0
+// Doing task no: 1
+// Doing task no: 2
+// Doing task no: 3
+// Output in Inspector:
+
+
+// Node.js console.timeStamp() Method
+// This method adds an event with the label ‘label‘ 
+// to the Timeline panel of the inspector.
+
+// console.timeStamp() Method
+
+// Starting newProfile() console profile
+console.profile("Hello()");
+
+// Printing timestamp
+console.timeStamp("Hello()");
+
+// Finishing profile
+console.profileEnd("Hello()");
+// Run index.js file using the following command:
+// node index.js
+// Output in Console:
+
+// *Doesn't print anything in Console...
+// Output in Inspector(edge):
+
+//example 2 
+// Starting Hello() console profile
+console.profile("Hello()");
+
+// Printing timeStamp
+console.timeStamp("Hello()");
+
+// Performing some action
+for (let i = 0; i < 1; i++) {
+    console.log("doing some task...");
+}
+
+// Finishing profile
+console.profileEnd("Hello()");
+
+// Printing timeStamp again
+console.timeStamp("Hello()");
+// Run the index.js file using the following command:
+
+// node index.js
+// Output in Console:
+
+// Doing some task...
+// Output in Inspector (edge):
+
+// The console.timeEnd() method is 
+// the console class of Node.js. 
+// This method stops a timer that 
+// was previously started by using 
+// console.time() method and display 
+// the result using stdout.
+
+// Node.js console.trace() Method
+// the console module which is used to print 
+// stack trace messages to stderr in a newline. 
+// Similar to console.error() method. 
+// message: This parameter specifies the message to be printed.
+// args: It is an optional parameter that specifies 
+// the parameters to be passed as substitution values 
+// in the message.
+
+// Example 1: The below examples illustrate 
+// the use of console.trace() method in Node.js.
+
+// Filename: app.js 
+
+// Node.js program to demonstrate the
+// console.trace() method
+
+// Accessing console module
+const console = require('console');
+
+// Calling console.trace() method
+console.trace("stack teace sample");
+
+console.trace(
+    "stack trace sample with args: %d", 39);
+// Run the app.js file using the following command:
+// node app.js
+
+// Accessing console module
+const console = require('console');
+
+// Calling console.trace() method
+console.trace("stack trace message: "
+    + "at %s: line no: %d ", "ff()", 96);
+
+let isTrace = true;
+
+console.custom_trace = function (message) {
+    if (isTrace) {
+        console.trace(message);
+    }
+}
+
+console.custom_trace("custom trace message");
+// Run the app.js file using the following command:
+// node app.js
+
+// The console.warn() function from 
+// console class of Node.js is used 
+// to display the warning messages 
+// on the console.
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Node.js DNS
+// DNS is a node module used to do name 
+// resolution facility which is provided 
+// by the operating system as well as used 
+// to do an actual DNS lookup. 
+
+// what is dns ?
+// **DNS (Domain Name System)** is like the **phonebook of the Internet**. Let me break it down for you:
+
+// 1. **Domain Names**: When we access information online, we use **domain names** like *nytimes.com* or *espn.com*. These domain names are easy for us humans to remember. But behind the scenes, web browsers need to interact with **Internet Protocol (IP) addresses** to load resources.
+
+// 2. **IP Addresses**: Each device connected to the Internet has a unique IP address. Think of it as the address that other machines use to find a specific device. For example, *192.168.1.1* (in IPv4) or more complex alphanumeric addresses like *2400:cb00:2048:1::c629:d7a2* (in IPv6).
+
+// 3. **DNS Translates**: Here's where DNS comes in. It translates domain names into IP addresses. So when you type *example.com* into your browser, the DNS server does the magic and finds the corresponding IP address (like looking up a phone number).
+
+// 4. **How It Works**: Let's say you want to load a webpage. The DNS resolution process involves converting a human-friendly hostname (e.g., *www.example.com*) into a computer-friendly IP address (e.g., *192.168.1.1*). This happens behind the scenes without any interaction from your computer apart from the initial request.
+
+// 5. **Components of DNS**:
+//    - **DNS Recursor**: Think of it as a librarian searching for a book in a library. The recursor receives queries from client machines (like web browsers) and makes additional requests to satisfy the query.
+//    - **Root Nameserver**: The first step in translating human-readable hostnames into IP addresses. It's like an index in a library pointing to different book racks.
+//    - **TLD Nameserver**: Specific racks of books in the library. It hosts the last portion of a hostname (e.g., the TLD server for *example.com* is "com").
+//    - **Authoritative Nameserver**: The final dictionary on a book rack, translating a specific name into its definition.
+
+// In summary, DNS makes our lives easier by letting us use domain names instead of remembering complex IP addresses. 🌐🔍⁷⁸⁹ [^10^]
+
+// what is dns server in node js ?
+
+// In **Node.js**, the **DNS (Domain Name System)** module enables name resolution. Let's dive into what it does:
+
+// 1. **Name Resolution**:
+//    - The DNS module helps you look up **IP addresses** of hostnames.
+//    - It's named after the **Domain Name System**, but it doesn't always use the DNS protocol for lookups.
+//    - Here's how it works:
+//      - `dns.lookup()` uses the operating system facilities to perform name resolution. It may not need to perform any network communication.
+//      - Other functions in the module connect to an actual DNS server to perform name resolution. These functions always use the network for DNS queries.
+
+// 2. **Usage Examples**:
+//    - To perform name resolution like other applications on the same system, use `dns.lookup()`. It uses the OS facilities:
+//      ```javascript
+const dns = require('dns');
+dns.lookup('example.org', (err, address, family) => {
+    console.log('address: %j family: IPv%s', address, family);
+});
+// Output: address: "93.184.216.34" family: IPv4
+//      ```
+//    - For actual DNS queries, bypassing other name-resolution facilities, use functions like `dns.resolve4()`:
+//      ```javascript
+dns.resolve4('archive.org', (err, addresses) => {
+    if (err) throw err;
+    console.log(`addresses: ${JSON.stringify(addresses)}`);
+    addresses.forEach((a) => {
+        dns.reverse(a, (err, hostnames) => {
+            // Handle reverse DNS lookup results
+        });
+    });
+});
+//      ```
+
+// 3. **Advantages**:
+//    - No need to memorize IP addresses – DNS servers convert domain or subdomain names to IP addresses.
+
+// Remember, the DNS module in Node.js simplifies the process of translating human-readable domain names into computer-friendly IP addresses! 🌐🔍¹²³
+
+// so is dns resolution and name resolution are same ?
+
+// **DNS resolution** and **name resolution** are closely related but not exactly the same. Let's break it down:
+
+// 1. **Name Resolution**:
+//    - **Name resolution** is a broader concept. It refers to the process of converting **human-readable domain names** (like *example.com*) into **computer-friendly IP addresses** (like *192.168.1.1*).
+//    - Name resolution can happen through various methods, including:
+//      - **DNS**: Using the Domain Name System (DNS) to look up IP addresses associated with domain names.
+//      - **Local Hosts File**: Checking a local hosts file on the computer for custom name-to-IP mappings.
+//      - **NetBIOS/WINS**: In Windows environments, using NetBIOS or Windows Internet Name Service (WINS) for name resolution.
+//      - **mDNS**: For local network devices, using multicast DNS (mDNS) to resolve names.
+//    - Essentially, any mechanism that translates names to addresses falls under name resolution.
+
+// 2. **DNS Resolution**:
+//    - **DNS resolution** specifically refers to the process of using the **DNS protocol** to look up IP addresses associated with domain names.
+//    - It involves querying DNS servers (such as root servers, TLD servers, and authoritative servers) to find the correct IP address for a given domain.
+//    - DNS resolution is the most common method for name resolution on the global Internet.
+
+// In summary:
+// - **Name resolution** encompasses all methods of translating names to addresses.
+// - **DNS resolution** is a specific type of name resolution that relies on the DNS protocol.
+
+// Think of it this way: DNS resolution is like a specialized branch of name resolution, focused on handling domain names across the Internet. 🌐🔍
+
+
+// Advantage: No need for memorizing IP addresses 
+// – DNS servers provide a nifty solution for 
+// converting domain or subdomain names to IP addresses. 
+
+// syntax -  dns.lookup(hostname[, options], callback)
+
+// Example 1: In this example, we will print 
+// the address of GeeksforGeeks on the console.
+
+// Include 'dns' module and create its object
+const dns = require('dns');
+const website = 'geeksforgeeks.org';
+// Call to lookup function of dns
+dns.lookup(website, (err, address, family) => {
+    console.log('address of %s is %j family: IPv%s',
+        website, address, family);
+})
+// Execute using $ node <filename>;
+// Output: 
+
+// address of geeksforgeeks.org is "52.25.109.230" family: IPv4
+
+// Example 2: In this example, we will 
+// print the address of the GeeksforGeeks.
+
+// Include 'dns' module and create its object
+const dns = require('dns');
+
+// Call to reverse function along with lookup function.
+dns.lookup('www.geeksforgeeks.org',
+    function onLookup(err, address, family) {
+        console.log('address:', address);
+        dns.reverse(address, function (err, hostnames) {
+            console.log('reverse for ' + address + ': '
+                + JSON.stringify(hostnames));
+        });
+    });
+
+// Execute using $ node <filename>;
+// Output:
+
+// address: 52.222.176.140
+// reverse for 52.222.176.140: ["server-52-222-176-140.bom52.r.cloudfront.net"]
+
+// The dns.getServers() method 
+// is used to get IP addresses configured for DNS resolution  of 
+// the current server.
+//Returns an array of IP address strings
+
+// Accessing dns module 
+const dns = require('dns');
+// Reading IP address of the current host 
+// and printing it to the console 
+console.log(dns.getServers());
+// Output: 
+// [ '2402:3a80:1103:a055::34', '192.168.43.1' ]
+
+// Accessing dns module 
+const dns = require('dns');
+// Reading IP address of the current host 
+// and printing it to the console 
+res = dns.getServers();
+res.forEach(element => {
+    console.log(element);
+});
+
+// Output:
+// 72.28.94.156
+// 2306: 2470: 3160:: 8888
+// 72.28.94.156: 1053
+// [2306: 2470: 3160:: 8888]: 1053
+
+// - **Purpose and Behavior**:
+//   - The `getServers()` method returns an array of IP address strings representing DNS servers.
+//   - These IP addresses are currently configured for DNS resolution on the server where your Node.js application is running.
+
+
+// **Use Case: Custom DNS Configuration for Multi-Region Services**
+
+// Imagine you're working on a large-scale web application 
+// that serves users from different regions worldwide. 
+// To optimize performance and reduce latency, 
+// you want to configure custom DNS servers 
+// for specific regions. This ensures that DNS resolution 
+// happens efficiently based on the user's location.
+
+// Here's an example where `dns.getServers()` plays a crucial role:
+
+// 1. **Multi-Region Service Deployment**:
+//    - Suppose your application is deployed across multiple data centers or cloud regions (e.g., US, Europe, Asia).
+//    - Each region has its own DNS servers optimized for local resolution.
+//    - You need to programmatically retrieve and configure the DNS servers based on the current deployment region.
+
+// 2. **Scenario**:
+//    - Your application starts up in a specific region (e.g., US).
+//    - You want to fetch the configured DNS servers for that region and set them as the default DNS resolvers for your application.
+
+   const dns = require('dns');
+
+// Get the configured DNS servers for the current region
+const regionDnsServers = dns.getServers();
+
+// Set the DNS servers for your application
+dns.setServers(regionDnsServers);
+
+console.log('Custom DNS servers configured successfully!');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

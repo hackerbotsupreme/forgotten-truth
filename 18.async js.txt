@@ -1,0 +1,3474 @@
+// Asynchronous JavaScript
+// In this module, we take a look at asynchronous JavaScript,
+//  why it is important, and how it can be used to 
+// effectively handle potential blocking operations, 
+// such as fetching resources from a server.
+
+// Looking to become a front-end web developer?
+// We have put together a course that includes all the 
+// essential information you need to work towards your goal.
+
+// Get started
+
+// Prerequisites
+// Asynchronous JavaScript is a fairly advanced topic, 
+// and you are advised to work through JavaScript first 
+// steps and JavaScript building blocks modules before 
+// attempting this.
+// 
+
+// Note: If you are working on a computer/tablet/other 
+// device where you don't have the ability to create your 
+// own files, you can try out (most of) the code examples 
+// in an online coding program such as JSBin or Glitch.
+
+// Guides
+// Introducing asynchronous JavaScript
+// In this article, we'll learn about synchronous and 
+// asynchronous programming, why we often need to use 
+// asynchronous techniques, and the problems related to 
+// the way asynchronous functions have historically been 
+// implemented in JavaScript.
+
+// How to use promises
+// Here we'll introduce promises and show how to use 
+// promise-based APIs. We'll also introduce the async 
+// and await keywords.
+
+// Implementing a promise-based API
+// This article will outline how to implement your own 
+// promise-based API.
+
+// Introducing workers
+// Workers enable you to run certain tasks in a separate 
+// thread to keep your main code responsive. In this article, 
+// we'll rewrite a long-running synchronous function to use 
+// a worker.
+
+// Assessments
+// Sequencing animations
+// The assessment asks you to use promises to play a set of 
+// animations in a particular sequence.
+
+// See also
+// Asynchronous Programming from the fantastic Eloquent 
+// JavaScript online book by Marijn Haverbeke.
+
+// Introducing asynchronous JavaScript
+// In this article, we'll explain what asynchronous 
+// programming is, why we need it, and briefly discuss 
+// some of the ways asynchronous functions have historically 
+// been implemented in JavaScript.
+
+
+// Objective:	To gain familiarity with what asynchronous 
+// JavaScript is, how it differs from synchronous JavaScript, 
+// and why we need it.
+
+// Asynchronous programming is a technique that enables 
+// your program to start a potentially long-running task 
+// and still be able to be responsive to other events while 
+// that task runs, rather than having to wait until that 
+// task has finished. Once that task has finished, your 
+// program is presented with the result.
+
+// Many functions provided by browsers, especially the most 
+// interesting ones, can potentially take a long time, and 
+// therefore, are asynchronous. For example:
+
+// Making HTTP requests using fetch()
+// Accessing a user's camera or microphone using getUserMedia()
+// Asking a user to select files using showOpenFilePicker()
+// So even though you may not have to implement your own 
+// asynchronous functions very often, you are very likely 
+// to need to use them correctly.
+
+// In this article, we'll start by looking at the problem 
+// with long-running synchronous functions, which make 
+// asynchronous programming a necessity.
+
+// Synchronous programming
+// Consider the following code:
+
+// JS
+// Copy to Clipboard
+const name = "Miriam";
+const greeting = `Hello, my name is ${name}!`;
+console.log(greeting);
+// "Hello, my name is Miriam!"
+// This code:
+
+// Declares a string called name.
+// Declares another string called greeting, which uses name.
+// Outputs the greeting to the JavaScript console.
+// We should note here that the browser effectively steps 
+// through the program one line at a time, in the order we
+//  wrote it. At each point, the browser waits for the line 
+// to finish its work before going on to the next line. It 
+// has to do this because each line depends on the work 
+// done in the preceding lines.
+
+// That makes this a synchronous program. It would still be 
+// synchronous even if we called a separate function, like this:
+
+// JS
+// Copy to Clipboard
+function makeGreeting(name) {
+  return `Hello, my name is ${name}!`;
+}
+
+const name = "Miriam";
+const greeting = makeGreeting(name);
+console.log(greeting);
+// "Hello, my name is Miriam!"
+// Here, makeGreeting() is a synchronous function because 
+// the caller has to wait for the function to finish its 
+// work and return a value before the caller can continue.
+
+// A long-running synchronous function
+// What if the synchronous function takes a long time?
+
+// The program below uses a very inefficient algorithm to 
+// generate multiple large prime numbers when a user clicks 
+// the "Generate primes" button. The higher the number of 
+// primes a user specifies, the longer the operation will take.
+
+// HTML
+// Play
+// Copy to Clipboard
+                // <label for="quota">Number of primes:</label>
+                // <input type="text" id="quota" name="quota" value="1000000" />
+
+                // <button id="generate">Generate primes</button>
+                // <button id="reload">Reload</button>
+
+                // <div id="output"></div>
+// JS
+// Play
+// Copy to Clipboard
+const MAX_PRIME = 1000000;
+
+function isPrime(n) {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return n > 1;
+}
+
+const random = (max) => Math.floor(Math.random() * max);
+
+function generatePrimes(quota) {
+  const primes = [];
+  while (primes.length < quota) {
+    const candidate = random(MAX_PRIME);
+    if (isPrime(candidate)) {
+      primes.push(candidate);
+    }
+  }
+  return primes;
+}
+
+const quota = document.querySelector("#quota");
+const output = document.querySelector("#output");
+
+document.querySelector("#generate").addEventListener("click", () => {
+  const primes = generatePrimes(quota.value);
+  output.textContent = `Finished generating ${quota.value} primes!`;
+});
+
+document.querySelector("#reload").addEventListener("click", () => {
+  document.location.reload();
+});
+// Play
+
+// Try clicking "Generate primes". Depending on how fast 
+// your computer is, it will probably take a few seconds 
+// before the program displays the "Finished!" message.
+
+// The trouble with long-running synchronous functions
+// The next example is just like the last one, except we 
+// added a text box for you to type in. This time, click 
+// "Generate primes", and try typing in the text box 
+// immediately after.
+
+// You'll find that while our generatePrimes() function 
+// is running, our program is completely unresponsive: 
+// you can't type anything, click anything, or do 
+// anything else.
+
+// Play
+
+// The reason for this is that this JavaScript program 
+// is single-threaded. A thread is a sequence of 
+// instructions that a program follows. Because the 
+// program consists of a single thread, it can only 
+// do one thing at a time: so if it is waiting for 
+// our long-running synchronous call to return, it 
+// can't do anything else.
+
+// What we need is a way for our program to:
+
+// Start a long-running operation by calling a function.
+// Have that function start the operation and return 
+// immediately, so that our program can still be responsive 
+// to other events.
+
+// Have the function execute the operation in a way that 
+// does not block the main thread, for example by starting 
+// a new thread.
+
+// Notify us with the result of the operation when it 
+// eventually completes.
+
+// That's precisely what asynchronous functions enable us 
+// to do. The rest of this module explains how they are 
+// implemented in JavaScript.
+
+// Event handlers
+// The description we just saw of asynchronous functions 
+// might remind you of event handlers, and if it does, 
+// you'd be right. Event handlers are really a form of 
+// asynchronous programming: you provide a function (the 
+// event handler) that will be called, not right away, but 
+// whenever the event happens. If "the event" is 
+// "the asynchronous operation has completed", then 
+// that event could be used to notify the caller about 
+// the result of an asynchronous function call.
+
+// Some early asynchronous APIs used events in just this way. 
+// The XMLHttpRequest API enables you to make HTTP requests 
+// to a remote server using JavaScript. Since this can take 
+// a long time, it's an asynchronous API, and you get 
+// notified about the progress and eventual completion 
+// of a request by attaching event listeners to the 
+// XMLHttpRequest object.
+
+// The following example shows this in action. Press 
+// "Click to start request" to send a request. We create 
+// a new XMLHttpRequest and listen for its loadend event. 
+// The handler logs a "Finished!" message along with the 
+// status code.
+
+// After adding the event listener we send the request. 
+// Note that after this, we can log "Started XHR request":
+//  that is, our program can continue to run while the 
+// request is going on, and our event handler will be 
+// called when the request is complete.
+
+// HTML
+// Play
+// Copy to Clipboard
+                // <button id="xhr">Click to start request</button>
+                // <button id="reload">Reload</button>
+
+                // <pre readonly class="event-log"></pre>
+// JS
+// Play
+// Copy to Clipboard
+const log = document.querySelector(".event-log");
+
+document.querySelector("#xhr").addEventListener("click", () => {
+  log.textContent = "";
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("loadend", () => {
+    log.textContent = `${log.textContent}Finished with status: ${xhr.status}`;
+  });
+
+  xhr.open(
+    "GET",
+    "https://raw.githubusercontent.com/mdn/content/main/files/en-us/_wikihistory.json",
+  );
+  xhr.send();
+  log.textContent = `${log.textContent}Started XHR request\n`;
+});
+
+document.querySelector("#reload").addEventListener("click", () => {
+  log.textContent = "";
+  document.location.reload();
+});
+// Play
+
+// This is just like the event handlers we've encountered 
+// in a previous module, except that instead of the event 
+// being a user action, such as the user clicking a button, 
+// the event is a change in the state of some object.
+
+// Callbacks
+// An event handler is a particular type of callback. A 
+// callback is just a function that's passed into another
+//  function, with the expectation that the callback will
+//  be called at the appropriate time. As we just saw, 
+// callbacks used to be the main way asynchronous functions 
+// were implemented in JavaScript.
+
+// However, callback-based code can get hard to understand 
+// when the callback itself has to call functions that 
+// accept a callback. This is a common situation if you 
+// need to perform some operation that breaks down into 
+// a series of asynchronous functions. For example, 
+// consider the following:
+
+// JS
+// Copy to Clipboard
+function doStep1(init) {
+  return init + 1;
+}
+
+function doStep2(init) {
+  return init + 2;
+}
+
+function doStep3(init) {
+  return init + 3;
+}
+
+function doOperation() {
+  let result = 0;
+  result = doStep1(result);
+  result = doStep2(result);
+  result = doStep3(result);
+  console.log(`result: ${result}`);
+}
+
+doOperation();
+// Here we have a single operation that's split into three
+//  steps, where each step depends on the last step. In 
+// our example, the first step adds 1 to the input, the 
+// second adds 2, and the third adds 3. Starting with an 
+// input of 0, the end result is 6 (0 + 1 + 2 + 3). As 
+// a synchronous program, this is very straightforward. 
+// But what if we implemented the steps using callbacks?
+
+// JS
+// Copy to Clipboard
+function doStep1(init, callback) {
+  const result = init + 1;
+  callback(result);
+}
+
+function doStep2(init, callback) {
+  const result = init + 2;
+  callback(result);
+}
+
+function doStep3(init, callback) {
+  const result = init + 3;
+  callback(result);
+}
+
+function doOperation() {
+  doStep1(0, (result1) => {
+    doStep2(result1, (result2) => {
+      doStep3(result2, (result3) => {
+        console.log(`result: ${result3}`);
+      });
+    });
+  });
+}
+
+doOperation();
+// Because we have to call callbacks inside callbacks, 
+// we get a deeply nested doOperation() function, which 
+// is much harder to read and debug. This is sometimes 
+// called "callback hell" or the "pyramid of doom" (because 
+// the indentation looks like a pyramid on its side).
+
+// When we nest callbacks like this, it can also get very 
+// hard to handle errors: often you have to handle errors 
+// at each level of the "pyramid", instead of having error 
+// handling only once at the top level.
+
+// For these reasons, most modern asynchronous APIs don't 
+// use callbacks. Instead, the foundation of asynchronous 
+// programming in JavaScript is the Promise, and that's the 
+// subject of the next article.
+
+
+// How to use promises
+// Promises are the foundation of asynchronous programming 
+// in modern JavaScript. A promise is an object returned by 
+// an asynchronous function, which represents the current 
+// state of the operation. At the time the promise is 
+// returned to the caller, the operation often isn't 
+// finished, but the promise object provides methods to 
+// handle the eventual success or failure of the operation.
+
+
+// Objective:	To understand how to use promises in JavaScript.
+// In the previous article, we talked about the use of 
+// callbacks to implement asynchronous functions. With 
+// that design, you call the asynchronous function, passing 
+// in your callback function. The function returns 
+// immediately and calls your callback when the operation 
+// is finished.
+
+// With a promise-based API, the asynchronous function starts 
+// the operation and returns a Promise object. You can then 
+// attach handlers to this promise object, and these handlers 
+// will be executed when the operation has succeeded or failed.
+
+// Using the fetch() API
+// Note: In this article, we will explore promises by copying 
+// code samples from the page into your browser's JavaScript 
+// console. To set this up:
+
+// open a browser tab and visit https://example.org
+// in that tab, open the JavaScript console in your 
+// browser's developer tools
+// when we show an example, copy it into the console. 
+// You will have to reload the page each time you enter 
+// a new example, or the console will complain that you 
+// have redeclared fetchPromise.
+
+// In this example, we'll download the JSON file 
+// from https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json, and log some information about it.
+
+// To do this, we'll make an HTTP request to the server. 
+// In an HTTP request, we send a request message to 
+// a remote server, and it sends us back a response. 
+// In this case, we'll send a request to get a JSON file 
+// from the server. Remember in the last article, where 
+// we made HTTP requests using the XMLHttpRequest API? Well, 
+// in this article, we'll use the fetch() API, which is the 
+// modern, promise-based replacement for XMLHttpRequest.
+
+// Copy this into your browser's JavaScript console:
+
+// JS
+// Copy to Clipboard
+const fetchPromise = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+
+console.log(fetchPromise);
+
+fetchPromise.then((response) => {
+  console.log(`Received response: ${response.status}`);
+});
+
+console.log("Started request…");
+// Here we are:
+
+// calling the fetch() API, and assigning the return value 
+// to the fetchPromise variable
+
+// immediately after, logging the fetchPromise variable. 
+// This should output something like: Promise 
+// { <state>: "pending" }, telling us that we have 
+// a Promise object, and it has a state whose value is
+//  "pending". The "pending" state means that the fetch 
+// operation is still going on.
+
+// passing a handler function into the Promise's then() method. When (and if) the fetch operation succeeds, the promise will call our handler, passing in a Response object, which contains the server's response.
+
+// logging a message that we have started the request.
+// The complete output should be something like:
+
+// Promise { <state>: "pending" }
+// Started request…
+// Received response: 200
+// Note that Started request… is logged before we receive 
+// the response. Unlike a synchronous function, fetch() 
+// returns while the request is still going on, enabling
+//  our program to stay responsive. The response shows 
+// the 200 (OK) status code, meaning that our request 
+// succeeded.
+
+// This probably seems a lot like the example in the last 
+// article, where we added event handlers to the
+//  XMLHttpRequest object. Instead of that, we're passing
+//  a handler into the then() method of the returned promise.
+
+// Chaining promises
+// With the fetch() API, once you get a Response object, 
+// you need to call another function to get the response 
+// data. In this case, we want to get the response data as
+//  JSON, so we would call the json() method of the Response 
+// object. It turns out that json() is also asynchronous. So 
+// this is a case where we have to call two successive 
+// asynchronous functions.
+
+// Try this:
+
+// JS
+// Copy to Clipboard
+const fetchPromise = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+
+fetchPromise.then((response) => {
+  const jsonPromise = response.json();
+  jsonPromise.then((data) => {
+    console.log(data[0].name);
+  });
+});
+// In this example, as before, we add a then() handler to 
+// the promise returned by fetch(). But this time, our 
+// handler calls response.json(), and then passes a new 
+// then() handler into the promise returned by response.json().
+
+// This should log "baked beans" (the name of the first 
+// product listed in "products.json").
+
+// But wait! Remember the last article, where we said that 
+// by calling a callback inside another callback, we got 
+// successively more nested levels of code? And we said that 
+// this "callback hell" made our code hard to understand? 
+// Isn't this just the same, only with then() calls?
+
+// It is, of course. But the elegant feature of promises is 
+// that then() itself returns a promise, which will be 
+// completed with the result of the function passed to it. 
+// This means that we can (and certainly should) rewrite 
+// the above code like this:
+
+// JS
+// Copy to Clipboard
+const fetchPromise = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+
+fetchPromise
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data[0].name);
+  });
+// Instead of calling the second then() inside the handler 
+// for the first then(), we can return the promise returned 
+// by json(), and call the second then() on that return value. 
+// This is called promise chaining and means we can avoid 
+// ever-increasing levels of indentation when we need to 
+// make consecutive asynchronous function calls.
+
+// Before we move on to the next step, there's one more 
+// piece to add. We need to check that the server accepted 
+// and was able to handle the request, before we try to 
+// read it. We'll do this by checking the status code in 
+// the response and throwing an error if it wasn't "OK":
+
+// JS
+// Copy to Clipboard
+const fetchPromise = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+
+fetchPromise
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data[0].name);
+  });
+// Catching errors
+// This brings us to the last piece: how do we handle errors? 
+// The fetch() API can throw an error for many reasons (for 
+// example, because there was no network connectivity or the 
+// URL was malformed in some way) and we are throwing an 
+// error ourselves if the server returned an error.
+
+// In the last article, we saw that error handling can get 
+// very difficult with nested callbacks, making us handle 
+// errors at every nesting level.
+
+// To support error handling, Promise objects provide a 
+// catch() method. This is a lot like then(): you call it 
+// and pass in a handler function. However, while the handler 
+// passed to then() is called when the asynchronous operation 
+// succeeds, the handler passed to catch() is called when 
+// the asynchronous operation fails.
+
+// If you add catch() to the end of a promise chain, then 
+// it will be called when any of the asynchronous function 
+// calls fail. So you can implement an operation as several 
+// consecutive asynchronous function calls, and have a single
+//  place to handle all errors.
+
+// Try this version of our fetch() code. We've added an 
+// error handler using catch(), and also modified the URL 
+// so the request will fail.
+
+// JS
+// Copy to Clipboard
+const fetchPromise = fetch(
+  "bad-scheme://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+
+fetchPromise
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data[0].name);
+  })
+  .catch((error) => {
+    console.error(`Could not get products: ${error}`);
+  });
+// Try running this version: you should see the error 
+// logged by our catch() handler.
+
+// Promise terminology
+// Promises come with some quite specific terminology that 
+// it's worth getting clear about.
+
+// First, a promise can be in one of three states:
+
+// pending: the promise has been created, and the asynchronous 
+// function it's associated with has not succeeded or failed 
+// yet. This is the state your promise is in when it's 
+// returned from a call to fetch(), and the request is 
+// still being made.
+
+// fulfilled: the asynchronous function has succeeded. When 
+// a promise is fulfilled, its then() handler is called.
+
+// rejected: the asynchronous function has failed. When 
+// a promise is rejected, its catch() handler is called.
+
+// Note that what "succeeded" or "failed" means here is up 
+// to the API in question. For example, fetch() rejects the 
+// returned promise if (among other reasons) a network error 
+// prevented the request being sent, but fulfills the promise 
+// if the server sent a response, even if the response was an 
+// error like 404 Not Found.
+
+// Sometimes, we use the term settled to cover both fulfilled 
+// and rejected.
+
+// A promise is resolved if it is settled, or if it has been 
+// "locked in" to follow the state of another promise.
+
+// The article Let's talk about how to talk about promises
+//  gives a great explanation of the details of this 
+// terminology.
+
+// Combining multiple promises
+// The promise chain is what you need when your operation 
+// consists of several asynchronous functions, and you 
+// need each one to complete before starting the next one.
+//  But there are other ways you might need to combine 
+// asynchronous function calls, and the Promise API provides 
+// some helpers for them.
+
+// Sometimes, you need all the promises to be fulfilled, 
+// but they don't depend on each other. In a case like that, 
+// it's much more efficient to start them all off together, 
+// then be notified when they have all fulfilled. The 
+// Promise.all() method is what you need here. It takes 
+// an array of promises and returns a single promise.
+
+// The promise returned by Promise.all() is:
+
+// fulfilled when and if all the promises in the array are 
+// fulfilled. In this case, the then() handler is called 
+// with an array of all the responses, in the same order 
+// that the promises were passed into all().
+
+// rejected when and if any of the promises in the array 
+// are rejected. In this case, the catch() handler is 
+// called with the error thrown by the promise that rejected.
+
+// For example:
+
+// JS
+// Copy to Clipboard
+const fetchPromise1 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+const fetchPromise2 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found",
+);
+const fetchPromise3 = fetch(
+  "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json",
+);
+
+Promise.all([fetchPromise1, fetchPromise2, fetchPromise3])
+  .then((responses) => {
+    for (const response of responses) {
+      console.log(`${response.url}: ${response.status}`);
+    }
+  })
+  .catch((error) => {
+    console.error(`Failed to fetch: ${error}`);
+  });
+// Here, we're making three fetch() requests to three 
+// different URLs. If they all succeed, we will log the 
+// response status of each one. If any of them fail, then 
+// we're logging the failure.
+
+// With the URLs we've provided, all the requests should 
+// be fulfilled, although for the second, the server will 
+// return 404 (Not Found) instead of 200 (OK) because the 
+// requested file does not exist. So the output should be:
+
+// https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json: 200
+// https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found: 404
+// https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json: 200
+// If we try the same code with a badly formed URL, like this:
+
+// JS
+// Copy to Clipboard
+const fetchPromise1 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+const fetchPromise2 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found",
+);
+const fetchPromise3 = fetch(
+  "bad-scheme://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json",
+);
+
+Promise.all([fetchPromise1, fetchPromise2, fetchPromise3])
+  .then((responses) => {
+    for (const response of responses) {
+      console.log(`${response.url}: ${response.status}`);
+    }
+  })
+  .catch((error) => {
+    console.error(`Failed to fetch: ${error}`);
+  });
+// Then we can expect the catch() handler to run, and we 
+// should see something like:
+
+// Failed to fetch: TypeError: Failed to fetch
+// Sometimes, you might need any one of a set of promises 
+// to be fulfilled, and don't care which one. In that case, 
+// you want Promise.any(). This is like Promise.all(), 
+// except that it is fulfilled as soon as any of the array
+//  of promises is fulfilled, or rejected if all of them 
+// are rejected:
+
+// JS
+// Copy to Clipboard
+const fetchPromise1 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+const fetchPromise2 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found",
+);
+const fetchPromise3 = fetch(
+  "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json",
+);
+
+Promise.any([fetchPromise1, fetchPromise2, fetchPromise3])
+  .then((response) => {
+    console.log(`${response.url}: ${response.status}`);
+  })
+  .catch((error) => {
+    console.error(`Failed to fetch: ${error}`);
+  });
+// Note that in this case we can't predict which fetch 
+// request will complete first.
+
+// These are just two of the extra Promise functions for 
+// combining multiple promises. To learn about the rest, 
+// see the Promise reference documentation.
+
+// async and await
+// The async keyword gives you a simpler way to work with 
+// asynchronous promise-based code. Adding async at the 
+// start of a function makes it an async function:
+
+// JS
+// Copy to Clipboard
+async function myFunction() {
+  // This is an async function
+}
+// Inside an async function, you can use the await keyword 
+// before a call to a function that returns a promise. 
+// This makes the code wait at that point until the promise 
+// is settled, at which point the fulfilled value of the 
+// promise is treated as a return value, or the rejected 
+// value is thrown.
+
+// This enables you to write code that uses asynchronous 
+// functions but looks like synchronous code. For example,
+//  we could use it to rewrite our fetch example:
+
+// JS
+// Copy to Clipboard
+async function fetchProducts() {
+  try {
+    // after this line, our function will wait for the `fetch()` call to be settled
+    // the `fetch()` call will either return a Response or throw an error
+    const response = await fetch(
+      "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    // after this line, our function will wait for the `response.json()` call to be settled
+    // the `response.json()` call will either return the parsed JSON object or throw an error
+    const data = await response.json();
+    console.log(data[0].name);
+  } catch (error) {
+    console.error(`Could not get products: ${error}`);
+  }
+}
+
+fetchProducts();
+// Here, we are calling await fetch(), and instead of 
+// getting a Promise, our caller gets back a fully 
+// complete Response object, just as if fetch() were 
+// a synchronous function!
+
+// We can even use a try...catch block for error handling, 
+// exactly as we would if the code were synchronous.
+
+// Note though that async functions always return a promise, 
+// so you can't do something like:
+
+// JS
+// Copy to Clipboard
+async function fetchProducts() {
+  try {
+    const response = await fetch(
+      "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Could not get products: ${error}`);
+  }
+}
+
+const promise = fetchProducts();
+console.log(promise[0].name); // "promise" is a Promise object, so this will not work
+// Instead, you'd need to do something like:
+
+// JS
+// Copy to Clipboard
+async function fetchProducts() {
+  try {
+    const response = await fetch(
+      "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Could not get products: ${error}`);
+  }
+}
+
+const promise = fetchProducts();
+promise.then((data) => console.log(data[0].name));
+// Also, note that you can only use await inside an async 
+// function, unless your code is in a JavaScript module. 
+// That means you can't do this in a normal script:
+
+// JS
+// Copy to Clipboard
+try {
+  // using await outside an async function is only allowed in a module
+  const response = await fetch(
+    "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+  );
+  if (!response.ok) {
+    throw new Error(`HTTP error: ${response.status}`);
+  }
+  const data = await response.json();
+  console.log(data[0].name);
+} catch (error) {
+  console.error(`Could not get products: ${error}`);
+}
+// You'll probably use async functions a lot where you might 
+// otherwise use promise chains, and they make working with 
+// promises much more intuitive.
+
+// Keep in mind that just like a promise chain, await forces 
+// asynchronous operations to be completed in series. This 
+// is necessary if the result of the next operation depends 
+// on the result of the last one, but if that's not the case 
+// then something like Promise.all() will be more performant.
+
+// Conclusion
+// Promises are the foundation of asynchronous programming 
+// in modern JavaScript. They make it easier to express and 
+// reason about sequences of asynchronous operations without 
+// deeply nested callbacks, and they support a style of error
+//  handling that is similar to the synchronous try...catch 
+// statement.
+
+// The async and await keywords make it easier to build an 
+// operation from a series of consecutive asynchronous 
+// function calls, avoiding the need to create explicit 
+// promise chains, and allowing you to write code that 
+// looks just like synchronous code.
+
+// Promises work in the latest versions of all modern 
+// browsers; the only place where promise support will 
+// be a problem is in Opera Mini and IE11 and earlier versions.
+
+// We didn't touch on all features of promises in this 
+// article, just the most interesting and useful ones. 
+// As you start to learn more about promises, you'll come 
+// across more features and techniques.
+
+// Many modern Web APIs are promise-based, including WebRTC,
+//  Web Audio API, Media Capture and Streams API, and many more.
+
+// In the last article we discussed how to use APIs that 
+// return promises. In this article we'll look at the other 
+// side — how to implement APIs that return promises. This 
+// is a much less common task than using promise-based APIs,
+//  but it's still worth knowing about.
+
+// Objective:	To understand how to implement promise-based 
+// APIs.
+// Generally, when you implement a promise-based API, you'll 
+// be wrapping an asynchronous operation, which might use 
+// events, or plain callbacks, or a message-passing model. 
+// You'll arrange for a Promise object to handle the success 
+// or failure of that operation properly.
+
+// Implementing an alarm() API
+// In this example we'll implement a promise-based alarm API,
+//  called alarm(). It will take as arguments the name of the
+//  person to wake up and a delay in milliseconds to wait 
+// before waking the person up. After the delay, the 
+// function will send a "Wake up!" message, including 
+// the name of the person we need to wake up.
+
+// Wrapping setTimeout()
+// We'll use the setTimeout() API to implement our alarm()
+//  function. The setTimeout() API takes as arguments 
+// a callback function and a delay, given in milliseconds. 
+// When setTimeout() is called, it starts a timer set to 
+// the given delay, and when the time expires, it calls 
+// the given function.
+
+// In the example below, we call setTimeout() with a 
+// callback function and a delay of 1000 milliseconds:
+
+// HTML
+// Play
+// Copy to Clipboard
+            // <button id="set-alarm">Set alarm</button>
+            // <div id="output"></div>
+// JS
+// Play
+// Copy to Clipboard
+const output = document.querySelector("#output");
+const button = document.querySelector("#set-alarm");
+
+function setAlarm() {
+  setTimeout(() => {
+    output.textContent = "Wake up!";
+  }, 1000);
+}
+
+button.addEventListener("click", setAlarm);
+// Play
+
+// The Promise() constructor
+// Our alarm() function will return a Promise that is 
+// fulfilled when the timer expires. It will pass a "Wake up!" message into the then() handler, and will reject the promise if the caller supplies a negative delay value.
+
+// The key component here is the Promise() constructor. 
+// The Promise() constructor takes a single function as 
+// an argument. We'll call this function the executor. 
+// When you create a new promise you supply the 
+// implementation of the executor.
+
+// This executor function itself takes two arguments, 
+// which are both also functions, and which are 
+// conventionally called resolve and reject. In 
+// your executor implementation, you call the 
+// underlying asynchronous function. If the asynchronous 
+// function succeeds, you call resolve, and if it fails, 
+// you call reject. If the executor function throws 
+// an error, reject is called automatically. You can 
+// pass a single parameter of any type into resolve 
+// and reject.
+
+// So we can implement alarm() like this:
+
+// JS
+// Copy to Clipboard
+function alarm(person, delay) {
+  return new Promise((resolve, reject) => {
+    if (delay < 0) {
+      throw new Error("Alarm delay must not be negative");
+    }
+    setTimeout(() => {
+      resolve(`Wake up, ${person}!`);
+    }, delay);
+  });
+}
+// This function creates and returns a new Promise. Inside 
+// the executor for the promise, we:
+
+// check that delay is not negative, and throw an error if 
+// it is.
+
+// call setTimeout(), passing a callback and delay. 
+// The callback will be called when the timer expires, 
+// and in the callback we call resolve, passing in our
+//  "Wake up!" message.
+
+// Using the alarm() API
+// This part should be quite familiar from the last article. 
+// We can call alarm(), and on the returned promise call 
+// then() and catch() to set handlers for promise fulfillment
+//  and rejection.
+
+// JS
+// Play
+// Copy to Clipboard
+const name = document.querySelector("#name");
+const delay = document.querySelector("#delay");
+const button = document.querySelector("#set-alarm");
+const output = document.querySelector("#output");
+
+function alarm(person, delay) {
+  return new Promise((resolve, reject) => {
+    if (delay < 0) {
+      throw new Error("Alarm delay must not be negative");
+    }
+    setTimeout(() => {
+      resolve(`Wake up, ${person}!`);
+    }, delay);
+  });
+}
+
+button.addEventListener("click", () => {
+  alarm(name.value, delay.value)
+    .then((message) => (output.textContent = message))
+    .catch((error) => (output.textContent = `Couldn't set alarm: ${error}`));
+});
+// Play
+
+// Try setting different values for "Name" and "Delay". 
+// Try setting a negative value for "Delay".
+
+// Using async and await with the alarm() API
+// Since alarm() returns a Promise, we can do everything 
+// with it that we could do with any other promise: promise 
+// chaining, Promise.all(), and async / await:
+
+// JS
+// Play
+// Copy to Clipboard
+const name = document.querySelector("#name");
+const delay = document.querySelector("#delay");
+const button = document.querySelector("#set-alarm");
+const output = document.querySelector("#output");
+
+function alarm(person, delay) {
+  return new Promise((resolve, reject) => {
+    if (delay < 0) {
+      throw new Error("Alarm delay must not be negative");
+    }
+    setTimeout(() => {
+      resolve(`Wake up, ${person}!`);
+    }, delay);
+  });
+}
+
+button.addEventListener("click", async () => {
+  try {
+    const message = await alarm(name.value, delay.value);
+    output.textContent = message;
+  } catch (error) {
+    output.textContent = `Couldn't set alarm: ${error}`;
+  }
+});
+// Play
+
+// See also
+// Promise() constructor
+// Using promises
+
+// In this final article in our "Asynchronous JavaScript" module, we'll introduce workers, which enable you to run some tasks in a separate thread of execution.
+
+// Prerequisites:	A reasonable understanding of JavaScript 
+// fundamentals, including event handling.
+
+
+// In the first article of this module, we saw what happens 
+// when you have a long-running synchronous task in your 
+// program — the whole window becomes totally unresponsive. 
+// Fundamentally, the reason for this is that the program is 
+// single-threaded. A thread is a sequence of instructions 
+// that a program follows. Because the program consists of 
+// a single thread, it can only do one thing at a time: so 
+// if it is waiting for our long-running synchronous call 
+// to return, it can't do anything else.
+
+// Workers give you the ability to run some tasks in a 
+// different thread, so you can start the task, then 
+// continue with other processing (such as handling user 
+// actions).
+
+// One concern from all this is that if multiple threads 
+// can have access to the same shared data, it's possible 
+// for them to change it independently and unexpectedly
+//  (with respect to each other). This can cause bugs 
+// that are hard to find.
+
+// To avoid these problems on the web, your main code 
+// and your worker code never get direct access to each 
+// other's variables, and can only truly "share" data in 
+// very specific cases. Workers and the main code run in 
+// completely separate worlds, and only interact by sending 
+// each other messages. In particular, this means that 
+// workers can't access the DOM (the window, document, 
+// page elements, and so on).
+
+// There are three different sorts of workers:
+
+// dedicated workers
+// shared workers
+// service workers
+
+// In this article, we'll walk through an example of the 
+// first sort of worker, then briefly discuss the other two.
+
+// Using web workers
+// Remember in the first article, where we had a page that 
+// calculated prime numbers? We're going to use a worker to 
+// run the prime-number calculation, so our page stays 
+// responsive to user actions.
+
+// The synchronous prime generator
+// Let's first take another look at the JavaScript in our 
+// previous example:
+
+// JS
+// Copy to Clipboard
+function generatePrimes(quota) {
+  function isPrime(n) {
+    for (let c = 2; c <= Math.sqrt(n); ++c) {
+      if (n % c === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const primes = [];
+  const maximum = 1000000;
+
+  while (primes.length < quota) {
+    const candidate = Math.floor(Math.random() * (maximum + 1));
+    if (isPrime(candidate)) {
+      primes.push(candidate);
+    }
+  }
+
+  return primes;
+}
+
+document.querySelector("#generate").addEventListener("click", () => {
+  const quota = document.querySelector("#quota").value;
+  const primes = generatePrimes(quota);
+  document.querySelector("#output").textContent =
+    `Finished generating ${quota} primes!`;
+});
+
+document.querySelector("#reload").addEventListener("click", () => {
+  document.querySelector("#user-input").value =
+    'Try typing in here immediately after pressing "Generate primes"';
+  document.location.reload();
+});
+// In this program, after we call generatePrimes(), the 
+// program becomes totally unresponsive.
+
+// Prime generation with a worker
+// For this example, start by making a local copy of the 
+// files at
+//  https://github.com/mdn/learning-area/blob/main/javascript/asynchronous/workers/start. There are four files in this directory:
+
+// index.html
+// style.css
+// main.js
+// generate.js
+
+// The "index.html" file and the "style.css" files are 
+// already complete:
+
+// HTML
+// Copy to Clipboard
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Prime numbers</title>
+    <script src="main.js" defer></script>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <label for="quota">Number of primes:</label>
+    <input type="text" id="quota" name="quota" value="1000000" />
+
+    <button id="generate">Generate primes</button>
+    <button id="reload">Reload</button>
+
+    <textarea id="user-input" rows="5" cols="62">
+Try typing in here immediately after pressing "Generate primes"
+    </textarea>
+
+    <div id="output"></div>
+  </body>
+</html>
+// CSS
+// Copy to Clipboard
+textarea {
+  display: block;
+  margin: 1rem 0;
+}
+// The "main.js" and "generate.js" files are empty. We're 
+// going to add the main code to "main.js", and the worker 
+// code to "generate.js".
+
+// So first, we can see that the worker code is kept in 
+// a separate script from the main code. We can also see, 
+// looking at "index.html" above, that only the main code 
+// is included in a <script> element.
+
+// Now copy the following code into "main.js":
+
+// JS
+// Copy to Clipboard
+// Create a new worker, giving it the code in "generate.js"
+const worker = new Worker("./generate.js");
+
+// When the user clicks "Generate primes", send a message 
+// to the worker.
+// The message command is "generate", and the message also
+//  contains "quota",
+// which is the number of primes to generate.
+document.querySelector("#generate").addEventListener("click", () => {
+  const quota = document.querySelector("#quota").value;
+  worker.postMessage({
+    command: "generate",
+    quota,
+  });
+});
+
+// When the worker sends a message back to the main thread,
+// update the output box with a message for the user, 
+// including the number of
+// primes that were generated, taken from the message data.
+worker.addEventListener("message", (message) => {
+  document.querySelector("#output").textContent =
+    `Finished generating ${message.data} primes!`;
+});
+
+document.querySelector("#reload").addEventListener("click", () => {
+  document.querySelector("#user-input").value =
+    'Try typing in here immediately after pressing "Generate primes"';
+  document.location.reload();
+});
+// First, we're creating the worker using the Worker() 
+// constructor. We pass it a URL pointing to the worker 
+// script. As soon as the worker is created, the worker 
+// script is executed.
+
+// Next, as in the synchronous version, we add a click event 
+// handler to the "Generate primes" button. But now, rather 
+// than calling a generatePrimes() function, we send a 
+// message to the worker using worker.postMessage(). This 
+// message can take an argument, and in this case, we're 
+// passing a JSON object containing two properties:
+
+// command: a string identifying the thing we want the 
+// worker to do (in case our worker could do more than 
+// one thing)
+
+// quota: the number of primes to generate.
+
+// Next, we add a message event handler to the worker. 
+// This is so the worker can tell us when it has finished, 
+// and pass us any resulting data. Our handler takes the 
+// data from the data property of the message, and writes 
+// it to the output element (the data is exactly the same 
+// as quota, so this is a bit pointless, but it shows the 
+// principle).
+
+// Finally, we implement the click event handler for the 
+// "Reload" button. This is exactly the same as in the 
+// synchronous version.
+
+// Now for the worker code. Copy the following code into
+//  "generate.js":
+
+// JS
+// Copy to Clipboard
+// Listen for messages from the main thread.
+// If the message command is "generate", call `generatePrimes()`
+addEventListener("message", (message) => {
+  if (message.data.command === "generate") {
+    generatePrimes(message.data.quota);
+  }
+});
+
+// Generate primes (very inefficiently)
+function generatePrimes(quota) {
+  function isPrime(n) {
+    for (let c = 2; c <= Math.sqrt(n); ++c) {
+      if (n % c === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const primes = [];
+  const maximum = 1000000;
+
+  while (primes.length < quota) {
+    const candidate = Math.floor(Math.random() * (maximum + 1));
+    if (isPrime(candidate)) {
+      primes.push(candidate);
+    }
+  }
+
+  // When we have finished, send a message to the main thread,
+  // including the number of primes we generated.
+  postMessage(primes.length);
+}
+// Remember that this runs as soon as the main script creates 
+// the worker.
+
+// The first thing the worker does is start listening for 
+// messages from the main script. It does this using 
+// addEventListener(), which is a global function in 
+// a worker. Inside the message event handler, the data 
+// property of the event contains a copy of the argument 
+// passed from the main script. If the main script passed 
+// the generate command, we call generatePrimes(), passing 
+// in the quota value from the message event.
+
+// The generatePrimes() function is just like the 
+// synchronous version, except instead of returning a value,
+//  we send a message to the main script when we are done. 
+// We use the postMessage() function for this, which like 
+// addEventListener() is a global function in a worker. 
+// As we already saw, the main script is listening for 
+// this message and will update the DOM when the message 
+// is received.
+
+// Note: To run this site, you'll have to run a local web 
+// server, because file:// URLs are not allowed to load 
+// workers. See our guide to setting up a local testing 
+// server. With that done, you should be able to click 
+// "Generate primes" and have your main page stay responsive.
+
+// If you have any problems creating or running the example, 
+// you can review the finished version and try it live.
+
+// Other types of workers
+// The worker we just created was what's called a dedicated 
+// worker. This means it's used by a single script instance.
+
+// There are other types of workers, though:
+
+// Shared workers can be shared by several different scripts 
+// running in different windows.
+
+// Service workers act like proxy servers, caching resources 
+// so that web applications can work when the user is offline. 
+// They're a key component of Progressive Web Apps.
+
+// Conclusion
+// In this article we've introduced web workers, which 
+// enable a web application to offload tasks to a separate 
+// thread. The main thread and the worker don't directly 
+// share any variables, but communicate by sending messages, 
+// which are received by the other side as message events.
+
+// Workers can be an effective way to keep the main 
+// application responsive, although they can't access 
+// all the APIs that the main application can, and in 
+// particular can't access the DOM.
+
+// See also
+// Using web workers
+// Using service workers
+// Web workers API
+
+// reference > Javascript > Reference > Standard built-in object > Promise 
+
+
+// Promise
+// Constructor
+//      Promise() constructor
+// Properties
+     Promise[@@species]
+// Methods
+Promise.all()
+Promise.allSettled()
+Promise.any()
+Promise.prototype.catch()
+Promise.prototype.finally()
+Promise.race()
+Promise.reject()
+Promise.resolve()
+Promise.prototype.then()
+Promise.withResolvers()
+
+////////////////////////////////////////////////////////
+
+// Promise() constructor
+// The Promise() constructor creates Promise objects. 
+// It is primarily used to wrap callback-based APIs 
+// that do not already support promises.
+
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('foo');
+    }, 300);
+});
+
+promise1.then((value) => {
+    console.log(value);
+    // Expected output: "foo"
+});
+
+console.log(promise1);
+// Expected output: [object Promise]
+
+
+// Syntax
+new Promise(executor)
+
+// Note: Promise() can only be constructed 
+// with new.Attempting to call it without 
+// new throws a TypeError.
+
+
+//Parameters
+// executor
+// A function to be executed by the constructor.It 
+// receives two functions as parameters: resolveFunc 
+// and rejectFunc.Any errors thrown in the executor 
+// will cause the promise to be rejected, and the 
+// return value will be neglected.The semantics 
+// of executor are detailed below.
+
+// Return value
+// When called via new, the Promise constructor 
+// returns a promise object.The promise object 
+// will become resolved when either of the functions 
+// resolveFunc or rejectFunc are invoked.Note that 
+// if you call resolveFunc or rejectFunc and pass 
+// another Promise object as an argument, it can 
+// be said to be "resolved", but still not "settled".
+// See the Promise description for more explanation.
+
+//     Description
+// Traditionally(before promises), asynchronous 
+// tasks were designed as callbacks.
+
+    readFile("./data.txt", (error, result) => {
+        // This callback will be called when the task is done, with the
+        // final `error` or `result`. Any operation dependent on the
+        // result must be defined within this callback.
+    });
+// Code here is immediately executed after 
+// the `readFile` request
+
+// is fired. It does not wait for the callback 
+// to be called, hence
+
+// making `readFile` "asynchronous".
+
+
+// To take advantage of the readability 
+// improvement and language features offered 
+// by promises, the Promise() constructor allows
+//  one to transform the callback - based API to 
+// a promise - based one.
+
+//Note: If your task is already promise - 
+// based, you likely do not need the Promise() constructor.
+
+// The executor is custom code that ties 
+// an outcome in a callback to a promise.You, 
+// the programmer, write the executor.Its 
+// signature is expected to be:
+
+function executor(resolveFunc, rejectFunc) {
+    // Typically, some asynchronous operation that accepts a callback,
+    // like the `readFile` function above
+}
+
+// resolveFunc and rejectFunc are also functions, 
+// and you can give them whatever actual names 
+// you want.Their signatures are simple: they 
+// accept a single parameter of any type.
+
+resolveFunc(value); // call on resolved
+rejectFunc(reason); // call on rejected
+
+// The value parameter passed to resolveFunc 
+// can be another promise object, in which 
+// case the newly constructed promise's state 
+// will be "locked in" to the promise passed (as 
+// part of the resolution promise). The rejectFunc 
+// has semantics close to the throw statement, 
+// so reason is typically an Error instance. If 
+// either value or reason is omitted, the promise 
+// is fulfilled/rejected with undefined.
+
+// The executor's completion state has limited 
+// effect on the promise's state:
+
+// The executor return value is ignored.return 
+// statements within the executor merely impact 
+// control flow and alter whether a part of the 
+// function is executed, but do not have any impact 
+// on the promise's fulfillment value. If executor 
+// exits and it's impossible for resolveFunc or 
+// rejectFunc to be called in the future(for example, 
+// there are no async tasks scheduled), then the promise 
+// remains pending forever.
+
+// If an error is thrown in the executor, the promise 
+// is rejected, unless resolveFunc or rejectFunc has 
+// already been called.
+
+//Note: The existence of pending promises does 
+// not prevent the program from exiting.If the 
+// event loop is empty, the program exits despite 
+// any pending promises(because those are necessarily 
+// forever - pending).
+
+//Here's a summary of the typical flow:
+
+// At the time when the constructor generates the 
+// new Promise object, it also generates a 
+// corresponding pair of functions for resolveFunc 
+// and rejectFunc; these are "tethered" to the Promise object.
+
+// executor typically wraps some asynchronous 
+// operation which provides a callback - based API.
+// The callback(the one passed to the original callback 
+// - based API) is defined within the executor code, 
+// so it has access to the resolveFunc and rejectFunc.
+
+// The executor is called synchronously(as soon as 
+// the Promise is constructed) with the resolveFunc 
+// and rejectFunc functions as arguments.
+
+// The code within the executor has the opportunity 
+// to perform some operation.The eventual completion 
+// of the asynchronous task is communicated with the 
+// promise instance via the side effect caused by 
+// resolveFunc or rejectFunc.The side effect is 
+// that the Promise object becomes "resolved".
+
+// If resolveFunc is called first, the value 
+// passed will be resolved.The promise may stay 
+// pending(in case another thenable is passed), 
+// become fulfilled(in most cases where a non - 
+// thenable value is passed), or become rejected(in 
+// case of an invalid resolution value).
+
+// If rejectFunc is called first, the promise 
+// instantly becomes rejected.
+
+// Once one of the resolving functions(resolveFunc 
+// or rejectFunc) is called, the promise stays 
+// resolved.Only the first call to resolveFunc 
+// or rejectFunc affects the promise's eventual 
+// state, and subsequent calls to either function 
+// can neither change the fulfillment value/rejection 
+// reason nor toggle its eventual state from "fulfilled" 
+// to "rejected" or opposite.
+
+// If executor exits by throwing an error, then the 
+// promise is rejected.However, the error is ignored 
+// if one of the resolving functions has already been 
+// called(so that the promise is already resolved).
+
+// Resolving the promise does not necessarily cause 
+// the promise to become fulfilled or rejected(i.e.settled).
+// The promise may still be pending because it's resolved 
+// with another thenable, but its eventual state will 
+// match that of the resolved thenable.
+
+// Once the promise settles, it(asynchronously) 
+// invokes any further handlers associated through 
+// then(), catch (), or finally().The eventual 
+// fulfillment value or rejection reason is passed 
+// to the invocation of fulfillment and rejection 
+// handlers as an input parameter(see Chained Promises).
+
+// For example, the callback - based readFile API 
+// above can be transformed into a promise - based one.
+
+const readFilePromise = (path) =>
+    new Promise((resolve, reject) => {
+        readFile(path, (error, result) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+
+readFilePromise("./data.txt")
+    .then((result) => console.log(result))
+    .catch((error) => console.error("Failed to read data"));
+
+//The resolve and reject callbacks are only 
+// available within the scope of the executor 
+// function, which means you can't access them 
+// after the promise is constructed. If you want 
+// to construct the promise before deciding how 
+// to resolve it, you can use the Promise.withResolvers() 
+// method instead, which exposes the resolve and 
+// reject functions.
+
+//     The resolve function
+//     The resolve function has the following behaviors:
+    
+//     If it's called with the same value as the 
+// newly created promise (the promise it's "tethered to"), 
+// the promise is rejected with a TypeError.
+//     If it's called with a non-thenable value (a 
+// primitive, or an object whose then property is not 
+// callable, including when the property is not present), 
+// the promise is immediately fulfilled with that value.
+//     If it's called with a thenable value (including 
+// another Promise instance), then the thenable's then 
+// method is saved and called in the future(it's always 
+// called asynchronously). The then method will be called 
+// with two callbacks, which are two new functions with 
+// the exact same behaviors as the resolveFunc and 
+// rejectFunc passed to the executor function. If 
+// calling the then method throws, then the current 
+// promise is rejected with the thrown error.
+
+//In the last case, it means code like:
+
+
+new Promise((resolve, reject) => {
+            resolve(thenable);
+        });
+
+        // Is roughly equivalent to:
+
+new Promise((resolve, reject) => {
+    try {
+        thenable.then(
+            (value) => resolve(value),
+            (reason) => reject(reason),
+        );
+    } catch (e) {
+        reject(e);
+    }
+});
+
+// Except that in the resolve(thenable) case:
+
+// resolve is called synchronously, so that 
+// calling resolve or reject again has no 
+// effect, even when the handlers attached 
+// through anotherPromise.then() are not called yet.
+
+// The then method is called asynchronously, 
+// so that the promise will never be instantly 
+// resolved if a thenable is passed.
+
+// Because resolve is called again with whatever 
+// thenable.then() passes to it as value, the 
+// resolver function is able to flatten nested 
+// thenables, where a thenable calls its onFulfilled 
+// handler with another thenable.The effect is that 
+// the fulfillment handler of a real promise will 
+// never receive a thenable as its fulfillment value.
+
+//     Examples
+// Turning a callback - based API into a promise - based one
+// To provide a function with promise functionality, 
+// have it return a promise by calling the resolve 
+// and reject functions at the correct times.
+
+function myAsyncFunction(url) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = () => resolve(xhr.responseText);
+        xhr.onerror = () => reject(xhr.statusText);
+        xhr.send();
+    });
+}
+
+
+// Effect of calling resolveFunc
+// Calling resolveFunc causes the promise to 
+// become resolved, so that calling resolveFunc 
+// or rejectFunc again has no effect.However, the 
+// promise may be in any of the states: pending, 
+// fulfilled, or rejected.
+
+// This pendingResolved promise is resolved the 
+// time it's created, because it has already been 
+// "locked in" to match the eventual state of the 
+// inner promise, and calling resolveOuter or 
+// rejectOuter or throwing an error later in the
+//  executor has no effect on its eventual state. 
+// However, the inner promise is still pending until 
+// 100ms later, so the outer promise is also pending:
+
+const pendingResolved = new Promise((resolveOuter, rejectOuter) => {
+    resolveOuter(
+        new Promise((resolveInner) => {
+            setTimeout(() => {
+                resolveInner("inner");
+            }, 100);
+        }),
+    );
+});
+
+
+// This fulfilledResolved promise becomes 
+// fulfilled the moment it's resolved, because 
+// it's resolved with a non - thenable value.However, 
+// when it's created, it's unresolved, because neither 
+// resolve nor reject has been called yet.An unresolved 
+// promise is necessarily pending:
+
+const fulfilledResolved = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("outer");
+    }, 100);
+});
+
+
+// 1. Resolving with the promise itself
+const rejectedResolved1 = new Promise((resolve) => {
+    // Note: resolve has to be called asynchronously,
+    // so that the rejectedResolved1 variable is initialized
+    setTimeout(() => resolve(rejectedResolved1)); // TypeError: Chaining cycle detected for promise #<Promise>
+});
+
+// 2. Resolving with an object which throws when accessing the `then` property
+const rejectedResolved2 = new Promise((resolve) => {
+    resolve({
+        get then() {
+            throw new Error("Can't get then property");
+        },
+    });
+});
+
+
+// //////////////////////////////////////////////////////////////////////////////////////
+
+// Promise[@@species]
+// The Promise[@@species] static accessor 
+// property returns the constructor used to 
+// construct return values from promise methods.
+
+//     Syntax
+Promise[Symbol.species]
+
+// Return value
+// The value of the constructor(this) 
+// on which get @@species was called.The return 
+// value is used to construct return values from 
+// promise chaining methods that create new promises.
+
+//     Description
+// The @@species accessor property returns the 
+// default constructor for Promise objects.Subclass 
+// constructors may override it to change the 
+// constructor assignment.The default implementation 
+// is basically:
+
+// Hypothetical underlying implementation for illustration
+class Promise {
+    static get [Symbol.species]() {
+        return this;
+    }
+}
+
+// Because of this polymorphic implementation,
+//  @@species of derived subclasses would also 
+// return the constructor itself by default.
+
+class SubPromise extends Promise { }
+SubPromise[Symbol.species] === SubPromise; // true
+
+// Promise chaining methods — then(), catch (), 
+// and finally() — return new promise objects.They 
+// get the constructor to construct the new promise 
+// through this.constructor[@@species].If 
+// this.constructor is undefined, or if 
+// this.constructor[@@species] is undefined or null, 
+// the default Promise() constructor is used.Otherwise, 
+// the constructor returned by this.constructor[@@species] 
+// is used to construct the new promise object.
+
+//     Examples
+// Species in ordinary objects
+// The Symbol.species property returns the default 
+// constructor function, which is the Promise constructor 
+// for Promise.
+
+    Promise[Symbol.species]; // [Function: Promise]
+
+//     Species in derived objects
+// In an instance of a custom Promise subclass, 
+// such as MyPromise, the MyPromise species is 
+// the MyPromise constructor.However, you might 
+// want to override this, in order to return parent
+//  Promise objects in your derived class methods.
+
+class MyPromise extends Promise {
+    // Override MyPromise species to the parent Promise constructor
+    static get [Symbol.species]() {
+        return Promise;
+    }
+}
+
+
+// By default, promise methods would return 
+// promises with the type of the subclass.
+
+class MyPromise extends Promise {
+    someValue = 1;
+}
+console.log(MyPromise.resolve(1).then(() => { }).someValue); // 1
+
+// By overriding @@species, the promise methods 
+// will return the base Promise type.
+
+class MyPromise extends Promise {
+    someValue = 1;
+    static get [Symbol.species]() {
+        return Promise;
+    }
+}
+
+console.log(MyPromise.resolve(1).then(() => { }).someValue); // undefined
+
+
+// Methods - Promise.all()
+
+Promise.all()
+// The Promise.all() static method takes an iterable 
+// of promises as input and returns a single 
+// Promise.This returned promise fulfills when 
+// all of the input's promises fulfill (including 
+// when an empty iterable is passed), with an array 
+// of the fulfillment values. It rejects when any 
+// of the input's promises rejects, with this first 
+// rejection reason.
+
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 100, 'foo');
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+    console.log(values);
+});
+// Expected output: Array [3, 42, "foo"]
+
+
+// Syntax
+// Promise.all(iterable)
+
+// Return value
+// A Promise that is:
+
+// Already fulfilled, if the iterable passed is empty.
+// Asynchronously fulfilled, when all the promises 
+// in the given iterable fulfill.The fulfillment 
+// value is an array of fulfillment values, in the
+//  order of the promises passed, regardless of 
+// completion order.If the iterable passed is non - empty 
+// but contains no pending promises, the returned 
+// promise is still asynchronously(instead of synchronously) 
+// fulfilled.
+
+// Asynchronously rejected, when any of the promises 
+// in the given iterable rejects.The rejection reason 
+// is the rejection reason of the first promise that was 
+// rejected.
+
+//     Description
+// The Promise.all() method is one of the promise 
+// concurrency methods.It can be useful for aggregating 
+// the results of multiple promises.It is typically used 
+// when there are multiple related asynchronous tasks 
+// that the overall code relies on to work successfully 
+// — all of whom we want to fulfill before the code 
+// execution continues.
+
+//     Promise.all() will reject immediately upon any 
+// of the input promises rejecting.In comparison, 
+// the promise returned by Promise.allSettled() will 
+// wait for all input promises to complete, regardless 
+// of whether or not one rejects.Use allSettled() if 
+// you need the final result of every promise in the 
+// input iterable.
+
+
+//         Examples
+// Using Promise.all()
+// Promise.all waits for all fulfillments(or the first 
+// rejection).
+
+const p1 = Promise.resolve(3);
+const p2 = 1337;
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("foo");
+    }, 100);
+});
+
+Promise.all([p1, p2, p3]).then((values) => {
+    console.log(values); // [3, 1337, "foo"]
+});
+
+
+// If the iterable contains non - promise values, 
+// they will be ignored, but still counted in the 
+// returned promise array value(if the promise is fulfilled):
+
+// All values are non-promises, so the returned promise gets fulfilled
+const p = Promise.all([1, 2, 3]);
+// The only input promise is already fulfilled,
+// so the returned promise gets fulfilled
+const p2 = Promise.all([1, 2, 3, Promise.resolve(444)]);
+// One (and the only) input promise is rejected,
+// so the returned promise gets rejected
+const p3 = Promise.all([1, 2, 3, Promise.reject(555)]);
+
+// Using setTimeout, we can execute code after the queue is empty
+setTimeout(() => {
+    console.log(p);
+    console.log(p2);
+    console.log(p3);
+});
+
+// Logs:
+// Promise { <state>: "fulfilled", <value>: Array[3] }
+// Promise { <state>: "fulfilled", <value>: Array[4] }
+// Promise { <state>: "rejected", <reason>: 555 }
+
+
+// Asynchronicity or synchronicity of Promise.all
+
+// This following example demonstrates the 
+// asynchronicity of Promise.all when a non - empty 
+// iterable is passed:
+
+// Passing an array of promises that are already resolved,
+// to trigger Promise.all as soon as possible
+const resolvedPromisesArray = [Promise.resolve(33), Promise.resolve(44)];
+
+const p = Promise.all(resolvedPromisesArray);
+// Immediately logging the value of p
+console.log(p);
+
+// Using setTimeout, we can execute code after the queue is empty
+setTimeout(() => {
+    console.log("the queue is now empty");
+    console.log(p);
+});
+
+// Logs, in order:
+// Promise { <state>: "pending" }
+// the queue is now empty
+// Promise { <state>: "fulfilled", <value>: Array[2] }
+
+// The same thing happens if Promise.all rejects:
+
+    const mixedPromisesArray = [Promise.resolve(33), Promise.reject(44)];
+const p = Promise.all(mixedPromisesArray);
+console.log(p);
+setTimeout(() => {
+    console.log("the queue is now empty");
+    console.log(p);
+});
+
+// Logs:
+// Promise { <state>: "pending" }
+// the queue is now empty
+// Promise { <state>: "rejected", <reason>: 44 }
+
+// Promise.all resolves synchronously if and only 
+// if the iterable passed is empty:
+
+const p = Promise.all([]); // Will be immediately resolved
+const p2 = Promise.all([1337, "hi"]); // Non-promise values are ignored, but the evaluation is done asynchronously
+console.log(p);
+console.log(p2);
+setTimeout(() => {
+    console.log("the queue is now empty");
+    console.log(p2);
+});
+
+// Logs:
+// Promise { <state>: "fulfilled", <value>: Array[0] }
+// Promise { <state>: "pending" }
+// the queue is now empty
+// Promise { <state>: "fulfilled", <value>: Array[2] }
+
+
+// Using Promise.all() with async functions
+// Within async functions, it's very common 
+// to "over-await" your code. For example, 
+// given the following functions:
+
+function promptForDishChoice() {
+    return new Promise((resolve, reject) => {
+        const dialog = document.createElement("dialog");
+        dialog.innerHTML = `
+  <form method="dialog">
+    <p>What would you like to eat?</p>
+    <select>
+      <option value="pizza">Pizza</option>
+      <option value="pasta">Pasta</option>
+      <option value="salad">Salad</option>
+    </select>
+    <menu>
+      <li><button value="cancel">Cancel</button></li>
+      <li><button type="submit" value="ok">OK</button></li>
+    </menu>
+  </form>
+      `;
+        dialog.addEventListener("close", () => {
+            if (dialog.returnValue === "ok") {
+                resolve(dialog.querySelector("select").value);
+            } else {
+                reject(new Error("User cancelled dialog"));
+            }
+        });
+        document.body.appendChild(dialog);
+        dialog.showModal();
+    });
+}
+
+async function fetchPrices() {
+    const response = await fetch("/prices");
+    return await response.json();
+}
+// You may write a function like this:
+
+async function getPrice() {
+    const choice = await promptForDishChoice();
+    const prices = await fetchPrices();
+    return prices[choice];
+}
+
+// However, note that the execution of 
+// promptForDishChoice and fetchPrices 
+// don't depend on the result of each 
+// other. While the user is choosing their 
+// dish, it's fine for the prices to be
+//  fetched in the background, but in the 
+// code above, the await operator causes 
+// the async function to pause until the 
+// choice is made, and then again until 
+// the prices are fetched.We can use 
+// Promise.all to run them concurrently, 
+// so that the user doesn't have to wait 
+// for the prices to be fetched before the 
+// result is given:
+
+async function getPrice() {
+    const [choice, prices] = await Promise.all([
+        promptForDishChoice(),
+        fetchPrices(),
+    ]);
+    return prices[choice];
+}
+
+// Promise.all is the best choice of 
+// concurrency method here, because 
+// error handling is intuitive — if 
+// any of the promises reject, the result 
+// is no longer available, so the whole await 
+// expression throws.
+
+//Promise.all accepts an iterable of promises, 
+// so if you are using it to run several async 
+// functions concurrently, you need to call 
+// the async functions and use the returned 
+// promises.Directly passing the functions 
+// to Promise.all does not work, since they 
+// are not promises.
+
+        async function getPrice() {
+            const [choice, prices] = await Promise.all([
+                promptForDishChoice,
+                fetchPrices,
+            ]);
+            // `choice` and `prices` are still the original async functions;
+            // Promise.all() does nothing to non-promises
+        }
+
+// Promise.all fail - fast behavior
+// Promise.all is rejected if any of 
+// the elements are rejected.For example, 
+// if you pass in four promises that resolve 
+// after a timeout and one promise that rejects
+//  immediately, then Promise.all will reject immediately.
+
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("one"), 1000);
+});
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("two"), 2000);
+});
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("three"), 3000);
+});
+const p4 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("four"), 4000);
+});
+const p5 = new Promise((resolve, reject) => {
+    reject(new Error("reject"));
+});
+
+// Using .catch:
+Promise.all([p1, p2, p3, p4, p5])
+    .then((values) => {
+        console.log(values);
+    })
+    .catch((error) => {
+        console.error(error.message);
+    });
+
+// Logs:
+// "reject"
+
+// It is possible to change this behavior by
+//  handling possible rejections:
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("p1_delayed_resolution"), 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+    reject(new Error("p2_immediate_rejection"));
+});
+
+Promise.all([p1.catch((error) => error), p2.catch((error) => error)]).then(
+    (values) => {
+        console.log(values[0]); // "p1_delayed_resolution"
+        console.error(values[1]); // "Error: p2_immediate_rejection"
+    },
+);
+
+
+// promise methods > Promise.any()
+
+// The Promise.any() static method takes an iterable
+//  of promises as input and returns a single Promise.
+// This returned promise fulfills when any of the 
+// input's promises fulfills, with this first 
+// fulfillment value. It rejects when all of the 
+// input's promises reject(including when an empty 
+// iterable is passed), with an AggregateError 
+// containing an array of rejection reasons.
+
+const promise1 = Promise.reject(0);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'quick'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 500, 'slow'));
+
+const promises = [promise1, promise2, promise3];
+
+Promise.any(promises).then((value) => console.log(value));
+
+// Expected output: "quick"
+
+// Syntax
+// Promise.any(iterable)
+
+// Parameters
+// iterable
+// An iterable(such as an Array) of promises.
+
+// Return value
+// A Promise that is:
+
+// Already rejected, if the iterable passed is empty.
+// Asynchronously fulfilled, when any of the 
+// promises in the given iterable fulfills.The 
+// fulfillment value is the fulfillment value of 
+// the first promise that was fulfilled.
+
+// Asynchronously rejected, when all of the promises 
+// in the given iterable reject.The rejection reason 
+// is an AggregateError containing an array of rejection 
+// reasons in its errors property.The errors are in 
+// the order of the promises passed, regardless of 
+// completion order.If the iterable passed is non - 
+// empty but contains no pending promises, the returned 
+// promise is still asynchronously(instead of synchronously) 
+// rejected.
+
+//     Description
+// The Promise.any() method is one of the promise 
+// concurrency methods.This method is useful for 
+// returning the first promise that fulfills.It short 
+// - circuits after a promise fulfills, so it does not 
+// wait for the other promises to complete once it finds one.
+
+// Unlike Promise.all(), which returns an array of 
+// fulfillment values, we only get one fulfillment 
+// value(assuming at least one promise fulfills).This 
+// can be beneficial if we need only one promise to 
+// fulfill but we do not care which one does.Note 
+// another difference: this method rejects upon 
+// receiving an empty iterable, since, truthfully, 
+// the iterable contains no items that fulfill.You 
+// may compare Promise.any() and Promise.all() with 
+// Array.prototype.some() and Array.prototype.every().
+
+//Also, unlike Promise.race(), which returns the 
+// first settled value(either fulfillment or rejection), 
+// this method returns the first fulfilled value.This 
+// method ignores all rejected promises up until the 
+// first promise that fulfills.
+
+//         Examples
+// Using Promise.any()
+// Promise.any() fulfills with the first promise to 
+// fulfill, even if a promise rejects first.This 
+// is in contrast to Promise.race(), which fulfills 
+// or rejects with the first promise to settle.
+
+const pErr = new Promise((resolve, reject) => {
+    reject("Always fails");
+});
+
+const pSlow = new Promise((resolve, reject) => {
+    setTimeout(resolve, 500, "Done eventually");
+});
+
+const pFast = new Promise((resolve, reject) => {
+    setTimeout(resolve, 100, "Done quick");
+});
+
+Promise.any([pErr, pSlow, pFast]).then((value) => {
+    console.log(value);
+    // pFast fulfills first
+});
+// Logs:
+// Done quick
+
+// Rejections with AggregateError
+// Promise.any() rejects with an AggregateError 
+// if no promise fulfills.
+
+const failure = new Promise((resolve, reject) => {
+    reject("Always fails");
+});
+
+Promise.any([failure]).catch((err) => {
+    console.log(err);
+});
+// AggregateError: No Promise in Promise.any was resolved
+
+
+// Displaying the first image loaded
+// In this example, we have a function that fetches 
+// an image and returns a blob.We use Promise.any() 
+// to fetch a couple of images and display the first 
+// one available(i.e.whose promise has resolved).
+
+async function fetchAndDecode(url, description) {
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const data = await res.blob();
+    return [data, description];
+}
+
+const coffee = fetchAndDecode("coffee.jpg", "Coffee");
+const tea = fetchAndDecode("tea.jpg", "Tea");
+
+Promise.any([coffee, tea])
+    .then(([blob, description]) => {
+        const objectURL = URL.createObjectURL(blob);
+        const image = document.createElement("img");
+        image.src = objectURL;
+        image.alt = description;
+        document.body.appendChild(image);
+    })
+    .catch((e) => {
+        console.error(e);
+    });
+
+
+// methods > Promise.reject()
+
+// Promise.reject()
+// The Promise.reject() static method returns 
+// a Promise object that is rejected with a given reason.
+
+// Try it
+function resolved(result) {
+    console.log('Resolved');
+}
+
+function rejected(result) {
+    console.error(result);
+}
+
+Promise.reject(new Error('fail')).then(resolved, rejected);
+// Expected output: Error: fail
+
+// syntax
+// Promise.reject(reason)
+
+// Parameters
+// reason
+// Reason why this Promise rejected.
+
+// Return value
+// A Promise that is rejected with the given reason.
+
+//     Description
+// The static Promise.reject function returns a Promise 
+// that is rejected.For debugging purposes and selective 
+// error catching, it is useful to make reason an 
+// instanceof Error.
+
+//     Promise.reject() is generic and supports 
+// subclassing, which means it can be called on 
+// subclasses of Promise, and the result will be 
+// a promise of the subclass type.To do so, the 
+// subclass's constructor must implement the same 
+// signature as the Promise() constructor — accepting 
+// a single executor function that can be called with 
+// the resolve and reject callbacks as parameters. 
+// Promise.reject() is essentially a shorthand for 
+// new Promise((resolve, reject) => reject(reason)).
+
+// Unlike Promise.resolve(), Promise.reject() always 
+// wraps reason in a new Promise object, even when 
+// reason is already a Promise.
+
+//     Examples
+// Using the static Promise.reject() method
+Promise.reject(new Error("fail")).then(
+    () => {
+        // not called
+    },
+    (error) => {
+        console.error(error); // Stacktrace
+    },
+);
+
+// Rejecting with a promise
+// Unlike Promise.resolve, the Promise.reject 
+// method does not reuse existing Promise instances.
+// It always returns a new Promise instance that 
+// wraps reason.
+
+const p = Promise.resolve(1);
+const rejected = Promise.reject(p);
+console.log(rejected === p); // false
+rejected.catch((v) => {
+    console.log(v === p); // true
+});
+
+// Calling reject() on a non - Promise constructor
+// Promise.reject() is a generic method.It can 
+// be called on any constructor that implements 
+// the same signature as the Promise()
+//  constructor.For example, we can call it on 
+// a constructor that passes it console.log as reject:
+
+class NotPromise {
+    constructor(executor) {
+        // The "resolve" and "reject" functions behave nothing like the
+        // native promise's, but Promise.reject() calls them in the same way.
+        executor(
+            (value) => console.log("Resolved", value),
+            (reason) => console.log("Rejected", reason),
+        );
+    }
+}
+
+Promise.reject.call(NotPromise, "foo"); // Logs "Rejected foo"
+
+
+// methods -> Promise.resolve()
+
+// Promise.resolve()
+// The Promise.resolve() static method "resolves" 
+// a given value to a Promise.If the value is a promise,
+//  that promise is returned; if the value is a thenable, 
+// Promise.resolve() will call the then() method with two 
+// callbacks it prepared; otherwise the returned promise 
+// will be fulfilled with the value.
+
+// This function flattens nested layers of promise - like
+//  objects(e.g.a promise that fulfills to a promise that 
+// fulfills to something) into a single layer — a promise 
+// that fulfills to a non - thenable value.
+
+// Try it
+const promise1 = Promise.resolve(123);
+
+promise1.then((value) => {
+    console.log(value);
+    // Expected output: 123
+});
+
+
+// Syntax
+// Promise.resolve(value)
+
+// Parameters
+// value
+// Argument to be resolved by this Promise.Can also 
+// be a Promise or a thenable to resolve.
+
+// Return value
+// A Promise that is resolved with the given value, 
+// or the promise passed as value, if the value was 
+// a promise object.A resolved promise can be in any 
+// of the states — fulfilled, rejected, or pending.For 
+// example, resolving a rejected promise will still 
+// result in a rejected promise.
+
+//     Description
+// Promise.resolve() resolves a promise, which is 
+// not the same as fulfilling or rejecting the 
+// promise.See Promise description for definitions 
+// of the terminology.In brief, Promise.resolve() 
+// returns a promise whose eventual state depends 
+// on another promise, thenable object, or other value.
+
+//     Promise.resolve() is generic and supports 
+// subclassing, which means it can be called on 
+// subclasses of Promise, and the result will be 
+// a promise of the subclass type.To do so, the 
+// subclass's constructor must implement the same 
+// signature as the Promise() constructor — accepting 
+// a single executor function that can be called with 
+// the resolve and reject callbacks as parameters.
+
+// Promise.resolve() special - cases native Promise 
+// instances.If value belongs to Promise or a subclass, 
+// and value.constructor === Promise, then value is 
+// directly returned by Promise.resolve(), without 
+// creating a new Promise instance.Otherwise, 
+// Promise.resolve() is essentially a shorthand 
+// for new Promise((resolve) => resolve(value)).
+
+// The bulk of the resolving logic is actually 
+// implemented by the resolve function passed by 
+// the Promise() constructor.In summary:
+
+// If a non - thenable value is passed, the returned 
+// promise is already fulfilled with that value.
+
+// If a thenable is passed, the returned promise
+//  will adopt the state of that thenable by calling 
+// the then method and passing a pair of resolving 
+// functions as arguments. (But because native promises 
+// directly pass through Promise.resolve() without 
+// creating a wrapper, the then method is not called 
+// on native promises.) If the resolve function 
+// receives another thenable object, it will be 
+// resolved again, so that the eventual fulfillment 
+// value of the promise will never be thenable.
+//     Examples
+// Using the static Promise.resolve method
+
+Promise.resolve("Success").then(
+    (value) => {
+        console.log(value); // "Success"
+    },
+    (reason) => {
+        // not called
+    },
+);
+
+
+// Resolving an array
+const p = Promise.resolve([1, 2, 3]);
+p.then((v) => {
+    console.log(v[0]); // 1
+});
+
+
+// Resolving another Promise
+// Promise.resolve() reuses existing Promise 
+// instances.If it's resolving a native promise, 
+// it returns the same promise instance without 
+// creating a wrapper.
+
+const original = Promise.resolve(33);
+const cast = Promise.resolve(original);
+cast.then((value) => {
+    console.log(`value: ${value}`);
+});
+console.log(`original === cast ? ${original === cast}`);
+
+// Logs, in order:
+// original === cast ? true
+// value: 33
+
+// Resolving thenables and throwing Errors
+
+// Resolving a thenable object
+const p1 = Promise.resolve({
+    then(onFulfill, onReject) {
+        onFulfill("fulfilled!");
+    },
+});
+console.log(p1 instanceof Promise); // true, object casted to a Promise
+
+p1.then(
+    (v) => {
+        console.log(v); // "fulfilled!"
+    },
+    (e) => {
+        // not called
+    },
+);
+
+// Thenable throws
+// Promise rejects
+const p2 = Promise.resolve({
+    then() {
+        throw new TypeError("Throwing");
+    },
+});
+p2.then(
+    (v) => {
+        // not called
+    },
+    (e) => {
+        console.error(e); // TypeError: Throwing
+    },
+);
+
+// Thenable throws after callback
+// Promise resolves
+const p3 = Promise.resolve({
+    then(onFulfilled) {
+        onFulfilled("Resolving");
+        throw new TypeError("Throwing");
+    },
+});
+p3.then(
+    (v) => {
+        console.log(v); // "Resolving"
+    },
+    (e) => {
+        // not called
+    },
+);
+
+// Nested thenables will be "deeply flattened" 
+// to a single promise.
+
+const thenable = {
+    then(onFulfilled, onRejected) {
+        onFulfilled({
+            // The thenable is fulfilled with another thenable
+            then(onFulfilled, onRejected) {
+                onFulfilled(42);
+            },
+        });
+    },
+};
+
+Promise.resolve(thenable).then((v) => {
+    console.log(v); // 42
+});
+
+// Warning: Do not call Promise.resolve() on 
+// a thenable that resolves to itself.That leads 
+// to infinite recursion, because it attempts to 
+// flatten an infinitely - nested promise.
+
+const thenable = {
+    then(onFulfilled, onRejected) {
+        onFulfilled(thenable);
+    },
+};
+
+Promise.resolve(thenable); // Will lead to infinite recursion.
+
+// Calling resolve() on a non - Promise constructor
+// Promise.resolve() is a generic method.It can 
+// be called on any constructor that implements 
+// the same signature as the Promise() constructor.
+// For example, we can call it on a constructor 
+// that passes it console.log as resolve:
+
+class NotPromise {
+    constructor(executor) {
+        // The "resolve" and "reject" functions behave nothing like the
+        // native promise's, but Promise.resolve() calls them in the same way.
+        executor(
+            (value) => console.log("Resolved", value),
+            (reason) => console.log("Rejected", reason),
+        );
+    }
+}
+
+Promise.resolve.call(NotPromise, "foo"); // Logs "Resolved foo"
+
+// The ability to flatten nested thenables is 
+// implemented by the resolve function of the 
+// Promise() constructor, so if you call it on 
+// another constructor, nested thenables may not 
+// be flattened, depending on how that constructor 
+// implements its resolve function.
+
+const thenable = {
+    then(onFulfilled, onRejected) {
+        onFulfilled({
+            // The thenable is fulfilled with another thenable
+            then(onFulfilled, onRejected) {
+                onFulfilled(42);
+            },
+        });
+    },
+};
+
+Promise.resolve.call(NotPromise, thenable); // Logs "Resolved { then: [Function: then] }"
+
+// method > Promise.race()
+
+// The Promise.race() static method takes 
+// an iterable of promises as input and 
+// returns a single Promise.This returned 
+// promise settles with the eventual state 
+// of the first promise that settles.
+
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 500, 'one');
+});
+
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 100, 'two');
+});
+
+Promise.race([promise1, promise2]).then((value) => {
+    console.log(value);
+    // Both resolve, but promise2 is faster
+});
+// Expected output: "two"
+
+
+// Syntax
+// Promise.race(iterable)
+
+// Parameters
+// iterable
+//   An iterable(such as an Array) of promises.
+  
+//   Return value
+//   A Promise that asynchronously settles with 
+// the eventual state of the first promise in the 
+// iterable to settle.In other words, it fulfills 
+// if the first promise to settle is fulfilled, 
+// 
+// and rejects if the first promise to settle is 
+// rejected.The returned promise remains pending 
+// forever if the iterable passed is empty.If the 
+// iterable passed is non - empty but contains no 
+// pending promises, the returned promise is still 
+// asynchronously(instead of synchronously) settled.
+
+//     Description
+//   The Promise.race() method is one of the promise 
+// concurrency methods.It's useful when you want the 
+// first async task to complete, but do not care about 
+// its eventual state (i.e. it can either succeed or fail).
+  
+//   If the iterable contains one or more non - promise 
+// values and / or an already settled promise, then 
+// Promise.race() will settle to the first of these 
+// values found in the iterable
+
+
+// Examples
+//   Using Promise.race()
+//   This example shows how Promise.race() can be 
+// used to race several timers implemented with 
+// setTimeout().The timer with the shortest time 
+// always wins the race and becomes the resulting 
+// promise's state.
+
+function sleep(time, value, state) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (state === "fulfill") {
+                return resolve(value);
+            } else {
+                return reject(new Error(value));
+            }
+        }, time);
+    });
+}
+
+const p1 = sleep(500, "one", "fulfill");
+const p2 = sleep(100, "two", "fulfill");
+
+Promise.race([p1, p2]).then((value) => {
+    console.log(value); // "two"
+    // Both fulfill, but p2 is faster
+});
+
+const p3 = sleep(100, "three", "fulfill");
+const p4 = sleep(500, "four", "reject");
+
+Promise.race([p3, p4]).then(
+    (value) => {
+        console.log(value); // "three"
+        // p3 is faster, so it fulfills
+    },
+    (error) => {
+        // Not called
+    },
+);
+
+const p5 = sleep(500, "five", "fulfill");
+const p6 = sleep(100, "six", "reject");
+
+Promise.race([p5, p6]).then(
+    (value) => {
+        // Not called
+    },
+    (error) => {
+        console.error(error.message); // "six"
+        // p6 is faster, so it rejects
+    },
+);
+
+// Asynchronicity of Promise.race
+// This following example demonstrates the 
+// asynchronicity of Promise.race.Unlike other 
+// promise concurrency methods, Promise.race is 
+// always asynchronous: it never settles synchronously, 
+// even when the iterable is empty.
+
+// Passing an array of promises that are already resolved,
+// to trigger Promise.race as soon as possible
+const resolvedPromisesArray = [Promise.resolve(33), Promise.resolve(44)];
+
+const p = Promise.race(resolvedPromisesArray);
+// Immediately logging the value of p
+console.log(p);
+
+// Using setTimeout, we can execute code after the stack is empty
+setTimeout(() => {
+    console.log("the stack is now empty");
+    console.log(p);
+});
+
+// Logs, in order:
+// Promise { <state>: "pending" }
+// the stack is now empty
+// Promise { <state>: "fulfilled", <value>: 33 }
+
+// An empty iterable causes the returned promise 
+// to be forever pending:
+
+const foreverPendingPromise = Promise.race([]);
+console.log(foreverPendingPromise);
+setTimeout(() => {
+    console.log("the stack is now empty");
+    console.log(foreverPendingPromise);
+});
+
+// Logs, in order:
+// Promise { <state>: "pending" }
+// the stack is now empty
+// Promise { <state>: "pending" }
+
+// If the iterable contains one or more non - 
+// promise value and / or an already settled promise, 
+// then Promise.race will settle to the first of these 
+// values found in the array:
+
+const foreverPendingPromise = Promise.race([]);
+const alreadyFulfilledProm = Promise.resolve(100);
+
+const arr = [foreverPendingPromise, alreadyFulfilledProm, "non-Promise value"];
+const arr2 = [foreverPendingPromise, "non-Promise value", Promise.resolve(100)];
+const p = Promise.race(arr);
+const p2 = Promise.race(arr2);
+
+console.log(p);
+console.log(p2);
+setTimeout(() => {
+    console.log("the stack is now empty");
+    console.log(p);
+    console.log(p2);
+});
+
+// Logs, in order:
+// Promise { <state>: "pending" }
+// Promise { <state>: "pending" }
+// the stack is now empty
+// Promise { <state>: "fulfilled", <value>: 100 }
+// Promise { <state>: "fulfilled", <value>: "non-Promise value" }
+
+// Using Promise.race() to implement request timeout
+// You can race a potentially long - lasting request 
+// with a timer that rejects, so that when the time 
+// limit has elapsed, the resulting promise automatically 
+// rejects.
+
+const data = Promise.race([
+    fetch("/api"),
+    new Promise((resolve, reject) => {
+        // Reject after 5 seconds
+        setTimeout(() => reject(new Error("Request timed out")), 5000);
+    }),
+])
+    .then((res) => res.json())
+    .catch((err) => displayError(err));
+
+
+
+//     If the data promise fulfills, it will contain 
+// the data fetched from / api; otherwise, it will 
+// reject if fetch remains pending for 5 seconds and 
+// loses the race with the setTimeout timer.
+
+//     Using Promise.race() to detect the status of 
+// a promise
+//     Because Promise.race() resolves to the first 
+// non - pending promise in the iterable, we can check 
+// a promise's state, including if it's pending.This 
+// example is adapted from promise - status - async.
+
+
+function promiseState(promise) {
+    const pendingState = { status: "pending" };
+
+    return Promise.race([promise, pendingState]).then(
+        (value) =>
+            value === pendingState ? value : { status: "fulfilled", value },
+        (reason) => ({ status: "rejected", reason }),
+    );
+}
+
+// In this function, if promise is pending, the 
+// second value, pendingState, which is a non - promise, 
+// becomes the result of the race; otherwise, if promise 
+// is already settled, we may know its state through 
+// the onFulfilled and onRejected handlers.For example:
+
+// // methods -> Promise.all()
+
+// The Promise.all() static method takes an iterable 
+// of promises as input and returns a single Promise.
+// This returned promise fulfills when all of the 
+// input's promises fulfill (including when an 
+// empty iterable is passed), with an array of the 
+// fulfillment values. It rejects when any of the 
+// input's promises rejects, with this first rejection reason.
+
+// Try it
+
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 100, 'foo');
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+    console.log(values);
+});
+// Expected output: Array [3, 42, "foo"]
+
+// Syntax
+Promise.all(iterable)
+
+// Parameters
+// iterable
+// An iterable(such as an Array) of promises.
+
+// Return value
+// A Promise that is:
+
+// Already fulfilled, if the iterable passed is empty.
+// Asynchronously fulfilled, when all the promises 
+// in the given iterable fulfill.The fulfillment 
+// value is an array of fulfillment values, in the 
+// order of the promises passed, regardless of 
+// completion order.If the iterable passed is 
+// non - empty but contains no pending promises, 
+// the returned promise is still asynchronously(instead 
+// of synchronously) fulfilled.
+// Asynchronously rejected, when any of the promises 
+// in the given iterable rejects.The rejection reason 
+// is the rejection reason of the first promise that 
+// was rejected.
+
+//     Description
+// The Promise.all() method is one of the promise 
+// concurrency methods.It can be useful for 
+// aggregating the results of multiple promises.It 
+// is typically used when there are multiple related 
+// asynchronous tasks that the overall code relies 
+// on to work successfully — all of whom we want to 
+// fulfill before the code execution continues.
+
+//     Promise.all() will reject immediately upon 
+// any of the input promises rejecting.In comparison, 
+// the promise returned by Promise.allSettled() will 
+// wait for all input promises to complete, regardless 
+// of whether or not one rejects.Use allSettled() if 
+// you need the final result of every promise in the 
+// input iterable.
+
+//         Examples
+Using Promise.all()
+// Promise.all waits for all fulfillments(or the first rejection).
+
+const p1 = Promise.resolve(3);
+const p2 = 1337;
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("foo");
+    }, 100);
+});
+
+Promise.all([p1, p2, p3]).then((values) => {
+    console.log(values); // [3, 1337, "foo"]
+});
+
+// If the iterable contains non - promise values, 
+// they will be ignored, but still counted in the 
+// returned promise array value(if the promise is 
+// fulfilled):
+
+// All values are non-promises, so the returned promise gets fulfilled
+const p = Promise.all([1, 2, 3]);
+// The only input promise is already fulfilled,
+// so the returned promise gets fulfilled
+const p2 = Promise.all([1, 2, 3, Promise.resolve(444)]);
+// One (and the only) input promise is rejected,
+// so the returned promise gets rejected
+const p3 = Promise.all([1, 2, 3, Promise.reject(555)]);
+
+// Using setTimeout, we can execute code after the queue is empty
+setTimeout(() => {
+    console.log(p);
+    console.log(p2);
+    console.log(p3);
+});
+
+// Logs:
+// Promise { <state>: "fulfilled", <value>: Array[3] }
+// Promise { <state>: "fulfilled", <value>: Array[4] }
+// Promise { <state>: "rejected", <reason>: 555 }
+
+// Asynchronicity or synchronicity of Promise.all
+// This following example demonstrates the asynchronicity 
+// of Promise.all when a non - empty iterable is passed:
+
+// Passing an array of promises that are already resolved,
+// to trigger Promise.all as soon as possible
+const resolvedPromisesArray = [Promise.resolve(33), Promise.resolve(44)];
+
+const p = Promise.all(resolvedPromisesArray);
+// Immediately logging the value of p
+console.log(p);
+
+// Using setTimeout, we can execute code after the queue is empty
+setTimeout(() => {
+    console.log("the queue is now empty");
+    console.log(p);
+});
+
+// Logs, in order:
+// Promise { <state>: "pending" }
+// the queue is now empty
+// Promise { <state>: "fulfilled", <value>: Array[2] }
+
+
+// The same thing happens if Promise.all rejects:
+
+const mixedPromisesArray = [Promise.resolve(33), Promise.reject(44)];
+const p = Promise.all(mixedPromisesArray);
+console.log(p);
+setTimeout(() => {
+    console.log("the queue is now empty");
+    console.log(p);
+});
+
+// Logs:
+// Promise { <state>: "pending" }
+// the queue is now empty
+// Promise { <state>: "rejected", <reason>: 44 }
+
+
+// Promise.all resolves synchronously if and only 
+// if the iterable passed is empty:
+
+const p = Promise.all([]); // Will be immediately resolved
+const p2 = Promise.all([1337, "hi"]); // Non-promise values are ignored, but the evaluation is done asynchronously
+console.log(p);
+console.log(p2);
+setTimeout(() => {
+    console.log("the queue is now empty");
+    console.log(p2);
+});
+
+// Logs:
+// Promise { <state>: "fulfilled", <value>: Array[0] }
+// Promise { <state>: "pending" }
+// the queue is now empty
+// Promise { <state>: "fulfilled", <value>: Array[2] }
+
+// Using Promise.all() with async functions
+// Within async functions, it's very common to "over-await" your code. For example, given the following functions:
+
+function promptForDishChoice() {
+    return new Promise((resolve, reject) => {
+        const dialog = document.createElement("dialog");
+        dialog.innerHTML = `
+  <form method="dialog">
+    <p>What would you like to eat?</p>
+    <select>
+      <option value="pizza">Pizza</option>
+      <option value="pasta">Pasta</option>
+      <option value="salad">Salad</option>
+    </select>
+    <menu>
+      <li><button value="cancel">Cancel</button></li>
+      <li><button type="submit" value="ok">OK</button></li>
+    </menu>
+  </form>
+      `;
+        dialog.addEventListener("close", () => {
+            if (dialog.returnValue === "ok") {
+                resolve(dialog.querySelector("select").value);
+            } else {
+                reject(new Error("User cancelled dialog"));
+            }
+        });
+        document.body.appendChild(dialog);
+        dialog.showModal();
+    });
+}
+
+async function fetchPrices() {
+    const response = await fetch("/prices");
+    return await response.json();
+}
+  
+
+//   You may write a function like this:
+
+async function getPrice() {
+    const choice = await promptForDishChoice();
+    const prices = await fetchPrices();
+    return prices[choice];
+}
+
+// However, note that the execution of promptForDishChoice and fetchPrices don't depend on the result of each other. While the user is choosing their dish, it's fine for the prices to be fetched in the background, but in the code above, the await operator causes the async function to pause until the choice is made, and then again until the prices are fetched.We can use Promise.all to run them concurrently, so that the user doesn't have to wait for the prices to be fetched before the result is given:
+
+async function getPrice() {
+    const [choice, prices] = await Promise.all([
+        promptForDishChoice(),
+        fetchPrices(),
+    ]);
+    return prices[choice];
+}
+
+
+// Promise.all is the best choice of concurrency 
+// method here, because error handling is intuitive 
+// — if any of the promises reject, the result is 
+// no longer available, so the whole await 
+// expression throws.
+
+//     Promise.all accepts an iterable of promises, so if you are using it to run several async functions concurrently, you need to call the async functions and use the returned promises.Directly passing the functions to Promise.all does not work, since they are not promises.
+
+        async function getPrice() {
+            const [choice, prices] = await Promise.all([
+                promptForDishChoice,
+                fetchPrices,
+            ]);
+            // `choice` and `prices` are still the original async functions;
+            // Promise.all() does nothing to non-promises
+        }
+
+// Promise.all fail - fast behavior
+// Promise.all is rejected if any of the elements are rejected.For example, if you pass in four promises that resolve after a timeout and one promise that rejects immediately, then Promise.all will reject immediately.
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("one"), 1000);
+});
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("two"), 2000);
+});
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("three"), 3000);
+});
+const p4 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("four"), 4000);
+});
+const p5 = new Promise((resolve, reject) => {
+    reject(new Error("reject"));
+});
+
+// Using .catch:
+Promise.all([p1, p2, p3, p4, p5])
+    .then((values) => {
+        console.log(values);
+    })
+    .catch((error) => {
+        console.error(error.message);
+    });
+
+// Logs:
+// "reject"
+
+
+// It is possible to change this behavior by handling possible rejections:
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("p1_delayed_resolution"), 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+    reject(new Error("p2_immediate_rejection"));
+});
+
+Promise.all([p1.catch((error) => error), p2.catch((error) => error)]).then(
+    (values) => {
+        console.log(values[0]); // "p1_delayed_resolution"
+        console.error(values[1]); // "Error: p2_immediate_rejection"
+    },
+);
+
+// // methods > Promise.prototype.catch()
+
+// The catch () method of Promise instances schedules a function to be called when the promise is rejected.It immediately returns an equivalent Promise object, allowing you to chain calls to other promise methods.It is a shortcut for Promise.prototype.then(undefined, onRejected).
+
+const promise1 = new Promise((resolve, reject) => {
+    throw new Error('Uh-oh!');
+});
+
+promise1.catch((error) => {
+    console.error(error);
+});
+// Expected output: Error: Uh-oh!
+
+// Syntax
+// promiseInstance.catch(onRejected)
+
+// Parameters
+// onRejected
+// A function to asynchronously execute when this promise becomes rejected.Its return value becomes the fulfillment value of the promise returned by catch (). The function is called with the following arguments:
+
+// reason
+// The value that the promise was rejected with.
+
+// Return value
+// Returns a new Promise.This new promise is always pending when returned, regardless of the current promise's status. If onRejected is called, the returned promise will resolve based on the return value of this call, or reject with the thrown error from this call. If the current promise fulfills, onRejected is not called and the returned promise fulfills to the same value.
+
+// Description
+// The catch method is used for error handling in promise composition.Since it returns a Promise, it can be chained in the same way as its sister method, then().
+
+// If a promise becomes rejected, and there are no rejection handlers to call(a handler can be attached through any of then(), catch (), or finally()), then the rejection event is surfaced by the host.In the browser, this results in an unhandledrejection event.If a handler is attached to a rejected promise whose rejection has already caused an unhandled rejection event, then another rejectionhandled event is fired.
+
+//     catch() internally calls then() on the object upon which it was called, passing undefined and onRejected as arguments.The value of that call is directly returned.This is observable if you wrap the methods.
+
+// // overriding original Promise.prototype.then/catch just to add some logs
+((Promise) => {
+        const originalThen = Promise.prototype.then;
+        const originalCatch = Promise.prototype.catch;
+
+        Promise.prototype.then = function (...args) {
+            console.log("Called .then on %o with arguments: %o", this, args);
+            return originalThen.apply(this, args);
+        };
+        Promise.prototype.catch = function (...args) {
+            console.error("Called .catch on %o with arguments: %o", this, args);
+            return originalCatch.apply(this, args);
+        };
+    })(Promise);
+
+// // calling catch on an already resolved promise
+// Promise.resolve().catch(function XXX() { });
+
+// Logs:
+// Called .catch on Promise{} with arguments: Arguments{1} [0: function XXX()]
+// Called .then on Promise{} with arguments: Arguments{2} [0: undefined, 1: function XXX()]
+
+
+// This means that passing undefined still causes the returned promise to be rejected, and you have to pass a function to prevent the final promise from being rejected.
+
+// Because catch () just calls then(), it supports subclassing.
+
+//     Note: The examples below are throwing instances of Error.As with synchronous throw statements, this is considered a good practice; otherwise, the part doing the catching would have to perform checks to see if the argument was a string or an error, and you might lose valuable information such as stack traces.
+
+//         Examples
+// Using and chaining the catch () method
+const p1 = new Promise((resolve, reject) => {
+    resolve("Success");
+});
+
+p1.then((value) => {
+    console.log(value); // "Success!"
+    throw new Error("oh, no!");
+})
+    .catch((e) => {
+        console.error(e.message); // "oh, no!"
+    })
+    .then(
+        () => console.log("after a catch the chain is restored"), // "after a catch the chain is restored"
+        () => console.log("Not fired due to the catch"),
+    );
+
+// The following behaves the same as above
+p1.then((value) => {
+    console.log(value); // "Success!"
+    return Promise.reject("oh, no!");
+})
+    .catch((e) => {
+        console.error(e); // "oh, no!"
+    })
+    .then(
+        () => console.log("after a catch the chain is restored"), // "after a catch the chain is restored"
+        () => console.log("Not fired due to the catch"),
+    );
+
+
+//     Gotchas when throwing errors
+//     Throwing an error will call the catch () 
+// method most of the time:
+
+const p1 = new Promise((resolve, reject) => {
+    throw new Error("Uh-oh!");
+});
+
+p1.catch((e) => {
+    console.error(e); // "Uh-oh!"
+});
+
+// Errors thrown inside asynchronous functions will 
+// act like uncaught errors:
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        throw new Error("Uncaught Exception!");
+    }, 1000);
+});
+
+p2.catch((e) => {
+    console.error(e); // This is never called
+});
+
+
+// Errors thrown after resolve is called 
+// will be silenced:
+
+
+const p3 = new Promise((resolve, reject) => {
+    resolve();
+    throw new Error("Silenced Exception!");
+});
+
+p3.catch((e) => {
+    console.error(e); // This is never called
+});
+
+// catch () is not called if the promise is fulfilled
+// // Create a promise which would not call onReject
+// const p1 = Promise.resolve("calling next");
+
+const p2 = p1.catch((reason) => {
+    // This is never called
+    console.error("catch p1!");
+    console.error(reason);
+});
+
+p2.then(
+    (value) => {
+        console.log("next promise's onFulfilled");
+        console.log(value); // calling next
+    },
+    (reason) => {
+        console.log("next promise's onRejected");
+        console.log(reason);
+    },
+);
+
+
+// // method > Promise.prototype.finally()
+
+// The finally() method of Promise instances 
+// schedules a function to be called when the 
+// promise is settled(either fulfilled or rejected).
+// It immediately returns an equivalent Promise object, 
+// allowing you to chain calls to other promise methods.
+
+// This lets you avoid duplicating code in both the 
+// promise's then() and catch() handlers.
+
+// Try it
+function checkMail() {
+    return new Promise((resolve, reject) => {
+        if (Math.random() > 0.5) {
+            resolve('Mail has arrived');
+        } else {
+            reject(new Error('Failed to arrive'));
+        }
+    });
+}
+
+checkMail()
+    .then((mail) => {
+        console.log(mail);
+    })
+    .catch((err) => {
+        console.error(err);
+    })
+    .finally(() => {
+        console.log('Experiment completed');
+    });
+
+
+// Syntax
+// promiseInstance.finally(onFinally)
+
+// Parameters
+// onFinally
+// A function to asynchronously execute when 
+// this promise becomes settled.Its return value 
+// is ignored unless the returned value is a 
+// rejected promise.The function is called with 
+// no arguments.
+
+// Return value
+// Returns an equivalent Promise.If the handler 
+// throws an error or returns a rejected promise, 
+// the promise returned by finally() will be rejected 
+// with that value instead.Otherwise, the return 
+// value of the handler does not affect the state 
+// of the original promise.
+
+//     Description
+// The finally() method can be useful if you want 
+// to do some processing or cleanup once the promise 
+// is settled, regardless of its outcome.
+
+// The finally() method is very similar to calling 
+// then(onFinally, onFinally).However, there are a 
+// couple of differences:
+
+// When creating a function inline, you can pass it 
+// once, instead of being forced to either declare it 
+// twice, or create a variable for it.
+
+// The onFinally callback does not receive any argument.
+// This use case is for precisely when you do not care 
+// about the rejection reason or the fulfillment value,
+//  and so there's no need to provide it.
+
+// A finally() call is usually transparent and does 
+// not change the eventual state of the original 
+// promise.So for example:
+
+// Unlike Promise.resolve(2).then(() => 77, () => { }), 
+// which returns a promise eventually fulfilled with the 
+// value 77, Promise.resolve(2).finally(() => 77) returns
+//  a promise eventually fulfilled with the value 2.
+
+// Similarly, unlike 
+// Promise.reject(3).then(() => { }, () => 88), which 
+// returns a promise eventually fulfilled with the 
+// value 88, Promise.reject(3).finally(() => 88) returns 
+// a promise eventually rejected with the reason 3.
+
+// Note: A throw (or returning a rejected promise) in 
+// the finally callback still rejects the returned 
+// promise.For example, both 
+// Promise.reject(3).finally(() => { throw 99; }) 
+// and Promise.reject(3).finally(() => Promise.reject(99)) 
+// reject the returned promise with the reason 99.
+
+// Like catch (), finally() internally calls the then 
+// method on the object upon which it was called.If 
+// onFinally is not a function, then() is called with 
+// onFinally as both arguments — which, for
+//  Promise.prototype.then(), means that no useful
+//  handler is attached.Otherwise, then() is called
+//  with two internally created functions, which 
+// behave like the following:
+
+
+promise.then(
+    (value) => Promise.resolve(onFinally()).then(() => value),
+    (reason) =>
+        Promise.resolve(onFinally()).then(() => {
+            throw reason;
+        }),
+);
+
+
+// Because finally() calls then(), it supports 
+// subclassing.Moreover, notice the Promise.resolve() 
+// call above — in reality, onFinally()'s return value 
+// is resolved using the same algorithm as Promise.resolve(), 
+// but the actual constructor used to construct the 
+// resolved promise will be the subclass. finally() 
+// gets this constructor through 
+// promise.constructor[@@species].
+
+// Examples
+// Using finally()
+
+let isLoading = true;
+
+fetch(myRequest)
+    .then((response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return response.json();
+        }
+        throw new TypeError("Oops, we haven't got JSON!");
+    })
+    .then((json) => {
+        /* process your JSON further */
+    })
+    .catch((error) => {
+        console.error(error); // this line can also throw, e.g. when console = {}
+    })
+    .finally(() => {
+        isLoading = false;
+    });
+
+
+
+
+

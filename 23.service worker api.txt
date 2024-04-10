@@ -1,0 +1,3394 @@
+// Using Service Workers
+
+// This article provides information on 
+// getting started with service workers, 
+// including basic architecture, registering
+//  a service worker, the installation and
+//  activation process for a new service 
+// worker, updating your service worker, 
+// cache control and custom responses, 
+// all in the context of a simple app 
+// with offline functionality.
+
+// The premise of service workers
+// One overriding problem that web users 
+// have suffered with for years is loss 
+// of connectivity. The best web app in
+//  the world will provide a terrible 
+// user experience if you can't download 
+// it. There have been various attempts 
+// to create technologies to solve this 
+// problem, and some of the issues have 
+// been solved. But the overriding problem 
+// is that there wasn't a good overall 
+// control mechanism for asset caching 
+// and custom network requests.
+
+// Service workers fix these issues. 
+// Using a service worker you can set 
+// an app up to use cached assets first, 
+// thus providing a default experience even 
+// when offline, before then getting more 
+// data from the network (commonly known as 
+// "offline first"). This is already available
+//  with native apps, which is one of the 
+// main reasons native apps are often 
+// chosen over web apps.
+
+// A service worker functions like a proxy 
+// server, allowing you to modify requests 
+// and responses replacing them with items 
+// from its own cache.
+
+// Setting up to play with service workers
+// Service workers are enabled by default 
+// in all modern browsers. To run code 
+// using service workers, you'll need to 
+// serve your code via HTTPS — Service 
+// workers are restricted to running 
+// across HTTPS for security reasons.
+//  A server supporting HTTPS is necessary. 
+// To host experiments, you can use a service 
+// such as GitHub, Netlify, Vercel, etc. In 
+// order to facilitate local development, 
+// localhost is considered a secure origin 
+// by browsers as well.
+
+// Basic architecture
+// With service workers, the following 
+// steps are generally observed for basic setup:
+
+// The service worker code is fetched and 
+// then registered using 
+// serviceWorkerContainer.register(). If 
+// successful, the service worker is executed 
+// in a ServiceWorkerGlobalScope; this is 
+// basically a special kind of worker context, 
+// running off the main script execution thread, 
+// with no DOM access. The service worker is 
+// now ready to process events.
+
+// Installation takes place. An install 
+// event is always the first one sent to 
+// a service worker (this can be used to 
+// start the process of populating an IndexedDB, 
+// and caching site assets). During this step, 
+// the application is preparing to make 
+// everything available for use offline.
+
+// When the install handler completes, 
+// the service worker is considered installed. 
+// At this point a previous version of the 
+// service worker may be active and 
+// controlling open pages. Because we 
+// don't want two different versions of 
+// the same service worker running at 
+// the same time, the new version is 
+// not yet active.
+
+// Once all pages controlled by the old 
+// version of the service worker have 
+// closed, it's safe to retire the old 
+// version, and the newly installed service 
+// worker receives an activate event. The 
+// primary use of activate is to clean up 
+// resources used in previous versions of 
+// the service worker. The new service 
+// worker can call skipWaiting() to ask 
+// to be activated immediately without 
+// waiting for open pages to be closed. 
+// The new service worker will then receive 
+// activate immediately, and will take over 
+// any open pages.
+
+// After activation, the service worker 
+// will now control pages, but only 
+// those that were opened after the 
+// register() is successful. In other 
+// words, documents will have to be 
+// reloaded to actually be controlled,
+//  because a document starts life with 
+// or without a service worker and maintains 
+// that for its lifetime. To override this 
+// default behavior and adopt open pages, 
+// a service worker can call clients.claim().
+
+// Whenever a new version of a service 
+// worker is fetched, this cycle happens 
+// again and the remains of the previous 
+// version are cleaned during the new 
+// version's activation.
+
+// lifecycle diagram
+// Here is a summary of the available 
+// service worker events:
+
+// install
+// activate
+// message
+// Functional events
+// fetch
+// sync
+// push
+// Demo
+// To demonstrate just the very basics 
+// of registering and installing a service 
+// worker, we have created a demo called 
+// simple service worker, which is a simple 
+// Star Wars Lego image gallery. It uses a 
+// promise-powered function to read image 
+// data from a JSON object and load the 
+// images using fetch(), before displaying 
+// the images in a line down the page. We've 
+// kept things static for now. It also registers, 
+// installs, and activates a service worker.
+
+// The words Star Wars followed by an image of 
+// a Lego version of the Darth Vader character
+// You can see the source code on GitHub, and 
+// the simple service worker running live.
+
+// Registering your worker
+// The first block of code in our app's 
+// JavaScript file — app.js — is as follows. 
+// This is our entry point into using service workers.
+
+// JS
+// Copy to Clipboard
+const registerServiceWorker = async () => {
+  if ("serviceWorker" in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
+      });
+      if (registration.installing) {
+        console.log("Service worker installing");
+      } else if (registration.waiting) {
+        console.log("Service worker installed");
+      } else if (registration.active) {
+        console.log("Service worker active");
+      }
+    } catch (error) {
+      console.error(`Registration failed with ${error}`);
+    }
+  }
+};
+
+// …
+
+registerServiceWorker();
+// The if-block performs a feature 
+// detection test to make sure service 
+// workers are supported before trying 
+// to register one.
+
+// Next, we use the 
+// ServiceWorkerContainer.register() 
+// function to register the service 
+// worker for this site. The service 
+// worker code is in a JavaScript file 
+// residing inside our app (note this is 
+// the file's URL relative to the origin, 
+// not the JS file that references it.)
+
+// The scope parameter is optional, and 
+// can be used to specify the subset of 
+// your content that you want the service 
+// worker to control. In this case, we 
+// have specified '/', which means all 
+// content under the app's origin. If 
+// you leave it out, it will default to 
+// this value anyway, but we specified
+//  it here for illustration purposes.
+
+// This registers a service worker, which 
+// runs in a worker context, and therefore 
+// has no DOM access.
+
+// A single service worker can control 
+// many pages. Each time a page within 
+// your scope is loaded, the service worker 
+// is installed against that page and operates 
+// on it. Bear in mind therefore that you 
+// need to be careful with global variables
+//  in the service worker script: each 
+// page doesn't get its own unique worker.
+
+// Note: One great thing about service 
+// workers is that if you use feature
+//  detection like we've shown above, 
+// browsers that don't support service 
+// workers can just use your app online in 
+// the normal expected fashion.
+
+// Why is my service worker failing to register?
+// This could be for the following reasons:
+
+// You are not running your application through HTTPS.
+// The path to your service worker file is not 
+// written correctly — it needs to be written 
+// relative to the origin, not your app's root 
+// directory. In our example, the worker is at 
+// https://bncb2v.csb.app/sw.js, and the app's 
+// root is https://bncb2v.csb.app/. But the 
+// path needs to be written as /sw.js.
+
+// It is also not allowed to point to a service
+//  worker of a different origin than that of your app.
+
+// The service worker will only catch requests 
+// from clients under the service worker's scope.
+
+// The max scope for a service worker is the 
+// location of the worker (in other words if 
+// the script sw.js is located in /js/sw.js, 
+// it can only control URLs under /js/ by default). 
+// A list of max scopes for that worker can be 
+// specified with the Service-Worker-Allowed header.
+
+// In Firefox, Service Worker APIs are hidden 
+// and cannot be used when the user is in 
+// private browsing mode, or when history 
+// is disabled, or if cookies are cleared
+//  when Firefox is closed.
+
+// In Chrome, registration fails when the 
+// "Block all cookies (not recommended)" 
+// option is enabled.
+
+// Install and activate: populating your cache
+// After your service worker is registered, 
+// the browser will attempt to install then 
+// activate the service worker for your page/site.
+
+
+// The install event is fired when an 
+// installation is successfully completed. 
+// The install event is generally used to 
+// populate your browser's offline caching 
+// capabilities with the assets you need to 
+// run your app offline. To do this, we use
+//  Service Worker's storage API — cache — a 
+// global object on the service worker that 
+// allows us to store assets delivered by 
+// responses, and keyed by their requests. 
+// This API works in a similar way to the 
+// browser's standard cache, but it is 
+// specific to your domain. The contents 
+// of the cache are kept until you clear them.
+
+// Here's how our service worker handles the install event:
+
+// JS
+// Copy to Clipboard
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open("v1");
+  await cache.addAll(resources);
+};
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    addResourcesToCache([
+      "/",
+      "/index.html",
+      "/style.css",
+      "/app.js",
+      "/image-list.js",
+      "/star-wars-logo.jpg",
+      "/gallery/bountyHunters.jpg",
+      "/gallery/myLittleVader.jpg",
+      "/gallery/snowTroopers.jpg",
+    ]),
+  );
+});
+// Here we add an install event listener 
+// to the service worker (hence self), 
+// and then chain a ExtendableEvent.waitUntil() 
+// method onto the event — this ensures that 
+// the service worker will not install until 
+// the code inside waitUntil() has successfully occurred.
+
+// Inside addResourcesToCache() we use the 
+// caches.open() method to create a new cache 
+// called v1, which will be version 1 of our 
+// site resources cache. Then we call a function 
+// addAll() on the created cache, which for its 
+// parameter takes an array of URLs to all the 
+// resources you want to cache. The URLs are 
+// relative to the worker's location.
+
+// If the promise is rejected, the installation 
+// fails, and the worker won't do anything. 
+// This is OK, as you can fix your code and 
+// then try again the next time registration occurs.
+
+// After a successful installation, the service 
+// worker activates. This doesn't have much 
+// of a distinct use the first time your service 
+// worker is installed/activated, but it means 
+// more when the service worker is updated (see 
+// the Updating your service worker section later on.)
+
+// Note: The Web Storage API (localStorage) works
+//  in a similar way to service worker cache, but 
+// it is synchronous, so not allowed in service workers.
+
+// Note: IndexedDB can be used inside a service 
+// worker for data storage if you require it.
+
+// Custom responses to requests
+// Now you've got your site assets cached, you 
+// need to tell service workers to do something 
+// with the cached content. This is done with 
+// the fetch event.
+
+// A fetch event fires every time any resource 
+// controlled by a service worker is fetched, 
+// which includes the documents inside the 
+// specified scope, and any resources referenced 
+// in those documents (for example if index.html 
+// makes a cross-origin request to embed an image, 
+// that still goes through its service worker.)
+
+// You can attach a fetch event listener to 
+// the service worker, then call the respondWith() 
+// method on the event to hijack our HTTP responses
+//  and update them with your own content.
+
+// JS
+// Copy to Clipboard
+self.addEventListener("fetch", (event) => {
+  event.respondWith(/* custom content goes here */);
+});
+// We could start by responding with the resource 
+// whose URL matches that of the network request, in each case:
+
+// JS
+// Copy to Clipboard
+self.addEventListener("fetch", (event) => {
+  event.respondWith(caches.match(event.request));
+});
+// caches.match(event.request) allows us to 
+// match each resource requested from the 
+// network with the equivalent resource 
+// available in the cache, if there is a 
+// matching one available. The matching is 
+// done via URL and various headers, just 
+// like with normal HTTP requests.
+
+// Fetch event diagram
+// Recovering failed requests
+// So caches.match(event.request) is great 
+// when there is a match in the service
+//  worker cache, but what about cases when
+//  there isn't a match? If we didn't provide
+//  any kind of failure handling, our promise 
+// would resolve with undefined and we 
+// wouldn't get anything returned.
+
+// After testing the response from the cache,
+//  we can fall back on a regular network request:
+
+// JS
+// Copy to Clipboard
+const cacheFirst = async (request) => {
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+  return fetch(request);
+};
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(cacheFirst(event.request));
+});
+// If the resources aren't in the cache, 
+// they are requested from the network.
+
+// Using a more elaborate strategy, we 
+// could not only request the resource 
+// from the network, but also save it 
+// into the cache so that later requests 
+// for that resource could be retrieved 
+// offline too. This would mean that if 
+// 
+// extra images were added to the Star 
+// Wars gallery, our app could automatically 
+// grab them and cache them. The following 
+// snippet implements such a strategy:
+
+// JS
+// Copy to Clipboard
+const putInCache = async (request, response) => {
+  const cache = await caches.open("v1");
+  await cache.put(request, response);
+};
+
+const cacheFirst = async (request) => {
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+  const responseFromNetwork = await fetch(request);
+  putInCache(request, responseFromNetwork.clone());
+  return responseFromNetwork;
+};
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(cacheFirst(event.request));
+});
+// If the request URL is not available in 
+// the cache, we request the resource from 
+// the network request with await fetch(request). 
+// After that, we put a clone of the response 
+// into the cache. The putInCache() function 
+// uses caches.open('v1') and cache.put() to 
+// add the resource to the cache. The original 
+// response is returned to the browser to be 
+// given to the page that called it.
+
+// Cloning the response is necessary because 
+// request and response streams can only be 
+// read once. In order to return the response
+//  to the browser and put it in the cache we 
+// have to clone it. So the original gets 
+// returned to the browser and the clone 
+// gets sent to the cache. They are each read once.
+
+// What might look a bit weird is that the 
+// promise returned by putInCache() is not 
+// awaited. But the reason is that we don't 
+// want to wait until the response clone has 
+// been added to the cache before returning 
+// a response.
+
+// The only trouble we have now is that if 
+// the request doesn't match anything in 
+// the cache, and the network is not available, 
+// our request will still fail. Let's provide 
+// a default fallback so that whatever happens, 
+// the user will at least get something:
+
+// JS
+// Copy to Clipboard
+const putInCache = async (request, response) => {
+  const cache = await caches.open("v1");
+  await cache.put(request, response);
+};
+
+const cacheFirst = async ({ request, fallbackUrl }) => {
+  // First try to get the resource from the cache
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+
+  // Next try to get the resource from the network
+  try {
+    const responseFromNetwork = await fetch(request);
+    // response may be used only once
+    // we need to save clone to put one copy in cache
+    // and serve second one
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
+  } catch (error) {
+    const fallbackResponse = await caches.match(fallbackUrl);
+    if (fallbackResponse) {
+      return fallbackResponse;
+    }
+    // when even the fallback response is not available,
+    // there is nothing we can do, but we must always
+    // return a Response object
+    return new Response("Network error happened", {
+      status: 408,
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
+};
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    cacheFirst({
+      request: event.request,
+      fallbackUrl: "/gallery/myLittleVader.jpg",
+    }),
+  );
+});
+// We have opted for this fallback image 
+// because the only updates that are likely
+//  to fail are new images, as everything 
+// else is depended on for installation in 
+// the install event listener we saw earlier.
+
+// Service Worker navigation preload
+// If enabled, the navigation preload feature 
+// starts downloading resources as soon as 
+// the fetch request is made, and in parallel 
+// with service worker activation. This ensures
+//  that download starts immediately on 
+// navigation to a page, rather than having 
+// to wait until the service worker is activated. 
+// That delay happens relatively rarely, but is 
+// unavoidable when it does happen, and may be 
+// significant.
+
+// First the feature must be enabled during 
+// service worker activation, using 
+// registration.navigationPreload.enable():
+
+// JS
+// Copy to Clipboard
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.registration?.navigationPreload.enable());
+});
+// Then use event.preloadResponse to 
+// wait for the preloaded resource to 
+// finish downloading in the fetch event handler.
+
+// Continuing the example from the 
+// previous sections, we insert the code 
+// to wait for the preloaded resource after 
+// the cache check, and before fetching from 
+// the network if that doesn't succeed.
+
+// The new process is:
+
+// Check cache
+// Wait on event.preloadResponse, which 
+// is passed as preloadResponsePromise to 
+// the cacheFirst() function. Cache the 
+// result if it returns.
+
+// If neither of these are defined then we go to the network.
+// JS
+// Copy to Clipboard
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open("v1");
+  await cache.addAll(resources);
+};
+
+const putInCache = async (request, response) => {
+  const cache = await caches.open("v1");
+  await cache.put(request, response);
+};
+
+const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
+  // First try to get the resource from the cache
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+
+  // Next try to use (and cache) the preloaded response, if it's there
+  const preloadResponse = await preloadResponsePromise;
+  if (preloadResponse) {
+    console.info("using preload response", preloadResponse);
+    putInCache(request, preloadResponse.clone());
+    return preloadResponse;
+  }
+
+  // Next try to get the resource from the network
+  try {
+    const responseFromNetwork = await fetch(request);
+    // response may be used only once
+    // we need to save clone to put one copy in cache
+    // and serve second one
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
+  } catch (error) {
+    const fallbackResponse = await caches.match(fallbackUrl);
+    if (fallbackResponse) {
+      return fallbackResponse;
+    }
+    // when even the fallback response is not available,
+    // there is nothing we can do, but we must always
+    // return a Response object
+    return new Response("Network error happened", {
+      status: 408,
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
+};
+
+// Enable navigation preload
+const enableNavigationPreload = async () => {
+  if (self.registration.navigationPreload) {
+    await self.registration.navigationPreload.enable();
+  }
+};
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(enableNavigationPreload());
+});
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    addResourcesToCache([
+      "/",
+      "/index.html",
+      "/style.css",
+      "/app.js",
+      "/image-list.js",
+      "/star-wars-logo.jpg",
+      "/gallery/bountyHunters.jpg",
+      "/gallery/myLittleVader.jpg",
+      "/gallery/snowTroopers.jpg",
+    ]),
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    cacheFirst({
+      request: event.request,
+      preloadResponsePromise: event.preloadResponse,
+      fallbackUrl: "/gallery/myLittleVader.jpg",
+    }),
+  );
+});
+// Note that in this example we download and 
+// cache the same data for the resource whether 
+// it is downloaded "normally" or preloaded. 
+// You can instead choose to download and cache
+//  a different resource on preload. For more 
+// information see NavigationPreloadManager > Custom responses.
+
+// Updating your service worker
+// If your service worker has previously been 
+// installed, but then a new version of the 
+// worker is available on refresh or page load,
+//  the new version is installed in the background,
+//  but not yet activated. It is only activated 
+// when there are no longer any pages loaded that 
+// are still using the old service worker. As soon 
+// as there are no more such pages still loaded, 
+// the new service worker activates.
+
+// Note: It is possible to bypass 
+// this by using Clients.claim().
+
+// You'll want to update your install event 
+// listener in the new service worker to 
+// something like this (notice the new version number):
+
+// JS
+// Copy to Clipboard
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open("v2");
+  await cache.addAll(resources);
+};
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    addResourcesToCache([
+      "/",
+      "/index.html",
+      "/style.css",
+      "/app.js",
+      "/image-list.js",
+
+      // …
+
+      // include other new resources for the new version…
+    ]),
+  );
+});
+// While the service worker is being installed,
+//  the previous version is still responsible 
+// for fetches. The new version is installing 
+// in the background. We are calling the new cache 
+// v2, so the previous v1 cache isn't disturbed.
+
+// When no pages are using the previous version, 
+// the new worker activates and becomes 
+// responsible for fetches.
+
+// Deleting old caches
+// As we saw in the last section, when you 
+// update a service worker to a new version, 
+// you'll create a new cache in its install 
+// event handler. While there are open pages 
+// that are controlled by the previous version 
+// of the worker, you need to keep both caches, 
+// because the previous version needs its 
+// version of the cache. You can use the 
+// activate event to remove data from the previous caches.
+
+// Promises passed into waitUntil() will 
+// block other events until completion, so 
+// you can rest assured that your clean-up 
+// operation will have completed by the time 
+// you get your first fetch event on the new service worker.
+
+// JS
+// Copy to Clipboard
+const deleteCache = async (key) => {
+  await caches.delete(key);
+};
+
+const deleteOldCaches = async () => {
+  const cacheKeepList = ["v2"];
+  const keyList = await caches.keys();
+  const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
+  await Promise.all(cachesToDelete.map(deleteCache));
+};
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(deleteOldCaches());
+});
+
+Interfaces -> 
+
+Cache (on the storage)
+CacheStorage (on the storage)
+
+Client 
+// Client
+// The Client interface represents an executable context 
+// such as a Worker, or a SharedWorker. Window clients are 
+// represented by the more-specific WindowClient. You can
+//  get Client/WindowClient objects from methods such as 
+// Clients.matchAll() and Clients.get().
+
+// Instance methods
+// Client.postMessage()
+// Sends a message to the client.
+
+// Instance properties
+// Client.frameType Read only
+// The client's frame type as a string. It can be 
+// "auxiliary", "top-level", "nested", or "none".
+
+// Client.id Read only
+// The universally unique identifier of the client 
+// as a string.
+
+// Client.type Read only
+// The client's type as a string. It can be "window",
+//  "worker", or "sharedworker".
+
+// Client.url Read only
+// The URL of the client as a string.
+
+// Client: type property
+// The type read-only property of the Client 
+// interface indicates the type of client
+//  the service worker is controlling.
+
+// Value
+// A string, representing the client type.
+//  The value can be one of
+
+// "window"
+// "worker"
+// "sharedworker"
+
+// Examples
+// service worker client (e.g. a document)
+function sendMessage(message) {
+  return new Promise((resolve, reject) => {
+    // note that this is the ServiceWorker.postMessage version
+    navigator.serviceWorker.controller.postMessage(message);
+    window.serviceWorker.onMessage = (e) => {
+      resolve(e.data);
+    };
+  });
+}
+
+// controlling service worker
+self.addEventListener("message", (e) => {
+  // e.source is a client object
+  e.source.postMessage(`Hello! Your message was: ${e.data}`);
+  // Let's also post the type value back to the client
+  e.source.postMessage(e.source.type);
+});
+
+// Client: url property
+// The url read-only property of the 
+// Client interface returns the URL 
+// of the current service worker client.
+
+// Value
+// A string.
+
+// Examples
+// JS
+// Copy to Clipboard
+self.addEventListener("notificationclick", (event) => {
+  console.log("On notification click: ", event.notification.tag);
+  event.notification.close();
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: "window",
+      })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url === "/" && "focus" in client) {
+            return client.focus();
+          }
+        }
+        if (clients.openWindow) {
+          return clients.openWindow("/");
+        }
+      }),
+  );
+});
+
+// Clients
+// The Clients interface provides 
+// access to Client objects. Access 
+// it via self.clients within a 
+// service worker.
+
+// Instance methods
+
+// Clients.get()
+// Returns a Promise for a Client matching a given id.
+
+// Clients.matchAll()
+// Returns a Promise for an array of 
+// Client objects. An options argument 
+// allows you to control the types of clients returned.
+
+// Clients.openWindow()
+// Opens a new browser window for a given
+//  URL and returns a Promise for the new WindowClient.
+
+// Clients.claim()
+// Allows an active service worker to 
+// set itself as the controller for 
+// all clients within its scope.
+
+// Examples
+// The following example shows an
+//  existing chat window or creates
+//  a new one when the user clicks 
+// a notification.
+
+// JS
+// Copy to Clipboard
+addEventListener("notificationclick", (event) => {
+  event.waitUntil(
+    (async () => {
+      const allClients = await clients.matchAll({
+        includeUncontrolled: true,
+      });
+
+      let chatClient;
+
+      // Let's see if we already have a chat window open:
+      for (const client of allClients) {
+        const url = new URL(client.url);
+
+        if (url.pathname === "/chat/") {
+          // Excellent, let's use it!
+          client.focus();
+          chatClient = client;
+          break;
+        }
+      }
+
+      // If we didn't find an existing chat window,
+      // open a new one:
+      if (!chatClient) {
+        chatClient = await clients.openWindow("/chat/");
+      }
+
+      // Message the client:
+      chatClient.postMessage("New chat messages!");
+    })(),
+  );
+});
+
+// Instance methods 
+// Clients: get() method
+// The get() method of the Clients interface 
+// gets a service worker client matching 
+// a given id and returns it in a Promise.
+
+// Syntax
+// JS
+// Copy to Clipboard
+get(id)
+// Parameters
+// id
+// A string representing the
+//  id of the client you want to get.
+
+// Return value
+// A Promise that resolves to 
+// a Client object or undefined.
+
+// Examples
+// JS
+// Copy to Clipboard
+self.clients.get(id).then((client) => {
+  self.clients.openWindow(client.url);
+});
+
+// Clients: matchAll() method
+// The matchAll() method of the Clients 
+// interface returns a Promise for a 
+// list of service worker Client objects.
+//  Include the options parameter to 
+// return all service worker clients 
+// whose origin is the same as the 
+// associated service worker's origin. 
+// If options are not included, the 
+// method returns only the service 
+// worker clients controlled by the
+//  service worker.
+
+// Syntax
+matchAll()
+matchAll(options)
+// Parameters
+// options Optional
+// An options object allowing you to set 
+// options for the matching operation. 
+// Available options are:
+
+// includeUncontrolled
+// A boolean value — if set to true, 
+// the matching operation will return 
+// all service worker clients who share 
+// the same origin as the current 
+// service worker. Otherwise, it 
+// returns only the service worker 
+// clients controlled by the current
+//  service worker. The default is false.
+
+// type
+// Sets the type of clients you want 
+// matched. Available values are 
+// "window", "worker", "sharedworker", 
+// and "all". The default is "window".
+
+// Return value
+// A Promise that resolves to an array 
+// of Client objects. In Chrome 46/Firefox 
+// 54 and later, this method returns 
+// clients in most recently focused 
+// order, correct as per spec.
+
+// Examples
+// JS
+// Copy to Clipboard
+clients.matchAll(options).then((clientList) => {
+  for (const client of clientList) {
+    if (client.url === "index.html") {
+      clients.openWindow(client);
+      // or do something else involving the matching client
+    }
+  }
+});
+
+// Clients: claim() method
+// The claim() method of the Clients 
+// interface allows an active service 
+// worker to set itself as the controller
+//  for all clients within its scope. 
+// This triggers a "controllerchange" 
+// event on navigator.serviceWorker in 
+// any clients that become controlled 
+// by this service worker.
+
+// When a service worker is initially 
+// registered, pages won't use it until 
+// they next load. The claim() method 
+// causes those pages to be controlled 
+// immediately. Be aware that this results 
+// in your service worker controlling pages 
+// that loaded regularly over the network, 
+// or possibly via a different service worker.
+
+// Syntax
+claim()
+// Parameters
+// None.
+
+// Return value
+// A Promise that resolves to undefined.
+
+// Examples
+// The following example uses claim() 
+// inside service worker's "activate" 
+// event listener so that clients loaded 
+// in the same scope do not need to be 
+// reloaded before their fetches will 
+// go through this service worker.
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(clients.claim());
+});
+
+// ServiceWorker
+// Secure context: This feature 
+// is available only in secure 
+// contexts (HTTPS), in some or 
+// all supporting browsers.
+
+// The ServiceWorker interface 
+// of the Service Worker API 
+// provides a reference to a 
+// service worker. Multiple browsing 
+// contexts (e.g. pages, workers, etc.) 
+// can be associated with the same 
+// service worker, each through a 
+// unique ServiceWorker object.
+
+// A ServiceWorker object is 
+// available via a number of properties:
+
+// ServiceWorkerRegistration.active
+// ServiceWorkerGlobalScope.serviceWorker
+
+// ServiceWorkerContainer.controller — when 
+// the service worker is in activating or activated state
+
+// ServiceWorkerRegistration.installing — when 
+// the service worker is in installing state
+
+// ServiceWorkerRegistration.waiting — when 
+// the service worker is in installed state
+
+// The ServiceWorker interface is dispatched 
+// a set of lifecycle events — install 
+// and activate — and functional events 
+// including fetch. A ServiceWorker object 
+// has an associated ServiceWorker.state,
+//  related to its lifecycle.
+
+// Service workers allow static import of
+//  ECMAScript modules, if supported, 
+// using import. Dynamic import is 
+// disallowed by the specification — calling import() will throw.
+
+// EventTarget
+// ServiceWorker
+// Instance properties
+// The ServiceWorker interface inherits
+//  properties from its parent, EventTarget.
+
+// ServiceWorker.scriptURL Read only
+// Returns the ServiceWorker serialized 
+// script URL defined as part of 
+// ServiceWorkerRegistration. The URL 
+// must be on the same origin as the 
+// document that registers the ServiceWorker.
+
+// ServiceWorker.state Read only
+// Returns the state of the service worker.
+//  It returns one of the following values: 
+// parsed, installing, installed, activating,
+//  activated, or redundant.
+
+// Instance methods
+// The ServiceWorker interface inherits 
+// methods from its parent, EventTarget.
+
+// ServiceWorker.postMessage()
+// Sends a message — consisting of any 
+// structured-cloneable JavaScript object — 
+// to the service worker. The message is 
+// transmitted to the service worker using 
+// a message event on its global scope.
+
+// Events
+// statechange
+// Fired when ServiceWorker.state changes.
+
+// error
+// Fired when an error happens inside 
+// the ServiceWorker object.
+
+// Examples
+// This code snippet is from the service 
+// worker registration-events sample (live demo).
+//  The code listens for any change in the
+//  ServiceWorker.state and returns its value.
+
+// JS
+// Copy to Clipboard
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("service-worker.js", {
+      scope: "./",
+    })
+    .then((registration) => {
+      let serviceWorker;
+      if (registration.installing) {
+        serviceWorker = registration.installing;
+        document.querySelector("#kind").textContent = "installing";
+      } else if (registration.waiting) {
+        serviceWorker = registration.waiting;
+        document.querySelector("#kind").textContent = "waiting";
+      } else if (registration.active) {
+        serviceWorker = registration.active;
+        document.querySelector("#kind").textContent = "active";
+      }
+      if (serviceWorker) {
+        // logState(serviceWorker.state);
+        serviceWorker.addEventListener("statechange", (e) => {
+          // logState(e.target.state);
+        });
+      }
+    })
+    .catch((error) => {
+      // Something went wrong during registration. The service-worker.js file
+      // might be unavailable or contain a syntax error.
+    });
+} else {
+  // The current browser doesn't support service workers.
+  // Perhaps it is too old or we are not in a Secure Context.
+}
+
+// ServiceWorker: error event
+// The error event fires whenever 
+// an error occurs in the service worker.
+
+// Syntax
+// Use the event name in methods like 
+// addEventListener(), or set an event 
+// handler property.
+
+addEventListener("error", (event) => {});
+
+onerror = (event) => {};
+// Event type
+// A generic Event.
+
+// Example
+// The following code snippet gets a 
+// handle to the ServiceWorker object 
+// via ServiceWorkerRegistration.active
+//  and sets up an onerror handler on 
+// the resulting object:
+
+// in the page being controlled
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register("service-worker.js");
+
+  navigator.serviceWorker.ready.then((registration) => {
+    registration.active.onerror = (event) => {
+      console.log("An error occurred in the service worker!");
+    };
+  });
+}
+
+
+// ServiceWorker: statechange event
+// The statechange event fires anytime 
+// the ServiceWorker.state changes.
+
+// Syntax
+// Use the event name in methods like
+//  addEventListener(), or set an 
+// event handler property.
+
+addEventListener("statechange", (event) => {});
+
+onstatechange = (event) => {};
+// Event type
+// A generic Event.
+
+// Examples
+// This code snippet is from the 
+// service worker registration-events 
+// sample (live demo). The code listens 
+// for any change in the 
+// ServiceWorker.state and returns its value.
+
+// JS
+// Copy to Clipboard
+let serviceWorker;
+if (registration.installing) {
+  serviceWorker = registration.installing;
+  document.querySelector("#kind").textContent = "installing";
+} else if (registration.waiting) {
+  serviceWorker = registration.waiting;
+  document.querySelector("#kind").textContent = "waiting";
+} else if (registration.active) {
+  serviceWorker = registration.active;
+  document.querySelector("#kind").textContent = "active";
+}
+
+if (serviceWorker) {
+  logState(serviceWorker.state);
+  serviceWorker.addEventListener("statechange", (e) => {
+    logState(e.target.state);
+  });
+}
+// Note that when statechange fires, 
+// the service worker's references 
+// may have changed. For example:
+
+// JS
+// Copy to Clipboard
+navigator.serviceWorker.register("/sw.js").then((swr) => {
+  swr.installing.state = "installing";
+  swr.installing.onstatechange = () => {
+    swr.installing = null;
+    // At this point, swr.waiting OR swr.active might be true. This is because the statechange
+    // event gets queued, meanwhile the underlying worker may have gone into the waiting
+    // state and will be immediately activated if possible.
+  };
+});
+
+// ServiceWorker: state property
+// The state read-only property of 
+// the ServiceWorker interface returns 
+// a string representing the current 
+// state of the service worker. It 
+// can be one of the following values:
+//  parsed, installing, installed, 
+// activating, activated, or redundant.
+
+// Value
+// A String that can take one of the following values:
+
+// "parsed"
+// The initial state of a service 
+// worker after it is downloaded and 
+// confirmed to be runnable. A service 
+// worker is never updated to this state, 
+// so this will never be the value of 
+// the ServiceWorker.statechange_event
+
+// "installing"
+// The service worker in this state is 
+// considered an installing worker. 
+// During this state, ExtendableEvent.waitUntil() 
+// can be called inside the install 
+// event handler to extend the life 
+// of the installing worker until the
+//  passed promise resolves successfully. 
+// This is primarily used to ensure that 
+// the service worker is not active until
+//  all of the core caches are populated.
+
+// "installed"
+// The service worker in this state 
+// is considered a waiting worker.
+
+// "activating"
+// The service worker in this state 
+// is considered an active worker. 
+// During this state, 
+// ExtendableEvent.waitUntil() can be 
+// called inside the onactivate event 
+// handler to extend the life of the 
+// active worker until the passed 
+// promise resolves successfully. No 
+// functional events are dispatched 
+// until the state becomes activated.
+
+// "activated"
+// The service worker in this state 
+// is considered an active worker 
+// ready to handle functional events.
+
+// "redundant"
+// A new service worker is replacing 
+// the current service worker, or the
+//  current service worker is being 
+// discarded due to an install failure.
+
+// Examples
+// This code snippet is from the 
+// service worker registration-events 
+// sample (live demo). The code listens 
+// for any change in the 
+// ServiceWorker.state and returns its value.
+
+// JS
+// Copy to Clipboard
+let serviceWorker;
+if (registration.installing) {
+  serviceWorker = registration.installing;
+  document.querySelector("#kind").textContent = "installing";
+} else if (registration.waiting) {
+  serviceWorker = registration.waiting;
+  document.querySelector("#kind").textContent = "waiting";
+} else if (registration.active) {
+  serviceWorker = registration.active;
+  document.querySelector("#kind").textContent = "active";
+}
+
+if (serviceWorker) {
+  logState(serviceWorker.state);
+  serviceWorker.addEventListener("statechange", (e) => {
+    logState(e.target.state);
+  });
+}
+// ServiceWorker: scriptURL property
+// Returns the ServiceWorker serialized 
+// script URL defined as part of 
+// ServiceWorkerRegistration. Must
+//  be on the same origin as the 
+// document that registers the ServiceWorker.
+
+// Value
+// A string.
+
+// Examples
+const sw = navigator.serviceWorker.controller;
+console.log(sw.scriptURL);
+// https://example.com/scripts/service-worker.js
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// web worker api 
+
+// Using Web Workers
+// Web Workers are a simple means for
+//  web content to run scripts in
+//  background threads. The worker
+//  thread can perform tasks without
+//  interfering with the user interface. 
+// In addition, they can make network
+//  requests using the fetch() or 
+// XMLHttpRequest APIs. Once created, 
+// a worker can send messages to the 
+// JavaScript code that created it by
+//  posting messages to an event handler 
+// specified by that code (and vice versa).
+
+// This article provides a detailed
+//  introduction to using web workers.
+
+// Web Workers API
+// A worker is an object created using 
+// a constructor (e.g. Worker()) that 
+// runs a named JavaScript file — this
+//  file contains the code that will run
+//  in the worker thread; workers run in
+//  another global context that is different
+//  from the current window. Thus, using 
+// the window shortcut to get the current
+//  global scope (instead of self) within
+//  a Worker will return an error.
+
+// The worker context is represented by 
+// a DedicatedWorkerGlobalScope object in 
+// the case of dedicated workers (standard 
+// workers that are utilized by a single script;
+//  shared workers use SharedWorkerGlobalScope).
+//  A dedicated worker is only accessible from 
+// the script that first spawned it, whereas
+//  shared workers can be accessed from
+//  multiple scripts.
+
+// Note: See The Web Workers API landing
+//  page for reference documentation on
+//  workers and additional guides.
+
+// You can run whatever code you like
+//  inside the worker thread, with some
+//  exceptions. For example, you can't
+//  directly manipulate the DOM from 
+// inside a worker, or use some default
+//  methods and properties of the window
+//  object. But you can use a large number
+//  of items available under window,
+//  including WebSockets, and data storage
+//  mechanisms like IndexedDB. See Functions
+//  and classes available to workers for
+//  more details.
+
+// Data is sent between workers and the
+//  main thread via a system of messages
+//  — both sides send their messages using
+//  the postMessage() method, and respond
+//  to messages via the onmessage event 
+// handler (the message is contained within
+//  the message event's data attribute). The
+//  data is copied rather than shared.
+
+// Workers may in turn spawn new workers, 
+// as long as those workers are hosted 
+// within the same origin as the parent page.
+
+// In addition, workers can make network
+//  requests using the fetch() or
+//  XMLHttpRequest APIs (although note 
+// that the responseXML attribute of
+//  XMLHttpRequest will always be null).
+
+// Dedicated workers
+// As mentioned above, a dedicated worker 
+// is only accessible by the script that 
+// called it. In this section we'll discuss
+//  the JavaScript found in our Basic 
+// dedicated worker example (run 
+// dedicated worker): This allows you to 
+// enter two numbers to be multiplied together. 
+// The numbers are sent to a dedicated worker, 
+// multiplied together, and the result is 
+// returned to the page and displayed.
+
+// This example is rather trivial, but we
+//  decided to keep it simple while 
+// introducing you to basic worker concepts.
+//  More advanced details are covered later
+//  on in the article.
+
+// Worker feature detection
+// For slightly more controlled error handling 
+// and backwards compatibility, it is a good 
+// idea to wrap your worker accessing code 
+// in the following (main.js):
+
+// JS
+// Copy to Clipboard
+if (window.Worker) {
+  // …
+}
+// Spawning a dedicated worker
+// Creating a new worker is simple. All 
+// you need to do is call the Worker() 
+// constructor, specifying the URI of a 
+// script to execute in the worker thread (main.js):
+
+// JS
+// Copy to Clipboard
+const myWorker = new Worker("worker.js");
+// Sending messages to and from a dedicated worker
+
+// The magic of workers happens via the 
+// postMessage() method and the onmessage
+//  event handler. When you want to send 
+// a message to the worker, you post 
+// messages to it like this (main.js):
+
+// JS
+// Copy to Clipboard
+first.onchange = () => {
+  myWorker.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+
+second.onchange = () => {
+  myWorker.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+// So here we have two <input> elements 
+// represented by the variables first and 
+// second; when the value of either is 
+// changed, myWorker.postMessage
+// ([first.value,second.value]) is used 
+// to send the value inside both to the
+//  worker, as an array. You can send 
+// pretty much anything you like in the message.
+
+// In the worker, we can respond when
+//  the message is received by writing
+//  an event handler block like this (worker.js):
+
+// JS
+// Copy to Clipboard
+onmessage = (e) => {
+  console.log("Message received from main script");
+  const workerResult = `Result: ${e.data[0] * e.data[1]}`;
+  console.log("Posting message back to main script");
+  postMessage(workerResult);
+};
+// The onmessage handler allows us to run
+//  some code whenever a message is received, 
+// with the message itself being available in
+//  the message event's data attribute. Here 
+// we multiply together the two numbers then
+//  use postMessage() again, to post the 
+// result back to the main thread.
+
+// Back in the main thread, we use onmessage 
+// again, to respond to the message sent 
+// back from the worker:
+
+// JS
+// Copy to Clipboard
+myWorker.onmessage = (e) => {
+  result.textContent = e.data;
+  console.log("Message received from worker");
+};
+// Here we grab the message event data and 
+// set it as the textContent of the result 
+// paragraph, so the user can see the result
+//  of the calculation.
+
+// Note: Notice that onmessage and 
+// postMessage() need to be hung off 
+// the Worker object when used in the
+//  main script thread, but not when used
+//  in the worker. This is because, inside 
+// the worker, the worker is effectively 
+// the global scope.
+
+// Note: When a message is passed between
+//  the main thread and worker, it is 
+// copied or "transferred" (moved), not 
+// shared. Read Transferring data to and 
+// from workers: further details for a
+//  much more thorough explanation.
+
+// Terminating a worker
+// If you need to immediately terminate 
+// a running worker from the main thread,
+//  you can do so by calling the worker's
+//  terminate method:
+
+// JS
+// Copy to Clipboard
+myWorker.terminate();
+// The worker thread is killed immediately.
+
+// Handling errors
+// When a runtime error occurs in the worker,
+//  its onerror event handler is called. It 
+// receives an event named error which 
+// implements the ErrorEvent interface.
+
+// The event doesn't bubble and is cancelable;
+//  to prevent the default action from taking
+//  place, the worker can call the error 
+// event's preventDefault() method.
+
+// The error event has the following 
+// three fields that are of interest:
+
+// message
+// A human-readable error message.
+
+// filename
+// The name of the script file in which the error occurred.
+
+// lineno
+// The line number of the script file on
+//  which the error occurred.
+
+// Spawning subworkers
+// Workers may spawn more workers if they wish.
+//  So-called sub-workers must be hosted within
+//  the same origin as the parent page. Also, 
+// the URIs for subworkers are resolved relative
+//  to the parent worker's location rather than
+//  that of the owning page. This makes it easier 
+// for workers to keep track of where their
+//  dependencies are.
+
+// Importing scripts and libraries
+// Worker threads have access to a global 
+// function, importScripts(), which lets 
+// them import scripts. It accepts zero or
+//  more URIs as parameters to resources to 
+// import; all the following examples are valid:
+
+// JS
+// Copy to Clipboard
+importScripts(); /* imports nothing */
+importScripts("foo.js"); /* imports just "foo.js" */
+importScripts("foo.js", "bar.js"); /* imports two scripts */
+importScripts(
+  "//example.com/hello.js",
+); /* You can import scripts from other origins */
+
+// The browser loads each listed script and 
+// executes it. Any global objects from each
+//  script may then be used by the worker. If 
+// the script can't be loaded, NETWORK_ERROR
+//  is thrown, and subsequent code will not 
+// be executed. Previously executed code 
+// (including code deferred using setTimeout()) 
+// will still be functional though. Function
+//  declarations after the importScripts() 
+// method are also kept, since these are 
+// always evaluated before the rest of the code.
+
+// Note: Scripts may be downloaded in any 
+// order, but will be executed in the order
+//  in which you pass the filenames into 
+// importScripts(). This is done synchronously; 
+// importScripts() does not return until all 
+// the scripts have been loaded and executed.
+
+// Shared workers
+// A shared worker is accessible by multiple 
+// scripts — even if they are being accessed
+//  by different windows, iframes or even
+//  workers. In this section we'll discuss
+//  the JavaScript found in our Basic 
+// shared worker example (run shared worker): 
+// This is very similar to the basic dedicated
+//  worker example, except that it has two 
+// functions available handled by different
+//  script files: multiplying two numbers, 
+// or squaring a number. Both scripts use 
+// the same worker to do the actual calculation required.
+
+// Here we'll concentrate on the differences
+//  between dedicated and shared workers. 
+// Note that in this example we have two 
+// HTML pages, each with JavaScript applied 
+// that uses the same single worker file.
+
+// Note: If SharedWorker can be accessed 
+// from several browsing contexts, all 
+// those browsing contexts must share 
+// the exact same origin (same protocol,
+//  host, and port).
+
+// Note: In Firefox, shared workers cannot 
+// be shared between documents loaded in 
+// private and non-private windows (Firefox bug 1177621).
+
+// Spawning a shared worker
+// Spawning a new shared worker is pretty 
+// much the same as with a dedicated worker,
+//  but with a different constructor name 
+// (see index.html and index2.html) —
+//  each one has to spin up the worker
+//  using code like the following:
+
+// JS
+// Copy to Clipboard
+const myWorker = new SharedWorker("worker.js");
+
+// One big difference is that with a shared 
+// worker you have to communicate via a 
+// port object — an explicit port is 
+// opened that the scripts can use to 
+// communicate with the worker (this
+//  is done implicitly in the case 
+// of dedicated workers).
+
+// The port connection needs to be 
+// started either implicitly by use 
+// of the onmessage event handler or 
+// explicitly with the start() method
+//  before any messages can be posted.
+//  Calling start() is only needed if 
+// the message event is wired up via 
+// the addEventListener() method.
+
+// Note: When using the start() method 
+// to open the port connection, it needs 
+// to be called from both the parent 
+// thread and the worker thread if 
+// two-way communication is needed.
+
+// Sending messages to and from a shared worker
+// Now messages can be sent to the worker
+//  as before, but the postMessage() 
+// method has to be invoked through 
+// the port object (again, you'll see
+//  similar constructs in both 
+// multiply.js and square.js):
+
+// JS
+// Copy to Clipboard
+squareNumber.onchange = () => {
+  myWorker.port.postMessage([squareNumber.value, squareNumber.value]);
+  console.log("Message posted to worker");
+};
+// Now, on to the worker. There is 
+// a bit more complexity here as 
+// well (worker.js):
+
+// JS
+// Copy to Clipboard
+onconnect = (e) => {
+  const port = e.ports[0];
+
+  port.onmessage = (e) => {
+    const workerResult = `Result: ${e.data[0] * e.data[1]}`;
+    port.postMessage(workerResult);
+  };
+};
+// First, we use an onconnect handler
+//  to fire code when a connection to 
+// the port happens (i.e. when the
+//  onmessage event handler in the
+//  parent thread is set up, or when
+//  the start() method is explicitly
+//  called in the parent thread).
+
+// We use the ports attribute of this 
+// event object to grab the port and 
+// store it in a variable.
+
+// Next, we add an onmessage handler 
+// on the port to do the calculation 
+// and return the result to the main 
+// thread. Setting up this onmessage 
+// handler in the worker thread also 
+// implicitly opens the port connection 
+// back to the parent thread, so the call
+//  to port.start() is not actually needed,
+//  as noted above.
+
+// Finally, back in the main script, we 
+// deal with the message (again, you'll 
+// see similar constructs in both 
+// multiply.js and square.js):
+
+// JS
+// Copy to Clipboard
+myWorker.port.onmessage = (e) => {
+  result2.textContent = e.data;
+  console.log("Message received from worker");
+};
+// When a message comes back through 
+// the port from the worker, we insert
+//  the calculation result inside the 
+// appropriate result paragraph.
+
+// About thread safety
+// The Worker interface spawns real 
+// OS-level threads, and mindful 
+// programmers may be concerned that
+//  concurrency can cause "interesting"
+//  effects in your code if you aren't careful.
+
+// However, since web workers have 
+// carefully controlled communication
+//  points with other threads, it's
+//  actually very hard to cause 
+// concurrency problems. There's
+//  no access to non-threadsafe 
+// components or the DOM. And you 
+// have to pass specific data in 
+// and out of a thread through 
+// serialized objects. So you have
+//  to work really hard to cause 
+// problems in your code.
+
+// Content security policy
+// Workers are considered to have 
+// their own execution context, 
+// distinct from the document that 
+// created them. For this reason they 
+// are, in general, not governed by 
+// the content security policy of the
+//  document (or parent worker) that
+//  created them. So for example, 
+// suppose a document is served with
+//  the following header:
+
+// HTTP
+// Copy to Clipboard
+Content-Security-Policy: script-src 'self'
+// Among other things, this 
+// will prevent any scripts it 
+// includes from using eval(). 
+// However, if the script constructs
+//  a worker, code running in the
+//  worker's context will be allowed 
+// to use eval().
+
+// To specify a content security 
+// policy for the worker, set a 
+// Content-Security-Policy response
+//  header for the request which 
+// delivered the worker script itself.
+
+// The exception to this is if the worker 
+// script's origin is a globally unique 
+// identifier (for example, if its URL 
+// has a scheme of data or blob). In 
+// this case, the worker does inherit 
+// the CSP of the document or worker 
+// that created it.
+// 
+
+// Transferring data to and from
+//  workers: further details
+
+// Data passed between the main 
+// page and workers is copied, 
+// not shared. Objects are 
+// serialized as they're 
+// handed to the worker,
+//  and subsequently, de-serialized 
+// on the other end. The page and 
+// worker do not share the same 
+// instance, so the end result 
+// is that a duplicate is created 
+// on each end. Most browsers 
+// implement this feature as
+//  structured cloning.
+// 
+// 
+
+// To illustrate this, let's 
+// create a function named 
+// emulateMessage(), which will 
+// simulate the behavior of a value
+//  that is cloned and not shared 
+// during the passage from a worker
+//  to the main page or vice versa:
+
+// JS
+// Copy to Clipboard
+function emulateMessage(vVal) {
+  return eval(`(${JSON.stringify(vVal)})`);
+}
+
+// Tests
+
+// test #1
+const example1 = new Number(3);
+console.log(typeof example1); // object
+console.log(typeof emulateMessage(example1)); // number
+
+// test #2
+const example2 = true;
+console.log(typeof example2); // boolean
+console.log(typeof emulateMessage(example2)); // boolean
+
+// test #3
+const example3 = new String("Hello World");
+console.log(typeof example3); // object
+console.log(typeof emulateMessage(example3)); // string
+
+// test #4
+const example4 = {
+  name: "Carina Anand",
+  age: 43,
+};
+console.log(typeof example4); // object
+console.log(typeof emulateMessage(example4)); // object
+
+// test #5
+function Animal(type, age) {
+  this.type = type;
+  this.age = age;
+}
+const example5 = new Animal("Cat", 3);
+alert(example5.constructor); // Animal
+alert(emulateMessage(example5).constructor); // Object
+// A value that is cloned and not 
+// shared is called message. As you 
+// will probably know by now, messages
+//  can be sent to and from the main
+//  thread by using postMessage(), and
+//  the message event's data attribute
+//  contains data passed back from the worker.
+
+// example.html: (the main page):
+
+// JS
+// Copy to Clipboard
+const myWorker = new Worker("my_task.js");
+
+myWorker.onmessage = (event) => {
+  console.log(`Worker said : ${event.data}`);
+};
+
+myWorker.postMessage("ali");
+my_task.js (the worker):
+
+// JS
+// Copy to Clipboard
+postMessage("I'm working before postMessage('ali').");
+
+onmessage = (event) => {
+  postMessage(`Hi, ${event.data}`);
+};
+// The structured cloning algorithm 
+// can accept JSON and a few things 
+// that JSON can't — like circular references.
+
+// Passing data examples
+// Example 1: Advanced passing JSON 
+// Data and creating a switching system
+
+// If you have to pass some complex 
+// data and have to call many 
+// different functions both on 
+// the main page and in the Worker, 
+// you can create a system which 
+// groups everything together.
+
+// First, we create a QueryableWorker 
+// class that takes the URL of the
+//  worker, a default listener, and 
+// an error handler, and this class 
+// is going to keep track of a list 
+// of listeners and help us communicate
+//  with the worker:
+
+// JS
+// Copy to Clipboard
+function QueryableWorker(url, defaultListener, onError) {
+  const instance = this;
+  const worker = new Worker(url);
+  const listeners = {};
+
+  this.defaultListener = defaultListener ?? (() => {});
+
+  if (onError) {
+    worker.onerror = onError;
+  }
+
+  this.postMessage = (message) => {
+    worker.postMessage(message);
+  };
+
+  this.terminate = () => {
+    worker.terminate();
+  };
+}
+// Then we add the methods of adding/removing listeners:
+
+// JS
+// Copy to Clipboard
+this.addListeners = (name, listener) => {
+  listeners[name] = listener;
+};
+
+this.removeListeners = (name) => {
+  delete listeners[name];
+};
+// Here we let the worker handle 
+// two simple operations for 
+// illustration: getting the
+//  difference of two numbers 
+// and making an alert after 
+// three seconds. In order to 
+// achieve that we first implement 
+// a sendQuery method which queries
+//  if the worker actually has the 
+// corresponding methods to do what we want.
+
+// JS
+// Copy to Clipboard
+// This functions takes at least one argument, 
+// the method name we want to query.
+
+// Then we can pass in the arguments that the method needs.
+this.sendQuery = (queryMethod, ...queryMethodArguments) => {
+  if (!queryMethod) {
+    throw new TypeError(
+      "QueryableWorker.sendQuery takes at least one argument",
+    );
+  }
+  worker.postMessage({
+    queryMethod,
+    queryMethodArguments,
+  });
+};
+// We finish QueryableWorker with the
+//  onmessage method. If the worker has 
+// the corresponding methods we queried, 
+// it should return the name of the 
+// corresponding listener and the 
+// arguments it needs, we just need
+//  to find it in listeners.:
+
+// JS
+// Copy to Clipboard
+worker.onmessage = (event) => {
+  if (
+    event.data instanceof Object &&
+    Object.hasOwn(event.data, "queryMethodListener") &&
+    Object.hasOwn(event.data, "queryMethodArguments")
+  ) {
+    listeners[event.data.queryMethodListener].apply(
+      instance,
+      event.data.queryMethodArguments,
+    );
+  } else {
+    this.defaultListener.call(instance, event.data);
+  }
+};
+// Now onto the worker. First we 
+// need to have the methods to 
+// handle the two simple operations:
+
+// JS
+// Copy to Clipboard
+const queryableFunctions = {
+  getDifference(a, b) {
+    reply("printStuff", a - b);
+  },
+  waitSomeTime() {
+    setTimeout(() => {
+      reply("doAlert", 3, "seconds");
+    }, 3000);
+  },
+};
+
+function reply(queryMethodListener, ...queryMethodArguments) {
+  if (!queryMethodListener) {
+    throw new TypeError("reply - takes at least one argument");
+  }
+  postMessage({
+    queryMethodListener,
+    queryMethodArguments,
+  });
+}
+
+/* This method is called when 
+// main page calls QueryWorker's 
+// postMessage method directly*/
+
+function defaultReply(message) {
+  // do something
+}
+// And the onmessage method is now trivial:
+
+// JS
+// Copy to Clipboard
+onmessage = (event) => {
+  if (
+    event.data instanceof Object &&
+    Object.hasOwn(event.data, "queryMethod") &&
+    Object.hasOwn(event.data, "queryMethodArguments")
+  ) {
+    queryableFunctions[event.data.queryMethod].apply(
+      self,
+      event.data.queryMethodArguments,
+    );
+  } else {
+    defaultReply(event.data);
+  }
+};
+// Here are the full implementation:
+
+// example.html (the main page):
+
+// HTML
+// Copy to Clipboard
+              // <!doctype html>
+              // <html lang="en-US">
+              //   <head>
+              //     <meta charset="UTF-8" />
+              //     <meta name="viewport" content="width=device-width" />
+              //     <title>MDN Example - Queryable worker</title>
+              //     <script type="text/javascript">
+              //       // QueryableWorker instances methods:
+              //       //   * sendQuery(queryable function name, argument to pass 1, argument to pass 2, etc. etc.): calls a Worker's queryable function
+              //       //   * postMessage(string or JSON Data): see Worker.prototype.postMessage()
+              //       //   * terminate(): terminates the Worker
+              //       //   * addListener(name, function): adds a listener
+              //       //   * removeListener(name): removes a listener
+              //       // QueryableWorker instances properties:
+              //       //   * defaultListener: the default listener executed only when the Worker calls the postMessage() function directly
+              //       function QueryableWorker(url, defaultListener, onError) {
+              //         const instance = this;
+              //         const worker = new Worker(url);
+              //         const listeners = {};
+
+              //         this.defaultListener = defaultListener ?? (() => {});
+
+              //         if (onError) {
+              //           worker.onerror = onError;
+              //         }
+
+              //         this.postMessage = (message) => {
+              //           worker.postMessage(message);
+              //         };
+
+              //         this.terminate = () => {
+              //           worker.terminate();
+              //         };
+
+              //         this.addListener = (name, listener) => {
+              //           listeners[name] = listener;
+              //         };
+
+              //         this.removeListener = (name) => {
+              //           delete listeners[name];
+              //         };
+
+              //         // This functions takes at least one argument, the method name we want to query.
+              //         // Then we can pass in the arguments that the method needs.
+              //         this.sendQuery = (queryMethod, ...queryMethodArguments) => {
+              //           if (!queryMethod) {
+              //             throw new TypeError(
+              //               "QueryableWorker.sendQuery takes at least one argument",
+              //             );
+              //           }
+              //           worker.postMessage({
+              //             queryMethod,
+              //             queryMethodArguments,
+              //           });
+              //         };
+
+              //         worker.onmessage = (event) => {
+              //           if (
+              //             event.data instanceof Object &&
+              //             Object.hasOwn(event.data, "queryMethodListener") &&
+              //             Object.hasOwn(event.data, "queryMethodArguments")
+              //           ) {
+              //             listeners[event.data.queryMethodListener].apply(
+              //               instance,
+              //               event.data.queryMethodArguments,
+              //             );
+              //           } else {
+              //             this.defaultListener.call(instance, event.data);
+              //           }
+              //         };
+              //       }
+
+              //       // your custom "queryable" worker
+              //       const myTask = new QueryableWorker("my_task.js");
+
+              //       // your custom "listeners"
+              //       myTask.addListener("printStuff", (result) => {
+              //         document
+              //           .getElementById("firstLink")
+              //           .parentNode.appendChild(
+              //             document.createTextNode(`The difference is ${result}!`),
+              //           );
+              //       });
+
+              //       myTask.addListener("doAlert", (time, unit) => {
+              //         alert(`Worker waited for ${time} ${unit} :-)`);
+              //       });
+              //     </script>
+              //   </head>
+              //   <body>
+              //     <ul>
+              //       <li>
+              //         <a
+              //           id="firstLink"
+              //           href="javascript:myTask.sendQuery('getDifference', 5, 3);"
+              //           >What is the difference between 5 and 3?</a
+              //         >
+              //       </li>
+              //       <li>
+              //         <a href="javascript:myTask.sendQuery('waitSomeTime');"
+              //           >Wait 3 seconds</a
+              //         >
+              //       </li>
+              //       <li>
+              //         <a href="javascript:myTask.terminate();">terminate() the Worker</a>
+              //       </li>
+              //     </ul>
+              //   </body>
+              // </html>
+              // my_task.js (the worker):
+
+// JS
+// Copy to Clipboard
+const queryableFunctions = {
+  // example #1: get the difference between two numbers:
+  getDifference(minuend, subtrahend) {
+    reply("printStuff", minuend - subtrahend);
+  },
+
+  // example #2: wait three seconds
+  waitSomeTime() {
+    setTimeout(() => {
+      reply("doAlert", 3, "seconds");
+    }, 3000);
+  },
+};
+
+// system functions
+
+function defaultReply(message) {
+  // your default PUBLIC function executed only when main page calls the queryableWorker.postMessage() method directly
+  // do something
+}
+
+function reply(queryMethodListener, ...queryMethodArguments) {
+  if (!queryMethodListener) {
+    throw new TypeError("reply - not enough arguments");
+  }
+  postMessage({
+    queryMethodListener,
+    queryMethodArguments,
+  });
+}
+
+onmessage = (event) => {
+  if (
+    event.data instanceof Object &&
+    Object.hasOwn(event.data, "queryMethod") &&
+    Object.hasOwn(event.data, "queryMethodArguments")
+  ) {
+    queryableFunctions[event.data.queryMethod].apply(
+      self,
+      event.data.queryMethodArguments,
+    );
+  } else {
+    defaultReply(event.data);
+  }
+};
+// It is possible to switch the 
+// content of each mainpage -> 
+// worker and worker -> mainpage 
+// message. And the property names
+//  "queryMethod", "queryMethodListeners",
+//  "queryMethodArguments" can be
+//  anything as long as they are 
+// consistent in QueryableWorker 
+// and the worker.
+
+// Passing data by transferring 
+// ownership (transferable objects)
+
+// Modern browsers contain an 
+// additional way to pass certain
+//  types of objects to or from a
+//  worker with high performance.
+//  Transferable objects are transferred 
+// from one context to another with 
+// a zero-copy operation, which results 
+// in a vast performance improvement 
+// when sending large data sets.
+
+// For example, when transferring
+//  an ArrayBuffer from your main
+//  app to a worker script, the
+//  original ArrayBuffer is cleared
+//  and no longer usable. Its content 
+// is (quite literally) transferred 
+// to the worker context.
+
+// JS
+// Copy to Clipboard
+// Create a 32MB "file" and fill it 
+// with consecutive values from 0 
+// to 255 – 32MB = 1024 * 1024 * 32
+
+const uInt8Array = new Uint8Array(1024 * 1024 * 32).map((v, i) => i);
+worker.postMessage(uInt8Array.buffer, [uInt8Array.buffer]);
+// Embedded workers
+// There is not an "official" way to
+//  embed the code of a worker within
+//  a web page, like <script> elements
+//  do for normal scripts. But a <script>
+//  element that does not have a src 
+// attribute and has a type attribute 
+// that does not identify an executable
+//  MIME type can be considered a data 
+// block element that JavaScript could 
+// use. "Data blocks" is a more general
+//  feature of HTML that can carry almost 
+// any textual data. So, a worker could 
+// be embedded in this way:
+// 
+
+// HTML
+// Copy to Clipboard
+            // <!doctype html>
+            // <html lang="en-US">
+            //   <head>
+            //     <meta charset="UTF-8" />
+            //     <meta name="viewport" content="width=device-width" />
+            //     <title>MDN Example - Embedded worker</title>
+            //     <script type="text/js-worker">
+            //       // This script WON'T be parsed by JS engines because its MIME type is text/js-worker.
+            //       const myVar = 'Hello World!';
+            //       // Rest of your worker code goes here.
+            //     </script>
+            //     <script>
+            //       // This script WILL be parsed by JS engines because its MIME type is text/javascript.
+            //       function pageLog(sMsg) {
+            //         // Use a fragment: browser will only render/reflow once.
+            //         const frag = document.createDocumentFragment();
+            //         frag.appendChild(document.createTextNode(sMsg));
+            //         frag.appendChild(document.createElement("br"));
+            //         document.querySelector("#logDisplay").appendChild(frag);
+            //       }
+            //     </script>
+            //     <script type="text/js-worker">
+            //       // This script WON'T be parsed by JS engines because its MIME type is text/js-worker.
+            //       onmessage = (event) => {
+            //         postMessage(myVar);
+            //       };
+            //       // Rest of your worker code goes here.
+            //     </script>
+            //     <script>
+            //       // This script WILL be parsed by JS engines because its MIME type is text/javascript.
+
+            //       // In the past blob builder existed, but now we use Blob
+            //       const blob = new Blob(
+            //         Array.prototype.map.call(
+            //           document.querySelectorAll("script[type='text\/js-worker']"),
+            //           (script) => script.textContent,
+            //         ),
+            //         { type: "text/javascript" },
+            //       );
+
+            //       // Creating a new document.worker property containing all our "text/js-worker" scripts.
+            //       document.worker = new Worker(window.URL.createObjectURL(blob));
+
+            //       document.worker.onmessage = (event) => {
+            //         pageLog(`Received: ${event.data}`);
+            //       };
+
+            //       // Start the worker.
+            //       window.onload = () => {
+            //         document.worker.postMessage("");
+            //       };
+            //     </script>
+            //   </head>
+            //   <body>
+            //     <div id="logDisplay"></div>
+            //   </body>
+            // </html>
+// The embedded worker is now nested 
+// into a new custom document.worker 
+// property.
+
+// It is also worth noting that you 
+// can also convert a function into 
+// a Blob, then generate an object 
+// URL from that blob. For example:
+
+// JS
+// Copy to Clipboard
+function fn2workerURL(fn) {
+  const blob = new Blob([`(${fn.toString()})()`], { type: "text/javascript" });
+  return URL.createObjectURL(blob);
+}
+// Further examples
+// This section provides further 
+// examples of how to use web workers.
+
+// Performing computations in the background
+// Workers are mainly useful for 
+// allowing your code to perform
+//  processor-intensive calculations 
+// without blocking the user interface
+//  thread. In this example, a worker 
+// is used to calculate Fibonacci numbers.
+
+// The JavaScript code
+// The following JavaScript code is 
+// stored in the "fibonacci.js" file
+//  referenced by the HTML in the next section.
+// 
+
+// JS
+// Copy to Clipboard
+self.onmessage = (event) => {
+  const userNum = Number(event.data);
+  self.postMessage(fibonacci(userNum));
+};
+
+function fibonacci(num) {
+  let a = 1;
+  let b = 0;
+  while (num > 0) {
+    [a, b] = [a + b, a];
+    num--;
+  }
+
+  return b;
+}
+// The worker sets the property onmessage
+//  to a function which will receive 
+// messages sent when the worker object's
+//  postMessage() is called. This performs 
+// the math and eventually returns the 
+// result back to the main thread.
+
+// The HTML code
+// HTML
+// Copy to Clipboard
+              // <!doctype html>
+              // <html lang="en-US">
+              //   <head>
+              //     <meta charset="UTF-8" />
+              //     <title>Fibonacci number generator</title>
+              //     <style>
+              //       body {
+              //         width: 500px;
+              //       }
+
+              //       div,
+              //       p {
+              //         margin-bottom: 20px;
+              //       }
+              //     </style>
+              //   </head>
+              //   <body>
+              //     <form>
+              //       <div>
+              //         <label for="number"
+              //           >Enter a number that is a zero-based index position in the fibonacci
+              //           sequence to see what number is in that position. For example, enter 6
+              //           and you'll get a result of 8 — the fibonacci number at index position
+              //           6 is 8.</label
+              //         >
+              //         <input type="number" id="number" />
+              //       </div>
+              //       <div>
+              //         <input type="submit" />
+              //       </div>
+              //     </form>
+
+              //     <p id="result"></p>
+
+              //     <script>
+              //       const form = document.querySelector("form");
+              //       const input = document.querySelector('input[type="number"]');
+              //       const result = document.querySelector("p#result");
+              //       const worker = new Worker("fibonacci.js");
+
+              //       worker.onmessage = (event) => {
+              //         result.textContent = event.data;
+              //         console.log(`Got: ${event.data}`);
+              //       };
+
+              //       worker.onerror = (error) => {
+              //         console.log(`Worker error: ${error.message}`);
+              //         throw error;
+              //       };
+
+              //       form.onsubmit = (e) => {
+              //         e.preventDefault();
+              //         worker.postMessage(input.value);
+              //         input.value = "";
+              //       };
+              //     </script>
+              //   </body>
+              // </html>
+// The web page creates a <p> element 
+// with the ID result, which gets used 
+// to display the result, then spawns 
+// the worker. After spawning the worker,
+//  the onmessage handler is configured 
+// to display the results by setting the
+//  contents of the <p> element, and the
+//  onerror handler is set to log the 
+// error message to the devtools console.
+
+// Finally, a message is sent to the worker to start it.
+
+// Try this example live.
+
+// Dividing tasks among multiple workers
+// As multicore computers become 
+// increasingly common, it's often
+//  useful to divide computationally 
+// complex tasks among multiple workers,
+//  which may then perform those tasks
+//  on multiple-processor cores.
+
+// Other types of workers
+// In addition to dedicated and shared 
+// web workers, there are other types 
+// of workers available:
+
+// ServiceWorkers essentially act as 
+// proxy servers that sit between web 
+// applications, and the browser and 
+// network (when available). They are
+//  intended to (amongst other things) 
+// enable the creation of effective 
+// offline experiences, intercepting
+//  network requests and taking appropriate
+//  action based on whether the network is
+//  available and updated assets reside on
+//  the server. They will also allow access
+//  to push notifications and background sync APIs.
+
+// 
+// Audio Worklet provide the ability 
+// for direct scripted audio processing 
+// to be done in a worklet (a lightweight
+//  version of worker) context.
+
+// Debugging worker threads
+// Most browsers enable you to debug web 
+// workers in their JavaScript debuggers
+//  in exactly the same way as debugging 
+// the main thread! For example, both 
+// Firefox and Chrome list JavaScript 
+// source files for both the main thread
+//  and active worker threads, and all of 
+// these files can be opened to set
+//  breakpoints and logpoints.
+
+// To learn how to debug web workers,
+//  see the documentation for each 
+// browser's JavaScript debugger:
+
+// Chrome Sources panel
+// Firefox JavaScript Debugger
+// Functions and interfaces available in workers
+
+// You can use most standard JavaScript
+//  features inside a web worker, including:
+
+// Navigator
+fetch()
+// Array, Date, Math, and String
+// setTimeout() and setInterval()
+
+// The main thing you can't do in a Worker
+//  is directly affect the parent page.
+//  This includes manipulating the DOM 
+// and using that page's objects. You 
+// have to do it indirectly, by sending 
+// a message back to the main script via 
+// DedicatedWorkerGlobalScope.postMessage, 
+// then doing the changes in event handler.
+
+// Note: You can test whether a method is 
+// available to workers using the site: 
+// https://worker-playground.glitch.me/.
+//  For example, if you enter EventSource 
+// into the site on Firefox 84 you'll see
+//  that this is not supported in service 
+// workers, but is in dedicated and shared workers.
+// 
+
+// Note: For a complete list of functions
+//  available to workers, see Functions 
+// and interfaces available to workers.
+
+// WorkerGlobalScope
+
+// The WorkerGlobalScope interface of 
+// the Web Workers API is an interface 
+// representing the scope of any worker.
+//  Workers have no browsing context; 
+// this scope contains the information
+//  usually conveyed by Window objects 
+// — in this case event handlers, the 
+// console or the associated 
+// WorkerNavigator object. Each 
+// WorkerGlobalScope has its own
+//  event loop.
+
+// This interface is usually 
+// specialized by each worker 
+// type: DedicatedWorkerGlobalScope 
+// for dedicated workers, 
+// SharedWorkerGlobalScope for 
+// shared workers, and
+//  ServiceWorkerGlobalScope for
+//  ServiceWorker. The self property 
+// /returns the specialized scope for each context.
+
+// EventTarget
+// WorkerGlobalScope
+// Instance properties
+// This interface inherits properties
+//  from the EventTarget interface.
+
+// Standard properties
+// WorkerGlobalScope.caches Read only
+// Returns the CacheStorage object associated 
+// with the current context. This object 
+// enables functionality such as storing
+//  assets for offline use, and generating
+//  custom responses to requests.
+
+// WorkerGlobalScope.crossOriginIsolated Read only
+// Returns a boolean value that 
+// indicates whether the website 
+// is in a cross-origin isolation state.
+
+// WorkerGlobalScope.crypto Read only
+// Returns the Crypto object associated to the global object.
+
+// WorkerGlobalScope.fonts Read only
+// Returns the FontFaceSet associated with the worker.
+
+// WorkerGlobalScope.indexedDB Read only
+// Provides a mechanism for applications to
+//  asynchronously access capabilities of 
+// indexed databases; returns an IDBFactory object.
+
+// WorkerGlobalScope.isSecureContext Read only
+// Returns a boolean indicating whether the
+//  current context is secure (true) or not (false).
+
+// WorkerGlobalScope.location Read only
+// Returns the WorkerLocation associated 
+// with the worker. It is a specific location
+//  object, mostly a subset of the Location 
+// for browsing scopes, but adapted to workers.r.
+
+// WorkerGlobalScope.navigator Read only
+// Returns the WorkerNavigator associated 
+// with the worker. It is a specific navigator
+//  object, mostly a subset of the Navigator 
+// for browsing scopes, but adapted to workers.
+
+// WorkerGlobalScope.origin Read only
+// Returns the global object's origin, serialized as a string.
+
+// WorkerGlobalScope.performance Read only
+// Returns the Performance associated with the 
+// worker. It is a regular performance object,
+//  except that only a subset of its property
+//  and methods are available to workers.
+
+// WorkerGlobalScope.scheduler Read only
+// Returns the Scheduler object associated 
+// with the current context. This is the 
+// entry point for using the Prioritized 
+// Task Scheduling API.
+
+// WorkerGlobalScope.self Read only
+// Returns a reference to the WorkerGlobalScope
+//  itself. Most of the time it is a specific
+//  scope like DedicatedWorkerGlobalScope, 
+// SharedWorkerGlobalScope or ServiceWorkerGlobalScope.
+
+// Non-standard properties
+// console Read only Non-standard
+// Returns the console associated with the worker.
+
+// Instance methods
+// This interface inherits methods from 
+// the EventTarget interface.
+
+// Standard methods
+// WorkerGlobalScope.atob()
+// Decodes a string of data which has been 
+// encoded using base-64 encoding.
+
+// WorkerGlobalScope.btoa()
+// Creates a base-64 encoded ASCII string 
+// from a string of binary data.
+
+// WorkerGlobalScope.clearInterval()
+// Cancels the repeated execution set using setInterval().
+
+// WorkerGlobalScope.clearTimeout()
+// Cancels the delayed execution set using setTimeout().
+
+// WorkerGlobalScope.createImageBitmap()
+// Accepts a variety of different image
+//  sources, and returns a Promise which 
+// resolves to an ImageBitmap. Optionally
+//  the source is cropped to the rectangle
+//  of pixels originating at (sx, sy) wit
+// h width sw, and height sh.
+
+// WorkerGlobalScope.fetch()
+// Starts the process of fetching a resource from the network.
+
+// WorkerGlobalScope.importScripts()
+// Imports one or more scripts into the worker's 
+// scope. You can specify as many as you'd like, 
+// separated by commas. For example: importScripts('foo.js', 'bar.js');.
+
+// WorkerGlobalScope.queueMicrotask()
+// Queues a microtask to be executed at a safe 
+// time prior to control returning to 
+// the browser's event loop.
+
+// WorkerGlobalScope.setInterval()
+// Schedules a function to execute every time
+//  a given number of milliseconds elapses.
+
+// WorkerGlobalScope.setTimeout()
+// Schedules a function to execute in a given amount of time.
+
+// WorkerGlobalScope.structuredClone()
+// Creates a deep clone of a given value 
+// using the structured clone algorithm.
+
+// WorkerGlobalScope.reportError()
+// Reports an error in a script, emulating 
+// an unhandled exception.
+
+// Non-standard methods
+// WorkerGlobalScope.dump() Deprecated Non-standard
+// Allows you to write a message to stdout — i.e. 
+// in your terminal. This is the same as 
+// Firefox's window.dump, but for workers.
+
+// Events
+// error
+// Fired when an error occurred.
+
+// languagechange
+// Fired at the global/worker scope object
+//  when the user's preferred languages change.
+
+// offline
+// Fired when the browser has lost access 
+// to the network and the value of 
+// navigator.onLine switched to false.
+
+// online
+// Fired when the browser has gained access
+//  to the network and the value of
+//  navigator.onLine switched to true.
+
+// rejectionhandled
+// Fired on handled Promise rejection events.
+
+// securitypolicyviolation
+// Fired when a Content Security Policy is violated.
+
+// unhandledrejection
+// Fired on unhandled Promise rejection events.
+
+// Example
+// You won't access WorkerGlobalScope directly
+//  in your code; however, its properties and 
+// methods are inherited by more specific global
+//  scopes such as DedicatedWorkerGlobalScope 
+// and SharedWorkerGlobalScope. For example, 
+// you could import another script into the
+//  worker and print out the contents of 
+// the worker scope's navigator object 
+// using the following two lines:
+
+// JS
+// Copy to Clipboard
+importScripts("foo.js");
+console.log(navigator);
+// Note: Since the global scope of the 
+// worker script is effectively the global 
+// scope of the worker you are running 
+// (DedicatedWorkerGlobalScope or whatever)
+//  and all worker global scopes inherit
+//  methods, properties, etc. from 
+// WorkerGlobalScope, you can run lines
+//  such as those above without
+//  specifying a parent object.
+
+
+// WorkerGlobalScope: error event
+
+// The error event of the WorkerGlobalScope 
+// interface fires when an error occurs in the worker.
+
+// Syntax
+// Use the event name in methods like 
+// addEventListener(), or set an 
+// event handler property.
+addEventListener("error", (event) => {});
+
+onerror = (event) => {};
+// Event type
+// A generic Event.
+
+// Example
+// The following code snippet shows 
+// an onerror handler set inside a worker:
+
+self.onerror = () => {
+  console.log("There is an error inside your worker!");
+};
+// The same snippet, but using addEventListener():
+
+self.addEventListener("error", () => {
+  console.log("There is an error inside your worker!");
+});
+
+
+// WorkerGlobalScope: languagechange event
+
+// The languagechange event is fired at 
+// the global scope object when the 
+// user's preferred language changes.
+
+// This event is not cancelable 
+// and does not bubble.
+
+// Syntax
+// Use the event name in methods 
+// like addEventListener(), or 
+// set an event handler property.
+
+// JS
+// Copy to Clipboard
+addEventListener("languagechange", (event) => {});
+
+onlanguagechange = (event) => {};
+// Event type
+// A generic Event.
+
+// Examples
+// You can use the languagechange 
+// event in an addEventListener method:
+
+// JS
+// Copy to Clipboard
+worker.addEventListener("languagechange", () => {
+  console.log("languagechange event detected!");
+});
+// Or use the onlanguagechange event handler property:
+
+// JS
+// Copy to Clipboard
+worker.onlanguagechange = (event) => {
+  console.log("languagechange event detected!");
+};
+
+// WorkerGlobalScope: offline event
+
+// The offline event of the WorkerGlobalScope 
+// fires when the device loses connection 
+// to the internet.
+
+// Syntax
+// Use the event name in methods like 
+// addEventListener(), or set an 
+// event handler property.
+
+// JS
+// Copy to Clipboard
+addEventListener("offline", (event) => {});
+
+onoffline = (event) => {};
+// Event type
+// A generic Event.
+
+// Example
+// The following code snippet shows 
+// an onoffline handler set inside a worker:
+
+self.onoffline = () => {
+  console.log("Your worker is now offline");
+};
+// The same snippet, but using addEventListener():
+
+// JS
+// Copy to Clipboard
+self.addEventListener("offline", () => {
+  console.log("Your worker is now offline");
+});
+
+// See also
+// The WorkerGlobalScope interface it belongs to.
+
+// WorkerGlobalScope: online event
+
+// The online event of the 
+// WorkerGlobalScope fires when 
+// the device reconnects to the internet.
+
+// Syntax
+// Use the event name in methods 
+// like addEventListener(), or 
+// set an event handler property.
+
+// JS
+// Copy to Clipboard
+addEventListener("online", (event) => {});
+
+ononline = (event) => {};
+// Event type
+// A generic Event.
+
+// Example
+// The following code snippet shows 
+// an onoffline handler set inside a worker:
+
+// JS
+// Copy to Clipboard
+self.ononline = () => {
+  console.log("Your worker is now online");
+};
+// The same snippet, but using addEventListener():
+
+// JS
+// Copy to Clipboard
+self.addEventListener("online", () => {
+  console.log("Your worker is now online");
+});
+
+// WorkerGlobalScope: importScripts() method
+
+// The importScripts() method of the 
+// WorkerGlobalScope interface
+//  synchronously imports one 
+// or more scripts into the worker's scope.
+
+// Syntax
+// JS
+// Copy to Clipboard
+importScripts(path0)
+importScripts(path0, path1)
+importScripts(path0, path1, /* …, */ pathN)
+// Parameters
+// pathN
+// A string value representing the 
+// URL of the script to be imported. 
+// The URL may be absolute or relative.
+//  If the URL is relative, it is 
+// relative to the HTML document's base URL.
+
+// Return value
+// None (undefined).
+
+// Exceptions
+// NetworkError
+// Imported scripts were served without 
+// a text/javascript MIME type or without
+//  one of the permitted legacy 
+// JavaScript MIME types.
+
+// Examples
+// If you had some functionality
+//  written in a separate script 
+// called foo.js that you wanted
+//  to use inside worker.js, you
+//  could import it using the 
+// following line:
+
+// JS
+// Copy to Clipboard
+importScripts("foo.js");
+
+// importScripts() and self.importScripts()
+//  are effectively equivalent — both 
+// represent importScripts() being 
+// called from inside the worker's inner scope.
+
+// WorkerGlobalScope: location property
+
+// The location read-only property of 
+// the WorkerGlobalScope interface 
+// returns the WorkerLocation associated 
+// with the worker. It is a specific
+//  location object, mostly a subset 
+// of the Location for browsing 
+// scopes, but adapted to workers.
+
+// Value
+// A WorkerLocation object.
+
+// Examples
+// If you called the following in 
+// a document served at localhost:8000
+
+// JS
+// Copy to Clipboard
+console.log(location);
+// inside a worker (which would basically
+//  be the equivalent of 
+// self.console.log(self.location);,
+//  as these are being called on the 
+// worker scope, which can be referenced
+//  with WorkerGlobalScope.self), you 
+// will get a WorkerLocation object 
+// written to the console — something 
+// like the following:
+
+WorkerLocation {hash: "", search: "", pathname: "/worker.js", port: "8000", hostname: "localhost"…}
+  hash: ""
+  host: "localhost:8000"
+  hostname: "localhost"
+  href: "http://localhost:8000/worker.js"
+  origin: "http://localhost:8000"
+  pathname: "/worker.js"
+  port: "8000"
+  protocol: "http:"
+  search: ""
+  __proto__: WorkerLocation
+// You could use this location 
+// object to return more information
+//  about the document's location, 
+// as you might do with a normal
+//  Location object.
+
+// Note: Firefox has a bug with 
+// using console.log inside 
+// shared/service workers 
+// (see Firefox bug 1058644), 
+// which may return strange 
+// results, but this should be fixed soon.
+
+// WorkerGlobalScope: navigator property
+
+// The navigator read-only property of
+//  the WorkerGlobalScope interface 
+// returns the WorkerNavigator associated 
+// with the worker. It is a specific 
+// navigator object, mostly a subset 
+// of the Navigator for browsing scopes,
+//  but adapted to workers.
+
+// Value
+// A WorkerNavigator object.
+
+// Examples
+// If you call the following
+
+console.log(navigator);
+// inside a worker (which would basically 
+// be the equivalent of 
+// self.console.log(self.navigator);,
+//  as these are being called on the 
+// worker scope, which can be referenced
+//  with WorkerGlobalScope.self), you
+//  will get a WorkerNavigator object
+//  written to the console — something 
+// like the following:
+
+Object {onLine: true, userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap…ML, like Gecko) Chrome/40.0.2214.93 Safari/537.36", product: "Gecko", platform: "MacIntel", appVersion: "5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKi…ML, like Gecko) Chrome/40.0.2214.93 Safari/537.36"…}
+    appCodeName: "Mozilla"
+    appName: "Netscape"
+    appVersion: "5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36"
+    hardwareConcurrency: 4
+    onLine: true
+    platform: "MacIntel"
+    product: "Gecko"
+    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36"
+    __proto__: Object
+// You could use this navigator
+//  object to return more information 
+// about the runtime environment, as 
+// you might do with a normal Navigator object.
+
+
+// WorkerGlobalScope: self property
+
+// The self read-only property of the 
+// WorkerGlobalScope interface returns 
+// a reference to the WorkerGlobalScope 
+// itself. Most of the time it is a 
+// specific scope like 
+// DedicatedWorkerGlobalScope,
+//  SharedWorkerGlobalScope, or
+//  ServiceWorkerGlobalScope.
+
+// Value
+// A global scope object (differs 
+// depending on the type of
+//  worker you are dealing with
+// , as indicated above).
+
+// Examples
+// If you called
+
+// JS
+// Copy to Clipboard
+console.log(self);
+// inside a worker, you will get 
+// a worker global scope of the 
+// same type as that worker object 
+// written to the console — 
+// something like the following:
+
+// DedicatedWorkerGlobalScope {
+// undefined: undefined, Infinity: Infinity, Math: MathConstructor, NaN: NaN, Intl: Object…}
+//     Infinity: Infinity
+//     Array: function Array() { [native code] }
+//       arguments: null
+//       caller: null
+//       isArray: function isArray() { [native code] }
+//       length: 1
+//       name: "Array"
+//       observe: function observe() { [native code] }
+//       prototype: Array[0]
+//       unobserve: function unobserve() { [native code] }
+//       __proto__: function Empty() {}
+//       <function scope>
+//     ArrayBuffer: function ArrayBuffer() { [native code] }
+//     Blob: function Blob() { [native code] }
+//     Boolean: function Boolean() { [native code] }
+//     DataView: function DataView() { [native code] }
+//     Date: function Date() { [native code] }
+//     DedicatedWorkerGlobalScope: function DedicatedWorkerGlobalScope() { [native code] }
+//     Error: function Error() { [native code] }
+// // etc. etc.
+
+// sharedworker
+// SharedWorker
+
+// The SharedWorker interface 
+// represents a specific kind 
+// of worker that can be accessed 
+// from several browsing contexts,
+//  such as several windows, iframes
+//  or even workers. They implement
+//  an interface different than 
+// dedicated workers and have a 
+// different global scope, 
+// SharedWorkerGlobalScope.
+
+// Note: If SharedWorker can be 
+// accessed from several browsing
+//  contexts, all those browsing 
+// contexts must share the exact 
+// same origin (same protocol,
+//  host and port).
+
+// EventTarget
+// SharedWorker
+// Constructors
+SharedWorker()
+// Creates a shared web worker
+//  that executes the script at 
+// the specified URL.
+
+// Instance properties
+// Inherits properties from 
+// its parent, EventTarget.
+
+// SharedWorker.port Read only
+// Returns a MessagePort object
+//  used to communicate with and
+//  control the shared worker.
+
+// Events
+// error
+// Fires when an error occurs 
+// in the shared worker.
+
+// Instance methods
+// Inherits methods from its
+//  parent, EventTarget.
+
+// Example
+// In our Basic shared worker 
+// example (run shared worker),
+//  we have two HTML pages, 
+// each of which uses some 
+// JavaScript to perform a 
+// simple calculation. The
+//  different scripts are 
+// using the same worker file 
+// to perform the calculation — 
+// they can both access it, even
+//  if their pages are running
+//  inside different windows.
+
+// The following code snippet 
+// shows creation of a SharedWorker
+//  object using the SharedWorker()
+//  constructor. Both scripts contain this:
+
+// JS
+// Copy to Clipboard
+const myWorker = new SharedWorker("worker.js");
+// Note: Once a shared worker is created,
+//  any script running in the same origin 
+// can obtain a reference to that worker 
+// and communicate with it. The shared 
+// worker will be alive as long as its 
+// global scope's owner set (a set of 
+// Document and WorkerGlobalScope objects) 
+// is not empty (for example, if there is 
+// any live page holding a reference to it,
+//  maybe through new SharedWorker()). To
+//  read more about shared worker lifetime,
+//  see The worker's lifetime section of
+//  the HTML specification.
+
+// Both scripts then access the worker 
+// through a MessagePort object created 
+// using the SharedWorker.port property.
+//  If the onmessage event is attached 
+// using addEventListener, the port is 
+// manually started using its start() method:
+
+// JS
+// Copy to Clipboard
+myWorker.port.start();
+// When the port is started, both scripts
+//  post messages to the worker and handle 
+// messages sent from it using 
+// port.postMessage() and port.onmessage, 
+// respectively:
+
+// Note: You can use browser devtools to
+//  debug your SharedWorker, by entering
+//  a URL in your browser address bar to
+//  access the devtools workers inspector;
+//  for example, in Chrome, the URL 
+// chrome://inspect/#workers, and in 
+// FireFox, the URL about:debugging#workers.
+
+first.onchange = () => {
+  myWorker.port.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+
+second.onchange = () => {
+  myWorker.port.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+
+myWorker.port.onmessage = (e) => {
+  result1.textContent = e.data;
+  console.log("Message received from worker");
+};
+// Inside the worker we use the 
+// onconnect handler to connect to the
+//  same port discussed above. The ports
+//  associated with that worker are 
+// accessible in the connect event's 
+// ports property — we then use MessagePort
+//  start() method to start the port, and 
+// the onmessage handler to deal with 
+// messages sent from the main threads.
+
+onconnect = (e) => {
+  const port = e.ports[0];
+
+  port.addEventListener("message", (e) => {
+    const workerResult = `Result: ${e.data[0] * e.data[1]}`;
+    port.postMessage(workerResult);
+  });
+
+  port.start(); // Required when using addEventListener. Otherwise called implicitly by onmessage setter.
+};
+
+// SharedWorker: SharedWorker() constructor
+
+// The SharedWorker() constructor creates 
+// a SharedWorker object that executes 
+// the script at the specified URL. This
+//  script must obey the same-origin policy.
+
+// Note: there is disagreement among 
+// browser manufacturers about whether
+//  a data URL is of the same origin 
+// or not. Although Firefox 10.0 and 
+// later accept data URLs, that's not
+//  the case in all other browsers.
+
+// Syntax
+// JS
+// Copy to Clipboard
+new SharedWorker(aURL)
+new SharedWorker(aURL, name)
+new SharedWorker(aURL, options)
+// Parameters
+// aURL
+// A string representing the URL of the
+//  script the worker will execute. 
+// It must obey the same-origin policy.
+
+// name Optional
+// A string specifying an identifying 
+// name for the SharedWorkerGlobalScope 
+// representing the scope of the worker, 
+// which is useful for creating new
+//  instances of the same SharedWorker
+//  and debugging.
+
+// options Optional
+// An object containing option properties
+//  that can set when creating the object
+//  instance. Available properties are as follows:
+
+// type
+// A string specifying the type of worker
+//  to create. The value can be classic 
+// or module. If not specified, the 
+// default used is classic.
+
+// credentials
+// A string specifying the type of 
+// credentials to use for the worker.
+//  The value can be omit, same-origin, 
+// or include. If not specified, or if
+//  type is classic, the default used 
+// is omit (no credentials required).
+
+// name
+// A string specifying an identifying
+//  name for the SharedWorkerGlobalScope
+//  representing the scope of the worker,
+//  which is mainly useful for debugging purposes.
+
+// Exceptions
+// SecurityError DOMException
+// Thrown if the document is not
+//  allowed to start workers, for 
+// example if the URL has an invalid 
+// syntax or if the same-origin policy is violated.
+
+// NetworkError DOMException
+// Thrown if the MIME type of the worker
+//  script is incorrect. It should always
+//  be text/javascript (for historical
+//  reasons other JavaScript MIME types
+//  may be accepted).
+
+// SyntaxError DOMException
+// Thrown if aURL cannot be parsed.
+
+// Examples
+// The following code snippet shows
+//  creation of a SharedWorker object
+//  using the SharedWorker() constructor
+//  and subsequent usage of the object:
+
+// JS
+// Copy to Clipboard
+const myWorker = new SharedWorker("worker.js");
+
+myWorker.port.start();
+
+first.onchange = () => {
+  myWorker.port.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+
+second.onchange = () => {
+  myWorker.port.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+
+myWorker.port.onmessage = (e) => {
+  result1.textContent = e.data;
+  console.log("Message received from worker");
+};
+// For a full example, see our Basic shared worker example (run shared worker.)
+// https://github.com/mdn/dom-examples/tree/main/web-workers/simple-shared-worker
+
+// SharedWorker: port property
+
+// The port property of the SharedWorker
+//  interface returns a MessagePort
+//  object used to communicate and 
+// control the shared worker.
+
+// Value
+// A MessagePort object.
+
+// Examples
+// The following code snippet shows
+//  creation of a SharedWorker object
+//  using the SharedWorker() constructor.
+//  Multiple scripts can then access the 
+// worker through a MessagePort object 
+// accessed using the SharedWorker.port 
+// property — the port is started using 
+// its start() method:
+
+// JS
+// Copy to Clipboard
+const myWorker = new SharedWorker("worker.js");
+myWorker.port.start();
+
+// For a full example, see our Basic 
+// shared worker example (run shared worker.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

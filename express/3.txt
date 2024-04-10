@@ -1,0 +1,4794 @@
+// Express JS Response Timeout - what is it ? 
+
+
+// 1. **Client Requests**: When a user interacts 
+// with a web application (for example, by clicking 
+// a button or submitting a form), the server 
+// receives a request from the client (usually a web browser).
+// Ideally, the server 
+// should respond quickly to the client's request. 
+// However, sometimes processing takes longer due 
+// to various reasons (such as complex computations 
+// or database queries). If the server takes 
+// too long to respond, the client might wait indefinitely. 
+// To prevent this, we set a **response timeout** – 
+// a maximum time the server allows itself to process 
+// the request and send a response.
+// In Express.js ,
+// you can configure response timeouts. If the server 
+// doesn't complete processing within the specified time, 
+// it cancels the request and sends an error response. 
+// This improves server reliability and prevents hanging requests.
+
+
+// In summary, response timeouts in Express JS ensure 
+// that clients don't wait forever for a server response, 
+// enhancing overall performance and user experience.
+
+// Approach
+// A basic example of a timeout means that 
+// you created a route but did not pass any
+//  data to the client, like you have not 
+// set up the res.send(). In that case, 
+// the client is not receiving any data,
+//  so for the client, it would be like 
+// the server is not sending it will load 
+// the browser response is not received.
+
+// In this particular approach, we are 
+// not going to send data to the client 
+// side; we have implemented only an 
+// endpoint to get requests, and we have 
+// implemented a middleware that will 
+// automatically send status code 408 
+// when the request has timed out.
+
+// Syntax:
+app.get("*", (req, res) => { })
+
+// Example: Implementation of above approach.
+
+// Index.js
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use((req, res, next) => {
+    res.setTimeout(2000, () => {
+        console.log('Request has timed out.');
+        res.sendStatus(408);
+    });
+    next();
+});
+
+app.get('/', (req, res) => {
+
+});
+
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+});
+
+// Express.js app.engine() Function
+// The app.engine() function is used to 
+// register the given template engine 
+// callback as ext/extension files .
+The app.engine() function in Express.js is used to associate an engine (a rendering engine) with a specific file extension. This function allows you to use different template engines for rendering views in your Express application. 
+Using app.engine() is especially useful when you want to use different template engines for different parts of your application or when you want to create your own custom rendering engine. It provides flexibility and extensibility in rendering views in Express applications.
+when would someone want to use template engine ?
+
+There are several reasons why someone might want to use a template engine in web development:
+
+1. **Separation of Concerns**: Template engines allow you to separate the presentation logic (HTML, CSS) from the application logic (JavaScript, server-side code). This separation promotes code organization, maintainability, and reusability.
+
+2. **Dynamic Content Generation**: Template engines make it easier to generate dynamic HTML content by allowing you to embed programming logic and data directly into your templates. This is particularly useful for rendering user-specific content, generating lists or tables from data sources, or creating reusable UI components.
+
+3. **Reusability and Modularization**: Template engines often provide features like layouts, partials, and includes, which enable you to create reusable templates and components. This promotes code reuse and consistency across different parts of your application.
+
+4. **Caching and Performance**: Some template engines offer caching mechanisms that can significantly improve the performance of your application by caching the compiled templates in memory, reducing the need for repeated parsing and compilation.
+
+5. **Readability and Syntax Sugar**: Template engines often provide a more readable and expressive syntax for embedding code and data within HTML templates, making it easier to write and understand complex templates.
+
+6. **Compatibility with Front-end Frameworks**: Many popular front-end frameworks and libraries, such as React, Angular, and Vue, use template engines or a similar concept to separate the UI components from the application logic.
+
+7. **Server-side Rendering (SSR)**: Template engines are essential for server-side rendering, where the HTML is generated on the server and sent to the client as a fully rendered page. This can improve the initial load time and provide better SEO (Search Engine Optimization) for websites.
+
+8. **Simplified Workflow**: Template engines can simplify the workflow for developers by abstracting away the complexities of string manipulation and allowing them to focus on the presentation logic and data binding.
+
+While template engines are not a strict requirement for web development, they are widely adopted because they provide a structured and maintainable approach to building user interfaces and generating dynamic content. They can significantly improve the development experience, especially in larger projects or when working with teams.
+
+
+
+// Syntax:
+app.engine(ext, callback)
+
+// Parameters: The ext parameter is 
+// the extension type like ejs, hbs, 
+// etc and callback is the function
+//  passed as a parameter. 
+
+npm install express
+npm version express
+
+// Create a views folder and put a home.html
+//  file in it with the following code: 
+
+// Example 1: Filename: home.html 
+// <html>
+// <head>
+//     <title>app.engine() Demo</title>
+// </head>
+
+// <body>
+//     <h2>EJS Engine</h2>
+// </body>
+// </html>
+
+// now, to map the EJS template 
+// engine to “.html” files:
+app.engine('html', require('ejs').renderFile);
+
+// Project Structure: see on site 
+
+
+// Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.engine('html', require('ejs').renderFile);
+
+app.get('/', function (req, res) {
+    res.render("home.html")
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Steps to run the program:
+
+// Make sure you have installed the express 
+// and ejs modules using the following command:
+npm install express
+npm install ejs
+// Run the index.js file using the below command:
+node index.js
+// Output:
+
+
+// Console Output:
+
+// Server listening on PORT 3000
+// Browser Output:
+
+// Now open your browser and go 
+// to http://localhost:3000/, you 
+// can see the following output
+//  on your browser:
+
+// Example 2: 
+// Filename: home.html
+//     < html >
+// <head>
+//     <title>app.engine() Demo</title>
+// </head>
+// <body>
+//     <h2>Handlebars Engine</h2>
+// </body>
+// </ >
+
+// Filename: index.js
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+console.log(app.engine('html', require('hbs').renderFile));
+// hbs - hbs is the handlebars template engine 
+app.get('/', function (req, res) {
+    res.render("home.html") // renders and servers the html file 
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// Steps to run the program:
+
+// Make sure you have installed the express and hbs modules using the following command:
+
+npm install express
+npm install hbs
+// Run the index.js file using the below command:
+
+    node index.js
+// Output:
+
+// Console Output:
+
+// Server listening on PORT 3000
+// Browser Output:
+
+// Now open your browser and go to http://localhost:3000/, 
+// you can see the following output on your browser:
+
+// is app.set and app.engine are same ?
+
+// Certainly! Let's clarify the difference between
+//  `app.set` and `app.engine` in **Express.js**:
+
+// 1. **`app.set`**:
+//     - **Purpose**: `app.set` is used to configure 
+// various settings/properties for an Express application.
+//     - **Functionality**:
+//         - It allows you to set properties related 
+            // to your application, such as the **views directory** 
+            // (where template files are located) and the **view engine**
+            //  (the template engine to use).
+//         - For example:
+//```javascript
+            // Set the views directory
+            app.set('views', './views');
+
+            // Set the view engine (e.g., Pug)
+            app.set('view engine', 'pug');
+//             ```
+//     - **Effect**:
+//         - After setting the view engine, you don't 
+            // need to explicitly specify the engine or load 
+            // the template engine module in your app. Express 
+            // internally handles loading the specified template engine¹.
+//         - The view engine cache doesn't cache 
+            // the contents of the template's output; it only 
+            // caches the underlying template itself¹.
+
+// 2. **`app.engine`**:
+//     - **Purpose**: `app.engine` is used to 
+            // register a template engine callback for 
+            // a specific file extension.
+//     - **Functionality**:
+//         - It associates a file extension 
+            // (e.g., `.pug`, `.ejs`, `.hbs`) with a template engine.
+//         - By default, Express automatically requires 
+            // the engine based on the file extension.
+//         - Example:
+//             ```javascript
+            // Register Pug as the template engine for .pug files
+            app.engine('pug', require('pug').__express);
+//             ```
+//     - **Usage**:
+//         - You typically use `app.engine` when 
+            // integrating a custom template engine that 
+            // doesn't follow the standard convention 
+            // (like Jade/Pug or Mustache).
+//         - Some template engines (like Pug) export 
+            // a function named `__express` that is called by `res.render()` 
+            // to render the template code¹³.
+
+// In summary, `app.set` configures global settings for 
+// your Express app, while `app.engine` associates 
+// specific file extensions with template engines. 
+// Both play crucial roles in handling views 
+// and rendering templates. 🌟.
+
+
+///////////////////////////////////////////////////////////////
+/* __express syntax */
+__express(filePath, options, callback) {}
+app.engine('html', require('pug').__express);
+app.engine('html', require('hbs').renderFile)
+// register pug as the template engine for .html files 
+// Pug export a function named __express that is called 
+// by res.render() to render the template code12.
+
+app.engine('html', require('pug').__express);
+app.engine('html', require('hbs').renderFile)
+// Pug (formerly Jade):
+// For Pug, we use require('pug').__express.
+// Pug provides this special function (__express) that 
+// Express calls to render Pug templates.
+
+// Handlebars (hbs):
+// Handlebars does not use __express.
+// Instead, we set up Handlebars as the template 
+// engine using app.engine('html', require('hbs').renderFile).
+
+// When you call res.render('home.html'), 
+// Express internally uses Handlebars 
+// to process the template and 
+// generate dynamic HTML content and 
+// the callback function(app.engine(ext, callback)) 
+// is called by the res.render() 
+// function to render the template code.
+
+// it prepares Express to use required template 
+// engines when rendering .html files.
+// When you later call 
+// res.render('home.html')
+
+// When you call res.render('home.html') (where 'home.html' is an .html file), 
+// Express automatically uses Pug to process the template and generate
+//  dynamic HTML content.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.subdomains);
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+// Make sure you have installed the express 
+// module using the following command: 
+npm install express
+
+// Run the index.js file using the below command: 
+node index.js
+
+// check out 
+// Console Output:  
+// Browser Output: 
+
+// Output:
+['car', 'lambo']
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Express JS – app.listen vs server.listen
+
+// What is app.listen() and server.listen() in Express JS?
+// app.listen(): In Express.js, app.listen() method 
+// is used to start a web server and listen to 
+// the connections on the specified host and port. 
+// This method is invoked on an instance of 
+// an Express application (app) created using express().
+
+// server.listen(): In Node.js,
+//  server.listen() method is used 
+// to start a server and listens for
+//  incoming network connections on 
+// a specified port and optional hostname. 
+// This method is typically associated 
+// with the native http or 
+// https modules in Node.js.
+
+// The basic usage of server.listen() 
+// is to create an HTTP or HTTPS server
+//  using http.createServer() or 
+// https.createServer() respectively, 
+// and then calling server.listen() 
+// to start the server.
+
+// difffeerence
+
+// - **app.listen()**:
+//     - **Server Creation**: Combines creating an HTTP server 
+//        and binding the Express application to that server in one method call.
+//     - **Server Control**: Binds the Express app to an HTTP 
+//        server, handling incoming requests through app 
+//        routes and middleware.
+//     - **Usability**: Requires less code and is more 
+//        focused for Express.js applications.
+//     - **Customization**: Allows setting specific 
+//        Express-related configurations (e.g., `app.set`) 
+//        during server initialization.
+
+// - **server.listen()**:
+//     - **Module**: Part of the native **HTTP module** in Node.js.
+//     - **Server Creation**: Manually creates an HTTP server 
+//        using `http.createServer()` and then binds it to 
+//        a port using `server.listen`.
+//     - **Server Control**: Provides more control over 
+//        the server instance, allowing custom handling 
+//        of HTTP requests and responses using 
+//        the created server object.
+//     - **Usability**: Offers lower-level access, useful 
+//        for specific server configurations.
+//     - **Customization**: Enables flexibility to implement 
+//        custom server behaviors beyond HTTP, such as handling 
+//        raw TCP connections or creating WebSocket servers. 🌟🚀
+
+
+//     - Use `app.listen()` for most Express applications (less code, higher-level).
+//     - Use `server.listen()` when you need more control 
+//      or want to reuse the HTTP server (e.g., for WebSocket connections). 🌟🚀.
+
+
+//   Conclusion:
+// app.listen() is often used with frameworks 
+// like Express to create an HTTP server and 
+// bind the application to it.We don’t have 
+// to manually define everything as Express 
+// do it for us.
+
+//  While server.listen() is used
+//  when directly creating an HTTP server
+//  with the http module, allowing for
+//  more manual control over the server’s
+//  behavior.It is useful if you want to 
+// reuse the HTTP server, for example to 
+// run socket.io within 
+// the same HTTP server instance.
+
+
+// 2. **Specifying Host and Port**:
+//     - You can also specify the host (IP address) along with the port.
+
+// ```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World!\n');
+});
+
+const PORT = 8080;
+const HOST = '127.0.0.1'; // Example IP address
+server.listen(PORT, HOST, () => {
+    console.log(`HTTP server listening on ${HOST}:${PORT}`);
+});
+// ```
+
+// 3. **Setting Backlog (Maximum Queue Length)**:
+//     - You can set the maximum length of the queue of pending connections (backlog).
+
+// ```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World!\n');
+});
+
+const PORT = 8080;
+const BACKLOG = 10; // Example backlog value
+server.listen(PORT, BACKLOG, () => {
+    console.log(`HTTP server listening on port ${PORT} with backlog ${BACKLOG}`);
+});
+// ```
+
+// 4. **Using a Callback Function**:
+//     - You can provide a callback function to execute once the server starts listening.
+
+// ```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World!\n');
+});
+
+const PORT = 8080;
+server.listen(PORT, () => {
+    console.log(`HTTP server listening on port ${PORT}`);
+    // Additional setup or actions after server starts
+});
+// ```
+
+// Remember to replace the example values (port, host, backlog) with your actual configuration. These options allow you to customize how your HTTP server listens for incoming connections. 🌟🚀
+
+
+ //middleware vs  callbacks 
+
+// 1. **Middleware**:
+//    - Middleware functions   handle requests and responses between 
+//      the server and route handlers.(req-res cycle)
+//    - They execute **before** the actual route handler is invoked.
+//    - Middleware can perform tasks such as logging, 
+//      authentication, data validation, and modifying
+//       the request or response.
+//    - Middleware can be **global** (applied to all routes) 
+//      or **specific** (applied only to certain routes).
+//    - For instance, if you use `router.use('/myRoute', test)`,
+//       the `test` middleware will run for **all HTTP verbs** 
+//       (GET, POST, etc.) hitting the `/myRoute` path.
+//    - The order of middleware execution matters; they 
+//      run in the sequence they are declared.
+
+// 2. **Callbacks**:
+//    - Callbacks are functions that execute **after** 
+//      an asynchronous operation completes.
+//    - In Express, route handlers (such as `app.get('/route', callback)`) 
+//      often use callbacks.
+//    - Unlike middleware, callbacks are **specific to a route**.
+//    - For example, `router.post('/myRoute', test, function (req, res) { ... })` 
+//      applies the `test` callback only 
+//      to **POST requests** hitting `/myRoute`.
+
+// In summary:
+// - **Middleware** can be global or specific, 
+//    while **callbacks** are route-specific.
+// - Middleware runs before route handlers, whereas 
+//    callbacks execute within route handlers.
+// - Choose between them based on your use case: 
+//   global tasks (middleware) or route-specific logic (callbacks). 🚀
+
+
+
+// Express app.use() Function
+// The app.use() function is used to mount 
+// the specified middleware function(s) at 
+// the path that is being specified so It is
+//  mostly used to set up middleware for
+//  your application. 
+
+//The `app.use()` function 
+// in **Express.js** serves several 
+// essential purposes:
+
+// 1. **Adding Middleware**:
+//     - When you call `app.use(callback)`, it adds 
+//      a new middleware function to your Express application.
+//     - Middleware functions are executed in the 
+//      order they are added, creating a middleware stack.
+
+// 2. **Middleware Stack**:
+//     - Internally, an Express app maintains 
+//      a middleware stack.
+//     - Each middleware function in 
+//       the stack processes the request 
+//       and response objects.
+//     - Functions like `app.get()` and
+//       `app.post()` also add layers to this stack.
+
+// 3. **Order Matters**:
+//     - The order in which you call `app.use()` matters.
+//     - For example, consider the common 
+//       middleware function `cors`, which 
+//       adds CORS headers to your responses.
+//     - Make sure you call `app.use(cors())` 
+//       before defining any route handlers 
+//      or anything else that sends an HTTP response.
+//     - Otherwise, you won't get the necessary CORS headers.
+
+// 4. **Example: Logging HTTP Method and URL**:
+//     - Suppose you want to log the HTTP method 
+//      and URL of every request:
+
+//         ```javascript
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next(); // Call next to proceed to the next middleware
+});
+
+app.get('/test', (req, res) => {
+    res.send('ok');
+});
+
+const server = app.listen(3000);
+//         ```
+//       - In this example:
+//         - The middleware logs the method 
+//           and URL for every request.
+//         - The `next()` function ensures that 
+//           subsequent middleware or route 
+//            handlers are executed.
+
+// 5. **Path Parameter**:
+//     - You can also pass a path to `app.use()` 
+//       to execute the middleware only for specific URLs.
+
+
+//     - For example:
+//         ```javascript
+app.use('/cors', require('cors')());
+// Middleware will only run for URLs starting with '/cors'
+//         ```
+
+// Remember, `app.use()` is a powerful tool for 
+// setting up middleware in Express, allowing you 
+// to handle various aspects of request processing! 🚀.
+
+// 1. **Middleware Functions**:
+//     - Middleware functions in Express are e
+//       ssentially **request handlers** that 
+//       can process incoming requests 
+//        and modify the response.
+//     - They can perform tasks such as 
+//        logging, authentication, error handling, and more.
+//     - Middleware functions have the following signature:
+
+//         ```javascript
+function middleware(req, res, next) {
+    // Your middleware logic here
+    // Call next() to proceed to the next middleware
+}
+//         ```
+
+// 2. **Adding Middleware with `app.use()`**:
+//     - The primary purpose of `app.use()` is 
+//       to **add middleware functions** to your application.
+//     - These middleware functions are executed 
+//        in the order they are added.
+//     - The syntax for `app.use()` is:
+
+//         ```javascript
+app.use(path, middleware);
+//         ```
+//     - Here's why it's designed this way:
+
+
+function logRequest(req, res, next) {
+    console.log(`Received ${req.method} request at ${req.url}`);
+    next(); // Call next to proceed to the next middleware
+}
+
+app.use('/api', logRequest);
+//         ```
+//     - In this example:
+//         - The `logRequest` function is a middleware.
+//         - When a request matches the `/api` path, Express invokes this middleware.
+//         - After logging, it calls `next()` to proceed to the next middleware.
+
+// Indeed! **Middlewares** and **functions** are 
+// closely related, and middlewares are a specific 
+// type of function used in the context of web 
+// frameworks like **Express.js**.
+In Express.js (a popular web framework for Node.js), 
+// middleware functions are used to handle various aspects 
+// of HTTP requests and responses.
+//     - Middleware functions are executed **sequentially** 
+// in the order they are added.
+//     - They can:
+//         - Modify the request or response objects.
+//         - Perform tasks like logging, authentication, validation, etc.
+//         - Call the `next()` function to pass control to the next middleware.
+
+
+// 5. **Middleware vs. Regular Functions**:
+//     - Middleware functions have a specific purpose within
+// the context of handling HTTP requests.
+//     - They are designed to be **chainable**, allowing
+// you to create a sequence of processing steps.
+//     - Regular functions, on the other hand, can be used
+// for any purpose and are not tied to the request-response cycle.
+
+// In summary, middleware functions are a subset of functions,
+// tailored for handling web requests and responses. They play
+// a crucial role in Express applications, enabling modular
+// and organized request processing! 🌟
+
+// Express.js req.app Property
+
+// The req.app property holds the reference 
+// to the instance of the Express application 
+// that is using the middleware. 
+
+// Syntax:
+req.app
+
+// Browser Output: 
+
+// Now open your browser and go to http://localhost:3000/,
+//  now you can see the following output on your console:
+
+// Server listening on PORT 3000
+// { [EventEmitter: app]
+//   _events: [Object: null prototype] 
+//     { mount: [Function: onmount] },
+//   _eventsCount: 1,
+//   _maxListeners: undefined,
+//   setMaxListeners: [Function: setMaxListeners],
+//   getMaxListeners: [Function: getMaxListeners],
+//   . . .
+//  _router:
+//    { [Function: router]
+//      params: {},
+//      _params: [],
+//      caseSensitive: false,
+//      mergeParams: undefined,
+//      strict: false,
+//      stack: [ [Layer], [Layer], [Layer] ] } }
+
+
+// Certainly! Let's explore the meaning of 
+// the `req.app` property in **Express.js**.
+
+// 1. **`req.app` Property**:
+//    - The `req.app` property holds a reference to 
+//      the **instance of the Express application** 
+//      that is currently using the middleware.
+//    - It provides a way to access the application-level 
+//      properties and methods from within a route handler 
+//      or middleware function.
+//    - Essentially, it allows you to interact with 
+//      the global application context.
+
+// 2. **Use Cases**:
+//    - **Accessing Application-Level Properties**:
+//      - You can use `req.app` to access properties 
+//        set at the application level. For example, if 
+//        you've set custom configuration options or 
+//        initialized database connections during app setup, 
+//        you can access them via `req.app`.
+//    - **Sharing Resources Across Routes**:
+//      - Suppose you've created a shared resource (e.g., 
+//        a database connection pool) when setting up your 
+//        Express app. You can access this resource from 
+//    any route handler using `req.app`.
+//    - **Custom Middleware**:
+//      - Custom middleware can also use `req.app` to 
+//        perform tasks that require access to 
+//        the global application context.
+
+// 3. **Example**:
+//    - Let's say you've set up an Express app and want 
+//      to log some application-level information within a route handler:
+
+// 4. **Remember**:
+//    - While `req.app` provides access to
+//     the application instance, it's generally
+//     better to use other mechanisms (such as
+//     dependency injection or services) to share
+//     resources across routes.
+//    - Use `req.app` judiciously, keeping in mind
+//     the separation of concerns and modularity.
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js req.baseUrl Property
+
+// The req.baseUrl property is the URL path 
+// on which a router instance was mounted. 
+// The req.baseUrl property is similar to 
+// the mount path property of the app object, 
+// except app.mountpath returns the matched 
+// path pattern(s). 
+
+// Syntax:
+req.baseUrl
+
+// javascript
+
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+const user = express.Router();
+
+user.get('/login', function (req, res) {
+    console.log(req.baseUrl);
+    res.end();
+})
+
+app.use('/user', user);
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// output 
+the output when you run the server and visit the /user/login route would be:
+/user
+The user router is mounted on the /user path using app.use('/user', user).
+
+
+// Example 2: Filename: index.js 
+
+// javascript
+
+const express = require('express');
+const e = require('express');
+const app = express();
+const PORT = 3000;
+
+const student = express.Router();
+app.use('/student', student);
+
+student.get('/signup', function (req, res) {
+    if (req.baseUrl == '/student') {
+        console.log("Show Signup Form");
+        res.end();
+    } else {
+        console.log("Invalid Request")
+        res.send("Invalid Route")
+    }
+})
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+Let's break down the meaning 
+// of the `req.baseUrl` property in **Express.js**:
+
+// 1. ** `req.baseUrl` Property **:
+//    - The`req.baseUrl` property represents 
+//     the ** URL path on which a router instance was mounted **.
+//    - When you create a router using`express.Router()`, 
+//      you can attach it to a specific base path(mount point) 
+//      within your application.
+//    - For example, if you mount a router at`/user`, 
+    //  any routes defined within that router will be 
+    //  accessible under the `/user` path.
+
+// 2. ** Comparison with `app.mountpath` **:
+//      - The`req.baseUrl` property is similar to 
+//        the `mount path` property of the `app` object.
+//      - However, there's a subtle difference:
+//      - `req.baseUrl` returns the ** exact matched path ** 
+//         where the router is mounted.
+//      - `app.mountpath` returns the ** pattern(s) ** 
+//         that match the route, considering any route 
+//         parameters or wildcards.
+
+
+const express = require('express');
+const app = express();
+
+// Create a router for user-related routes
+const userRouter = express.Router();
+
+// Mount the router at '/user'
+app.use('/user', userRouter);
+
+// Example 1: Accessing '/user/login'
+userRouter.get('/login', (req, res) => {
+    console.log(req.baseUrl); // Output: '/user'
+    res.end();
+});
+
+// Example 2: Accessing '/student/signup'
+const studentRouter = express.Router();
+app.use('/student', studentRouter);
+
+studentRouter.get('/signup', (req, res) => {
+    if (req.baseUrl === '/student') {
+        console.log('Show Signup Form');
+    } else {
+        console.log('Invalid Request');
+        res.send('Invalid Route');
+    }
+    res.end();
+});
+
+app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
+
+
+//     - In Example 1, when accessing`/user/login`, `req.baseUrl` is`/user`.
+//      - In Example 2, when accessing`/student/signup`, `req.baseUrl` is`/student`.
+
+
+
+// 4. ** Use Cases **:
+//    - You can use `req.baseUrl` to handle route - specific logic based on the mount path.
+//    - It's especially useful when you want to differentiate behavior for different mounted routers.
+
+// Remember, `req.baseUrl` helps you understand 
+// the exact base path where a router is mounted 
+// within your Express application! 🚀
+
+/////////////////////////////////////////////////////////////////////////////
+
+// Express req.body Property
+
+// The req.body property contains 
+// key-value pairs of data submitted in 
+// the request body. By default, it is 
+// undefined and is populated when 
+// you use a middleware called
+//  body-parsing such as express.urlencoded() 
+// or express.json(). 
+
+// Syntax:
+req.body
+
+// Example 1: Below is the code of req.body 
+// Property implementation.
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// For parsing application/json
+app.use(express.json());
+
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/profile', function (req, res) {
+    console.log(req.body);
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+// Now make a POST request to http://localhost:3000/profile 
+// with the following body:
+// {
+//     "title":"Greetings from GeeksforGeeks"
+// }
+
+
+// Browser Output: Now you can see 
+// the following output on your console:
+
+// Server listening on PORT 3000
+// { title: 'Greetings from GeeksforGeeks' }
+
+
+// Example 2: Below is the code of req.body Property implementation.
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/signup', function (req, res) {
+    const data = req.body;
+    console.log("Name: ", data.name);
+    console.log("Age: ", data.age);
+    console.log("Gender: ", data.gender);
+
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Now make a POST request to http://localhost:3000/signup 
+// with the following request body:
+
+//  {
+//      "name": "Gourav",
+//      "age": 13,
+//      "gender":"Male"
+//  }
+
+// Output: Now you will see the following output on your console screen:
+
+// Server listening on PORT 3000
+// Name:  Gourav
+// Age:  13
+// Gender:  Male
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Express.js req.cookies Property
+
+// The req.cookies property is used when 
+// the user is using cookie-parser middleware. 
+// This property is an object that contains 
+// cookies sent by the request. 
+
+// Syntax:
+req.cookies
+
+
+// Example 1: Filename: index.js 
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.use(cookieParser());
+
+app.get('/', function (req, res) {
+    req.cookies.title = 'GeeksforGeeks';
+    console.log(req.cookies);
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Steps to run the program:
+// node index.js
+// Now open your browser and go 
+// to http://localhost:3000/, now you can 
+// see the following output on your console:
+
+// Server listening on PORT 3000
+// [Object: null prototype] { title: 'GeeksforGeeks' }
+
+// Example 2: Filename: index.js 
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.use(cookieParser());
+
+app.get('/user', function (req, res) {
+    req.cookies.name = 'Gourav';
+    req.cookies.age = 12;
+
+    console.log(req.cookies);
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+// node index.js
+// Output: Now open your browser and make
+// a GET request to http://localhost:3000/user,
+// now you can see the following output on your console:
+
+// Server listening on PORT 3000
+// [Object: null prototype] { name: 'Gourav', age: 12 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js req.fresh Property
+// The req.fresh property returns true if 
+// the response is still ‘fresh’ in 
+// the client’s cache else(if fresh return true) 
+// it will return false. 
+
+// so basically fresh  means is it valid or  expired right ?
+// Exactly! In the context of **Express.js**, 
+// the `req.fresh` property helps determine
+//  whether a cached response (like a dish in 
+// a restaurant) is still valid (fresh) or has 
+// expired (stale). If it's fresh, you can serve
+//  it directly; otherwise, you need to 
+// prepare a new one. 🍽️🔄
+
+// Syntax:
+req.fresh
+// Parameter: No parameter 
+// Return Value: True or False 
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.fresh);
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// node index.js
+// Output:
+
+// Now open your browser and go to http://localhost:3000/,
+// now you can see the following output on your console:
+// Server listening on PORT 3000
+// false
+
+// Example 2: Consider the above code but this
+// time, make a GET request to http://localhost:3000/
+// with Header set to Cache-Control: no-cache, now
+//  you can see the following output on your console:
+
+// Output:
+// Server listening on PORT 3000
+// false
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js req.accepts() Function
+
+// The req.accepts() function checks if 
+// the specified content types are acceptable 
+// on the basis of the requests Accept HTTP 
+// header field. The method returns the best 
+// match, else it returns false if none of 
+// the specified content types is acceptable. 
+
+// Syntax:
+req.accepts(types)
+// Parameter: The type value is 
+// a single MIME type string. 
+
+// Return Value: String 
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept'));
+    console.log(req.accepts('application/json'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+// Now make a GET request to http://localhost:3000/ 
+// with the header set to ‘ Accept: application/json’, 
+// then you will see the following output on your console:
+
+// Server listening on PORT 3000
+// application/json
+// application/json
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept'));
+    console.log(req.accepts('text/plain'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Server listening on PORT 3000
+// application/json
+// false
+
+
+// 1. **HTTP Request Headers**:
+//    - When a client (like a web browser or 
+//      an API client) sends a request to your
+//       server, it includes additional information
+//       beyond just the URL.
+//    - One of these pieces of information 
+//      is the **Accept header**.
+
+// 2. **What Is the Accept Header?**
+//    - The **Accept header** tells the server 
+//      what types of content (like HTML, JSON,
+//       or images) the client can handle.
+//    - It's like a customer telling a restaurant 
+//      which cuisines they prefer.
+
+// 3. **`req.accepts()` Function**:
+//    - In Express, the `req.accepts()` function 
+//      checks if the specified content types are
+//       **acceptable** based on the client's Accept header.
+//    - It helps you determine the best match between 
+//      what the client wants and what your server can provide.
+//    - If none of the specified content types 
+//      is acceptable, it returns `false`.
+
+// 4. **Example**:
+//    - Suppose a client sends a request with 
+//      the Accept header set to `"application/json, text/html"`.
+//    - You can use `req.accepts('application/json')` 
+//      to check if the client accepts JSON.
+//    - If the client accepts JSON, it returns 
+//      `'application/json'`. Otherwise, it returns `false`.
+
+// 5. **Usage**:
+//    - You might use this function to decide which 
+//      format (HTML, JSON, etc.) to send back in your response.
+
+
+// example 
+app.get('/data', (req, res) => {
+    if (req.accepts('application/json')) {
+        res.json({ message: 'Here is some JSON data!' });
+    } else if (req.accepts('text/html')) {
+        res.send('<h1>HTML Content</h1>');
+    } else {
+        res.status(406).send('Not acceptable');
+    }
+});
+
+//////////////////////////////////////////////////////////////////////////
+
+// Express.js req.acceptsCharsets() Function
+
+// 1. **HTTP Request Headers**:
+//    - When a client (like a web browser or an API client) sends a request to your server, it includes additional information beyond just the URL.
+//    - One of these pieces of information is the **Accept-Charset header**.
+
+// 2. **What Is the Accept-Charset Header?**
+//    - The **Accept-Charset header** tells the server which character encodings (like UTF-8 or ISO-8859-1) the client can handle.
+//    - It's like a customer telling a restaurant which types of spices they prefer in their food.
+
+// 3. **`req.acceptsCharsets()` Function**:
+//    - In Express, the `req.acceptsCharsets()` function checks if the specified character sets (charsets) are **acceptable** based on the client's Accept-Charset header.
+//    - It helps you determine the best match between what the client wants and what your server can provide.
+//    - If none of the specified charsets is acceptable, it returns `false`.
+
+// 4. **Example**:
+//    - Suppose a client sends a request with the Accept-Charset header set to `"UTF-8, ISO-8859-1"`.
+//    - You can use `req.acceptsCharsets('UTF-8')` to check if the client accepts UTF-8.
+//    - If the client accepts UTF-8, it returns `'UTF-8'`. Otherwise, it returns `false`.
+
+// 5. **Usage**:
+//    - You might use this function to decide which character 
+//      encoding to use when sending a response.
+//    - For example:
+//      ```javascript
+app.get('/data', (req, res) => {
+    if (req.acceptsCharsets('UTF-8')) {
+        res.send('Here is some data in UTF-8 encoding.');
+    } else if (req.acceptsCharsets('ISO-8859-1')) {
+        res.send('Here is some data in ISO-8859-1 encoding.');
+    } else {
+        res.status(406).send('Not acceptable charset.');
+    }
+});
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept-Charset'));
+    console.log(req.acceptsCharsets('UTF-8'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Output:
+// Console Output:
+
+// Server listening on PORT 3000
+// Browser Output:
+
+// Now make a GET request to http://localhost:3000/ 
+// with the header set to ‘ Accept-Charset: UTF-8’, 
+// then you will see the following output on your console:
+
+// Server listening on PORT 3000
+// UTF-8
+// UTF-8
+
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept-Charset'));
+    console.log(req.acceptsCharsets('ISO-8859-1'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// node index.js
+// Now make a GET request to http://localhost:3000/ 
+// with the header set to ‘ Accept-Charset: UTF-8’, 
+// then you will see the following output on your console:
+
+// Output:
+// Server listening on PORT 3000
+// UTF-8
+// false
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// the `req.acceptsEncodings()` function in **Express.js**:
+
+// 1. **HTTP Request Headers**:
+//    - When a client (like a web browser or an API client) sends a request to your server, it includes additional information beyond just the URL.
+//    - One of these pieces of information is the **Accept-Encoding header**.
+
+// 2. **What Is the Accept-Encoding Header?**
+//    - The **Accept-Encoding header** tells the server which **compression encodings** (like gzip or deflate) the client can handle.
+//    - It's like a customer telling a restaurant which cooking techniques they prefer (grilling, steaming, etc.).
+
+// 3. **`req.acceptsEncodings()` Function**:
+//    - In Express, the `req.acceptsEncodings()` function checks if the specified encodings (like gzip or compress) are **acceptable** based on the client's Accept-Encoding header.
+//    - It helps you determine the best match between what the client wants and what your server can provide.
+//    - If none of the specified encodings is acceptable, it returns `false`.
+
+// 4. **Usage**:
+//    - You might use this function to decide which compression encoding to use when sending a response.
+//    - For example:
+//      ```javascript
+app.get('/data', (req, res) => {
+    if (req.acceptsEncodings('gzip')) {
+        // Send gzipped content
+    } else if (req.acceptsEncodings('deflate')) {
+        // Send deflated content
+    } else {
+        // Send uncompressed content
+    }
+});
+//      ```
+
+// Remember, `req.acceptsEncodings()` helps you serve the 
+// right compressed content based on what the client can handle! 🚀
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept-Encoding'));
+    console.log(req.acceptsEncodings('compress'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+node index.js
+// Now make a GET request to http://localhost:3000/ 
+// with the header set to ‘Accept-Encoding: gzip’,
+//  then you will see the following output on your console:
+
+// Output:
+// Server listening on PORT 3000
+// gzip
+// false
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept-Encoding'));
+    console.log(req.acceptsEncodings('gzip'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+node index.js
+// Output:
+// Console Output:
+// Server listening on PORT 3000
+
+// Browser Output:
+// Now make a GET request to http://localhost:3000/ 
+// with the header set to ‘Accept-Encoding: gzip’, 
+// then you will see the following output on your console:
+
+// Server listening on PORT 3000
+// gzip
+// gzip
+flg
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js req.acceptsLanguages() Function
+
+// The req.acceptsLanguages() function returns 
+// the first accepted language of the specified 
+// language on the basis of the request that 
+// Accept-Language HTTP header field and it returns 
+// false if none of the specified languages is accepted. 
+
+// Syntax:
+req.acceptsLanguages(lang[, ...])
+// Parameters: The lang parameter is 
+// the language code like ‘en-US’, etc. 
+
+// Return Value: String (if true) or False. 
+
+
+// Certainly! Let's break down the meaning of the `req.acceptsLanguages()` function in **Express.js**:
+
+// 1. **HTTP Request Headers**:
+//    - When a client (like a web browser or an API client) sends a request to your server, it includes additional information beyond just the URL.
+//    - One of these pieces of information is the **Accept-Language header**.
+
+// 2. **What Is the Accept-Language Header?**
+//    - The **Accept-Language header** tells the server which **languages** the client can understand.
+//    - It's like a customer telling a restaurant which languages they speak.
+
+// 3. **`req.acceptsLanguages()` Function**:
+//    - In Express, the `req.acceptsLanguages()` function checks if the specified languages (like "en-US" or "fr-CA") are **acceptable** based on the client's Accept-Language header.
+//    - It helps you determine the best match between what the client wants and what your server can provide.
+//    - If none of the specified languages is acceptable, it returns `false`.
+
+// 4. **Usage**:
+//    - You might use this function to decide which language-specific content to send back in your response.
+//    - For example:
+app.get('/greeting', (req, res) => {
+    if (req.acceptsLanguages('en-US')) {
+        res.send('Hello!');
+    } else if (req.acceptsLanguages('fr-CA')) {
+        res.send('Bonjour !');
+    } else {
+        res.send('Language not supported.');
+    }
+});
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept-Language'));
+    console.log(req.acceptsLanguages('en-US'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// Output:
+// Console Output:
+// Server listening on PORT 3000
+// Browser Output: 
+// Now make a GET request to http://localhost:3000/ 
+// with the header set to ‘Accept-Language: en-US’,
+//  then you will see the following output on your console:
+// Server listening on PORT 3000
+// en-US
+// en-US
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(req.get('Accept-Language'));
+    console.log(req.acceptsLanguages('fr-CH'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// node index.js
+// Output:
+
+// Browser Output:
+// Now make a GET request to http://localhost:3000/
+//  with the header set to ‘Accept-Language: en-US’, 
+// then you will see the following output on your console:
+// Server listening on PORT 3000
+// en-US
+// false
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inly! Let me explain the ** `res.download()` function** in ** Express.js **:
+
+// 1. ** Purpose **:
+//    - The`res.download()` function is used to ** transfer a file ** to the client(usually a web browser) as an ** attachment **.
+//    - When you want the user to download a file(like a PDF, image, or document), you can use this function.
+
+// 2. ** How It Works **:
+//    - Suppose you have a file(e.g., "my-document.pdf") on your server.
+//    - When a user requests to download this file, you can use`res.download('path/to/my-document.pdf')`.
+//    - The browser will prompt the user to save the file locally.
+
+// 3. ** Example **:
+// - Let's say you want users to download a PDF file when they visit a specific route:
+
+//     ```javascript
+app.get('/download', (req, res) => {
+    const filePath = 'path/to/my-document.pdf';
+    res.download(filePath); // Transfer the file as an attachment
+});
+//      ```
+
+// 4. ** Headers and Prompt **:
+//    - The`res.download()` function sets appropriate headers(like`Content-Disposition`) to indicate that the response should be treated as an attachment.
+//    - Browsers will prompt the user to save the file with the specified filename.
+
+// 5. ** Remember **:
+//    - Make sure the file exists at the specified path.
+//    - You can customize the downloaded filename by providing a second argument to`res.download()`.
+
+// In summary, `res.download()` helps you serve files for download in Express! 🚀
+
+// res.download() Function
+// The res.download() function transfers 
+// the file at the path as an ‘attachment’. 
+// Typically, browsers will prompt
+//  the user to download.
+
+// Syntax:
+res.download(path[, filename][, options][, fn])
+
+// Parameters: The filename is the name of the file
+//  which is to be downloaded as an attachment
+//  and fn is a callback function. 
+// Return Value: It does not return anything. 
+
+// Example 1: Filename: index.js
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    res.download('Hello.txt');
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+//node index.js
+
+// Output:
+// Console Output:
+// Server listening on PORT 3000
+// Open your browser and go to http://localhost:3000/, now 
+// you can see the “Hello.txt” file being downloaded on your screen.
+
+// Example 2: Filename: index.js
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    res.download('Unknown_file.txt', function (error) {
+        console.log("Error : ", error)
+    });
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+//node index.js
+
+// Output:
+// Browser Output:
+// Open your browser and go to http://localhost:3000/, 
+// then you will see the following output on your console:
+
+// Error: [Error: ENOENT: no such file or directory,
+//stat 'C:\\Users\\Unknown_file.txt'] {
+//errno: -4058,
+//code: 'ENOENT',
+//syscall: 'stat',
+//path: 'C:\\Users\\Unknown_file.txt',
+//expose: false,
+//statusCode: 404,
+//status: 404
+// }
+
+/////////////////////////////////////////////////////////////////////////
+
+// Express res.end() Function
+// The res.end() function concludes the 
+// response process and is derived from
+//  the HTTP.ServerResponse’s response.end() 
+// method in the Node core. It is employed 
+// to promptly conclude the response
+//  without including any data.
+
+// Syntax:
+res.end([data][, encoding])
+
+// Parameters: The default encoding is ‘utf8‘ and the data parameter is 
+// the data with which the user wants to end the response.
+// Return Value: It returns an Object.
+
+// Example 1: Below is the code example of the res.status() Method:
+const express = require('express');
+const app = express();
+const PORT = 3000;
+// Without middleware
+app.get('/',
+    function (req, res) {
+        res.end();
+    });
+app.listen(PORT,
+    function (err) {
+        if (err) console.log(err);
+        console.log("Server listening on PORT", PORT);
+    });
+
+// node index.js
+// Output: 
+// Server listening on PORT 3000
+
+
+// Example 2: Below is the code example of the res.status() Method:
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// With middleware
+app.use('/user',
+    function (req, res, next) {
+        console.log("/user called")
+        res.end();
+    })
+
+app.get('/user',
+    function (req, res) {
+        console.log("User Page")
+        res.end();
+    });
+
+app.listen(PORT,
+    function (err) {
+        if (err) console.log(err);
+        console.log("Server listening on PORT", PORT);
+    });
+
+// node index.js
+// Output: go to http://localhost:3000/user, 
+// then you will see the following output on your console
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js res.app Property
+
+// The res.app property holds a reference 
+// to the instance of the Express application 
+// that is using the middleware. 
+
+// Syntax:
+res.app
+
+// Parameter: No parameters. 
+// Return Value: Object 
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    console.log(res.app.get('views'));
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// Output:
+
+// Console Output:
+// Server listening on PORT 3000
+// Browser Output:
+
+// Now open your browser and go to http://localhost:3000/, 
+// now you can see the following output on your console:
+// Server listening on PORT 3000
+// C:\Users\Lenovo\Downloads\Geeksforgeeks Internship\NEW\Express\views
+
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/getApp', function (req, res) {
+
+    // Holds the reference to the
+    // instance of the Express
+    // application
+    console.log(res.app);
+    res.end();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+node index.js
+// Output: Now open your browser and make
+// a GET request to http://localhost:3000/getApp,
+// now you can see the following output on your console:
+
+// Server listening on PORT 3000
+// [Function: app] EventEmitter {
+//   _events: [Object: null prototype] { mount: [Function: onmount] },
+//   _eventsCount: 1,
+//   _maxListeners: undefined,
+//   setMaxListeners: [Function: setMaxListeners],
+//   getMaxListeners: [Function: getMaxListeners],
+//   emit: [Function: emit],
+//   . . .
+//   },
+//   mountpath: '/',
+//   _router: [Function: router] {
+//     params: {},
+//     _params: [],
+//     caseSensitive: false,
+//     mergeParams: undefined,
+//     strict: false,
+//     stack: [ [Layer], [Layer], [Layer] ]
+//   }
+// }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js res.headersSent Property
+
+// The res.headersSent property is a boolean 
+// property that indicates if the app sent 
+// HTTP headers for the response. 
+
+// Syntax:
+res.headersSent
+// Parameter: No parameters. 
+// Return Value: This property returns 
+// a Boolean value either True or False.
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+
+    // Before res.send()
+    console.log(res.headersSent);
+    res.send('OK');
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// Output:
+
+// Console Output:
+// Server listening on PORT 3000
+// Browser Output:
+// Now open your browser and go to http://localhost:3000/, 
+// now you can see the following output on your console:
+// Server listening on PORT 3000
+// false
+
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    res.send('OK');
+
+    // After res.send()
+    console.log(res.headersSent);
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+node index.js
+// Output: Now open your browser and make
+//  a GET request to http://localhost:3000,
+// now you can see the following output
+// on your console:
+// Server listening on PORT 3000
+// true
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Certainly! Let's break down the meaning 
+// of the `res.locals` property in **Express.js**:
+
+// 1. **Context for the Current Request**:
+//    - When your Express app receives a request 
+//      from a client (like a web browser), it processes 
+//      that request and prepares a response.
+//    - During this process, you might want to store 
+//      some data that is specific to that particular request.
+
+// 2. **What Is `res.locals`?**
+//    - The `res.locals` property is 
+//      an **object** provided by Express.
+//    - It acts as a **temporary storage** for 
+//      data that you want to make available 
+//      only within the current request/response cycle.
+//    - Think of it as a **scratchpad** where 
+//      you can jot down notes for this specific request.
+
+// 3. **Scope and Accessibility**:
+//    - The data stored in `res.locals` 
+//      is **scoped to the current request**.
+//    - It is **not shared** across 
+//      different requests or different users.
+//    - You can access it only within 
+//      the route handlers or middleware 
+//      functions that are part of the current request.
+
+// 4. **Typical Use Cases**:
+//    - **View Rendering**: If you're using 
+//      a template engine (like Pug or EJS) 
+//      to render views (HTML pages), you can 
+//      store data in `res.locals` and use 
+//      it in your views.
+//    - **Middleware Communication**: Middleware 
+//      functions can set data in `res.locals` 
+//      and pass it along to subsequent middleware 
+//      or route handlers.
+//    - **Request-Specific Variables**: For example, 
+//      storing the currently logged-in user's 
+//      information or any other context-specific data.
+
+// 5. **Example**:
+//    - Suppose you want to display the user's 
+//      name in the header of your web page.
+//    - In your route handler, you can do 
+//      something like this:
+
+//      ```javascript
+app.get('/profile', (req, res) => {
+    const user = getUserFromDatabase(req.session.userId); // Get user info
+    res.locals.userName = user.name; // Store it in res.locals
+    res.render('profile'); // Render the profile view
+});
+//      ```
+
+//- In your view (e.g., `profile.pug`), you 
+// can access `res.locals.userName`.
+
+// Remember, `res.locals` is a handy way 
+// to pass data around within the same 
+// request/response cycle in Express! 🚀
+
+
+// Example 1: Below is the basic example of the res.locals property:
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/',
+    function (req, res) {
+        res.locals.user = 'GeeksforGeeks';
+        console.log(res.locals);
+        res.end();
+    });
+
+app.listen(PORT,
+    function (err) {
+        if (err) console.log(err);
+        console.log(
+            "Server listening on PORT",
+            PORT
+        );
+    });
+// node index.js
+// Output: go to http://localhost:3000/, now you 
+// can see the following output on your console:
+// Server listening on PORT 3000
+// [Object: null prototype] { user: 'GeeksforGeeks' }
+
+
+// Example 2: Below is the basic example of the res.locals property:
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/',
+    function (req, res) {
+        // Sending multiples locals
+        res.locals.name = 'Gourav';
+        res.locals.age = 13;
+        res.locals.gender = 'Male'
+        console.log(res.locals);
+        res.end();
+    });
+
+app.listen(PORT,
+    function (err) {
+        if (err) console.log(err);
+        console.log(
+            "Server listening on PORT",
+            PORT
+        );
+    });
+
+
+node index.js
+// Output: make a GET request to http://localhost:3000:
+
+// Server listening on PORT 3000
+// [Object: null prototype] { name: 'Gourav', age: 13, gender: 'Male' }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Certainly! Let's break down the meaning
+// of the `res.append()` function in **Express.js**:
+
+// 1. **HTTP Response Headers**:
+//    - When your Express app sends a response
+//      to a client (like a web browser), it
+//      includes additional information beyond
+//      just the content.
+//    - This extra information is sent in
+//      the **response headers**.
+
+// 2. **What Is the `res.append()` Function?**
+//    - The `res.append()` function appends
+//      the specified value to an
+//      **HTTP response header field**.
+//    - If the header is not already set,
+//      it creates the header with
+//      the specified value.
+//    - Think of it as adding extra notes
+//      to the response before sending it
+//       back to the client.
+
+// 3. **Example**:
+//    - Suppose you want to set a custom header
+//      called "Warning" with the value "201 Warning"
+//      in your response.
+//    - You can use `res.append('Warning', '201 Warning')`.
+
+// 4. **Usage**:
+//    - You might use this function to add custom headers,
+//      control caching behavior, or set other
+//      response-related information.
+
+// Remember, `res.append()` helps you customize
+// the response headers in Express! 🚀.
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Without middleware
+app.get('/', function (req, res) {
+    res.append('Warning', '201 Warning');
+    console.log(res.get('Warning')); // 201 Warning
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// Output:
+
+// Console Output:  
+// Server listening on PORT 3000
+// Browser Output: 
+// Open your browser and go to http://localhost:3000/, 
+// now you see the following output on your console: 
+// Server listening on PORT 3000
+// 201 Warning
+
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// With middleware
+app.use('/', function (req, res, next) {
+    res.append('Warning', '201 Its a Warning');
+    next();
+})
+
+app.get('/', function (req, res) {
+    console.log(res.get('Warning'));
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+node index.js
+// Output: Now, open the browser and go to http://localhost:3000/,
+// now check your console and you will see the following output:
+// Server listening on PORT 3000
+// 201 Its a Warning
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Certainly! Let's break down the meaning 
+// of the `res.attachment()` function in **Express.js**:
+
+// 1. **Purpose**:
+//    - The `res.attachment()` function is used 
+//      to set the **HTTP response Content-Disposition 
+//      header field** to **'attachment'**.
+//    - When you want the user to download a file
+//       (like a PDF, image, or document), you 
+//       can use this function.
+
+// 2. **How It Works**:
+//    - Suppose you have a file (e.g., "my-document.pdf") on your server.
+//    - When a user requests to download this file, 
+//      you can use `res.attachment('my-document.pdf')`.
+//    - The browser will prompt the user to save the file locally.
+
+// 3. **Headers and Prompt**:
+//    - The `res.attachment()` function sets appropriate 
+//      headers (like `Content-Disposition`) to indicate 
+//      that the response should be treated as an attachment.
+//    - Browsers will prompt the user to save 
+//      the file with the specified filename.
+
+// 4. **Example**:
+//    - Let's say you want users to download a PDF 
+//      file when they visit a specific route:
+
+//      ```javascript
+app.get('/download', (req, res) => {
+   const filePath = 'path/to/my-document.pdf';
+   res.attachment(filePath); // Transfer the file as an attachment
+});
+//      ```
+
+// Remember, `res.attachment()` helps you 
+// serve files for download in Express! 🚀
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Without middleware
+app.get('/', function (req, res) {
+   res.attachment('Hello.txt');
+   console.log(res.get('Content-Disposition'));
+});
+
+app.listen(PORT, function (err) {
+   if (err) console.log(err);
+   console.log("Server listening on PORT", PORT);
+});
+// Output:
+
+// Console Output:  
+// Server listening on PORT 3000
+// Browser Output: 
+// Open your browser and go to http://localhost:3000/, 
+// now you can see the following output on your console: 
+// Server listening on PORT 3000
+// attachment; filename="Hello.txt"
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express res.cookie() Function
+// The res.cookie() function is used to set 
+// the cookie name to value. The value parameter
+//  may be a string or object converted to JSON.
+// Syntax:
+res.cookie(name, value[, options])
+// Parameters: The name parameter holds 
+// the name of the cookie and the value 
+// parameter is the value assigned to 
+// the cookie name. The options parameter 
+// contains various properties like encode,
+//  expires, domain, etc. 
+
+
+// Example 1: Below is the code example 
+// of the res.cookie() Function.
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Without middleware
+app.get('/', function (req, res) {
+    // key-value
+    res.cookie('name', 'geeksforgeeks');/* name , value , options */
+    res.send("Cookie Set");
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+node index.js
+
+// Example 2: Below is the code example 
+// of the res.cookie() Function.
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// With middleware
+app.use('/', function (req, res, next) {
+    res.cookie('title', 'GeeksforGeeks');
+    res.send("Cookie Set");
+    next();
+})
+
+app.get('/', function (req, res) {
+    console.log('Cookie SET');
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+node index.js
+// Output: go to http://localhost:3000/ you will see the output:
+// Server listening on PORT 3000
+// Cookie SET
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Express.js res.clearCookie() Function
+
+// The res.clearCookie() function is used 
+// to clear the cookie specified by name. 
+// This function is called for clearing 
+// the cookies which as already been set.
+//  For example, if a user cookie is set, 
+// then it can be cleared using this function. 
+
+// Syntax:
+res.clearCookie(name, [options])
+// Parameters:
+
+// Name: It is the name of the cookie which 
+// is to be cleared. Like in the following 
+// example, we have cleared the title cookie.
+
+// Options: It is an object that can have 
+// various properties like domain, encode, path, secure, etc.
+
+
+// Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+
+    // Setting cookie (key-value)
+    res.cookie('title', 'geeksforgeeks');
+
+    // Clearing the cookie
+    res.clearCookie('title');
+
+    console.log("Cookie cleared");
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+// Browser Output:
+// Now open your browser and go
+// to http://localhost:3000/, you
+// can see the following output
+// on your screen:
+// Server listening on PORT 3000
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express res.end() Function
+
+// The res.end() function concludes 
+// the response process and is derived 
+// from the HTTP.ServerResponse’s response.end() 
+// method in the Node core. It is employed to 
+// promptly conclude the response without 
+// including any data.
+
+// Syntax: 
+res.end([data][, encoding])
+
+// Parameters: The default encoding 
+// is ‘utf8‘ and the data parameter 
+// is the data with which the user 
+// wants to end the response.
+
+// Example 1: Below is the code 
+// example of the res.status() Method:
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Without middleware
+app.get('/',
+    function (req, res) {
+        res.end();
+    });
+
+app.listen(PORT,
+    function (err) {
+        if (err) console.log(err);
+        console.log("Server listening on PORT", PORT);
+    });
+
+
+// Example 2: Below is the code example 
+// of the res.status() Method:
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// With middleware
+app.use('/user',
+    function (req, res, next) {
+        console.log("/user called")
+        res.end();
+    })
+
+app.get('/user',
+    function (req, res) {
+        console.log("User Page")
+        res.end();
+    });
+
+app.listen(PORT,
+    function (err) {
+        if (err) console.log(err);
+        console.log("Server listening on PORT", PORT);
+    });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js res.links() Function
+
+// The res.links() function is used 
+// to join the links provided as properties 
+// of the parameter to populate the response’s 
+// Link HTTP header field.
+
+// Syntax: 
+res.links(links)
+
+// Parameter: The link parameter describes 
+// the name of the link to be joined.
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Without middleware
+app.get('/', function (req, res) {
+    res.links({
+        next: 'http://demo.com?page=2',
+        middle: 'http://demo.com?page=4',
+        last: 'http://demo.com?page=6'
+    });
+    console.log(res.get('link'));
+});
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// With middleware
+app.use('/', function (req, res, next) {
+    res.links({
+        next: 'http://demo.com?page=2',
+        middle: 'http://demo.com?page=4',
+        last: 'http://demo.com?page=6'
+    });
+    next();
+})
+
+app.get('/', function (req, res) {
+    console.log(res.get('link'));
+    res.send();
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Certainly! The `res.links()` function 
+// in **Express.js** serves to join 
+// the links provided as properties 
+// of the parameter and populate 
+// the response's **Link HTTP header field**. 
+// Let's break it down:
+
+// 1. **Purpose**:
+//     - When you call `res.links(links)`,
+//       it sets the **Link** header in the HTTP response.
+//     - The **Link** header provides information 
+//      about relationships between the current 
+//      resource and other resources.
+//     - It is commonly used for pagination, 
+//       navigation, and related resources.
+
+// 2. **Usage Example**:
+//     - Suppose you want to provide pagination 
+//      links in your API response:
+
+
+//         ```javascript
+app.get('/api/data', (req, res) => {
+    const currentPage = 1;
+    const totalPages = 10;
+    const baseUrl = 'http://example.com/api/data';
+
+    const links = {
+        next: `${baseUrl}?page=${currentPage + 1}`,
+        prev: `${baseUrl}?page=${currentPage - 1}`,
+        last: `${baseUrl}?page=${totalPages}`,
+    };
+
+    res.links(links);
+    res.json({ data: [], currentPage, totalPages });
+});
+//         ```
+
+//     - In this example:
+//         - The `links` object contains URLs
+//          for the next, previous, and last pages.
+//         - The `res.links(links)` call sets the **Link** header.
+//         - The response also includes the data
+//           and pagination information.
+
+// 3. **Running the Program**:
+//     - Make sure you have installed the Express
+//       module using `npm install express`.
+//     - Run your Express app.
+//     - When clients make requests to your API,
+//       they'll receive the **Link** header with
+//       the appropriate URLs.
+
+// Remember, `res.links()` helps you provide relevant
+// links in your API responses, enhancing navigation
+// and discoverability! 🌐.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Certainly! The `res.redirect()` function 
+// in **Express.js** is used to **redirect** 
+// the user to a different URL. 
+
+// Let's break it down:
+
+// 1. **Purpose**:
+//    - Sometimes, you want to send the user 
+//    to another page or route within your app.
+//    - For example, after a successful login, 
+//      you might want to redirect the user to 
+//     their profile page.
+
+// 2. **How It Works**:
+//    - When you call `res.redirect('/new-page')`, 
+//     it tells the browser to navigate to the specified URL.
+//    - The browser will make a new request to that URL, 
+//     and your server will handle it accordingly.
+
+// 3. **Example**:
+//    - Suppose you have a route that handles user login:
+
+//      ```javascript
+app.post('/login', (req, res) => {
+   // Validate user credentials
+   // If valid, redirect to the profile page
+   res.redirect('/profile');
+});
+//      ```
+
+// 4. **Status Code**:
+//    - By default, `res.redirect()` sends an HTTP 
+//      status code **302 Found**, which indicates 
+//      a temporary redirect.
+//    - You can specify a different status code if needed.
+
+// Remember, `res.redirect()` helps you guide users 
+// to the right place within your app! 🚀
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! The `res.render()` function 
+// in **Express.js** is used 
+// to **render views** (HTML pages) and 
+// send them as responses to the client. 
+
+// Let's break it down:
+
+// 1. **View Rendering**:
+//    - When building a web application, you often 
+//      need to display dynamic content (like user 
+//      profiles, blog posts, or product details) in HTML format.
+//    - Views are the HTML templates that define 
+//      how this dynamic content should be presented.
+
+// 2. **How `res.render()` Works**:
+//    - Suppose you have a view file (e.g., `profile.pug` or `home.ejs`) 
+//      that contains placeholders for dynamic data.
+//    - When a user visits a specific route (e.g., `/profile`), 
+//      you can use `res.render('profile')` to render 
+//      the `profile.pug` or `profile.ejs` view.
+//    - Express will replace the placeholders in 
+//     the view with actual data 
+//     (like the user's name or profile picture).
+
+// 3. **Example**:
+//    - Let's say you want to render a user's profile page:
+
+//      ```javascript
+app.get('/profile', (req, res) => {
+    const user = getUserFromDatabase(req.session.userId); // Get user info
+    res.render('profile', { user }); // Render the profile view with user data
+});
+//      ```
+
+// 4. **View Engines**:
+//    - To use `res.render()`, you need to set
+//      up a **view engine** (like Pug, EJS, or
+//      Handlebars) in your Express app.
+//    - The view engine compiles your views into
+//       HTML and replaces placeholders with actual data.
+
+// Remember, `res.render()` helps you dynamically
+// generate HTML pages based on data and templates! 🚀
+
+/////////////////////////////////////////////////
+
+// good industry level  example 
+// Certainly! Let's create a practical use case 
+// scenario for the `res.render()` function in 
+// an Express.js application. Imagine you're 
+// building a web application for an online bookstore. 
+// Here's how you can utilize `res.render()`:
+
+// ### Scenario: Book Details Page
+
+// 1. **Project Setup**:
+//    - You've set up your Express.js project with 
+//      necessary dependencies, including the `express` and `ejs` modules.
+//    - Your project structure includes routes, views, and static assets.
+
+// 2. **Database and Data Model**:
+//    - You have a database containing information about various books.
+//    - Each book has properties like title, author, genre, 
+//      cover image URL, and a brief description.
+
+// 3. **Routes and Controllers**:
+//    - Create a route for displaying book details. For example:
+//      ```javascript
+// routes/book.js
+const express = require('express');
+const router = express.Router();
+
+// Assume you have a book model or data source
+const Book = require('../models/Book');
+
+// Route to display book details
+router.get('/books/:id', async (req, res) => {
+    try {
+        const bookId = req.params.id;
+        const book = await Book.findById(bookId); // Fetch book details from the database
+        res.render('book-details', { book }); // Render the 'book-details' view
+    } catch (error) {
+        console.error('Error fetching book details:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
+module.exports = router;
+//      ```
+
+// 4. **View Template (EJS)**:
+//    - Create an EJS template for displaying book details. For example:
+
+//      ```html
+//  <!-- views/book-details.ejs -->
+//  <!DOCTYPE html>
+//  <html lang="en">
+//  <head>
+//    <meta charset="UTF-8">
+//    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//    <title><%= book.title %> - Book Details</title>
+//  </head>
+//  <body>
+//    <h1><%= book.title %></h1>
+//    <p>Author: <%= book.author %></p>
+//    <p>Genre: <%= book.genre %></p>
+//    <img src="<%= book.coverImageUrl %>" alt="Book Cover">
+//    <p><%= book.description %></p>
+//    <!-- Add more book details as needed -->
+//  </body>
+//  </html>
+//      ```
+
+// 5. **Client Interaction**:
+//    - When a user visits a book details page (e.g., `/books/123`),
+//       the route handler fetches the book details from the database.
+//    - The `res.render()` function dynamically generates the HTML 
+//      using the `book-details.ejs` template and injects 
+//      the book data (locals) into it.
+//    - The rendered HTML is sent to the client's browser.
+
+// 6. **User Experience**:
+//    - Users can explore book details by navigating to specific book URLs.
+//    - The page displays the book title, author, genre, cover image, and description.
+//    - The dynamic rendering ensures that each book's details are presented accurately.
+
+// Remember that this is a simplified example, and in 
+// a real-world scenario, you'd handle more complex logic,
+//  error handling, and additional features. But 
+// this demonstrates how `res.render()` can be used 
+// to create dynamic views in an Express.js application. 📚🌟.
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! The `res.format()` function in 
+// **Express.js** performs **content negotiation** 
+// based on the **Accept HTTP header** in 
+// the request object. 
+
+// Let's break it down:
+
+// 1. **Content Negotiation**:
+//    - When a client (like a web browser) sends 
+//      a request to your server, it includes 
+//      an **Accept header**.
+//    - This header specifies the types of content 
+//     (like HTML, JSON, or XML) that the client can handle.
+
+// 2. **What Does `res.format()` Do?**
+//    - The `res.format()` function checks 
+//      the **Accept header** in the request.
+//    - It then **invokes the corresponding handler**
+//      (route or middleware) based on the acceptable 
+//      content types ordered by their quality values.
+//    - In other words, it helps you serve the right 
+//      content format (HTML, JSON, etc.) based 
+//      on what the client wants.
+
+// 3. **Example**:
+//    - Suppose you have a route that responds 
+//     to different content types:
+
+//      ```javascript
+app.get('/data', (req, res) => {
+    res.format({
+        html: () => {
+            res.send('<p>HTML content</p>');
+        },
+        json: () => {
+            res.json({ message: 'JSON data' });
+        }
+    });
+});
+//      ```
+
+//    - If the client requests HTML (`Accept: text/html`), 
+//      it gets the HTML content. If it requests JSON 
+//      (`Accept: application/json`), it gets the JSON data.
+
+// Remember, `res.format()` helps you serve the right 
+//   content type based on the client's preferences! 🚀.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// The `res.get()` function in **Express.js** 
+// allows you to retrieve the value of 
+// an HTTP response header specified by 
+// its field name. 
+
+// Let's break it down:
+
+// 1. **Purpose**:
+//    - When your Express app sends a response 
+//      to the client (like a web browser), 
+//      it includes various headers.
+//    - These headers provide additional 
+//      information about the response.
+
+// 2. **How It Works**:
+//    - Suppose you want to get the value of 
+//      the `Content-Type` header from the response.
+//    - You can use `res.get('Content-Type')` to retrieve it.
+
+// 3. **Example**:
+//    - Let's say you have set the `Content-Type` header in your response:
+
+//      ```javascript
+res.set('Content-Type', 'application/json');
+console.log(res.get('Content-Type')); // Output: 'application/json'
+//      ```
+
+// Remember, `res.get()` helps you access specific
+// response headers in Express! 🚀
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// The `res.json()` function in **Express.js** 
+// sends a JSON response. Let's break it down:
+
+// 1. **Purpose**:
+//    - When your Express app needs to send data 
+//      back to the client (like a web browser or 
+//      an API consumer), you often want to format 
+//      it as JSON (JavaScript Object Notation).
+//    - JSON is a lightweight data interchange format 
+//      that is easy for both humans and machines 
+//      to read and write.
+
+// 2. **How It Works**:
+//    - When you call `res.json({ key: 'value' })`, 
+//      it sends an HTTP response with the correct 
+//      **Content-Type** set to `application/json`.
+//    - The provided object is automatically converted 
+//      to a JSON-formatted string using 
+//      the `JSON.stringify()` method.
+
+// 3. **Example**:
+//    - Suppose you want to send user data as JSON:
+
+//      ```javascript
+app.get('/user', (req, res) => {
+   const userData = { name: 'John', age: 30 };
+   res.json(userData);
+});
+//      ```
+
+// 4. **Benefits**:
+//    - Ensures consistent data format (JSON) across responses.
+//    - Simplifies handling data on the client side.
+
+// Remember, `res.json()` helps you send structured data 
+// in JSON format from your Express server! 🚀.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! Let's discuss the `res.location()` 
+// function in **Express.js** in the requested format:
+
+// 1. **Purpose**:
+//     - The `res.location()` function sets 
+//      the **response Location HTTP header** 
+//      to the specified **path parameter**.
+//     - It is commonly used to indicate where 
+//      the client (usually a web browser) should 
+//      redirect after processing the current request.
+
+// 2. **Usage Example**:
+//     - Suppose you have an Express route handler:
+//         ```javascript
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    res.location('http://demo.com');
+    console.log(res.get('location')); // http://demo.com
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+        // ```
+//     - In this example:
+//         - When a client accesses the root path (`'/'`),
+//           the server sets the **Location** header to `'http://demo.com'`.
+//         - The response doesn't end immediately; you 
+//           can continue writing additional content.
+
+// 3. **Running the Program**:
+//     - Make sure you have installed the Express 
+//       module using `npm install express`.
+//     - Run the `index.js` file with `node index.js`.
+//     - When you open your browser and 
+//      visit [http://localhost:3000/](http://localhost:3000/), 
+//      you'll see the following output in the console:
+//         ```
+        Server listening on PORT 3000
+http://demo.com
+//         ```
+
+// Remember, the `res.location()` function is useful 
+// for setting the redirection URL without actually 
+// performing the redirection. It's commonly used 
+// when you want to indicate where the client should 
+// go next after a successful operation. 🌐Certainly! 
+// Let's discuss the `res.location()` function in 
+// **Express.js** in the requested format:
+
+// 1. **Purpose**:
+//     - The `res.location()` function sets 
+//      the **response Location HTTP header** 
+//      to the specified **path parameter**.
+//     - It is commonly used to indicate where 
+//      the client (usually a web browser) should 
+//      redirect after processing the current request.
+
+// 2. **Usage Example**:
+//     - Suppose you have an Express route handler:
+//         ```javascript
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    res.location('http://demo.com');
+    console.log(res.get('location')); // http://demo.com
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+//         ```
+//     - In this example:
+//         - When a client accesses the root path (`'/'`), 
+//          the server sets the **Location** header to `'http://demo.com'`.
+//         - The response doesn't end immediately; you 
+//          can continue writing additional content.
+
+// 3. **Running the Program**:
+//     - Make sure you have installed the Express 
+//      module using `npm install express`.
+//     - Run the `index.js` file with `node index.js`.
+//     - When you open your browser and visit
+//       [http://localhost:3000/](http://localhost:3000/), 
+//       you'll see the following output in the console:
+
+//         ```
+Server listening on PORT 3000
+http://demo.com
+//         ```
+
+// Remember, the `res.location()` function is useful
+// for setting the redirection URL without actually
+// performing the redirection. It's commonly used
+// when you want to indicate where the client should
+//  go next after a successful operation. 🌐
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! Let's discuss 
+// the `res.sendfile()` function in **Express.js**:
+
+// 1. **Purpose**:
+//     - The `res.sendfile()` function is 
+//      used to **send a file** in response 
+//      to an HTTP request made by the client.
+//     - It transfers the specified file at 
+//       the given path and sets the **Content-Type** 
+//       response HTTP header field based on 
+//       the filename extension.
+
+// 2. **Syntax**:
+//     ```javascript
+res.sendFile(path[, options][, fn])
+//     ```
+
+// 3. **Parameters**:
+//     - `path`: The absolute path of the file to be sent.
+//     - `options` (optional): An object containing 
+//        various properties like `maxAge`, `root`, etc.
+//     - `fn` (optional): A callback function that gets 
+//        executed after the file is sent.
+
+// 4. **Example**:
+//     - Suppose you have an Express route handler:
+//         ```javascript
+const express = require('express');
+const app = express();
+const path = require('path');
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    const options = { root: path.join(__dirname) };
+    const fileName = 'Hello.txt';
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            console.error('Error sending file:', err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    });
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.error(err);
+    console.log("Server listening on PORT", PORT);
+});
+//         ```
+//     - In this example:
+//         - When a client accesses the root path (`'/'`), 
+//           the server sends the file named `'Hello.txt'`.
+//         - The `options` object specifies the root directory 
+//           where the file is located.
+//         - The response doesn't end immediately; you can 
+//           continue writing additional content.
+
+// 5. **Running the Program**:
+//     - Make sure you have installed the Express 
+//       module using `npm install express`.
+//     - Create a `.txt` file (e.g., `Hello.txt`) in 
+//      the root directory of your project with some 
+//      text (e.g., "Greetings from GeeksforGeeks").
+//     - Run the `index.js` file with `node index.js`.
+//     - Open your browser and visit [http://localhost:3000/](http://localhost:3000/).
+//     - Check your console; you'll see the following output:
+//         ```
+        Server listening on PORT 3000
+Sent: Hello.txt
+//         ```
+
+// Remember, `res.sendfile()` helps you serve files
+// in Express, making it useful for sending static
+//  files like HTML, images, or other resources! 🚀
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! In **Express.js**, the `res.sendStatus()` 
+// function serves to set the **response HTTP status code**
+//  to the specified **status code** and send its string 
+// representation as the response body. 
+
+// Let's break it down:
+
+// 1. **Purpose**:
+//     - When you call `res.sendStatus(statusCode)`, 
+//      it sets the **HTTP status code** in the response.
+//     - It also sends a corresponding status message 
+//      (e.g., "OK," "Not Found," "Internal Server Error") 
+//      as the response body.
+
+// 2. **Usage Example**:
+//     - Suppose you want to send an HTTP status 
+//      code of **404 (Not Found)**:
+
+//         ```javascript
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.get('/', function (req, res) {
+    res.sendStatus(404); // Sets status code to 404 and sends "Not Found"
+});
+
+app.listen(PORT, function (err) {
+    if (err) console.error(err);
+    console.log("Server listening on PORT", PORT);
+});
+//         ```
+
+//     - In this example:
+//         - When a client accesses the root path (`'/'`), 
+//          the server sets the **HTTP status code** to **404**
+//           and sends the corresponding message "Not Found."
+//         - The response doesn't end immediately; you can 
+//           continue writing additional content.
+
+// 3. **Running the Program**:
+//     - Make sure you have installed the Express 
+//      module using `npm install express`.
+//     - Run the `index.js` file with `node index.js`.
+//     - When you open your browser and visit
+//       [http://localhost:3000/](http://localhost:3000/), 
+//       you'll see the following output:
+//         ```
+        Server listening on PORT 3000
+//         ```
+
+//     - Check your browser's network tab or console;
+//      you'll find the response status code set to **404**.
+
+// Remember, `res.sendStatus()` simplifies setting
+// the status code and sending a corresponding message
+// in one call. It's commonly used for handling different
+// HTTP status scenarios in your Express application! 🚀
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js router.all() Function
+
+// The router.all() function is just like 
+// the router.METHOD() methods, except that 
+// it matches all HTTP methods (verbs). It 
+// is very helpful for mapping global logic 
+// for arbitrary matches or specific path prefixes. 
+
+// Syntax:
+router.all(path, [callback, ...] callback)
+// Parameter: The path parameter is the path 
+// of the specified URL and the callback 
+// is the function passed as a parameter. 
+// Return Value: It returns responses.
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const router = express.Router();
+const PORT = 3000;
+
+// Setting single route
+router.all('/user', function (req, res) {
+    console.log("User Page Called");
+    res.end();
+});
+
+app.use(router);
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+// Now make any request to http://localhost:3000/user 
+// like POST, PUT, DELETE, or any other type of request, 
+// and it will be shown the following output
+
+// User Page Called    
+// Every type of request made 
+// to http://localhost:3000/user will 
+// print the same output.
+
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const router = express.Router();
+const PORT = 3000;
+
+// Setting multiple routes
+router.all('/user', function (req, res) {
+    console.log("User Page Called");
+    res.end();
+});
+
+router.all('/student', function (req, res) {
+    console.log("Student Page Called");
+    res.end();
+});
+
+router.all('/teacher', function (req, res) {
+    console.log("Teacher Page Called");
+    res.end();
+});
+
+app.use(router);
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+
+node index.js
+// Output:
+
+// Now make a GET request to http://localhost:3000/user,
+//  http://localhost:3000/student, and
+//  http://localhost:3000/teacher it will
+// show the following output.
+
+// User Page Called
+// Student Page Called
+// Teacher Page Called
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express.js router.METHOD() Function
+
+// The router.METHOD() method provides 
+// the routing functionality in Express, 
+// where METHOD is one of the HTTP methods, 
+// such as GET, PUT, POST, and so on, in lowercase. 
+
+// Syntax:
+router.METHOD(path, [callback, ...] callback)
+
+// Parameter: The path parameter specifies 
+// the path on the URL and callback is 
+// the function that is executed when 
+// this path is called.
+
+// Return Value: Since, it provides 
+// the routing functionality, so 
+// it can return responses. 
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const router = express.Router();
+const PORT = 3000;
+
+// Single route
+router.get('/user', function (req, res, next) {
+    console.log("GET request called");
+    res.end();
+});
+
+app.use(router);
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+node index.js
+// Output:
+
+// Console Output:
+// Server listening on PORT 3000
+// Now make a GET request to http://localhost:3000/, 
+// you can see the following output on your screen:
+
+// Server listening on PORT 3000
+// GET request called
+
+
+// Example 2: Filename: index.js 
+const express = require('express');
+const app = express();
+const router = express.Router();
+const PORT = 3000;
+
+// Multiple routes
+router.get('/user', function (req, res, next) {
+    console.log("GET request called");
+    res.end();
+});
+
+router.post('/user', function (req, res, next) {
+    console.log("POST request called");
+    res.end();
+});
+
+router.delete('/user', function (req, res, next) {
+    console.log("DELETE request called");
+    res.end();
+})
+
+app.use(router);
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+
+node index.js
+// Output:
+
+// Now make GET, POST, and DELETE request
+// to http://localhost:3000/, you can see
+// the following output on your screen:
+
+// Server listening on PORT 3000
+// GET request called
+// POST request called
+// DELETE request called
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Express.js router.param() function
+
+// The parameters of router.param() are 
+// a name and function. Where the name 
+// is the actual name of the parameter 
+// and the function is the callback function. 
+// Basically, the router.param() function 
+// triggers the callback function whenever 
+// the user routes to the parameter. 
+// This callback function will be called 
+// only a single time in the request-response 
+// cycle, even if the user routes to 
+// the parameter multiple times.
+
+// Syntax:
+router.param(name, function)
+
+// Parameters of the callback function are: 
+// req: the request object
+// res: the response object
+// next: the next middleware function
+// id: the value of the name parameter
+
+
+// Example: Create a file names app.js and 
+// paste the following code into the file.
+const express = require("express");
+const app = express();
+
+//import router module from route.js file
+const userRoutes = require("./route");
+
+app.use("/", userRoutes);
+
+//PORT
+const port = process.env.PORT || 8000;
+
+//Starting a server
+app.listen(port, () => {
+  console.log(`app is running at ${port}`);
+});
+// We have to create another file named 
+// route.js in the same directory
+
+// Code for route.js file
+
+const express = require("express");
+const router = express.Router();
+
+router.param("userId", (req, res, next, id) => {
+  console.log("This function will be called first");
+  next();
+});
+
+router.get("/user/:userId", (req, res) => {
+  console.log("Then this function will be called");
+  res.end();
+});
+// Export router 
+module.exports = router;
+
+
+// node app.js
+// Output:
+
+// Enter the following address into the browser
+
+// http://localhost:8000/user/343
+
+
+// Certainly! The `router.param()` function 
+// in **Express.js** allows you to define callback 
+// triggers for route parameters. 
+
+// Let's break down its purpose and behavior:
+
+// 1. **Purpose**:
+//     - The `router.param(name, callback)` method 
+//      is used to handle specific route parameters.
+//     - It associates a callback function with 
+//      a named parameter in the route.
+//     - Whenever a user routes to a URL containing 
+//      that parameter, the specified callback 
+//      function is triggered.
+
+// 2. **Usage Example**:
+//     - Suppose you want to load user data based 
+//      on a parameter value (e.g., user ID):
+
+
+//```javascript
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// Define a parameter handler for 'user'
+router.param('user', (req, res, next, id) => {
+  // Load user data based on 'id'
+  // Perform any necessary actions
+  console.log(`User ID: ${id}`);
+  next(); // Call next to proceed to the next middleware
+});
+
+// Route that uses the 'user' parameter
+router.get('/user/:user', (req, res) => {
+  res.send('User profile page');
+});
+
+app.use(router);
+
+app.listen(3000, () => {
+  console.log('Server listening on PORT 3000');
+});
+//         ```
+//     - In this example:
+//         - When a user routes to `/user/123`, 
+//          the parameter handler is triggered.
+//         - The `id` parameter value (in this case, `123`) 
+//          is passed to the callback function.
+//         - You can load user data or perform other 
+//          actions based on this value.
+
+// 3. **Behavior**:
+//     - The callback function is called **only once** 
+//        during the request-response cycle, even if 
+//        the user routes to the parameter multiple times.
+//     - It's useful for tasks like loading data, 
+//        validation, or setting up context.
+
+// Remember, `router.param()` allows you to handle 
+// route parameters efficiently and perform actions 
+// specific to those parameters! 🌟
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! Let's break down the purpose and 
+// usage of the `router.route()` function in **Express.js**:
+
+// 1. **Purpose**:
+//     - The `router.route()` function returns an instance of a single route.
+//     - It allows you to define multiple HTTP verbs (such as GET, POST, PUT) 
+//      for the same route.
+//     - It helps avoid duplicate route naming and reduces typing errors.
+
+// 2. **Usage Example**:
+//     - Suppose you want to create a route for managing user profiles:
+//```javascript
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// Create a route for '/user'
+const userRoute = router.route('/user');
+
+// Define handlers for different HTTP methods
+userRoute
+    .get((req, res) => {
+        res.send('Get user profile');
+    })
+    .post((req, res) => {
+        res.send('Create new user profile');
+    })
+    .put((req, res) => {
+        res.send('Update user profile');
+    });
+
+app.use(userRoute);
+
+app.listen(3000, () => {
+    console.log('Server listening on PORT 3000');
+});
+// ```
+//     - In this example:
+//         - The `userRoute` represents the ` / user` route.
+//         - You can chain `.get()`, `.post()`, and `.put()` 
+//           to handle different HTTP methods.
+//         - This approach avoids repeating the `/ user` 
+//           path and keeps the code concise.
+
+// 3. **Benefits**:
+//     - Avoids redundancy: You define the route once 
+//       and attach different handlers to it.
+//     - Improves readability: All related route methods are grouped together.
+//     - Reduces chances of typos or inconsistencies.
+
+// Remember, `router.route()` simplifies route definition 
+// and organization, making your code cleaner and more maintainable! 🌟
+
+
+// Example 1: Filename: index.js 
+const express = require('express');
+const app = express();
+const router = express.Router();
+const PORT = 3000;
+
+// Single routing
+router.route('/user')
+    .get(function (req, res, next) {
+        console.log("GET request called");
+        res.end();
+    });
+app.use(router);
+
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
+node index.js
+// Output:
+// Console Output:
+// Server listening on PORT 3000
+// Browser Output:
+
+// Now make a GET request to http://localhost:3000/, 
+// you can see the following output on your screen:
+
+// Server listening on PORT 3000
+// GET request called
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Certainly! Let me explain the purpose of 
+// the `router.use()` function in **Express.js** 
+// in simpler terms:
+
+// 1. **What Does `router.use()` Do?**
+//     - The `router.use()` function allows you 
+//          to **mount middleware** for specific 
+//          routes handled by a particular router.
+//     - Think of it as attaching a set of common 
+//          tasks (middleware) to a group of related routes.
+
+// 2. **Purpose and Use Cases**:
+//     - **Modular Middleware**: You can define middleware 
+//          functions (like authentication, logging, or 
+//          error handling) and apply them to specific 
+//          routes within a router.
+//     - **Avoid Duplication**: Instead of repeating 
+//          the same middleware for each route, 
+//          you define it once using `router.use()`.
+//     - **Cleaner Code**: It keeps your route handlers 
+//          cleaner by separating common functionality.
+
+// 3. **Example**:
+//     - Suppose you have an API with user-related routes:
+
+//```javascript
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// Middleware for all user routes
+router.use((req, res, next) => {
+    console.log('User route middleware');
+    next(); // Proceed to the next middleware or route handler
+});
+
+// Actual user routes
+router.get('/profile', (req, res) => {
+    res.send('User profile page');
+});
+
+router.post('/create', (req, res) => {
+    res.send('Create new user');
+});
+
+app.use('/user', router); // Mount the router at '/user'
+
+app.listen(3000, () => {
+    console.log('Server listening on PORT 3000');
+});
+
+//         ```
+//     - In this example:
+//         - The middleware logs "User route middleware" for any `/user` route.
+//         - The actual user routes (`/profile`, `/create`) are 
+//              cleaner without repetitive middleware.
+
+// Remember, `router.use()` simplifies middleware management 
+// and keeps your code organized when handling related routes! 🌟
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Custom Middlewares:
+
+// We can create multiple Custom middleware 
+// using express.js according to the routing 
+// of the request and also forward the request 
+// to the next middleware.
+
+// Syntax:
+app.< Middlewaretype > (path, (req, res, next))
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// What is middleware chaining in Express JS, and how is it useful?
+
+// In Express JS there is the process of Middleware chaining 
+// by which multiple middleware functions sequentially 
+// can be processed and also can be able to modify 
+// the incoming requests before they reach 
+// the final route handler.
+
+// What is Middleware Chaining?
+// Middleware Chaining is the concept where 
+// multiple middleware functions are applied 
+// in sequential order till they reach 
+// the final route handler. Here, each of 
+// the middleware functions performs certain 
+// tasks like data processing, logging, 
+// authentication, etc. Each of the middleware
+//  functions can able to modify the request 
+// or response objects, terminate 
+// the request-response cycle, or pass control 
+// to the next middleware using the next() function.
+
+// Syntax
+const middleware1 = (req, res, next) => {
+  // Tasks
+  next();
+};
+const middleware2 = (req, res, next) => {
+  // Tasks
+  next();
+};
+app.get('/example', middleware1, middleware2, (req, res) => {
+  // Route handler
+});
+
+// example 
+//App.js
+const express = require('express');
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+// middleware function 1
+const reqFunction = (req, res, next) => {
+  console.log(`Received a ${req.method} request to ${req.url}`);
+  next();
+};
+// middleware function 2
+const formDataFunction = (req, res, next) => {
+  const { name: geekName } = req.body;
+  if (geekName) {
+    req.username = geekName;
+  }
+  next();
+};
+// middleware function 3
+const userShowFunction = (req, res) => {
+  const username = req.username || 'Guest';
+  res.send(`<h1>Hello, ${username}!</h1>`);
+};
+// route handler with middleware chaining
+app.get('/', reqFunction, (req, res) => {
+  res.send(`
+    <form method="post" action="/msg" style="margin-top: 20px;">
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name" name="name" required>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+});
+app.post('/msg', reqFunction, formDataFunction, userShowFunction);
+// Starting the server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+// node app.js
+
+//////////////////////////////////////////////////////////////////////////////////
+
+// What is express-session middleware in Express?
+// In the Express web application, the express-session 
+// middleware is mainly used for managing the sessions 
+// for the user-specific data.
+
+// What is express-session Middleware?
+// The express-session middleware allows the creation 
+// and storage of the session data used for authentication
+//  or user preferences. Using this middleware, we can 
+// properly maintain the stateful interaction between 
+// the Express.js server and the client. Using 
+// the sessions the security of the application 
+// is maintained and interaction with the user is increased.
+
+mkdir folder-name
+cd folder-name
+npm init-y
+npm i express
+npm i express-session
+
+
+//app.js
+const express = require('express');
+const session = require('express-session');
+const app = express();
+const port = 3000;
+// setting the session middleware
+app.use(session({
+    secret: 'gfg-key',
+    resave: false,
+    saveUninitialized: true
+}));
+// set session in the / route
+app.get('/', (req, res) => {
+    // session variable
+    req.session.gfgUser = 'geeksforgeeks';
+    res.send(`Hey Geek! Session is set! Now Go to 
+        <a href="/get">/get</a> to retrieve the session.`);
+});
+// get session in the /get route
+app.get('/get', (req, res) => {
+    // retrieve the session variable
+    const gfgUser = req.session.gfgUser || 'No session set';
+    res.send(`Session variable: ${gfgUser}`);
+});
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+// node app.js
+
+
+// The console logs a message indicating that the server is running.
+// this code sets up an Express server, 
+// configures session handling using 
+// the express-session middleware, 
+// and demonstrates how to set and 
+// retrieve session variables. When 
+// a user visits the root route, their 
+// session is set with the value 
+// 'geeksforgeeks', and they are 
+// instructed to visit /get to 
+// retrieve the session value. 
+// The /get route displays the
+//  session variable value to the user.
+// Import Dependencies:
+    // The code begins by importing necessary dependencies:
+        // express: A popular web application 
+        // framework for Node.js.
+        // express-session: A middleware for handling 
+        // sessions in Express applications.
+// Create an Express App:
+        // An instance of the Express application is created using const app = express();.
+        // The server will listen on port 3000.
+// Session Middleware Configuration:
+        // The express-session middleware is set up with the following options:
+                // secret: A secret key used to sign the session ID cookie.
+                // resave: Set to false to prevent session data from being saved on every request.
+                // saveUninitialized: Set to true to save uninitialized sessions (i.e., sessions with no data).
+// Setting a Session Variable:
+        // When a user accesses the root route (/), the following happens:
+                // The session variable gfgUser is set to the string 'geeksforgeeks'.
+                // A response is sent to the user with the message: “Hey Geek! Session is set! Now go to /get to retrieve the session.”
+// Retrieving the Session Variable:
+        // When a user accesses the /get route, the following occurs:
+                // The session variable gfgUser is retrieved.
+                // If the session variable is not set, the default value 'No session set' is used.
+                // A response is sent to the user displaying the session variable value: “Session variable: geeksforgeeks” (or “No session set” if not set).
+// Server Listening:
+            // The server starts listening on port 3000.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+Middleware is 
+// the integral part of the framework. By using 
+// the third party middleware we can add 
+// additional features in our application.
+//  We need to install third-party middleware with 
+// the help of NPM and import it in our application
+
+// Steps to use third-party middleware in Express.js
+mkdir third - middle
+cd third - middle
+npm init - y
+npm i express
+npm i body - parser
+
+//app.js
+const express = require('express');
+const parser = require('body-parser');
+const app = express();
+const port = 3000;
+// Using body-parser middleware to parse JSON requests
+app.use(parser.json());
+
+app.post('/api/data', (req, res) => {
+        const reqData = req.body;
+        console.log('Received data:', reqData);
+        res.status(200).json({ message: 'Data received successfully!' });
+});
+
+app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
+});
+// node app.js
+// Explanation:
+// In the above example, we have used third-party 
+// middleware as a body-parser. We have 
+// integrated it using ‘app.use()’.
+// Then we configured the body-parser to parse 
+// incoming JSON requests in the handler ‘api/data‘.
+// By using the req.body in the POST request handler 
+// we can access and process the parsed JSON data.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// // the **body-parser** middleware
+
+// the **body-parser** middleware 
+// is a third-party package that 
+// simplifies handling incoming 
+// request bodies. Let's dive 
+// into its purpose and usage:
+
+// 1. **Purpose of Body Parser Middleware**:
+//     - When a client sends data to your 
+        // server (e.g., through a form submission or 
+        // an API request), that data arrives in the request body.
+//     - The body-parser middleware parses this 
+        // request body and makes it accessible in 
+        // a convenient format for your route handlers.
+
+// 2. **What Body Parser Does**:
+//     - Parses different types of request bodies 
+        // (such as JSON, URL-encoded, or raw data).
+//     - Populates the `req.body` property with the parsed data.
+//     - Handles complexities like encoding, 
+        // content negotiation, and data validation.
+
+// 3. **Usage Example**:
+//     - To use body-parser, you need to install it first:
+//         ```
+        npm install body - parser
+//     ```
+// - Then, add it to your Express app:
+//     ```javascript
+const express = require('express');
+const bodyParser = require('body-parser'); // Import body-parser
+
+const app = express();
+
+// Use body-parser middleware
+app.use(bodyParser.json()); // Parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+// Example route that uses req.body
+app.post('/api/data', (req, res) => {
+        const { name, age } = req.body;
+        res.send(`Received data: Name - ${name}, Age - ${age}`);
+});
+
+app.listen(3000, () => {
+        console.log('Server listening on PORT 3000');
+});
+//         ```
+//     - In this example:
+//         - The `body-parser` middleware parses JSON and URL-encoded bodies.
+//         - The `req.body` object contains the parsed data.
+//         - You can access the data in your route handler.
+// The parsed data is made accessible in req.body.
+// Handling a POST Request:
+//         When a user sends a POST request to /api/data, we extract data from the request body.
+//         In this example, we assume the request body contains properties named name and age.
+//         We send a response back with the received data.
+// Starting the Server:
+//         We start the server on port 3000 using app.listen(3000, ...).
+//         The server listens for incoming requests.
+
+// 4. **Common Use Cases**:
+//     - Handling form submissions (URL-encoded data).
+//     - Consuming APIs that send data in JSON format.
+//     - Validating and processing user input.
+
+// Remember, body-parser simplifies handling request
+// bodies, making it easier to work with data sent
+// to your Express server! 🌟
+////////////////////////////////////////////////////////////////////////////////////////////
+
+// Certainly! Let's summarize the conclusion 
+// about application-level and route-level 
+// middleware in simpler terms:
+
+// 1. **Application-Level Middleware**:
+//     - It's like working on a **general canvas** for the entire app.
+//     - Handles common tasks globally (e.g., logging, authentication).
+//     - Provides a broad view of the application.
+
+// 2. **Route-Level Middleware**:
+//     - It's like **surgical precision** for specific routes.
+//     - Used for tasks related to specific routes (e.g., validation).
+//     - Offers more control and specificity.
+
+// 3. **Key Takeaway**:
+//     - Producers (developers) need to understand 
+//          the difference and choose wisely.
+//     - As Express.js evolves, mastering different 
+//          frameworks becomes essential for efficient web development.
+
+// In short, application-level middleware is broad, 
+// while route-level middleware is precise! 🌟
+
+
+// Certainly! Let's compare app-level middleware 
+// and route-level middleware in Express using code examples:
+
+// 1. **App-Level Middleware**:
+//     - App-level middleware is configured using `app.use()` or similar methods.
+//     - It applies to **all requests** processed by the Express application.
+//     - Common use cases include logging, error handling, authentication, and serving static files.
+
+// ```javascript
+// Example of app-level middleware
+const express = require('express');
+const app = express();
+
+// App-level middleware
+app.use((req, res, next) => {
+    console.log('App-level middleware');
+    next(); // Proceed to the next middleware or route handler
+});
+
+// Actual route
+app.get('/', (req, res) => {
+    res.send('Welcome to the homepage');
+});
+
+app.listen(3000, () => {
+    console.log('Server listening on PORT 3000');
+});
+// ```
+
+// 2. **Route-Level Middleware**:
+//     - Route-level middleware is specific to certain routes or groups of routes.
+//     - It's defined using `app.use()` or `router.use()`.
+//     - It executes only when a request matches the specified route.
+
+// ```javascript
+// Example of route-level middleware
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// Route-level middleware
+router.use((req, res, next) => {
+    console.log('Route-level middleware');
+    next(); // Proceed to the next middleware or route handler
+});
+
+// Actual route
+router.get('/profile', (req, res) => {
+    res.send('User profile page');
+});
+
+app.use('/user', router); // Mount the router at '/user'
+
+app.listen(3000, () => {
+    console.log('Server listening on PORT 3000');
+});
+// ```
+
+// 3. **Summary**:
+//     - App-level middleware applies globally to all requests.
+//     - Route-level middleware is specific to certain routes.
+//     - Choose based on whether you need global or route-specific functionality.
+
+// Remember, understanding the difference between 
+// these two types of middleware helps you structure 
+// your Express application effectively! 🌟
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// What is express-session middleware in Express?
+
+// In the Express web application, the express-session 
+// middleware is mainly used for managing the sessions
+//  for the user-specific data.
+// Certainly! In an **Express.js** web application, 
+// the `express-session` middleware is primarily 
+// used for managing user sessions and handling 
+// user-specific data. 
+
+// Certainly! In an **Express.js** web application, 
+// the `express-session` middleware is primarily 
+// used for managing user sessions and handling 
+// user-specific data. 
+// Let's dive into what it does:
+
+// 1. **Purpose of `express-session` Middleware**:
+//     - The `express-session` middleware allows
+        //  you to create and manage **user sessions**.
+//     - It maintains stateful interactions between 
+        // the Express.js server and the client (usually a web browser).
+//     - Sessions are essential for tasks like 
+        // user authentication, storing user preferences, 
+        // and maintaining user-specific data.
+
+// 2. **How `express-session` Works**:
+//     - When a user visits your website, 
+        // the server creates a unique session for that user.
+//     - The session data (such as user ID, preferences, 
+        // or shopping cart items) is stored on the server.
+//     - A session ID (usually stored in a cookie) is 
+        // sent to the client, allowing the server to 
+        // identify the user in subsequent requests.
+
+// 3. **Common Use Cases**:
+//     - **User Authentication**: Storing user login status and credentials.
+//     - **User Preferences**: Remembering user settings or theme preferences.
+//     - **Shopping Carts**: Maintain
+
+
+//app.js
+const express = require('express');
+const session = require('express-session');
+const app = express();
+const port = 3000;
+// setting the session middleware
+app.use(session({
+        secret: 'gfg-key',
+        resave: false,
+        saveUninitialized: true
+}));
+// set session in the / route
+app.get('/', (req, res) => {
+        // session variable
+        req.session.gfgUser = 'geeksforgeeks';
+        res.send(`Hey Geek! Session is set! Now Go to 
+        <a href="/get">/get</a> to retrieve the session.`);
+});
+// get session in the /get route
+app.get('/get', (req, res) => {
+        // retrieve the session variable
+        const gfgUser = req.session.gfgUser || 'No session set';
+        res.send(`Session variable: ${gfgUser}`);
+});
+app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
+});
+
+// node index.js 
+
+// explanation -> 
+
+// 1. **Importing Dependencies**:
+//     - We import the necessary modules: `express` and `express-session`.
+//     - `express` is the web framework for Node.js.
+//     - `express-session` provides session management functionality.
+
+// 2. **Creating an Express App**:
+//     - We create an Express application using `const app = express();`.
+
+// 3. **Setting Up `express-session` Middleware**:
+//     - We configure the `express-session` middleware using `app.use(session({ ... }))`.
+//     - The options provided are:
+//         - `secret`: A secret key used to sign the session ID cookie.
+//         - `resave`: Determines whether to save the session even if it hasn't been modified (set to `false`).
+//         - `saveUninitialized`: Determines whether to save uninitialized sessions (set to `true`).
+
+// 4. **Setting a Session Variable**:
+//     - When a user visits the root path (`/`), we set a session variable named `gfgUser` with the value `'geeksforgeeks'`.
+//     - This variable will be associated with the user's session.
+
+// 5. **Handling the `/get` Route**:
+//     - When a user visits the `/get` path, we retrieve the session variable (`gfgUser`) from the session.
+//     - If the session variable is not set, we provide a default value of `'No session set'`.
+//     - We send this information as the response.
+
+// 6. **Starting the Server**:
+//     - We start the server on port 3000 using `app.listen(port, ...)`.
+//     - The server listens for incoming requests.
+
+// 7. **Summary**:
+//     - The code demonstrates how to set and retrieve session variables using `express-session`.
+//     - When a user visits `/`, we set a session variable.
+//     - When a user visits `/get`, we retrieve and display the session variable.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// How to test API Endpoints with Postman and Express ?
+// for step by step see on site .
+
+// How to use postman for testing express application
+
+// Testing an Express app is very important 
+// to ensure its capability and reliability 
+// in different use cases.
+// options available like Thunder client, PAW, 
+// etc but we will use Postman here for 
+// the testing of the Express application. 
+// It provides a great user interface and 
+// numerous tools which makes API testing very easy.
+
+mkdir express - postman
+cd express - postman
+npm init - y
+npm i express nodemon mongoose
+
+// "dependencies": {
+//     "express": "^4.18.2",
+//     "mongoose": "^8.0.3",
+//     "nodemon": "^3.0.2"
+// }
+
+
+// Example: Creating a simple Express application 
+// for POST and GET userData.
+//app.js
+const express = require("express");
+const mongoose = require("mongoose");
+
+const app = express();
+app.use(express.json());
+
+// replace the connection string with your MongoDB URI.
+mongoose.connect(
+    "Your connection string",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }
+);
+
+// Create a Mongoose schema for users
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    mobile: Number,
+});
+
+const User = mongoose.model("Userdata", userSchema);
+
+app.get("/", (req, res) => {
+    res.send("API testing");
+});
+
+app.post("/users", async (req, res) => {
+    try {
+        const { name, email, mobile } = req.body;
+        const newUser = new User({ name, email, mobile });
+        await newUser.save();
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.get("/users", async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.listen(3000, () => {
+    console.log("App is running on port 3000");
+});
+
+// Certainly! Let's break down the code snippet step by step:
+
+// 1. **Importing Dependencies**:
+//     - We import the necessary modules: `express` and `mongoose`.
+//     - `express` is the web framework for Node.js.
+//     - `mongoose` is an Object Data Modeling (ODM) library for MongoDB.
+
+// 2. **Creating an Express App**:
+//     - We create an Express application using `const app = express();`.
+
+// 3. **Setting Up MongoDB Connection**:
+//     - We connect to a MongoDB database using the provided connection string.
+//     - Replace `"Your connection string"` with your actual MongoDB URI.
+
+// 4. **Creating a Mongoose Schema**:
+//     - We define a schema for users using `mongoose.Schema`.
+//     - The schema specifies the expected fields (`name`, `email`, and `mobile`).
+
+// 5. **Creating a Mongoose Model**:
+//     - We create a Mongoose model named `User` based on the defined schema.
+//     - The model represents a collection in the MongoDB database.
+
+// 6. **Handling Routes**:
+//     - We define three routes:
+//         - `/`: Responds with "API testing" when accessed via a GET request.
+//         - `/users`: Handles POST requests to create new users and GET requests to retrieve all users.
+//     - In the `/users` route:
+//         - For POST requests, we create a new user and save it to the database.
+//         - For GET requests, we retrieve all users from the database.
+
+// 7. **Error Handling**:
+//     - We handle errors by wrapping database operations in `try`/`catch` blocks.
+//     - If an error occurs, we send an appropriate error response.
+
+// 8. **Starting the Server**:
+//     - We start the server on port 3000 using `app.listen(3000, ...)`.
+//     - The server listens for incoming requests.
+
+// 9. **Summary**:
+//     - The code demonstrates how to create an Express API with MongoDB integration.
+//     - It handles user creation and retrieval using Mongoose models.
+
+// Remember, this code sets up an API for managing user data using Express and MongoDB! 🌟
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// How to test file uploads in Postman using Express?
+
+
+mkdir express - file - upload - example
+cd express - file - upload - example
+
+npm init - y
+npm install express multer
+mkdir uploads
+// "dependencies": {
+//     "express": "^4.18.2",
+//     "multer": "^1.4.5-lts.1"
+// } 
+
+
+//app.js
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+
+const app = express();
+const port = 8000;
+
+// Set up Multer to handle file uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // Uploads will be stored in the 'uploads' directory
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename to avoid overwriting
+    }
+});
+
+const upload = multer({ storage: storage });
+
+app.get('/', (req, res) => {
+    res.send('Hello from server')
+})
+
+// Define the file upload endpoint
+app.post('/api/files/upload', upload.single('file'), (req, res) => {
+    // Access the uploaded file information from req.file
+    const fileName = req.file.filename;
+
+    // Store the file into file system / database (if needed)
+
+    // Send the response
+    res.status(200).json({ message: `File uploaded successfully: ${fileName}` });
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+// explanation -> 
+// Certainly! Let's break down the code snippet in simple terms:
+
+// 1. **Setting Up File Uploads with Express and Multer**:
+//     - This code sets up an **Express.js** server to handle file uploads.
+//     - We use a package called **Multer** to manage file uploads.
+
+// 2. **Dependencies**:
+//     - We import the necessary modules: `express` and `multer`.
+//     - `express` is the web framework for Node.js.
+//     - `multer` is a middleware specifically designed for handling file uploads.
+
+// 3. **Creating an Express App**:
+//     - We create an Express application using `const app = express();`.
+
+// 4. **Configuring Multer Storage**:
+//     - We configure Multer to store uploaded files in a specific directory (`uploads/`).
+//     - The uploaded files will be given unique filenames based on the current timestamp.
+
+// 5. **Handling Routes**:
+//     - We define two routes:
+//         - `/`: Responds with "Hello from server" when accessed via a GET request.
+//         - `/api/files/upload`: Handles POST requests for file uploads.
+//     - In the `/api/files/upload` route:
+//         - We use the `upload.single('file')` middleware to handle single-file uploads.
+//         - The uploaded file information is accessible in `req.file`.
+//         - We send a success response with the uploaded filename.
+
+// 6. **Starting the Server**:
+//     - We start the server on port 8000 using `app.listen(8000, ...)`.
+//     - The server listens for incoming requests.
+
+// 7. **Summary**:
+//     - This code demonstrates how to set up an Express server to handle file uploads using Multer.
+//     - It's useful for scenarios like user profile picture uploads or document attachments.
+
+// Remember, Multer simplifies handling file uploads in Express applications! 🌟
+
+// for steps see on site 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// How to test API Endpoints with Postman and Express ?
+// Steps to test API endpoints with Postman & Express:
+npm init - y
+npm install express body - parser
+
+// Step 2: Create a file named `server.js` 
+// and add the following code:
+
+//server.js
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+
+app.use(bodyParser.json());
+
+// /hello endpoint
+app.get("/hello", (req, res) => {
+    res.send("Hello, Postman!");
+});
+
+// /greet/:name endpoint
+app.get("/greet/:name", (req, res) => {
+    const { name } = req.params;
+    res.send(`Hello, ${name}!`);
+});
+
+// /calculate endpoint
+app.post("/calculate", (req, res) => {
+    const { num1, num2 } = req.body;
+
+    if (num1 === undefined || num2 === undefined) {
+        return res
+            .status(400)
+            .json({
+                error: "Both num1 and num2 are required in the request body.",
+            });
+    }
+
+    const result = num1 + num2;
+    res.json({ result });
+});
+
+app.listen(3000, () => {
+    console.log("Server is running on http://localhost:3000");
+});
+// Run your server with the following command 
+// and access it at `http://localhost:3000`:
+
+node server.js
+
+// Step 3: Create a New Request
+
+// Open Postman, click “New,” and select ” Add Request.”
+// Give it a name and save it in a collection.
+
+// collection-and-req
+// Creating Collection and new request
+
+// Step 4: Define Request Details
+
+// Enter the request URL. For example,
+// use `http://localhost:3000/hello`.
+// Select the HTTP method (GET) from the dropdown menu.
+
+// req-url-and-method
+// Setting url and method type
+
+// Step 5: Click “Send” to make the request.
+
+// send-btn
+// Send button
+
+// Step 6: Getting the response from server.
+
+// For `/hello`, the response should be “Hello, Postman!”.
+// You will get this in Response window at bottom.
+
+// res-from-server
+// Response from server
+
+// Step 7: Test Other Endpoints
+
+// Repeat the process for `/greet/:name` and `/calculate`.
+// Adjust the URL and request method accordingly.
+
+// Navigate to the “Params” tab to add parameters –
+// For `/greet/:name`, we will set params too.
+// In below image you can see how to set it.
+
+// name
+// Sending params in url
+
+// Navigate to the “Body” tab to add body
+// to request – For `/calculate`, we will
+// send two number in body itself and
+// below image you can see it.
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 10. What is .env file used for?
+// The .env file is used for storing sensitive 
+// information in a web application which we don’t 
+// want to expose to others like password,
+//  database connection string etc. It is 
+// a simple text file where each line represents 
+// a key-value pair, and these pairs are used 
+// to configure various aspects of the application.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 11. What are JWT?
+// Json Web Tokens are mainly a token which 
+// is used for authentication and information 
+// exchange. When a user signs in to an application, 
+// the application then assigns JWT to that user.
+//  Subsequent requests by the user will include 
+// the assigned JWT. This token tells the server
+//  what routes, services, and resources the user
+//  is allowed to access. Json Web Token includes 
+// 3 part namely- Header, Payload and Signature.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// 12. Create a simple middleware for validating user.
+ 
+// Simple user validation middleware 
+const validateUser = (req, res, next) => { 
+  const user = req.user; 
+  
+  // Check if the user object is present 
+  if (!user) { 
+    return res.status(401).json({ error: 'Unauthorized - User not found' }); 
+  } 
+  
+  // If the user is valid, move to the next middleware or route handler 
+  next(); 
+}; 
+  
+// Example of using the middleware in an Express route 
+app.get('/profile', validateUser, (req, res) => { 
+  const user = req.user; 
+  res.json({ message: 'Profile page', username: user.username }); 
+}); 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 13. What is Bcrypt used for?
+// Bcrypt is a password hashing function 
+// which is used to securely hash and store 
+// user passwords. It is designed to be slow 
+// and computationally intensive, making it 
+// resistant to brute-force attacks and 
+// rainbow table attacks. Bcrypt is a key
+//  component in enhancing the security 
+// of user authentication systems.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 14. Why should you separate the Express app and server?
+// In Express.js, it is recommended to separate 
+// the Express App and the server setup. 
+// This provides the modularity and flexibility 
+// and makes the codebase more easier to maintain
+//  and test. Here are some reasons why you should 
+// separate the Express app and server:
+
+// Modularity: You can define routes, middleware, 
+// and other components in the Express app 
+// independently of the server configuration.
+
+// Ease of Testing: Separation makes it easier 
+// to write unit tests for the Express app without 
+// starting an actual server. You can test routes, 
+// middleware, and other components in isolation.
+
+// Reusability: You can reuse the same Express 
+// app in different server configurations.
+
+// Configuration Management: Separating the app 
+// and server allows for cleaner configuration management.
+
+// Scalability: It provides a foundation for 
+// a scalable code structure. As your application 
+// grows, it will easier to maintain the code.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 15. What do you understand about ESLint?
+// EsLint is a JavaScript linting tool which is 
+// used for automatically detecting incorrect 
+// patterns found in ECMAScript/JavaScript code. 
+// It is used with the purpose of improving code
+//  quality, making code more consistent, and 
+// avoiding bugs. ESLint is written using Node.js
+//  to provide a fast runtime environment and 
+// easy installation via npm.
+
+// 16. Define the concept of the test pyramid.
+// The Test Pyramid is a concept in software 
+// testing that represents the distribution of 
+// different types of tests. It was introduced by 
+// Mike Cohn, and it suggests that a testing 
+// strategy should be shaped like a pyramid, with 
+// the majority of tests at the base and fewer 
+// tests as you move up. The Test Pyramid consists 
+// of three levels: Unit Tests, Integration Tests, 
+// and End-to-End (E2E) Tests.
+
+// 17. Differentiate between res.send() and res.json().
+// Both res.send() and res.json() serves similar 
+// purposes with some difference. So it depends 
+// on the data type which we are working with. 
+// Choose res.json() when you are specifically 
+// working with JSON data. Use res.send() when 
+// you need versatility and control over the content
+//  type or when dealing with various data types 
+// in your responses.
+
+// 18. What is meant by Scaffolding in Express JS?
+// Scaffolding in Express.js refers to the process 
+// of generating a basic project structure automatically. 
+// This can speed up the initial setup and help maintain 
+// consistency in the way projects are structured, 
+// especially in large teams.
+
+// 19. How would you install an Express application generator for scaffolding?
+// Express application generator are used for quickly 
+// setting up a new Express application with some 
+// basic structure. You can install it using 
+// Node Package Manager (npm), which comes with Node.js.
+
+// To install it globally:
+npm install - g express - generator
+
+// 20. What is Yeoman and how to install Yeoman for scaffolding?
+// Yeoman is a scaffolding tool for web applications 
+// that helps developers to create new projects by 
+// providing a generator-based workflow.
+
+// To install Yeoman run the following command:
+
+npm install - g yo
+// Yeoman works with generators, which are 
+// packages that define the structure and 
+// configuration of a project. You can 
+// install a generator like this:
+npm install - g generator - express
+
+// Once installed, you can use Yeoman to 
+// create a new application:
+yo appname
+
+// 21. Explain what CORS is in Express JS?
+// CORS (Cross-Origin Resource Sharing) is 
+// a security feature implemented by web 
+// browsers to control how web pages in 
+// one domain can request and interact 
+// with resources hosted on another domain.
+
+// In the context of Express.js, CORS refers 
+// to a middleware that enables Cross-Origin 
+// Resource Sharing for your application. 
+// This allows the application to control 
+// which domains can access your resources 
+// by setting HTTP headers.
+
+// 22. What are Built-in Middlewares?
+// Express.js, includes a set of built-in 
+// middlewares that provide common functionality. 
+// These built-in middlewares are included by 
+// default when you create an Express application 
+// and can be used to handle various tasks. Here 
+// are some of the built-in middlewares in Express:
+
+// express.json(): This middleware is used to 
+// parse incoming JSON requests. It automatically 
+// parses the request body if the Content-Type 
+// header is set to application/json.
+
+// express.Router(): The express.Router() function 
+// is often used to create modular route handlers. 
+// It allows you to group route handlers together 
+// and then use them as a middleware.
+
+// express.static(): This middleware is used to 
+// serve static files, such as images, CSS, and 
+// JavaScript files, from a specified directory.
+
+// 23. How would you configure properties in Express JS?
+// In Express JS, you can configure properties using 
+// the app.set() method. This method allows you to set 
+// various properties and options which affects 
+// the behavior of the Express application.
+
+app.set(name, value);
+
+// Here, name represents the name of the property 
+// you want to configure, and value is the value 
+// you want to assign to that property. Express 
+// provides a wide range of properties that you 
+// can configure based on your application’s requirements.
+
+// 24. Which template engines do Express support?
+// Express.js supports any template engine that 
+// follows the (path, locals, callback) signature.
+
+// 25. Elaborate on the various methods of debugging 
+// on both Linux and Windows systems?
+// The debugging is the vital need at the time of 
+// software development to identifying issues in 
+// the application’s logic, handling of HTTP requests, 
+// middleware execution, and other aspects specific 
+// to web development. Here are some methods commonly 
+// used for debugging an Express.js application on
+//  both Linux and Windows:
+
+// Console.log: The simplest way to debug an
+//  Express JS application is by using console.log(). 
+// You can output messages to the console which can 
+// be viewed in the terminal.
+
+// Node Inspector: This is a powerful tool that 
+// allows you to debug your applications using 
+// Chrome Developer Tools. It supports features 
+// like setting breakpoints, stepping over functions, 
+// and inspecting variables.
+
+// Visual Studio Code Debugger: VS Code provides 
+// a built-in debugger that works on both Linux 
+// and Windows. It supports advanced features like 
+// conditional breakpoints, function breakpoints, and logpoints.
+
+// Utilizing debug module: The debug module is 
+// a small Node.js debugging utility that allows 
+// you to create debugging scopes.
+
+// 26. Name some databases that integrate with Express JS?
+// Express.js can support a variety of the databases which includes:
+
+// MySQL
+// MongoDB
+// PostgreSQL
+// SQLite
+// Oracle
+
+// 27. How would you render plain HTML using Express JS?
+// In Express.js, you can render plain HTML using the 
+// res.send() method or res.sendFile() method.
+
+// Sample code:
+
+
+//using res.send 
+
+const express = require('express');
+const app = express();
+const port = 8000;
+
+app.get('/', (req, res) => {
+  const htmlContent = '<html><body><h1>Hello, World!</h1></body></html>';
+  res.send(htmlContent);
+});
+
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
+// 28. What is the use of ‘Response.cookie()’ function?
+// The response.cookie() function in Express.js 
+// is used to set cookies in the HTTP response. 
+// Cookies are small pieces of data sent from 
+// a server and stored on the client’s browser.
+//  They are commonly used to store information 
+// about the user or to maintain session data.
+
+// Basic syntax of response.cookie():
+
+res.cookie(name, value, [options]);
+// 29. Under what circumstances does a Cross-Origin resource fail in Express JS?
+// When a Cross-Origin Resource Sharing request 
+// is made, the browser enforces certain security
+//  checks, and the request may fail under 
+// various circumstances:
+
+// No CORS Headers: The server doesn’t include 
+// the necessary CORS headers in its response.
+
+// Mismatched Origin: The requesting origin does 
+// not match the origin specified in the
+//  Access-Control-Allow-Origin header.
+
+// Restricted HTTP Methods: The browser 
+// enforces restrictions on which HTTP methods 
+// are allowed in cross-origin requests.
+
+// No Credentials: The browser makes restrictions
+//  on requests that include credentials (such as
+//  cookies or HTTP authentication).
+
+// 30. What is Pug template engine in Express JS?
+// Pug is a popular template engine for Express.js
+//  and other Node.js frameworks. You can use Pug 
+// to render dynamic HTML pages on the server side. 
+// It allows you to write templates using a syntax 
+// that relies on indentation and concise tags.
+
+// 31. What is meant by the sanitizing input process in Express JS?
+// Sanitizing input in Express.js application is 
+// an important security practice to prevent various 
+// types of attacks, such as Cross-Site Scripting (XSS) 
+// and SQL injection. It involves cleaning and validating 
+// user input before using it in your application so that 
+// it does not contain malicious code or can be a security risk.
+
+// 32. How to generating a skeleton Express JS app using terminal command?
+// To generate a skeleton for an Express.js application
+//  using the terminal, you can use the Express application 
+// generator which is a command-line tool provided by the
+//  Express.js framework. This generator will setup 
+// a basic directory structure which includes necessary 
+// files, and installs essential dependencies.
+
+// Steps to generate:
+
+// Step 1: Open your terminal and install the Express 
+// application generator globally using the following command:
+
+npm install - g express - generator
+// Step 2: After that you can use the express command 
+// to generate your Express.js app.
+
+express my - express - app
+// Step 3:Now go to the app directory and install 
+// the dependencies and start the app by running-
+
+npm install
+npm start
+
+// 33. What are middlewares in Express.Js?
+// Middleware functions are those functions that
+//  have the access to request and response object 
+// and the next middleware or function. They can 
+// add functionality to an application, such as 
+// logging, authentication, and error handling.
+
+// 34. What are the types of middlewares?
+// There are mainly five types of Middleware in Express.js:
+
+// Application-level middleware
+// Router-level middleware
+// Error-handling middleware
+// Built-in middleware
+// Third-party middleware
+
+
+// 35. List the built-in middleware functions provided by Express.
+// Express.js comes with several built-in 
+// middleware functions. Few of them are:
+
+// express.json: This is used for parsing 
+// incoming requests with JSON payloads.
+
+// express.static: This is used to serve static 
+// files like images, CSS files, and JavaScript files.
+
+// express.urlencoded: This is used for parsing 
+// incoming requests with URL-encoded payloads.
+
+// express.raw: This is used for parse incoming 
+// requests with a raw body.
+
+// express.text: This is used for parse incoming
+//  requests with a text body.
+
+
+// 36. Mention some third-party middleware provided by Express JS.
+// Express.js allows you to use third-party 
+// middleware to extend and enhance the functionality 
+// of your web application. Here are some commonly used 
+// third-party middleware in Express.js:
+
+// body-parser: This middleware is used to parse incoming 
+// request bodies, allowing you to access form data or
+//  JSON payloads on req.body.
+
+// cors: This module provides middleware to enable
+//  Cross-Origin Resource Sharing (CORS) in your 
+// Express application.
+
+// morgan: Morgan is a middleware module that 
+// provides request logging functionality.
+
+// helmet: Helmet helps to secure Express apps 
+// by setting various HTTP headers.
+
+// express-session: This middleware is used 
+// for managing user sessions in your Express application.
+
+// passport: This middleware is used for implementing 
+// authentication and authorization in Express applications.
+
+// 37. When application-level Middleware is used?
+// Application-level middlewares are bound to 
+// an instance of the Express application and 
+// are executed for every incoming request. 
+// These middlewares are defined using the app.use() 
+// method, and they can perform tasks such as logging, 
+// authentication, setting global variables, and more.
+
+// 38. Explain Router-level Middleware.
+// Router-level middlewares are specific to 
+// a particular router instance. This type 
+// of middleware is bound to an instance of 
+// express.Router(). Router-level middleware 
+// works similarly to application-level middleware, 
+// but it’s only invoked for the routes that are 
+// handled by that router instance. This allows you 
+// to apply middleware to specific subsets of your
+//  routes, keeping your application organized and manageable.
+
+// 39. How to secure Express.Js application?
+// It is very important to secure your application 
+// to protect it against various security threats. 
+// We can follow few best practices in our Express.js
+//  app to enhance the security of our application.
+
+// Keep Dependencies Updated: Regularly update 
+// your project dependencies, including Express.js 
+// and other npm packages.
+
+// Use Helmet Middleware: The helmet middleware 
+// helps secure your application by setting various
+//  HTTP headers. It helps prevent common web vulnerabilities.
+
+// Set Secure HTTP Headers: Configure your application 
+// to include secure HTTP headers, such as
+//  Content Security Policy (CSP), 
+// Strict-Transport-Security (HSTS), and others.
+
+// Use HTTPS: Always use HTTPS to encrypt data 
+// in transit. Obtain an SSL certificate for 
+// your domain and configure your server to use HTTPS.
+
+// Secure Database Access: Use parameterized queries 
+// or prepared statements to prevent SQL injection 
+// attacks. Ensure that your database credentials 
+// are secure and not exposed in configuration files.
+
+// 40. What is Express router() function?
+// The express.Router() function is used to create 
+// a new router object. This function is used when 
+// you want to create a new router object in your 
+// program to handle requests.
+
+// Syntax:
+express.Router([options])
+
+// 41. What are the different types of HTTP requests?
+
+// The primary HTTP methods are commonly referred 
+// to as CRUD operations, representing Create, Read, 
+// Update, and Delete. Here are the main HTTP methods:
+
+// GET: The GET method is used to request data 
+// from a specified resource.
+// POST: The POST method is used to submit data 
+// to be processed to a specified resource.
+// PUT: The PUT method is used to update 
+// a resource or create a new resource if 
+// it does not exist.
+
+// PATCH: The PATCH method is used to apply 
+// partial modifications to a resource.
+// 
+
+// DELETE: The DELETE method is used to 
+// request that a specified resource be removed.
+
+// 42. Do Other MVC frameworks also support scaffolding?
+// The Scaffolding technique is supported by other 
+// MVC frameworks also which includes- Ruby on Rails, 
+// OutSystems Platform, Play framework, Django, MonoRail,
+//  Brail, Symfony, Laravel, CodeIgniter, YII, CakePHP,
+//  Phalcon PHP, Model-Glue, PRADO, Grails, Catalyst,
+//  Seam Framework, Spring Roo, ASP.NET, etc.
+
+// 43. Which are the arguments available to an Express JS route handler function?
+
+// In Express JS route handler function, there are 
+// mainly3 arguments available that provide useful 
+// information and functionality.
+
+// req: This represents the HTTP request object
+//  which holds information about the incoming 
+// request. It allows you to access and manipulate
+//  the request data.
+
+// res: This represents the HTTP response object 
+// which is used to send the response back to the 
+// client. It provides methods and properties to 
+// set response headers, status codes, and send 
+// the response body.
+
+// next: This is a callback function that is used 
+// to pass control to the next middleware function
+//  in the request-response cycle.
+
+// 44. How can you deal with error handling in Express.js?
+// Express.js provides built-in error-handling mechanism
+//  with the help of the next() function. When an error 
+// occurs, you can pass it to the next middleware or route
+//  handler using the next() function. You can also add 
+// an error-handling middleware to your application that 
+// will be executed whenever an error occurs.
+
+// 45. What is the difference between a traditional server and an Express.js server?
+// A traditional server is a server that is built 
+// and managed independently. Traditional server 
+// may provide a basic foundation for handling HTTP
+//  requests and responses. While an Express.js server 
+// is built using the Express.js framework. It runs 
+// on top of Node.js. Express.js provides a simple 
+// and efficient way to create and manage web applications. 
+// It offers a wide range of features and tools for handling 
+// routing, middleware, and request or response objects.
+
+// 46. What is the purpose of the next() function in Express.js?
+// The next() function is used to pass control from one 
+// middleware function to the next function. It is used 
+// to execute the next middleware function in the chain. 
+// If there are no next middleware function in the chain 
+// then it will give control to router or other functions 
+// in the app. If you don’t call next() in a middleware 
+// function, the request-response cycle can be terminated, 
+// and subsequent middleware functions won’t be executed.
+
+// 47. What is the difference between app.route() and app.use() in Express.js?
+// app.route() is more specific to route handling and 
+// allows you to define a sequence of handlers for 
+// a particular route, on the other hand app.use() 
+// is a more general-purpose method for applying 
+// middleware globally or to specific routes.
+
+// 48. Explain what dynamic routing is in Express.js.
+// Dynamic routing in Express.js include parameters,
+//  which allows you to create flexible and dynamic 
+// routes in your web application. This parameters 
+// are used in your route handlers to customize the 
+// behaviour based on the data provided.
+
+// In Express, dynamic routing is achieved by using 
+// route parameters, denoted by a colon (:) followed 
+// by the parameter name.
+
+// Here’s a simple example:
+
+
+const express = require('express');
+const app = express();
+
+// Dynamic route with a parameter 
+app.get('/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  res.send(`User ID: ${userId}`);
+});
+
+// Start the server 
+const port = 8000;
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
+// 49. How to serve static files in Express.Js?
+// In Express.js, you can serve static files using
+// the built-in express.static middleware. This
+// middleware function takes the root directory
+//  of your static files as an argument and serves
+//  them automatically.
+
+// 50. What is the use of app.use() in Express.js?
+// app.use() is used to add middleware functions
+// in an Express application. It can be used to
+// add global middleware functions or to add
+//  middleware functions to specific routes.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+

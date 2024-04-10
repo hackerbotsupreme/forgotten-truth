@@ -1,0 +1,690 @@
+fetch() global function
+Note: This feature is available in Web Workers
+
+The global fetch() method starts the process 
+of fetching a resource from the network, 
+returning a promise that is fulfilled 
+once the response is available.
+
+The promise resolves to the Response 
+object representing the response to your request.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+dom api 
+// The HTML DOM document object is the owner 
+// of all other objects in your web page.
+// The HTML DOM Document Object
+// The document object represents your web page.
+// If you want to access any element in an 
+// HTML page, you always start with 
+// accessing the document object.
+
+
+// Below are some examples of how you can use 
+// the document object to access and manipulate HTML.
+
+// Finding HTML Elements
+// Method	                                        Description
+// document.getElementById(id)	                    Find an element by element id
+// document.getElementsByTagName(name)	            Find elements by tag name
+// document.getElementsByClassName(name)	        Find elements by class name
+
+// Changing HTML Elements
+// Property	                                        Description
+// element.innerHTML =  new html content	        Change the inner HTML of an element
+// element.attribute = new value	                Change the attribute value of an HTML element
+// element.style.property = new style	            Change the style of an HTML element
+
+// Method	                                        Description
+// element.setAttribute(attribute, value)	        Change the attribute value of an HTML element
+
+// Adding and Deleting Elements
+// Method	                                        Description
+// document.createElement(element)	                Create an HTML element
+// document.removeChild(element)	                Remove an HTML element
+// document.appendChild(element)	                Add an HTML element
+// document.replaceChild(new, old)	                Replace an HTML element
+// document.write(text)	                            Write into the HTML output stream
+
+
+// Adding Events Handlers
+// Method	                                        Description
+// document.getElementById(id).onclick              // Adding event handler code to an onclick event
+// = function(){code}	
+
+// Finding HTML Objects
+// The first HTML DOM  defined 11 HTML objects, 
+// object collections, and properties. These are still valid in HTML5.
+
+// Later, in HTML DOM Level 3, 
+// more objects, collections, and properties were added.
+
+// Property	Description	DOM
+// document.anchors	                    Returns all <a> elements that have a name attribute	1
+// document.applets	                    Deprecated	1
+// document.baseURI	                    Returns the absolute base URI of the document	3
+// document.body	                    Returns the <body> element	1
+// document.cookie	                    Returns the document's cookie	1
+// document.doctype	                    Returns the document's doctype	3
+// document.documentElement	            Returns the <html> element	3
+// document.documentMode	            Returns the mode used by the browser	3
+// document.documentURI	                Returns the URI of the document	3
+// document.domain	                    Returns the domain name of the document server	1
+// document.domConfig	                Obsolete.	3
+// document.embeds	                    Returns all <embed> elements	3
+// document.forms	                    Returns all <form> elements	1
+// document.head	                    Returns the <head> element	3
+// document.images	                    Returns all <img> elements	1
+// document.implementation	            Returns the DOM implementation	3
+// document.inputEncoding	            Returns the document's encoding (character set)	3
+// document.lastModified	            Returns the date and time the document was updated	3
+// document.links	                    Returns all <area> and <a> elements that have a href attribute	1
+// document.readyState	                Returns the (loading) status of the document	3
+// document.referrer	                Returns the URI of the referrer (the linking document)	1
+// document.scripts	                    Returns all <script> elements	3
+// document.strictErrorChecking	        Returns if error checking is enforced	3
+// document.title	                    Returns the <title> element	1
+// document.URL	                        Returns the complete URL of the document	1
+
+
+// Finding HTML Elements
+// Often, with JavaScript, you want to manipulate HTML elements.
+// To do so, you have to find the elements first. There are several ways to do this:
+// Finding HTML elements by id
+// Finding HTML elements by tag name
+// Finding HTML elements by class name
+// Finding HTML elements by CSS selectors
+// Finding HTML elements by HTML object collections
+// Finding HTML Element by Id
+// If the element is found, the method will return 
+// the element as an object (in element).
+// If the element is not found, element will contain null.
+
+
+// document.anchors
+// document.body
+// document.documentElement
+// document.embeds
+// document.forms
+// document.head
+// document.images
+// document.links
+// document.scripts
+// document.title
+
+
+// The HTML DOM allows JavaScript to change 
+// the content of HTML elements.
+
+// Changing HTML Content
+// The easiest way to modify the content of an 
+// HTML element is by using the innerHTML property.
+
+console.log("JavaScript Forms")
+
+// JavaScript Form Validation - client side validation 
+// HTML form validation can be done by JavaScript.
+
+// Data Validation
+// Data validation is the process of ensuring that user input is clean, correct, and useful.
+
+// Typical validation tasks are:
+// has the user filled in all required fields?
+// has the user entered a valid date?
+// has the user entered text in a numeric field?
+// Most often, the purpose of data validation is to ensure correct user input.
+
+// Validation can be defined by many different methods, and deployed in many different ways.
+// Server side validation is performed by a web server, after input has been sent to the server.
+// Client side validation is performed by a web browser, before input is sent to a web server.
+
+// HTML Constraint Validation
+// HTML5 introduced a new HTML validation concept called constraint validation.
+
+// HTML constraint validation is based on:
+
+// Constraint validation HTML Input Attributes
+// Constraint validation CSS Pseudo Selectors
+// Constraint validation DOM Properties and Methods
+// Constraint Validation HTML Input Attributes
+
+
+
+// Attribute	                    Description
+// disabled	                        Specifies that the input element should be disabled
+// max	                            Specifies the maximum value of an input element
+// min	                            Specifies the minimum value of an input element
+// pattern	                        Specifies the value pattern of an input element
+// required	                        Specifies that the input field requires an element
+// type 	                        Specifies the type of an input element
+// For a full list, go to HTML Input Attributes.
+
+// Constraint Validation CSS Pseudo Selectors
+// Selector	                        Description
+// :disabled	                    Selects input elements with the "disabled" attribute specified
+// :invalid	                        Selects input elements with invalid values
+// :optional	                    Selects input elements with no "required" attribute specified
+// :required	                    Selects input elements with the "required" attribute specified
+// :valid	                        Selects input elements with valid values
+// For a full list, go to CSS Pseudo Classes.
+
+
+JavaScript HTML DOM - Changing CSS
+// The HTML DOM allows JavaScript to change the style of HTML elements.
+// document.getElementById(id).style.property = new style
+
+// Using Events
+// The HTML DOM allows you to execute code when an event occurs.
+// Events are generated by the browser when "things happen" to HTML elements:
+// An element is clicked on
+
+// Learn to create HTML animations using JavaScript.
+// To demonstrate how to create HTML animations with JavaScript
+
+// Reacting to Events
+// A JavaScript can be executed when an event occurs, like when a user clicks on an HTML element.
+
+console.log("JavaScript HTML DOM Events")
+// HTML DOM allows JavaScript to react to HTML events:
+
+// Examples of HTML events:
+// When a user clicks the mouse
+// When a web page has loaded
+// When an image has been loaded
+// When the mouse moves over an element
+// When an input field is changed
+// When an HTML form is submitted
+// When a user strokes a key
+
+// Assign Events Using the HTML DOM
+// The HTML DOM allows you to assign events to HTML elements using JavaScript
+
+// The onload and onunload Events
+// The onload and onunload events are triggered when 
+//the user enters or leaves the page.
+// The onload event can be used to check the visitor's browser type 
+//and browser version, and load the proper version of the web page based on the information.
+
+console.log("JavaScript HTML DOM EventListener")
+// The addEventListener() method
+
+// Event Bubbling or Event Capturing?
+// There are two ways of event propagation in the HTML DOM, 
+//bubbling and capturing.
+flg
+// Event propagation is a way of defining the element 
+//order when an event occurs. If you have a <p> element inside a <div> element, 
+//and the user clicks on the <p> element, which element's "click" event should be handled first?
+// In bubbling the inner most element's event is handled first and 
+//then the outer: the <p> element's click event is handled first, then the <div> element's click event.
+
+// In capturing the outer most element's event is handled first 
+//and then the inner: the <div> element's click event will be handled first, 
+//then the <p> element's click event.
+
+
+// In capturing the outer most element's event is handled first 
+//and then the inner: the <div> element's click event will be handled first, 
+//then the <p> element's click event.
+
+
+
+// In capturing the outer most element's event is handled first 
+//and then the inner: the <div> element's click event will be handled first, 
+//then the <p> element's click event.
+
+// With the addEventListener() method you can specify the propagation 
+//type by using the "useCapture" parameter:
+
+// addEventListener(event, function, useCapture);
+// The default value is false, which will use the bubbling propagation, 
+//when the value is set to true, the event uses the capturing propagation.
+
+// Example
+// document.getElementById("myP").addEventListener("click", myFunction, true);
+// document.getElementById("myDiv").addEventListener("click", myFunction, true);
+// The removeEventListener() method
+// The removeEventListener() method removes event handlers that have been attached with the addEventListener() method:
+
+// Example
+// element.removeEventListener("mousemove", myFunction);
+// HTML DOM Event Object Reference
+// For a list of all HTML DOM events, look at our complete HTML DOM Event Object Reference.
+
+
+console.log("JavaScript HTML DOM Navigation")
+
+// With the HTML DOM, you can navigate the node tree using node relationships.
+
+// DOM Nodes
+// According to the W3C HTML DOM standard, everything in an HTML document is a node:
+
+// The entire document is a document node
+// Every HTML element is an element node
+// The text inside HTML elements are text nodes
+// Every HTML attribute is an attribute node (deprecated)
+// All comments are comment nodes
+// DOM HTML tree
+// With the HTML DOM, all nodes in the node tree can be accessed by JavaScript.
+
+// New nodes can be created, and all nodes can be modified or deleted.
+
+// Node Relationships
+// The nodes in the node tree have a hierarchical relationship to each other.
+
+// The terms parent, child, and sibling are used to describe the relationships.
+
+// In a node tree, the top node is called the root (or root node)
+// Every node has exactly one parent, except the root (which has no parent)
+// A node can have a number of children
+// Siblings (brothers or sisters) are nodes with the same parent
+
+
+navigating between nodes 
+
+// You can use the following node properties to navigate between nodes with JavaScript:
+// parentNode
+// childNodes[nodenumber]
+// firstChild
+// lastChild
+// nextSibling
+// previousSibling
+// Child Nodes and Node Values
+// A common error in DOM processing is to expect an element node to contain text.
+
+// Example:
+// <title id="demo">DOM Tutorial</title>
+// The element node <title> (in the example above) does not contain text.
+
+// It contains a text node with the value "DOM Tutorial".
+
+// The value of the text node can be accessed by the node's innerHTML property:
+
+// myTitle = document.getElementById("demo").innerHTML;
+// Accessing the innerHTML property is the same as accessing the nodeValue of the first child:
+
+// myTitle = document.getElementById("demo").firstChild.nodeValue;
+// Accessing the first child can also be done like this:
+
+// myTitle = document.getElementById("demo").childNodes[0].nodeValue;
+// All the (3) following examples retrieves the text of an <h1> element and copies it into a <p> element:
+
+
+// DOM Root Nodes
+// There are two special properties that allow access to the full document:
+
+// document.body - The body of the document
+// document.documentElement - The full document
+// document.head 
+
+
+// The nodeName Property
+// The nodeName property specifies the name of a node.
+
+// nodeName is read-only
+// nodeName of an element node is the same as the tag name
+// nodeName of an attribute node is the attribute name
+// nodeName of a text node is always #text
+// nodeName of the document node is always #document
+// Note: nodeName always contains the uppercase tag name of an HTML element.
+
+
+
+// The nodeValue Property
+// The nodeValue property specifies the value of a node.
+
+// nodeValue for element nodes is null
+// nodeValue for text nodes is the text itself
+// nodeValue for attribute nodes is the attribute value
+// The nodeType Property
+// The nodeType property is read only. It returns the type of a node.
+
+// The most important nodeType properties are:
+// Node	Type	            Example
+// ELEMENT_NODE	            1 <h1 class="heading">W3Schools</h1>
+// ATTRIBUTE_NODE	        2	 class = "heading" (deprecated)
+// TEXT_NODE	            3	W3Schools
+// COMMENT_NODE	            8	<!-- This is a comment -->
+// DOCUMENT_NODE	        9	The HTML document itself (the parent of <html>)
+// DOCUMENT_TYPE_NODE	    10	<!Doctype html></html>
+
+console.log("JavaScript HTML DOM Elements (Nodes)")
+// Adding and Removing Nodes (HTML Elements)
+
+// Creating New HTML Elements (Nodes)
+// To add a new element to the HTML DOM, you must create the 
+//element (element node) first, and then append it to an existing element.
+// example 
+// <script>
+// const para = document.createElement("p");
+// const node = document.createTextNode("This is new.");
+// para.appendChild(node);
+
+// const element = document.getElementById("div1");
+// element.appendChild(para);
+// </script>
+
+// element.appendChild(para);
+// Creating new HTML Elements - insertBefore()
+// The appendChild() method in the previous example, 
+//appended the new element as the last child of the parent.
+
+// If you don't want that you can use the insertBefore() method:
+
+// example 
+
+// <script>
+// const para = document.createElement("p");
+// const node = document.createTextNode("This is new.");
+// para.appendChild(node);
+
+// const element = document.getElementById("div1");
+// const child = document.getElementById("p1");
+// element.insertBefore(para, child);
+// </script>
+
+// Removing Existing HTML Elements
+// To remove an HTML element, use the remove() method
+
+// <script>
+// const elmnt = document.getElementById("p1"); elmnt.remove();
+// </script>
+
+// parent.removeChild(child);
+// Here is a common workaround: Find the child you want to remove, 
+//and use its parentNode property to find the parent:
+
+// Replacing HTML Elements 
+// To replace an element to the HTML DOM, use the replaceChild() method
+
+console.log("JavaScript HTML DOM Collections")
+
+// The HTMLCollection Object
+// The getElementsByTagName() method returns an HTMLCollection object.
+// An HTMLCollection object is an 
+//array-like list (collection) of HTML elements.
+// An HTMLCollection is NOT an array!
+// An HTMLCollection may look like an array, but it is not.
+// However, you cannot use array methods like valueOf(), pop(), push(), or join() on an HTMLCollection.
+
+console.log("JavaScript HTML DOM Node Lists")
+
+// The HTML DOM NodeList Object
+// A NodeList object is a list (collection) of nodes extracted from a document.
+// A NodeList object is almost the same as an HTMLCollection object.
+// All browsers return a NodeList object for the property childNodes. 
+// Most browsers return a NodeList object for the method querySelectorAll().
+
+
+// All browsers return a NodeList object for the property childNodes. 
+// Most browsers return a NodeList object for the method querySelectorAll().
+// The elements in the NodeList can be accessed by an index number.
+// To access the second <p> node you can write:
+
+// myNodeList[1]
+// Note: The index starts at 0.
+// The length property defines the number of nodes in a node list:
+// The length property is useful when you want to loop through the nodes in a node list:
+
+// Example
+// myNodelist.length
+// The length property is useful when you want to loop through the nodes in a node list:
+
+// Example
+// Change the color of all <p> elements in a node list:
+
+// const myNodelist = document.querySelectorAll("p");
+// for (let i = 0; i < myNodelist.length; i++) {
+//   myNodelist[i].style.color = "red";
+// }
+// The Difference Between an HTMLCollection and a NodeList
+// A NodeList and an HTMLcollection is very much the same thing.
+// Both are array-like collections (lists) of nodes (elements) extracted from a document. 
+//The nodes can be accessed by index numbers. The index starts at 0.
+// Both have a length property that returns the number of elements in the list (collection).
+// An HTMLCollection is a collection of document elements.
+// A NodeList is a collection of document nodes (element nodes, attribute nodes, and text nodes).
+// HTMLCollection items can be accessed by their name, id, or index number.
+// NodeList items can only be accessed by their index number.
+// An HTMLCollection is always a live collection. 
+//Example: If you add a <li> element to a list in the DOM, 
+//the list in the HTMLCollection will also change.
+// A NodeList is most often a static collection. 
+//Example: If you add a <li> element to a list in the DOM, 
+//the list in NodeList will not change.
+// The getElementsByClassName() and getElementsByTagName() methods return a live HTMLCollection.
+// The querySelectorAll() method returns a static NodeList.
+// The childNodes property returns a live NodeList.
+
+// Not an Array!
+// A NodeList may look like an array, but it is not.
+// You can loop through a NodeList and refer to its nodes by index.
+// But, you cannot use Array methods like push(), pop(), or join() on a NodeList.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Arrow function expressions
+// An arrow function expression is a compact 
+//alternative to a traditional function expression, 
+//with some semantic differences and deliberate limitations in usage:
+
+// Arrow functions don't have their own bindings to this, arguments, or super, and 
+//should not be used as methods.
+// Arrow functions cannot be used as constructors. Calling them with new throws 
+// a TypeError. They also don't have access to the new.target keyword.
+// Arrow functions cannot use yield within their body and 
+//cannot be created as generator functions.
+
+
+// Rest parameters, default parameters, and 
+// destructuring within params are supported,
+//  and always require parentheses:
+
+// JS
+// Copy to Clipboard
+// (a, b, ...r) => expression
+// (a = 400, b = 20, c) => expression
+// ([a, b] = [10, 20]) => expression
+// ({ a, b } = { a: 10, b: 20 }) => expression
+
+// Arrow functions can be async by prefixing the expression with the async keyword.
+
+// JS
+// Copy to Clipboard
+// async param => expression
+// async (param1, param2, ...paramN) => {
+//   statements
+// }
+
+// Description
+// Let's decompose a traditional anonymous function down to the simplest 
+//arrow function step-by-step. Each step along the way is a valid arrow function.
+// Note: Traditional function expressions and arrow functions have more 
+//differences than their syntax. 
+
+
+// JS
+// Copy to Clipboard
+// Traditional anonymous function
+(function (a) {
+  return a + 100;
+});
+
+// 1. Remove the word "function" and place arrow between the argument and opening body brace
+(a) => {
+  return a + 100;
+};
+
+// 2. Remove the body braces and word "return" — the return is implied.
+(a) => a + 100;
+
+// 3. Remove the parameter parentheses
+a => a + 100;
+// However, they can only be omitted in certain cases.
+
+
+// The parentheses can only be omitted if the function has a single 
+// simple parameter. If it has multiple parameters, no parameters, 
+// or default, destructured, or rest parameters, the parentheses 
+// around the parameter list are required.
+
+// JS
+// Copy to Clipboard
+// Traditional anonymous function
+(function (a, b) {
+  return a + b + 100;
+});
+
+// Arrow function
+(a, b) => a + b + 100;
+
+const a = 4;
+const b = 2;
+
+// Traditional anonymous function (no parameters)
+(function () {
+  return a + b + 100;
+});
+
+////////////////////////////////////////////////////////////////////////////////
+is browser cache is the lcocalstorage ? 
+
+
+The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin; the stored data is saved across browser sessions.
+
+localStorage is similar to sessionStorage, except that while localStorage data has no expiration time, sessionStorage data gets cleared when the page session ends — that is, when the page is closed. (localStorage data for a document loaded in a "private browsing" or "incognito" session is cleared when the last "private" tab is closed.)
+
+
+A Storage object which can be used to access the current origin's local storage space.
+
+Exceptions
+SecurityError
+Thrown in one of the following cases:
+
+The origin is not a valid scheme/host/port tuple. This can happen if the origin uses the file: or data: schemes, for example.
+The request violates a policy decision. For example, the user has configured the browsers to prevent the page from persisting data.
+Note that if the user blocks cookies, browsers will probably interpret this as an instruction to prevent the page from persisting data.
+
+Description
+The keys and the values stored with localStorage are always in the UTF-16 string format, which uses two bytes per character. As with objects, integer keys are automatically converted to strings.
+
+localStorage data is specific to the protocol of the document. In particular, for a site loaded over HTTP (e.g., http://example.com), localStorage returns a different object than localStorage for the corresponding site loaded over HTTPS (e.g., https://example.com).
+
+For documents loaded from file: URLs (that is, files opened in the browser directly from the user's local filesystem, rather than being served from a web server) the requirements for localStorage behavior are undefined and may vary among different browsers.
+
+In all current browsers, localStorage seems to return a different object for each file: URL. In other words, each file: URL seems to have its own unique local-storage area. But there are no guarantees about that behavior, so you shouldn't rely on it because, as mentioned above, the requirements for file: URLs remain undefined. So it's possible that browsers may change their file: URL handling for localStorage at any time. In fact some browsers have changed their handling for it over time.
+
+
+// Window: sessionStorage property
+// The read-only sessionStorage property accesses 
+//a session Storage object for the current origin. 
+// sessionStorage is similar to localStorage; the 
+// difference is that while data in localStorage 
+// doesn't expire, data in sessionStorage is cleared 
+// when the page session ends.
+
+// Whenever a document is loaded in a particular tab 
+// in the browser, a unique page session gets created 
+// and assigned to that particular tab. That page session 
+// is valid only for that particular tab.
+
+// A page session lasts as long as the tab or the browser 
+// is open, and survives over page reloads and restores.
+
+// Opening a page in a new tab or window creates a new 
+// session with the value of the top-level browsing 
+// context, which differs from how session cookies work.
+// Opening multiple tabs/windows with the same URL 
+// creates sessionStorage for each tab/window.
+// Duplicating a tab copies the tab's sessionStorage 
+// into the new tab.
+// Closing a tab/window ends the session and clears 
+// objects in sessionStorage.
+// Data stored in sessionStorage is specific to 
+// the protocol of the page. In particular, data 
+// stored by a script on a site accessed with 
+// HTTP (e.g., http://example.com) is put in 
+// a different sessionStorage object from the 
+// same site accessed with HTTPS (e.g., https://example.com).
+
+// The keys and the values are always in the 
+// UTF-16 string format, which uses two bytes 
+// per character. As with objects, integer 
+// keys are automatically converted to strings.
+
+// Value
+// A Storage object which can be used to 
+// access the current origin's session storage space.
+
+// Exceptions
+// SecurityError
+// Thrown in one of the following cases:
+
+// The origin is not a valid scheme/host/port tuple. 
+// This can happen if the origin uses the file: 
+// or data: schemes, for example.
+// The request violates a policy decision. For example, 
+// the user has configured the browsers to prevent 
+// the page from persisting data.
+// Note that if the user blocks cookies, browsers 
+// will probably interpret this as an instruction 
+// to prevent the page from persisting data.
+
+///////////////////////////////////////////////////////////////////////////////
+
+// Window: self property
+
+// The Window.self read-only property returns 
+// the window itself, as a WindowProxy. It 
+// can be used with dot notation on a window 
+// object (that is, window.self) or standalone 
+// (self). The advantage of the standalone 
+// notation is that a similar notation exists 
+// for non-window contexts, such as in Web 
+// Workers. By using self, you can refer to the 
+// global scope in a way that will work not only 
+// in a window context (self will resolve to 
+// window.self) but also in a worker context 
+// (self will then resolve to 
+// WorkerGlobalScope.self).
+
+// Value
+// A WindowProxy object.
+
+// Examples
+// Uses of window.self like the following 
+// could just as well be replaced by window.
+
+// JS
+// Copy to Clipboard
+if (window.parent.frames[0] !== window.self) {
+  // this window is not the first frame in the list
+}
+// Furthermore, when executing in the 
+// active document of a browsing context, 
+// window is a reference to the current global 
+// object and thus all of the following are equivalent:
+
+// JS
+// Copy to Clipboard
+const w1 = window;
+const w2 = self;
+const w3 = window.window;
+const w4 = window.self;
+// w1, w2, w3, w4 all strictly equal, but only 
+// w2 will function in workers
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+

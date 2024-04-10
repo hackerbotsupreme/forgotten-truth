@@ -1,0 +1,2249 @@
+
+console.log("JavaScript HTML DOM Document")
+
+// The HTML DOM document object is the owner 
+// of all other objects in your web page.
+
+// The HTML DOM Document Object
+// The document object represents your web page.
+
+// If you want to access any element in an 
+// HTML page, you always start with 
+// accessing the document object.
+
+// Below are some examples of how you can use 
+// the document object to access and manipulate HTML.
+
+// Finding HTML Elements
+// Method	                                        Description
+// document.getElementById(id)	                    Find an element by element id
+// document.getElementsByTagName(name)	            Find elements by tag name
+// document.getElementsByClassName(name)	        Find elements by class name
+
+// Changing HTML Elements
+// Property	                                        Description
+// element.innerHTML =  new html content	        Change the inner HTML of an element
+// element.attribute = new value	                Change the attribute value of an HTML element
+// element.style.property = new style	            Change the style of an HTML element
+
+// Method	                                        Description
+// element.setAttribute(attribute, value)	        Change the attribute value of an HTML element
+
+// Adding and Deleting Elements
+// Method	                                        Description
+// document.createElement(element)	                Create an HTML element
+// document.removeChild(element)	                Remove an HTML element
+// document.appendChild(element)	                Add an HTML element
+// document.replaceChild(new, old)	                Replace an HTML element
+// document.write(text)	                            Write into the HTML output stream
+
+
+// Adding Events Handlers
+// Method	                                        Description
+// document.getElementById(id).onclick              // Adding event handler code to an onclick event
+// = function(){code}	
+
+// Finding HTML Objects
+// The first HTML DOM  defined 11 HTML objects, 
+// object collections, and properties. These are still valid in HTML5.
+
+// Later, in HTML DOM Level 3, 
+// more objects, collections, and properties were added.
+
+// Property	Description	DOM
+// document.anchors	                    Returns all <a> elements that have a name attribute	1
+// document.applets	                    Deprecated	1
+// document.baseURI	                    Returns the absolute base URI of the document	3
+// document.body	                    Returns the <body> element	1
+// document.cookie	                    Returns the document's cookie	1
+// document.doctype	                    Returns the document's doctype	3
+// document.documentElement	            Returns the <html> element	3
+// document.documentMode	            Returns the mode used by the browser	3
+// document.documentURI	                    Returns the URI of the document	3
+// document.domain	                    Returns the domain name of the document server	1
+// document.domConfig	                        Obsolete.	3
+// document.embeds	                    Returns all <embed> elements	3
+// document.forms	                    Returns all <form> elements	1
+// document.head	                    Returns the <head> element	3
+// document.images	                    Returns all <img> elements	1
+// document.implementation	            Returns the DOM implementation	3
+// document.inputEncoding	            Returns the document's encoding (character set)	3
+// document.lastModified	            Returns the date and time the document was updated	3
+// document.links	                    Returns all <area> and <a> elements that have a href attribute	1
+// document.readyState	                Returns the (loading) status of the document	3
+// document.referrer	                Returns the URI of the referrer (the linking document)	1
+// document.scripts	                    Returns all <script> elements	3
+// document.strictErrorChecking	        Returns if error checking is enforced	3
+// document.title	                    Returns the <title> element	1
+// document.URL	                        Returns the complete URL of the document	1
+
+
+console.log("JavaScript HTML DOM Elements")
+
+// JavaScript HTML DOM Elements
+// This page teaches you how to find 
+// and access HTML elements in an HTML page.
+
+// Finding HTML Elements
+// Often, with JavaScript, you want 
+// to manipulate HTML elements.
+// To do so, you have to find the 
+// elements first. There are several ways to do this:
+// Finding HTML elements by id
+// Finding HTML elements by tag name
+// Finding HTML elements by class name
+// Finding HTML elements by CSS selectors
+// Finding HTML elements by HTML object collections
+// Finding HTML Element by Id
+
+
+// The easiest way to find an HTML element in the DOM, 
+// is by using the element id.
+
+// This example finds the element with id="intro":
+
+// Example
+// const element = document.getElementById("intro");
+// If the element is found, the method will return 
+// the element as an object (in element).
+// If the element is not found, element will contain null.
+
+// document.anchors
+// document.body
+// document.documentElement
+// document.embeds
+// document.forms
+// document.head
+// document.images
+// document.links
+// document.scripts
+// document.title
+// Test Yourself With Exercises
+// Exercise:
+
+
+console.log("JavaScript HTML DOM - Changing HTML")
+
+// The HTML DOM allows JavaScript to change 
+// the content of HTML elements.
+
+// Changing HTML Content
+// The easiest way to modify the content of an 
+// HTML element is by using the innerHTML property.
+
+// To change the content of an HTML element, use this syntax:
+
+// document.getElementById(id).innerHTML = new HTML
+// This example changes the content of a <p> element:
+
+// Example
+            // <html>
+            // <body>
+
+            // <p id="p1">Hello World!</p>
+
+            // <script>
+            // document.getElementById("p1").innerHTML = "New text!";
+            // </script>
+
+            // // </body>
+            // // </html>
+// Example explained:
+
+// The HTML document above contains 
+// a <p> element with id="p1"
+// We use the HTML DOM to get the 
+// element with id="p1"
+// A JavaScript changes the content 
+// (innerHTML) of that element to "New text!"
+// This example changes the content 
+// of an <h1> element:
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <h1 id="id01">Old Heading</h1>
+
+            // <script>
+            // const element = document.getElementById("id01");
+            // element.innerHTML = "New Heading";
+            // </script>
+
+            // // </body>
+            // // </html>
+// Example explained:
+
+// The HTML document above contains 
+// an <h1> element with id="id01"
+// We use the HTML DOM to get the 
+// element with id="id01"
+// A JavaScript changes the content 
+// (innerHTML) of that element to "New Heading"
+// Changing the Value of an Attribute
+// To change the value of an HTML 
+// attribute, use this syntax:
+
+// document.getElementById(id).attribute = new value
+// This example changes the value 
+// of the src attribute of an <img> element:
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <img id="myImage" src="smiley.gif">
+
+            // <script>
+            // document.getElementById("myImage").src = "landscape.jpg";
+            // </script>
+
+            // </body>
+            // </html>
+// Example explained:
+
+// The HTML document above contains 
+// an <img> element with id="myImage"
+// We use the HTML DOM to get the 
+// element with id="myImage"
+// A JavaScript changes the src attribute 
+// of that element from "smiley.gif" to "landscape.jpg"
+// Dynamic HTML content
+// JavaScript can create dynamic HTML content:
+
+// Date : Fri Jan 19 2024 21:38:56 GMT+0530 (India Standard Time)
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = "Date : " + Date(); </script>
+
+            // </body>
+            // </html>
+// document.write()
+// In JavaScript, document.write() can be 
+// used to write directly to the HTML output stream:
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <p>Bla bla bla</p>
+
+            // <script>
+            // document.write(Date());
+            // </script>
+
+            // <p>Bla bla bla</p>
+
+            // </body>
+            // </html>
+// Never use document.write() after the 
+// document is loaded. It will overwrite the document.
+
+// Test Yourself With Exercises
+// Exercise:
+// Use HTML DOM to change the value 
+// of the image's src attribute.
+
+        // <img id="image" src="smiley.gif">
+
+        // <script>
+        // document.getElementById("image")
+        //  = "pic_mountain.jpg";
+        // </script>
+
+// Start the Exercise
+
+console.log("JavaScript Forms")
+
+// JavaScript Form Validation
+// HTML form validation can be done by JavaScript.
+
+// If a form field (fname) is empty, 
+// this function alerts a message, 
+//and returns false, to prevent the 
+// form from being submitted:
+
+// JavaScript Example
+            // function validateForm() {
+            //   let x = document.forms["myForm"]["fname"].value;
+            //   if (x == "") {
+            //     alert("Name must be filled out");
+            //     return false;
+            //   }
+            // }
+// The function can be called when the form is submitted:
+
+// HTML Form Example
+            // <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+            // Name: <input type="text" name="fname">
+            // <input type="submit" value="Submit">
+            // </form>
+// JavaScript Can Validate Numeric Input
+// JavaScript is often used to validate numeric input:
+
+// Please input a number between 1 and 10
+
+//  Submit
+// Automatic HTML Form Validation
+// HTML form validation can be performed automatically by the browser:
+
+// If a form field (fname) is empty, the 
+//required attribute prevents this form from being submitted:
+
+// HTML Form Example
+            // <form action="/action_page.php" method="post">
+            //   <input type="text" name="fname" required>
+            //   <input type="submit" value="Submit">
+            // </form>
+// Automatic HTML form validation does not work in Internet Explorer 9 or earlier.
+
+// Data Validation
+// Data validation is the process of ensuring 
+// that user input is clean, correct, and useful.
+
+// Typical validation tasks are:
+// has the user filled in all required fields?
+// has the user entered a valid date?
+// has the user entered text in a numeric field?
+// Most often, the purpose of data validation is to ensure correct user input.
+
+// Validation can be defined by many different 
+// methods, and deployed in many different ways.
+// Server side validation is performed by a 
+// web server, after input has been sent to the server.
+// Client side validation is performed by a 
+// web browser, before input is sent to a web server.
+
+// HTML Constraint Validation
+// HTML5 introduced a new HTML validation 
+// concept called constraint validation.
+
+// HTML constraint validation is based on:
+
+// Constraint validation HTML Input Attributes
+// Constraint validation CSS Pseudo Selectors
+// Constraint validation DOM Properties and Methods
+// Constraint Validation HTML Input Attributes
+
+
+// Attribute	                    Description
+// disabled	                        Specifies that the input element should be disabled
+// max	                            Specifies the maximum value of an input element
+// min	                            Specifies the minimum value of an input element
+// pattern	                        Specifies the value pattern of an input element
+// required	                        Specifies that the input field requires an element
+// type 	                        Specifies the type of an input element
+// For a full list, go to HTML Input Attributes.
+
+// Constraint Validation CSS Pseudo Selectors
+// Selector	                        Description
+// :disabled	                    Selects input elements with the "disabled" attribute specified
+// :invalid	                        Selects input elements with invalid values
+// :optional	                    Selects input elements with no "required" attribute specified
+// :required	                    Selects input elements with the "required" attribute specified
+// :valid	                        Selects input elements with valid values
+// For a full list, go to CSS Pseudo Classes.
+
+console.log("JavaScript HTML DOM - Changing CSS")
+
+// The HTML DOM allows JavaScript to 
+// change the style of HTML elements.
+// document.getElementById(id).style.property = new style
+// Changing HTML Style
+// To change the style of an HTML element, use this syntax:
+
+// document.getElementById(id).style.property = new style
+// The following example changes the style of a <p> element:
+
+// Example
+            // <html>
+            // <body>
+
+            // <p id="p2">Hello World!</p>
+
+            // <script>
+            // document.getElementById("p2").style.color = "blue";
+            // </script>
+
+            // </body>
+            // </html>
+
+// Using Events
+// The HTML DOM allows you to execute 
+// code when an event occurs.
+// Events are generated by the browser 
+// when "things happen" to HTML elements:
+// An element is clicked on
+// The page has loaded
+// Input fields are changed
+// You will learn more about events in 
+// the next chapter of this tutorial.
+
+// This example changes the style of the
+//  HTML element with id="id1", when the 
+// user clicks a button:
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <h1 id="id1">My Heading 1</h1>
+
+            // <button type="button"
+            // onclick="document.getElementById('id1').style.color = 'red'">
+            // Click Me!</button>
+
+            // </body>
+            // </html>
+// More Examples
+// Visibility How to make an element invisible. 
+// Do you want to show the element or not?
+
+// HTML DOM Style Object Reference
+// For all HTML DOM style properties, look at 
+// our complete HTML DOM Style Object Reference.
+
+// Test Yourself With Exercises
+// Exercise:
+// Change the text color of the <p> element to "red".
+
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo")
+            //  = "red";
+            // </script>
+
+// Start the Exercise
+
+console.log("JavaScript HTML DOM Animation")
+
+// Learn to create HTML animations using JavaScript.
+
+// To demonstrate how to create HTML 
+// animations with JavaScript, we 
+// will use a simple web page:
+// A Basic Web Page
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <h1>My First JavaScript Animation</h1>
+
+            // <div id="animation">My animation will go here</div>
+
+            // </body>
+            // </html>
+// Create an Animation Container
+// All animations should be relative to a container element.
+
+// Example
+            // <div id ="container">
+            //   <div id ="animate">My animation will go here</div>
+            // </div>
+// Style the Elements
+// The container element should be 
+// created with style = "position: relative".
+
+// The animation element should be 
+// created with style = "position: absolute".
+
+// Example
+            // #container {
+            //   width: 400px;
+            //   height: 400px;
+            //   position: relative;
+            //   background: yellow;
+            // }
+            // #animate {
+            //   width: 50px;
+            //   height: 50px;
+            //   position: absolute;
+            //   background: red;
+            // }
+// Animation Code
+// JavaScript animations are done by 
+// programming gradual changes in an element's style.
+// The changes are called by a timer. When 
+// the timer interval is small, the animation looks continuous.
+
+// The basic code is:
+
+// Example
+            // id = setInterval(frame, 5);
+
+            // function frame() {
+            //   if (/* test for finished */) {
+            //     clearInterval(id);
+            //   } else {
+            //     /* code to change the element style */ 
+            //   }
+            // }
+// Create the Full Animation Using JavaScript
+// Example
+            // function myMove() {
+            //   let id = null;
+            //   const elem = document.getElementById("animate");
+            //   let pos = 0;
+            //   clearInterval(id);
+            //   id = setInterval(frame, 5);
+            //   function frame() {
+            //     if (pos == 350) {
+            //       clearInterval(id);
+            //     } else {
+            //       pos++;
+            //       elem.style.top = pos + 'px';
+            //       elem.style.left = pos + 'px';
+            //     }
+            //   }
+            // }
+
+console.log("JavaScript HTML DOM Events")
+// HTML DOM allows JavaScript to react to HTML events:
+
+// Mouse Over MeClick Me
+// Reacting to Events
+// A JavaScript can be executed when an 
+// event occurs, like when a user clicks on an HTML element.
+
+// To execute code when a user clicks 
+// on an element, add JavaScript code 
+// to an HTML event attribute:
+
+// onclick=JavaScript
+
+// Examples of HTML events:
+// When a user clicks the mouse
+// When a web page has loaded
+// When an image has been loaded
+// When the mouse moves over an element
+// When an input field is changed
+// When an HTML form is submitted
+// When a user strokes a key
+// In this example, the content of the 
+// <h1> element is changed when a user clicks on it:
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <h1 onclick="this.innerHTML = 'Ooops!'">Click on this text!</h1>
+
+            // </body>
+            // </html>
+// In this example, a function is called from the event handler:
+
+// Example
+            // <!DOCTYPE html>
+            // <html>
+            // <body>
+
+            // <h1 onclick="changeText(this)">Click on this text!</h1>
+
+            // <script>
+            // function changeText(id) {
+            //   id.innerHTML = "Ooops!";
+            // }
+            // </script>
+
+            // </body>
+            // </html>
+// HTML Event Attributes
+// To assign events to HTML elements 
+// you can use event attributes.
+
+// Example
+// Assign an onclick event to a button element:
+
+            // <button onclick="displayDate()">Try it</button>
+// In the example above, a function named 
+// displayDate will be executed when 
+// the button is clicked.
+
+// Assign Events Using the HTML DOM
+// The HTML DOM allows you to assign 
+// events to HTML elements using JavaScript:
+
+// Example
+// Assign an onclick event to a button element:
+
+            // <script>
+            // document.getElementById("myBtn").onclick = displayDate;
+            // </script>
+// In the example above, a function named 
+// displayDate is assigned to an HTML 
+// element with the id="myBtn".
+
+// The function will be executed when the button is clicked.
+
+// The onload and onunload Events
+// The onload and onunload events are triggered when 
+//the user enters or leaves the page.
+// The onload event can be used to check 
+// the visitor's browser type 
+//and browser version, and load the proper 
+// version of the web page based on the information.
+
+// The onload and onunload events can be used to deal with cookies.
+
+// Example
+// <body onload="checkCookies()">
+// The oninput Event
+// The oninput event is often to some 
+// action while the user input data.
+
+// Below is an example of how to use the 
+// oninput to change the content of an input field.
+
+// Example
+            // <input type="text" id="fname" oninput="upperCase()">
+// The onchange Event
+// The onchange event is often used in 
+// combination with validation of input fields.
+
+// Below is an example of how to use the onchange. 
+// The upperCase() function will be called when 
+// a user changes the content of an input field.
+
+// Example
+            // <input type="text" id="fname" onchange="upperCase()">
+// The onmouseover and onmouseout Events
+// The onmouseover and onmouseout events can 
+// be used to trigger a function when the user 
+// mouses over, or out of, an HTML element:
+
+// Mouse Over Me
+
+// The onmousedown, onmouseup and onclick Events
+// The onmousedown, onmouseup, and onclick events 
+// are all parts of a mouse-click. First when a 
+// mouse-button is clicked, the onmousedown event 
+// is triggered, then, when the mouse-button is 
+// released, the onmouseup event is triggered, 
+// finally, when the mouse-click is completed, 
+// the onclick event is triggered.
+
+// Click Me
+
+// More Examples
+// onmousedown and onmouseup
+// Change an image when a user holds 
+// down the mouse button.
+
+// onload
+// Display an alert box when the page 
+// has finished loading.
+
+// onfocus
+// Change the background-color of an input 
+// field when it gets focus.
+
+// Mouse Events
+// Change the color of an element when 
+// the cursor moves over it.
+
+// HTML DOM Event Object Reference
+// For a list of all HTML DOM events, look at 
+// our complete HTML DOM Event Object Reference.
+
+
+console.log("JavaScript HTML DOM EventListener")
+
+// The addEventListener() method
+// Example
+// Add an event listener that fires when
+//  a user clicks a button:
+
+            // document.getElementById("myBtn").addEventListener("click", displayDate);
+// The addEventListener() method attaches 
+// an event handler to the specified element.
+
+// The addEventListener() method attaches an 
+// event handler to an element without 
+// overwriting existing event handlers.
+
+// You can add many event handlers to one element.
+
+// You can add many event handlers of the 
+// same type to one element, i.e two "click" events.
+
+// You can add event listeners to any DOM 
+// object not only HTML elements. i.e the window object.
+
+// The addEventListener() method makes it 
+// easier to control how the event reacts to bubbling.
+
+// When using the addEventListener() method, 
+// the JavaScript is separated from the HTML 
+// markup, for better readability and allows 
+// you to add event listeners even when you 
+// do not control the HTML markup.
+
+// You can easily remove an event listener 
+// by using the removeEventListener() method.
+
+// Syntax
+            // element.addEventListener(event, function, useCapture);
+// The first parameter is the type of the 
+// event (like "click" or "mousedown" or 
+// any other HTML DOM Event.)
+
+// The second parameter is the function 
+// we want to call when the event occurs.
+
+// The third parameter is a boolean value 
+// specifying whether to use event bubbling 
+// or event capturing. This parameter is optional.
+
+// Note that you don't use the "on" prefix 
+// for the event; use "click" instead of "onclick".
+
+// Add an Event Handler to an Element
+// Example
+// Alert "Hello World!" when the user 
+// clicks on an element:
+
+            // element.addEventListener("click", function(){ alert("Hello World!"); });
+// You can also refer to an external "named" function:
+
+// Example
+// Alert "Hello World!" when the user clicks on an element:
+
+            // element.addEventListener("click", myFunction);
+
+            // function myFunction() {
+            //   alert ("Hello World!");
+            // }
+// Add Many Event Handlers to the Same Element
+// The addEventListener() method allows you to 
+// add many events to the same element, 
+// without overwriting existing events:
+
+// Example
+            // element.addEventListener("click", myFunction);
+            // element.addEventListener("click", mySecondFunction);
+// You can add events of different 
+// types to the same element:
+
+// Example
+            // element.addEventListener("mouseover", myFunction);
+            // element.addEventListener("click", mySecondFunction);
+            // element.addEventListener("mouseout", myThirdFunction);
+// Add an Event Handler to the window Object
+// The addEventListener() method allows you to 
+// add event listeners on any HTML DOM object 
+// such as HTML elements, the HTML document, 
+// the window object, or other objects that 
+// support events, like the xmlHttpRequest object.
+
+// Example
+// Add an event listener that fires when 
+// a user resizes the window:
+
+            // window.addEventListener("resize", function(){
+            //   document.getElementById("demo").innerHTML = sometext;
+            // });
+// Passing Parameters
+// When passing parameter values, use an 
+// "anonymous function" that calls the 
+// specified function with the parameters:
+
+// Example
+            // element.addEventListener("click", function(){ myFunction(p1, p2); });
+
+// Event Bubbling or Event Capturing?
+// There are two ways of event propagation in the HTML DOM, 
+//bubbling and capturing.
+
+// Event propagation is a way of defining the element 
+//order when an event occurs. If you 
+// have a <p> element inside a <div> element, 
+//and the user clicks on the <p> element, 
+// which element's "click" event 
+// should be handled first?
+// In bubbling the inner most element's 
+// event is handled first and 
+//then the outer: the <p> element's click 
+// event is handled first, then the <div> 
+// element's click event.
+
+// In capturing the outer most element's 
+// event is handled first 
+//and then the inner: the <div> element's 
+// click event will be handled first, 
+//then the <p> element's click event.
+
+// With the addEventListener() method you 
+// can specify the propagation 
+//type by using the "useCapture" parameter:
+
+            // addEventListener(event, function, useCapture);
+// The default value is false, which will use the bubbling propagation, 
+//when the value is set to true, the event uses the capturing propagation.
+
+// Example
+            // document.getElementById("myP").addEventListener("click", myFunction, true);
+            // document.getElementById("myDiv").addEventListener("click", myFunction, true);
+// The removeEventListener() method
+// The removeEventListener() method removes 
+// event handlers that have been attached 
+// with the addEventListener() method:
+
+// Example
+            // element.removeEventListener("mousemove", myFunction);
+// HTML DOM Event Object Reference
+// For a list of all HTML DOM events, 
+// look at our complete HTML DOM Event Object Reference.
+
+// Test Yourself With Exercises
+// Exercise:
+// Use the eventListener to assign an 
+// onclick event to the <button> element.
+
+// <button id="demo"></button>
+
+            // <script>
+            // document.getElementById("demo").
+            // ("
+            // ", myFunction);
+            // </script>
+
+// Start the Exercise
+
+console.log("JavaScript HTML DOM Navigation")
+
+// With the HTML DOM, you can navigate 
+// the node tree using node relationships.
+
+// DOM Nodes
+// According to the W3C HTML DOM standard, 
+// everything in an HTML document is a node:
+
+
+// The entire document is a document node
+// Every HTML element is an element node
+// The text inside HTML elements are text nodes
+// Every HTML attribute is an attribute node (deprecated)
+// All comments are comment nodes
+
+// DOM HTML tree
+// With the HTML DOM, all nodes in the 
+// node tree can be accessed by JavaScript.
+
+// 
+// New nodes can be created, and all 
+// nodes can be modified or deleted.
+
+// Node Relationships
+// The nodes in the node tree have 
+// a hierarchical relationship to each other.
+
+// The terms parent, child, and sibling 
+// are used to describe the relationships.
+
+// In a node tree, the top node is 
+// called the root (or root node)
+// Every node has exactly one parent, 
+// except the root (which has no parent)
+
+// A node can have a number of children
+// Siblings (brothers or sisters) are nodes with the same parent
+            // <html>
+
+            //   <head>
+            //     <title>DOM Tutorial</title>
+            //   </head>
+
+            //   <body>
+            //     <h1>DOM Lesson one</h1>
+            //     <p>Hello world!</p>
+            //   </body>
+
+            // </html>
+// Node tree
+// From the HTML above you can read:
+
+// <html> is the root node
+// <html> has no parents
+// <html> is the parent of <head> and <body>
+// <head> is the first child of <html>
+// <body> is the last child of <html>
+// and:
+
+// <head> has one child: <title>
+// <title> has one child (a text node): "DOM Tutorial"
+// <body> has two children: <h1> and <p>
+// <h1> has one child: "DOM Lesson one"
+// <p> has one child: "Hello world!"
+// <h1> and <p> are siblings
+// Navigating Between Nodes
+
+// You can use the following node properties 
+// to navigate between nodes with JavaScript:
+// parentNode
+// childNodes[nodenumber]
+// firstChild
+// lastChild
+// nextSibling
+// previousSibling
+// Child Nodes and Node Values
+// A common error in DOM processing is to expect an element node to contain text.
+
+// Example:
+            // <title id="demo">DOM Tutorial</title>
+// The element node <title> (in the example above) does not contain text.
+
+// It contains a text node with the value "DOM Tutorial".
+
+// The value of the text node can be accessed by the node's innerHTML property:
+
+            // myTitle = document.getElementById("demo").innerHTML;
+// Accessing the innerHTML property is the same as accessing the nodeValue of the first child:
+
+            // myTitle = document.getElementById("demo").firstChild.nodeValue;
+// Accessing the first child can also be done like this:
+
+            // myTitle = document.getElementById("demo").childNodes[0].nodeValue;
+// All the (3) following examples retrieves the text of an <h1> element and copies it into a <p> element:
+
+// Example
+            // <html>
+            // <body>
+
+            // <h1 id="id01">My First Page</h1>
+            // <p id="id02"></p>
+
+            // <script>
+            // document.getElementById("id02").innerHTML = document.getElementById("id01").innerHTML;
+            // </script>
+
+            // </body>
+            // </html>
+            // Example
+            // <html>
+            // <body>
+
+            // <h1 id="id01">My First Page</h1>
+            // <p id="id02"></p>
+
+            // <script>
+            // document.getElementById("id02").innerHTML = document.getElementById("id01").firstChild.nodeValue;
+            // </script>
+
+            // </body>
+            // </html>
+// Example
+            // <html>
+            // <body>
+
+            // <h1 id="id01">My First Page</h1>
+            // <p id="id02">Hello!</p>
+
+            // <script>
+            // document.getElementById("id02").innerHTML = document.getElementById("id01").childNodes[0].nodeValue;
+            // </script>
+
+            // </body>
+            // </html>
+// InnerHTML
+// In this tutorial we use the innerHTML 
+// property to retrieve the content of an HTML element.
+
+// However, learning the other methods 
+// above is useful for understanding the 
+// tree structure and the navigation of the DOM.
+
+// DOM Root Nodes
+// There are two special properties that 
+// allow access to the full document:
+
+// document.body - The body of the document
+// document.documentElement - The full document
+// Example
+            // <html>
+            // <body>
+
+            // <h2>JavaScript HTMLDOM</h2>
+            // <p>Displaying document.body</p>
+
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = document.body.innerHTML;
+            // </script>
+
+            // </body>
+            // </html>
+// Example
+            // <html>
+            // <body>
+
+            // <h2>JavaScript HTMLDOM</h2>
+            // <p>Displaying document.documentElement</p>
+
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = document.documentElement.innerHTML;
+            // </script>
+
+            // </body>
+            // </html>
+// The nodeName Property
+// The nodeName property specifies the name of a node.
+
+// nodeName is read-only
+// nodeName of an element node is the same as the tag name
+// nodeName of an attribute node is the attribute name
+// nodeName of a text node is always #text
+// nodeName of the document node is always #document
+// Example
+            // <h1 id="id01">My First Page</h1>
+            // <p id="id02"></p>
+
+            // <script>
+            // document.getElementById("id02").innerHTML = document.getElementById("id01").nodeName;
+            // </script>
+// Note: nodeName always contains the uppercase tag name of an HTML element.
+
+// The nodeValue Property
+// The nodeValue property specifies 
+// the value of a node.
+
+// nodeValue for element nodes is null
+// nodeValue for text nodes is the text itself
+// nodeValue for attribute nodes is the attribute value
+// The nodeType Property
+// The nodeType property is read only. 
+// It returns the type of a node.
+
+// Example
+            // <h1 id="id01">My First Page</h1>
+            // <p id="id02"></p>
+
+            // <script>
+            // document.getElementById("id02").innerHTML = document.getElementById("id01").nodeType;
+            // </script>
+
+// The most important nodeType properties are:
+// Node	Type	            Example
+// ELEMENT_NODE	            1 <h1 class="heading">W3Schools</h1>
+// ATTRIBUTE_NODE	        2	 class = "heading" (deprecated)
+// TEXT_NODE	            3	W3Schools
+// COMMENT_NODE	            8	<!-- This is a comment -->
+// DOCUMENT_NODE	        9	The HTML document itself (the parent of <html>)
+// DOCUMENT_TYPE_NODE	    10	<!Doctype html></html>
+
+
+console.log("JavaScript HTML DOM Elements (Nodes)")
+// Adding and Removing Nodes (HTML Elements)
+
+// Creating New HTML Elements (Nodes)
+// To add a new element to the HTML DOM, 
+// you must create the 
+//element (element node) first, and 
+// then append it to an existing element.
+
+//  Example
+            // <div id="div1">
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+
+            // <script>
+            // const para = document.createElement("p");
+            // const node = document.createTextNode("This is new.");
+            // para.appendChild(node);
+
+            // const element = document.getElementById("div1");
+            // element.appendChild(para);
+            // </script>
+// Example Explained 
+// This code creates a new <p> element:
+
+            // const para = document.createElement("p");
+// To add text to the <p> element, you must create a text node first. This code creates a text node:
+
+            // const node = document.createTextNode("This is a new paragraph.");
+// Then you must append the text node to the <p> element:
+
+            // para.appendChild(node);
+// Finally you must append the new element to an existing element.
+
+// This code finds an existing element:
+
+            // const element = document.getElementById("div1");
+// This code appends the new element to the existing element:
+
+            // element.appendChild(para);
+// Creating new HTML Elements - insertBefore()
+// The appendChild() method in the previous example, 
+//appended the new element as the last child of the parent.
+
+// If you don't want that you can use the insertBefore() method:
+
+// Example
+            // <div id="div1">
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+
+            // <script>
+            // const para = document.createElement("p");
+            // const node = document.createTextNode("This is new.");
+            // para.appendChild(node);
+
+            // const element = document.getElementById("div1");
+            // const child = document.getElementById("p1");
+            // element.insertBefore(para, child);
+            // </script>
+// Removing Existing HTML Elements
+// To remove an HTML element, use the remove() method:
+
+// Example
+            // <div>
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+
+            // <script>
+            // const elmnt = document.getElementById("p1"); elmnt.remove();
+            // </script>
+// Example Explained 
+// The HTML document contains a <div> 
+// element with two child nodes (two <p> elements):
+
+            // <div>
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+// Find the element you want to remove:
+
+            // const elmnt = document.getElementById("p1");
+// Then execute the remove() method on that element:
+
+            // elmnt.remove();
+// The remove() method does not work in older browsers, see the example below on how to use removeChild() instead.
+
+// Removing a Child Node
+// For browsers that does not support the remove() method, you have to find the parent node to remove an element:
+
+// Example
+            // <div id="div1">
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+
+            // <script>
+            // const parent = document.getElementById("div1");
+            // const child = document.getElementById("p1");
+            // parent.removeChild(child);
+            // </script>
+// Example Explained 
+// This HTML document contains a <div> 
+// element with two child nodes (two <p> elements):
+
+            // <div id="div1">
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+// Find the element with id="div1":
+
+            // const parent = document.getElementById("div1");
+// Find the <p> element with id="p1":
+
+            // const child = document.getElementById("p1");
+// Remove the child from the parent:
+
+            // parent.removeChild(child);
+// Here is a common workaround: Find the child you want to remove, 
+//and use its parentNode property to find the parent:
+
+            // const child = document.getElementById("p1");
+            // child.parentNode.removeChild(child);
+// Replacing HTML Elements 
+// To replace an element to the HTML DOM, use the replaceChild() method:
+
+// Example
+            // <div id="div1">
+            //   <p id="p1">This is a paragraph.</p>
+            //   <p id="p2">This is another paragraph.</p>
+            // </div>
+
+            // <script>
+            // const para = document.createElement("p");
+            // const node = document.createTextNode("This is new.");
+            // para.appendChild(node);
+
+            // const parent = document.getElementById("div1");
+            // const child = document.getElementById("p1");
+            // parent.replaceChild(para, child);
+            // </script>
+
+console.log("JavaScript HTML DOM Collections")
+
+// The HTMLCollection Object
+// The getElementsByTagName() method 
+// returns an HTMLCollection object.
+// An HTMLCollection object is an 
+//array-like list (collection) of HTML elements.
+// The following code selects all <p> elements in a document:
+
+// Example
+// const myCollection = document.getElementsByTagName("p");
+// The elements in the collection can be accessed by an index number.
+
+// To access the second <p> element you can write:
+
+// myCollection[1]
+// Note: The index starts at 0.
+
+// HTML HTMLCollection Length
+// The length property defines the number 
+// of elements in an HTMLCollection:
+
+// Example
+// myCollection.length
+// The length property is useful when you want 
+// to loop through the elements in a collection:
+
+// Example
+// Change the text color of all <p> elements:
+
+            // const myCollection = document.getElementsByTagName("p");
+            // for (let i = 0; i < myCollection.length; i++) {
+            //   myCollection[i].style.color = "red";
+            // }
+// An HTMLCollection is NOT an array!
+// An HTMLCollection may look like an array, 
+// but it is not.
+// However, you cannot use array methods like 
+// valueOf(), pop(), push(), or join() on an HTMLCollection.
+// You can loop through the list and refer 
+// to the elements with a number (just like an array).
+
+
+
+console.log("JavaScript HTML DOM Node Lists")
+
+// The HTML DOM NodeList Object
+// A NodeList object is a list (collection) 
+// of nodes extracted from a document.
+// A NodeList object is almost the same 
+// as an HTMLCollection object.
+
+// Some (older) browsers return a NodeList 
+// object instead of an HTMLCollection for 
+// methods like getElementsByClassName().
+
+// All browsers return a NodeList object 
+// for the property childNodes. 
+// Most browsers return a NodeList object 
+// for the method querySelectorAll().
+
+// The following code selects all <p> nodes in a document:
+
+// Example
+            // const myNodeList = document.querySelectorAll("p");
+// The elements in the NodeList can be accessed by an index number.
+
+// To access the second <p> node you can write:
+
+// myNodeList[1]
+// Note: The index starts at 0.
+
+// HTML DOM Node List Length
+// The length property defines the number 
+// of nodes in a node list:
+
+// Example
+// myNodelist.length
+// The length property is useful when you 
+// want to loop through the nodes in a node list:
+
+// Example
+// Change the color of all <p> elements in a node list:
+
+            // const myNodelist = document.querySelectorAll("p");
+            // for (let i = 0; i < myNodelist.length; i++) {
+            //   myNodelist[i].style.color = "red";
+            // }
+// The Difference Between an HTMLCollection and a NodeList
+// A NodeList and an HTMLcollection is very much the same thing.
+// Both are array-like collections (lists) of 
+// nodes (elements) extracted from a document. 
+//The nodes can be accessed by index numbers. 
+// The index starts at 0.
+// Both have a length property that returns 
+// the number of elements in the list (collection).
+// An HTMLCollection is a collection of 
+// document elements.
+// A NodeList is a collection of document 
+// nodes (element nodes, attribute nodes,
+//  and text nodes).
+// HTMLCollection items can be accessed by 
+// their name, id, or index number.
+// NodeList items can only be accessed 
+// by their index number.
+// An HTMLCollection is always a live collection. 
+//Example: If you add a <li> element to a list in the DOM, 
+//the list in the HTMLCollection will also change.
+// A NodeList is most often a static collection. 
+//Example: If you add a <li> element to a list in the DOM, 
+//the list in NodeList will not change.
+// The getElementsByClassName() and 
+// getElementsByTagName() methods return a live HTMLCollection.
+// The querySelectorAll() method returns a static NodeList.
+// The childNodes property returns a live NodeList.
+
+// Not an Array!
+// A NodeList may look like an array, but it is not.
+// You can loop through a NodeList and refer to its nodes by index.
+// But, you cannot use Array methods 
+// like push(), pop(), or join() on a NodeList.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+console.log("JavaScript Window - The Browser Object Model")
+
+// The Browser Object Model (BOM) 
+// allows JavaScript to "talk to" the browser.
+
+// The Browser Object Model (BOM)
+// There are no official standards 
+// for the Browser Object Model (BOM).
+
+// Since modern browsers have implemented (almost) the 
+// same methods and properties for 
+// JavaScript interactivity, 
+// it is often referred to, as 
+// methods and properties of the BOM.
+
+// The Window Object
+// The window object is supported 
+// by all browsers. 
+// It represents the browser's window.
+// All global JavaScript objects, 
+// functions, and 
+// variables automatically become 
+// members of the window object.
+// Global variables are properties 
+// of the window object.
+// Global function are methods 
+// of the window object.
+
+// Even the document object (of 
+// the HTML DOM) is a property 
+// of the window object:
+
+window.document.getElementById("header");
+// is the same as:
+
+document.getElementById("header");
+// Window Size
+// Two properties can be used to 
+// determine the size of the browser window.
+
+// Both properties return the sizes in pixels:
+
+// window.innerHeight - the inner 
+// height of the browser window (in pixels)
+// window.innerWidth - the inner 
+// width of the browser window (in pixels)
+// The browser window (the browser 
+// viewport) is NOT including toolbars and scrollbars.
+
+// Example
+let w = window.innerWidth;
+let h = window.innerHeight;
+// Other Window Methods
+// Some other methods:
+// window.innerWidth , window.innerHeight 
+// window.open() - open a new window
+// window.close() - close the current window
+// window.moveTo() - move the current window
+// window.resizeTo() - resize the current window
+
+
+console.log("JavaScript Window Screen")
+
+// The window.screen object contains 
+// information about the user's screen.
+
+// Window Screen
+// The window.screen object can be 
+// written without the window prefix.
+
+// Properties:
+
+screen.width
+screen.height
+screen.availWidth
+screen.availHeight
+screen.colorDepth
+screen.pixelDepth
+// Window Screen Width
+// The screen.width property returns 
+// the width of the visitor's screen in pixels.
+
+// Example
+// Display the width of the screen in pixels:
+
+document.getElementById("demo").innerHTML =
+"Screen Width: " + screen.width;
+// Result will be:
+
+// Screen Width: 1536
+// Window Screen Height
+// The screen.height property returns 
+// the height of the visitor's screen in pixels.
+
+// Example
+// Display the height of the 
+// screen in pixels:
+
+document.getElementById("demo").innerHTML =
+"Screen Height: " + screen.height;
+// Result will be:
+
+// Screen Height: 864
+// Window Screen Available Width
+// The screen.availWidth property returns 
+// the width of the visitor's screen, 
+// in pixels, minus interface features 
+// like the Windows Taskbar.
+
+// Example
+// Display the available width of the screen in pixels:
+
+document.getElementById("demo").innerHTML =
+"Available Screen Width: " + screen.availWidth;
+// Result will be:
+
+// Available Screen Width: 1536
+// Window Screen Available Height
+// The screen.availHeight property 
+// returns the height of the visitor's 
+// screen, in pixels, minus interface 
+// features like the Windows Taskbar.
+
+// Example
+// Display the available height of the screen in pixels:
+
+document.getElementById("demo").innerHTML =
+"Available Screen Height: " + screen.availHeight;
+// Result will be:
+
+// Available Screen Height: 816
+// Window Screen Color Depth
+// The screen.colorDepth property 
+// returns the number of bits used 
+// to display one color.
+
+// All modern computers use 24 bit or 32 bit hardware for color resolution:
+
+// 24 bits =      16,777,216 different "True Colors"
+// 32 bits = 4,294,967,296 different "Deep Colors"
+// Older computers used 16 bits: 65,536 different "High Colors" resolution.
+
+// Very old computers, and old cell 
+// phones used 8 bits: 256 different "VGA colors".
+
+// Example
+// Display the color depth of the screen in bits:
+
+document.getElementById("demo").innerHTML =
+"Screen Color Depth: " + screen.colorDepth;
+// Result will be:
+
+// Screen Color Depth: 24
+// The #rrggbb (rgb) values used in HTML represents 
+// "True Colors" (16,777,216 different colors)
+
+// Window Screen Pixel Depth
+// The screen.pixelDepth property 
+// returns the pixel depth of the screen.
+
+// Example
+// Display the pixel depth of the screen in bits:
+
+document.getElementById("demo").innerHTML =
+"Screen Pixel Depth: " + screen.pixelDepth;
+// Result will be:
+
+// Screen Pixel Depth: 24
+// For modern computers, Color Depth and Pixel Depth are equal.
+
+
+console.log("JavaScript Window Location")
+
+// The window.location/location  object can be used to get the 
+// current page address (URL) and to redirect the browser 
+// to a new page.
+
+// Window Location
+// The window.location object can 
+// be written without the window prefix.
+
+// Some examples:
+
+// window.location.href returns the 
+// href (URL) of the current page
+// window.location.hostname returns 
+// the domain name of the web host
+// window.location.pathname returns 
+// the path and filename of the current page
+// window.location.protocol returns 
+// the web protocol used (http: or https:)
+// window.location.assign() loads a new document
+// Window Location Href
+// The window.location.href property 
+// returns the URL of the current page.
+
+// Example
+// Display the href (URL) of the current page:
+
+document.getElementById("demo").innerHTML =
+"Page location is " + window.location.href;
+// Result is:
+
+// Page location is https://www.w3schools.com/js/js_window_location.asp
+// Window Location Hostname
+// The window.location.hostname property 
+// returns the name of the internet host 
+// (of the current page).
+
+// Example
+// Display the name of the host:
+
+document.getElementById("demo").innerHTML =
+"Page hostname is " + window.location.hostname;
+// Result is:
+
+// Page hostname is www.w3schools.com
+
+// Window Location Pathname
+// The window.location.pathname property 
+// returns the pathname of the current page.
+
+// Example
+// Display the path name of the current URL:
+
+document.getElementById("demo").innerHTML =
+"Page path is " + window.location.pathname;
+// Result is:
+
+// Page path is /js/js_window_location.asp
+
+// Window Location Protocol
+// The window.location.protocol property 
+// returns the web protocol of the page.
+
+// Example
+// Display the web protocol:
+
+document.getElementById("demo").innerHTML =
+"Page protocol is " + window.location.protocol;
+// Result is:
+
+// Page protocol is https:
+// Window Location Port
+// The window.location.port property returns the number of 
+// the internet host port (of the current page).
+
+// Example
+// Display the name of the host:
+
+document.getElementById("demo").innerHTML =
+"Port number is " + window.location.port;
+// Result is:
+
+// Port number is
+// Most browsers will not display default port numbers 
+// (80 for http and 443 for https)
+
+// Window Location Assign
+// The window.location.assign() method loads a new document.
+
+// Example
+// Load a new document:
+
+// <html>
+// <head>
+// <script>
+// function newDoc() {
+//   window.location.assign("https://www.w3schools.com")
+// }
+// </script>
+// </head>
+// <body>
+
+// <input type="button" value="Load new document" onclick="newDoc()">
+
+// </body>
+// </html>
+
+
+console.log("JavaScript Window History")
+
+// The window.history object contains the browsers history.
+// Window History
+// The window.history object can be 
+// written without the window prefix.
+// To protect the privacy of the users,
+//  there are limitations 
+// to how JavaScript can access this object.
+
+// Some methods:
+// history.back() - same as clicking back in the browser
+// history.forward() - same as clicking forward in the browser
+// Window History Back
+// The history.back() method loads the previous URL in the history list.
+// This is the same as clicking the Back button in the browser.
+// Example
+// Create a back button on a page:
+
+            // <html>
+            // <head>
+            // <script>
+            // function goBack() {
+            //   window.history.back()
+            // }
+            // </script>
+            // </head>
+            // <body>
+
+            // <input type="button" value="Back" onclick="goBack()">
+
+            // </body>
+            // </html>
+// The output of the code above will be:
+////////////
+// Window History Forward
+// The history.forward() method loads 
+// the next URL in the history list.
+
+// This is the same as clicking 
+// the Forward button in the browser.
+
+// Example
+// Create a forward button on a page:
+
+            // <html>
+            // <head>
+            // <script>
+            // function goForward() {
+            //   window.history.forward()
+            // }
+            // </script>
+            // </head>
+            // <body>
+
+            // <input type="button" value="Forward" onclick="goForward()">
+
+            // </body>
+            // </html>
+// The output of the code above will be:
+
+
+console.log("JavaScript Window Navigator")
+
+// The window.navigator object contains 
+// information about the visitor's browser.
+
+// Window Navigator
+// The window.navigator object can 
+// be written without the window prefix.
+
+// Some examples:
+// navigator.cookieEnabled - (Browser Cookies) 
+// The cookieEnabled property returns true 
+// if cookies are enabled, otherwise false
+// navigator.appCodeName
+// navigator.platform
+// 
+
+
+
+//  navigator.cookieEnabled:
+// Example
+{/* <p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+"cookiesEnabled is " + navigator.cookieEnabled;
+</script> */}
+// Browser Application Name
+// The appName property returns 
+// the application name of the browser:
+
+// Example
+{/* <p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+"navigator.appName is " + navigator.appName;
+</script> */}
+
+// Warning
+// This property is removed (deprecated)
+//  in the latest web standard.
+// Most browsers (IE11, Chrome, Firefox, Safari) returns Netscape as appName.
+
+// Browser Application Code Name
+// The appCodeName property returns the application code name of the browser:
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML =
+            // "navigator.appCodeName is " + navigator.appCodeName;
+            // </script>
+// Warning
+// This property is removed (deprecated)
+//  in the latest web standard.
+// Most browsers (IE11, Chrome, Firefox, Safari, Opera) returns Mozilla as appCodeName.
+
+// The Browser Engine
+// The product property returns the 
+// product name of the browser engine:
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML =
+            // "navigator.product is " + navigator.product;
+            // </script>
+// Warning
+// This property is removed (deprecated)
+//  in the latest web standard.
+// Most browsers returns Gecko as product.
+
+// The Browser Version
+// The appVersion property returns version
+//  information about the browser:
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = navigator.appVersion;
+            // </script>
+// The Browser Agent
+// The userAgent property returns the 
+// user-agent header sent by the 
+// browser to the server:
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = navigator.userAgent;
+            // </script>
+// Warning
+// The information from the navigator 
+// object can often be misleading.
+
+// The navigator object should not be 
+// used to detect browser versions because:
+
+// Different browsers can use the same name
+// The navigator data can be changed 
+// by the browser owner
+// Some browsers misidentify themselves 
+// to bypass site tests
+// Browsers cannot report new operating 
+// systems, released later than the browser
+
+// The Browser Platform
+// The platform property returns the 
+// browser platform (operating system):
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = navigator.platform;
+            // </script>
+// The Browser Language
+// The language property returns the browser's language:
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = navigator.language;
+            // </script>
+// Is The Browser Online?
+// The onLine property returns true if the browser is online:
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = navigator.onLine;
+            // </script>
+// Is Java Enabled?
+// The javaEnabled() method returns true if Java is enabled:
+
+// Example
+            // <p id="demo"></p>
+
+            // <script>
+            // document.getElementById("demo").innerHTML = navigator.javaEnabled();
+            // </script>
+
+
+console.log("JavaScript Popup Boxes")
+// JavaScript has three kind of popup boxes: 
+// Alert box, Confirm box, and Prompt box.
+
+// Alert Box
+// An alert box is often used if you want 
+// to make sure information comes through to the user.
+
+// When an alert box pops up, the user will 
+// have to click "OK" to proceed.
+
+// Syntax
+            // window.alert("sometext");
+// The window.alert() method can be written 
+// without the window prefix.
+
+// Example
+            // alert("I am an alert box!");
+// Confirm Box
+// A confirm box is often used if you 
+// want the user to verify or accept something.
+
+// When a confirm box pops up, the user 
+// will have to click either "OK" or "Cancel" to proceed.
+
+// If the user clicks "OK", the box returns
+//  true. If the user clicks "Cancel", the 
+// box returns false.
+
+// Syntax
+            // window.confirm("sometext");
+// The window.confirm() method can be 
+// written without the window prefix.
+
+// Example
+            // if (confirm("Press a button!")) {
+            //   txt = "You pressed OK!";
+            // } else {
+            //   txt = "You pressed Cancel!";
+            // }
+// Prompt Box
+// A prompt box is often used if you want 
+// the user to input a value before entering a page.
+
+// When a prompt box pops up, the user will 
+// have to click either "OK" or "Cancel" to 
+// proceed after entering an input value.
+
+// If the user clicks "OK" the box returns 
+// the input value. If the user clicks 
+// "Cancel" the box returns null.
+
+
+// Syntax
+            // window.prompt("sometext","defaultText");
+// The window.prompt() method can be 
+// written without the window prefix.
+
+// Example
+            // let person = prompt("Please enter your name", "Harry Potter");
+            // let text;
+            // if (person == null || person == "") {
+            //   text = "User cancelled the prompt.";
+            // } else {
+            //   text = "Hello " + person + "! How are you today?";
+            // }
+// Line Breaks
+// To display line breaks inside a 
+// popup box, use a back-slash followed 
+// by the character n.
+
+// Example
+            // alert("Hello\nHow are you?");
+
+
+console.log("JavaScript Timing Events")
+
+// 123456789101112	
+// JavaScript can be executed in time-intervals.
+// This is called timing events.
+// Timing Events
+// The window object allows execution 
+// of code at specified time intervals.
+
+// These time intervals are called timing events.
+// The two key methods to use with JavaScript are:
+            // setTimeout(function, milliseconds)
+// Executes a function, after waiting a 
+// specified number of milliseconds.
+            // setInterval(function, milliseconds)
+// Same as setTimeout(), but repeats the 
+// execution of the function continuously.
+
+// The setTimeout() and setInterval() are 
+// both methods of the HTML DOM Window object.
+
+// The setTimeout() Method
+            // window.setTimeout(function, milliseconds);
+// The window.setTimeout() method can be 
+// written without the window prefix.
+
+// The first parameter is a function to be executed.
+// The second parameter indicates the number 
+// of milliseconds before execution.
+
+// Example
+// Click a button. Wait 3 seconds, and the page will alert "Hello":
+
+            // <button onclick="setTimeout(myFunction, 3000)">Try it</button>
+
+            // <script>
+            // function myFunction() {
+            //   alert('Hello');
+            // }
+            // </script>
+// How to Stop the Execution?
+// The clearTimeout() method stops the execution 
+// of the function specified in setTimeout().
+
+            // window.clearTimeout(timeoutVariable)
+// The window.clearTimeout() method can 
+// be written without the window prefix.
+// The clearTimeout() method uses the 
+// variable returned from setTimeout():
+            // myVar = setTimeout(function, milliseconds);
+            // clearTimeout(myVar);
+// If the function has not already been 
+// executed, you can stop the execution 
+// by calling the clearTimeout() method:
+
+// Example
+// Same example as above, but with an added "Stop" button:
+            // <button onclick="myVar = setTimeout(myFunction, 3000)">Try it</button>
+            // <button onclick="clearTimeout(myVar)">Stop it</button>
+// The setInterval() Method
+// The setInterval() method repeats a 
+// given function at every given time-interval.
+
+            // window.setInterval(function, milliseconds);
+// The window.setInterval() method can 
+// be written without the window prefix.
+
+// The first parameter is the function 
+// to be executed.
+
+// The second parameter indicates the 
+// length of the time-interval between each execution.
+
+// This example executes a function called 
+// "myTimer" once every second (like a digital watch).
+
+// Example
+// Display the current time:
+
+            // setInterval(myTimer, 1000);
+
+            // function myTimer() {
+            //   const d = new Date();
+            //   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+            // }
+// There are 1000 milliseconds in one second.
+
+// How to Stop the Execution?
+// The clearInterval() method stops the 
+// executions of the function specified 
+// in the setInterval() method.
+
+// window.clearInterval(timerVariable)
+// The window.clearInterval() method can 
+// be written without the window prefix.
+
+// The clearInterval() method uses 
+// the variable returned from setInterval():
+
+            // let myVar = setInterval(function, milliseconds);
+            // clearInterval(myVar);
+// Example
+// Same example as above, but we have 
+// added a "Stop time" button:
+
+            // <p id="demo"></p>
+
+            // <button onclick="clearInterval(myVar)">Stop time</button>
+
+            // <script>
+            // let myVar = setInterval(myTimer, 1000);
+            // function myTimer() {
+            //   const d = new Date();
+            //   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+            // }
+            // </script>
+// More Examples
+// Another simple timing
+
+// A clock created with a timing event
+
+console.log("JavaScript Cookies")
+// Cookies let you store user information in web pages.
+// What are Cookies?
+// Cookies are data, stored in small text 
+// files, on your computer.
+
+// When a web server has sent a web page 
+// to a browser, 
+
+//the connection is shut down, and the 
+// server forgets everything about the user.
+
+// Cookies were invented to solve the 
+// problem "how to remember information about the user":
+
+// When a user visits a web page, his/her 
+// name can be stored in a cookie.
+
+// Next time the user visits the page, 
+// the cookie "remembers" his/her name.
+
+// Cookies are saved in name-value pairs like:
+
+// username = John Doe
+// When a browser requests a web page from 
+// a server, cookies belonging to the page 
+// are added to the request. This way the 
+// server gets the necessary data to 
+// "remember" information about users.
+
+// None of the examples below will work 
+// if your browser has local cookies support turned off.
+
+// Create a Cookie with JavaScript
+// JavaScript can create, read, and 
+// delete cookies with the document.cookie property.
+
+// With JavaScript, a cookie can be 
+// created like this:
+
+            // document.cookie = "username=John Doe";
+// You can also add an expiry date (in UTC time). 
+// By default, the cookie is deleted when the 
+// browser is closed:
+
+            // document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+// With a path parameter, you can tell the 
+// browser what path the cookie belongs to. 
+// By default, the cookie belongs to the current page.
+
+            // document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+// Read a Cookie with JavaScript
+// With JavaScript, cookies can be read like this:
+
+// let x = document.cookie;
+// document.cookie will return all cookies 
+// in one string much like: cookie1=value; cookie2=value; cookie3=value;
+
+// Change a Cookie with JavaScript
+// With JavaScript, you can change a cookie 
+// the same way as you create it:
+
+            // document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+// The old cookie is overwritten.
+
+// Delete a Cookie with JavaScript
+// Deleting a cookie is very simple.
+
+// You don't have to specify a cookie 
+// value when you delete a cookie.
+
+// Just set the expires parameter to a past date:
+
+            // document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+// You should define the cookie path to 
+// ensure that you delete the right cookie.
+
+// Some browsers will not let you delete 
+// a cookie if you don't specify the path.
+
+// The Cookie String
+// The document.cookie property looks like 
+// a normal text string. But it is not.
+
+// Even if you write a whole cookie string 
+// to document.cookie, when you read it out 
+// again, you can only see the name-value pair of it.
+
+// If you set a new cookie, older cookies 
+// are not overwritten. The new cookie is 
+// added to document.cookie, so if you read 
+// document.cookie again you will get something like:
+
+// cookie1 = value; cookie2 = value;
+
+// Display All Cookies  Create Cookie 1  
+// Create Cookie 2 Delete Cookie 1  Delete Cookie 2
+
+// If you want to find the value of one 
+// specified cookie, you must write a 
+// JavaScript function that searches for 
+// the cookie value in the cookie string.
+
+// JavaScript Cookie Example
+// In the example to follow, we will create 
+// a cookie that stores the name of a visitor.
+
+// The first time a visitor arrives to the 
+// web page, he/she will be asked to fill 
+// in his/her name. The name is then stored in a cookie.
+
+// The next time the visitor arrives at the 
+// same page, he/she will get a welcome message.
+
+// For the example we will create 3 JavaScript functions:
+
+// A function to set a cookie value
+// A function to get a cookie value
+// A function to check a cookie value
+// A Function to Set a Cookie
+// First, we create a function that stores 
+// the name of the visitor in a cookie variable:
+
+// Example
+            // function setCookie(cname, cvalue, exdays) {
+            //   const d = new Date();
+            //   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            //   let expires = "expires="+ d.toUTCString();
+            //   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            // }
+// Example explained:
+
+// The parameters of the function above are 
+// the name of the cookie (cname), the value 
+// of the cookie (cvalue), and the number of 
+// days until the cookie should expire (exdays).
+
+// The function sets a cookie by adding together 
+// the cookiename, the cookie value, and the expires string.
+
+// A Function to Get a Cookie
+// Then, we create a function that returns 
+// the value of a specified cookie:
+
+// Example
+            // function getCookie(cname) {
+            //   let name = cname + "=";
+            //   let decodedCookie = decodeURIComponent(document.cookie);
+            //   let ca = decodedCookie.split(';');
+            //   for(let i = 0; i <ca.length; i++) {
+            //     let c = ca[i];
+            //     while (c.charAt(0) == ' ') {
+            //       c = c.substring(1);
+            //     }
+            //     if (c.indexOf(name) == 0) {
+            //       return c.substring(name.length, c.length);
+            //     }
+            //   }
+            //   return "";
+            // }
+// Function explained:
+
+// Take the cookiename as parameter (cname).
+
+// Create a variable (name) with the 
+// text to search for (cname + "=").
+
+// Decode the cookie string, to handle 
+// cookies with special characters, e.g. '$'
+
+// Split document.cookie on semicolons into 
+// an array called ca (ca = decodedCookie.split(';')).
+
+// Loop through the ca array 
+// (i = 0; i < ca.length; i++), and 
+// read out each value c = ca[i]).
+
+// If the cookie is found (c.indexOf(name) == 0), 
+// return the value of the cookie (c.substring(name.length, c.length).
+
+// If the cookie is not found, return "".
+
+// A Function to Check a Cookie
+// Last, we create the function that 
+// checks if a cookie is set.
+
+// If the cookie is set it will display a greeting.
+
+// If the cookie is not set, it will 
+// display a prompt box, asking for the 
+// name of the user, and stores the username
+//  cookie for 365 days, by calling the setCookie function:
+
+// Example
+            // function checkCookie() {
+            //   let username = getCookie("username");
+            //   if (username != "") {
+            //    alert("Welcome again " + username);
+            //   } else {
+            //     username = prompt("Please enter your name:", "");
+            //     if (username != "" && username != null) {
+            //       setCookie("username", username, 365);
+            //     }
+            //   }
+            // }
+// All Together Now
+// Example
+            // function setCookie(cname, cvalue, exdays) {
+            //   const d = new Date();
+            //   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            //   let expires = "expires="+d.toUTCString();
+            //   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            // }
+
+            // function getCookie(cname) {
+            //   let name = cname + "=";
+            //   let ca = document.cookie.split(';');
+            //   for(let i = 0; i < ca.length; i++) {
+            //     let c = ca[i];
+            //     while (c.charAt(0) == ' ') {
+            //       c = c.substring(1);
+            //     }
+            //     if (c.indexOf(name) == 0) {
+            //       return c.substring(name.length, c.length);
+            //     }
+            //   }
+            //   return "";
+            // }
+
+            // function checkCookie() {
+            //   let user = getCookie("username");
+            //   if (user != "") {
+            //     alert("Welcome again " + user);
+            //   } else {
+            //     user = prompt("Please enter your name:", "");
+            //     if (user != "" && user != null) {
+            //       setCookie("username", user, 365);
+            //     }
+            //   }
+            // }
+// The example above runs the checkCookie() function when the page loads.
+
+
+

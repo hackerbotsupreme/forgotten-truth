@@ -1,0 +1,5723 @@
+console.log("HTML Events")
+// i listed all the Html events possible 
+// just show me what you know 
+console.log("list started from  script2.js")
+console.log("in this folder ")
+// ***********************************
+let a = document.getElementById("myButton")
+a.onclick = () => {
+  b.innerHTML = "Hello World!"
+}
+// ***********************************
+
+// The JavaScript code document.getElementsByClassName("container")[0] 
+//is used to select the first HTML element on the webpage that has 
+//the class name “container”.
+
+// ***********************************
+// Sure, here are some of the most
+//  common browser events in JavaScript:
+
+// 1. **Mouse events**¹:
+//     - `click`: When the mouse clicks on an element¹.
+//     - `contextmenu`: When the mouse right-clicks on an element¹.
+//     - `mouseover`: When the mouse cursor comes over an element¹.
+//     - `mouseout`: When the mouse cursor leaves an element¹.
+//     - `mousedown`: When the mouse button is pressed over an element¹.
+//     - `mouseup`: When the mouse button is released over an element¹.
+//     - `mousemove`: When the mouse is moved¹.
+
+// 2. **Keyboard events**¹:
+//     - `keydown`: When a keyboard key is pressed¹.
+//     - `keyup`: When a keyboard key is released¹.
+//     - `keypress`
+
+// 3. **Form element events**¹:
+//     - `submit`: When a form is submitted¹.
+//     - `focus`: When an element gets focus¹.
+
+// 4. **Document events**¹:
+//     - `DOMContentLoaded`: When the HTML is loaded and processed, DOM is fully built¹.
+
+// 5. **CSS events**¹:
+//     - `transitionend`: When a CSS-animation finishes¹.
+
+// There are many other events in JavaScript. You can find 
+// a more comprehensive list in the 
+//[W3Schools JavaScript Reference HTML DOM Events](^2^)
+//https://www.w3schools.com/jsref/dom_obj_event_prop.asp.
+
+
+console.log("browser events ")
+
+// there are numerous events in js .
+// to bring acccountablity to those , we categorized 
+// them accorading to thir  types.
+// remember , there is no official category and 
+// dont waste your time categorization , 
+// just cover the list .
+// which are ,
+// there are several types of browser events like 
+//1. Mouse events 
+//2. keyboard events 
+//3. Form element events 
+//4. Document events 
+//5. css events 
+// 6. **Animation Events**
+// 7. **Asynchronous Data Fetching Events**
+// 8. **Composition Events**
+// 9. **Database Events**
+// 10. **DOM Mutation Events**
+// 11. **Drag'n'drop, Wheel Events**
+// 12. **Touch Events**
+// 13. **Window Events**
+
+//so how can i print or see all the Mouse events  in the console?
+
+// You can use the `monitorEvents()` function in the browser 
+//console to log all events emitted by a specific DOM element. 
+//Here's how you can use it to monitor all mouse events for 
+//a specific element:
+
+// 1. Open your browser's developer tools (usually by pressing F12).
+// 2. Select the Console tab.
+// 3. Type the following command and press Enter:
+
+// monitorEvents(document.querySelector('your-selector'), 'mouse');
+
+// Replace `'your-selector'` with the CSS selector of the 
+//element you want to monitor. For example, if you want to 
+//monitor all mouse events on the body of the document, you 
+//would use:
+
+monitorEvents(document.body, 'mouse');
+
+// This will start logging all mouse events emitted by the 
+//body element to the console¹³.
+// To stop monitoring events, you can use the 
+//`unmonitorEvents()` function in a similar way:
+
+// unmonitorEvents(document.querySelector('your-selector'), 'mouse');
+
+// Remember, excessive use of `monitorEvents()` can result in 
+//a lot of data being logged to the console, which might 
+//make the console hard to read and cause your browser to 
+//slow down. So, it's a good practice to use `unmonitorEvents()` 
+//to stop monitoring when you're done¹³. Happy coding! 😊
+// important note 
+// The monitorEvents() function is only available in the 
+//console of your browser’s developer tools. If you’re trying 
+//to run this code in a script in your webpage, it won’t work.
+// and in outside of the console , like in script 
+// it returns error ,
+// Uncaught ReferenceError: monitorEvents is not defined
+
+//You can use the `monitorEvents()` function in your browser's console to log all events emitted by a specific DOM element². Here's an example of how you can use it to monitor `mousemove` events:
+
+const element = document.getElementById('yourElementId');
+element.addEventListener('mousemove', event => {
+    console.log('Mouse moved');
+});
+
+//In this code, replace `'yourElementId'` with the id of the 
+//element you want to monitor. Now, whenever the mouse moves 
+//over that element, "Mouse moved" will be logged to the console.
+//You can also monitor all events on a specific element 
+//using `monitorEvents(element)`, or stop monitoring using 
+//`unmonitorEvents(element)`².
+//Please note that excessive use of `mousemove` event 
+//listeners can lead to performance issues, as this event 
+//is fired very frequently. Use it sparingly and remove the 
+//event listener when it's no longer needed.
+
+// allrigth time time to roll on!
+// go to script2.js for next part!
+
+
+
+// *****************************************************
+console.log("HTML Events - w3 schools")
+console.log("marked (imp) on what i currently know")
+
+// HTML Events
+//     1.HTML Events
+//           abort
+//           afterprint
+//           animationend
+//           animationiteration
+//           animationstart
+//           beforeprint
+//           beforeunload
+//           blur(imp)
+//           canplay
+//           canplaythrough(imp)
+//           change(imp)
+//           click(imp)
+//           contextmenu(imp)
+//           copy(imp)
+//           cut(imp)
+//           dblclick(imp)
+//           drag(imp)
+//           dragend
+//           dragenter
+//           dragleave
+//           dragover
+//           dragstart
+//           drop
+//           durationchange
+//           ended
+//           error
+//           focus(imp)
+//           focusin
+//           focusout
+//           fullscreenchange
+//           fullscreenerror
+//           hashchange
+//           input(imp)
+//           invalid
+//           keydown(imp)
+//           keypress(imp)
+//           keyup(imp)
+//           load
+//           loadeddata
+//           loadedmetadata
+//           loadstart
+//           message
+//           mousedown(imp)
+//           mouseenter(imp)
+//           mouseleave(imp)
+//           mousemove(imp)
+//           mouseover(imp)
+//           mouseout(imp)
+//           mouseup(imp)
+//           offline(imp)
+//           online(imp)
+//           open
+//           pagehide
+//           pageshow
+//           paste(imp)
+//           pause(imp)
+//           play
+//           playing
+//           progress
+//           ratechange
+//           resize
+//           reset
+//           scroll(imp)
+//           search
+//           seeked
+//           seeking
+//           select
+//           show
+//           stalled
+//           submit
+//           suspend
+//           timeupdate
+//           toggle
+//           touchcancel
+//           touchend
+//           touchmove
+//           touchstart
+//           transitionend
+//           unload
+//           volumechange
+//           waiting
+//           wheel
+//     2.HTML Event objects
+//           Animation Events
+//           Clipboard Events(imp)
+//           Drag Events
+//           Events
+//           Focus Events(imp)
+//           HashChange Events
+//           Input Events(imp)
+//           Keyboard Events(imp)
+//           Mouse Events(imp)
+//           PageTransition Events
+//           PopState Events
+//           Progress Events
+//           Storage Events(imp)
+//           Touch Events(imp)
+//           Transition Events(imp)
+//           Ui Events(imp)
+//           Wheel Events(imp)
+//     3.HTML Event Properties
+//           altKey (Mouse)
+//           altKey (Key)
+//           animationName
+//           bubbles
+//           button
+//           buttons
+//           cancelable
+//           charCode
+//           clientX(imp)
+//           clientY(imp)
+//           code
+//           ctrlKey (Mouse)
+//           ctrlKey (Key)
+//           currentTarget(imp)
+//           data(imp)
+//           defaultPrevented
+//           deltaX
+//           deltaY
+//           deltaZ
+//           deltaMode
+//           detail(imp)
+//           elapsedTime
+//           elapsedTime
+//           eventPhase
+//           inputType
+//           isTrusted
+//           key
+//           keyCode
+//           location(imp)
+//           metaKey (Mouse)
+//           metaKey (Key)
+//           newURL
+//           oldURL
+//           offsetX(imp)
+//           offsetY(imp)
+//           pageX(imp)
+//           pageY(imp)
+//           persisted
+//           propertyName
+//           relatedTarget
+//           relatedTarget
+//           screenX(imp)
+//           screenY(imp)
+//           shiftKey (Mouse)
+//           shiftKey (Key)
+//           target
+//           targetTouches
+//           timeStamp
+//           touches
+//           type
+//           which (Mouse)
+//           which (Key)
+//           view
+//     4.HTML Event Methods
+//           getModifierState()(imp)
+//           preventDefault()(imp)
+//           stopImmidiatePropagation()(imp)
+//           stopPropagation()(imp)
+
+
+console.log("reliable source - mdn and https://www.w3schools.com/jsref/dom_obj_event_methods.asp")
+
+console.log("how to use onclick")
+// <!DOCTYPE html>
+// <html lang="en">
+
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <link rel="stylesheet" href="style.css">
+//     <title>Document</title>
+// </head>
+
+// <body>
+//     <div id="html">Hello , world </div>
+//     <button onclick="handleCLick()">CLick me</button>
+//     <button onclick=handleCLick()>CLick me</button>
+//     <button onclick="console.log('clicked')">Click me</button>
+//     <button onclick="function handleClick() { console.log('clicked'); handleClick(); }">Click me</button>
+//     <button id="myButton">Click me</button>
+//     <script src="script.js"></script>
+// </body>
+
+// </html>
+// <!-- in script.js -->
+// <!-- function handleCLick(){
+//     console.log("clicked")
+// } -->
+// <!-- document.getElementById('myButton').onclick = function() {
+//     console.log('clicked');
+// } -->
+// <!-- let b = document.getElementById("yourElementId"); 
+//   b.innerHTML = "Hello World!";
+// } --></head>
+
+console.log("HTML Events")
+
+
+console.log("HTML Events-blur")
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="text" id="myInput" placeholder="Type something here...">
+
+//     <script>
+//         //  Here’s a practical example of using the blur 
+//         // event in HTML. The blur event is fired when an
+//         //  element has lost focus. In this example, we’ll 
+//         // create an input field that changes its background 
+//         // color when it loses focus:
+//         // Get the input field
+//         var input = document.getElementById("myInput");
+
+//         // Add a blur event listener to the input field
+//         input.addEventListener('blur', function() {
+//             // Change the background color when the input field loses focus
+//             input.style.backgroundColor = "lightblue";
+//         });
+//         // In this code, when you type something in the 
+//         // input field and then click outside of it 
+//         // (causing it to lose focus), the blur event is 
+//         // triggered, and the input field’s background color 
+//         // changes to light blue. This is a simple but 
+//         // practical use of the blur event. You can replace 
+//         // the function with any other function to suit your 
+//         // needs. For example, you could use it to validate 
+//         // input fields in a form when the user moves to 
+//         // the next field.
+//     </script>
+// </body>
+// </html>
+
+
+
+
+console.log("HTML Events-canplaythrough")
+// The canplaythrough event in HTML is fired when the user 
+// agent can play the media, and estimates that if playback 
+// were to be started now, the media could be rendered at 
+// the current playback rate all the way to its end without 
+// having to stop for further buffering.
+// Here’s a practical example of using the canplaythrough 
+// event. We’ll create a video player that shows a loading 
+// message until the video is ready to play through:
+
+// <!DOCTYPE html>
+// <html lang="en">
+
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+
+// <body>
+//     <video id="myVideo" width="320" height="240" controls>
+//         <source src="movie.mp4" type="video/mp4">
+//         Your browser does not support the video tag.
+//     </video>
+//     <p id="loadingMessage">Loading video...</p>
+
+//     <script>
+//         // Get the video element
+//         var video = document.getElementById("myVideo");
+
+//         // Get the loading message element
+//         var loadingMessage = document.getElementById("loadingMessage");
+
+//         // Add a canplaythrough event listener to the video
+//         video.addEventListener('canplaythrough', function () {
+//             // Hide the loading message when the video is ready to play through
+//             loadingMessage.style.display = "none";
+//         });
+//     </script>
+// </body>
+
+// </html>
+
+// In this code, the loading message is displayed until 
+// the video is ready to play through. When the canplaythrough 
+// event is fired, the loading message is hidden. This is a 
+// simple but practical use of the canplaythrough event. 
+// You can replace the function with any other function to 
+// suit your needs. For example, you could use it to show 
+// custom controls only when the video is ready to play. 
+// Please replace "movie.mp4" with the actual path to your 
+// video file.
+
+
+
+console.log("HTML Events-change")
+// Sure, I can help with that. The change event in HTML is 
+//fired for <input>, <select>, and <textarea> elements when 
+//a change to the element’s value is committed by the user. 
+//Here’s a practical example of using the change event. 
+// We’ll create a select dropdown that displays the user’s 
+// choice when an option is selected:
+// Sure, I can help with that. The `change` event in HTML 
+// is fired for `<input>`, `<select>`, and `<textarea>` 
+// elements when a change to the element's value is committed
+//  by the user. Here's a practical example of using the 
+// `change` event. We'll create a select dropdown that 
+// displays the user's choice when an option is selected:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <select id="mySelect">
+//         <option value="apple">Apple</option>
+//         <option value="banana">Banana</option>
+//         <option value="cherry">Cherry</option>
+//     </select>
+//     <p id="demo">You selected: </p>
+
+//     <script>
+//         // Get the select element
+//         var select = document.getElementById("mySelect");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a change event listener to the select element
+//         select.addEventListener('change', function() {
+//             // Display the selected option when the select element's value changes
+//             demo.innerHTML = "You selected: " + select.value;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+// In this code, when you select an option from the dropdown, 
+// the `change` event is triggered, and the paragraph's text
+//  changes to display your selection. This is a simple but 
+// practical use of the `change` event. You can replace the 
+// function with any other function to suit your needs. For 
+// example, you could use it to perform different actions 
+// based on the user's selection.
+
+
+
+console.log("HTML Events-contextmenu")
+// Sure, I can help with that. The `contextmenu` event in 
+// HTML is fired when the user attempts to open a context 
+// menu. This event is typically triggered by clicking the 
+// right mouse button, or by pressing the context menu key. 
+// Here's a practical example of using the `contextmenu` 
+// event. We'll create a context menu that shows a custom 
+// message instead of the default context menu:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <p id="myParagraph">Right-click on this paragraph to see the custom context menu.</p>
+
+//     <script>
+//         // Get the paragraph element
+//         var paragraph = document.getElementById("myParagraph");
+
+//         // Add a contextmenu event listener to the paragraph
+//         paragraph.addEventListener('contextmenu', function(event) {
+//             // Prevent the default context menu from showing
+//             event.preventDefault();
+
+//             // Show a custom message instead
+//             alert("Custom context menu");
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you right-click on the paragraph, 
+// the `contextmenu` event is triggered, the default context 
+// menu is prevented from showing, and a custom alert message 
+// is shown instead. This is a simple but practical use of 
+// the `contextmenu` event. You can replace the function 
+// with any other function to suit your needs. For example, 
+// you could use it to show a custom context menu with your 
+// own options.
+
+console.log("HTML Events-copy")
+// Sure, I can help with that. The `copy` event in HTML is 
+// fired when the user initiates a copy action through the 
+// browser's user interface or a keyboard shortcut. Here's 
+// a practical example of using the `copy` event. We'll 
+// create a paragraph that shows a custom message when the 
+// user copies its content:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <p id="myParagraph">Try copying this text.</p>
+
+//     <script>
+//         // Get the paragraph element
+//         var paragraph = document.getElementById("myParagraph");
+
+//         // Add a copy event listener to the paragraph
+//         paragraph.addEventListener('copy', function(event) {
+//             // Prevent the default copy action
+//             event.preventDefault();
+
+//             // Set the clipboard data to a custom message
+//             event.clipboardData.setData('text/plain', "You copied from myParagraph!");
+
+//             // Show an alert message
+//             alert("You copied from myParagraph!");
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you try to copy the text from the 
+// paragraph, the `copy` event is triggered, the default 
+// copy action is prevented, and the clipboard data is set 
+// to a custom message. An alert message is also shown. 
+// This is a simple but practical use of the `copy` event. 
+// You can replace the function with any other function to 
+// suit your needs. For example, you could use it to track 
+// when users copy content from your website.
+
+console.log("HTML Events-cut")
+// Sure, I can help with that. The `cut` event in HTML is 
+// fired when the user initiates a cut action through the
+//  browser's user interface or a keyboard shortcut. Here's 
+// a practical example of using the `cut` event. We'll create 
+// a text area that shows a custom message when the user 
+// cuts its content:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <textarea id="myTextarea">Try cutting this text.</textarea>
+
+//     <script>
+//         // Get the textarea element
+//         var textarea = document.getElementById("myTextarea");
+
+//         // Add a cut event listener to the textarea
+//         textarea.addEventListener('cut', function(event) {
+//             // Prevent the default cut action
+//             event.preventDefault();
+
+//             // Set the clipboard data to a custom message
+//             event.clipboardData.setData('text/plain', "You cut from myTextarea!");
+
+//             // Show an alert message
+//             alert("You cut from myTextarea!");
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you try to cut the text from the 
+// textarea, the `cut` event is triggered, the default cut 
+// action is prevented, and the clipboard data is set to a 
+// custom message. An alert message is also shown. This is 
+// a simple but practical use of the `cut` event. You can 
+// replace the function with any other function to suit your 
+// needs. For example, you could use it to track when users 
+// cut content from your website.
+
+console.log("HTML Events-dblclick")
+// Sure, I can help with that. The `dblclick` event in HTML 
+// is fired when a pointing device button (usually a mouse's 
+// primary button) is clicked twice on a single element. 
+// Here's a practical example of using the `dblclick` event. 
+// We'll create a paragraph that changes its text when it is 
+// double-clicked:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <p id="myParagraph">Double-click on this paragraph.</p>
+
+//     <script>
+//         // Get the paragraph element
+//         var paragraph = document.getElementById("myParagraph");
+
+//         // Add a dblclick event listener to the paragraph
+//         paragraph.addEventListener('dblclick', function() {
+//             // Change the paragraph's text when it is double-clicked
+//             paragraph.innerHTML = "You double-clicked me!";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you double-click the paragraph, the 
+// `dblclick` event is triggered, and the paragraph's text 
+// changes to "You double-clicked me!". This is a simple but 
+// practical use of the `dblclick` event. You can replace the
+//  function with any other function to suit your needs. 
+// For example, you could use it to perform an action when 
+// a user double-clicks on an element.
+
+
+console.log("HTML Events-drag")
+// Sure, I can help with that. The `drag` event in HTML 
+// is fired when an element or text selection is being 
+// dragged. Here's a practical example of using the `drag` event. We'll create a draggable box that changes its color when it is being dragged:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 100px;
+//             height: 100px;
+//             background: red;
+//             position: absolute;
+//             cursor: move;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox" draggable="true"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a drag event listener to the box
+//         box.addEventListener('drag', function(event) {
+//             // Change the box's color when it is being dragged
+//             box.style.background = "blue";
+//         });
+
+//         // Add a dragend event listener to the box
+//         box.addEventListener('dragend', function(event) {
+//             // Change the box's color back to red when the dragging ends
+//             box.style.background = "red";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you start dragging the box, the `drag` event is triggered, and the box's color changes to blue. When you stop dragging the box, the `dragend` event is triggered, and the box's color changes back to red. This is a simple but practical use of the `drag` event. You can replace the function with any other function to suit your needs. For example, you could use it to perform an action when a user starts dragging an element.
+
+
+console.log("HTML Events-focus")
+// Sure, I can help with that. The `focus` event in HTML is 
+// fired when an element has received focus. Here's a 
+// practical example of using the `focus` event. We'll create 
+// an input field that changes its background color when it 
+// receives focus:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="text" id="myInput" placeholder="Click here to focus...">
+
+//     <script>
+//         // Get the input field
+//         var input = document.getElementById("myInput");
+
+//         // Add a focus event listener to the input field
+//         input.addEventListener('focus', function() {
+//             // Change the background color when the input field receives focus
+//             input.style.backgroundColor = "lightblue";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you click on the input field (causing 
+// it to receive focus), the `focus` event is triggered, and 
+// the input field's background color changes to light blue. 
+// This is a simple but practical use of the `focus` event. 
+// You can replace the function with any other function to 
+//suit your needs. For example, you could use it to display 
+// a tooltip when an input field receives focus.
+
+
+
+console.log("HTML Events-input")
+// Sure, I can help with that. The `input` event in HTML is 
+// fired when the value of an `<input>`, `<select>`, or 
+// `<textarea>` element has been changed. Here's a practical 
+// example of using the `input` event. We'll create an input 
+// field that displays its current value in a paragraph when 
+// the user types into it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="text" id="myInput" placeholder="Type something here...">
+//     <p id="demo">You typed: </p>
+
+//     <script>
+//         // Get the input field
+//         var input = document.getElementById("myInput");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add an input event listener to the input field
+//         input.addEventListener('input', function() {
+//             // Display the input field's current value when its value changes
+//             demo.innerHTML = "You typed: " + input.value;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you type something into the input 
+// field, the `input` event is triggered, and the paragraph's 
+// text changes to display what you typed. This is a simple 
+// but practical use of the `input` event. You can replace 
+// the function with any other function to suit your needs. 
+// For example, you could use it to perform real-time form 
+// validation as the user types.
+
+
+console.log("HTML Events-keydown")
+// Sure, I can help with that. The `keydown` event in HTML is fired when a key is pressed down. Here's a practical example of using the `keydown` event. We'll create an input field that displays a custom message in a paragraph when the user presses a key:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="text" id="myInput" placeholder="Press a key here...">
+//     <p id="demo">You pressed: </p>
+
+//     <script>
+//         // Get the input field
+//         var input = document.getElementById("myInput");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a keydown event listener to the input field
+//         input.addEventListener('keydown', function(event) {
+//             // Display the pressed key when a key is pressed
+//             demo.innerHTML = "You pressed: " + event.key;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you press a key in the input field, the `keydown` event is triggered, and the paragraph's text changes to display the key you pressed. This is a simple but practical use of the `keydown` event. You can replace the function with any other function to suit your needs. For example, you could use it to perform an action when a specific key is pressed.
+
+
+
+console.log("HTML Events-keypress")
+// Sure, I can help with that. The `keypress` event in HTML 
+// is fired when a key that produces a character value is 
+// pressed down. Here's a practical example of using the 
+// `keypress` event. We'll create an input field that displays
+//  a custom message in a paragraph when the user presses a 
+// key:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="text" id="myInput" placeholder="Press a key here...">
+//     <p id="demo">You pressed: </p>
+
+//     <script>
+//         // Get the input field
+//         var input = document.getElementById("myInput");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a keypress event listener to the input field
+//         input.addEventListener('keypress', function(event) {
+//             // Display the pressed key when a key is pressed
+//             demo.innerHTML = "You pressed: " + event.key;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you press a key in the input field, the
+//  `keypress` event is triggered, and the paragraph's text 
+// changes to display the key you pressed. This is a simple 
+// but practical use of the `keypress` event. You can replace
+//  the function with any other function to suit your needs. 
+// For example, you could use it to perform an action when a 
+// specific key is pressed.
+
+
+
+console.log("HTML Events-mousedown")
+// Sure, I can help with that. The `mousedown` event in HTML
+//  is fired when a pointing device button (usually a mouse's
+//  primary button) is pressed on an element. Here's a 
+// practical example of using the `mousedown` event. We'll 
+// create a button that changes its text when it is clicked:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <button id="myButton">Click me</button>
+
+//     <script>
+//         // Get the button element
+//         var button = document.getElementById("myButton");
+
+//         // Add a mousedown event listener to the button
+//         button.addEventListener('mousedown', function() {
+//             // Change the button's text when it is clicked
+//             button.innerHTML = "You clicked me!";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you press the mouse button over the 
+// button, the `mousedown` event is triggered, and the 
+// button's text changes to "You clicked me!". This is a 
+// simple but practical use of the `mousedown` event. You can 
+// replace the function with any other function to suit your 
+// needs. For example, you could use it to perform an action 
+//when a user presses the mouse button over an element.
+
+
+console.log("HTML Events-mouseenter")
+// Sure, I can help with that. The `mouseenter` event in 
+// HTML is fired when a pointing device (usually a mouse) is 
+// moved over the element that has the listener attached. 
+// Here's a practical example of using the `mouseenter` event.
+//  We'll create a box that changes its color when the mouse 
+// pointer enters it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 100px;
+//             height: 100px;
+//             background: red;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a mouseenter event listener to the box
+//         box.addEventListener('mouseenter', function() {
+//             // Change the box's color when the mouse pointer enters it
+//             box.style.background = "blue";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you move the mouse pointer over the 
+// box, the `mouseenter` event is triggered, and the box's 
+// color changes to blue. This is a simple but practical use 
+// of the `mouseenter` event. You can replace the function 
+// with any other function to suit your needs. For example, 
+// you could use it to display a tooltip when the mouse 
+// pointer enters an element.
+
+
+console.log("HTML Events-mouseleave")
+// Sure, I can help with that. The `mouseleave` event in HTML 
+//is fired when a pointing device (usually a mouse) is moved 
+//off the element that has the listener attached. Here's a 
+//practical example of using the `mouseleave` event. We'll 
+//create a box that changes its color back to its original 
+//color when the mouse pointer leaves it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 100px;
+//             height: 100px;
+//             background: red;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a mouseenter event listener to the box
+//         box.addEventListener('mouseenter', function() {
+//             // Change the box's color when the mouse pointer enters it
+//             box.style.background = "blue";
+//         });
+
+//         // Add a mouseleave event listener to the box
+//         box.addEventListener('mouseleave', function() {
+//             // Change the box's color back to red when the mouse pointer leaves it
+//             box.style.background = "red";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you move the mouse pointer over the box,
+// the `mouseenter` event is triggered, and the box's color 
+//changes to blue. When you move the mouse pointer off the 
+//box, the `mouseleave` event is triggered, and the box's 
+//color changes back to red. This is a simple but practical 
+//use of the `mouseleave` event. You can replace the function 
+//with any other function to suit your needs. For example, 
+//you could use it to hide a tooltip when the mouse pointer 
+//leaves an element.
+
+
+console.log("HTML Events-mousemove")
+// Sure, I can help with that. The `mousemove` event in HTML 
+//is fired when a pointing device (usually a mouse) is moved 
+//while over an element. Here's a practical example of using 
+//the `mousemove` event. We'll create a box that changes its 
+//position when the mouse pointer moves over it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 50px;
+//             height: 50px;
+//             background: red;
+//             position: absolute;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a mousemove event listener to the document
+//         document.addEventListener('mousemove', function(event) {
+//             // Change the box's position when the mouse pointer moves
+//             box.style.left = event.clientX + 'px';
+//             box.style.top = event.clientY + 'px';
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you move the mouse pointer anywhere in 
+//the document, the `mousemove` event is triggered, and the 
+//box's position changes to follow the mouse pointer. This is 
+//a simple but practical use of the `mousemove` event. You 
+//can replace the function with any other function to suit 
+//your needs. For example, you could use it to create a 
+//drawing application where the user can draw by moving the 
+//mouse.
+
+
+
+console.log("HTML Events-mouseover")
+// Sure, I can help with that. The `mouseover` event in HTML is fired when a pointing device (usually a mouse) is moved onto the element that has the listener attached or onto one of its children. Here's a practical example of using the `mouseover` event. We'll create a box that changes its color when the mouse pointer moves over it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 100px;
+//             height: 100px;
+//             background: red;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a mouseover event listener to the box
+//         box.addEventListener('mouseover', function() {
+//             // Change the box's color when the mouse pointer moves over it
+//             box.style.background = "blue";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you move the mouse pointer over the box, the `mouseover` event is triggered, and the box's color changes to blue. This is a simple but practical use of the `mouseover` event. You can replace the function with any other function to suit your needs. For example, you could use it to display a tooltip when the mouse pointer moves over an element.
+
+
+console.log("HTML Events-mouseout")
+// Sure, I can help with that. The `mouseout` event in HTML 
+//is fired when a pointing device (usually a mouse) is moved 
+//off the element that has the listener attached or off one 
+//of its children. Here's a practical example of using the 
+//`mouseout` event. We'll create a box that changes its color 
+//back to its original color when the mouse pointer moves out 
+//of it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 100px;
+//             height: 100px;
+//             background: red;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a mouseover event listener to the box
+//         box.addEventListener('mouseover', function() {
+//             // Change the box's color when the mouse pointer moves over it
+//             box.style.background = "blue";
+//         });
+
+//         // Add a mouseout event listener to the box
+//         box.addEventListener('mouseout', function() {
+//             // Change the box's color back to red when the mouse pointer moves out of it
+//             box.style.background = "red";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you move the mouse pointer over the 
+//box, the `mouseover` event is triggered, and the box's 
+//color changes to blue. When you move the mouse pointer out 
+//of the box, the `mouseout` event is triggered, and the box's 
+//color changes back to red. This is a simple but practical 
+//use of the `mouseout` event. You can replace the function 
+//with any other function to suit your needs. For example, 
+//you could use it to hide a tooltip when the mouse pointer 
+//moves out of an element.
+
+
+
+console.log("HTML Events-mouseup")
+// Sure, I can help with that. The `mouseup` event in HTML 
+//is fired when a pointing device button (usually a mouse's 
+//primary button) is released over an element. Here's a 
+//practical example of using the `mouseup` event. We'll 
+//create a button that changes its text when the mouse button 
+//is released over it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <button id="myButton">Click and release me</button>
+
+//     <script>
+//         // Get the button element
+//         var button = document.getElementById("myButton");
+
+//         // Add a mouseup event listener to the button
+//         button.addEventListener('mouseup', function() {
+//             // Change the button's text when the mouse button is released over it
+//             button.innerHTML = "You released me!";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you press and then release the mouse 
+//button over the button, the `mouseup` event is triggered, 
+//and the button's text changes to "You released me!". This 
+//is a simple but practical use of the `mouseup` event. You 
+//can replace the function with any other function to suit 
+//your needs. For example, you could use it to perform an 
+//action when a user releases the mouse button over an element.
+
+
+console.log("reliable source - mdn and https://www.w3schools.com/jsref/dom_obj_event_methods.asp")
+
+
+
+console.log("HTML Events-offline")
+
+// Sure, I can help with that. The `offline` event in HTML is 
+//fired when the browser has lost access to the network. 
+//Here's a practical example of using the `offline` event. 
+//We'll create a script that shows an alert message when the 
+//browser goes offline:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <p>Try going offline to see the alert message.</p>
+
+//     <script>
+//         // Add an offline event listener to the window
+//         window.addEventListener('offline', function() {
+//             // Show an alert message when the browser goes offline
+//             alert("You are offline!");
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you go offline (for example, by turning 
+//off your Wi-Fi or disconnecting your Ethernet cable), the 
+//`offline` event is triggered, and an alert message is shown. 
+//This is a simple but practical use of the `offline` event. 
+//You can replace the function with any other function to 
+//suit your needs. For example, you could use it to pause 
+//a video or game when the user goes offline.
+
+
+console.log("HTML Events-online")
+// Sure, I can help with that. The `online` event in HTML is 
+//fired when the browser has gained access to the network. 
+//Here's a practical example of using the `online` event. 
+//We'll create a script that shows an alert message when the 
+//browser goes online:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <p>Try going online to see the alert message.</p>
+
+//     <script>
+//         // Add an online event listener to the window
+//         window.addEventListener('online', function() {
+//             // Show an alert message when the browser goes online
+//             alert("You are online!");
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you go online (for example, by turning 
+//on your Wi-Fi or connecting your Ethernet cable), the 
+//`online` event is triggered, and an alert message is shown. 
+//This is a simple but practical use of the `online` event. 
+//You can replace the function with any other function to 
+//suit your needs. For example, you could use it to resume 
+//a video or game when the user goes online.
+
+
+console.log("HTML Events-paste")
+// Sure, I can help with that. The `paste` event in HTML is 
+//fired when the user initiates a paste action through the 
+//browser's user interface or a keyboard shortcut. Here's a 
+//practical example of using the `paste` event. We'll create 
+//an input field that displays a custom message in a paragraph 
+//when the user pastes text into it:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="text" id="myInput" placeholder="Paste something here...">
+//     <p id="demo">You pasted: </p>
+
+//     <script>
+//         // Get the input field
+//         var input = document.getElementById("myInput");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a paste event listener to the input field
+//         input.addEventListener('paste', function(event) {
+//             // Get the pasted data from the clipboard
+//             var pastedData = event.clipboardData.getData('text');
+
+//             // Display the pasted data in the paragraph
+//             demo.innerHTML = "You pasted: " + pastedData;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you paste text into the input field, 
+//the `paste` event is triggered, and the paragraph's text 
+//changes to display what you pasted. This is a simple but 
+//practical use of the `paste` event. You can replace the 
+//function with any other function to suit your needs. For 
+//example, you could use it to perform real-time form 
+//validation as the user pastes text into a field. 
+//Please note that the pasted data might not be immediately 
+//available in the input field's value at the time the 
+//`paste` event is fired. If you need to get the pasted text 
+//from the input field's value, you might need to use a 
+//`setTimeout` to delay the retrieval. Also, please be aware 
+//of the privacy implications when handling sensitive data 
+//that users paste into your website. Always handle such data 
+//responsibly and securely.
+
+
+console.log("HTML Events-pause")
+// Sure, I can help with that. The `pause` event in HTML is 
+//fired when a media element's playback is paused. Here's a 
+//practical example of using the `pause` event. We'll create 
+//a video player that displays a custom message in a 
+//paragraph when the video is paused:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <video id="myVideo" width="320" height="240" controls>
+//         <source src="movie.mp4" type="video/mp4">
+//         Your browser does not support the video tag.
+//     </video>
+//     <p id="demo">Video status: </p>
+
+//     <script>
+//         // Get the video element
+//         var video = document.getElementById("myVideo");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a pause event listener to the video
+//         video.addEventListener('pause', function() {
+//             // Display a custom message when the video is paused
+//             demo.innerHTML = "Video status: Paused";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you pause the video, the `pause` event 
+//is triggered, and the paragraph's text changes to "Video 
+//status: Paused". This is a simple but practical use of the 
+//`pause` event. You can replace the function with any other 
+//function to suit your needs. For example, you could use it 
+//to update a progress bar when the video is paused. Please 
+//replace `"movie.mp4"` with the actual path to your video 
+//file.
+
+console.log("HTML Events-scroll")
+// Sure, I can help with that. The `scroll` event in HTML is 
+// fired when the document view or an element has been 
+// scrolled. Here's a practical example of using the `scroll` 
+// event. We'll create a box that changes its color when you 
+// scroll the page:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+//     <style>
+//         #myBox {
+//             width: 100px;
+//             height: 100px;
+//             background: red;
+//             position: fixed;
+//         }
+//         #content {
+//             height: 2000px;
+//         }
+//     </style>
+// </head>
+// <body>
+//     <div id="myBox"></div>
+//     <div id="content"></div>
+
+//     <script>
+//         // Get the box element
+//         var box = document.getElementById("myBox");
+
+//         // Add a scroll event listener to the window
+//         window.addEventListener('scroll', function() {
+//             // Change the box's color when you scroll the page
+//             box.style.background = "blue";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you scroll the page, the `scroll` event 
+// is triggered, and the box's color changes to blue. This is 
+// a simple but practical use of the `scroll` event. You can 
+// replace the function with any other function to suit your 
+// needs. For example, you could use it to show or hide a 
+// navigation bar when the user scrolls the page. Please note 
+// that the `scroll` event is fired very frequently, and 
+// running complex operations on each `scroll` event can 
+// cause performance issues. It's often a good idea to 
+// throttle or debounce the event handler to improve 
+// performance. Also, please be aware that the `scroll` event 
+// does not bubble up, and it cannot be cancelled.
+
+console.log("HTML Events-search")
+// Sure, I can help with that. The `search` event in HTML is 
+//fired when a search is initiated in an `<input>` element 
+//of type `search`. Here's a practical example of using the 
+//`search` event. We'll create a search field that displays a 
+// custom message in a paragraph when a search is initiated:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <input type="search" id="mySearch" placeholder="Search here...">
+//     <p id="demo">You searched for: </p>
+
+//     <script>
+//         // Get the search field
+//         var search = document.getElementById("mySearch");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a search event listener to the search field
+//         search.addEventListener('search', function() {
+//             // Display the search field's current value when a search is initiated
+//             demo.innerHTML = "You searched for: " + search.value;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you initiate a search in the search 
+// field (for example, by pressing Enter), the `search` event 
+// is triggered, and the paragraph's text changes to display 
+// what you searched for. This is a simple but practical use 
+// of the `search` event. You can replace the function with 
+// any other function to suit your needs. For example, you 
+// could use it to perform a search operation when the user 
+// initiates a search. Please note that the `search` event is 
+// only fired for `<input>` elements of type `search`.
+
+
+
+console.log("HTML Events-select")
+// Sure, I can help with that. The `select` event in HTML is 
+//fired when some text has been selected in an `<input>` 
+//element or a `<textarea>` element. Here's a practical 
+//example of using the `select` event. We'll create a 
+//textarea that displays a custom message in a paragraph when 
+//the user selects some text:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <textarea id="myTextarea">Try selecting some text here...</textarea>
+//     <p id="demo">You selected: </p>
+
+//     <script>
+//         // Get the textarea element
+//         var textarea = document.getElementById("myTextarea");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a select event listener to the textarea
+//         textarea.addEventListener('select', function() {
+//             // Get the selected text from the textarea
+//             var selectedText = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
+
+//             // Display the selected text in the paragraph
+//             demo.innerHTML = "You selected: " + selectedText;
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you select some text in the textarea, 
+//the `select` event is triggered, and the paragraph's text 
+//changes to display what you selected. This is a simple but 
+//practical use of the `select` event. You can replace the 
+//function with any other function to suit your needs. For 
+//example, you could use it to perform an action when the 
+//user selects some text. Please note that the `select` 
+//event is only fired for `<input>` and `<textarea>` elements. If you need to detect text selection in other elements, you might need to use the `Selection` API or the `getSelection` method.
+
+
+
+console.log("HTML Events-show")
+// The `show` event in HTML is fired when a `<menu>` element 
+//is shown as a context menu. However, please note that the 
+//`<menu>` element and its associated features are currently 
+//not supported in any major browsers and it's not 
+//recommended to use it in production websites.
+
+// Here's an example of how the `show` event might be used if it were supported:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <menu type="context" id="mymenu">
+//         <menuitem label="Refresh" onclick="window.location.reload();"></menuitem>
+//         <menuitem label="Help" onclick="window.open('help.html');"></menuitem>
+//     </menu>
+
+//     <p contextmenu="mymenu">Right-click on this paragraph to see the custom context menu.</p>
+
+//     <script>
+//         // Get the menu element
+//         var menu = document.getElementById("mymenu");
+
+//         // Add a show event listener to the menu
+//         menu.addEventListener('show', function() {
+//             // Show an alert message when the menu is shown
+//             alert("Menu is shown!");
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you right-click on the paragraph to 
+//show the custom context menu, the `show` event would be 
+//triggered, and an alert message would be shown. This is 
+//a simple but practical use of the `show` event. You can 
+//replace the function with any other function to suit your 
+//needs. For example, you could use it to track when users 
+//open the context menu. However, as mentioned earlier, 
+//this is currently not supported in any major browsers. 
+//Instead, you might want to use JavaScript and CSS to 
+//create custom context menus. Please always check the 
+//current browser compatibility before using any HTML, CSS, 
+//or JavaScript features.
+
+
+console.log("HTML Events-submit")
+// Sure, I can help with that. The `submit` event in HTML 
+//is fired when a form is submitted. Here's a practical 
+//example of using the `submit` event. We'll create a form 
+//that displays a custom message in a paragraph when the 
+//form is submitted:
+
+// ```html
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <form id="myForm">
+//         <input type="text" placeholder="Type something here...">
+//         <input type="submit" value="Submit">
+//     </form>
+//     <p id="demo">Form status: </p>
+
+//     <script>
+//         // Get the form element
+//         var form = document.getElementById("myForm");
+
+//         // Get the paragraph element
+//         var demo = document.getElementById("demo");
+
+//         // Add a submit event listener to the form
+//         form.addEventListener('submit', function(event) {
+//             // Prevent the form from being submitted to the server
+//             event.preventDefault();
+
+//             // Display a custom message when the form is submitted
+//             demo.innerHTML = "Form status: Submitted";
+//         });
+//     </script>
+// </body>
+// </html>
+// ```
+
+// In this code, when you submit the form, the `submit` event 
+//is triggered, the form's default submit action is prevented 
+//(which would normally refresh the page), and the paragraph's 
+//text changes to "Form status: Submitted". This is a simple 
+//but practical use of the `submit` event. You can replace 
+//the function with any other function to suit your needs. 
+//For example, you could use it to perform form validation 
+//or to send the form data to a server using AJAX. Please 
+//note that the `preventDefault` method is used to prevent 
+//the form from being submitted to the server, which is the 
+//default action for the `submit` event. If you want the form 
+//to be submitted to the server, you should remove the 
+//`event.preventDefault();` line.
+
+
+
+console.log("HTML Events-suspend")
+// The `suspend` event in HTML is fired when media data 
+//loading has been suspended. This could be because the 
+//download has been paused, or because it has been delayed 
+//due to buffering.
+
+// Here's a simple example of how you can use the `suspend` 
+//event with an audio element:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <audio id="myAudio" controls>
+//   <source src="horse.ogg" type="audio/ogg">
+//   <source src="horse.mp3" type="audio/mpeg">
+//   Your browser does not support the audio element.
+// </audio>
+
+// <p id="demo"></p>
+
+// <script>
+// var aud = document.getElementById("myAudio");
+// aud.onsuspend = function() {
+//     document.getElementById("demo").innerHTML = "Media data loading has been suspended!";
+// };
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when the audio element's data loading is 
+//suspended, the text "Media data loading has been suspended!" 
+//will be displayed in the paragraph with the id "demo". 
+//Please replace "horse.ogg" and "horse.mp3" with actual 
+//audio file paths. This example will not work without valid 
+//audio files. 
+
+// Remember, the `suspend` event may not be available in all 
+//browsers, and its behavior can depend on various factors 
+//like network speed and system resources. Always make sure 
+//to test your code in the target environment.
+
+
+console.log("HTML Events-toggle")
+// The `toggle` event is not a standard HTML event. However, 
+//you can create a custom toggle functionality using 
+//JavaScript. Here's an example of how you can create a 
+//simple toggle effect for a button:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myButton" onclick="toggleColor()">Click me</button>
+
+// <script>
+// var isBlue = false;
+
+// function toggleColor() {
+//     var btn = document.getElementById("myButton");
+//     if (isBlue) {
+//         btn.style.backgroundColor = "red";
+//         isBlue = false;
+//     } else {
+//         btn.style.backgroundColor = "blue";
+//         isBlue = true;
+//     }
+// }
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click the button, the 
+//`toggleColor` function is called. This function changes 
+//the background color of the button between blue and red 
+//each time it's clicked. This is a simple demonstration of 
+//a toggle effect. You can extend this concept to create 
+//more complex toggle behaviors as needed. Remember to test 
+//your code in the target environment.
+
+
+console.log("HTML Events-touchmove")
+// The `touchmove` event is fired when one or more touch 
+//points are moved along the touch surface. This event is 
+//commonly used in touch-enabled devices. Here's a simple 
+//example of how you can use the `touchmove` event:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="status">Touch and drag inside this box</div>
+
+// <script>
+// document.getElementById("status").addEventListener("touchmove", function(event) {
+//     event.preventDefault();
+//     var touch = event.touches[0];
+//     document.getElementById("status").innerHTML = "Touch X: " + touch.clientX + "<br>Touch Y: " + touch.clientY;
+// }, false);
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you touch and move your finger 
+//inside the box, the `touchmove` event is triggered. 
+//The event listener then updates the text inside the box 
+//to show the current X and Y coordinates of the touch point.
+
+// Please note that this example will only work on 
+//touch-enabled devices. Also, the `preventDefault` method 
+//is used to prevent the browser's default behavior of 
+//scrolling the page when you touch and move your finger. 
+//Remember to test your code in the target environment.
+
+
+
+console.log("HTML Events-waiting")
+// The `waiting` event in HTML is fired when playback has 
+//stopped because of a temporary lack of data. This event 
+//is often used with media elements, like `<audio>` or 
+//`<video>`. Here's a simple example of how you can use the 
+//`waiting` event:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <video id="myVideo" width="320" height="240" controls>
+//   <source src="movie.mp4" type="video/mp4">
+//   <source src="movie.ogg" type="video/ogg">
+//   Your browser does not support the video tag.
+// </video>
+
+// <p id="demo"></p>
+
+// <script>
+// var vid = document.getElementById("myVideo");
+// vid.onwaiting = function() {
+//     document.getElementById("demo").innerHTML = "Playback stopped due to a temporary lack of data!";
+// };
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when the video's playback is stopped due 
+//to a temporary lack of data, the text "Playback stopped due 
+//to a temporary lack of data!" will be displayed in the 
+//paragraph with the id "demo". Please replace "movie.mp4" 
+//and "movie.ogg" with actual video file paths. This example 
+//will not work without valid video files.
+
+// Remember, the `waiting` event may not be available in 
+//all browsers, and its behavior can depend on various factors 
+//like network speed and system resources. Always make sure 
+//to test your code in the target environment.
+
+
+console.log("HTML Events-wheel")
+// The `wheel` event in HTML is fired when a wheel button 
+//of a pointing device (usually a mouse) is rotated. This 
+//can be used to implement custom scroll behaviors. Here's 
+//a simple example of how you can use the `wheel` event:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="demo" style="width:200px;height:200px;overflow:auto;">
+//   <div style="margin:500px;width:2000px;height:2000px;"></div>
+// </div>
+
+// <p id="status"></p>
+
+// <script>
+// document.getElementById("demo").addEventListener("wheel", function(event) {
+//     event.preventDefault();
+//     var status = document.getElementById("status");
+//     status.innerHTML = "Wheel event fired: " + event.deltaY;
+// }, { passive: false });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you scroll inside the box, the 
+//`wheel` event is triggered. The event listener then 
+//updates the text below the box to show the value of 
+//`event.deltaY`, which represents the vertical scroll amount.
+
+// Please note that the `preventDefault` method is used to 
+//prevent the browser's default scroll behavior. This is 
+//necessary because the `wheel` event is often used to 
+//implement custom scroll behaviors. Remember to test your 
+//code in the target environment. Also, note that the 
+//`{ passive: false }` option is used when adding the event 
+//listener to indicate that the `preventDefault` method may 
+//be called in the event handler. This is required in some 
+//browsers to prevent a console warning about passive event 
+//listeners.
+
+
+console.log("HTML Event objects-Clipboard Events")
+// Clipboard events in HTML include `copy`, `cut`, and 
+//`paste`. These events are fired when the user interacts 
+//with the clipboard through keyboard or context menu 
+//commands. Here's a simple example of how you can use 
+//these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" value="Hello, World!" id="myInput">
+// <p id="message"></p>
+
+// <script>
+// var input = document.getElementById("myInput");
+// var message = document.getElementById("message");
+
+// input.addEventListener("copy", function(event) {
+//     message.textContent = "Copy event fired!";
+// });
+
+// input.addEventListener("cut", function(event) {
+//     message.textContent = "Cut event fired!";
+// });
+
+// input.addEventListener("paste", function(event) {
+//     message.textContent = "Paste event fired!";
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you copy, cut, or paste from the 
+//input field, the corresponding event is triggered. The 
+//event listener then updates the text in the paragraph below 
+//the input field to indicate which event was fired.
+
+//Please note that clipboard events may not be fully supported 
+//in all browsers, and their behavior can depend on various 
+//factors like browser settings and permissions. Always make 
+//sure to test your code in the target environment. Also, 
+//note that manipulating the clipboard data during these 
+//events may require additional permissions in some browsers. 
+//This example does not include such manipulation; it merely 
+//detects the events. If you need to read or modify the 
+//clipboard data, please refer to the Clipboard API 
+//documentation and ensure you handle the permissions 
+//correctly. Remember to respect user privacy when dealing 
+//with clipboard data.
+
+console.log("HTML Event objects-Drag Events")
+// Drag events in HTML include `dragstart`, `drag`, 
+//`dragend`, `dragenter`, `dragover`, `dragleave`, and 
+//`drop`. These events are fired when the user drags and 
+//drops an element in a webpage. Here's a simple example 
+//of how you can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+//   <img src="img_logo.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+// </div>
+
+// <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+// <script>
+// function allowDrop(ev) {
+//   ev.preventDefault();
+// }
+
+// function drag(ev) {
+//   ev.dataTransfer.setData("text", ev.target.id);
+// }
+
+// function drop(ev) {
+//   ev.preventDefault();
+//   var data = ev.dataTransfer.getData("text");
+//   ev.target.appendChild(document.getElementById(data));
+// }
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, an image is made draggable with the 
+//`draggable="true"` attribute. The `dragstart` event is 
+//used to set the data to be dragged with the 
+//`dataTransfer.setData` method. The `dragover` event is used 
+//to specify where the dragged data can be dropped. 
+//By default, data/elements cannot be dropped in other 
+//elements, so to allow a drop, we must prevent the default 
+//handling of the element. This is done by calling the 
+//`event.preventDefault()` method for the `ondragover` event. 
+//The `drop` event is used to complete the drag and drop 
+//operation. Here, it moves the dragged image to the drop 
+//target.
+
+// Please replace "img_logo.gif" with an actual image file 
+//path. This example will not work without a valid image file.
+
+// Remember, drag and drop is a complex interaction that can 
+//be difficult to get right. Always make sure to test your 
+//code in the target environment. Also, note that drag and 
+//drop may not be fully supported or may behave differently 
+//on touch devices compared to mouse devices. This example 
+//does not include touch device compatibility. If you need 
+//to support touch devices, please refer to the Touch Events 
+//API documentation and ensure you handle the events correctly. 
+//Remember to respect user privacy when dealing with drag 
+//and drop data.
+
+
+console.log("HTML Event objects-Events")
+// Sure, I can provide an example of how to use HTML event 
+//objects. Let's consider a simple button click event:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myButton">Click me</button>
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("myButton").addEventListener("click", function(event) {
+//     document.getElementById("demo").innerHTML = "Button clicked at: " + event.timeStamp;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, an event listener is added to the button 
+//with the id "myButton". When the button is clicked, the 
+//anonymous function is called. This function uses the 
+//`event` object, which is automatically passed to event 
+//handlers. The `timeStamp` property of the `event` object 
+//is used to display the time (in milliseconds since the 
+//document was loaded) at which the button was clicked.
+
+// Please note that the `timeStamp` property may not be 
+//accurate to the exact millisecond due to various factors 
+//like system clock adjustments and browser throttling. 
+//Always make sure to test your code in the target 
+//environment. Also, note that the `event` object contains 
+//many other properties and methods that can be used to 
+//handle events more effectively. This example only
+// demonstrates one of them. If you need to use other 
+//properties or methods, please refer to the Event interface 
+//documentation and ensure you handle the events correctly. 
+//Remember to respect user privacy when dealing with event 
+//data.
+
+console.log("HTML Event objects-Focus Events")
+// Focus events in HTML include `focus`, `blur`, `focusin`, 
+//and `focusout`. These events are fired when an element 
+//gains or loses focus. Here's a simple example of how you 
+//can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" id="myInput" placeholder="Focus on me">
+// <p id="demo"></p>
+
+// <script>
+// var input = document.getElementById("myInput");
+// var message = document.getElementById("demo");
+
+// input.addEventListener("focus", function(event) {
+//     message.textContent = "Input field focused!";
+// });
+
+// input.addEventListener("blur", function(event) {
+//     message.textContent = "Input field lost focus!";
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click inside the input field, 
+//the `focus` event is triggered, and the text "Input field 
+//focused!" is displayed. When you click outside the input 
+//field, the `blur` event is triggered, and the text 
+//"Input field lost focus!" is displayed.
+
+// Please note that focus events may not be fully 
+//supported in all browsers, and their behavior can depend 
+//on various factors like browser settings and permissions. 
+//Always make sure to test your code in the target environment. 
+//Also, note that the `focus` and `blur` events do not bubble, 
+//but the `focusin` and `focusout` events do. This example 
+//does not demonstrate event bubbling. If you need to handle 
+//focus events on parent elements, please refer to the 
+//FocusEvent interface documentation and ensure you handle 
+//the events correctly. Remember to respect user privacy when 
+//dealing with event data.
+
+console.log("HTML Event objects-input Events")
+// Input events in HTML include `input` and `change`. These 
+//events are fired when the value of an `<input>`, `<select>`,
+// or `<textarea>` element is changed. Here's a simple 
+//example of how you can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" id="myInput" placeholder="Type something here">
+// <p id="demo"></p>
+
+// <script>
+// var input = document.getElementById("myInput");
+// var message = document.getElementById("demo");
+
+// input.addEventListener("input", function(event) {
+//     message.textContent = "Input field changed: " + event.target.value;
+// });
+
+// input.addEventListener("change", function(event) {
+//     message.textContent = "Input field committed: " + event.target.value;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you type in the input field, the 
+//`input` event is triggered, and the text "Input field 
+//changed: " followed by the current value of the input 
+//field is displayed. When you press Enter or the input 
+//field loses focus, the `change` event is triggered, and 
+//the text "Input field committed: " followed by the current 
+//value of the input field is displayed.
+
+// Please note that the `input` event is fired every time 
+//the value of the input field changes, while the `change` 
+//event is only fired when the value is committed, i.e., 
+//when the input field loses focus or the user presses Enter. 
+//Always make sure to test your code in the target environment. 
+//Also, note that the `input` and `change` events can be used 
+//with other form elements like `<select>` and `<textarea>`. 
+//This example only demonstrates their use with an `<input>` 
+//element. If you need to use these events with other elements, 
+//please refer to the InputEvent and Event interface 
+//documentation and ensure you handle the events correctly. 
+//Remember to respect user privacy when dealing with event 
+//data.
+
+
+console.log("HTML Event objects-Keyboard Events")
+// Keyboard events in HTML include `keydown`, `keypress`, 
+// and `keyup`. These events are fired when a user interacts
+//  with the keyboard. Here's a simple example of how you 
+// can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" id="myInput" placeholder="Type something here">
+// <p id="demo"></p>
+
+// <script>
+// var input = document.getElementById("myInput");
+// var message = document.getElementById("demo");
+
+// input.addEventListener("keydown", function(event) {
+//     message.textContent = "Key down: " + event.key;
+// });
+
+// input.addEventListener("keypress", function(event) {
+//     message.textContent = "Key press: " + event.key;
+// });
+
+// input.addEventListener("keyup", function(event) {
+//     message.textContent = "Key up: " + event.key;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you press a key in the input field, 
+// the `keydown` event is triggered, and the text "Key down: " 
+// followed by the key that was pressed is displayed. While 
+// you keep the key pressed, the `keypress` event is 
+// triggered, and the text "Key press: " followed by the key 
+// that was pressed is displayed. When you release the key, 
+// the `keyup` event is triggered, and the text "Key up: " 
+// followed by the key that was released is displayed.
+
+// Please note that the `keydown` and `keyup` events are 
+// fired for all keys, while the `keypress` event is only 
+// fired for keys that produce a character value. Always make 
+// sure to test your code in the target environment. Also, 
+// note that the `event.key` property is used to get the key 
+// that was pressed or released. This property returns a 
+// string that represents the value of the key. If you need 
+// to use other properties of the `event` object, please 
+// refer to the KeyboardEvent interface documentation and 
+// ensure you handle the events correctly. Remember to 
+// respect user privacy when dealing with event data.
+
+console.log("HTML Event objects-Mouse Events")
+// Mouse events in HTML include `click`, `dblclick`, 
+//`mousedown`, `mousemove`, `mouseover`, `mouseout`, 
+//`mouseup`, and `contextmenu`. These events are fired 
+//when a user interacts with the mouse. Here's a simple 
+//example of how you can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myButton">Hover over me</button>
+// <p id="demo"></p>
+
+// <script>
+// var button = document.getElementById("myButton");
+// var message = document.getElementById("demo");
+
+// button.addEventListener("mouseover", function(event) {
+//     message.textContent = "Mouse over: " + event.clientX + ", " + event.clientY;
+// });
+
+// button.addEventListener("mouseout", function(event) {
+//     message.textContent = "Mouse out: " + event.clientX + ", " + event.clientY;
+// });
+
+// button.addEventListener("mousedown", function(event) {
+//     message.textContent = "Mouse down: " + event.clientX + ", " + event.clientY;
+// });
+
+// button.addEventListener("mouseup", function(event) {
+//     message.textContent = "Mouse up: " + event.clientX + ", " + event.clientY;
+// });
+
+// button.addEventListener("click", function(event) {
+//     message.textContent = "Click: " + event.clientX + ", " + event.clientY;
+// });
+
+// button.addEventListener("dblclick", function(event) {
+//     message.textContent = "Double click: " + event.clientX + ", " + event.clientY;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you interact with the button, the 
+//corresponding mouse event is triggered, and the text in 
+//the paragraph below the button is updated to indicate 
+//which event was fired and the mouse coordinates at the 
+//time of the event.
+
+// Please note that the `event.clientX` and `event.clientY` 
+///properties are used to get the horizontal and vertical 
+//coordinates, respectively, of the mouse pointer when the 
+//event was triggered, relative to the viewport. Always make 
+//sure to test your code in the target environment. Also, 
+//note that the `event` object contains many other properties
+// and methods that can be used to handle events more 
+//effectively. This example only demonstrates some of them. 
+//If you need to use other properties or methods, please 
+//refer to the MouseEvent interface documentation and ensure 
+//you handle the events correctly. Remember to respect user 
+//privacy when dealing with event data.
+
+
+
+console.log("HTML Event objects-Storage Events")
+// Sure, I can provide an example of how to use HTML Storage 
+// events. The `storage` event is fired when a storage 
+// area (`localStorage` or `sessionStorage`) has been 
+// modified in the context of another document.
+
+// Here's a simple example of how you can use the `storage` 
+// event:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button onclick="changeValue()">Change local storage</button>
+// <p id="demo"></p>
+
+// <script>
+// // Set initial localStorage value
+// localStorage.setItem("name", "John");
+
+// // Function to change localStorage value
+// function changeValue() {
+//     localStorage.setItem("name", "Jane");
+// }
+
+// // Listen for storage event
+// window.addEventListener("storage", function(event) {
+//     document.getElementById("demo").innerHTML = "Storage key " + event.key + " changed from " + event.oldValue + " to " + event.newValue;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click the button, the 
+// `changeValue` function is called, which changes the 
+// value of the "name" key in `localStorage`. This triggers 
+// the `storage` event, and the text in the paragraph is 
+// updated to indicate the key that was changed, the old 
+// value, and the new value.
+
+// Please note that the `storage` event is not triggered 
+// for changes made to the `localStorage` or `sessionStorage` 
+// objects in the same document. It is only triggered for 
+// changes made in other documents. Therefore, to see the 
+// `storage` event in action, you would need to have this 
+// page open in two tabs or windows and click the button 
+// in one of them. The `storage` event would then be 
+// triggered in the other tab or window.
+
+// Always make sure to test your code in the target 
+// environment. Also, note that the `event` object contains 
+// many other properties and methods that can be used to 
+// handle events more effectively. This example only 
+// demonstrates some of them. If you need to use other 
+// properties or methods, please refer to the StorageEvent i
+// nterface documentation and ensure you handle the events 
+// correctly. Remember to respect user privacy when dealing 
+//with storage data.
+
+
+console.log("HTML Event objects-Transition Events")
+// Transition events in HTML include `transitionend`, 
+// `transitionstart`, and `transitionrun`. These events 
+// are fired when a CSS transition has completed or started. 
+// Here's a simple example of how you can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myButton">Click me</button>
+// <div id="myDiv" style="width:100px;height:100px;background:red;transition:width 2s;"></div>
+// <p id="demo"></p>
+
+// <script>
+// var button = document.getElementById("myButton");
+// var div = document.getElementById("myDiv");
+// var message = document.getElementById("demo");
+
+// button.addEventListener("click", function(event) {
+//     div.style.width = "200px";
+// });
+
+// div.addEventListener("transitionstart", function(event) {
+//     message.textContent = "Transition started";
+// });
+
+// div.addEventListener("transitionend", function(event) {
+//     message.textContent = "Transition ended";
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click the button, the width of 
+// the div is changed, which triggers a CSS transition. 
+// The `transitionstart` event is fired when the transition 
+// starts, and the `transitionend` event is fired when the 
+// transition ends. The text in the paragraph is updated to 
+// indicate when the transition starts and ends.
+
+// Please note that the `transition` property is used in the 
+// div's style to specify that the width should transition 
+// over 2 seconds. Always make sure to test your code in the 
+// target environment. Also, note that the `event` object 
+// contains many other properties and methods that can be used to handle events more effectively. This example only demonstrates some of them. If you need to use other properties or methods, please refer to the TransitionEvent interface documentation and ensure you handle the events correctly. Remember to respect user privacy when dealing with event data.
+
+
+
+console.log("HTML Event objects-Ui Events")
+// UI Events in HTML include `load`, `unload`, `scroll`, 
+//`resize`, `select`, and `change`. These events are fired 
+//when a user interacts with the user interface of a webpage. 
+//Here's a simple example of how you can use these events:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <select id="mySelect">
+//   <option value="option1">Option 1</option>
+//   <option value="option2">Option 2</option>
+//   <option value="option3">Option 3</option>
+// </select>
+// <p id="demo"></p>
+
+// <script>
+// var select = document.getElementById("mySelect");
+// var message = document.getElementById("demo");
+
+// select.addEventListener("change", function(event) {
+//     message.textContent = "Selected option: " + event.target.value;
+// });
+
+// window.addEventListener("resize", function(event) {
+//     message.textContent = "Window resized to: " + window.innerWidth + "x" + window.innerHeight;
+// });
+
+// window.addEventListener("load", function(event) {
+//     message.textContent = "Page loaded";
+// });
+
+// window.addEventListener("unload", function(event) {
+//     alert("Page is unloading");
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you change the selected option in 
+//the dropdown, the `change` event is triggered, and the 
+//text "Selected option: " followed by the value of the 
+//selected option is displayed. When you resize the window, 
+//the `resize` event is triggered, and the text "Window 
+//resized to: " followed by the current window dimensions 
+//is displayed. When the page is loaded, the `load` event 
+//is triggered, and the text "Page loaded" is displayed. 
+//When you navigate away from the page, the `unload` event 
+//is triggered, and an alert is shown saying "Page is 
+//unloading".
+
+// Please note that the `unload` event is not reliable and 
+//may not be fired in some cases, such as when the page is 
+//cached by the browser. Always make sure to test your code 
+//in the target environment. Also, note that the `event` 
+//object contains many other properties and methods that 
+//can be used to handle events more effectively. This 
+//example only demonstrates some of them. If you need to use 
+//other properties or methods, please refer to the UIEvent 
+//interface documentation and ensure you handle the events 
+//correctly. Remember to respect user privacy when dealing 
+//with event data.
+
+console.log("HTML Event objects-Wheel Events")
+// Sure, I can provide an example of how to use HTML Wheel 
+//events. The `wheel` event is fired when the wheel button 
+//of a pointing device (usually a mouse) is rotated. This 
+//can be used to implement custom scroll behaviors. Here's 
+//a simple example of how you can use the `wheel` event:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="demo" style="width:200px;height:200px;overflow:auto;">
+//   <div style="margin:500px;width:2000px;height:2000px;"></div>
+// </div>
+
+// <p id="status"></p>
+
+// <script>
+// document.getElementById("demo").addEventListener("wheel", function(event) {
+//     event.preventDefault();
+//     var status = document.getElementById("status");
+//     status.innerHTML = "Wheel event fired: " + event.deltaY;
+// }, { passive: false });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you scroll inside the box, the 
+//`wheel` event is triggered. The event listener then 
+//updates the text below the box to show the value of 
+//`event.deltaY`, which represents the vertical scroll 
+//amount.
+
+// Please note that the `preventDefault` method is used to 
+//prevent the browser's default scroll behavior. This is 
+//necessary because the `wheel` event is often used to 
+//implement custom scroll behaviors. Remember to test your 
+//code in the target environment. Also, note that the 
+//`{ passive: false }` option is used when adding the event 
+//listener to indicate that the `preventDefault` method may 
+//be called in the event handler. This is required in some 
+//browsers to prevent a console warning about passive event 
+//listeners. Remember to respect user privacy when dealing 
+//with event data.
+
+
+console.log("reliable source - mdn and https://www.w3schools.com/jsref/dom_obj_event_methods.asp")
+
+
+
+console.log("HTML Event Properties - bubbles")
+// Sure, I can provide an example of how the `bubbles` 
+// property works in HTML event handling. The `bubbles` 
+// property returns a boolean value that indicates whether 
+// an event propagates up (bubbles) through the DOM or not.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="padding: 50px; background-color: lightblue;">
+//   <button id="myBtn">Click me</button>
+// </div>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   alert("Button Clicked!\nBubbles: " + event.bubbles);
+// });
+
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("click", function(event) {
+//   alert("Div Clicked!\nBubbles: " + event.bubbles);
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, you'll 
+// first see an alert saying "Button Clicked! Bubbles: true",
+// and then another alert saying "Div Clicked! Bubbles: true". 
+// This is because the click event on the button bubbles up 
+// to the containing `div` element. If you click outside the 
+// button but inside the `div`, you'll only see the alert for 
+// the `div` click, demonstrating the bubbling effect. 
+
+// Please note that not all events bubble. For example, the 
+// `focus` event does not bubble, and the `bubbles` property
+//  of such an event would return `false`. You can check the 
+// `bubbles` property of an event to determine if it bubbles 
+// or not. 
+
+// Remember to run this code in an actual HTML environment to
+//  see the results. 
+
+console.log("HTML Event Properties - button")
+// Sure, I can provide an example of how the `button` 
+// property works in HTML event handling. The `button` 
+// property returns a number that indicates which mouse 
+// button was pressed when a mouse event was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me with different mouse buttons</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("mousedown", function(event) {
+//   var text;
+//   switch (event.button) {
+//     case 0:
+//       text = "Left button clicked!";
+//       break;
+//     case 1:
+//       text = "Middle button clicked!";
+//       break;
+//     case 2:
+//       text = "Right button clicked!";
+//       break;
+//     default:
+//       text = "Unknown button clicked!";
+//   }
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button with 
+// different mouse buttons, the text under the button will 
+// change accordingly. The left button corresponds to `0`, 
+// the middle button (or clicking the scroll wheel) corresponds 
+// to `1`, and the right button corresponds to `2`.
+
+// Please note that this code might not work as expected 
+// in all browsers due to differences in how they handle 
+// mouse events. Also, remember to run this code in an actual
+//  HTML environment to see the results. Let me know if you 
+// have any other questions! 😊
+
+
+console.log("HTML Event Properties - buttons")
+// Sure, I can provide an example of how the `buttons` 
+//property works in HTML event handling. The `buttons` 
+//property returns a number that indicates which mouse 
+//button or buttons were pressed when a mouse event was 
+//triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me with different mouse buttons</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("mousedown", function(event) {
+//   var text;
+//   switch (event.buttons) {
+//     case 1:
+//       text = "Left button clicked!";
+//       break;
+//     case 2:
+//       text = "Right button clicked!";
+//       break;
+//     case 4:
+//       text = "Middle button clicked!";
+//       break;
+//     default:
+//       text = "Multiple or unknown buttons clicked!";
+//   }
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button with 
+//different mouse buttons, the text under the button will 
+//change accordingly. The left button corresponds to `1`, 
+//the right button corresponds to `2`, and the middle button 
+//(or clicking the scroll wheel) corresponds to `4`.
+
+// Please note that this code might not work as expected in 
+//all browsers due to differences in how they handle mouse 
+//events. Also, remember to run this code in an actual HTML 
+//environment to see the results. Let me know if you have any 
+//other questions! 😊
+
+
+console.log("HTML Event Properties - charCode")
+// Sure, I can provide an example of how the `charCode` 
+//property works in HTML event handling. The `charCode` 
+//property returns the Unicode of the key character that 
+//was pressed when a keyboard event was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" id="myInput" placeholder="Type something here">
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the input field
+// document.getElementById("myInput").addEventListener("keypress", function(event) {
+//   var text = "Key pressed: " + String.fromCharCode(event.charCode);
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you type something in the input 
+//field, the text under the input field will display the 
+//character that was pressed. The `charCode` property is 
+//used to get the Unicode of the key character, and 
+//`String.fromCharCode()` is used to convert this Unicode 
+//into a string.
+
+// Please note that the `charCode` property is deprecated 
+//and may not work in all browsers. The `key` property is 
+//recommended for new projects. Also, remember to run this 
+//code in an actual HTML environment to see the results. 
+//Let me know if you have any other questions! 😊
+console.log("HTML Event Properties - clientX")
+// Sure, I can provide an example of how the `clientX` 
+//property works in HTML event handling. The `clientX` 
+//property returns the horizontal coordinate (according to 
+//the client area) of the mouse pointer when a mouse event 
+//was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse X Coordinate: " + event.clientX;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the X 
+//coordinate of the mouse pointer. The `clientX` property 
+//is used to get this coordinate.
+
+// Please note that the `clientX` value is relative to the 
+//top left corner of the client area of the browser, not 
+//the top left corner of the page. Also, remember to run this 
+//code in an actual HTML environment to see the results. Let 
+//me know if you have any other questions! 😊
+console.log("HTML Event Properties - clientY")
+// Sure, I can provide an example of how the `clientY` 
+//property works in HTML event handling. The `clientY` 
+//property returns the vertical coordinate (according to 
+//the client area) of the mouse pointer when a mouse event 
+//was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse Y Coordinate: " + event.clientY;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the Y 
+//coordinate of the mouse pointer. The `clientY` property is 
+//used to get this coordinate.
+
+// Please note that the `clientY` value is relative to the 
+//top left corner of the client area of the browser, not the 
+//top left corner of the page. Also, remember to run this 
+//code in an actual HTML environment to see the results. 
+//Let me know if you have any other questions! 😊
+console.log("HTML Event Properties - currentTarget")
+// Sure, I can provide an example of how the `currentTarget` 
+//property works in HTML event handling. The `currentTarget` 
+//property always refers to the element that the event handler 
+//has been attached to as opposed to `target` property which 
+//indicates the element where the event was actually fired.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="padding: 50px; background-color: lightblue;">
+//   <button id="myBtn">Click me</button>
+// </div>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("click", function(event) {
+//   alert("Event handler attached to: " + event.currentTarget.id + "\nEvent fired at: " + event.target.id);
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, you'll see 
+//an alert saying "Event handler attached to: myDiv\nEvent 
+//fired at: myBtn". This is because the event handler is 
+//attached to the `div` element (the current target), but 
+//the event is actually fired at the `button` element 
+//(the target). If you click outside the button but inside 
+//the `div`, both the current target and the target will be 
+//the `div`.
+
+// Remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+console.log("HTML Event Properties - data")
+// Sure, I can provide an example of how the `data` property 
+//works in HTML event handling. The `data` property is used 
+//with the `createEvent()` method, and it specifies some data 
+//that can be associated with the event.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Create a new event
+// var myEvent = new CustomEvent("myEvent", {detail: {key: "Hello, world!"}});
+
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("myEvent", function(event) {
+//   document.getElementById("demo").innerHTML = "Event data: " + event.detail.key;
+// });
+
+// // Dispatch the event
+// document.getElementById("myBtn").addEventListener("click", function() {
+//   this.dispatchEvent(myEvent);
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, the text 
+//under the button will display "Event data: Hello, world!". 
+//This is because a custom event named "myEvent" is created 
+//and dispatched when the button is clicked, and the `data` 
+//property of this event is set to "Hello, world!".
+
+// Please note that the `data` property is not widely 
+//supported and may not work in all browsers. Also, remember 
+//to run this code in an actual HTML environment to see the 
+//results. Let me know if you have any other questions! 😊
+
+console.log("HTML Event Properties - detail")
+// Sure, I can provide an example of how the `detail` 
+//property works in HTML event handling. The `detail` 
+//property returns a number that indicates how many times 
+//the mouse was clicked, for click and dblclick events. For 
+//other events, it returns other information associated with 
+//the event.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   var text = "Button clicked " + event.detail + " time(s)";
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, the text 
+//under the button will display how many times the button 
+//has been clicked. The `detail` property is used to get this 
+//number.
+
+// Please note that the `detail` property may not work as 
+//expected in all browsers due to differences in how they 
+//handle mouse events. Also, remember to run this code in 
+//an actual HTML environment to see the results. Let me 
+//know if you have any other questions! 😊
+console.log("HTML Event Properties - inputType")
+// Sure, I can provide an example of how the `inputType` 
+//property works in HTML event handling. The `inputType` 
+//property returns a string that represents the type of 
+//change that triggered the `input` event.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" id="myInput" placeholder="Type something here">
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the input field
+// document.getElementById("myInput").addEventListener("input", function(event) {
+//   var text = "Input type: " + event.inputType;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you type something in the input 
+//field, the text under the input field will display the type 
+//of input that triggered the event. The `inputType` property 
+//is used to get this type.
+
+// Please note that the `inputType` property is not widely 
+//supported and may not work in all browsers. Also, remember 
+//to run this code in an actual HTML environment to see the 
+//results. Let me know if you have any other questions! 😊
+console.log("HTML Event Properties - isTrusted")
+// Sure, I can provide an example of how the `isTrusted` 
+//property works in HTML event handling. The `isTrusted` 
+//property returns a boolean that indicates if an event was 
+//generated by a user action, or created and dispatched via 
+//a script.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   var text = "Is event trusted? " + event.isTrusted;
+//   document.getElementById("demo").innerHTML = text;
+// });
+
+// // Create a new event
+// var myEvent = new Event("click");
+
+// // Dispatch the event
+// document.getElementById("myBtn").addEventListener("click", function() {
+//   this.dispatchEvent(myEvent);
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, the text 
+//under the button will display "Is event trusted? true". 
+//This is because the click event is generated by a user 
+//action, so `isTrusted` is `true`. However, when the button 
+//is clicked, a new click event is also created and dispatched 
+//via a script. For this event, `isTrusted` is `false`.
+
+// Please note that the `isTrusted` property is read-only 
+//and cannot be changed by scripts. Also, remember to run 
+//this code in an actual HTML environment to see the results. 
+//Let me know if you have any other questions! 😊
+console.log("HTML Event Properties - location")
+// Sure, I can provide an example of how the `location` 
+//property works in HTML event handling. The `location` 
+//property is specific to the KeyboardEvent object and it 
+//returns a number representing the location of the key on 
+//the keyboard or device.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <input type="text" id="myInput" placeholder="Type something here">
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the input field
+// document.getElementById("myInput").addEventListener("keydown", function(event) {
+//   var text = "Key location: " + event.location;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you press a key in the input field, the text under the input field will display the location of the key that was pressed. The `location` property is used to get this location.
+
+// The returned number could be:
+// - `0` for standard keys
+// - `1` for left-side modifier keys (such as left shift or left alt)
+// - `2` for right-side modifier keys (such as right shift or right alt)
+// - `3` for keys on the numpad
+
+// Please note that the `location` property may not work as 
+//expected in all browsers due to differences in how they 
+//handle keyboard events. Also, remember to run this code 
+//in an actual HTML environment to see the results. Let me 
+//know if you have any other questions! 😊
+console.log("HTML Event Properties - offsetX")
+// Sure, I can provide an example of how the `offsetX` 
+//property works in HTML event handling. The `offsetX` 
+//property returns the X coordinate of the mouse pointer, 
+//relative to the target element, when a mouse event was 
+//triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse X Coordinate (relative to target): " + event.offsetX;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the X 
+//coordinate of the mouse pointer relative to the square. 
+//The `offsetX` property is used to get this coordinate.
+
+// Please note that the `offsetX` value is relative to the 
+//top left corner of the target element, not the top left 
+//corner of the page or the client area of the browser. 
+//Also, remember to run this code in an actual HTML 
+//environment to see the results. Let me know if you have 
+//any other questions! 😊
+console.log("HTML Event Properties - offsetY")
+// Sure, I can provide an example of how the `offsetY` 
+//property works in HTML event handling. The `offsetY` 
+//property returns the Y coordinate of the mouse pointer, 
+//relative to the target element, when a mouse event was 
+//triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse Y Coordinate (relative to target): " + event.offsetY;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the Y 
+//coordinate of the mouse pointer relative to the square. 
+//The `offsetY` property is used to get this coordinate.
+
+// Please note that the `offsetY` value is relative to the 
+//top left corner of the target element, not the top left 
+//corner of the page or the client area of the browser. 
+//Also, remember to run this code in an actual HTML environment to see the results. Let me know if you have any other questions! 😊
+console.log("HTML Event Properties - pageX")
+// Sure, I can provide an example of how the `pageX` 
+//property works in HTML event handling. The `pageX` 
+//property returns the X coordinate (horizontal position) 
+//of the mouse pointer, relative to the document, when the 
+//mouse event was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse X Coordinate (relative to document): " + event.pageX;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the X 
+//coordinate of the mouse pointer relative to the document. 
+//The `pageX` property is used to get this coordinate.
+
+// Please note that the `pageX` value is relative to the 
+//top left corner of the whole document, not the top left 
+//corner of the viewport or the target element. Also, 
+//remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+console.log("HTML Event Properties - pageY")
+// Sure, I can provide an example of how the `pageY` 
+//property works in HTML event handling. The `pageY` 
+//property returns the Y coordinate (vertical position) 
+//of the mouse pointer, relative to the document, when 
+//the mouse event was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse Y Coordinate (relative to document): " + event.pageY;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the 
+//blue square, the text under the square will display 
+//the Y coordinate of the mouse pointer relative to the 
+//document. The `pageY` property is used to get this 
+//coordinate.
+
+// Please note that the `pageY` value is relative to the 
+//top left corner of the whole document, not the top left 
+//corner of the viewport or the target element. Also, 
+//remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+console.log("HTML Event Properties - screenX")
+// Sure, I can provide an example of how the `screenX` 
+//property works in HTML event handling. The `screenX` 
+//property returns the X coordinate (horizontal position) 
+//of the mouse pointer, relative to the screen, when a mouse 
+//event was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse X Coordinate (relative to screen): " + event.screenX;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the X 
+//coordinate of the mouse pointer relative to the screen. 
+//The `screenX` property is used to get this coordinate.
+
+// Please note that the `screenX` value is relative to 
+//the top left corner of the screen, not the top left corner 
+//of the page or the client area of the browser. Also, 
+//remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+
+console.log("HTML Event Properties - screenY")
+// Sure, I can provide an example of how the `screenY` 
+//property works in HTML event handling. The `screenY` 
+//property returns the Y coordinate (vertical position) 
+//of the mouse pointer, relative to the screen, when a 
+//mouse event was triggered.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="height: 200px; width: 200px; background-color: lightblue;"></div>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("mousemove", function(event) {
+//   var text = "Mouse Y Coordinate (relative to screen): " + event.screenY;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you move your mouse over the blue 
+//square, the text under the square will display the Y 
+//coordinate of the mouse pointer relative to the screen. 
+//The `screenY` property is used to get this coordinate.
+
+// Please note that the `screenY` value is relative to the 
+//top left corner of the screen, not the top left corner of 
+//the page or the client area of the browser. Also, remember 
+//to run this code in an actual HTML environment to see the 
+//results. Let me know if you have any other questions! 😊
+
+console.log("HTML Event Properties - target")
+// Sure, I can provide an example of how the `target` 
+//property works in HTML event handling. The `target` 
+//property returns the element that triggered the event.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="padding: 50px; background-color: lightblue;">
+//   <button id="myBtn">Click me</button>
+// </div>
+
+// <script>
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("click", function(event) {
+//   alert("Event triggered by: " + event.target.id);
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, you'll see 
+//an alert saying "Event triggered by: myBtn". This is 
+//because the event is triggered by the `button` element, 
+//so the `target` is the `button`. If you click outside the 
+//button but inside the `div`, the `target` will be the `div`.
+
+// Remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+
+console.log("HTML Event Properties - view")
+// Sure, I can provide an example of how the `view` property 
+//works in HTML event handling. The `view` property returns 
+//a reference to the `Window` object where the event occurred.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   var text = "Event view: " + event.view;
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, the text 
+//under the button will display the `Window` object where 
+//the event occurred. The `view` property is used to get 
+//this object.
+
+// Please note that the `view` property is read-only and 
+//cannot be changed by scripts. Also, remember to run this 
+//code in an actual HTML environment to see the results. 
+//Let me know if you have any other questions! 😊
+
+
+console.log("HTML Event Methods - getModifierState")
+// Sure, I can provide an example of how the 
+//`getModifierState()` method works in HTML event 
+//handling. The `getModifierState()` method returns 
+//a boolean value that indicates whether a specific 
+//system modifier key was activated when the event occurred.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me</button>
+
+// <p id="demo"></p>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   var text = "Is Shift key pressed? " + event.getModifierState("Shift");
+//   document.getElementById("demo").innerHTML = text;
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, the 
+//text under the button will display whether the Shift 
+//key was pressed when the button was clicked. The 
+//`getModifierState()` method is used to get this information.
+
+// Please note that the `getModifierState()` method is 
+//case-sensitive and should be used with the exact names 
+//of the modifier keys. Also, remember to run this code 
+//in an actual HTML environment to see the results. Let
+// me know if you have any other questions! 😊
+
+console.log("HTML Event Methods - preventDefault")
+
+// console.log("HTML Event MethodsSure, I can provide 
+//an example of how the `preventDefault()` method works 
+//in HTML event handling. The `preventDefault()` method 
+//is used to prevent the browser from executing the default 
+//action of the event.
+
+// // Here's a simple example:
+
+// // ```html
+// // <!DOCTYPE html>
+// // <html>
+// // <body>
+
+// // <a href="https://www.bing.com" id="myLink">Go to Bing</a>
+
+// <script>
+// // Add event listener to the link
+// document.getElementById("myLink").addEventListener("click", function(event) {
+//   event.preventDefault();
+//   alert("Default action prevented!");
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the link, instead 
+//of going to Bing (the default action of the link), you'll 
+//see an alert saying "Default action prevented!". This is 
+//because the `preventDefault()` method is used to prevent 
+//the link from being followed.
+
+// Please note that not all default actions can be prevented. 
+//Also, remember to run this code in an actual HTML 
+//environment to see the results. Let me know if you 
+//have any other questions! 😊 - stopImmidiatePropagation")
+console.log("HTML Event Methods - stopImmidiatePropagation")
+// Sure, I can provide an example of how the 
+//`stopImmediatePropagation()` method works in HTML event 
+//handling. The `stopImmediatePropagation()` method 
+//prevents other listeners of the same event from being called.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <button id="myBtn">Click me</button>
+
+// <script>
+// // Add the first event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   alert("First listener!");
+//   event.stopImmediatePropagation();
+// });
+
+// // Add the second event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   alert("Second listener!");
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, you'll 
+//only see an alert saying "First listener!". You won't 
+//see the alert for the second listener because the 
+//`stopImmediatePropagation()` method in the first listener 
+//prevents the second listener from being called.
+
+// Please note that the `stopImmediatePropagation()` method 
+//not only prevents further propagation of the event, but 
+//also prevents any other listeners on the same element 
+//from being called. If you only want to stop propagation 
+//and not prevent other listeners from being called, you 
+//can use the `stopPropagation()` method instead. Also, 
+//remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+console.log("HTML Event Methods - stopPropagation")
+// Sure, I can provide an example of how the 
+//`stopPropagation()` method works in HTML event handling. 
+//The `stopPropagation()` method prevents further 
+//propagation of an event during event flow.
+
+// Here's a simple example:
+
+// ```html
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+// <div id="myDiv" style="padding: 50px; background-color: lightblue;">
+//   <button id="myBtn">Click me</button>
+// </div>
+
+// <script>
+// // Add event listener to the button
+// document.getElementById("myBtn").addEventListener("click", function(event) {
+//   alert("Button clicked!");
+//   event.stopPropagation();
+// });
+
+// // Add event listener to the div
+// document.getElementById("myDiv").addEventListener("click", function(event) {
+//   alert("Div clicked!");
+// });
+// </script>
+
+// </body>
+// </html>
+// ```
+
+// In this example, when you click on the button, you'll 
+//only see an alert saying "Button clicked!". You won't see 
+//the alert for the `div` click because the 
+//`stopPropagation()` method in the button's click event 
+//handler prevents the event from bubbling up to the `div`.
+
+// Please note that the `stopPropagation()` method only 
+//stops the event from bubbling up the DOM tree and does 
+//not prevent other listeners on the same element from 
+//being called. If you want to stop other listeners on 
+//the same element from being called, you can use the 
+//`stopImmediatePropagation()` method instead. Also, 
+//remember to run this code in an actual HTML environment 
+//to see the results. Let me know if you have any other 
+//questions! 😊
+
+
+console.log("HTML DOM Events")
+
+// HTML Events
+            // abort
+            // afterprint
+            // animationend
+            // animationiteration
+            // animationstart
+            // beforeprint
+            // beforeunload
+            // blur
+            // canplay
+            // canplaythrough
+            // change
+            // click
+            // contextmenu
+            // copy
+            // cut
+            // dblclick
+            // drag
+            // dragend
+            // dragenter
+            // dragleave
+            // dragover
+            // dragstart
+            // drop
+            // durationchange
+            // ended
+            // error
+            // focus
+            // focusin
+            // focusout
+            // fullscreenchange
+            // fullscreenerror
+            // hashchange
+            // input
+            // invalid
+            // keydown
+            // keypress
+            // keyup
+            // load
+            // loadeddata
+            // loadedmetadata
+            // loadstart
+            // message
+            // mousedown
+            // mouseenter
+            // mouseleave
+            // mousemove
+            // mouseover
+            // mouseout
+            // mouseup
+            // offline
+            // online
+            // open
+            // pagehide
+            // pageshow
+            // paste
+            // pause
+            // play
+            // playing
+            // progress
+            // ratechange
+            // resize
+            // reset
+            // scroll
+            // search
+            // seeked
+            // seeking
+            // select
+            // show
+            // stalled
+            // submit
+            // suspend
+            // timeupdate
+            // toggle
+            // touchcancel
+            // touchend
+            // touchmove
+            // touchstart
+            // transitionend
+            // unload
+            // volumechange
+            // waiting
+            // wheel
+
+console.log("HTML DOM Events")
+
+// DOM Events allow JavaScript to add event listener or event handlers to HTML elements.
+
+// For a tutorial about Events, read our JavaScript Events Tutorial.
+
+// Examples
+// In HTML onclick is the event listener, myFunction is the event handler:
+
+// <button onclick="myFunction()">Click me</button>
+// In JavaScript click is the event, myFunction is the event handler:
+
+// button.addEventListener("click", myFunction);
+// Event	Occurs When	Belongs To
+// abort	The loading of a media is aborted	UiEvent, Event
+// afterprint	A page has started printing	Event
+// animationend	A CSS animation has completed	AnimationEvent
+// animationiteration	A CSS animation is repeated	AnimationEvent
+// animationstart	A CSS animation has started	AnimationEvent
+// beforeprint	A page is about to be printed	Event
+// beforeunload	Before a document is about to be unloaded	UiEvent, Event
+// blur	An element loses focus	FocusEvent
+// canplay	The browser can start playing a media (has buffered enough to begin)	Event
+// canplaythrough	The browser can play through a media without stopping for buffering	Event
+// change	The content of a form element has changed	Event
+// click	An element is clicked on	MouseEvent
+// contextmenu	An element is right-clicked to open a context menu	MouseEvent
+// copy	The content of an element is copied	ClipboardEvent
+// cut	The content of an element is cut	ClipboardEvent
+// dblclick	An element is double-clicked	MouseEvent
+// drag	An element is being dragged	DragEvent
+// dragend	Dragging of an element has ended	DragEvent
+// dragenter	A dragged element enters the drop target	DragEvent
+// dragleave	A dragged element leaves the drop target	DragEvent
+// dragover	A dragged element is over the drop target	DragEvent
+// dragstart	Dragging of an element has started	DragEvent
+// drop	A dragged element is dropped on the target	DragEvent
+// durationchange	The duration of a media is changed	Event
+// ended	A media has reach the end ("thanks for listening")	Event
+// error	An error has occurred while loading a file	ProgressEvent, UiEvent, Event
+// focus	An element gets focus	FocusEvent
+// focusin	An element is about to get focus	FocusEvent
+// focusout	An element is about to lose focus	FocusEvent
+// fullscreenchange	An element is displayed in fullscreen mode	Event
+// fullscreenerror	An element can not be displayed in fullscreen mode	Event
+// hashchange	There has been changes to the anchor part of a URL	HashChangeEvent
+// input	An element gets user input	InputEvent, Event
+// invalid	An element is invalid	Event
+// keydown	A key is down	KeyboardEvent
+// keypress	A key is pressed	KeyboardEvent
+// keyup	A key is released	KeyboardEvent
+// load	An object has loaded	UiEvent, Event
+// loadeddata	Media data is loaded	Event
+// loadedmetadata	Meta data (like dimensions and duration) are loaded	Event
+// loadstart	The browser starts looking for the specified media	ProgressEvent
+// message	A message is received through the event source	Event
+// mousedown	The mouse button is pressed over an element	MouseEvent
+// mouseenter	The pointer is moved onto an element	MouseEvent
+// mouseleave	The pointer is moved out of an element	MouseEvent
+// mousemove	The pointer is moved over an element	MouseEvent
+// mouseover	The pointer is moved onto an element	MouseEvent
+// mouseout	The pointer is moved out of an element	MouseEvent
+// mouseup	A user releases a mouse button over an element	MouseEvent
+// mousewheel	Deprecated. Use the wheel event instead	WheelEvent
+// offline	The browser starts working offline	Event
+// online	The browser starts working online	Event
+// open	A connection with the event source is opened	Event
+// pagehide	User navigates away from a webpage	PageTransitionEvent
+// pageshow	User navigates to a webpage	PageTransitionEvent
+// paste	Some content is pasted in an element	ClipboardEvent
+// pause	A media is paused	Event
+// play	The media has started or is no longer paused	Event
+// playing	The media is playing after being paused or buffered	Event
+// popstate	The window's history changes	PopStateEvent
+// progress	The browser is downloading media data	Event
+// ratechange	The playing speed of a media is changed	Event
+// resize	The document view is resized	UiEvent, Event
+// reset	A form is reset	Event
+// scroll	An scrollbar is being scrolled	UiEvent, Event
+// search	Something is written in a search field	Event
+// seeked	Skipping to a media position is finished	Event
+// seeking	Skipping to a media position is started	Event
+// select	User selects some text	UiEvent, Event
+// show	A <menu> element is shown as a context menu	Event
+// stalled	The browser is trying to get unavailable media data	Event
+// storage	A Web Storage area is updated	StorageEvent
+// submit	A form is submitted	Event
+// suspend	The browser is intentionally not getting media data	Event
+// timeupdate	The playing position has changed (the user moves to a different point in the media)	Event
+// toggle	The user opens or closes the <details> element	Event
+// touchcancel	The touch is interrupted	TouchEvent
+// touchend	A finger is removed from a touch screen	TouchEvent
+// touchmove	A finger is dragged across the screen	TouchEvent
+// touchstart	A finger is placed on a touch screen	TouchEvent
+// transitionend	A CSS transition has completed	TransitionEvent
+// unload	A page has unloaded	UiEvent, Event
+// volumechange	The volume of a media is changed (includes muting)	Event
+// waiting	A media is paused but is expected to resume (e.g. buffering)	Event
+// wheel	The mouse wheel rolls up or down over an element	WheelEvent
+
+
+console.log("onabort Event")
+
+// Example
+// Call a function when the loading of a video is aborted:
+
+// <video onabort="myFunction()">
+// More examples below.
+
+// Description
+// The onabort event occurs when the loading of an audio or video is aborted.
+
+// The onabort event occurs when a download is aborted, not when an error occurs.
+
+// Audio and Video Events
+// While loading a media, these events occur in the following order:
+
+// Event	Occurs When
+// onloadstart	The loading of a media starts
+// ondurationchange	The duration of a media is changed
+// onloadedmetadata	The meta data for a media has been loaded
+// onloadeddata	A media frame is loaded
+// onprogress	The browser is loading a media
+// oncanplay	An element's scrollbar is being scrolled
+// oncanplaythrough	The browser estimates it can play a media
+// onplay	A media starts to play
+// onplaying	A media starts or resumes
+// ontimeupdate	The indicated time is changed
+// onended	A media has reached the end
+// Events that can occur while a media is loading or playing:
+
+// Event	Occurs When
+// onabort	The loading of a media is aborted
+// onemptied	A media is empty (already loaded)
+// onerror	An error occurs while loading a media
+// onpause	A media is paused
+// onratechange	The playback rate is changed
+// onseeked	A user has seeked a new media position
+// onseeking	A user start seeking a new media position
+// onstalled	Media data is not available
+// onsuspend	The browser is not getting the media data
+// onvolumechange	The volume of a media is changed
+// onwaiting	A media is waiting for the next frame
+// See Also:
+// The <audio> Object
+// The <video> Object
+
+// Syntax
+// In HTML:
+
+// <element onabort="myScript">
+// In JavaScript:
+
+// object.onabort = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("abort", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	No
+// Event type:	UiEvent if generated from a user interface, Event otherwise.
+// HTML tags:	<audio> and <video>
+// DOM Version:	Level 3 Events
+
+console.log("onafterprint Event")
+
+// Example
+// Call a function when a page starts printing:
+
+// <body onafterprint="myFunction()">
+// Description
+// The onafterprint event occurs when a page starts 
+// printing.
+
+// The onafterprint event occurs when after the print 
+// dialogue box is closed.
+
+// Note
+// The browser fires onafterprint and onbeforeprint 
+// so that notes, explanations and comments can be 
+// added to the printing process.
+
+// See Also:
+// The onbeforeprint Event
+
+// Syntax
+// In HTML:
+
+// <element onafterprint="myScript">
+// In JavaScript:
+
+// object.onafterprint = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("afterprint", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	No
+// Event type:	Event
+// HTML tags:	 <body>
+// DOM Version:	Level 3 Events
+
+
+console.log("animationend Event")
+
+// Example
+// Do something when a CSS animation has ended:
+
+// const div1 = document.getElementById("myDIV");
+
+// div1.addEventListener("animationend", myEndFunction);
+// Description
+// The animationend event occurs when a CSS animation has completed.
+
+// Animation Events
+// Event	Occurs When
+// animationstart	A CSS animation has started
+// animationend	A CSS animation has completed
+// animationiteration	A CSS animation is repeated
+// Animation Properties
+// Property	Description
+// animationName	The name of the animation
+// elapsedTime	The number of seconds an animation has been running
+// pseudoElement	The name of the pseudo-element of the animation
+// See Also:
+// The Animation Event Object
+// The Style animation Property
+
+// Tutorial:
+// CSS3 Animations
+
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	No
+// Event type:	AnimationEvent
+// DOM Version:	Level 3 Events
+// Browser Support
+// onanimationend is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("animationiteration Event")
+
+// Example
+// Do something when a CSS animation is repeated:
+
+// const div1 = document.getElementById("myDIV");
+
+// div1.addEventListener("animationiteration", myRepeatFunction);
+// Description
+// The animationiteration event occurs when a CSS animation is repeated.
+
+// Animation Events
+// Event	Occurs When
+// animationstart	A CSS animation has started
+// animationend	A CSS animation has completed
+// animationiteration	A CSS animation is repeated
+// Animation Properties
+// Property	Description
+// animationName	The name of the animation
+// elapsedTime	The number of seconds an animation has been running
+// pseudoElement	The name of the pseudo-element of the animation
+// See Also:
+// The Animation Event Object
+// The Style animation Property
+
+// Tutorial:
+// CSS3 Animations
+
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	No
+// Event type:	AnimationEvent
+// DOM Version:	Level 3 Events
+// Browser Support
+// onanimationiteration is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("animationstart Event")
+
+// Example
+// Do something when a CSS animation starts:
+
+// const div1 = document.getElementById("myDIV");
+
+// div1.addEventListener("animationstart", myStartFunction);
+// Description
+// The animationstart event occurs when a CSS animation starts.
+
+// Animation Events
+// Event	Occurs When
+// animationstart	A CSS animation has started
+// animationend	A CSS animation has completed
+// animationiteration	A CSS animation is repeated
+// Animation Properties
+// Property	Description
+// animationName	The name of the animation
+// elapsedTime	The number of seconds an animation has been running
+// pseudoElement	The name of the pseudo-element of the animation
+// See Also:
+// The Animation Event Object
+// The Style animation Property
+
+// Tutorial:
+// CSS3 Animations
+
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	No
+// Event type:	AnimationEvent
+// DOM Version:	Level 3 Events
+// Browser Support
+// onanimationstart is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("onbeforeprint Event")
+// Example
+// Call a function when a page is about to be printed:
+
+// <body onbeforeprint="myFunction()">
+// Description
+// The onbeforeprint event occurs when a page is about to be printed.
+
+// The onbeforeprint event occurs before the print dialogue box opens.
+
+// Note
+// The browser fires onafterprint and onbeforeprint so that notes, explanations and comments can be added to the printing process.
+
+// See Also:
+// The onafterprint Event
+
+// Syntax
+// In HTML:
+
+// <element onbeforeprint="myScript">
+// In JavaScript:
+
+// object.onbeforeprint = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("beforeprint", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	No
+// Event type:	Event
+// HTML tags:	 <body>
+// DOM Version:	Level 3 Events
+// Browser Support
+// onbeforeprint is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+
+console.log("onbeforeunload Event")
+
+// Example
+// Call a function when the page is about to be unloaded:
+
+// <body onbeforeunload="return myFunction()">
+// Description
+// The onbeforeunload event occurs when a document is about to be unloaded.
+
+// This event allows you to display a message in a confirmation dialog box to inform the user whether he/she wants to stay or leave the current page.
+
+// The default message that appears in the confirmation box, is different in different browsers. However, the standard message is something like "Are you sure you want to leave this page?".
+
+// This message cannot be removed, unless you call preventDefault() on the event.
+
+// Syntax
+// In HTML:
+
+// <element onbeforeunload="myScript">
+// In JavaScript:
+
+// object.onbeforeunload = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("beforeunload", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	Yes
+// Event type:	UiEvent if generated from a user interface, Event otherwise
+// HTML tags:	 <body>
+// DOM Version:	Level 2 Events
+// Browser Support
+// onbeforeunload is a DOM Level 2 (2001) feature.
+
+// It is fully supported in all browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	9-11
+
+console.log("onblur Event")
+// Example
+// Call a function when a user leaves an input field:
+
+// <input type="text" onblur="myFunction()">
+// Description
+// The onblur event occurs when an HTML element loses focus.
+
+// The onblur event is often used on input fields.
+
+// The onblur event is often used with form validation (when the user leaves a form field).
+
+// Focus Based Events
+// Event	Occurs When
+// focus	An element gets focus
+// blur	An element loses focus
+// focusin	An element gets focus
+// focusout	An element loses focus
+// See Also:
+// The Focus Event Object
+
+// Syntax
+// In HTML:
+
+// <element onblur="myScript">
+// In JavaScript:
+
+// object.onblur = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("blur", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	No
+// Event type:	FocusEvent
+// HTML tags:	ALL HTML elements, EXCEPT: <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, and <title>
+// DOM Version:	Level 2 Events
+// More Examples
+// Example
+// Using onfocus and onblur attributes:
+
+// <input type="text" onfocus="focusFunction()" onblur="blurFunction()">
+// Example
+// Event delegation: using focus and blur events:
+
+// Set useCapture parameter of addEventListener() to true:
+
+// <form id="myForm">
+//   <input type="text" id="myInput">
+// </form>
+
+// <script>
+// let x = document.getElementById("myForm");
+// x.addEventListener("focus", myFocusFunction, true);
+// x.addEventListener("blur", myBlurFunction, true);
+
+// function myFocusFunction() {
+//   document.getElementById("myInput").style.backgroundColor = "yellow";
+// }
+
+// function myBlurFunction() {
+//   document.getElementById("myInput").style.backgroundColor = "";
+// }
+// </script>
+// Example
+// Event delegation: using focusin and focusout events:
+
+// <form id="myForm">
+//   <input type="text" id="myInput">
+// </form>
+
+// <script>
+// let x = document.getElementById("myForm");
+// x.addEventListener("focusin", myFocusFunction);
+// x.addEventListener("focusout", myBlurFunction);
+
+// function myFocusFunction() {
+//   document.getElementById("myInput").style.backgroundColor = "yellow";
+// }
+
+// function myBlurFunction() {
+//   document.getElementById("myInput").style.backgroundColor = "";
+// }
+// </script>
+// Browser Support
+// onblur is a DOM Level 2 (2001) feature.
+
+// It is fully supported in all browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	9-11
+
+
+console.log("oncanplay Event")
+
+// Example
+// Call a function when a video is ready to start playing:
+
+// <video oncanplay="myFunction()">
+// More examples below.
+
+// Description
+// The oncanplay event occurs when the browser can start playing a media.
+
+// The oncanplay event occurs when the browser has buffered enough to begin.
+
+// Audio and Video Events
+// While loading a media, these events occur in the following order:
+
+// Event	Occurs When
+// onloadstart	The loading of a media starts
+// ondurationchange	The duration of a media is changed
+// onloadedmetadata	The meta data for a media has been loaded
+// onloadeddata	A media frame is loaded
+// onprogress	The browser is loading a media
+// oncanplay	An element's scrollbar is being scrolled
+// oncanplaythrough	The browser estimates it can play a media
+// onplay	A media starts to play
+// onplaying	A media starts or resumes
+// ontimeupdate	The indicated time is changed
+// onended	A media has reached the end
+// Events that can occur while a media is loading or playing:
+
+// Event	Occurs When
+// onabort	The loading of a media is aborted
+// onemptied	A media is empty (already loaded)
+// onerror	An error occurs while loading a media
+// onpause	A media is paused
+// onratechange	The playback rate is changed
+// onseeked	A user has seeked a new media position
+// onseeking	A user start seeking a new media position
+// onstalled	Media data is not available
+// onsuspend	The browser is not getting the media data
+// onvolumechange	The volume of a media is changed
+// onwaiting	A media is waiting for the next frame
+// See Also:
+// The <audio> Object
+// The <video> Object
+
+// Syntax
+// In HTML:
+
+// <element oncanplay="myScript">
+// In JavaScript:
+
+// object.oncanplay = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("canplay", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	No
+// Event type:	Event
+// HTML tags:	<audio> and <video>
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// Call a function when an audio is ready to start playing:
+
+// <audio oncanplay="myFunction()">
+// Browser Support
+// oncanplay is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("oncanplaythrough Event")
+
+// Example
+// Call a function when a video can be played all the way through, without stopping:
+
+// <video oncanplaythrough="myFunction()">
+// More examples below.
+
+// Description
+// The oncanplaythrough event occurs when the browser estimates it can play through a media without having to stop for buffering.
+
+// Audio and Video Events
+// While loading a media, these events occur in the following order:
+
+// Event	Occurs When
+// onloadstart	The loading of a media starts
+// ondurationchange	The duration of a media is changed
+// onloadedmetadata	The meta data for a media has been loaded
+// onloadeddata	A media frame is loaded
+// onprogress	The browser is loading a media
+// oncanplay	An element's scrollbar is being scrolled
+// oncanplaythrough	The browser estimates it can play a media
+// onplay	A media starts to play
+// onplaying	A media starts or resumes
+// ontimeupdate	The indicated time is changed
+// onended	A media has reached the end
+// Events that can occur while a media is loading or playing:
+
+// Event	Occurs When
+// onabort	The loading of a media is aborted
+// onemptied	A media is empty (already loaded)
+// onerror	An error occurs while loading a media
+// onpause	A media is paused
+// onratechange	The playback rate is changed
+// onseeked	A user has seeked a new media position
+// onseeking	A user start seeking a new media position
+// onstalled	Media data is not available
+// onsuspend	The browser is not getting the media data
+// onvolumechange	The volume of a media is changed
+// onwaiting	A media is waiting for the next frame
+// See Also:
+// The <audio> Object
+// The <video> Object
+
+// Syntax
+// In HTML:
+
+// <element oncanplaythrough="myScript">
+// In JavaScript:
+
+// object.oncanplaythrough = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("canplaythrough", myScript);
+// Technical Details
+// Bubbles:	No
+// Cancelable:	No
+// Event type:	Event
+// HTML tags:	<audio> and <video>
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// Call a function when an audio can be played all the way through, without stopping:
+
+// <audio oncanplaythrough="myFunction()">
+// Browser Support
+// oncanplaythrough is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("onchange Event")
+// Example
+// Call a function when a user changes the selected option of a <select> element:
+
+// <select onchange="myFunction()">
+// More "Try it Yourself" examples below.
+
+// Description
+// The onchange event occurs when the value of an HTML element is changed.
+
+// Tip: This event is similar to the oninput event. The difference is that the oninput event occurs immediately after the value of an element has changed, while onchange occurs when the element loses focus, after the content has been changed. The other difference is that the onchange event also works on <select> elements.
+
+// Syntax
+// In HTML:
+
+// <element onchange="myScript">
+// In JavaScript:
+
+// object.onchange = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("change", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	No
+// Event type:	Event
+// HTML tags:	<input type="checkbox">, <input type="color">, <input type="date">, <input type="datetime">, <input type="email">, <input type="file">, <input type="month">, <input type="number">, <input type="password">, <input type="radio">, <input type="range">, <input type="search">, <input type="tel">, <input type="text">, <input type="time">, <input type="url">, <input type="week">, <select> and <textarea>
+// DOM Version:	Level 2 Events
+// More Examples
+// Example
+// Call a function when a user changes the content of an input field:
+
+// <input type="text" onchange="myFunction()">
+// Browser Support
+// onchange is a DOM Level 2 (2001) feature.
+
+// It is fully supported in all browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	9-11
+
+console.log("onclick Event")
+// Example
+// Call a function when a button is clicked:
+
+// <button onclick="myFunction()">Click me</button>
+// More examples below.
+
+// Description
+// The onclick event occurs when the user clicks on an HTML element.
+
+// Mouse Events
+// Event	Occurs When
+// onclick	The user clicks on an element
+// oncontextmenu	The user right-clicks on an element
+// ondblclick	The user double-clicks on an element
+// onmousedown	A mouse button is pressed over an element
+// onmouseenter	The pointer is moved onto an element
+// onmouseleave	The pointer is moved out of an element
+// onmousemove	The pointer is moving over an element
+// onmouseout	The mouse pointer moves out of an element
+// onmouseover	The mouse pointer is moved over an element
+// onmouseup	The mouse button is released over an element
+// See Also:
+// The Mouse Event Object
+
+// Tutorial:
+// JavaScript Events
+
+// Syntax
+// In HTML:
+
+// <element onclick="myScript">
+// In JavaScript:
+
+// object.onclick = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("click", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	MouseEvent
+// Supported
+// HTML tags:	All except: <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, and <title>
+// More Examples
+// Click a <button> to display the date:
+
+// <button onclick="getElementById('demo').innerHTML = Date()">What is the time?</button>
+// Click a <h3> element to change the text color:
+
+// <h3 id="demo" onclick="myFunction()">Click me to change my color.</h3>
+
+// <script>
+// function myFunction() {
+//   document.getElementById("demo").style.color = "red";
+// }
+// </script>
+// Another example on how to change the color of an element:
+
+// <h3 onclick="myFunction(this, 'red')">Click me to change my color.</h3>
+
+// <script>
+// function myFunction(element, color) {
+//   element.style.color = color;
+// }
+// </script>
+// Click to copy text from one input field to another:
+
+// <button onclick="myFunction()">Copy Text</button>
+
+// function myFunction() {
+//   document.getElementById("field2").value =   document.getElementById("field1").value;
+// }
+// </script>
+// How to assign an "onclick" event to the window object:
+
+// window.onclick = myFunction;
+
+// function myFunction() {
+//   document.getElementsByTagName("BODY")[0].style.backgroundColor = "yellow";
+// }
+// Use onclick to create a dropdown:
+
+// document.getElementById("myBtn").onclick = function() {myFunction()};
+
+// function myFunction() {
+//   document.getElementById("myDropdown").classList.toggle("show");
+// }
+// Browser Support
+// onclick is a DOM Level 2 (2001) feature.
+
+// It is fully supported in all browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	9-11
+
+console.log("oncontextmenu Event")
+
+// Example
+// Prevent the context menu to show:
+
+// div.addEventListener("contextmenu", (e) => {e.preventDefault()});
+// Description
+// The oncontextmenu event occurs when the user right-clicks an HTML element to open the context menu.
+
+// Mouse Events
+// Event	Occurs When
+// onclick	The user clicks on an element
+// oncontextmenu	The user right-clicks on an element
+// ondblclick	The user double-clicks on an element
+// onmousedown	A mouse button is pressed over an element
+// onmouseenter	The pointer is moved onto an element
+// onmouseleave	The pointer is moved out of an element
+// onmousemove	The pointer is moving over an element
+// onmouseout	The mouse pointer moves out of an element
+// onmouseover	The mouse pointer is moved over an element
+// onmouseup	The mouse button is released over an element
+// See Also:
+// The Mouse Event Object
+
+// Tutorial:
+// JavaScript Events
+
+// Syntax
+// In HTML:
+
+// <element oncontextmenu="myScript">
+// In JavaScript:
+
+// object.oncontextmenu = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("contextmenu", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	MouseEvent
+// HTML tags:	All HTML elements
+// DOM Version:	Level 3 Events
+// Browser Support
+// oncontextmenu is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("oncopy Event")
+// Example
+// Call a function when copying some text of an <input> element:
+
+// <input type="text" oncopy="myFunction()" value="Try to copy me">
+// More examples below
+
+// Description
+// The oncopy event occurs when the user starts a copy process in the browser.
+
+// The oncopy event occurs when the user copies element content (like a text copy).
+
+// The oncopy event also occurs when the user copies a whole element (like an image).
+
+// 3 Ways to Copy:
+// Press Ctrl + C
+// Select "Copy" from the Edit menu in your browser
+// Right click to display the context menu, and select "Copy"
+// Clipboard Events
+// Event	Occurs When
+// copy	The user copies content
+// cut	The user starts cuts content
+// paste	The user pastes content
+// See Also:
+// The Cliboard Event Object
+
+// Syntax
+// In HTML:
+
+// <element oncopy="myScript">
+// In JavaScript:
+
+// object.oncopy = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("copy", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	ClipboardEvent
+// HTML tags:	All HTML elements
+// More Examples
+// Example
+// Call a function when copying some text of a <p> element:
+
+// <p oncopy="myFunction()">Try to copy this text</p>
+// Example
+// Call a function when copying an image:
+
+// <img src="w3schools.gif" oncopy="myFunction()">
+// Browser Support
+// oncopy is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("oncut Event")
+
+// Example
+// Call a function when cutting some text in an <input> element:
+
+// <input type="text" oncut="myFunction()" value="Try to cut this text">
+// More examples below
+
+// Description
+// The oncut event occurs when the user cuts the content of an element.
+
+// The oncut event is mostly used on <input> elements with type="text".
+
+// Note
+// It is only possible to cut something from an input field.
+
+// It is not possible to cut the content of, for example a <p> element, UNLESS the element has set contenteditable to "true" (See "More Examples" below).
+
+// 3 Ways to Cut:
+// Press Ctrl + X
+// Select "Cut" from the Edit menu in your browser
+// Right click to display the context menu, and select "Cut"
+// Clipboard Events
+// Event	Occurs When
+// copy	The user copies content
+// cut	The user starts cuts content
+// paste	The user pastes content
+// See Also:
+// The Cliboard Event Object
+
+// Syntax
+// In HTML:
+
+// <element oncut="myScript">
+// In JavaScript:
+
+// object.oncut = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("cut", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	ClipboardEvent
+// HTML tags:	All HTML elements
+// More Examples
+// Example
+// Call a function when cutting some text of a <p> element.
+
+// (Note that contenteditable is set to "true"):
+
+// <p contenteditable="true" oncut="myFunction()">Try to cut this text</p>
+// Browser Support
+// oncut is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("ondblclick Event")
+
+// Example
+// Call a function when a <p> element is double-clicked:
+
+// <p ondblclick="myFunction()">Double-click me</p>
+// More examples below.
+
+// Description
+// The ondblclick event occurs when the user double-clicks on an HTML element.
+
+// Mouse Events
+// Event	Occurs When
+// onclick	The user clicks on an element
+// oncontextmenu	The user right-clicks on an element
+// ondblclick	The user double-clicks on an element
+// onmousedown	A mouse button is pressed over an element
+// onmouseenter	The pointer is moved onto an element
+// onmouseleave	The pointer is moved out of an element
+// onmousemove	The pointer is moving over an element
+// onmouseout	The mouse pointer moves out of an element
+// onmouseover	The mouse pointer is moved over an element
+// onmouseup	The mouse button is released over an element
+// See Also:
+// The Mouse Event Object
+
+// Tutorial:
+// JavaScript Events
+
+// Syntax
+// In HTML:
+
+// <element ondblclick="myScript">
+// In JavaScript:
+
+// object.ondblclick = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("dblclick", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	MouseEvent
+// HTML tags:	All HTML elements, EXCEPT: <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, and <title>.
+// DOM Version:	Level 2 Events
+// Browser Support
+// ondblclick is a DOM Level 2 (2001) feature.
+
+// It is fully supported in all browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	9-11
+
+console.log("ondrag Event")
+// Example
+// Call a function when a <p> element is being dragged:
+
+// <p draggable="true" ondrag="myFunction(event)">Drag me!</p>
+// More examples below.
+
+// Description
+// The ondrag event occurs when a selection is being dragged.
+
+// Drag and drop is a common feature in HTML. It is when you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do not need the draggable attribute.
+
+// Many events occur in the different stages of a drag and drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	Occurs When
+// ondrag	An element is being dragged
+// ondragstart	The user starts to drag an element
+// ondragend	The user has finished dragging an element
+// Note: While dragging an element, the ondrag event fires every 350 milliseconds.
+
+// On the Drop Target:
+// Event	Occurs When
+// ondragenter	A dragged element enters the drop target
+// ondragleave	A dragged element leaves the drop target
+// ondragover	A dragged element is over the drop target
+// ondrop	A dragged element is dropped on the target
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondrag="myScript">
+// In JavaScript:
+
+// object.ondrag = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("drag", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	DragEvent
+// HTML tags:	All HTML elements
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// // Events fired on the drag target
+
+// document.addEventListener("dragstart", function(event) {
+//   // The dataTransfer.setData() method sets the data type and the value of the dragged data
+//   event.dataTransfer.setData("Text", event.target.id);
+
+//   // Output some text when starting to drag the p element
+//   document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+//   // Change the opacity of the draggable element
+//   event.target.style.opacity = "0.4";
+// });
+
+// // While dragging the p element, change the color of the output text
+// document.addEventListener("drag", function(event) {
+//   document.getElementById("demo").style.color = "red";
+// });
+
+// // Output some text when finished dragging the p element and reset the opacity
+// document.addEventListener("dragend", function(event) {
+//   document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+//   event.target.style.opacity = "1";
+// });
+
+
+// // Events fired on the drop target
+
+// // When the draggable p element enters the droptarget, change the DIVS's border style
+// document.addEventListener("dragenter", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "3px dotted red";
+//   }
+// });
+
+// // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+// document.addEventListener("dragover", function(event) {
+//   event.preventDefault();
+// });
+
+// // When the draggable p element leaves the droptarget, reset the DIVS's border style
+// document.addEventListener("dragleave", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "";
+//   }
+// });
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+// document.addEventListener("drop", function(event) {
+//   event.preventDefault();
+//   if ( event.target.className == "droptarget" ) {
+//     document.getElementById("demo").style.color = "";
+//     event.target.style.border = "";
+//     var data = event.dataTransfer.getData("Text");
+//     event.target.appendChild(document.getElementById(data));
+//   }
+// });
+// </script>
+// Browser Support
+// ondrag is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("ondragend Event")
+// Example
+// Call a function when the user has finished dragging a <p> element:
+
+// <p draggable="true" ondragend="myFunction(event)">Drag me!</p>
+// More examples below.
+
+// Description
+// The ondragend event occurs when a user has finished dragging a selection.
+
+// Drag and drop is a common feature in HTML. It is when you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do not need the draggable attribute.
+
+// Many events occur in the different stages of a drag and drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	Occurs When
+// ondrag	An element is being dragged
+// ondragstart	The user starts to drag an element
+// ondragend	The user has finished dragging an element
+// Note: While dragging an element, the ondrag event fires every 350 milliseconds.
+
+// On the Drop Target:
+// Event	Occurs When
+// ondragenter	A dragged element enters the drop target
+// ondragleave	A dragged element leaves the drop target
+// ondragover	A dragged element is over the drop target
+// ondrop	A dragged element is dropped on the target
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondragend="myScript">
+// In JavaScript:
+
+// object.ondragend = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("dragend", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	No
+// Event type:	DragEvent
+// HTML tags:	All HTML elements
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// // Events fired on the drag target
+
+// document.addEventListener("dragstart", function(event) {
+//   // The dataTransfer.setData() method sets the data type and the value of the dragged data
+//   event.dataTransfer.setData("Text", event.target.id);
+
+//   // Output some text when starting to drag the p element
+//   document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+//   // Change the opacity of the draggable element
+//   event.target.style.opacity = "0.4";
+// });
+
+// // While dragging the p element, change the color of the output text
+// document.addEventListener("drag", function(event) {
+//   document.getElementById("demo").style.color = "red";
+// });
+
+// // Output some text when finished dragging the p element and reset the opacity
+// document.addEventListener("dragend", function(event) {
+//   document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+//   event.target.style.opacity = "1";
+// });
+
+
+// // Events fired on the drop target
+
+// // When the draggable p element enters the droptarget, change the DIVS's border style
+// document.addEventListener("dragenter", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "3px dotted red";
+//   }
+// });
+
+// // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+// document.addEventListener("dragover", function(event) {
+//   event.preventDefault();
+// });
+
+// // When the draggable p element leaves the droptarget, reset the DIVS's border style
+// document.addEventListener("dragleave", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "";
+//   }
+// });
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+// document.addEventListener("drop", function(event) {
+//   event.preventDefault();
+//   if ( event.target.className == "droptarget" ) {
+//     document.getElementById("demo").style.color = "";
+//     event.target.style.border = "";
+//     var data = event.dataTransfer.getData("Text");
+//     event.target.appendChild(document.getElementById(data));
+//   }
+// });
+// </script>
+// Browser Support
+// ondragend is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("ondragenter Event")
+// Example
+// Call a function when a draggable element enters a drop target:
+
+// <div ondragenter="myFunction(event)"></div>
+// More examples below.
+
+// Description
+// The ondragenter event occurs when a draggable selection enters a drop target.
+
+// The ondragenter and ondragleave events can help a user to better understand when a draggable is over the drop target. For example, by setting a background color when a draggable element enters the drop target, and removing the color when the element is moved out of the target.
+
+// Drag and drop is a common feature in HTML. It is when you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do not need the draggable attribute.
+
+// Many events occur in the different stages of a drag and drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	Occurs When
+// ondrag	An element is being dragged
+// ondragstart	The user starts to drag an element
+// ondragend	The user has finished dragging an element
+// Note: While dragging an element, the ondrag event fires every 350 milliseconds.
+
+// On the Drop Target:
+// Event	Occurs When
+// ondragenter	A dragged element enters the drop target
+// ondragleave	A dragged element leaves the drop target
+// ondragover	A dragged element is over the drop target
+// ondrop	A dragged element is dropped on the target
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondragenter="myScript">
+// In JavaScript:
+
+// object.ondragenter = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("dragenter", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	DragEvent
+// HTML tags:	All HTML elements
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// // Events fired on the drag target
+
+// document.addEventListener("dragstart", function(event) {
+//   // The dataTransfer.setData() method sets the data type and the value of the dragged data
+//   event.dataTransfer.setData("Text", event.target.id);
+
+//   // Output some text when starting to drag the p element
+//   document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+//   // Change the opacity of the draggable element
+//   event.target.style.opacity = "0.4";
+// });
+
+// // While dragging the p element, change the color of the output text
+// document.addEventListener("drag", function(event) {
+//   document.getElementById("demo").style.color = "red";
+// });
+
+// // Output some text when finished dragging the p element and reset the opacity
+// document.addEventListener("dragend", function(event) {
+//   document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+//   event.target.style.opacity = "1";
+// });
+
+
+// // Events fired on the drop target
+
+// // When the draggable p element enters the droptarget, change the DIVS's border style
+// document.addEventListener("dragenter", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "3px dotted red";
+//   }
+// });
+
+// // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+// document.addEventListener("dragover", function(event) {
+//   event.preventDefault();
+// });
+
+// // When the draggable p element leaves the droptarget, reset the DIVS's border style
+// document.addEventListener("dragleave", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "";
+//   }
+// });
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+// document.addEventListener("drop", function(event) {
+//   event.preventDefault();
+//   if ( event.target.className == "droptarget" ) {
+//     document.getElementById("demo").style.color = "";
+//     event.target.style.border = "";
+//     var data = event.dataTransfer.getData("Text");
+//     event.target.appendChild(document.getElementById(data));
+//   }
+// });
+// </script>
+// Browser Support
+// ondragenter is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("ondragleave Event")
+
+// Example
+// Call a function when a draggable element is moved out of a drop target:
+
+// <div ondragleave="myFunction(event)"></div>
+// More examples below.
+
+// Description
+// The ondragleave event occurs when a draggable selection leaves a drop target.
+
+// The ondragenter and ondragleave events can help a user to better understand when a draggable is over the drop target. For example, by setting a background color when a draggable element enters the drop target, and removing the color when the element is moved out of the target.
+
+// Drag and drop is a common feature in HTML. It is when you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do not need the draggable attribute.
+
+// Many events occur in the different stages of a drag and drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	Occurs When
+// ondrag	An element is being dragged
+// ondragstart	The user starts to drag an element
+// ondragend	The user has finished dragging an element
+// Note: While dragging an element, the ondrag event fires every 350 milliseconds.
+
+// On the Drop Target:
+// Event	Occurs When
+// ondragenter	A dragged element enters the drop target
+// ondragleave	A dragged element leaves the drop target
+// ondragover	A dragged element is over the drop target
+// ondrop	A dragged element is dropped on the target
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondragleave="myScript">
+// In JavaScript:
+
+// object.ondragleave = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("dragleave", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	No
+// Event type:	DragEvent
+// HTML tags:	All HTML elements
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// // Events fired on the drag target
+
+// document.addEventListener("dragstart", function(event) {
+//   // The dataTransfer.setData() method sets the data type and the value of the dragged data
+//   event.dataTransfer.setData("Text", event.target.id);
+
+//   // Output some text when starting to drag the p element
+//   document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+//   // Change the opacity of the draggable element
+//   event.target.style.opacity = "0.4";
+// });
+
+// // While dragging the p element, change the color of the output text
+// document.addEventListener("drag", function(event) {
+//   document.getElementById("demo").style.color = "red";
+// });
+
+// // Output some text when finished dragging the p element and reset the opacity
+// document.addEventListener("dragend", function(event) {
+//   document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+//   event.target.style.opacity = "1";
+// });
+
+
+// // Events fired on the drop target
+
+// // When the draggable p element enters the droptarget, change the DIVS's border style
+// document.addEventListener("dragenter", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "3px dotted red";
+//   }
+// });
+
+// // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+// document.addEventListener("dragover", function(event) {
+//   event.preventDefault();
+// });
+
+// // When the draggable p element leaves the droptarget, reset the DIVS's border style
+// document.addEventListener("dragleave", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "";
+//   }
+// });
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+// document.addEventListener("drop", function(event) {
+//   event.preventDefault();
+//   if ( event.target.className == "droptarget" ) {
+//     document.getElementById("demo").style.color = "";
+//     event.target.style.border = "";
+//     var data = event.dataTransfer.getData("Text");
+//     event.target.appendChild(document.getElementById(data));
+//   }
+// });
+// </script>
+// Browser Support
+// ondragleave is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("ondragover Event")
+// Example
+// Call a function when an element is being dragged over a drop target:
+
+// <div ondragover="myFunction(event)"></div>
+// More examples below.
+
+// Description
+// The ondragover event occurs when a draggable selection is dragged over a target.
+
+// By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element. This is done by calling the event.preventDefault() method for the ondragover event.
+
+// Drag and drop is a common feature in HTML. It is when you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do not need the draggable attribute.
+
+// Many events occur in the different stages of a drag and drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	Occurs When
+// ondrag	An element is being dragged
+// ondragstart	The user starts to drag an element
+// ondragend	The user has finished dragging an element
+// Note: While dragging an element, the ondrag event fires every 350 milliseconds.
+
+// On the Drop Target:
+// Event	Occurs When
+// ondragenter	A dragged element enters the drop target
+// ondragleave	A dragged element leaves the drop target
+// ondragover	A dragged element is over the drop target
+// ondrop	A dragged element is dropped on the target
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondragover="myScript">
+// In JavaScript:
+
+// object.ondragover = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("dragover", myScript);
+// Technical Details
+// Bubbles:	Yes
+// Cancelable:	Yes
+// Event type:	DragEvent
+// HTML tags:	All HTML elements
+// DOM Version:	Level 3 Events
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// // Events fired on the drag target
+
+// document.addEventListener("dragstart", function(event) {
+//   // The dataTransfer.setData() method sets the data type and the value of the dragged data
+//   event.dataTransfer.setData("Text", event.target.id);
+
+//   // Output some text when starting to drag the p element
+//   document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+//   // Change the opacity of the draggable element
+//   event.target.style.opacity = "0.4";
+// });
+
+// // While dragging the p element, change the color of the output text
+// document.addEventListener("drag", function(event) {
+//   document.getElementById("demo").style.color = "red";
+// });
+
+// // Output some text when finished dragging the p element and reset the opacity
+// document.addEventListener("dragend", function(event) {
+//   document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+//   event.target.style.opacity = "1";
+// });
+
+
+// // Events fired on the drop target
+
+// // When the draggable p element enters the droptarget, change the DIVS's border style
+// document.addEventListener("dragenter", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "3px dotted red";
+//   }
+// });
+
+// // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+// document.addEventListener("dragover", function(event) {
+//   event.preventDefault();
+// });
+
+// // When the draggable p element leaves the droptarget, reset the DIVS's border style
+// document.addEventListener("dragleave", function(event) {
+//   if ( event.target.className == "droptarget" ) {
+//     event.target.style.border = "";
+//   }
+// });
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+// document.addEventListener("drop", function(event) {
+//   event.preventDefault();
+//   if ( event.target.className == "droptarget" ) {
+//     document.getElementById("demo").style.color = "";
+//     event.target.style.border = "";
+//     var data = event.dataTransfer.getData("Text");
+//     event.target.appendChild(document.getElementById(data));
+//   }
+// });
+// </script>
+// Browser Support
+// ondragover is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+
+
+console.log("ondragstart Event")
+// Example
+// Call a function when the user starts to drag a <p> element:
+
+// <p draggable="true" ondragstart="myFunction(event)">Drag me!</p>
+// More examples below.
+
+// Description
+// The ondragstart event occurs when the user starts to 
+// drag a selection.
+
+// Drag and drop is a common feature in HTML. It is when 
+// you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable
+//  Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do not 
+// need the draggable attribute.
+
+// Many events occur in the different stages of a drag and 
+// drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	        Occurs When
+// ondrag	        An element is being dragged
+// ondragstart	    The user starts to drag an element
+// ondragend	T   he user has finished dragging an element
+// Note: While dragging an element, the ondrag event fires 
+// every 350 milliseconds.
+
+// On the Drop Target:
+// Event	    Occurs When
+// ondragenter	A dragged element enters the drop target
+// ondragleave	A dragged element leaves the drop target
+// ondragover	A dragged element is over the drop target
+// ondrop	    A dragged element is dropped on the target
+
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondragstart="myScript">
+// In JavaScript:
+
+// object.ondragstart = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("dragstart", myScript);
+// Technical Details
+// Bubbles:	        Yes
+// Cancelable:	    Yes
+// Event type:	    DragEvent
+// HTML tags:	    All HTML elements
+// DOM Version:	    Level 3 Events
+
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// Events fired on the drag target
+
+document.addEventListener("dragstart", function (event) {
+    // The dataTransfer.setData() method sets the data type and the value of the dragged data
+    event.dataTransfer.setData("Text", event.target.id);
+
+    // Output some text when starting to drag the p element
+    document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+    // Change the opacity of the draggable element
+    event.target.style.opacity = "0.4";
+});
+
+// While dragging the p element, change the color of the output text
+document.addEventListener("drag", function (event) {
+    document.getElementById("demo").style.color = "red";
+});
+
+// Output some text when finished dragging the p element and reset the opacity
+document.addEventListener("dragend", function (event) {
+    document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+    event.target.style.opacity = "1";
+});
+
+
+// Events fired on the drop target
+
+// When the draggable p element enters the droptarget, change the DIVS's border style
+document.addEventListener("dragenter", function (event) {
+    if (event.target.className == "droptarget") {
+        event.target.style.border = "3px dotted red";
+    }
+});
+
+// By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+document.addEventListener("dragover", function (event) {
+    event.preventDefault();
+});
+
+// When the draggable p element leaves the droptarget, reset the DIVS's border style
+document.addEventListener("dragleave", function (event) {
+    if (event.target.className == "droptarget") {
+        event.target.style.border = "";
+    }
+});
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+document.addEventListener("drop", function(event) {
+  event.preventDefault();
+  if ( event.target.className == "droptarget" ) {
+    document.getElementById("demo").style.color = "";
+    event.target.style.border = "";
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+  }
+});
+// </script>
+// Browser Support
+// ondragstart is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+console.log("ondrop Event")
+// Example
+// Call a function when a draggable element is dropped in 
+// a <div> element:
+
+// <div ondrop="myFunction(event)"></div>
+// More examples below.
+
+// Description
+// The ondrop event occurs when a draggable selection is 
+// dropped on a target.
+
+// Drag and drop is a common feature in HTML. It is when 
+// you "grab" an object and drag it to a different location.
+
+// To make an element draggable, use The draggable Attribute.
+
+// For more information, see the HTML Drag and Drop Tutorial.
+
+// Links and images are draggable by default, and do 
+// not need the draggable attribute.
+
+// Many events occur in the different stages of a drag 
+// and drop operation (see below):
+
+// Drag Events
+// On the Draggable Element:
+// Event	            Occurs When
+// ondrag	            An element is being dragged
+// ondragstart	        The user starts to drag an element
+// ondragend	        The user has finished dragging an element
+
+// Note: While dragging an element, the ondrag event fires
+//  every 350 milliseconds.
+
+// On the Drop Target:
+// Event	        Occurs When
+// ondragenter	    A dragged element enters the drop target
+// ondragleave	    A dragged element leaves the drop target
+// ondragover	    A dragged element is over the drop target
+// ondrop	        A dragged element is dropped on the target
+
+// See Also:
+// The Drag Event Object
+// The draggable Attribute
+
+// Tutorial:
+// HTML Drag and Drop
+
+// Syntax
+// In HTML:
+
+// <element ondrop="myScript">
+// In JavaScript:
+
+object.ondrop = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+object.addEventListener("drop", myScript);
+// Technical Details
+// Bubbles:	                Yes
+// Cancelable:	            Yes
+// Event type:	        DragEvent
+// HTML tags:	        All HTML elements
+// DOM Version:	        Level 3 Events
+
+// More Examples
+// Example
+// A demonstration of ALL possible drag and drop events:
+
+// <p draggable="true" id="dragtarget">Drag me!</p>
+
+// <div class="droptarget">Drop here!</div>
+
+// <script>
+// Events fired on the drag target
+
+document.addEventListener("dragstart", function(event) {
+  // The dataTransfer.setData() method sets the data type and the value of the dragged data
+  event.dataTransfer.setData("Text", event.target.id);
+
+  // Output some text when starting to drag the p element
+  document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+  // Change the opacity of the draggable element
+  event.target.style.opacity = "0.4";
+});
+
+// While dragging the p element, change the color of the output text
+document.addEventListener("drag", function(event) {
+  document.getElementById("demo").style.color = "red";
+});
+
+// Output some text when finished dragging the p element and reset the opacity
+document.addEventListener("dragend", function(event) {
+  document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+  event.target.style.opacity = "1";
+});
+
+
+// Events fired on the drop target
+
+// When the draggable p element enters the droptarget, change the DIVS's border style
+document.addEventListener("dragenter", function(event) {
+  if ( event.target.className == "droptarget" ) {
+    event.target.style.border = "3px dotted red";
+  }
+});
+
+// By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+document.addEventListener("dragover", function(event) {
+  event.preventDefault();
+});
+
+// When the draggable p element leaves the droptarget, reset the DIVS's border style
+document.addEventListener("dragleave", function(event) {
+  if ( event.target.className == "droptarget" ) {
+    event.target.style.border = "";
+  }
+});
+
+// /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+// Reset the color of the output text and DIV's border color
+// Get the dragged data with the dataTransfer.getData() method
+// The dragged data is the id of the dragged element ("drag1")
+// Append the dragged element into the drop element
+// */
+document.addEventListener("drop", function(event) {
+  event.preventDefault();
+  if ( event.target.className == "droptarget" ) {
+    document.getElementById("demo").style.color = "";
+    event.target.style.border = "";
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+  }
+// });
+// </script>
+// Browser Support
+// ondrop is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+
+console.log("ondurationchange Event")
+// Example
+// Call a function when the duration of a video has changed:
+
+// <video ondurationchange="myFunction()">
+// More examples below.
+
+// Description
+// The ondurationchange event occurs when the duration of 
+// a media is changed.
+
+// When an audio or video is loaded, the duration changes 
+// from "NaN" to an actual duration.
+
+// Audio and Video Events
+// While loading a media, these events occur in the 
+// following order:
+
+// Event	            Occurs When
+// onloadstart	        The loading of a media starts
+// ondurationchange	    The duration of a media is changed
+// onloadedmetadata	    The meta data for a media has been loaded
+// onloadeddata	        A media frame is loaded
+// onprogress	        The browser is loading a media
+// oncanplay	        An element's scrollbar is being scrolled
+// oncanplaythrough	    The browser estimates it can play a media
+// onplay	            A media starts to play
+// onplaying	        A media starts or resumes
+// ontimeupdate	        The indicated time is changed
+// onended	            A media has reached the end
+// Events that can occur while a media is loading or playing:
+
+// Event	        Occurs When
+// onabort	        The loading of a media is aborted
+// onemptied	    A media is empty (already loaded)
+// onerror	        An error occurs while loading a media
+// onpause	        A media is paused
+// onratechange	    The playback rate is changed
+// onseeked	        A user has seeked a new media position
+// onseeking	    A user start seeking a new media position
+// onstalled	    Media data is not available
+// onsuspend	    The browser is not getting the media data
+// onvolumechange	The volume of a media is changed
+// onwaiting	    A media is waiting for the next frame
+
+// See Also:
+// The <audio> Object
+// The <video> Object
+
+// Syntax
+// In HTML:
+
+// <element ondurationchange="myScript">
+// In JavaScript:
+
+// object.ondurationchange = function(){myScript};
+// In JavaScript, using the addEventListener() method:
+
+// object.addEventListener("durationchange", myScript);
+// Technical Details
+// Bubbles:	            No
+// Cancelable:	        No
+// Event type:	        Event
+// HTML tags:	        <audio> and <video>
+// DOM Version:	        Level 3 Events
+
+// More Examples
+// Example
+// Call a function when the audio is starting to load:
+
+// <audio ondurationchange="myFunction()">
+// Browser Support
+// ondurationchange is a DOM Level 3 (2004) feature.
+
+// It is fully supported in all modern browsers:
+
+// Chrome	Edge	Firefox	Safari	Opera	IE
+// Yes	Yes	Yes	Yes	Yes	11
+
+
+

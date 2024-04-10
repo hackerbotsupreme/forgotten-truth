@@ -1,0 +1,2922 @@
+// statements and declarations 
+
+//statements 
+// break
+// Terminates the current loop, 
+// switch, or label statement and 
+// transfers program control to 
+// the statement following the 
+// terminated statement.
+
+// continue
+// Terminates execution of the 
+// statements in the current 
+// iteration of the current or 
+// labeled loop, and continues 
+// execution of the loop with 
+// the next iteration.
+
+// throw
+// Throws a user-defined exception.
+
+// switch
+// try...catch
+
+// Declaring variables
+// var
+// let
+// const
+
+
+// Functions and classes
+// function
+// function*
+// async function
+// async function*
+// class
+
+
+// Iterations
+// do...while
+// for
+// for...in
+// for...of
+// for await...of
+// while
+
+
+// Empty
+// Block
+// Expression statement
+// debugger
+// export
+// import
+// label
+// with Deprecated
+
+
+// Difference between statements and declarations
+// The following are declarations:
+// let
+// const
+// function
+// function*
+// async function
+// async function*
+// class
+// export (Note: it can only appear at the 
+// top-level of a module)
+// import (Note: it can only appear at 
+// the top-level of a module)
+// Everything else in the list above 
+// is a statement.
+
+// The terms "statement" and "declaration" 
+// have a precise meaning in the formal 
+// syntax of JavaScript that affects where 
+// they may be placed in code. For example, 
+// in most control-flow structures, the body 
+// only accepts statements — such as the two 
+// arms of an if...else:
+if (condition)
+  statement1;
+else
+  statement2;
+// If you use a declaration instead of a statement, 
+// it would be a SyntaxError. For example, 
+// a let declaration is not a statement, 
+// so you can't use it in its bare form as 
+// the body of an if statement.
+
+if (condition)
+  let i = 0; // SyntaxError: Lexical declaration cannot appear in a single-statement context
+// On the other hand, var is a statement, 
+// so you can use it on its own 
+// as the if body.
+
+if (condition)
+  var i = 0
+// The fact that var is a statement instead 
+// of a declaration is a special case, 
+// because it doesn't follow normal lexical 
+// scoping rules and may create side effects
+//  — in the form of creating global variables, 
+// mutating existing var-defined variables, 
+// and defining variables that are visible 
+// outside of its block (because var-defined 
+// variables aren't block-scoped).
+
+// As another example, labels can only 
+// be attached to statements.
+
+label: const a = 1; // SyntaxError: Lexical declaration cannot appear in a single-statement context
+
+labels can only be attached to the statements not the declarations 
+
+// To get around this, you can wrap 
+// the declaration in braces — this 
+// makes it part of a block statement.
+
+// async function*
+// The **`async function*`** declaration in JavaScript 
+// creates a binding for a new **asynchronous generator 
+// function** with a specified name.
+
+// 1. **Asynchronous Function**:
+//- An **asynchronous function** is a function 
+// that operates asynchronously via the event loop. 
+// It allows you to write code that doesn't block 
+// the main execution thread while waiting for 
+// certain tasks (such as network requests or file I/O) to complete.
+//- Asynchronous functions use **Promises** to handle 
+// asynchronous behavior. They return a **Promise** 
+// that resolves with the value returned by the function 
+// or rejects with an exception if an error occurs.
+//- The `await` keyword can be used within an asynchronous 
+// function to pause execution until a Promise 
+// is resolved or rejected.
+
+// 2. **Generator Function**:
+//- A **generator function** is a special type of function 
+// that can be paused and resumed during its execution. 
+// It produces a sequence of values lazily, one at a time.
+//- Generator functions are defined using the `function*` syntax.
+//- When you call a generator function, it returns an **iterator** 
+// (an object with a `next()` method).
+
+async function* fetchUserPosts(userId) {
+    try {
+        const response = await fetch(`/api/posts/${userId}`);
+        const posts = await response.json();
+        for (const post of posts) {
+            yield post; // Yield each post one by one
+        }
+    } catch (error) {
+        console.error('Error fetching user posts:', error);
+    }
+}
+// Usage:
+const userPostsIterator = fetchUserPosts(123);
+
+(async () => {
+    for await (const post of userPostsIterator) {
+        console.log('Received post:', post);
+    }
+})();
+
+// You can also define async generator functions using 
+// the async function* expression.
+
+async function* foo() {
+    yield await Promise.resolve('a');
+    yield await Promise.resolve('b');
+    yield await Promise.resolve('c');
+}
+
+let str = '';
+async function generate() {
+    for await (const val of foo()) {
+        str = str + val;
+    }
+    console.log(str);
+}
+generate();
+// Expected output: "abc"
+
+// An async function* declaration creates an
+//  AsyncGeneratorFunction object.Each time when an async 
+// generator function is called, it returns a new
+//  AsyncGenerator object, which conforms to the async 
+// iterator protocol.Every call to next() returns a Promise 
+// that resolves to the iterator result object.
+
+async function* foo() {
+    yield Promise.reject(1);
+}
+
+foo()
+    .next()
+    .catch((e) => console.error(e));
+
+//Async generator functions always produce promises of
+//  results — even when each yield step is synchronous.
+
+async function* myGenerator(step) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    yield 0;
+    yield step;
+    yield step * 2;
+}
+
+const gen = myGenerator(2);
+gen
+    .next()
+    .then((res) => {
+        console.log(res); // { value: 0, done: false }
+        return gen.next();
+    })
+    .then((res) => {
+        console.log(res); // { value: 2, done: false }
+        return gen.next();
+    })
+    .then((res) => {
+        console.log(res); // { value: 4, done: false }
+        return gen.next();
+    })
+    .then((res) => {
+        console.log(res); // { value: undefined, done: true }
+        return gen.next();
+    });
+
+async function* readFiles(directory) {
+    const files = await fs.readdir(directory);
+    for (const file of files) {
+        const stats = await fs.stat(file);
+        if (stats.isFile()) {
+            yield {
+                name: file,
+                content: await fs.readFile(file, "utf8"),
+            };
+        }
+    }
+}
+
+const files = readFiles(".");
+console.log((await files.next()).value);
+// Possible output: { name: 'file1.txt', content: '...' }
+console.log((await files.next()).value);
+// Possible output: { name: 'file2.txt', content: '...' }
+
+Generator functions are used in real-life scenarios when you need to implement lazy or asynchronous data processing, control flow management, or when dealing with infinite or large data streams. Iterators and Iterables, Asynchronous Programming ,Task Delegation and Scheduling , One of the most common and regular use cases for generator functions is in handling and processing asynchronous code using async/await syntax and Promises.
+
+In modern JavaScript, async/await provides a more readable and straightforward way to work with asynchronous operations compared to traditional Promise chaining. However, under the hood, async/await is built using generator functions.
+
+Here's a simplified example of how generator functions are used with async/await:
+
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    // Simulating an asynchronous operation
+    setTimeout(() => {
+      resolve('Data fetched');
+    }, 1000);
+  });
+}
+
+async function getData() {
+  const data1 = await fetchData('/data1');
+  console.log(data1); // Output: 'Data fetched'
+
+  const data2 = await fetchData('/data2');
+  console.log(data2); // Output: 'Data fetched'
+}
+
+getData();
+
+In this example, the getData function is an async function, which is automatically transformed by the JavaScript engine into a generator function behind the scenes. When the await keyword is encountered, the generator function's control is yielded back to the caller, allowing other operations to continue until the asynchronous operation completes.
+
+This regular use of generator functions in async/await makes it possible to write asynchronous code that appears synchronous, improving code readability and maintainability.
+
+
+what is control flow ? 
+Control flow refers to the order in which individual statements, instructions, or function calls are executed in a computer program. It's the logical sequence or flow that determines how the program's execution progresses.
+
+Think of it like a recipe book. The control flow is the order in which you follow the steps to prepare a dish. You might:
+
+1. Gather the ingredients (execute some initial setup code)
+2. Preheat the oven (execute a specific instruction)
+3. Mix the dry ingredients (execute a function or set of statements)
+4. If the recipe calls for nuts, add them (execute a conditional statement or branch in the flow)
+5. Repeat stirring the mixture every 5 minutes (execute a loop or repeated set of instructions)
+6. Bake the dish for 30 minutes (possibly pause execution for a period of time)
+7. Remove the dish from the oven (execute the next set of instructions)
+
+In this analogy, the control flow represents the sequence of steps you follow, the order in which you execute different parts of the recipe. It can involve conditional statements (if the recipe calls for nuts), loops (repeat stirring), function calls (mix the dry ingredients), and even pausing execution (bake for 30 minutes).
+
+In programming, control flow is managed by language constructs like conditionals (if/else statements), loops (for, while), function calls, and other statements that alter the flow of execution based on certain conditions or events.
+
+Without control flow structures, a program would simply execute all statements sequentially from top to bottom, which would severely limit its functionality and flexibility. Control flow constructs allow programs to make decisions, repeat or skip certain instructions, execute code conditionally, and ultimately create complex and intelligent behaviors based on various inputs, conditions, and events.
+
+the generator function's control is yielded back to the caller, - what do yu mean by this line ?
+
+When I say "the generator function's control is yielded back to the caller", I'm referring to how generator functions work internally and how they manage control flow.
+
+In a regular function, when you call it, the control flow enters the function, executes its code from top to bottom, and then returns back to the caller (the code that invoked the function).
+
+Generator functions work differently. When a generator function encounters the yield keyword, it doesn't return like a regular function. Instead, it "yields" or "pauses" its execution and returns control back to the caller. However, it also saves its internal state (including variable values and execution point) so that it can resume execution later from where it left off.
+
+Here's a simple example:
+
+javascript
+
+
+Copy code
+function* generateNumbers() {
+  yield 1; // Execution paused here, control yielded back to the caller
+  yield 2; // Execution will resume here when the generator is called again
+  yield 3;
+}
+
+const generator = generateNumbers();
+console.log(generator.next().value); // Output: 1
+console.log(generator.next().value); // Output: 2
+console.log(generator.next().value); // Output: 3
+In this example:
+
+When generateNumbers() is called, it doesn't execute the function body immediately. Instead, it creates a generator object.
+Calling generator.next() the first time executes the generator function until the first yield statement, which "yields" the value 1 and pauses the execution, giving control back to the caller (the console.log statements).
+Calling generator.next() again resumes the generator function from where it left off (after the first yield), and executes until the next yield, yielding the value 2.
+The process continues until the generator function completes.
+So, when I say "the generator function's control is yielded back to the caller", I mean that the generator function temporarily pauses its execution, saves its internal state, and returns control flow back to the code that called it (the "caller"). This allows other code to execute while the generator is paused, and then the generator can later resume execution from where it left off.
+
+This control flow management capability of generator functions is what makes them useful for implementing asynchronous programming patterns like async/await, where the generator function can pause its execution while waiting for an asynchronous operation to complete, and then resume once the operation is done.
+
+
+// async function 
+//async function function resolveAfter2Seconds() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('resolved');
+        }, 2000);
+    });
+}
+
+async function asyncCall() {
+    console.log('calling');
+    const result = await resolveAfter2Seconds();
+    console.log(result);
+    // Expected output: "resolved"
+}
+
+asyncCall();
+
+which one is more prefeered in industry - async/await or promises while handling async operations ?
+
+In modern JavaScript development, especially in the industry, `async/await` is generally preferred over raw Promises for asynchronous programming. Here are a few reasons why:
+
+1. **Readability**: `async/await` syntax provides a more readable and straightforward way of writing asynchronous code, as it allows you to write code that looks and behaves more like synchronous code. This makes it easier to reason about and maintain asynchronous code.
+
+2. **Error Handling**: With `async/await`, you can use standard `try/catch` blocks to handle errors in a more intuitive way, similar to how you would handle synchronous errors. This is generally easier to understand and manage compared to chaining `.catch` blocks in Promise chains.
+
+3. **Debugging**: Code written with `async/await` is often easier to debug, as the call stack maintains the correct code location and context, making it easier to step through and understand the flow of execution.
+
+4. **Concurrency and Parallelism**: While Promises are limited to handling asynchronous operations in a sequential manner, `async/await` allows for better control over concurrency and parallelism by taking advantage of constructs like `Promise.all` and control flow mechanisms like `for...of` loops.
+
+5. **Adoption and Standardization**: `async/await` is a part of the ECMAScript standard (ES2017 and later), and is widely adopted and supported in modern JavaScript environments, including Node.js and all major browsers.
+
+That being said, Promises are still widely used and are the building blocks upon which `async/await` is built. Promises provide a more low-level and flexible way of working with asynchronous operations, and are particularly useful in certain scenarios, such as handling multiple asynchronous operations in parallel or implementing advanced control flow patterns.
+
+In practice, many developers and projects use a combination of `async/await` and Promises, leveraging the strengths of both approaches. For example, libraries and APIs may return Promises, which can then be consumed using `async/await` in the application code for better readability and error handling.
+
+While `async/await` is generally preferred for its simplicity and readability, a solid understanding of Promises is still valuable, as they form the foundation of asynchronous programming in JavaScript and are often used in lower-level libraries and utilities.
+
+Await expressions
+//Await expressions make promise-returning 
+// functions behave as though they're synchronous by 
+// suspending execution until the returned promise is 
+// fulfilled or rejected.The resolved value of the 
+// promise is treated as the return value of the await 
+// expression.Use of async and await enables the use 
+// of ordinary try / catch blocks around asynchronous code.
+// Async functions always return a promise.If the return 
+// value of an async function is not explicitly a promise, 
+// it will be implicitly wrapped in a promise.
+
+// For example, consider the following code:
+async function foo() {
+    return 1;
+}
+// It is similar to:
+function foo() {
+    return Promise.resolve(1);
+}
+
+// Even though the return value of an async function behaves 
+// as if it's wrapped in a Promise.resolve, they are not 
+// equivalent. - how ? 
+
+The statement "Even though the return value of an async function behaves as if it's wrapped in a `Promise.resolve`, they are not equivalent" refers to a subtle difference in how the returned value is handled in an async function compared to explicitly wrapping it with `Promise.resolve`.
+
+In an async function, if you return a non-Promise value, JavaScript implicitly wraps that value in a resolved Promise. However, this implicit wrapping is not exactly the same as calling `Promise.resolve` explicitly.
+
+Here's an example to illustrate the difference:
+
+```javascript
+async function foo() {
+  return 1;
+}
+
+function bar() {
+  return Promise.resolve(1);
+}
+
+foo().then(value => console.log(value)); // Output: 1
+bar().then(value => console.log(value)); // Output: 1
+
+// Now, let's try returning an object
+async function baz() {
+  return { value: 1 };
+}
+
+function qux() {
+  return Promise.resolve({ value: 1 });
+}
+
+baz().then(obj => console.log(obj)); // Output: { value: 1 }
+qux().then(obj => console.log(obj)); // Output: Promise { { value: 1 } }
+```
+
+In the example above, when returning a simple value like `1`, both the async function `foo` and the `Promise.resolve` in `bar` behave the same way.
+
+However, when returning an object `{ value: 1 }`, the difference becomes apparent. The async function `baz` directly returns the object, while `Promise.resolve` in `qux` wraps the object in a resolved Promise.
+
+This difference arises because `Promise.resolve` follows the rules of the Promise specification, which states that if the argument passed to `Promise.resolve` is an object with a `then` method, it will assume it's a Promise-like object and return it as-is without wrapping it in a new Promise.
+
+On the other hand, async functions always wrap the returned value in a resolved Promise, regardless of whether it's a Promise-like object or a regular object.
+
+This subtle difference can be important in certain scenarios, especially when dealing with Promise-like objects or when relying on the specific behavior of `Promise.resolve` as defined in the specification.
+
+In general, it's recommended to use async/await for better readability and to leverage the implicit Promise wrapping behavior, unless you specifically need to work with Promise-like objects or leverage the specific behavior of `Promise.resolve`.
+
+
+// An async function will return a different reference, 
+// whereas Promise.resolve returns the same reference if 
+// the given value is a promise.
+
+// It can be a problem when you want to check the equality 
+// of a promise and a return value of an async function.
+
+const p = new Promise((res, rej) => {
+    res(1);
+});
+
+async function asyncReturn() {
+    return p;
+}
+
+function basicReturn() {
+    return Promise.resolve(p);
+}
+
+console.log(p === basicReturn()); // true
+// 1 === 1
+console.log(p === asyncReturn()); // false
+// 1 === promise((req,res) => {1} ) 
+
+
+// The behavior you're observing here is due to 
+// the difference in how **synchronous** and 
+// **asynchronous** functions handle promises.
+
+// 1. **`basicReturn()`**:
+//     - This function returns a **resolved promise** with the value of `p`.
+//     - When you compare `p` with the result of `basicReturn()`, they are indeed equal because both are resolved promises with the same value.
+//     - So, `p === basicReturn()` evaluates to `true`.
+
+// 2. **`asyncReturn()`**:
+//     - This function is an **asynchronous function** that returns a promise.
+//     - The `return p;` statement inside `asyncReturn()` does not directly return the resolved value of `p`. Instead, it wraps the value in a promise.
+//     - When you compare `p` with the result of `asyncReturn()`, they are not equal because `asyncReturn()` returns a new promise (with the same resolved value as `p`), but it's a different promise object.
+//     - So, `p === asyncReturn()` evaluates to `false`.
+
+// In summary, the difference lies in how the two functions 
+// handle promises: `basicReturn()` directly returns 
+// the resolved promise, while `asyncReturn()` wraps the 
+// value in a new promise. This behavior is consistent 
+// with the asynchronous nature of the latter function. an async 
+// function without an await expression will run 
+// synchronously.If there is an await expression inside 
+// the function body, however, the async function will 
+// always complete asynchronously.
+
+
+// 2. **`await` Expressions**:
+//     - The `await` keyword is used inside an asynchronous 
+//      function to pause execution until a promise is resolved.
+//     - When an `await` expression is encountered, 
+//      the function **pauses** its execution and **waits** 
+//      for the promise to resolve.
+//     - Once the promise is resolved (or rejected), 
+//      the function resumes execution from where it left off.
+
+// 3. **Asynchronous Completion**:
+//     - If there is at least one `await` expression inside 
+//      the function body, the entire function will **always** 
+//      complete **asynchronously**.
+//     - Even if the top-level code runs synchronously, 
+//      the presence of an `await` ensures that the function 
+//      won't block the event loop and will allow other tasks 
+//      to execute concurrently.
+
+async function foo() {
+    await 1;
+}
+function foo() {
+    return Promise.resolve(1).then(() => undefined);
+}
+
+// In the following example, we successively await two 
+// promises.Progress moves through function foo in three 
+// stages.
+
+// Code after each await expression can be thought of as 
+// existing in a.then callback.In this way a promise chain 
+// is progressively constructed with each reentrant step 
+// through the function. The return value forms the final 
+// link in the chain.
+
+// In the following example, we successively await two 
+// promises.Progress moves through function foo in three 
+// stages.
+
+// The first line of the body of function foo is executed 
+// synchronously, with the await expression configured with
+//  the pending promise.Progress through foo is then suspended 
+// and control is yielded back to the function that called foo.
+
+// Some time later, when the first promise has either been 
+// fulfilled or rejected, control moves back into foo.The 
+// result of the first promise fulfillment(if it was not 
+// rejected) is returned from the await expression.Here 1 
+// is assigned to result1.Progress continues, and the second 
+// await expression is evaluated.Again, progress through foo 
+// is suspended and control is yielded.
+
+// Some time later, when the second promise has either been 
+// fulfilled or rejected, control re - enters foo.The result 
+// of the second promise resolution is returned from the 
+// second await expression.Here 2 is assigned to 
+// result2.Control moves to the return expression(if any).
+// The default return value of undefined is returned as the 
+// resolution value of the current promise.
+
+async function foo() {
+    const result1 = await new Promise((resolve) =>
+        setTimeout(() => resolve("1")),
+    );
+    const result2 = await new Promise((resolve) =>
+        setTimeout(() => resolve("2")),
+    );
+}
+foo();
+// Note how the promise chain is not built - up in one go.
+// Instead, the promise chain is constructed in stages as 
+// control is successively yielded from and returned to the
+//  async function. As a result, we must be mindful of error 
+// handling behavior when dealing with concurrent 
+// asynchronous operations.
+
+// For example, in the following code an unhandled promise 
+// rejection error will be thrown, even if a.catch handler 
+// has been configured further along the promise chain.This 
+// is because p2 will not be "wired into" the promise chain 
+// until control returns from p1.
+
+async function foo() {
+    const p1 = new Promise((resolve) => setTimeout(() => resolve("1"), 1000));
+    const p2 = new Promise((_, reject) => setTimeout(() => reject("2"), 500));
+    const results = [await p1, await p2]; // Do not do this! Use Promise.all or Promise.allSettled instead.
+}
+foo().catch(() => { }); // Attempt to swallow all errors...
+
+function resolveAfter2Seconds() {
+    console.log("starting slow promise");
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("slow");
+            console.log("slow promise is done");
+        }, 2000);
+    });
+}
+
+function resolveAfter1Second() {
+    console.log("starting fast promise");
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("fast");
+            console.log("fast promise is done");
+        }, 1000);
+    });
+}
+
+async function sequentialStart() {
+    console.log("== sequentialStart starts ==");
+
+    // 1. Start a timer, log after it's done
+    const slow = resolveAfter2Seconds();
+    console.log(await slow);
+
+    // 2. Start the next timer after waiting for the previous one
+    const fast = resolveAfter1Second();
+    console.log(await fast);
+
+    console.log("== sequentialStart done ==");
+}
+
+async function sequentialWait() {
+    console.log("== sequentialWait starts ==");
+
+    // 1. Start two timers without waiting for each other
+    const slow = resolveAfter2Seconds();
+    const fast = resolveAfter1Second();
+
+    // 2. Wait for the slow timer to complete, and then log the result
+    console.log(await slow);
+    // 3. Wait for the fast timer to complete, and then log the result
+    console.log(await fast);
+
+    console.log("== sequentialWait done ==");
+}
+
+async function concurrent1() {
+    console.log("== concurrent1 starts ==");
+
+    // 1. Start two timers concurrently and wait for both to complete
+    const results = await Promise.all([
+        resolveAfter2Seconds(),
+        resolveAfter1Second(),
+    ]);
+    // 2. Log the results together
+    console.log(results[0]);
+    console.log(results[1]);
+
+    console.log("== concurrent1 done ==");
+}
+
+async function concurrent2() {
+    console.log("== concurrent2 starts ==");
+
+    // 1. Start two timers concurrently, log immediately after each one is done
+    await Promise.all([
+        (async () => console.log(await resolveAfter2Seconds()))(),
+        (async () => console.log(await resolveAfter1Second()))(),
+    ]);
+    console.log("== concurrent2 done ==");
+}
+
+sequentialStart(); // after 2 seconds, logs "slow", then after 1 more second, "fast"
+
+// wait above to finish
+setTimeout(sequentialWait, 4000); // after 2 seconds, logs "slow" and then "fast"
+
+// wait again
+setTimeout(concurrent1, 7000); // same as sequentialWait
+
+// wait again
+setTimeout(concurrent2, 10000); // after 1 second, logs "fast", then after 1 more second, "slow"
+
+
+The behavior you described in your comment is a common misconception related to asynchronous programming in JavaScript. Let me explain how the code finishes in 2 seconds even though the timers run concurrently, and why the await calls still run in series.
+
+1. **Concurrent Execution**:
+   - When you create the `slow` and `fast` timers using `resolveAfter2Seconds()` and `resolveAfter1Second()`, respectively, both timers start running concurrently.
+   - This means that they are both active at the same time, without waiting for each other.
+
+2. **Await Calls**:
+   - The `await` keyword is used to pause the execution of a function until a promise is resolved.
+   - In your code, the `await slow` and `await fast` calls are used to wait for the promises returned by the timers to resolve.
+   - However, these `await` calls do not block the entire execution of the function. Instead, they allow other code (including other `await` calls) to run concurrently.
+
+3. **Execution Timeline**:
+   - Here's how the execution proceeds:
+     - Both timers start running concurrently.
+     - The `await slow` call waits for the slow timer (2 seconds) to complete.
+     - While waiting for the slow timer, the fast timer continues running concurrently.
+     - The `await fast` call waits for the fast timer (1 second) to complete.
+     - Since the slow timer has already finished by this point, the total time for the second `await` is only 1 second.
+     - Overall, the code finishes in 2 seconds (the time taken by the slow timer) because the timers run concurrently, but the `await` calls are in series.
+
+4. **Summary**:
+   - The timers run concurrently, but the `await` calls allow the code to proceed in a non-blocking manner.
+   - The second `await` does not wait for the first one to finish; it only waits for the fast timer to complete.
+   - This behavior allows the code to complete in 2 seconds instead of 3 seconds (the total time for both timers).
+
+Remember that JavaScript's event loop and asynchronous nature enable efficient execution even when waiting for multiple tasks to complete. The `await` keyword ensures that the code proceeds sequentially only when necessary, allowing for better performance and responsiveness. 🚀
+
+Certainly! Let's break down the behavior of the `sequentialStart` function step by step:
+
+1. **Function Start**:
+   - The `sequentialStart` function begins executing.
+   - The first log statement prints: `"== sequentialStart starts =="`.
+
+2. **Slow Timer (resolveAfter2Seconds)**:
+   - The `slow` timer (created by `resolveAfter2Seconds()`) starts running.
+   - The `await slow` call pauses the execution of the function until the slow timer completes (waits for 2 seconds).
+   - The result of the slow timer is logged.
+
+3. **Fast Timer (resolveAfter1Second)**:
+   - While waiting for the slow timer, the fast timer (created by `resolveAfter1Second()`) continues running concurrently.
+   - The `await fast` call waits for the fast timer to complete (waits for 1 second).
+   - Since the fast timer was already running, the total time for the second `await` is only 1 second.
+
+4. **Function Completion**:
+   - The second log statement prints: `"== sequentialStart done =="`.
+   - The entire function completes in 2 seconds (the time taken by the slow timer) because:
+     - The timers run concurrently (slow and fast).
+     - The `await` calls allow other code to run in parallel.
+     - The second `await` does not wait for the first one to finish; it only waits for the fast timer.
+
+In summary, the code finishes in 2 seconds because the timers run concurrently, and the `await` calls allow parallel execution. Even though the timers start together, the `await` calls ensure that the results are processed sequentially, resulting in efficient execution. 🚀
+
+function getProcessedData(url) {
+    return downloadData(url) // returns a promise
+        .catch((e) => downloadFallbackData(url)) // returns a promise
+        .then((v) => processDataInWorker(v)); // returns a promise
+}
+// means things that will complete eventually also we dont wanna block the 
+// event loop then warap it into promise 
+// this above code  can be rewritten with a single async function as 
+// follows:
+
+async function getProcessedData(url) {
+    let v;
+    try {
+        v = await downloadData(url);
+    } catch (e) {
+        v = await downloadFallbackData(url);
+    }
+    return processDataInWorker(v);
+}
+// Alternatively, you can chain the promise with catch ():
+async function getProcessedData(url) {
+    const v = await downloadData(url).catch((e) => downloadFallbackData(url));
+    return processDataInWorker(v);
+}
+
+// Block statement
+// A block statement is used to group zero or more 
+// statements
+
+var x = 1;
+let y = 1;
+
+if (true) {
+    var x = 2;
+    let y = 2;
+}
+
+console.log(x);
+// Expected output: 2
+
+console.log(y);
+// Expected output: 1
+
+// Copy to Clipboard
+{
+    StatementList
+}
+//In addition, combined with block - scoped declarations like 
+// let, const, and class, blocks can prevent temporary
+//  variables from polluting the global namespace, just 
+// like IIFEs do.
+
+flg
+
+var x = 1;
+{
+    var x = 2;
+}
+console.log(x); // 2
+
+let x = 1;
+{
+    let x = 2;
+}
+console.log(x); // 1
+
+const c = 1;
+{
+    const c = 2;
+}
+console.log(c); // 1; does not throw SyntaxError
+
+// In strict mode, function declarations inside blocks are 
+// scoped to that block and are hoisted to the top of the 
+// block.
+
+"use strict";
+
+{
+    foo(); // Logs "foo"
+    function foo() {
+        console.log("foo");
+    }
+}
+
+foo(); // ReferenceError: foo is not defined
+
+// break
+// The break statement terminates the current loop or 
+// switch statement and transfers program control to the
+//  statement following the terminated statement.It can 
+// also be used to jump past a labeled statement when used
+//  within that labeled statement.
+
+// Try it
+let i = 0;
+
+while (i < 6) {
+    if (i === 3) {
+        break;
+    }
+    i = i + 1;
+}
+console.log(i);
+// Expected output: 3
+
+
+outerBlock: {
+    innerBlock: {
+        console.log("1");
+        break outerBlock; // breaks out of both innerBlock and outerBlock
+        console.log(":-("); // skipped
+    }
+    console.log("2"); // skipped
+}
+
+function testBreak(x) {
+    let i = 0;
+
+    while (i < 6) {
+        if (i === 3) {
+            (() => {
+                break;
+            })();
+        }
+        i += 1;
+    }
+
+    return i * x;
+}
+testBreak(1); // SyntaxError: Illegal break statement
+// jump target cannot cross function boundary 
+
+// Unsyntactic break statements
+// A break statement must be nested within any label it 
+// references.The following code also uses break statements
+//  with labeled blocks, but generates a syntax error because
+//  its break statement references block2 but it's not 
+// nested within block2.
+block1: {
+    console.log("1");
+    break block2; // SyntaxError: label not found
+}
+// label cannot be found 
+
+block2: {
+    console.log("2");
+}
+// break in switch statements
+// The following code has a break statement that terminates 
+// the switch statement when a case is matched and the 
+// corresponding code has run.
+const food = "sushi";
+
+switch (food) {
+    case "sushi":
+        console.log("Sushi is originally from Japan.");
+        break;
+    case "pizza":
+        console.log("Pizza is originally from Italy.");
+        break;
+    default:
+        console.log("I have never heard of that dish.");
+        break;
+}
+
+function testBreak(x) {
+    let i = 0;
+
+    while (i < 6) {
+        if (i === 3) {
+            (() => {
+                break;
+            })();
+        }
+        i += 1;
+    }
+
+    return i * x;
+}
+testBreak(1); // SyntaxError: Illegal break statement
+// jump target cannot cross function boundary 
+
+block1: {
+    console.log("1");
+    (() => {
+        break block1; // SyntaxError: Undefined label 'block1'
+    })();
+}
+// jump target cannot cross function boundary 
+// means break cannot jump operate outside of the function boundary 
+
+
+i heard that contructor is a blueprint of creating objects of same type , so wht is class and wht is the relation between two ?
+
+Sure, let me explain in simple terms:
+
+A class is like a blueprint or a template that defines/list of the properties , methods and behaviors that objects of that type should have. It acts as a blueprint for creating objects.
+
+A constructor is a special method/function within a class that is used to create and initialize(create an instance ) objects of that class type. It is a blueprint for creating objects of the same type.
+
+The relationship between classes and constructors is that a class defines the structure , properties and behavior of objects, while the constructor is a method within the class that is used to create and initialize those objects.
+
+Here's an analogy to help understand better:
+
+Think of a class as a blueprint for building houses. It specifies the overall design, the number of rooms, the materials to be used, and the features the house should have.
+
+The constructor is like the construction crew that takes that blueprint and actually builds the house according to the specifications provided in the blueprint (class). Each time you call the constructor, it creates a new house (object) based on the blueprint (class).
+
+Just like you can use the same blueprint to build multiple houses, you can use the same class to create multiple objects of that type by calling the constructor multiple times.
+
+So, in essence, a class is a template or a blueprint that defines the structure and behavior of objects, while a constructor is a method within that class that is responsible for creating and initializing objects based on that blueprint.
+
+
+// class
+//The class declaration creates a binding of a new class 
+// to a given name.
+
+class Polygon {
+    constructor(height, width) {
+        this.area = height * width;
+    }
+}
+
+
+console.log(new Polygon(4, 3).area);
+// Expected output: 12
+
+// classes are blueprint of creating object . 
+// let suppose we want to create 100 objects of same properties and methods . 
+// so we cn use the calsses to do so .
+// class declarations are scoped to blocks as well as 
+// functions.
+
+// class declarations can only be accessed after the place 
+// of declaration is reached(see temporal dead zone).For 
+// this reason, class declarations are commonly regarded 
+// as non - hoisted(unlike function declarations).
+// class declarations do not create properties on globalThis
+//  when declared at the top level of a script(unlike 
+// function declarations).
+// class declarations cannot be redeclared by any other 
+// declaration in the same scope.
+// Outside the class body, class declarations can be 
+// re - assigned like let, but you should avoid doing so.
+// Within the class body, the binding is constant like const.
+// like
+class Foo {
+    static {
+        Foo = 1; // TypeError: Assignment to constant variable.
+    }
+}
+
+class Foo2 {
+    bar = (Foo2 = 1); // TypeError: Assignment to constant variable.
+}
+
+class Foo3 { }
+Foo3 = 1;
+console.log(Foo3); // 1
+
+// In the following example, we first define a class named 
+// Rectangle, then extend it to create a class named 
+// FilledRectangle.
+
+// Note that super(), used in the constructor, can only be 
+// used in constructors, and must be called before the this 
+// keyword can be used.
+
+//     JS
+// Copy to Clipboard
+class Rectangle {
+    constructor(height, width) {
+        this.name = "Rectangle";
+        this.height = height;
+        this.width = width;
+    }
+}
+
+class FilledRectangle extends Rectangle {
+    constructor(height, width, color) {
+        super(height, width);
+        this.name = "Filled rectangle";
+        this.color = color;
+    }
+}
+
+// const
+//The const declaration declares block-scoped local 
+// variables.
+
+// Try it
+const number = 42;
+
+try {
+    number = 99;
+} catch (err) {
+    console.log(err);
+    // Expected output: TypeError: invalid assignment to const 'number'
+    // (Note: the exact output may be browser-dependent)
+}
+
+console.log(number);
+// Expected output: 42
+
+// syntax 
+const name1 = value1, name2 = value2, /* …, */ nameN = valueN;
+//const declarations are scoped to blocks as well as functions.
+// const declarations can only be accessed after the place 
+// of declaration is reached(see temporal dead zone).For 
+// this reason, const declarations are commonly regarded 
+// as non-hoisted.
+// const declarations do not create properties on globalThis
+//  when declared at the top level of a script.
+// const declarations cannot be redeclared by any other 
+// declaration in the same scope.
+// The const declaration creates an immutable reference to 
+// a value.
+
+
+// continue
+// The continue statement terminates execution of the 
+// statements in the current iteration of the current 
+// or labeled loop, and continues execution of the loop 
+// with the next iteration.
+
+// Try it
+let text = '';
+
+for (let i = 0; i < 10; i++) {
+    if (i === 3) {
+        continue;
+    }
+    text = text + i;
+}
+
+console.log(text);
+// Expected output: "012456789"
+
+continue;
+continue label;
+
+// continue cannot be used within loops across function 
+// boundaries.
+
+// JS
+// Copy to Clipboard
+for (let i = 0; i < 10; i++) {
+    (() => {
+        continue; // SyntaxError: Illegal continue statement: no surrounding iteration statement
+    })();
+}
+// jump target cannot cross function  boundary 
+// When referencing a label, the labeled statement must 
+// contain the continue statement.
+
+// JS
+// Copy to Clipboard
+label: for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
+
+for (let i = 0; i < 10; i++) {
+    continue label; // SyntaxError: Undefined label 'label'
+}
+// The labeled statement must be a loop.
+// the continue statement can only jumo ti a label of an enclosing iteration statement 
+
+// there are total 63 reserved kyword in js  , 
+// and a alabel indentifier can nit be a reserved word . 
+
+//     JS
+// Copy to Clipboard
+label: {
+    for (let i = 0; i < 10; i++) {
+        continue label; // SyntaxError: Illegal continue statement: 'label' does not denote an iteration statement
+    }
+}
+// the continue statement can only jumo ti a label of an enclosing iteration statement 
+
+// Empty statement / no statement - ;
+// if js expect a statement we can use no/empty statement 
+// to give an empty statement . 
+
+// Try it
+const array1 = [1, 2, 3];
+// Assign all array values to 0
+for (let i = 0; i < array1.length; array1[i++] = 0 /* empty statement */);
+console.log(array1);
+// Expected output: Array [0, 0, 0]
+
+// Copy to Clipboard
+;
+
+// Description
+// The empty statement is a semicolon (;) indicating that 
+// no statement will be executed, even if JavaScript syntax 
+// requires one.
+// The opposite behavior, where you want multiple statements, 
+// but JavaScript only allows a single one, is possible 
+// using a block statement, which combines several statements
+//  into a single one.
+
+// Examples
+// Empty loop body
+// The empty statement is sometimes used with loop statements. 
+// See the following example with an empty loop body:
+
+const arr = [1, 2, 3];
+// Assign all array values to 0
+for (let i = 0; i < arr.length; arr[i++] = 0) /* empty statement */ ;
+console.log(arr);
+// [0, 0, 0]
+
+if (condition);      // Caution, this "if" does nothing!
+  killTheUniverse(); // So this always gets executed!!!
+
+// export
+// The export declaration is used to export values from 
+// a JavaScript module.
+// In order to use the export declaration in a source file, 
+// the file must be interpreted by the runtime as a module.
+// In HTML, this is done by adding type = "module" to 
+// the < script > tag, or by being imported by another 
+// module.Modules are automatically interpreted in strict mode.
+
+export let name1, name2/*, … */; // also var
+export const name1 = 1, name2 = 2/*, … */; // also var, let
+export function functionName() { /* … */ }
+export class ClassName { /* … */ }
+export function* generatorFunctionName() { /* … */ }
+export const { name1, name2: bar } = o;
+export const [name1, name2] = array;
+
+// Export list
+export { name1, /* …, */ nameN };
+export { variable1 as name1, variable2 as name2, /* …, */ nameN };
+export { variable1 as "string name" };
+export { name1 as default /*, … */ };
+
+// Default exports
+export default expression;
+export default function functionName() { /* … */ }
+export default class ClassName { /* … */ }
+export default function* generatorFunctionName() { /* … */ }
+export default function () { /* … */ }
+export default class { /* … */ }
+export default function* () { /* … */ }
+
+// Aggregating modules
+export * from "module-name";
+export * as name1 from "module-name";
+export { name1, /* …, */ nameN } from "module-name";
+export { import1 as name1, import2 as name2, /* …, */ nameN } from "module-name";
+export { default, /* …, */ } from "module-name";
+export { default as name1 } from "module-name";
+
+// Identifier to be exported(so that it can be imported via
+//  import in another script). If you use an alias with as, 
+// the actual exported name can be specified as a string 
+// literal, which may not be a valid identifier.
+
+// Every module can have two different types of export, 
+// named export and default export. You can have multiple 
+// named exports per module but only one default export. 
+
+export { myFunction as default };
+export { x } from "mod";
+export { x as v } from "mod";
+export * as ns from "mod";
+import * as ns from "./barrel.js";
+export { default as DefaultExport } from "bar.js";
+export { cube, foo, graph };
+import { cube, foo, graph } from "./my-module.js";
+
+// Expression statement
+// An expression statement is an expression used in a place 
+// where a statement is expected.
+// Apart from the dedicated statement syntaxes, you can 
+// also use almost any expression as a statement on its
+//  own.
+
+// for...in
+//The for...in statement iterates over all enumerable string 
+// properties of an object(ignoring properties keyed by 
+// symbols), including inherited enumerable properties.
+
+// Syntax
+for (variable in object)
+    statement
+// A statement to be executed on every iteration.May 
+// reference variable.You can use a block statement to 
+// execute multiple statements.
+// Object whose non - symbol enumerable properties are 
+// iterated over.
+
+//     Description
+// The loop will iterate over all enumerable properties of 
+// the object itself and those the object inherits from its 
+// prototype chain(properties of nearer prototypes take 
+// precedence over those of prototypes further away from 
+// the object in its prototype chain).
+//Some properties inherited from prototypes are marked as non-enumerable. 
+//These properties won’t show up in a for…in loop.
+
+// Iterating over own properties only
+// If you only want to consider properties attached to the
+//  object itself, and not its prototypes, you can use one 
+// of the following techniques:
+Object.keys()
+Object.getOwnPropertyNames()
+// Object.keys will return a list of enumerable own string 
+// properties, while Object.getOwnPropertyNames will also 
+// contain non - enumerable ones.
+
+// Many JavaScript style guides and linters recommend against 
+// the use of for...in, because it iterates over the entire 
+// prototype chain which is rarely what one wants, and may 
+// be a confusion with the more widely - used for...of loop.
+// for...in is most practically used for debugging purposes,
+//  being an easy way to check the properties of an object(by
+//  outputting to the console or otherwise).
+
+const triangle = { a: 1, b: 2, c: 3 };
+function ColoredTriangle() {
+    this.color = "red";
+}
+ColoredTriangle.prototype = triangle;
+const obj = new ColoredTriangle();
+for (const prop in obj) {
+    if (Object.hasOwn(obj, prop)) {
+        console.log(`obj.${prop} = ${obj[prop]}`);
+    }
+}
+// Logs:
+// "obj.color = red"
+
+const proto = { a: 1 };
+const obj = { __proto__: proto, a: 2 };
+for (const prop in obj) {
+    console.log(`obj.${prop} = ${obj[prop]}`);
+}
+// Logs:
+// obj.a = 2
+
+Object.defineProperty(obj, "a", { enumerable: false });
+for (const prop in obj) {
+    console.log(`obj.${prop} = ${obj[prop]}`);
+}
+// Logs nothing, because the first "a" property visited is non-enumerable.
+
+// JS
+// Copy to Clipboard
+const obj = { a: 1, b: 2 };
+
+for (const prop in obj) {
+    console.log(`obj.${prop} = ${obj[prop]}`);
+    Object.setPrototypeOf(obj, { c: 3 });
+}
+
+// for...of
+// The for...of statement executes a loop that operates 
+// on a sequence of values sourced from an iterable 
+// object.
+const array1 = ['a', 'b', 'c'];
+
+for (const element of array1) {
+    console.log(element);
+}
+// Expected output: "a"
+// Expected output: "b"
+// Expected output: "c"
+
+// Syntax
+for (variable of iterable)
+    statement
+
+// When a for...of loop iterates over an iterable, it first 
+// calls the iterable's [@@iterator]() method, which returns 
+// an iterator, and then repeatedly calls the resulting 
+// iterator's next() method to produce the sequence of 
+// values to be assigned to variable.
+
+// If the for...of loop exited early(e.g.a break statement 
+// is encountered or an error is thrown), the return () method 
+// of the iterator is called to perform any cleanup.
+
+const iterable = new Map([
+    ["a", 1],
+    ["b", 2],
+    ["c", 3],
+]);
+
+for (const entry of iterable) {
+    console.log(entry);
+}
+// ['a', 1]
+// ['b', 2]
+// ['c', 3]
+for (const [key, value] of iterable) {
+    console.log(value);
+}
+// 1
+// 2
+// 3
+
+
+const iterable = {
+    [Symbol.iterator]() {
+        let i = 1;
+        return {
+            next() {
+                if (i <= 3) {
+                    return { value: i++, done: false };
+                }
+                return { value: undefined, done: true };
+            },
+        };
+    },
+};
+
+for (const value of iterable) {
+    console.log(value);
+}
+// 1
+// 2
+// 3
+
+// Iterating over an object with an @@iterator generator 
+// method:
+const iterable = {
+    *[Symbol.iterator]() {
+        yield 1;
+        yield 2;
+        yield 3;
+    },
+};
+
+for (const value of iterable) {
+    console.log(value);
+}
+// 1
+// 2
+// 3
+
+// Iterable iterators(iterators with a[@@iterator]() method 
+// that returns this) are a fairly common technique to make 
+// iterators usable in syntaxes expecting iterables, such as 
+// for...of.
+
+//     JS
+// Copy to Clipboard
+let i = 1;
+
+const iterator = {
+    next() {
+        if (i <= 3) {
+            return { value: i++, done: false };
+        }
+        return { value: undefined, done: true };
+    },
+    [Symbol.iterator]() {
+        return this;
+    },
+};
+
+for (const value of iterator) {
+    console.log(value);
+}
+// 1
+// 2
+// 3
+
+
+// for
+// The for statement creates a loop that consists of three 
+// optional expressions, enclosed in parentheses and 
+// separated by semicolons, followed by a statement(usually a
+//  block statement) to be executed in the loop.
+
+for (initialization; condition; afterthought)
+    statement
+
+// Initialization block syntax
+// The initialization block accepts both expressions and 
+// variable declarations.However, expressions cannot use 
+// the in operator unparenthesized, because that is ambiguous
+//  with a for...in loop.
+
+// Copy to Clipboard
+for (let i = "start" in window ? window.start : 0; i < 9; i++) {
+    console.log(i);
+}
+// ) expected
+// SyntaxError: 'for-in' loop variable declaration may not have an initializer.
+
+// Copy to Clipboard
+// Parenthesize the whole initializer
+for (let i = ("start" in window ? window.start : 0); i < 9; i++) {
+    console.log(i);
+}
+// Parenthesize the `in` expression
+for (let i = ("start" in window) ? window.start : 0; i < 9; i++) {
+    console.log(i);
+}
+
+// function*
+//A generator function 
+// can be exited and later re - entered, with its context
+// (variable bindings) saved across re - entrances.
+
+function* generator(i) {
+    yield i;
+    yield i + 10;
+}
+
+const gen = generator(10);
+
+console.log(gen.next().value);
+// Expected output: 10
+
+console.log(gen.next().value);
+// Expected output: 20
+
+// 1. A **generator function** is a special type of function in JavaScript.
+// 2. When you call a generator function, it returns a new **Generator object**.
+// 3. This Generator object follows the **iterator protocol**.
+// 4. The key feature of generator functions is the use of the **`yield`** keyword.
+// 5. Here's how it works step by step:
+//    - When you call the **`next()`** method on the Generator object, the generator function's body starts executing.
+//    - It runs until it encounters the first **`yield`** expression.
+//    - The value specified after **`yield`** is returned as the result of that iteration.
+//    - The **`done`** property indicates whether the generator has finished yielding values (it's `true` when done).
+//    - You can also resume the generator function by calling **`next()`** with an argument, which replaces the **`yield`** expression with that argument.
+
+// In summary, generator functions allow you to pause and 
+// resume their execution, making them useful for handling 
+// sequences of values or asynchronous operations.
+// A return statement in a generator, when executed, will 
+// make the generator finish(i.e.the done property of the
+//  object returned by it will be set to true).
+//When a generator is finished, subsequent 
+// next() calls will not execute any of that generator's 
+// code, they will just return an object of this
+//  form: { value: undefined, done: true }.
+
+function* idMaker() {
+    let index = 0;
+    while (true) {
+        yield index++;
+    }
+}
+const gen = idMaker();
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+console.log(gen.next().value); // 3
+// …
+
+
+
+function* anotherGenerator(i) {
+    yield i + 1;
+    yield i + 2;
+    yield i + 3;
+}
+
+function* generator(i) {
+    yield i;
+    yield* anotherGenerator(i);
+    yield i + 10;
+}
+
+const gen = generator(10);
+
+console.log(gen.next().value); // 10
+console.log(gen.next().value); // 11
+console.log(gen.next().value); // 12
+console.log(gen.next().value); // 13
+console.log(gen.next().value); // 20
+
+
+class Foo {
+    *generator() {
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+}
+
+const f = new Foo();
+const gen = f.generator();
+
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 3, done: false }
+console.log(gen.next()); // { value: undefined, done: true }
+
+
+class Foo {
+    *[Symbol.iterator]() {
+        yield 1;
+        yield 2;
+    }
+}
+
+const SomeObj = {
+    *[Symbol.iterator]() {
+        yield "a";
+        yield "b";
+    },
+};
+
+console.log(Array.from(new Foo())); // [ 1, 2 ]
+console.log(Array.from(SomeObj)); // [ 'a', 'b' ]
+
+const foo = function* () {
+    yield 10;
+    yield 20;
+};
+
+const bar = foo();
+console.log(bar.next()); // {value: 10, done: false}
+
+// function
+//The function declaration creates a binding of a new 
+// function to a given name.
+
+hoisted(); // Logs "foo"
+
+function hoisted() {
+  console.log("foo");
+}
+
+notHoisted(); // TypeError: notHoisted is not a function
+
+var notHoisted = function () {
+  console.log("bar");
+};
+
+// Redeclarations
+// At the top level of a script, function declarations 
+// behave like var and can be redeclared by another function 
+// or var but not by let, const, or class.
+
+function a(b) {}
+function a(b, c) {}
+console.log(a.length); // 2
+let a = 2; // SyntaxError: Identifier 'a' has already been declared
+
+// When function declarations are redeclared by var, the 
+// var declaration's initializer always overrides the 
+// function's value, regardless of their relative position. 
+// This is because function declarations are hoisted before 
+// any initializer gets evaluated, so the initializer comes 
+// later and overrides the value.
+
+// JS
+// Copy to Clipboard
+var a = 1;
+function a() {}
+console.log(a); // 1
+// At the top level of a function's body, function also 
+// behaves like var and can be redeclared or have the 
+// same name as a parameter.
+
+function foo(a) {
+  function a() {}
+  console.log(typeof a);
+}
+
+foo(2); // Logs "function"
+// At the top level of a module or a block in strict mode, 
+// function declarations behave like let and cannot be 
+// redeclared by any other declaration.
+
+function foo() {}
+function foo() {} // SyntaxError: Identifier 'foo' has already been declared
+
+"use strict";
+{
+  function foo() {}
+  function foo() {} // SyntaxError: Identifier 'foo' has already been declared
+}
+
+// import
+// In order to use the import declaration in a source file, 
+// the file must be interpreted by the runtime as a module.
+// In HTML, this is done by adding type = "module" to 
+// the < script > tag.Modules are automatically interpreted 
+// in strict mode.
+
+import defaultExport from "module-name";
+import * as name from "module-name";
+import { export1 } from "module-name";
+import { export1 as alias1 } from "module-name";
+import { default as alias } from "module-name";
+import { export1, export2 } from "module-name";
+import { export1, export2 as alias2, /* … */ } from "module-name";
+import { "string name" as alias } from "module-name";
+import defaultExport, { export1, /* … */ } from "module-name";
+import defaultExport, * as name from "module-name";
+import "module-name";
+
+
+// Labeled statement
+// A labeled statement is any statement that is prefixed 
+// with an identifier.
+
+// You can use a label to identify a statement, and later 
+// refer to it using a break or continue statement. Note 
+// that JavaScript has no goto statement; you can only use
+//  labels with break or continue.
+
+// Any break or continue that references label must be 
+// contained within the statement that's labeled by label. 
+// Think about label as a variable that's only available 
+// in the scope of statement.
+
+//  break label; statement is encountered when executing 
+// statement, execution of statement terminates, and 
+// execution continues at the statement immediately 
+// following the labeled statement.
+
+
+// continue label; can only be used if statement is one of 
+// the looping statements.If a continue label; statement is 
+// encountered when executing statement, execution of 
+// statement continues at the next iteration of the loop.
+// continue; without a label can only continue the innermost 
+// loop, while continue label; allows continuing any given 
+// loop even when the statement is nested within other loops.
+
+// Copy to Clipboard
+// Numbers from 1 to 100
+const items = Array.from({ length: 100 }, (_, i) => i + 1);
+const tests = [
+    { pass: (item) => item % 2 === 0 },
+    { pass: (item) => item % 3 === 0 },
+    { pass: (item) => item % 5 === 0 },
+];
+let itemsPassed = 0;
+
+itemIteration: for (const item of items) {
+    for (const test of tests) {
+        if (!test.pass(item)) {
+            continue itemIteration;
+        }
+    }
+
+    itemsPassed++;
+}
+
+// Using a labeled block with break
+foo: {
+    console.log("face");
+    break foo;
+    console.log("this will not be executed");
+}
+console.log("swap");
+// Logs:
+// "face"
+// "swap"
+
+
+// Labeled function declarations
+// Labels can only be applied to statements, not declarations.
+// There is a legacy grammar that allows function declarations 
+// to be labeled in non - strict code:
+
+L: function F() { }
+// In strict mode code, however, this will throw
+//  a SyntaxError:
+
+"use strict";
+L: function F() { }
+// SyntaxError: functions cannot be labelled
+// Non - plain functions, such as generator functions and 
+// async functions can neither be labeled in strict code, 
+// nor in non - strict code:
+
+// return
+// The return statement ends function execution and 
+// specifies a value to be returned to the function caller.
+
+// switch
+// The switch statement evaluates an expression, matching 
+// the expression's value against a series of case clauses, 
+// and executes statements after the first case clause with 
+// a matching value, until a break statement is encountered. 
+// The default clause of a switch statement will be jumped 
+// to if no case matches the expression's value.
+
+const expr = 'Papayas';
+switch (expr) {
+    case 'Oranges':
+        console.log('Oranges are $0.59 a pound.');
+        break;
+    case 'Mangoes':
+    case 'Papayas':
+        console.log('Mangoes and papayas are $2.79 a pound.');
+        // Expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+    default:
+        console.log(`Sorry, we are out of ${expr}.`);
+}
+
+
+// Syntax
+switch (expression) {
+    case caseExpression1:
+        statements
+    case caseExpression2:
+        statements
+    // …
+    case caseExpressionN:
+        statements
+    default:
+        statements
+}
+
+switch (undefined) {
+    case console.log(1):
+    case console.log(2):
+}
+// Only logs 1
+
+// You can use the break statement within a switch 
+// statement's body to break out early
+
+const foo = 0;
+switch (foo) {
+    case -1:
+        console.log("negative 1");
+        break;
+    case 0: // Value of foo matches this criteria; execution starts from here
+        console.log(0);
+    // Forgotten break! Execution falls through
+    case 1: // no break statement in 'case 0:' so this case will run as well
+        console.log(1);
+        break; // Break encountered; will not continue into 'case 2:'
+    case 2:
+        console.log(2);
+        break;
+    default:
+        console.log("default");
+}
+// Logs 0 and 1
+
+const action = "say_hello";
+switch (action) {
+    case "say_hello":
+        const message = "hello";
+        console.log(message);
+        break;
+    case "say_hi":
+        const message = "hi";
+        console.log(message);
+        break;
+    default:
+        console.log("Empty action received.");
+}
+// This example will output the error 
+// "Uncaught SyntaxError: Identifier 'message' has already 
+// been declared", because the first 
+// const message = 'hello'; conflicts with the second 
+// const message = 'hi'; declaration, even when they're 
+// within their own separate case clauses. Ultimately, 
+// this is due to both const declarations being within 
+// the same block scope created by the switch body.
+
+
+// To fix this, whenever you need to use let or const 
+// declarations in a case clause, wrap it in a block.
+
+//     JS
+// Copy to Clipboard
+const action = "say_hello";
+switch (action) {
+    case "say_hello": {
+        const message = "hello";
+        console.log(message);
+        break;
+    }
+    case "say_hi": {
+        const message = "hi";
+        console.log(message);
+        break;
+    }
+    default: {
+        console.log("Empty action received.");
+    }
+}
+// This code will now output hello in the console as it 
+// should, without any errors.
+
+
+// Taking advantage of fall - through
+// This method takes advantage of the fact that if there is 
+// no break below a case clause, execution will continue to 
+// the next case clause regardless if that case meets the 
+// criteria.
+
+// Copy to Clipboard
+const Animal = "Giraffe";
+switch (Animal) {
+    case "Cow":
+    case "Giraffe":
+    case "Dog":
+    case "Pig":
+        console.log("This animal is not extinct.");
+        break;
+    case "Dinosaur":
+    default:
+        console.log("This animal is extinct.");
+}
+
+// The following is an example of a multiple - operation 
+// sequential case clause, where, depending on the provided 
+// integer, you can receive different output.This shows you
+//  that it will traverse in the order that you put the case
+//  clauses, and it does not have to be numerically 
+// sequential.In JavaScript, you can even mix in
+//  definitions of strings into these case statements as well.
+
+// Copy to Clipboard
+const foo = 1;
+let output = "Output: ";
+switch (foo) {
+    case 0:
+        output += "So ";
+    case 1:
+        output += "What ";
+        output += "Is ";
+    case 2:
+        output += "Your ";
+    case 3:
+        output += "Name";
+    case 4:
+        output += "?";
+        console.log(output);
+        break;
+    case 5:
+        output += "!";
+        console.log(output);
+        break;
+    default:
+        console.log("Please pick a number from 0 to 5!");
+}
+
+
+// You may often find yourself doing a series of if...else matches.
+//     JS
+// Copy to Clipboard
+if ("fetch" in globalThis) {
+    // Fetch a resource with fetch
+} else if ("XMLHttpRequest" in globalThis) {
+    // Fetch a resource with XMLHttpRequest
+} else {
+    // Fetch a resource with some custom AJAX logic
+}
+// This pattern is not doing a sequence of === comparisons, 
+// but you can still convert it to a switch construct.
+
+//     JS
+// Copy to Clipboard
+switch (true) {
+    case "fetch" in globalThis:
+        // Fetch a resource with fetch
+        break;
+    case "XMLHttpRequest" in globalThis:
+        // Fetch a resource with XMLHttpRequest
+        break;
+    default:
+        // Fetch a resource with some custom AJAX logic
+        break;
+}
+// The switch (true) pattern as an alternative to if...else 
+// is especially useful if you want to utilize the fall - 
+// through behavior.
+
+// throw
+// The throw statement throws a user - defined exception.
+// Execution of the current function will stop(the statements
+//  after throw won't be executed), and control will be 
+// passed to the first catch block in the call stack. If 
+// no catch block exists among caller functions, the program 
+// will terminate.
+
+function getRectArea(width, height) {
+    if (isNaN(width) || isNaN(height)) {
+        throw new Error('Parameter is not a number!');
+    }
+}
+
+try {
+    getRectArea(3, 'A');
+} catch (e) {
+    console.error(e);
+    // Expected output: Error: Parameter is not a number!
+}
+
+
+throw new Error("Required"); // Throws a new Error object
+throw;
+// This is invalid code, because unlike return, throw must 
+// be followed by an expression.
+// To avoid this problem(to prevent ASI), you could use 
+// parentheses:
+throw (
+    new Error()
+);
+
+// try...catch
+// The try...catch statement is comprised of a try block 
+// and either a catch block, a finally block, or both.The 
+// code in the try block is executed first, and if it throws
+//  an exception, the code in the catch block will be executed.
+// The code in the finally block will always be executed 
+// before control flow exits the entire construct.
+
+try {
+    tryStatements
+} catch (exceptionVar) {
+    catchStatements
+} finally {
+    finallyStatements
+}
+
+// finallyStatements
+// Statements that are executed before control flow exits 
+// the try...catch...finally construct.These statements 
+// execute regardless of whether an exception was thrown
+//  or caught.
+
+// Catch binding
+// When an exception is thrown in the try block, 
+// exceptionVar(i.e., the e in catch (e)) holds the 
+// exception value.You can use this binding to get 
+// information about the exception that was thrown.This
+//  binding is only available in the catch block's scope.
+
+
+// It needs not be a single identifier.You can use 
+// a destructuring pattern to assign multiple identifiers 
+// at once.
+
+//     JS
+// Copy to Clipboard
+try {
+    throw new TypeError("oops");
+} catch ({ name, message }) {
+    console.log(name); // "TypeError"
+    console.log(message); // "oops"
+}
+
+// The bindings created by the catch clause live in the same
+//  scope as the catch block, so any variables declared in 
+// the catch block cannot have the same name as the bindings 
+// created by the catch clause. (There's one exception to 
+// this rule, but it's a deprecated syntax.)
+
+try {
+    throw new TypeError("oops");
+} catch ({ name, message }) {
+    var name; // SyntaxError: Identifier 'name' has already been declared
+    let message; // SyntaxError: Identifier 'message' has already been declared
+}
+
+
+// Conditional catch blocks
+// You can create "Conditional catch blocks" by combining 
+// try...catch blocks with if...else if...else structures, 
+// like this:
+
+// JS
+// Copy to Clipboard
+try {
+    myroutine(); // may throw three types of exceptions
+} catch (e) {
+    if (e instanceof TypeError) {
+        // statements to handle TypeError exceptions
+    } else if (e instanceof RangeError) {
+        // statements to handle RangeError exceptions
+    } else if (e instanceof EvalError) {
+        // statements to handle EvalError exceptions
+    } else {
+        // statements to handle any unspecified exceptions
+        logMyErrors(e); // pass exception object to error handler
+    }
+}
+// A common use case for this is to only catch (and silence) 
+// a small subset of expected errors, and then re -throw the 
+// error in other cases:
+
+// JS
+// Copy to Clipboard
+try {
+    myRoutine();
+} catch (e) {
+    if (e instanceof RangeError) {
+        // statements to handle this very common expected error
+    } else {
+        throw e; // re-throw the error unchanged
+    }
+}
+
+    (() => {
+        try {
+            try {
+                throw new Error("oops");
+            } catch (ex) {
+                console.error("inner", ex.message);
+                throw ex;
+            } finally {
+                console.log("finally");
+                return;
+            }
+        } catch (ex) {
+            console.error("outer", ex.message);
+        }
+    })();
+
+// Logs:
+// "inner" "oops"
+// "finally"
+
+
+// var
+//The var statement declares function-scoped or globally - 
+// scoped variables, optionally initializing each to a value.
+var name1;
+var name1 = value1;
+var name1 = value1, name2 = value2;
+var name1, name2 = value2;
+var name1 = value1, name2, /* …, */ nameN = valueN;
+
+// Importantly, other block constructs, including block 
+// statements, try...catch, switch, headers of one of the 
+// for statements, do not create scopes for var, and 
+// variables declared with var inside such a block 
+// can continue to be referenced outside the block.
+
+// In a script, a variable declared using var is added as 
+// a non-configurable property of the global object.This 
+// means its property descriptor cannot be changed and it 
+// cannot be deleted using delete.JavaScript has automatic
+//  memory management, and it would make no sense to be able 
+// to use the delete operator on a global variable.
+
+//     JS
+// Copy to Clipboard
+"use strict";
+var x = 1;
+Object.hasOwn(globalThis, "x"); // true
+delete globalThis.x; // TypeError in strict mode. Fails silently otherwise.
+delete x; // SyntaxError in strict mode. Fails silently otherwise.
+// In both NodeJS CommonJS modules and native ECMAScript 
+// modules, top - level variable declarations are scoped 
+// to the module, and are not added as properties to the 
+// global object.
+
+// Redeclarations
+// Duplicate variable declarations using var will not trigger
+//  an error, even in strict mode, and the variable will not 
+// lose its value
+
+
+// Initialization of several variables
+// Be careful of the var x = y = 1 syntax — y is not actually
+//  declared as a variable, so y = 1 is an unqualified 
+// identifier assignment, which creates a global variable 
+// in non - strict mode.
+
+//     JS
+// Copy to Clipboard
+var x = 0;
+function f() {
+    var x = y = 1; // Declares x locally; declares y globally.
+}
+f();
+
+console.log(x, y); // 0 1
+
+// In non-strict mode:
+// x is the global one as expected;
+// y is leaked outside of the function, though!
+// The same example as above but with a strict mode:
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+var x = 0;
+function f() {
+    var x = y = 1; // ReferenceError: y is not defined
+}
+f();
+
+console.log(x, y);
+flg
+
+// Iteration protocols
+// Iteration protocols aren't new built-ins or 
+// syntax, but protocols. These protocols can be 
+// implemented by any object by following some 
+// conventions.
+
+// There are two protocols: The iterable protocol
+//  and the iterator protocol.
+
+// The iterable protocol
+// The iterable protocol allows JavaScript objects to
+//  define or customize their iteration behavior, such
+//  as what values are looped over in a for...of construct.
+//  Some built-in types are built-in iterables with a 
+// default iteration behavior, such as Array or Map, 
+// while other types (such as Object) are not.
+
+// In order to be iterable, an object must implement 
+// the @@iterator method, meaning that the object (or 
+// one of the objects up its prototype chain) must have
+//  a property with a @@iterator key which is available 
+// via constant Symbol.iterator:
+
+[Symbol.iterator]
+// A zero-argument function that returns an object,
+//  conforming to the iterator protocol.
+
+// Whenever an object needs to be iterated (such as at
+//  the beginning of a for...of loop), its @@iterator 
+// method is called with no arguments, and the returned 
+// iterator is used to obtain the values to be iterated.
+
+// Note that when this zero-argument function is called, 
+// it is invoked as a method on the iterable object.
+//  Therefore inside of the function, the this keyword
+//  can be used to access the properties of the iterable 
+// object, to decide what to provide during the iteration.
+
+// This function can be an ordinary function, or it can 
+// be a generator function, so that when invoked, an
+//  iterator object is returned. Inside of this generator
+//  function, each entry can be provided by using yield.
+
+// The iterator protocol
+// The iterator protocol defines a standard way to produce
+//  a sequence of values (either finite or infinite), and 
+// potentially a return value when all values have been
+//  generated.
+
+// An object is an iterator when it implements a next() 
+// method with the following semantics:
+
+next()
+// A function that accepts zero or one argument and 
+// returns an object conforming to the IteratorResult
+//  interface (see below). If a non-object value gets 
+// returned (such as false or undefined) when a built-in 
+// language feature (such as for...of) is using the iterator, 
+// a TypeError ("iterator.next() returned a non-object value") 
+// will be thrown.
+
+// All iterator protocol methods (next(), return(),
+//  and throw()) are expected to return an object 
+// implementing the IteratorResult interface. It must 
+// have the following properties:
+
+// done Optional
+// A boolean that's false if the iterator was able to 
+// produce the next value in the sequence. (This is 
+// equivalent to not specifying the done property altogether.)
+
+// Has the value true if the iterator has completed its
+//  sequence. In this case, value optionally specifies the
+//  return value of the iterator.
+
+// value Optional
+// Any JavaScript value returned by the iterator. Can be 
+// omitted when done is true.
+
+// In practice, neither property is strictly required; if 
+// an object without either property is returned, it's 
+// effectively equivalent to { done: false, value: undefined }.
+
+// If an iterator returns a result with done: true, any 
+// subsequent calls to next() are expected to return 
+// done: true as well, although this is not enforced on 
+// the language level.
+
+// The next method can receive a value which will be made
+//  available to the method body. No built-in language 
+// feature will pass any value. The value passed to the
+//  next method of generators will become the value of 
+// the corresponding yield expression.
+
+// Optionally, the iterator can also implement the
+//  return(value) and throw(exception) methods, which,
+//  when called, tells the iterator that the caller is
+//  done with iterating it and can perform any necessary
+//  cleanup (such as closing database connection).
+
+// return(value) Optional
+// A function that accepts zero or one argument and
+//  returns an object conforming to the IteratorResult 
+// interface, typically with value equal to the value 
+// passed in and done equal to true. Calling this method
+//  tells the iterator that the caller does not intend 
+// to make any more next() calls and can perform any 
+// cleanup actions.
+
+// throw(exception) Optional
+// A function that accepts zero or one argument and 
+// returns an object conforming to the IteratorResult 
+// interface, typically with done equal to true. Calling
+//  this method tells the iterator that the caller detects
+//  an error condition, and exception is typically an Error
+//  instance.
+
+// Note: It is not possible to know reflectively (i.e. 
+// without actually calling next() and validating the 
+// returned result) whether a particular object implements
+//  the iterator protocol.
+
+// It is very easy to make an iterator also iterable: 
+// just implement an [@@iterator]() method that returns this.
+
+// JS
+// Copy to Clipboard
+// Satisfies both the Iterator Protocol and Iterable
+const myIterator = {
+  next() {
+    // ...
+  },
+  [Symbol.iterator]() {
+    return this;
+  },
+};
+// Such object is called an iterable iterator. Doing 
+// so allows an iterator to be consumed by the various 
+// syntaxes expecting iterables — therefore, it is seldom
+//  useful to implement the Iterator Protocol without also
+//  implementing Iterable. (In fact, almost all syntaxes
+//  and APIs expect iterables, not iterators.) The generator
+//  object is an example:
+
+// JS
+// Copy to Clipboard
+const aGeneratorObject = (function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+})();
+
+// console.log(typeof aGeneratorObject.next);
+// // "function" — it has a next method (which returns
+//  the right result), so it's an iterator
+
+console.log(typeof aGeneratorObject[Symbol.iterator]);
+// // "function" — it has an @@iterator method (which 
+// returns the right iterator), so it's an iterable
+
+console.log(aGeneratorObject[Symbol.iterator]() === aGeneratorObject);
+// true — its @@iterator method returns itself (an iterator),
+//  so it's an iterable iterator
+
+// All built-in iterators inherit from Iterator.prototype,
+//  which implements the [@@iterator]() method as returning
+//  this, so that built-in iterators are also iterable.
+
+// However, when possible, it's better for
+//  iterable[Symbol.iterator] to return different
+//  iterators that always start from the beginning, 
+// like Set.prototype[@@iterator]() does.
+
+// The async iterator and async iterable protocols
+// There are another pair of protocols used for async
+//  iteration, named async iterator and async iterable
+//  protocols. They have very similar interfaces compared
+//  to the iterable and iterator protocols, except that 
+// each return value from the calls to the iterator methods
+//  is wrapped in a promise.
+
+// An object implements the async iterable protocol when
+//  it implements the following methods:
+
+[Symbol.asyncIterator]
+// A zero-argument function that returns an object,
+//  conforming to the async iterator protocol.
+
+// An object implements the async iterator protocol when 
+// it implements the following methods:
+
+next()
+// A function that accepts zero or one argument and returns
+//  a promise. The promise fulfills to an object conforming
+//  to the IteratorResult interface, and the properties have
+//  the same semantics as those of the sync iterator's.
+
+// return(value) Optional
+// A function that accepts zero or one argument and returns
+//  a promise. The promise fulfills to an object conforming 
+// to the IteratorResult interface, and the properties have
+//  the same semantics as those of the sync iterator's.
+
+// throw(exception) Optional
+// A function that accepts zero or one argument and returns
+//  a promise. The promise fulfills to an object conforming 
+// to the IteratorResult interface, and the properties have 
+// the same semantics as those of the sync iterator's.
+
+// Interactions between the language and iteration protocols
+// The language specifies APIs that either produce or consume 
+// iterables and iterators.
+
+// Built-in iterables
+// String, Array, TypedArray, Map, Set, and Segments 
+// (returned by Intl.Segmenter.prototype.segment()) are 
+// all built-in iterables, because each of their prototype
+//  objects implements an @@iterator method. In addition, 
+// the arguments object and some DOM collection types such 
+// as NodeList are also iterables. There is no object in the
+//  core JavaScript language that is async iterable. Some 
+// web APIs, such as ReadableStream, have the 
+// Symbol.asyncIterator method set by default.
+
+// Generator functions return generator objects, which are
+//  iterable iterators. Async generator functions return 
+// async generator objects, which are async iterable
+//  iterators.
+
+// The iterators returned from built-in iterables actually
+//  all inherit from a common class Iterator, which 
+// implements the aforementioned 
+[Symbol.iterator]() { return this; } 
+// method, making them all iterable iterators. 
+// The Iterator class also provides additional 
+// helper methods in addition to the next() method
+//  required by the iterator protocol. You can 
+// inspect an iterator's prototype chain by logging
+//  it in a graphical console.
+
+console.log([][Symbol.iterator]());
+
+Array Iterator {}
+// [[Prototype]]: Array Iterator     ==> This is the prototype shared by all array iterators
+// next: ƒ next()
+// Symbol(Symbol.toStringTag): "Array Iterator"
+// [[Prototype]]: Object           ==> This is the prototype shared by all built-in iterators
+// Symbol(Symbol.iterator): ƒ [Symbol.iterator]()
+// [[Prototype]]: Object         ==> This is Object.prototype
+
+
+// Built-in APIs accepting iterables
+// There are many APIs that accept iterables. 
+// Some examples include:
+
+Map()
+WeakMap()
+Set()
+WeakSet()
+Promise.all()
+Promise.allSettled()
+Promise.race()
+Promise.any()
+Array.from()
+Object.groupBy()
+Map.groupBy()
+
+
+// JS
+// Copy to Clipboard
+const myObj = {};
+
+new WeakSet(
+  (function* () {
+    yield {};
+    yield myObj;
+    yield {};
+  })(),
+).has(myObj); // true
+
+// Syntaxes expecting iterables
+// Some statements and expressions expect iterables, 
+// for example the for...of loops, array and parameter 
+// spreading, yield*, and array destructuring:
+
+// JS
+// Copy to Clipboard
+for (const value of ["a", "b", "c"]) {
+  console.log(value);
+}
+// "a"
+// "b"
+// "c"
+
+console.log([..."abc"]); // ["a", "b", "c"]
+
+function* gen() {
+  yield* ["a", "b", "c"];
+}
+
+console.log(gen().next()); // { value: "a", done: false }
+
+[a, b, c] = new Set(["a", "b", "c"]);
+console.log(a); // "a"
+
+// When built-in syntaxes are iterating an iterator, 
+// and the last result's done is false (i.e. the iterator
+//  is able to produce more values) but no more values are
+//  needed, the return method will get called if present. 
+// This can happen, for example, if a break or return is 
+// encountered in a for...of loop, or if all identifiers 
+// are already bound in an array destructuring.
+
+// JS
+// Copy to Clipboard
+const obj = {
+  [Symbol.iterator]() {
+    let i = 0;
+    return {
+      next() {
+        i++;
+        console.log("Returning", i);
+        if (i === 3) return { done: true, value: i };
+        return { done: false, value: i };
+      },
+      return() {
+        console.log("Closing");
+        return { done: true };
+      },
+    };
+  },
+};
+
+const [a] = obj;
+// Returning 1
+// Closing
+
+const [b, c, d] = obj;
+// Returning 1
+// Returning 2
+// Returning 3
+// Already reached the end (the last call returned `done: true`),
+// so `return` is not called
+
+for (const b of obj) {
+  break;
+}
+// Returning 1
+
+
+// Closing
+// The for await...of loop and yield* in async 
+// generator functions (but not sync generator 
+// functions) are the only ways to interact with
+//  async iterables. Using for...of, array spreading,
+//  etc. on an async iterable that's not also a sync 
+// iterable (i.e. it has [@@asyncIterator]() but 
+// no [@@iterator]()) will throw a TypeError: x is 
+// not iterable.
+
+// Non-well-formed iterables
+// If an iterable's @@iterator method doesn't return
+//  an iterator object, then it's considered a non-well-formed
+//  iterable.
+
+// Using one is likely to result in runtime errors or
+//  buggy behavior:
+
+// JS
+// Copy to Clipboard
+const nonWellFormedIterable = {};
+nonWellFormedIterable[Symbol.iterator] = () => 1;
+[...nonWellFormedIterable]; // TypeError: [Symbol.iterator]() returned a non-object value
+
+// Examples
+// User-defined iterables
+// You can make your own iterables like this:
+
+// JS
+// Copy to Clipboard
+const myIterable = {
+  *[Symbol.iterator]() {
+    yield 1;
+    yield 2;
+    yield 3;
+  },
+};
+
+console.log([...myIterable]); // [1, 2, 3]
+
+// Simple iterator
+// Iterators are stateful by nature. If you don't define
+//  it as a generator function (as the example above shows),
+//  you would likely want to encapsulate the state in 
+// a closure.
+
+// JS
+// Copy to Clipboard
+function makeIterator(array) {
+  let nextIndex = 0;
+  return {
+    next() {
+      return nextIndex < array.length
+        ? {
+            value: array[nextIndex++],
+            done: false,
+          }
+        : {
+            done: true,
+          };
+    },
+  };
+}
+
+const it = makeIterator(["yo", "ya"]);
+
+console.log(it.next().value); // 'yo'
+console.log(it.next().value); // 'ya'
+console.log(it.next().done); // true
+
+
+// Infinite iterator
+// JS
+// Copy to Clipboard
+function idMaker() {
+  let index = 0;
+  return {
+    next() {
+      return {
+        value: index++,
+        done: false,
+      };
+    },
+  };
+}
+
+const it = idMaker();
+
+console.log(it.next().value); // 0
+console.log(it.next().value); // 1
+console.log(it.next().value); // 2
+// ...
+// Defining an iterable with a generator
+// JS
+// Copy to Clipboard
+function* makeSimpleGenerator(array) {
+  let nextIndex = 0;
+  while (nextIndex < array.length) {
+    yield array[nextIndex++];
+  }
+}
+
+const gen = makeSimpleGenerator(["yo", "ya"]);
+
+console.log(gen.next().value); // 'yo'
+console.log(gen.next().value); // 'ya'
+console.log(gen.next().done); // true
+
+function* idMaker() {
+  let index = 0;
+  while (true) {
+    yield index++;
+  }
+}
+
+const it = idMaker();
+
+console.log(it.next().value); // 0
+console.log(it.next().value); // 1
+console.log(it.next().value); // 2
+// ...
+// Defining an iterable with a class
+// State encapsulation can be done with 
+// private properties as well.
+
+// JS
+// Copy to Clipboard
+class SimpleClass {
+  #data;
+
+  constructor(data) {
+    this.#data = data;
+  }
+
+  [Symbol.iterator]() {
+    // Use a new index for each iterator. This makes multiple
+    // iterations over the iterable safe for non-trivial cases,
+    // such as use of break or nested looping over the same iterable.
+    let index = 0;
+
+    return {
+      // Note: using an arrow function allows `this` to point to the
+      // one of `[@@iterator]()` instead of `next()`
+      next: () => {
+        if (index < this.#data.length) {
+          return { value: this.#data[index++], done: false };
+        } else {
+          return { done: true };
+        }
+      },
+    };
+  }
+}
+
+const simple = new SimpleClass([1, 2, 3, 4, 5]);
+
+for (const val of simple) {
+  console.log(val); // 1 2 3 4 5
+}
+
+
+// Overriding built-in iterables
+// For example, a String is a built-in iterable object:
+
+// JS
+// Copy to Clipboard
+const someString = "hi";
+console.log(typeof someString[Symbol.iterator]); // "function"
+// String's default iterator returns the string's 
+// code points one by one:
+
+// JS
+// Copy to Clipboard
+const iterator = someString[Symbol.iterator]();
+console.log(`${iterator}`); // "[object String Iterator]"
+
+console.log(iterator.next()); // { value: "h", done: false }
+console.log(iterator.next()); // { value: "i", done: false }
+console.log(iterator.next()); // { value: undefined, done: true }
+// You can redefine the iteration behavior by 
+// supplying our own @@iterator:
+
+// JS
+// Copy to Clipboard
+// need to construct a String object explicitly to avoid auto-boxing
+const someString = new String("hi");
+
+someString[Symbol.iterator] = function () {
+  return {
+    // this is the iterator object, returning a single element (the string "bye")
+    next() {
+      return this._first
+        ? { value: "bye", done: (this._first = false) }
+        : { done: true };
+    },
+    _first: true,
+  };
+};
+// Notice how redefining @@iterator affects the
+//  behavior of built-in constructs that use the
+//  iteration protocol:
+
+// JS
+// Copy to Clipboard
+console.log([...someString]); // ["bye"]
+console.log(`${someString}`); // "hi"
+
+
+// Strict mode
+// Note: Sometimes you'll see the default, non-strict mode referred to as sloppy mode. This isn't an official term, but be aware of it, just in case.
+
+// JavaScript's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code. Browsers not supporting strict mode will run strict mode code with different behavior from browsers that do, so don't rely on strict mode without feature-testing for support for the relevant aspects of strict mode. Strict mode code and non-strict mode code can coexist, so scripts can opt into strict mode incrementally.
+
+// Strict mode makes several changes to normal JavaScript semantics:
+
+// Eliminates some JavaScript silent errors by changing them to throw errors.
+// Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
+// Prohibits some syntax likely to be defined in future versions of ECMAScript.
+// Invoking strict mode
+// Strict mode applies to entire scripts or to individual functions. It doesn't apply to block statements enclosed in {} braces; attempting to apply it to such contexts does nothing. eval code, Function code, event handler attributes, strings passed to setTimeout(), and related functions are either function bodies or entire scripts, and invoking strict mode in them works as expected.
+
+// Strict mode for scripts
+// To invoke strict mode for an entire script, put the exact statement "use strict"; (or 'use strict';) before any other statements.
+
+// JS
+// Copy to Clipboard
+// // Whole-script strict mode syntax
+"use strict";
+const v = "Hi! I'm a strict mode script!";
+// Strict mode for functions
+// Likewise, to invoke strict mode for a function, put the exact statement "use strict"; (or 'use strict';) in the function's body before any other statements.
+
+// JS
+// Copy to Clipboard
+function myStrictFunction() {
+  // Function-level strict mode syntax
+  "use strict";
+  function nested() {
+    return "And so am I!";
+  }
+  return `Hi! I'm a strict mode function! ${nested()}`;
+}
+function myNotStrictFunction() {
+  return "I'm not strict.";
+}
+// The "use strict" directive can only be applied to the body of functions with simple parameters. Using "use strict" in functions with rest, default, or destructured parameters is a syntax error.
+
+// JS
+// Copy to Clipboard
+function sum(a = 1, b = 2) {
+  // SyntaxError: "use strict" not allowed in function with default parameter
+  "use strict";
+  return a + b;
+}
+// Strict mode for modules
+// The entire contents of JavaScript modules are automatically in strict mode, with no statement needed to initiate it.
+
+// JS
+// Copy to Clipboard
+function myStrictFunction() {
+  // because this is a module, I'm strict by default
+}
+export default myStrictFunction;
+// Strict mode for classes
+// All parts of a class's body are strict mode code, including both class declarations and class expressions.
+
+// JS
+// Copy to Clipboard
+class C1 {
+  // All code here is evaluated in strict mode
+  test() {
+    delete Object.prototype;
+  }
+}
+new C1().test(); // TypeError, because test() is in strict mode
+
+const C2 = class {
+  // All code here is evaluated in strict mode
+};
+
+// Code here may not be in strict mode
+delete Object.prototype; // Will not throw error
+// Changes in strict mode
+// Strict mode changes both syntax and runtime behavior. Changes generally fall into these categories:
+
+// changes converting mistakes into errors (as syntax errors or at runtime)
+// changes simplifying how variable references are resolved
+// changes simplifying eval and arguments
+// changes making it easier to write "secure" JavaScript
+// changes anticipating future ECMAScript evolution.
+// Converting mistakes into errors
+// Strict mode changes some previously-accepted mistakes into errors. JavaScript was designed to be easy for novice developers, and sometimes it gives operations which should be errors non-error semantics. Sometimes this fixes the immediate problem, but sometimes this creates worse problems in the future. Strict mode treats these mistakes as errors so that they're discovered and promptly fixed.
+
+// Assigning to undeclared variables
+// Strict mode makes it impossible to accidentally create global variables. In sloppy mode, mistyping a variable in an assignment creates a new property on the global object and continues to "work". Assignments which would accidentally create global variables throw an error in strict mode:
+
+// JS
+// Copy to Clipboard
+"use strict";
+let mistypeVariable;
+
+// Assuming no global variable mistypeVarible exists
+// this line throws a ReferenceError due to the
+// misspelling of "mistypeVariable" (lack of an "a")
+mistypeVarible = 17;
+// Failing to assign to object properties
+// Strict mode makes assignments which would otherwise silently fail to throw an exception. There are three ways to fail a property assignment:
+
+// assignment to a non-writable data property
+// assignment to a getter-only accessor property
+// assignment to a new property on a non-extensible object
+// For example, NaN is a non-writable global variable. In sloppy mode, assigning to NaN does nothing; the developer receives no failure feedback. In strict mode, assigning to NaN throws an exception.
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+// Assignment to a non-writable global
+undefined = 5; // TypeError
+Infinity = 5; // TypeError
+
+// Assignment to a non-writable property
+const obj1 = {};
+Object.defineProperty(obj1, "x", { value: 42, writable: false });
+obj1.x = 9; // TypeError
+
+// Assignment to a getter-only property
+const obj2 = {
+  get x() {
+    return 17;
+  },
+};
+obj2.x = 5; // TypeError
+
+// Assignment to a new property on a non-extensible object
+const fixed = {};
+Object.preventExtensions(fixed);
+fixed.newProp = "ohai"; // TypeError
+// Failing to delete object properties
+// Attempts to delete a non-configurable or otherwise undeletable (e.g. it's intercepted by a proxy's deleteProperty handler which returns false) property throw in strict mode (where before the attempt would have no effect):
+
+// JS
+// Copy to Clipboard
+"use strict";
+delete Object.prototype; // TypeError
+delete [].length; // TypeError
+// Strict mode also forbids deleting plain names. delete name in strict mode is a syntax error:
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+var x;
+delete x; // syntax error
+// If the name is a configurable global property, prefix it with globalThis to delete it.
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+delete globalThis.x;
+// Duplicate parameter names
+// Strict mode requires that function parameter names be unique. In sloppy mode, the last duplicated argument hides previous identically-named arguments. Those previous arguments remain available through arguments, so they're not completely inaccessible. Still, this hiding makes little sense and is probably undesirable (it might hide a typo, for example), so in strict mode, duplicate argument names are a syntax error:
+
+// JS
+// Copy to Clipboard
+function sum(a, a, c) {
+  // syntax error
+  "use strict";
+  return a + a + c; // wrong if this code ran
+}
+// Legacy octal literals
+// Strict mode forbids a 0-prefixed octal literal or octal escape sequence. In sloppy mode, a number beginning with a 0, such as 0644, is interpreted as an octal number (0644 === 420), if all digits are smaller than 8. Novice developers sometimes believe a leading-zero prefix has no semantic meaning, so they might use it as an alignment device — but this changes the number's meaning! A leading-zero syntax for the octal is rarely useful and can be mistakenly used, so strict mode makes it a syntax error:
+
+// JS
+// Copy to Clipboard
+"use strict";
+const sum =
+  015 + // syntax error
+  197 +
+  142;
+// The standardized way to denote octal literals is via the 0o prefix. For example:
+
+// JS
+// Copy to Clipboard
+const sumWithOctal = 0o10 + 8;
+console.log(sumWithOctal); // 16
+// Octal escape sequences, such as "\45", which is equal to "%", can be used to represent characters by extended-ASCII character code numbers in octal. In strict mode, this is a syntax error. More formally, it's disallowed to have \ followed by any decimal digit other than 0, or \0 followed by a decimal digit; for example \9 and \07.
+
+// Setting properties on primitive values
+// Strict mode forbids setting properties on primitive values. Accessing a property on a primitive implicitly creates a wrapper object that's unobservable, so in sloppy mode, setting properties is ignored (no-op). In strict mode, a TypeError is thrown.
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+false.true = ""; // TypeError
+(14).sailing = "home"; // TypeError
+"with".you = "far away"; // TypeError
+// Duplicate property names
+// Duplicate property names used to be considered a SyntaxError in strict mode. With the introduction of computed property names, making duplication possible at runtime, this restriction was removed in ES2015.
+
+// JS
+// Copy to Clipboard
+"use strict";
+const o = { p: 1, p: 2 }; // syntax error prior to ECMAScript 2015
+// Note: Making code that used to error become non-errors is always considered backwards-compatible. This is a good part of the language being strict about throwing errors: it leaves room for future semantic changes.
+
+// Simplifying scope management
+// Strict mode simplifies how variable names map to particular variable definitions in the code. Many compiler optimizations rely on the ability to say that variable X is stored in that location: this is critical to fully optimizing JavaScript code. JavaScript sometimes makes this basic mapping of name to variable definition in the code impossible to perform until runtime. Strict mode removes most cases where this happens, so the compiler can better optimize strict mode code.
+
+// Removal of the with statement
+// Strict mode prohibits with. The problem with with is that any name inside the block might map either to a property of the object passed to it, or to a variable in surrounding (or even global) scope, at runtime; it's impossible to know which beforehand. Strict mode makes with a syntax error, so there's no chance for a name in a with to refer to an unknown location at runtime:
+
+// JS
+// Copy to Clipboard
+"use strict";
+const x = 17;
+with (obj) {
+  // Syntax error
+  // If this weren't strict mode, would this be const x, or
+  // would it instead be obj.x? It's impossible in general
+  // to say without running the code, so the name can't be
+  // optimized.
+  x;
+}
+// The simple alternative of assigning the object to a short name variable, then accessing the corresponding property on that variable, stands ready to replace with.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

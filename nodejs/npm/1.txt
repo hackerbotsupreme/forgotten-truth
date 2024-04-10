@@ -1,0 +1,207 @@
+// npm init <package-spec> (same as `npx <package-spec>`)
+// npm init <@scope> (same as `npx <@scope>/create`)
+
+// To see if you already have Node.js and
+//  npm installed and check the installed 
+// version, run the following commands:
+
+// node -v
+// npm -v
+
+// Local install (default): puts stuff in ./node_modules of the current package root.
+// Global install (with -g): puts stuff in /usr/local or wherever node is installed.
+// Install it locally if you're going to require() it.
+// Install it globally if you're going to run it on the command line.
+// If you need both, then install it in both places
+
+
+// The npm config command can be used to 
+// update and edit the contents of 
+// the user and global npmrc files.
+
+// repository
+// Specify the place where your code lives. 
+// This is helpful for people who want to contribute. 
+// If the git repo is on GitHub, then 
+// the npm docs command will be able to find you.
+
+// Do it like this:
+
+// {
+//   "repository": {
+//     "type": "git",
+//     "url": "https://github.com/npm/cli.git"
+//   }
+// }
+
+// The URL should be a publicly available
+//  (perhaps read-only) url that can be 
+// handed directly to a VCS program without
+//  any modification. It should not be a url 
+// to an html project page that you put in 
+// your browser. It's for computers.
+
+// For GitHub, GitHub gist, Bitbucket, or 
+// GitLab repositories you can use the 
+// same shortcut syntax you use for npm install:
+
+// {
+//   "repository": "npm/npm",
+
+//   "repository": "github:user/repo",
+
+//   "repository": "gist:11081aaa281",
+
+//   "repository": "bitbucket:user/repo",
+
+//   "repository": "gitlab:user/repo"
+// }
+
+// If the package.json for your package 
+// is not in the root directory (for example
+//  if it is part of a monorepo), you can 
+// specify the directory in which it lives:
+
+// {
+//   "repository": {
+//     "type": "git",
+//     "url": "https://github.com/facebook/react.git",
+//     "directory": "packages/react-dom"
+//   }
+// }
+
+// scripts
+// The "scripts" property is a dictionary
+//  containing script commands that are run 
+// at various times in the lifecycle of your
+//  package. The key is the lifecycle event, 
+// and the value is the command to run at that point.
+
+
+// on the previous file we can see commands like , 
+
+// npm install n -g
+// npm install -g n
+// npm install n -g && n stable
+// npm cache clean -f
+// npm install -g n
+// npm update -g npm
+// npm update [-g] [<pkg>...]
+// npm install -g npm
+// npm install npm@latest -g
+
+// so , after seeing all this i am pretty confused , how this commands are written and 
+// what exactly do they means ... 
+
+
+//to install the latest 
+// stable version of npm, on the command line, run:
+
+// npm install npm@latest -g
+
+// like ,
+// npm install npm@latest -g
+
+// removed 52 packages, and changed 71 packages in 20s
+// 24 packages are looking for funding
+//   run `npm fund` for details
+
+// npm -v 
+// 10.5.0
+
+// To see if you already have Node.js and 
+// npm installed and check the installed version, 
+// run the following commands:
+// node -v
+// npm -v
+
+// Try the latest stable version of node
+// Updating node on Windows
+// Install the latest msi from https://nodejs.org/en/download
+
+
+// ls node_modules
+
+// latest npm version
+//  use npm install
+//  <package_name>@<tag>. For example, to 
+// install the example-package at the version 
+// tagged with beta, you would run the following command:
+
+// npm install example-package@beta
+
+// Packages and modulesGetting packagesDownloading and installing packages globally
+// npm install -g <package_name>
+
+
+// Updating packages downloaded from the registry
+// Updating local packages
+// Navigate to the root directory of your project 
+// and ensure it contains a package.json file:
+
+// cd /path/to/project
+// In your project root directory, run the update command:
+// npm update
+
+// To test the update, run the outdated command. 
+// There should not be any output.
+
+// npm outdated
+// Updating globally-installed packages
+// npm install npm@latest -g
+
+// Updating a single global package
+// To update a single global package, on the command line, run:
+// npm update -g <package_name>
+
+// Updating all globally-installed packages
+// To update all global packages, on the command line, run:
+// npm update -g
+
+// Uninstalling packages and dependencies
+
+// If you no longer need to use a package in your 
+// code, we recommend uninstalling it and removing 
+// it from your project's dependencies.
+
+
+// Uninstalling local packages
+// Removing a local package from your node_modules directory
+
+// To remove a package from your node_modules 
+// directory, on the command line, use the
+//  uninstall command. Include the scope if 
+// the package is scoped.
+
+// This uninstalls a package, completely 
+// removing everything npm installed on its behalf.
+
+// It also removes the package from 
+// the dependencies, devDependencies, 
+// optionalDependencies, and peerDependencies 
+// objects in your package.json.
+
+// npm uninstall <package_name>
+// npm uninstall <@scope/package_name>
+
+
+// Example
+// npm uninstall lodash
+// Removing a local package without removing it from package.json
+// Using the --no-save will tell npm not to remove 
+// the package from your package.json, npm-shrinkwrap.json, 
+// or package-lock.json files.
+
+// Example
+// npm uninstall --no-save lodash
+// --save or -S will tell npm to remove the package from 
+// your package.json, npm-shrinkwrap.json, and 
+// package-lock.json files. This is the default,
+//  but you may need to use this if you have for
+//  instance save=false in your .npmrc file.
+
+// Unscoped package
+// npm uninstall -g <package_name>
+// Scoped package
+// npm uninstall -g <@scope/package_name>
+

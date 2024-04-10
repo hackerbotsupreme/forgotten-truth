@@ -1,0 +1,4484 @@
+// Express.js MCQ (Multiple Choice Questions)
+
+// 2) Which of the following are the core features of the Express framework?
+// It allows us to set up middleware to respond to HTTP Requests.
+// It defines a routing table that can work as per HTTP Method and URL.
+// It is used to render the HTML pages dynamically.
+// All of the above.(answer)
+
+
+// 4) What will be the output of the following code in the console?
+
+// File: my_module.js  
+exports.name = 'Zeus';  
+// Code:  
+var my_module = require('./mymodule');  
+console.log((function(settings){  
+    return settings.split('').reverse().join('')  
+})(my_module.name));  
+// Error
+// Zeus
+// undefined
+// sueZ(answer)
+
+// 5) What is the way to store local variables that can be accessed within the application?
+// Using Config file
+// Using database
+// Using app.locals(answer)
+// Using app.storage
+
+// 6) In combination with a request method, root paths define the endpoints at which requests can be made. Which of the following are valid forms of route path?
+// strings
+// string patterns
+// regular expressions
+// All of the above(answer)
+
+// 7) Where are the captured values populated regarding the route parameters?
+// req.data
+// app.locals
+// req.params
+// All of the above(all the above )
+
+// 8) How is it possible to create chainable route handlers for a route path in Express.js?
+// Using app.route()(answer)
+// Using app.routes()
+// Using app.router()
+// Using app.routing()
+
+// 9) Which of the following function arguments are available to Express.js Route handlers?
+// req - the request object
+// res - the response object
+// next
+// All of the above(answer)
+
+
+// 10) Which of the following is the Scaffolding in Express.js?
+// Yeoman
+// Express application generator
+// Handler functions
+// Both A & B(answer)
+
+
+
+// 12) Which of the following is a middleware in Express.js?
+// function(req){ }
+// method(req){ }
+// function(req,res,next){ } (answer)
+// method(req,res,next){ }
+
+
+// 13) Which of the following is the correct statement in the context of Express.js?
+// Express is a minimal and flexible Node.js web application framework. (answer)
+// Express is a minimal and flexible React.js web application framework.
+// Express is a minimal and flexible Redux.js web application framework.
+// Express is a minimal and flexible Angular.js web application framework.
+// Show Answer Workspace
+
+
+// 14) Which of the following is the correct syntax to use Express.js in Node?
+// var = require('express')();
+// var_require('express')();
+// var app = require('express')();(answer)
+// None of the above.
+
+
+// 16) To use Mongo with Express.js, we need a client API for node.
+// TRUE(answer)
+// FALSE
+// Can be true or false
+// Cannot say
+
+
+// 17) Which of the following facilitates us to create a skeleton for a web application easily?
+// Authentication
+// APIs
+// Debugging
+// Scaffolding(answer)
+
+
+// 18) Which of the following is a middleware that parses cookies attached to the client request object?
+// cookie
+// cookies
+// cookie-parser(answer)
+// None of the above
+
+// 19) The method of using values is called?
+// filters
+// interpolation(answer)
+// inheritance
+// includes
+
+
+// 20) Which of the following command is used to check the current version of NPM?
+// nmp --ver
+// npm --version(answer)
+// npm help
+// None of the above.
+
+// 21) In Express.js, the method app.all(path, callback [, callback ...]) is:
+// True(answer)
+// False
+// Cannot say
+
+// 22) Which of the following method requests that the server accept the data enclosed in the request to modify an existing object identified by the URI?
+// GET
+// DELETE
+// PUT(answer)
+// POST
+
+
+// 23) Which of the following statement is correct in the case of backlog arguments?
+// A port number on which the server should accept incoming requests.
+// The backlog argument is the name of the domain.
+// The maximum number of queued pending connections.(answer)
+// An asynchronous function is called when the server starts listening for requests.
+
+
+
+// 25) Which of the following function is used to specify what to do when a get request at the given route is called?
+// app.get(route, callback)(answer)
+// get(route, callback)
+// js.get(route, callback)
+// fun.get(route, callback)
+
+
+// 26) Where are the captured values populated regarding route parameters?
+// app.locals object
+// req.data object
+// req.params object(answer)
+// None of the above.
+
+
+// 27) Cookies are the complex, large files/data sent to the server with a client request and stored on the server-side.
+// This statement is true.
+// This statement is false.(answer)
+// Can be true or false
+// Cannot say.
+
+
+// 28) HTTP is stateless.
+// This statement is true.(answer)
+// This statement is false.
+// It can be true or false.
+// Cannot say.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// expresss website packed 
+
+// Assuming you’ve already installed 
+// Node.js
+$ mkdir myapp
+$ cd myapp
+$ npm init
+// entry point: (index.js)
+// Enter app.js, or whatever you want 
+// the name of the main file to be. If 
+// you want it to be index.js, hit 
+// RETURN to accept the suggested 
+// default file name.
+$ npm install express
+
+// To install Express temporarily 
+// and not add it to the dependencies list:
+$ npm install express --no-save
+
+
+// Hello world example
+
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+$ node app.js
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express application generator
+
+
+// Certainly! The **Express application generator** is a powerful tool
+//  that allows you to quickly create an application skeleton 
+// for your Node.js Express projects. Let's break down how to use it:
+
+// 1. **Using npx (Node.js 8.2.0 and later)**:
+//     - You can run the application generator directly using the `npx` command:
+//         ```
+        $ npx express - generator
+//         ```
+//     - This will create an Express app skeleton with default settings.
+
+// 2. **For Earlier Node Versions**:
+//     - If you're using an earlier version of Node, you'll need to install the application generator globally as an npm package:
+//         ```
+        $ npm install - g express - generator
+    //     ```
+    // - After installation, launch the generator:
+    //     ```
+        $ express
+//         ```
+//     - This will display various options for configuring your app.
+
+// 3. **Command Options**:
+//     - Here are some of the key options you can use with the generator:
+//         - `-e, --ejs`: Adds EJS engine support.
+//         - `--hbs`: Adds Handlebars engine support.
+//         - `--pug`: Adds Pug (formerly Jade) engine support (which is the default).
+//         - `--no-view`: Generates the app without a view engine.
+//         - `-v, --view <engine>`: Specifies the view engine (options: ejs|hbs|hjs|jade|pug|twig|vash).
+//         - `-c, --css <engine>`: Adds stylesheet engine support (options: less|stylus|compass|sass).
+//         - `--git`: Adds a .gitignore file.
+//         - `-f, --force`: Forces creation even in a non-empty directory.
+
+// 4. **Example**:
+//     - To create an Express app named "myapp" with Pug as the view engine, run:
+//         ```
+        $ express--view = pug myapp
+    //     ```
+    // - This will generate the following directory structure:
+    //     ```
+    //     ├── app.js
+    //     ├── bin
+    //     │   └── www
+    //     ├── package.json
+    //     ├── public
+    //     │   ├── images
+    //     │   ├── javascripts
+    //     │   └── stylesheets
+    //     │       └── style.css
+    //     ├── routes
+    //     │   ├── index.js
+    //     │   └── users.js
+    //     └── views
+    //         ├── error.pug
+    //         ├── index.pug
+    //         └── layout.pug
+    //     ```
+    // - After creating your app, navigate to the app directory (`cd myapp`) and install dependencies:
+    //     ```
+        $ cd myapp
+        $ npm install
+    //         ```
+
+    // 5. **Running the App**:
+    // - On Windows Command Prompt:
+    //     ```
+    > set DEBUG = myapp:* & npm start
+//     ```
+// - On Windows PowerShell:
+//     ```
+PS > $env: DEBUG = 'myapp:*'; npm start
+//         ```
+//     - Finally, load [http://localhost:3000/](http://localhost:3000/)
+// in your browser to access your newly created Express app.
+
+// Remember, the Express app generator sets up the basic
+//  structure for your project, including routes,
+// views, and static files. You can then build upon
+// this foundation to create your custom application! 🚀
+
+// The app structure created by the 
+// generator is just one of many ways 
+// to structure Express apps. Feel free 
+// .to use this structure or modify it 
+// to best suit your needs.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Basic routing
+
+// Routing refers to determining how 
+// an application responds to a client 
+// request to a particular endpoint, 
+// which is a URI (or path) and a 
+// specific HTTP request method 
+// (GET, POST, and so on).
+
+// Each route can have one or more 
+// handler functions, which are 
+// executed when the route is matched.
+
+// Route definition takes the following structure:
+app.METHOD(PATH, HANDLER)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Serving static files in Express
+
+// To serve static files such as images, 
+// CSS files, and JavaScript files, use 
+// the express.static built-in 
+// middleware function in Express.
+
+// The function signature is:
+express.static(root, [options])
+
+// The root argument specifies the
+//  root directory from which to 
+// serve static assets.
+app.use(express.static('public'))
+
+// Now, you can load the files 
+// that are in the public directory:
+
+// http://localhost:3000/images/kitten.jpg
+// http://localhost:3000/css/style.css
+// http://localhost:3000/js/app.js
+// http://localhost:3000/images/bg.png
+// http://localhost:3000/hello.html
+
+// Express looks up the files 
+// relative to the static directory, 
+// so the name of the static 
+// directory is not part of the URL.
+// To use multiple static assets 
+// directories, call the
+//  express.static middleware 
+// function multiple times:
+
+app.use(express.static('public'))
+app.use(express.static('files'))
+// Express looks up the files in 
+// the order in which you set the
+//  static directories with the 
+// express.static middleware function.
+
+// NOTE: For best results, use a 
+// reverse proxy cache to improve
+//  performance of serving static assets.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Serving static files in Express
+
+// To serve static files such as images, 
+// CSS files, and JavaScript files, use 
+// the express.static built-in 
+// middleware function in Express.
+
+// The function signature is:
+express.static(root, [options])
+
+// The root argument specifies the
+//  root directory from which to 
+// serve static assets. For more 
+// information on the options 
+// argument, see express.static.
+
+// For example, use the following
+//  code to serve images, CSS files, 
+// and JavaScript files in a 
+// directory named public:
+app.use(express.static('public'))
+
+// Now, you can load the files 
+// that are in the public directory:
+
+// http://localhost:3000/images/kitten.jpg
+// http://localhost:3000/css/style.css
+// http://localhost:3000/js/app.js
+// http://localhost:3000/images/bg.png
+// http://localhost:3000/hello.html
+
+// Express looks up the files 
+// relative to the static directory, 
+// so the name of the static 
+// directory is not part of the URL.
+// 
+// To use multiple static assets 
+// directories, call the
+//  express.static middleware 
+// function multiple times:
+
+app.use(express.static('public'))
+app.use(express.static('files'))
+
+// Express looks up the files in 
+// the order in which you set the
+//  static directories with the 
+// express.static middleware function.
+
+// NOTE: For best results, use a 
+// reverse proxy cache to improve
+//  performance of serving static assets.
+
+// To create a virtual path prefix 
+// (where the path does not actually 
+// exist in the file system) for
+//  files that are served by the 
+// express.static function, specify 
+// a mount path for the static 
+// directory, as shown below:
+
+app.use('/static', express.static('public'))
+
+// Now, you can load the files that are 
+// in the public directory from the 
+// /static path prefix.you’ve mounted 
+// the /static path prefix to serve 
+// files from the public directory.
+
+
+// Now, you can load the files that are in 
+// the public directory using the following URLs:
+// http://localhost:3000/static/images/kitten.jpg
+// http://localhost:3000/static/css/style.css
+// http://localhost:3000/static/js/app.js
+// http://localhost:3000/static/images/bg.png
+// http://localhost:3000/static/hello.html
+
+// However, the path that you provide to
+//  the express.static function is relative
+//  to the directory from where you launch 
+// your node process. If you run the express 
+// app from another directory, it’s safer 
+// to use the absolute path of the directory
+//  that you want to serve:
+
+const path = require('path')
+app.use('/static', express.static(path.join(__dirname, 'public')))
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// go https://github.com/expressjs/express/tree/master/examples 
+// to see the examples 
+
+// Express examples
+// This page contains list of examples using Express.
+
+// auth -                       Authentication with login and password
+// content-negotiation -        HTTP content negotiation
+// cookie-sessions -            Working with cookie-based sessions
+// cookies -                    Working with cookies
+// downloads -                  Transferring files to client
+// ejs -                        Working with Embedded JavaScript templating (ejs)
+// error-pages -                Creating error pages
+// error -                      Working with error middleware
+// hello-world -                Simple request handler
+// markdown -                   Markdown as template engine
+// multi-router -               Working with multiple Express routers
+// multipart -                  Accepting multipart-encoded forms
+// mvc -                        MVC-style controllers
+// online -                     Tracking online user activity with online and redis packages
+// params -                     Working with route parameters
+// resource -                   Multiple HTTP operations on the same resource
+// route-map -                  Organizing routes using a map
+// route-middleware -           Working with route middleware
+// route-separation -           Organizing routes per each resource
+// search -                     Search API
+// session -                    User sessions
+// static-files -               Serving static files
+// vhost -                      Working with virtual hosts
+// view-constructor -           Rendering views dynamically
+// view-locals -                Saving data in request object between middleware calls
+// web-service -                Simple API service
+
+// all the code is in exress master folder 
+// this is an excellent and cool examples to start with 
+// official by  node js 
+
+// here is a demo of it 
+//auth - Authentication with login and password
+
+'use strict'
+
+/**
+ * Module dependencies.
+ */
+
+var express = require('../..');
+var hash = require('pbkdf2-password')()
+var path = require('path');
+var session = require('express-session');
+
+var app = module.exports = express();
+
+// config
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// middleware
+
+app.use(express.urlencoded({ extended: false }))
+app.use(session({
+  resave: false, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: 'shhhh, very secret'
+}));
+
+// Session-persisted message middleware
+
+app.use(function(req, res, next){
+  var err = req.session.error;
+  var msg = req.session.success;
+  delete req.session.error;
+  delete req.session.success;
+  res.locals.message = '';
+  if (err) res.locals.message = '<p class="msg error">' + err + '</p>';
+  if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
+  next();
+});
+
+// dummy database
+
+var users = {
+  tj: { name: 'tj' }
+};
+
+// when you create a user, generate a salt
+// and hash the password ('foobar' is the pass here)
+
+hash({ password: 'foobar' }, function (err, pass, salt, hash) {
+  if (err) throw err;
+  // store the salt & hash in the "db"
+  users.tj.salt = salt;
+  users.tj.hash = hash;
+});
+
+
+// Authenticate using our plain-object database of doom!
+
+function authenticate(name, pass, fn) {
+  if (!module.parent) console.log('authenticating %s:%s', name, pass);
+  var user = users[name];
+  // query the db for the given username
+  if (!user) return fn(null, null)
+  // apply the same algorithm to the POSTed password, applying
+  // the hash against the pass / salt, if there is a match we
+  // found the user
+  hash({ password: pass, salt: user.salt }, function (err, pass, salt, hash) {
+    if (err) return fn(err);
+    if (hash === user.hash) return fn(null, user)
+    fn(null, null)
+  });
+}
+
+function restrict(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    req.session.error = 'Access denied!';
+    res.redirect('/login');
+  }
+}
+
+app.get('/', function(req, res){
+  res.redirect('/login');
+});
+
+app.get('/restricted', restrict, function(req, res){
+  res.send('Wahoo! restricted area, click to <a href="/logout">logout</a>');
+});
+
+app.get('/logout', function(req, res){
+  // destroy the user's session to log them out
+  // will be re-created next request
+  req.session.destroy(function(){
+    res.redirect('/');
+  });
+});
+
+app.get('/login', function(req, res){
+  res.render('login');
+});
+
+app.post('/login', function (req, res, next) {
+  authenticate(req.body.username, req.body.password, function(err, user){
+    if (err) return next(err)
+    if (user) {
+      // Regenerate session when signing in
+      // to prevent fixation
+      req.session.regenerate(function(){
+        // Store the user's primary key
+        // in the session store to be retrieved,
+        // or in this case the entire user object
+        req.session.user = user;
+        req.session.success = 'Authenticated as ' + user.name
+          + ' click to <a href="/logout">logout</a>. '
+          + ' You may now access <a href="/restricted">/restricted</a>.';
+        res.redirect('back');
+      });
+    } else {
+      req.session.error = 'Authentication failed, please check your '
+        + ' username and password.'
+        + ' (use "tj" and "foobar")';
+      res.redirect('/login');
+    }
+  });
+});
+
+/* istanbul ignore next */
+if (!module.parent) {
+  app.listen(3000);
+  console.log('Express started on port 3000');
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// How should I structure my application?
+
+// There is no definitive answer to this 
+// question. The answer depends on the 
+// scale of your application and the 
+// team that is involved. To be as 
+// flexible as possible, Express 
+// makes no assumptions in terms of structure.
+
+// Routes and other application-specific
+//  logic can live in as many files as
+//  you wish, in any directory structure
+//  you prefer. means 
+
+// Certainly! Let's break down the statement:
+
+// 1. **Express Framework**:
+//    - The statement refers to the **Express framework**, which is a popular web application framework for Node.js.
+//    - Express provides a flexible and minimalistic approach to building web applications, allowing developers to structure their projects according to their preferences.
+
+// 2. **Application-Specific Logic**:
+//    - When building an application using Express, you'll write code that handles specific functionality or features. This includes things like handling routes (URL paths), managing database connections, authentication, middleware, and more.
+//    - The term **"application-specific logic"** encompasses all the custom code that makes your application unique.
+
+// 3. **Directory Structure**:
+//    - Express **makes no assumptions** about how you organize your project files.
+//    - You can structure your application in any way you prefer.
+//    - The statement emphasizes that you can distribute your application-specific logic across **multiple files** and organize them into **directories** as needed.
+
+// 4. **Flexibility**:
+//    - The flexibility provided by Express allows developers to create a directory structure that aligns with their project's requirements.
+//    - For example, you can have separate folders for routes, controllers, models, middleware, utilities, and more.
+
+// In summary, the statement encourages 
+// developers to design their directory structure 
+// based on their application's needs. Whether you 
+// choose a flat structure or a deeply nested one, 
+// Express allows you to organize your code in 
+// a way that makes sense for your project².
+
+
+// View the following 
+// examples for inspiration:
+
+// Route listings
+// ------------------------------------------------------------
+// General
+app.get('/', site.index);
+
+// User
+app.get('/users', user.list);
+app.all('/user/:id/:op?', user.load);
+app.get('/user/:id', user.view);
+app.get('/user/:id/view', user.view);
+app.get('/user/:id/edit', user.edit);
+app.put('/user/:id/edit', user.update);
+
+// Posts
+app.get('/posts', post.list);
+// ------------------------------------------------------------
+// Route map
+// ------------------------------------------------------------
+app.map({
+  '/users': {
+    get: users.list,
+    delete: users.delete,
+    '/:uid': {
+      get: users.get,
+      '/pets': {
+        get: pets.list,
+        '/:pid': {
+          delete: pets.delete
+        }
+      }
+    }
+  }
+});
+// ------------------------------------------------------------
+
+// MVC style controllers
+// ------------------------------------------------------------
+// checkout mvc in the express master folder 
+// ------------------------------------------------------------
+
+// Also, there are third-party extensions 
+// for Express, which simplify some of these patterns:
+// Resourceful routing
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// How do I define models?
+
+// Express has no notion of a 
+// database. This concept is 
+// left up to third-party Node modules, 
+// allowing you to interface with 
+// nearly any database.
+
+// See LoopBack for an Express-based
+//  framework that is centered around models.
+
+// https://loopback.io/
+// LoopBack is a highly-extensible, open-source Node.js framework that enables you to:
+
+// Create dynamic end-to-end REST APIs with little or no coding.
+// Access data from major relational databases, MongoDB, SOAP and REST APIs.
+// Incorporate model relationships and access controls for complex APIs.
+// Separable components for file storage, third-party login, and OAuth 2.0.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Which template engines does Express support?
+// Express supports any template engine that 
+// conforms with the (path, locals, callback) 
+// signature. To normalize template engine 
+// interfaces and caching, see the consolidate.js 
+// project for support. Unlisted template engines 
+// might still support the Express signature.
+// https://github.com/tj/consolidate.js
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// How can I authenticate users?
+// Authentication is another opinionated 
+// area that Express does not venture into.
+//  You may use any authentication scheme
+//  you wish.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// An Express application can use 
+// the following types of middleware:
+// Application-level middleware
+// Router-level middleware
+// Error-handling middleware
+// Built-in middleware
+// Third-party middleware
+
+// You can load application-level and 
+// router-level middleware with an optional
+//  mount path. You can also load a series 
+// of middleware functions together, which 
+// creates a sub-stack of the middleware 
+// system at a mount point.
+
+// Application-level middleware
+// Bind application-level middleware 
+// to an instance of the app object 
+// by using the app.use() and app.METHOD() 
+// functions, where METHOD is the HTTP 
+// method of the request that the 
+// middleware function handles 
+// (such as GET, PUT, or POST) in lowercase.
+
+// This example shows a middleware 
+// function with no mount path. The 
+// function is executed every time 
+// the app receives a request.
+
+const express = require('express')
+const app = express()
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+
+// This example shows a middleware 
+// function mounted on the /user/:id path. 
+// The function is executed for any 
+// type of HTTP request on the /user/:id path.
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+
+// Here is an example of loading 
+// a series of middleware functions 
+// at a mount point, with a mount path. 
+// It illustrates a middleware sub-stack 
+// that prints request info for any type 
+// of HTTP request to the /user/:id path.
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+
+// Route handlers enable you to define 
+// multiple routes for a path. The 
+// example below defines two routes
+//  for GET requests to the /user/:id 
+// path. The second route will not cause 
+// any problems, but it will never get 
+// called because the first route ends 
+// the request-response cycle.
+
+// This example shows a middleware 
+// sub-stack that handles GET requests 
+// to the /user/:id path.
+app.get('/user/:id', (req, res, next) => {
+  console.log('ID:', req.params.id)
+  next()
+}, (req, res, next) => {
+  res.send('User Info')
+})
+
+// handler for the /user/:id path, 
+// which prints the user ID
+
+app.get('/user/:id', (req, res, next) => {
+  res.send(req.params.id)
+})
+
+
+// To skip the rest of the middleware 
+// functions from a router middleware 
+// stack, call next('route') to pass 
+// control to the next route. 
+// NOTE: next('route') will work 
+// only in middleware functions that 
+// were loaded by using the app.METHOD() 
+// or router.METHOD() functions.
+
+// This example shows a middleware 
+// sub-stack that handles GET requests 
+// to the /user/:id path.
+
+app.get('/user/:id', (req, res, next) => {
+  // if the user ID is 0, skip to the next route
+  if (req.params.id === '0') next('route')
+  // otherwise pass the control to the next middleware function in this stack
+  else next()
+}, (req, res, next) => {
+  // send a regular response
+  res.send('regular')
+})
+
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req, res, next) => {
+  res.send('special')
+})
+
+
+// Middleware can also be declared 
+// in an array for reusability.
+
+// This example shows an array with 
+// a middleware sub-stack that handles
+//  GET requests to the /user/:id path
+
+function logOriginalUrl (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}
+
+function logMethod (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+}
+
+const logStuff = [logOriginalUrl, logMethod]
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info')
+})
+ 
+// -------------------------------------------------------------
+// Router-level middleware
+// Router-level middleware works in the 
+// same way as application-level middleware, 
+// except it is bound to an instance of 
+// express.Router().
+
+const router = express.Router()
+// Load router-level middleware by using 
+// the router.use() and router.METHOD() functions.
+
+// -------------------------------------------------------------
+
+
+                          // The following example code replicates 
+                          // the middleware system that is shown 
+                          // above for application-level middleware, 
+                          // by using router-level middleware:
+
+const express = require('express')
+const app = express()
+const router = express.Router()
+
+// a middleware function with no mount 
+// path. This code is executed for 
+// every request to the router
+
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+
+// -------------------------------------------------------------
+
+
+// a middleware sub-stack shows request 
+// info for any type of HTTP request 
+// to the /user/:id path
+
+router.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+
+// -------------------------------------------------------------
+
+
+// a middleware sub-stack that 
+// handles GET requests to the /user/:id path
+
+router.get('/user/:id', (req, res, next) => {
+  // if the user ID is 0, skip to the next router
+  if (req.params.id === '0') next('route')
+  // otherwise pass control to the next middleware function in this stack
+  else next()
+}, (req, res, next) => {
+  // render a regular page
+  res.render('regular')
+})
+
+// -------------------------------------------------------------
+
+// handler for the /user/:id path,
+//  which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.render('special')
+})
+
+// mount the router on the app
+app.use('/', router)
+
+// To skip the rest of the router’s 
+// middleware functions, call 
+// next('router') to pass control 
+// back out of the router instance.
+
+// -------------------------------------------------------------
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        // This example shows a middleware 
+                        // sub-stack that handles GET 
+                        // requests to the /user/:id path.
+
+const express = require('express')
+const app = express()
+const router = express.Router()
+
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) return next('router')
+  next()
+})
+
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!')
+})
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
+  res.sendStatus(401)
+})
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Error-handling middleware
+
+// Error-handling middleware always takes 
+// four arguments. You must provide four 
+// arguments to identify it as an 
+// error-handling middleware function. 
+// Even if you don’t need to use the 
+// next object, you must specify it to 
+// maintain the signature. Otherwise, 
+// the next object will be interpreted as 
+// regular middleware and will fail to handle errors.
+
+// Define error-handling middleware 
+// functions in the same way as other 
+// middleware functions, except with 
+// four arguments instead of three, 
+// specifically with the signature 
+// (err, req, res, next)):
+
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+
+// For details about error-handling 
+// middleware, see: Error handling.
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express has the following 
+// built-in middleware functions:
+// express.static 
+// express.json
+// express.urlencoded
+// and 
+// Third-party middleware
+// Use third-party middleware to 
+// add functionality to Express apps.
+//////////////////////////////////////////////////////////////////////////////////////////////
+// The following example illustrates 
+// installing and loading the 
+// cookie-parsing middleware 
+// function cookie-parser.
+
+$ npm install cookie-parser
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
+
+// load the cookie-parsing middleware
+app.use(cookieParser())
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// What is a Template Engine?
+//     A template engine is a tool or library 
+//     that simplifies the process of generating dynamic HTML content.
+//     It allows developers to create reusable 
+//     templates (static files) containing 
+//     placeholders for data.
+//     At runtime, the template engine replaces 
+//     these placeholders with actual values, 
+//     creating a customized HTML page.
+//     The resulting HTML is then sent to 
+//     the client’s browser.
+
+// How Does It Work?
+//     Imagine you’re building a web application 
+//     that displays user profiles. Instead of 
+//     manually writing HTML for each profile page, 
+//     you create a template with placeholders like 
+//     {{username}}, {{email}}, and {{profileImage}}.
+//     When a user visits a profile page,
+//     the template engine fetches the user’s data 
+//     (e.g., username, email, profile image URL) 
+//     from a database or other sources.
+//     It dynamically replaces the placeholders 
+//     in the template with the actual data, 
+//     generating a complete HTML page.
+//     The client’s browser receives this HTML page, 
+//     which now contains personalized content.
+
+// Benefits of Using Template Engines:
+//     Separation of Concerns: Template engines 
+//     separate HTML structure from data, making 
+//     code more maintainable.
+//     Reusability: Templates can be reused across 
+//     different pages or components.
+//     Dynamic Content: Template engines handle dynamic 
+//     data, such as user profiles, blog posts, or product listings.
+//     Consistency: Ensures a consistent layout and 
+//     design across pages.
+
+// Popular Template Engines:
+//     Mustache: A minimalistic template engine that 
+//     works in various programming languages.
+//     Handlebars: Based on Mustache, it adds more 
+//     features like conditionals and loops.
+//     EJS (Embedded JavaScript): Allows embedding 
+//     JavaScript code directly into templates.
+//     Pug (formerly Jade): A concise and expressive 
+//     template engine with indentation-based syntax.
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// To render template files, set the 
+// following application setting 
+// properties, set in app.js in the 
+// default app created by the generator:
+
+// views, the directory where the 
+// template files are located. Eg: 
+// app.set('views', './views'). 
+// This defaults to the views 
+// directory in the application 
+// root directory.
+
+// view engine, the template 
+// engine to use. For example, to use 
+// the Pug template engine: 
+// app.set('view engine', 'pug').
+
+// Then install the corresponding 
+// template engine npm package; for 
+// example to install Pug:
+
+$ npm install pug--save
+
+// Express-compliant template engines 
+// such as Jade and Pug export a 
+// function named __express(filePath, 
+// options, callback), which is called 
+// by the res.render() function to 
+// render the template code.
+
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+// When a user makes a request to the home page ('/'), Express calls the res.render() function.
+// Takes the template file name ('index' in this case).
+// Passes an object with data (in this example, { title: 'Hey', message: 'Hello there!' }).
+// Invokes the __express function provided by the Pug template engine.
+// The __express function:
+// Receives the file path ('index').
+// Receives the options (data object).
+// Calls the callback function with the rendered HTML content.
+// The rendered HTML is then sent to the client’s browser.
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Error Handling
+
+// comes with a default error 
+// handler so you don’t need 
+// to write your own to get started.
+
+// Errors that occur in synchronous 
+// code inside route handlers and 
+// middleware require no extra work. 
+// If synchronous code throws an error, 
+// then Express will catch and process 
+// it. For example:
+app.get('/', (req, res) => {
+  throw new Error('BROKEN') // Express will catch this on its own.
+})
+
+// For errors returned from 
+// asynchronous functions invoked 
+// by route handlers and middleware, 
+// you must pass them to the next() 
+// function, where Express will catch 
+// and process them. For example:
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err) // Pass errors to Express.
+    } else {
+      res.send(data)
+    }
+  })
+})
+
+// Starting with Express 5, route 
+// handlers and middleware that 
+// return a Promise will call 
+// next(value) automatically 
+// when they reject or throw an 
+// error. For example:
+app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id)
+  res.send(user)
+})
+// If getUserById throws an error or 
+// rejects, next will be called with 
+// either the thrown error or the 
+// rejected value. If no rejected 
+// value is provided, next will be 
+// called with a default Error 
+// object provided by the Express router.
+
+// If you pass anything to the 
+// next() function (except the 
+// string 'route'), Express regards 
+// the current request as being an 
+// error and will skip any remaining 
+// non-error handling routing 
+// and middleware functions.
+
+// If the callback in a sequence 
+// provides no data, only errors,
+//  you can simplify this code as follows:
+
+app.get('/', [
+  function (req, res, next) {
+    fs.writeFile('/inaccessible-path', 'data', next)
+  },
+  function (req, res) {
+    res.send('OK')
+  }
+])
+// In the above example next 
+// is provided as the callback 
+// for fs.writeFile, which is 
+// called with or without errors. 
+// If there is no error the second 
+// handler is executed, otherwise 
+// Express catches and processes the error.
+
+// You must catch errors that occur 
+// in asynchronous code invoked by 
+// route handlers or middleware 
+// and pass them to Express for 
+// processing. For example:
+
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN')
+    } catch (err) {
+      next(err)
+    }
+  }, 100)
+})
+// The above example uses a 
+// try...catch block to catch 
+// errors in the asynchronous 
+// code and pass them to Express. 
+// If the try...catch block were 
+// omitted, Express would not 
+// catch the error since it is 
+// not part of the synchronous 
+// handler code.
+
+// Use promises to avoid the overhead 
+// of the try...catch block or when 
+// using functions that return 
+// promises. For example:
+app.get('/', (req, res, next) => {
+  Promise.resolve().then(() => {
+    throw new Error('BROKEN')
+  }).catch(next) // Errors will be passed to Express.
+})
+
+// Since promises automatically 
+// catch both synchronous errors 
+// and rejected promises, you can 
+// simply provide next as the final 
+// catch handler and Express will 
+// catch errors, because the catch 
+// handler is given the error as 
+// the first argument.
+
+// You could also use a chain of 
+// handlers to rely on synchronous 
+// error catching, by reducing the 
+// asynchronous code to something 
+// trivial. For example:
+
+app.get('/', [
+  function (req, res, next) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data
+      next(err)
+    })
+  },
+  function (req, res) {
+    res.locals.data = res.locals.data.split(',')[1]
+    res.send(res.locals.data)
+  }
+])
+
+// The above example has a couple of 
+// trivial statements from the 
+// readFile call. If readFile causes 
+// an error, then it passes the error 
+// to Express, otherwise you quickly 
+// return to the world of synchronous 
+// error handling in the next handler 
+// in the chain. Then, the example above 
+// tries to process the data. If this 
+// fails then the synchronous error 
+// handler will catch it.
+
+
+// Writing error handlers
+// Define error-handling middleware 
+// functions in the same way as 
+// other middleware functions, 
+// except error-handling functions 
+// have four arguments instead of 
+// three: (err, req, res, next).
+//  For example:
+
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+// You define error-handling 
+// middleware last, after other 
+// app.use() and routes calls; 
+// for example:
+
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+app.use(bodyParser.json())
+app.use(methodOverride())
+app.use((err, req, res, next) => {
+  // logic
+})
+// Responses from within a middleware 
+// function can be in any format, such 
+// as an HTML error page, a simple 
+// message, or a JSON string.
+
+// For organizational (and higher-level 
+// framework) purposes, you can define 
+// several error-handling middleware 
+// functions, much as you would with 
+// regular middleware functions. For 
+// example, to define an error-handler 
+// for requests made by using XHR and 
+// those without:
+
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+app.use(bodyParser.json())
+app.use(methodOverride())
+app.use(logErrors)
+app.use(clientErrorHandler)
+app.use(errorHandler)
+// In this example, the generic 
+// logErrors might write request 
+// and error information to stderr, 
+// for example:
+
+function logErrors (err, req, res, next) {
+  console.error(err.stack)
+  next(err)
+}
+// Also in this example, clientErrorHandler 
+// is defined as follows; in this case, 
+// the error is explicitly passed 
+// along to the next one.
+
+// Notice that when not calling “next” 
+// in an error-handling function, 
+// you are responsible for writing 
+// (and ending) the response. Otherwise 
+// those requests will “hang” and will 
+// not be eligible for garbage collection.
+
+function clientErrorHandler (err, req, res, next) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' })
+  } else {
+    next(err)
+  }
+}
+// Implement the “catch-all” 
+// errorHandler function as 
+// follows (for example):
+
+function errorHandler (err, req, res, next) {
+  res.status(500)
+  res.render('error', { error: err })
+}
+// If you have a route handler 
+// with multiple callback functions 
+// you can use the route parameter 
+// to skip to the next route handler.
+//  For example:
+
+app.get('/a_route_behind_paywall',
+  (req, res, next) => {
+    if (!req.user.hasPaid) {
+      // continue handling this request
+      next('route')
+    } else {
+      next()
+    }
+  }, (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err)
+      res.json(doc)
+    })
+  })
+// In this example, the getPaidContent 
+// handler will be skipped but any 
+// remaining handlers in app for 
+// /a_route_behind_paywall would 
+// continue to be executed.
+
+// Calls to next() and next(err) 
+// indicate that the current handler 
+// is complete and in what state. 
+// next(err) will skip all remaining 
+// handlers in the chain except for 
+// those that are set up to handle 
+// errors as described above.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Debugging Express
+// To see all the internal logs 
+// used in Express, set the DEBUG 
+// environment variable to 
+// express:* when launching your app.
+
+> set DEBUG=express:* & node index.js
+// When a request is then made to the app, 
+// you will see the logs specified in the Express code:
+  // express:router dispatching GET / +4h
+  // express:router query  : / +2ms
+  // express:router expressInit  : / +0ms
+  // express:router favicon  : / +0ms
+  // express:router logger  : / +1ms
+............
+
+// To see the logs only from the router 
+// implementation set the value of 
+// DEBUG to express:router. Likewise, 
+// to see logs only from the application 
+// implementation set the value of DEBUG 
+// to express:application, and so on.
+
+// Applications generated by express
+// An application generated by the 
+// express command uses the debug 
+// module and its debug namespace is 
+// scoped to the name of the application.
+
+// For example, if you generated 
+// the app with $ express sample-app, 
+// you can enable the debug statements 
+// with the following command:
+
+$ DEBUG=sample-app:* node ./bin/www
+
+// You can specify more than one 
+// debug namespace by assigning a 
+// comma-separated list of names:
+
+$ DEBUG=http,mail,express:* node index.js
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Database integration
+// Adding the capability to connect 
+// databases to Express apps is just 
+// a matter of loading an appropriate 
+// Node.js driver for the database in 
+// your app.
+
+
+// These database drivers are among many 
+// that are available. For other options,
+//  search on the npm site.
+
+// MongoDB
+// Module: mongodb
+
+// Installation
+// $ npm install mongodb
+// Example (v2.*)
+const MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
+  if (err) throw err
+
+  db.collection('mammals').find().toArray((err, result) => {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
+// Example (v3.*)
+const MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
+  if (err) throw err
+
+  const db = client.db('animals')
+
+  db.collection('mammals').find().toArray((err, result) => {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
+// If you want an object model driver for MongoDB, look at Mongoose.
+// Mongoose is a driver . 
+
+// MySQL
+// Module: mysql
+
+// Installation
+// $ npm install mysql
+// Example
+const mysql = require('mysql')
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'dbuser',
+  password: 's3kreee7',
+  database: 'my_db'
+})
+
+connection.connect()
+
+connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
+  if (err) throw err
+
+  console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
+
+.. there is also sql server , postgresql , sqlite and many more ..
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Security best practices for 
+
+// Express applications in production include:
+// Don’t use deprecated or 
+// vulnerable versions of Express
+
+// Use TLS
+// Use Helmet
+// Use cookies securely
+// Prevent brute-force attacks against authorization
+// Ensure your dependencies are secure
+// Avoid other known vulnerabilities
+// Additional considerations
+// Don’t use deprecated or vulnerable versions of Express
+
+
+// Express 2.x and 3.x are no longer maintained. 
+// Security and performance issues in these 
+// versions won’t be fixed. Do not use them! 
+// If you haven’t moved to version 4, follow 
+// the migration guide.
+
+// Also ensure you are not using any of 
+// the vulnerable Express versions listed on 
+// the Security updates page. If you are, 
+// update to one of the stable releases, 
+// preferably the latest.
+
+// Use TLS
+// If your app deals with or transmits 
+// sensitive data, use Transport Layer 
+// Security (TLS) to secure the connection 
+// and the data. This technology encrypts 
+// data before it is sent from the client 
+// to the server, thus preventing some 
+// common (and easy) hacks. Although Ajax 
+// and POST requests might not be visibly 
+// obvious and seem “hidden” in browsers, 
+// their network traffic is vulnerable to
+//  packet sniffing and man-in-the-middle attacks.
+
+// You may be familiar with Secure Socket 
+// Layer (SSL) encryption. TLS is simply the 
+// next progression of SSL. In other words, 
+// if you were using SSL before, consider 
+// upgrading to TLS. In general, we recommend 
+// Nginx to handle TLS. For a good reference 
+// to configure TLS on Nginx (and other servers), 
+// see Recommended Server Configurations (Mozilla Wiki).
+
+
+// Also, a handy tool to get a free TLS 
+// certificate is Let’s Encrypt, a free, 
+// automated, and open certificate authority 
+// (CA) provided by the Internet Security 
+// Research Group (ISRG).
+
+// Use Helmet
+// Helmet can help protect your app from 
+// some well-known web vulnerabilities by 
+// setting HTTP headers appropriately.
+
+// Helmet is a collection of several 
+// smaller middleware functions that 
+// set security-related HTTP response 
+// headers. Some examples include:
+
+
+// helmet.contentSecurityPolicy which 
+// sets the Content-Security-Policy header. 
+// This helps prevent cross-site scripting 
+// attacks among many other things.
+
+// helmet.hsts which sets the 
+// Strict-Transport-Security header. 
+// This helps enforce secure (HTTPS) 
+// connections to the server.
+
+// helmet.frameguard which sets 
+// the X-Frame-Options header. This 
+// provides clickjacking protection.
+
+// Helmet includes several other 
+// middleware functions which you 
+// can read about at its documentation 
+// website.
+
+
+// Install Helmet like any other module:
+
+// $ npm install --save helmet
+
+const helmet = require('helmet')
+app.use(helmet())
+// By default, Express.js sends the 
+// X-Powered-By response header banner. 
+// This can be disabled using the 
+// app.disable() method:
+// app.disable('x-powered-by')
+// Note: Disabling the X-Powered-By 
+// header does not prevent a sophisticated 
+// attacker from determining that an app 
+// is running Express.
+
+// Use cookies securely
+// To ensure cookies don’t open your app 
+// to exploits, don’t use the default 
+// session cookie name and set cookie 
+// security options appropriately.
+
+// There are two main middleware 
+// cookie session modules:
+
+// express-session that replaces 
+// express.session middleware 
+// built-in to Express 3.x.
+
+// cookie-session that replaces 
+// express.cookieSession middleware 
+// built-in to Express 3.x.
+
+
+
+// The main difference between these 
+// two modules is how they save cookie 
+// session data. The express-session 
+// middleware stores session data on 
+// the server; it only saves the session 
+// ID in the cookie itself, not session 
+// data. By default, it uses in-memory 
+// storage and is not designed for 
+// a production environment. In production, 
+// you’ll need to set up a scalable 
+// session-store; see the list of 
+// compatible session stores.
+
+// In contrast, cookie-session middleware 
+// implements cookie-backed storage: it 
+// serializes the entire session to the 
+// cookie, rather than just a session key.
+//  Only use it when session data is 
+// relatively small and easily encoded 
+// as primitive values (rather than objects). 
+
+
+// Don’t use the default session cookie name
+// Using the default session cookie name 
+// can open your app to attacks. The 
+// security issue posed is similar 
+// to X-Powered-By: a potential attacker 
+// can use it to fingerprint the server 
+// and target attacks accordingly.
+
+// To avoid this problem, use generic 
+// cookie names; for example using 
+// express-session middleware:
+
+const session = require('express-session')
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+}))
+
+// Set cookie security options
+// Set the following cookie options 
+// to enhance security:
+
+// secure - Ensures the browser only 
+// sends the cookie over HTTPS.
+
+// httpOnly - Ensures the cookie is 
+// sent only over HTTP(S), not client 
+// JavaScript, helping to protect 
+// against cross-site scripting attacks.
+
+// Prevent brute-force attacks 
+// against authorization
+
+// Make sure login endpoints 
+// are protected to make private 
+// data more secure.
+
+
+// A simple and powerful technique 
+// is to block authorization attempts 
+// using two metrics:
+
+// The first is number of consecutive 
+// failed attempts by the same user 
+// name and IP address.
+
+// The second is number of failed 
+// attempts from an IP address over 
+// some long period of time. For 
+// example, block an IP address if 
+// it makes 100 failed attempts in one day.
+
+
+// rate-limiter-flexible package 
+// provides tools to make this 
+// technique easy and fast. You can 
+// find an example of brute-force 
+// protection in the documentation
+
+// Ensure your dependencies are secure
+// Using npm to manage your application’s 
+// dependencies is powerful and convenient. 
+// But the packages that you use may contain 
+// critical security vulnerabilities that 
+// could also affect your application. The 
+// security of your app is only as strong 
+// as the “weakest link” in your dependencies.
+
+
+// Since npm@6, npm automatically reviews 
+// every install request. Also you can 
+// use ‘npm audit’ to analyze your 
+// dependency tree.
+$ npm audit
+
+
+// If you want to stay more secure, consider Snyk.
+
+// Snyk offers both a command-line tool 
+// and a Github integration that checks 
+// your application against Snyk’s open 
+// source vulnerability database for any 
+// known vulnerabilities in your dependencies. 
+// Install the CLI as follows:
+
+$ npm install -g snyk
+$ cd your-app
+// Use this command to test your application for vulnerabilities:
+$ snyk test
+
+// Use this command to open a wizard that 
+// walks you through the process of applying 
+// updates or patches to fix the 
+// vulnerabilities that were found:
+$ snyk wizard
+
+// Avoid other known vulnerabilities
+// Keep an eye out for Node Security Project 
+// or Snyk advisories that may affect Express 
+// or other modules that your app uses. 
+// In general, these databases are excellent 
+// resources for knowledge and tools about 
+// Node security.
+
+// Finally, Express apps - like any other web 
+// apps - can be vulnerable to a variety of 
+// web-based attacks. Familiarize yourself 
+// with known web vulnerabilities and take 
+// precautions to avoid them.
+
+// Additional considerations
+// Here are some further recommendations from 
+// the excellent Node.js Security Checklist. 
+// Refer to that blog post for all the details 
+// on these recommendations:
+
+// Always filter and sanitize user input to 
+// protect against cross-site scripting (XSS) 
+// and command injection attacks.
+
+// Defend against SQL injection attacks by 
+// using parameterized queries or prepared statements.
+
+// Use the open-source sqlmap tool to detect
+//  SQL injection vulnerabilities in your app.
+
+// Use the nmap and sslyze tools to test 
+// the configuration of your SSL ciphers, 
+// keys, and renegotiation as well as the 
+// validity of your certificate.
+
+// Use safe-regex to ensure your regular 
+// expressions are not susceptible to 
+// regular expression denial of service attacks.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Production best practices: performance and reliability
+
+// This topic clearly falls into the 
+// “devops” world, spanning both traditional 
+// development and operations. Accordingly, 
+// the information is divided into two parts:
+
+// Things to do in your code (the dev part):
+// Use gzip compression
+// Don’t use synchronous functions
+// Do logging correctly
+// Handle exceptions properly
+// Things to do in your environment / setup (the ops part):
+// Set NODE_ENV to “production”
+// Ensure your app automatically restarts
+// Run your app in a cluster
+// Cache request results
+// Use a load balancer
+// Use a reverse proxy
+
+// Gzip compressing can greatly decrease 
+// the size of the response body and hence 
+// increase the speed of a web app. Use the 
+// compression middleware for gzip 
+// compression in your Express app. 
+// For example:
+const compression = require('compression')
+const express = require('express')
+const app = express()
+app.use(compression())
+
+
+// For a high-traffic website in 
+// production, the best way to put 
+// compression in place is to implement 
+// it at a reverse proxy level (see 
+// Use a reverse proxy). In that case, 
+// you do not need to use compression 
+// middleware. For details on enabling 
+// gzip compression in Nginx, see Module 
+// ngx_http_gzip_module in the Nginx documentation.
+
+// Don’t use synchronous functions
+// Synchronous functions and methods tie 
+// up the executing process until they 
+// return. A single call to a synchronous 
+// function might return in a few microseconds 
+// or milliseconds, however in high-traffic 
+// websites, these calls add up and reduce 
+// the performance of the app. Avoid their 
+// use in production.
+
+
+// Do logging correctly
+// In general, there are two reasons for 
+// logging from your app: For debugging 
+// and for logging app activity (essentially, 
+// everything else). Using console.log() 
+// or console.error() to print log messages 
+// to the terminal is common practice in 
+// development. But these functions are 
+// synchronous when the destination is a 
+// terminal or a file, so they are not 
+// suitable for production, unless you 
+// pipe the output to another program.
+
+
+// For debugging
+// If you’re logging for purposes of 
+// debugging, then instead of using 
+// console.log(), use a special debugging 
+// module like debug. This module enables 
+// you to use the DEBUG environment 
+// variable to control what debug 
+// messages are sent to console.error(), 
+// if any. To keep your app purely 
+// asynchronous, you’d still want to 
+// pipe console.error() to another 
+// program. But then, you’re not really 
+// going to debug in production, are you?
+
+// For app activity
+// If you’re logging app activity (for 
+// example, tracking traffic or API calls), 
+// instead of using console.log(), use a 
+// logging library like Winston or Bunyan. 
+// For a detailed comparison of these two 
+// libraries, see the StrongLoop blog post 
+// Comparing Winston and Bunyan Node.js Logging.
+
+andle exceptions properly
+// Node apps crash when they encounter an 
+// uncaught exception. Not handling 
+// exceptions and taking appropriate 
+// actions will make your Express app 
+// crash and go offline. If you follow 
+// the advice in Ensure your app 
+// automatically restarts below, then 
+// your app will recover from a crash.
+//  Fortunately, Express apps typically 
+// have a short startup time. Nevertheless, 
+// you want to avoid crashing in the first 
+// place, and to do that, you need to 
+// handle exceptions properly.
+
+// To ensure you handle all exceptions, 
+// use the following techniques:
+
+// Use try-catch
+// Use promises
+
+
+// Before diving into these topics, you 
+// should have a basic understanding of 
+// Node/Express error handling: using 
+// error-first callbacks, and propagating 
+// errors in middleware. Node uses an 
+// “error-first callback” convention for 
+// returning errors from asynchronous 
+// functions, where the first parameter 
+// to the callback function is the error 
+// object, followed by result data in 
+// succeeding parameters. To indicate 
+// no error, pass null as the first 
+// parameter. The callback function 
+// must correspondingly follow the 
+// error-first callback convention to 
+// meaningfully handle the error. And 
+// in Express, the best practice is to 
+// use the next() function to propagate 
+// errors through the middleware chain.
+
+// For more on the fundamentals 
+// of error handling, see:
+// Error Handling in Node.js
+// Building Robust Node Applications: Error Handling (StrongLoop blog)
+
+
+// What not to do
+// One thing you should not do is to 
+// listen for the uncaughtException event, 
+// emitted when an exception bubbles all 
+// the way back to the event loop. Adding 
+// an event listener for uncaughtException 
+// will change the default behavior of the 
+// process that is encountering an exception; 
+// the process will continue to run despite 
+// the exception. This might sound like 
+// a good way of preventing your app from 
+// crashing, but continuing to run the app 
+// after an uncaught exception is a dangerous 
+// practice and is not recommended, because 
+// the state of the process becomes unreliable
+//  and unpredictable.
+
+// Additionally, using uncaughtException 
+// is officially recognized as crude. So 
+// listening for uncaughtException is just 
+// a bad idea. This is why we recommend things 
+// like multiple processes and supervisors: 
+// crashing and restarting is often the most 
+// reliable way to recover from an error.
+
+
+// Use try-catch
+// Try-catch is a JavaScript language 
+// construct that you can use to catch 
+// exceptions in synchronous code. Use 
+// try-catch, for example, to handle 
+// JSON parsing errors as shown below.
+
+// Use a tool such as JSHint or JSLint 
+// to help you find implicit exceptions 
+// like reference errors on undefined variables.
+
+// However, try-catch works only for 
+// synchronous code. Because the Node 
+//platform is primarily asynchronous 
+// (particularly in a production environment), 
+// try-catch won’t catch a lot of exceptions.
+
+// Use promises
+// Promises will handle any exceptions 
+// (both explicit and implicit) in 
+// asynchronous code blocks that use then(). 
+// Just add .catch(next) to the end of 
+// promise chains.
+
+ For example:
+
+app.get('/', (req, res, next) => {
+  // do some sync stuff
+  queryDb()
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
+    .catch(next)
+})
+
+app.use((err, req, res, next) => {
+  // handle error
+})
+// Now all errors asynchronous and 
+// synchronous get propagated to the 
+// error middleware.
+
+// However, there are two caveats:
+
+// All your asynchronous code must return 
+// promises (except emitters). If a particular 
+// library does not return promises, convert 
+// the base object by using a helper function 
+// like Bluebird.promisifyAll().
+
+// Event emitters (like streams) can still 
+// cause uncaught exceptions. So make sure 
+// you are handling the error event properly; for example:
+
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
+app.get('/', wrap(async (req, res, next) => {
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
+  stream.on('error', next).pipe(res)
+}))
+// The wrap() function is a wrapper that 
+// catches rejected promises and calls next() 
+// with the error as the first argument. For
+//  details, see Asynchronous Error Handling 
+// in Express with Promises, Generators and ES7.
+
+// For more information about error-handling 
+// by using promises, see Promises in 
+// Node.js with Q – An Alternative to Callbacks.
+
+
+// Things to do in your environment / setup
+// Here are some things you can do in 
+// your system environment to improve
+//  your app’s performance:
+
+// Set NODE_ENV to “production”
+// Ensure your app automatically restarts
+// Run your app in a cluster
+// Cache request results
+// Use a load balancer
+// Use a reverse proxy
+// Set NODE_ENV to “production”
+
+
+// The NODE_ENV environment variable 
+// specifies the environment in which 
+// an application is running (usually,
+//  development or production). One of 
+// the simplest things you can do to 
+// improve performance is to set 
+// NODE_ENV to “production.”
+
+// Setting NODE_ENV to “production” makes Express:
+
+// Cache view templates.
+// Cache CSS files generated from CSS extensions.
+// Generate less verbose error messages.
+
+// Tests indicate that just doing this 
+// can improve app performance by 
+// a factor of three!
+
+// If you need to write environment-specific 
+// code, you can check the value of NODE_ENV
+//  with process.env.NODE_ENV. Be aware that 
+// checking the value of any environment 
+// variable incurs a performance penalty, 
+// and so should be done sparingly.
+
+// In development, you typically set 
+// environment variables in your 
+// interactive shell, for example 
+// by using export or your .bash_profile 
+// file. But in general you shouldn’t 
+// do that on a production server; 
+// instead, use your OS’s init system 
+// (systemd or Upstart). The next section 
+// provides more details about using your 
+// init system in general, but setting 
+// NODE_ENV is so important for performance 
+// (and easy to do), that it’s highlighted here.
+
+// With Upstart, use the env keyword in 
+// your job file. For example:
+
+// # /etc/init/env.conf
+//  env NODE_ENV=production
+// For more information, see the Upstart 
+// Intro, Cookbook and Best Practices.
+
+// With systemd, use the Environment 
+// directive in your unit file. For example:
+
+// # /etc/systemd/system/myservice.service
+// Environment=NODE_ENV=production
+// For more information, see Using Environment
+//  Variables In systemd Units.
+
+// Ensure your app automatically restarts
+// In production, you don’t want your application 
+// to be offline, ever. This means you need to 
+// make sure it restarts both if the app crashes 
+// and if the server itself crashes. Although you 
+// hope that neither of those events occurs, 
+// realistically you must account for both 
+// eventualities by:
+
+// Using a process manager to restart 
+// the app (and Node) when it crashes.
+
+// Using the init system provided by your 
+// OS to restart the process manager when 
+// the OS crashes. It’s also possible to 
+// use the init system without a process manager.
+
+// Node applications crash if they 
+// encounter an uncaught exception. 
+// The foremost thing you need to do 
+// is to ensure your app is well-tested 
+// and handles all exceptions (see handle 
+// exceptions properly for details). But 
+// as a fail-safe, put a mechanism in 
+// place to ensure that if and when 
+// your app crashes, it will 
+// automatically restart.
+
+// Use a process manager
+// In development, you started your 
+// app simply from the command line 
+// with node server.js or something 
+// similar. But doing this in production 
+// is a recipe for disaster. If the app 
+// crashes, it will be offline until you 
+// restart it. To ensure your app restarts 
+// if it crashes, use a process manager.
+//  A process manager is a “container” 
+// for applications that facilitates 
+// deployment, provides high availability, 
+// and enables you to manage the 
+// application at runtime.
+
+// In addition to restarting your app 
+// when it crashes, a process manager 
+// can enable you to:
+
+// Gain insights into runtime performance 
+// and resource consumption.
+
+// Modify settings dynamically to improve performance.
+
+// Control clustering (StrongLoop PM and pm2).
+
+// The most popular process managers 
+// for Node are as follows:
+
+// StrongLoop Process Manager
+// PM2
+// Forever
+// For a feature-by-feature comparison 
+// of the three process managers, 
+// see http://strong-pm.io/compare/. 
+// For a more detailed introduction 
+// to all three, see Process managers 
+// for Express apps.
+
+// Using any of these process managers will 
+// suffice to keep your application up, 
+// even if it does crash from time to time.
+
+// However, StrongLoop PM has lots of 
+// features that specifically target 
+// production deployment. You can use 
+// it and the related StrongLoop tools to:
+
+// Build and package your app locally, 
+// then deploy it securely to your 
+// production system.
+
+// Automatically restart your app 
+// if it crashes for any reason.
+
+// Manage your clusters remotely.
+
+// View CPU profiles and heap snapshots 
+// to optimize performance and diagnose 
+// memory leaks.
+
+// View performance metrics for your application.
+
+// Easily scale to multiple hosts with 
+// integrated control for Nginx load balancer.
+
+// As explained below, when you install 
+// StrongLoop PM as an operating system 
+// service using your init system, it will 
+// automatically restart when the system 
+// restarts. Thus, it will keep your 
+// application processes and clusters 
+// alive forever.
+
+// Use an init system
+// The next layer of reliability is to 
+// ensure that your app restarts when 
+// the server restarts. Systems can still 
+// go down for a variety of reasons. To 
+// ensure that your app restarts if the 
+// server crashes, use the init system 
+// built into your OS. The two main init 
+// systems in use today are systemd and Upstart.
+
+// There are two ways to use init 
+// systems with your Express app:
+
+// Run your app in a process manager, 
+// and install the process manager as 
+// a service with the init system. The 
+// process manager will restart your 
+// app when the app crashes, and the 
+// init system will restart the process
+//  manager when the OS restarts. This 
+// is the recommended approach.
+
+// Run your app (and Node) directly with 
+// the init system. This is somewhat simpler, 
+// but you don’t get the additional advantages 
+// of using a process manager.
+
+// Systemd
+// Systemd is a Linux system and service 
+// manager. Most major Linux distributions 
+// have adopted systemd as their default 
+// init system.
+
+// A systemd service configuration file 
+// is called a unit file, with a filename 
+// ending in .service. Here’s an example 
+// unit file to manage a Node app directly. 
+// Replace the values enclosed in <angle brackets> 
+// for your system and app:
+
+// [Unit]
+// Description=<Awesome Express App>
+
+// [Service]
+// Type=simple
+// ExecStart=/usr/local/bin/node </projects/myapp/index.js>
+// WorkingDirectory=</projects/myapp>
+
+// User=nobody
+// Group=nogroup
+
+// # Environment variables:
+// Environment=NODE_ENV=production
+
+// # Allow many incoming connections
+// LimitNOFILE=infinity
+
+// # Allow core dumps for debugging
+// LimitCORE=infinity
+
+// StandardInput=null
+// StandardOutput=syslog
+// StandardError=syslog
+// Restart=always
+
+// [Install]
+// WantedBy=multi-user.target
+// For more information on systemd, see 
+// the systemd reference (man page).
+
+// StrongLoop PM as a systemd service
+// You can easily install StrongLoop Process 
+// Manager as a systemd service. After you do, 
+// when the server restarts, it will 
+// automatically restart StrongLoop PM, 
+// which will then restart all the apps 
+// it is managing.
+
+// To install StrongLoop PM as a systemd service:
+
+// $ sudo sl-pm-install --systemd
+// Then start the service with:
+
+// $ sudo /usr/bin/systemctl start strong-pm
+// For more information, see Setting up a 
+// production host (StrongLoop documentation).
+
+// Upstart
+// Upstart is a system tool available on 
+// many Linux distributions for starting 
+// tasks and services during system startup, 
+// stopping them during shutdown, and 
+// supervising them. You can configure 
+// your Express app or process manager as 
+// a service and then Upstart will 
+// automatically restart it when it crashes.
+
+// An Upstart service is defined in a 
+// job configuration file (also called a “job”) 
+// with filename ending in .conf. The following 
+// example shows how to create a job called 
+// “myapp” for an app named “myapp” with the 
+// main file located at /projects/myapp/index.js.
+
+// Create a file named myapp.conf 
+// at /etc/init/ with the following content 
+// (replace the bold text with values for 
+// your system and app):
+
+// # When to start the process
+// start on runlevel [2345]
+
+// # When to stop the process
+// stop on runlevel [016]
+
+// # Increase file descriptor limit to 
+// be able to handle more requests
+// limit nofile 50000 50000
+
+// # Use production mode
+// env NODE_ENV=production
+
+// # Run as www-data
+// setuid www-data
+// setgid www-data
+
+// # Run from inside the app dir
+// chdir /projects/myapp
+
+// # The process to start
+// exec /usr/local/bin/node /projects/myapp/index.js
+
+// # Restart the process if it is down
+// respawn
+
+// # Limit restart attempt to 10 times 
+// within 10 seconds
+// respawn limit 10 10
+// NOTE: This script requires Upstart 1.4 
+// or newer, supported on Ubuntu 12.04-14.10.
+
+// Since the job is configured to run when 
+// the system starts, your app will be 
+// started along with the operating system, 
+// and automatically restarted if the app 
+// crashes or the system goes down.
+
+// Apart from automatically restarting the 
+// app, Upstart enables you to use these 
+// commands:
+
+// start myapp – Start the app
+// restart myapp – Restart the app
+// stop myapp – Stop the app.
+
+// For more information on Upstart, 
+// see Upstart Intro, Cookbook and Best Practises.
+
+// StrongLoop PM as an Upstart service
+// You can easily install StrongLoop 
+// Process Manager as an Upstart service. 
+// After you do, when the server restarts, 
+// it will automatically restart StrongLoop PM, 
+// which will then restart all the apps it is managing.
+
+// To install StrongLoop PM as an Upstart 1.4 service:
+
+// $ sudo sl-pm-install
+// Then run the service with:
+
+// $ sudo /sbin/initctl start strong-pm
+// NOTE: On systems that don’t support Upstart 
+// 1.4, the commands are slightly different. 
+// See Setting up a production host (StrongLoop 
+// documentation) for more information.
+
+// Run your app in a cluster
+// In a multi-core system, you can increase 
+// the performance of a Node app by many times 
+// by launching a cluster of processes. A cluster 
+// runs multiple instances of the app, ideally 
+// one instance on each CPU core, thereby 
+// distributing the load and tasks among 
+// the instances.
+
+// Balancing between application instances 
+// using the cluster API
+
+// IMPORTANT: Since the app instances run 
+// as separate processes, they do not share 
+// the same memory space. That is, objects 
+// are local to each instance of the app. 
+// Therefore, you cannot maintain state in 
+// the application code. However, you can 
+// use an in-memory datastore like Redis 
+// to store session-related data and state. 
+// This caveat applies to essentially all 
+// forms of horizontal scaling, whether 
+// clustering with multiple processes or 
+// multiple physical servers.
+
+// In clustered apps, worker processes can 
+// crash individually without affecting the 
+// rest of the processes. Apart from performance 
+// advantages, failure isolation is another 
+// reason to run a cluster of app processes. 
+// Whenever a worker process crashes, always 
+// make sure to log the event and spawn a 
+// new process using cluster.fork().
+
+// Using Node’s cluster module
+// Clustering is made possible with Node’s 
+// cluster module. This enables a master 
+// process to spawn worker processes and 
+// distribute incoming connections among 
+// the workers. However, rather than using 
+// this module directly, it’s far better to 
+// use one of the many tools out there that 
+// does it for you automatically; for 
+// example node-pm or cluster-service.
+
+// Using StrongLoop PM
+// If you deploy your application to 
+// StrongLoop Process Manager (PM), then 
+// you can take advantage of clustering
+//  without modifying your application code.
+
+// When StrongLoop Process Manager (PM) 
+// runs an application, it automatically 
+// runs it in a cluster with a number of 
+// workers equal to the number of CPU 
+// cores on the system. You can manually 
+// change the number of worker processes 
+// in the cluster using the slc command 
+// line tool without stopping the app.
+
+// For example, assuming you’ve deployed 
+// your app to prod.foo.com and StrongLoop 
+// PM is listening on port 8701 (the default), 
+// then to set the cluster size to eight using slc:
+
+// $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
+// For more information on clustering with 
+// StrongLoop PM, see Clustering in 
+// StrongLoop documentation.
+
+// Using PM2
+// If you deploy your application with 
+// PM2, then you can take advantage of 
+// clustering without modifying your 
+// application code. You should ensure 
+// your application is stateless first, 
+// meaning no local data is stored in 
+// the process (such as sessions,
+//  websocket connections and the like).
+
+// When running an application with PM2, 
+// you can enable cluster mode to run it 
+// in a cluster with a number of instances 
+// of your choosing, such as the matching 
+// the number of available CPUs on the 
+// machine. You can manually change the 
+// number of processes in the cluster 
+// using the pm2 command line tool 
+// without stopping the app.
+
+// To enable cluster mode, start 
+// your application like so:
+
+// # Start 4 worker processes
+// $ pm2 start npm --name my-app -i 4 -- start
+// # Auto-detect number of available CPUs and start that many worker processes
+// $ pm2 start npm --name my-app -i max -- start
+
+// This can also be configured within a PM2 
+// process file (ecosystem.config.js or 
+// similar) by setting exec_mode to cluster 
+// and instances to the number of 
+// workers to start.
+
+// Once running, the application 
+// can be scaled like so:
+
+// # Add 3 more workers
+// $ pm2 scale my-app +3
+// # Scale to a specific number of workers
+// $ pm2 scale my-app 2
+
+// For more information on clustering 
+// with PM2, see Cluster Mode in the 
+// PM2 documentation.
+
+// Cache request results
+// Another strategy to improve the 
+// performance in production is to 
+// cache the result of requests, so 
+// that your app does not repeat the 
+// operation to serve the same request 
+// repeatedly.
+
+// Use a caching server like Varnish or 
+// Nginx (see also Nginx Caching) to 
+// greatly improve the speed and 
+// performance of your app.
+
+// Use a load balancer
+// No matter how optimized an app is, 
+// a single instance can handle only 
+// a limited amount of load and traffic. 
+// One way to scale an app is to run 
+// multiple instances of it and 
+// distribute the traffic via a 
+// load balancer. Setting up a load 
+// balancer can improve your app’s 
+// performance and speed, and enable 
+// it to scale more than is possible 
+// with a single instance.
+
+// A load balancer is usually a 
+// reverse proxy that orchestrates 
+// traffic to and from multiple 
+// application instances and servers. 
+// You can easily set up a load balancer 
+// for your app by using Nginx or HAProxy.
+
+// With load balancing, you might have 
+// to ensure that requests that are 
+// associated with a particular 
+// session ID connect to the process 
+// that originated them. This is known 
+// as session affinity, or sticky sessions,
+//  and may be addressed by the suggestion 
+// above to use a data store such as Redis 
+// for session data (depending on your 
+// application). For a discussion, see 
+// Using multiple nodes.
+
+// Use a reverse proxy
+// A reverse proxy sits in front of a 
+// web app and performs supporting 
+// operations on the requests, apart 
+// from directing requests to the app. 
+// It can handle error pages, compression, 
+// caching, serving files, and load 
+// balancing among other things.
+
+// Handing over tasks that do not require
+//  knowledge of application state to a 
+// reverse proxy frees up Express to perform 
+// specialized application tasks. For this 
+// reason, it is recommended to run Express 
+// behind a reverse proxy like Nginx or 
+// HAProxy in production.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Health Checks and Graceful Shutdown
+
+// Graceful shutdown
+// When you deploy a new version of your
+//  application, you must replace the 
+// previous version. The process manager 
+// you’re using will first send a SIGTERM 
+// signal to the application to notify it 
+// that it will be killed. Once the 
+// application gets this signal, it 
+// should stop accepting new requests, 
+// finish all the ongoing requests, 
+// clean up the resources it used, 
+// including database connections 
+// and file locks then exit.
+
+// Example Graceful Shutdown
+const server = app.listen(port)
+
+process.on('SIGTERM', () => {
+  debug('SIGTERM signal received: closing HTTP server')
+  server.close(() => {
+    debug('HTTP server closed')
+  })
+})
+// Health checks
+// A load balancer uses health checks 
+// to determine if an application 
+// instance is healthy and can accept 
+// requests. For example, Kubernetes 
+// has two health checks:
+
+// liveness, that determines when 
+// to restart a container.
+
+// readiness, that determines when 
+// a container is ready to start 
+// accepting traffic. When a pod is 
+// not ready, it is removed from the
+//  service load balancers.
+
+// Third-party solutions
+// Warning: This information refers 
+// to third-party sites, products, 
+// or modules that are not maintained 
+// by the Expressjs team. Listing here
+//  does not constitute an endorsement
+//  or recommendation from the Expressjs 
+// project team.
+
+// Terminus
+// Terminus is an open-source project 
+// that adds health checks and graceful 
+// shutdown to your application to 
+// eliminate the need to write boilerplate 
+// code. You just provide the cleanup 
+// logic for graceful shutdowns and the 
+// health check logic for health checks, 
+// and terminus handles the rest.
+
+// Install terminus as follows:
+
+// $ npm i @godaddy/terminus --save
+// Here’s a basic template that illustrates 
+// using terminus. For more information, 
+// see https://github.com/godaddy/terminus.
+
+const http = require('http')
+const express = require('express')
+const { createTerminus } = require('@godaddy/terminus')
+
+const app = express()
+
+app.get('/', (req, res) => {
+  res.send('ok')
+})
+
+const server = http.createServer(app)
+
+function onSignal () {
+  console.log('server is starting cleanup')
+  // start cleanup of resource, like databases or file descriptors
+}
+
+async function onHealthCheck () {
+  // checks if the system is healthy, like the db connection is live
+  // resolves, if health, rejects if not
+}
+
+createTerminus(server, {
+  signal: 'SIGINT',
+  healthChecks: { '/healthcheck': onHealthCheck },
+  onSignal
+})
+
+server.listen(3000)
+// Lightship
+// Lightship is an open-source project 
+// that adds health, readiness and liveness 
+// checks to your application. Lightship 
+// is a standalone HTTP-service that runs 
+// as a separate HTTP service; this allows 
+// having health-readiness-liveness HTTP 
+// endpoints without exposing them on 
+// the public interface.
+
+// Install Lightship as follows:
+
+// $ npm install lightship
+// Basic template that illustrates using Lightship:
+
+const http = require('http')
+const express = require('express')
+const {
+  createLightship
+} = require('lightship')
+
+// Lightship will start a HTTP service on port 9000.
+const lightship = createLightship()
+
+const app = express()
+
+app.get('/', (req, res) => {
+  res.send('ok')
+})
+
+app.listen(3000, () => {
+  lightship.signalReady()
+})
+
+// You can signal that the service is 
+// not ready using `lightship.signalNotReady()`.
+
+// Lightship documentation provides 
+// examples of the corresponding 
+// Kubernetes configuration and a 
+// complete example of integration with Express.js.
+
+
+// http-terminator
+// http-terminator implements logic for 
+// gracefully terminating an express.js 
+// server.
+
+// Terminating a HTTP server in Node.js 
+// requires keeping track of all open 
+// connections and signaling them that 
+// the server is shutting down. 
+// http-terminator implements the 
+// logic for tracking all connections 
+// and their termination upon a timeout. 
+// http-terminator also ensures graceful 
+// communication of the server intention 
+// to shutdown to any clients that are 
+// currently receiving response from this server.
+
+// Install http-terminator as follows:
+
+// $ npm install http-terminator
+// Basic template that illustrates using http-terminator:
+
+const express = require('express')
+const { createHttpTerminator } = require('http-terminator')
+
+const app = express()
+
+const server = app.listen(3000)
+
+const httpTerminator = createHttpTerminator({ server })
+
+app.get('/', (req, res) => {
+  res.send('ok')
+})
+
+// A server will terminate after 
+// invoking `httpTerminator.terminate()`.
+
+// Note: Timeout is used for illustration 
+// of delayed termination purposes only.
+
+setTimeout(() => {
+  httpTerminator.terminate()
+}, 1000)
+// http-terminator documentation provides 
+// API documentation and comparison to 
+// other existing third-party solutions.
+
+// express-actuator
+// express-actuator is a middleware to 
+// add endpoints to help you monitor 
+// and manage applications.
+
+// Install express-actuator as follows:
+
+// $ npm install --save express-actuator
+// Basic template that illustrates 
+// using express-actuator:
+
+const express = require('express')
+const actuator = require('express-actuator')
+
+const app = express()
+
+app.use(actuator())
+
+app.listen(3000)
+// The express-actuator documentation 
+// provides different options for customization.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// CORS is a node.js package for providing a Connect/Express
+//  middleware that can be used to enable CORS with various 
+// options.
+
+// Installation
+// This is a Node.js module available through the npm 
+// registry. Installation is done using the npm install 
+// command:
+
+$ npm install cors
+
+// Usage
+// Simple Usage (Enable All CORS Requests)
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
+
+app.get('/products/:id', function (req, res, next) {
+    res.json({ msg: 'This is CORS-enabled for all origins!' })
+})
+
+app.listen(80, function () {
+    console.log('CORS-enabled web server listening on port 80')
+})
+// Enable CORS for a Single Route
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+app.get('/products/:id', cors(), function (req, res, next) {
+    res.json({ msg: 'This is CORS-enabled for a Single Route' })
+})
+
+app.listen(80, function () {
+    console.log('CORS-enabled web server listening on port 80')
+})
+// Configuring CORS
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+var corsOptions = {
+    origin: 'http://example.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.get('/products/:id', cors(corsOptions), function (req, res, next) {
+    res.json({ msg: 'This is CORS-enabled for only example.com.' })
+})
+
+app.listen(80, function () {
+    console.log('CORS-enabled web server listening on port 80')
+})
+
+// Enabling CORS Pre-Flight
+// Certain CORS requests are considered ‘complex’ and require 
+// an initial OPTIONS request (called the “pre-flight request”). 
+// An example of a ‘complex’ CORS request is one that uses 
+// an HTTP verb other than GET/HEAD/POST (such as DELETE) 
+// or that uses custom headers. To enable pre-flighting,
+//  you must add a new OPTIONS handler for the route you 
+// want to support:
+
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+app.options('/products/:id', cors()) // enable pre-flight request for DELETE request
+app.del('/products/:id', cors(), function (req, res, next) {
+    res.json({ msg: 'This is CORS-enabled for all origins!' })
+})
+
+app.listen(80, function () {
+    console.log('CORS-enabled web server listening on port 80')
+})
+
+// You can also enable pre-flight across-the-board like so:
+app.options('*', cors()) // include before other routes
+
+// NOTE: When using this middleware as an application level 
+// middleware (for example, app.use(cors())), pre-flight
+//  requests are already handled for all routes.
+
+// Configuring CORS Asynchronously
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+var allowlist = ['http://example1.com', 'http://example2.com']
+var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    if (allowlist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+app.get('/products/:id', cors(corsOptionsDelegate), function (req, res, next) {
+    res.json({ msg: 'This is CORS-enabled for an allowed domain.' })
+})
+
+app.listen(80, function () {
+    console.log('CORS-enabled web server listening on port 80')
+})
+
+// Configuration Options
+// origin: Configures the Access-Control-Allow-Origin CORS header. Possible values:
+// Boolean - set origin to true to reflect the request origin, as defined by req.header('Origin'), or set it to false to disable CORS.
+// String - set origin to a specific origin. For example if you set it to "http://example.com" only requests from “http://example.com” will be allowed.
+// RegExp - set origin to a regular expression pattern which will be used to test the request origin. If it’s a match, the request origin will be reflected. For example the pattern /example\.com$/ will reflect any request that is coming from an origin ending with “example.com”.
+// Array - set origin to an array of valid origins. Each origin can be a String or a RegExp. For example ["http://example1.com", /\.example2\.com$/] will accept any request from “http://example1.com” or from a subdomain of “example2.com”.
+// Function - set origin to a function implementing some custom logic. The function takes the request origin as the first parameter and a callback (called as callback(err, origin), where origin is a non-function value of the origin option) as the second.
+
+// methods: Configures the Access-Control-Allow-Methods CORS header. Expects a comma-delimited string (ex: ‘GET,PUT,POST’) or an array (ex: ['GET', 'PUT', 'POST']).
+// allowedHeaders: Configures the Access-Control-Allow-Headers CORS header. Expects a comma-delimited string (ex: ‘Content-Type,Authorization’) or an array (ex: ['Content-Type', 'Authorization']). If not specified, defaults to reflecting the headers specified in the request’s Access-Control-Request-Headers header.
+// exposedHeaders: Configures the Access-Control-Expose-Headers CORS header. Expects a comma-delimited string (ex: ‘Content-Range,X-Content-Range’) or an array (ex: ['Content-Range', 'X-Content-Range']). If not specified, no custom headers are exposed.
+// credentials: Configures the Access-Control-Allow-Credentials CORS header. Set to true to pass the header, otherwise it is omitted.
+// maxAge: Configures the Access-Control-Max-Age CORS header. Set to an integer to pass the header, otherwise it is omitted.
+// preflightContinue: Pass the CORS preflight response to the next handler.
+// optionsSuccessStatus: Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) choke on 204.
+
+// The default configuration is the equivalent of:
+// {
+//   "origin": "*",
+//   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   "preflightContinue": false,
+//   "optionsSuccessStatus": 204
+// }
+
+
+
+// For details on the effect of each CORS header, read this 
+// article on web.dev.
+// https://web.dev/articles/cross-origin-resource-sharing
+
+// Demo
+// A demo that illustrates CORS working (and not working) 
+// using React is available here:
+//  https://node-cors-client.netlify.com
+
+// Code for that demo can be found here:
+
+// Client: https://github.com/troygoode/node-cors-client
+// Server: https://github.com/troygoode/node-cors-server
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Middleware module	        Description
+// connect-image-optimus	    Optimize image serving. Switches images to .webp or .jxr, if possible.
+// express-debug	            Development tool that adds information about template variables (locals), current session, and so on.
+// helmet	                    Helps secure your apps by setting various HTTP headers.
+// passport	                    Authentication using “strategies” such as OAuth, OpenID and many others. See http://passportjs.org/ for more information.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Companies using Express in production
+// accenture 
+// Dentisphere 
+// Exove 
+// Fox Sports Australia 
+// IBM 
+// Icicle Technologies 
+// Mulesoft 
+// Myntra 
+// NodeBB 
+// QuizUp 
+// Ripjar 
+// Rising Stack 
+// SparkPost 
+// Uber 
+// Yandex 
+// Agrippa Solutions 
+// AS CircleHD CircleHD 
+// Taskade 
+// Hasura 
+// iLoveCoding kuali 
+// Wormhole 
+// Work in biotech
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Some open-source projects that use Express:
+
+// Builder Book: Open source web app to 
+// publish documentation or books. Built 
+// with React, Material-UI, Next, 
+// Express, Mongoose, MongoDB.
+// https://github.com/async-labs/builderbook
+
+// SaaS Boilerplate: Open source web 
+// app to build your own SaaS product. 
+// Built with React, Material-UI, Next, 
+// MobX, Express, Mongoose, MongoDB, Typescript.
+// https://github.com/async-labs/saas
+
+// BitMidi: Open source web app 
+// powered by Express. BitMidi is 
+// a historical archive of MIDI files 
+// from the early web era. It uses the 
+// latest modern web technology including
+//  WebAssembly and Web Audio to bring 
+// MIDI back to life.
+// https://bitmidi.com/
+//  (source code)
+// https://github.com/feross/bitmidi.com
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Multer is a node.js middleware for handling multipart/form-data, 
+// which is primarily used for uploading files.
+// NOTE: Multer will not process any form which is not 
+// multipart (multipart/form-data).
+
+// Usage
+// Multer adds a body object and a file or files object 
+// to the request object. The body object contains the 
+// values of the text fields of the form, the file or files
+//  object contains the files uploaded via the form.
+
+// API
+// File information
+// Each file contains the following information:
+
+// Key	            Description	Note
+// fieldname	    Field name specified in the form	 
+// originalname	    Name of the file on the user’s computer	 
+// encoding	        Encoding type of the file	 
+// mimetype	        Mime type of the file	 
+// size	            Size of the file in bytes	 
+// destination	    The folder to which the file has been saved	DiskStorage
+// filename	        The name of the file within the destination	DiskStorage
+// path	            The full path to the uploaded file	DiskStorage
+// buffer	        A Buffer of the entire file	MemoryStorage
+
+
+// multer(opts)
+// Multer accepts an options object, the most basic of which 
+// is the dest property, which tells Multer where to upload 
+// the files. In case you omit the options object, the files 
+// will be kept in memory and never written to disk.
+
+// By default, Multer will rename the files so as to avoid
+//  naming conflicts. The renaming function can be customized
+//  according to your needs.
+
+// The following are the options that can be passed to Multer.
+
+// Key	            Description
+// dest or storage	Where to store the files
+// fileFilter	    Function to control which files are accepted
+// limits	        Limits of the uploaded data
+// preservePath	    Keep the full path of files instead of just the base name
+
+// In an average web app, only dest might be required, and 
+// configured as shown in the following example.
+
+const upload = multer({ dest: 'uploads/' })
+// If you want more control over your uploads, you’ll want
+//  to use the storage option instead of dest. Multer ships 
+// with storage engines DiskStorage and MemoryStorage; More 
+// engines are available from third parties.
+
+// .single(fieldname)
+// Accept a single file with the name fieldname. The single 
+// file will be stored in req.file.
+
+// .array(fieldname[, maxCount])
+// Accept an array of files, all with the name fieldname. 
+// Optionally error out if more than maxCount files are
+//  uploaded. The array of files will be stored in req.files.
+
+// .fields(fields)
+// Accept a mix of files, specified by fields. An object 
+// with arrays of files will be stored in req.files.
+
+// fields should be an array of objects with name and 
+// optionally a maxCount. Example:
+
+[
+    { name: 'avatar', maxCount: 1 },
+    { name: 'gallery', maxCount: 8 }
+]
+// .none()
+// Accept only text fields. If any file upload is made, 
+// error with code “LIMIT_UNEXPECTED_FILE” will be issued.
+
+// .any()
+// Accepts all files that comes over the wire. An array 
+// of files will be stored in req.files.
+
+// WARNING: Make sure that you always handle the files that 
+// a user uploads. Never add multer as a global middleware 
+// since a malicious user could upload files to a route that 
+// you didn’t anticipate. Only use this function on routes 
+// where you are handling the uploaded files.
+
+// storage
+
+// DiskStorage
+// The disk storage engine gives you full control on storing 
+// files to disk.
+// There are two options available, destination and filename.
+// They are both functions that determine where the file 
+// should be stored.
+
+
+// destination is used to determine within which folder the 
+// uploaded files should be stored.This can also be given as 
+// a string(e.g. '/tmp/uploads').If no destination is given, 
+// the operating system’s default directory for temporary 
+// files is used.
+
+//Note: You are responsible for creating the directory when 
+// providing destination as a function. When passing a 
+// string, multer will make sure that the directory is
+//  created for you.
+
+// filename is used to determine what the file should be 
+// named inside the folder.If no filename is given, each 
+// file will be given a random name that doesn’t include 
+// any file extension.
+
+//Note: Multer will not append any file extension for you, 
+// your function should return a filename complete with an 
+// file extension.
+
+//WARNING: Uploading very large files, 
+// or relatively small files in large 
+// numbers very quickly, can cause your 
+// application to run out of memory when
+//  memory storage is used.
+
+//     fileFilter
+// Set this to a function to control which files should be 
+// uploaded and which should be skipped.The function should 
+// look like this:
+
+function fileFilter(req, file, cb) {
+    // The function should call `cb` with a boolean
+    // to indicate if the file should be accepted
+
+    // To reject this file pass `false`, like so:
+    cb(null, false)
+
+    // To accept the file pass `true`, like so:
+    cb(null, true)
+
+    // You can always pass an error if something goes wrong:
+    cb(new Error('I don\'t have a clue!'))
+
+}
+
+// Error handling
+// When encountering an error, Multer will delegate the 
+// error to Express.You can display a nice error page 
+// using the standard express way.
+
+//If you want to catch errors specifically from Multer, 
+// you can call the middleware function by yourself.Also,
+//  if you want to catch only the Multer errors, you can 
+// use the MulterError class that is attached to the 
+// multer object itself(e.g.err instanceof multer.MulterError).
+
+const multer = require('multer')
+const upload = multer().single('avatar')
+
+app.post('/profile', function (req, res) {
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+        } else if (err) {
+            // An unknown error occurred when uploading.
+        }
+
+        // Everything went fine.
+    })
+})
+// Custom storage engine
+// For information on how to build your own storage engine, 
+// see Multer Storage Engine.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// compression middleware 
+
+// The following compression codings are supported:
+// deflate
+// gzip
+
+// Install
+$ npm install compression
+
+// API
+var compression = require('compression')
+compression([options])
+
+// Returns the compression middleware using the given options. 
+// The middleware will attempt to compress response bodies 
+// for all request that traverse through the middleware, 
+// based on the given options.
+
+
+// This middleware will never compress responses that include 
+// a Cache-Control header with the no-transform directive, 
+// as compressing will transform the body.
+
+
+// express/connect
+// When using this module with express or connect, simply 
+// app.use the module as high as you like. Requests that 
+// pass through the middleware will be compressed.
+
+var compression = require('compression')
+var express = require('express')
+
+var app = express()
+
+// compress all responses
+app.use(compression())
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// cookie-parser
+// Parse Cookie header and populate req.cookies with an 
+// object keyed by the cookie names. Optionally you may 
+// enable signed cookie support by passing a secret string, 
+// which assigns req.secret so it may be used by other 
+// middleware.
+
+$ npm install cookie-parser
+var cookieParser = require('cookie-parser')
+cookieParser(secret, options)
+
+// the given secret and options.
+
+// secret a string or array used for signing cookies. This 
+// is optional and if not specified, will not parse signed 
+// cookies. If a string is provided, this is used as the 
+// secret. If an array is provided, an attempt will be made 
+// to unsign the cookie with each secret in order.
+
+// options an object that is passed to cookie.parse as the 
+// second option. See cookie for more information.
+
+
+// decode a function to decode the value of the cookie
+
+// The middleware will parse the Cookie header on the request 
+// and expose the cookie data as the property req.cookies 
+// and, if a secret was provided, as the property
+//  req.signedCookies. These properties are name value 
+// pairs of the cookie name to cookie value.
+
+// When secret is provided, this module will unsign and 
+// validate any signed cookie values and move those name 
+// value pairs from req.cookies into req.signedCookies. 
+// A signed cookie is a cookie that has a value prefixed 
+// with s:. Signed cookies that fail signature validation 
+// will have the value false instead of the tampered value.
+
+// In addition, this module supports special “JSON cookies”. 
+// These are cookie where the value is prefixed with j:. 
+// When these values are encountered, the value will be 
+// exposed as the result of JSON.parse. If parsing fails,
+//  the original value will remain.
+
+cookieParser.JSONCookie(str)
+// Parse a cookie value as a JSON cookie. This will 
+// return the parsed JSON value if it was a JSON cookie, 
+// otherwise, it will return the passed value.
+
+cookieParser.JSONCookies(cookies)
+// Given an object, this will iterate over the keys 
+// and call JSONCookie on each value, replacing the 
+// original value with the parsed value. This returns 
+// the same object that was passed in.
+
+cookieParser.signedCookie(str, secret)
+// Parse a cookie value as a signed cookie. This will 
+// return the parsed unsigned value if it was a signed
+//  cookie and the signature was valid. If the value was
+//  not signed, the original value is returned. If the 
+// value was signed but the signature could not be 
+// validated, false is returned.
+
+// The secret argument can be an array or string. If 
+// a string is provided, this is used as the secret. 
+// If an array is provided, an attempt will be made 
+// to unsign the cookie with each secret in order.
+
+cookieParser.signedCookies(cookies, secret)
+// Given an object, this will iterate over the keys and 
+// check if any value is a signed cookie. If it is a signed 
+// cookie and the signature is valid, the key will be deleted
+//  from the object and added to the new object that is returned.
+
+// The secret argument can be an array or string. If a 
+// string is provided, this is used as the secret. If 
+// an array is provided, an attempt will be made to 
+// unsign the cookie with each secret in order.
+
+// Example
+var express = require('express')
+var cookieParser = require('cookie-parser')
+
+var app = express()
+app.use(cookieParser())
+
+app.get('/', function (req, res) {
+    // Cookies that have not been signed
+    console.log('Cookies: ', req.cookies)
+
+    // Cookies that have been signed
+    console.log('Signed Cookies: ', req.signedCookies)
+})
+
+app.listen(8080)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// express-session middleware and vhost middleware
+
+$ npm install express - session
+// API
+var session = require('express-session')
+session(options)
+
+
+// Note Session data is not saved in the cookie itself, 
+// just the session ID. Session data is stored server-side.
+
+.... too complex understand first via videos 
+
+Mastering File Uploads with Multer in Node.js
+Introduction
+
+Uploading files is a fundamental aspect of many web applications. As a Node.js developer, you’ll often come across scenarios where users need to upload multiple files simultaneously. Thankfully, we have a powerful middleware called multer that simplifies the process of handling file uploads in Node.js. In this comprehensive tutorial, we’ll explore the ins and outs of using multer to handle single and multiple file uploads from both a single field and multiple fields.
+
+Step 1: Create a new directory and navigate into it:
+mkdir multer-file-upload-tutorial
+cd multer-file-upload-tutorial
+
+Step 2: Initialize a new Node.js project:
+npm init -y
+
+Step 3: Install the required packages, namely `express` and `multer`:
+npm install express multer
+
+Creating the Express App
+Step 4: Create a new file named `app.js` in the project root:
+
+// app.js
+const express = require('express');
+const multer = require('multer');
+const app = express();
+const port = 3000; // Change this port to your preferred port number
+// Create a storage strategy for multer
+const storage = multer.diskStorage({
+ destination: function (req, file, cb) {
+ // Specify the upload directory
+ cb(null, 'uploads/');
+ },
+ filename: function (req, file, cb) {
+ // Define the file name format
+ cb(null, file.originalname);
+ }
+});
+// Create a multer instance with the storage strategy
+const upload = multer({ storage: storage });
+// Route to handle single file upload
+app.post('/uploadSingle', upload.single('singleFile'), (req, res) => {
+ // The uploaded file is available in req.file
+ res.json({ message: 'Single file uploaded successfully!' });
+});
+// Route to handle multiple file uploads from a single field
+app.post('/uploadMultipleSingleField', upload.array('multipleFiles', 5), (req, res) => {
+ // The uploaded files are available in req.files
+ res.json({ message: 'Multiple files from a single field uploaded successfully!' });
+});
+// Route to handle multiple file uploads from multiple fields
+app.post('/uploadMultipleFields', upload.fields([
+ { name: 'field1Files', maxCount: 5 },
+ { name: 'field2Files', maxCount: 5 }
+]), (req, res) => {
+ // The uploaded files are available in req.files
+ // Use req.files['field1Files'] for files from the first field
+ // Use req.files['field2Files'] for files from the second field
+ res.json({ message: 'Multiple files from multiple fields uploaded successfully!' });
+});
+// Start the server
+app.listen(port, () => {
+ console.log(`Server running on http://localhost:${port}`);
+});
+
+In the code above, we import the required modules, create an Express app, and configure multer to handle file uploads. We set up a disk storage strategy, defining the destination and filename format for uploaded files. In this example, we’ll save the files in the `uploads/` directory with their original names.
+
+File Upload Handling
+
+With our server set up, let’s create an HTML form to test the file upload functionality.
+
+Step 5: Create an HTML file named index.html in the project root:
+<! - index.html →
+<!DOCTYPE html>
+<html>
+<head>
+ <title>File Upload Test</title>
+</head>
+<body>
+ <h1>File Upload Test</h1>
+<! - Single File Upload →
+ <h2>Single File Upload</h2>
+ <form action="http://localhost:3000/uploadSingle" method="post" enctype="multipart/form-data">
+ <input type="file" name="singleFile">
+ <br>
+ <input type="submit" value="Upload">
+ </form>
+<! - Multiple File Uploads from a Single Field →
+ <h2>Multiple File Uploads from a Single Field</h2>
+ <form action="http://localhost:3000/uploadMultipleSingleField" method="post" enctype="multipart/form-data">
+ <input type="file" name="multipleFiles" multiple>
+ <br>
+ <input type="submit" value="Upload">
+ </form>
+<! - Multiple File Uploads from Multiple Fields →
+ <h2>Multiple File Uploads from Multiple Fields</h2>
+ <form action="http://localhost:3000/uploadMultipleFields" method="post" enctype="multipart/form-data">
+ <h3>Field 1</h3>
+ <input type="file" name="field1Files" multiple>
+ <br>
+ <h3>Field 2</h3>
+ <input type="file" name="field2Files" multiple>
+ <br>
+ <input type="submit" value="Upload">
+ </form>
+</body>
+</html>
+
+Testing the File Upload
+
+Step 6: Create a new directory named uploads in the project root. This is where the uploaded files will be stored.
+
+Step 7: Run the Express server:
+node app.js
+
+Your server is now running at http://localhost:3000 (or the port you specified).
+
+Step 8: Open the index.html file in your browser. You should see a form with options to test single and multiple file uploads from both a single field and multiple fields.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+an example myapp , see - "C:\Users\rekha\OneDrive\Desktop\backend=node+exp+mongo\File-Upload-in-Nodejs-using-Multer-master"
+
+and also see , how to send mails using nodemailer 
+C:\Users\rekha\OneDrive\Desktop\backend=node+exp+mongo\Express Tutorial(geeks for geeks)\11.How to send email with Nodemailer using Gmail account in Node .txt
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 									express basic to intemediate finished 
+
+//  begining of the mongodb to get a job just the basics are enough 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// MongoDB
+// MongoDB is a document 
+// database, 
+
+// SQL vs Document Databases
+
+// SQL databases are considered 
+// relational databases. They 
+// store related data in 
+// separate tables. When 
+// data is needed, it is 
+// queried from multiple 
+// tables to join the data 
+// Wback together.
+
+
+// MongoDB is a document 
+// database which is often 
+// referred to as a 
+// non-relational database. 
+// This does not mean that 
+// relational data cannot 
+// be stored in document 
+// databases. It means 
+// that relational data 
+// is stored differently. 
+// A better way to refer 
+// to it is as a non-tabular 
+// database.
+
+// MongoDB stores data in 
+// flexible documents. 
+// Instead of having multiple 
+// tables you can simply 
+// keep all of your related 
+// data together. This makes 
+// reading your data very fast.
+
+// You can still have multiple 
+// groups of data too. In 
+// MongoDB, instead of tables 
+// these are called collections.
+
+// Local vs Cloud Database
+// MongoDB can be installed 
+// locally, which will all1ow 
+// you to host your own MongoDB 
+// server on your hardware. 
+// This requires you to manage 
+// your server, upgrades, and 
+// any other maintenance.
+
+// You can download and use the 
+// MongoDB open source Community 
+// Server on your hardware for free.
+
+// MongoDB 
+// Atlas, a cloud database 
+// platform.
+
+
+// Sign up for a free MongoDB 
+// Atlas account to get started.
+
+// Creating a Cluster
+// After you have created your 
+// account, set up a free 
+// "Shared Cluster" then 
+// choose your preferred 
+// cloud provider and region.
+
+
+// You will need to set up 
+// a user and add your IP 
+// address to the list of 
+// allowed IP addresses.
+
+// Under "Database Access", 
+// create a new user and 
+// keep track of the username 
+// and password.
+
+// Next, under "Network Access", 
+// add your current IP address 
+// to allow access from your 
+// computer.
+
+// Install MongoDB Shell (mongosh)
+// There are many ways to 
+// connect to your MongoDB 
+// database.
+
+// We will start by using 
+// the MongoDB Shell, mongosh.
+
+// Use the official instructions 
+// to install mongosh on your 
+// operating system.
+
+// To verify that it has been 
+// installed properly, open 
+// your terminal and type:
+// mongosh --version
+
+// You should see that the 
+// latest verion is 
+// installed.
+
+// Connect to the database
+
+// In the MongoDB Atlas dashboard, 
+// under "Databases", click the 
+// "Connect" button for your Cluster.
+
+// Next, choose "Connect with 
+// the MongoDB Shell".
+
+// Copy your connection string.
+
+// Paste your connection string 
+// into your terminal and press enter.
+
+// You will be prompted to enter 
+// your database user password 
+// that you created earlier.
+
+// You are now connected to 
+// the database!
+
+// What Next?
+// In the following sections we 
+// will use 'mongosh' to create, 
+// read, update, and delete (CRUD) 
+// items in your database.
+
+// After connecting to your database 
+// using mongosh, you can see which 
+// database you are using by typing 
+// db in your terminal.
+
+// To see all available databases, 
+// in your terminal type show dbs.
+
+// Notice that myFirstDatabase is 
+// not listed. This is because the 
+// database is empty. An empty 
+// database is essentially 
+// non-existant.
+
+// Change or Create a Database
+// You can change or create a 
+// new database by typing use 
+// then the name of the database.
+
+// Example
+// Create a new database called "blog":
+// use blog
+// We are now in the blog database.
+
+// You can create a collection using 
+// the createCollection() database method.
+db.createCollection("posts")
+
+// To insert a single document(single object), 
+// use the insertOne() method.
+insertOne()
+
+// Example
+db.posts.insertOne({
+  title: "Post Title 1",
+  body: "Body of post.",
+  category: "News"
+})
+// Note: If you try to insert 
+// documents into a collection 
+// that does not exist, MongoDB 
+// will create the collection 
+// automatically.
+
+// To insert multiple documents 
+// at once, use the insertMany() 
+// method.
+insertMany()
+// This method inserts an array 
+// of objects into the database.
+
+// Example
+db.posts.insertMany([  
+  {
+    title: "Post Title 2",
+    body: "Body of post.",
+    category: "Event"
+  },
+  {
+    title: "Post Title 3",
+    body: "Body of post.",
+    category: "Technology"
+  },
+  {
+    title: "Post Title 4",
+    body: "Body of post.",
+    category: "Event"
+  }
+])
+
+// to find 
+// and select data from a collection 
+// in MongoDB, we can use the find() 
+// method.
+find()
+// This method accepts a query 
+// object. If left empty, all 
+// documents will be returned.
+db.posts.find()
+
+// To select only one document, 
+// we can use the findOne() method.
+findOne()
+// Note: This method only returns 
+// the first match it finds.
+
+db.posts.find( {category: "News"} )
+//a query object
+
+db.posts.find({}, {category: 0})
+db.posts.find({}, {title: 1, date: 0})
+
+// To update an existing 
+// document we can use the 
+// updateOne() or updateMany() 
+// methods.
+db.posts.updateOne( { title: "Post Title 1" }, { $set: { likes: 2 } } ) 
+
+// The updateMany() method 
+// will update all documents 
+// that match the provided query.
+db.posts.updateMany({}, { $inc: { likes: 1 } })
+
+// Delete Documents
+// We can delete documents by 
+// using the methods deleteOne() 
+// or deleteMany().
+db.posts.deleteOne({ title: "Post Title 5" })
+db.posts.deleteMany({ category: "Technology" })
+
+// Comparison
+// The following operators can be 
+// used in queries to compare values:
+// $eq: Values are equal
+// $ne: Values are not equal
+// $gt: Value is greater than another value
+// $gte: Value is greater than or equal to another value
+// $lt: Value is less than another value
+// $lte: Value is less than or equal to another value
+// $in: Value is matched within an array
+
+// Logical
+// The following operators can 
+// logically compare multiple queries.
+// $and: Returns documents where both queries match
+// $or: Returns documents where either query matches
+// $nor: Returns documents where both queries fail to match
+// $not: Returns documents where the query does not match
+
+// Evaluation
+// The following operators assist 
+// in evaluating documents.
+// $regex: Allows the use of regular expressions when evaluating field values
+// $text: Performs a text search
+// $where: Uses a JavaScript expression to match documents
+
+// Indexing & Search
+// MongoDB Atlas comes with a full-text 
+// search engine that can be used to 
+// search for documents in a collection.
+
+// Creating an Index
+// We'll use the Atlas dashboard to 
+// create an index on the "sample_mflix" 
+// database from the sample data that 
+// we loaded in the Intro to 
+// Aggregations section.
+// ........
+// figure out somehow 
+
+
+// Schema Validation
+// By default MongoDB has a flexible 
+// schema. This means that there is 
+// no strict schema validation set 
+// up initially.
+
+// Schema validation rules can be 
+// created in order to ensure that 
+// all documents a collection share 
+// a similar structure.
+
+// MongoDB supports JSON Schema validation. 
+// The $jsonSchema operator allows us 
+// to define our document structure.
+
+// Example
+db.createCollection("posts", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [ "title", "body" ],
+      properties: {
+        title: {
+          bsonType: "string",
+          description: "Title of post - Required."
+        },
+        body: {
+          bsonType: "string",
+          description: "Body of post - Required."
+        },
+        category: {
+          bsonType: "string",
+          description: "Category of post - Optional."
+        },
+        likes: {
+          bsonType: "int",
+          description: "Post like count. Must be an integer - Optional."
+        },
+        tags: {
+          bsonType: ["string"],
+          description: "Must be an array of strings - Optional."
+        },
+        date: {
+          bsonType: "date",
+          description: "Must be a date - Optional."
+        }
+      }
+    }
+  }
+})
+
+// This will create the posts 
+// collection in the current 
+// database and specify the JSON 
+// Schema validation requirements 
+// for the collection.
+
+//What is MongoDB?
+//MongoDB is an open-source, document-oriented NoSQL database 
+management system.
+Designed for flexibility, scalability, and performance in handling 
+unstructured or semi-structured data
+
+Clusters in MongoDB
+In MongoDB, a cluster refers to a group of interconnected 
+servers (nodes) that work together to store and manage data.
+
+MongoDB 
+Terminologies
+database -> collection -> documements 
+
+Key Features of MongoDB
+
+Certainly! Let's delve into the fascinating world of MongoDB and explore its powerful features:
+
+1. **Flexible Schema Design**:
+   - MongoDB embraces dynamic, schema-less data structures.
+   - You're not bound by rigid table schemas; instead, documents within a collection can have varying sets of fields and different data types.
+   - This flexibility allows you to easily adapt to changing data requirements as your application evolves.
+
+2. **Scalability and Performance**:
+   - MongoDB excels in handling large datasets and high traffic scenarios.
+   - **Horizontal scaling** is supported, allowing you to distribute data across multiple nodes.
+   - Optimized read and write operations ensure fast performance even as your application grows.
+
+3. **Document-Oriented Storage**:
+   - Data is stored in **JSON-like BSON documents**.
+   - Each document is a self-contained unit with rich data types and nested arrays.
+   - This design promotes efficient storage and retrieval of complex data structures.
+
+4. **Dynamic Queries**:
+   - MongoDB offers a **rich query language** capable of handling complex queries.
+   - You can express intricate conditions and utilize various operators.
+   - **Indexes** play a crucial role in speeding up query execution.
+
+5. **Aggregation Framework**:
+   - The aggregation framework is a powerful tool for data transformations and analysis.
+   - It allows you to process data using **multiple pipeline stages**.
+   - Think of it as a data transformation pipeline, similar to *nix command line pipes (|), where each stage performs an operation on the input documents.
+
+6. **Open Source and Community**:
+   - MongoDB is an open-source database system.
+   - Its vibrant community ensures regular updates, improvements, and ongoing support.
+
+In summary, MongoDB's flexibility, scalability, and robust features make it an excellent choice for modern applications. Whether you're building a small project or a large-scale system, MongoDB provides the tools you need to handle data effectively and efficiently¹²³⁴⁵⁶.
+
+
+frontend+ backend + database(mongdb)
+
+JSON Vs BSON
+
+In MongoDB, we write in JSON format only but behind the scene data is stored 
+in BSON (Binary JSON) format, a binary representation of JSON. 
+
+By utilizing BSON, MongoDB can achieve higher read and write speeds, 
+reduced storage requirements, and improved data manipulation capabilities, 
+making it well-suited for handling large and complex datasets while 
+maintaining performance efficiency.
+
+json -> Easy to Read 
+& Write
+
+BSON -> Not Easy to Read
+
+BSON in MongoDB
+Binary JSON Format: 
+BSON, Binary JSON, is 
+used in MongoDB for 
+data storage and 
+transmission. ----->
+Efficient Storage: 
+Designed for efficient 
+data storage and 
+transmission in 
+MongoDB. ----->
+Diverse Data Types: 
+Supports a wider range 
+of data types, including 
+Binary, Date, and 
+Regular Expression. ----->
+Compact & Fast: 
+BSON's binary format is 
+more compact, leading 
+to smaller storage and 
+faster processing --------> 
+Native to MongoDB: 
+MongoDB stores data in 
+BSON format, ensuring 
+seamless integration. ----> 
+Performance Boost: 
+Faster serialization 
+improves data access 
+and manipulation 
+speed.
+
+
+Managing Databases and Collections
+show dbs;
+use <database-name>;
+db.dropDatabase();
+show collections;
+db.createCollection('<collection-name>’);
+db.<collection-name>.drop();
+
+
+Insert Operation in 
+MongoDB
+Inserting Documents in MongoDB
+When to use Quotes and when not to?
+Ordered and Unordered Inserts
+Case Sensitivity in MongoDB
+
+
+When to use Quotes and when not to?
+Special Characters
+If a field name contains special characters or spaces, or starts with 
+a numeric digit, using quotes is necessary.
+
+Reserved Words
+If a field name is a reserved keyword in MongoDB, use quotes to 
+distinguish it from the reserved keyword.
+
+Ordered and Unordered Inserts
+When executing bulk write operations, "ordered" and "unordered" determine the batch 
+behavior.
+
+Ordered Inserts
+Default behavior is ordered, where MongoDB stops on the first error.
+db.<collection-name>.insertMany([ doc1, doc2, ... ]);
+
+Unordered Inserts
+When executing bulk write operations with unordered flag, MongoDB continues processing 
+after encountering an error.
+db.<collection-name>.insertMany([ doc1, doc2, ... ], { ordered: false });
+
+$Ordered Inserts
+{Correct Doc. 1}+{Wrong Doc. 2}+{Correct Doc. 3} = {Correct Doc. 1}
+Thapa TechnicalSUBSCRIBE https://thapatechnical.shop
+{Correct Doc. 1}
+Documents Before the wrong one will be 
+inserted & after the one with error will not.
+
+
+$Ordered = false
+{Correct Doc. 1}+{Wrong Doc. 2}+{Correct Doc. 3}+{Correct Doc. 4} = {Correct Doc. 1}+{Correct Doc. 3}+{Correct Doc. 4}
+Thapa TechnicalSUBSCRIBE https://thapatechnical.shop
+{Correct Doc. 1}
+Documents before the one with an error will be 
+inserted, and the documents after the one with an error 
+will also be inserted. Only the document with the error 
+will not be inserted.
+
+
+Case Sensitivity in MongoDB
+Collection names are case-sensitive.
+Field names within documents are also case-sensitive.
+
+db.Product.insertOne({ name: 'thapa', age: 30 }); 
+db.product.insertOne({ name: 'thapa', age: 30 });
+
+Read Operations in MongoDB
+Inserting Documents in MongoDB
+Ordered and Unordered Inserts
+Case Sensitivity in MongoDB
+Comparison Operators
+Logical Operators
+Cursors in MongoDB
+
+Finding Documents in MongoDB
+find()
+db.collection_name.find({ key: value })
+findOne()
+db.collection_name.findOne({ key: value })
+
+Importing JSON in MongoDB
+mongoimport jsonfile.json –d database_name –c collection_name
+mongoimport products.json -d shop -c products
+mongoimport products.json -d shop -c products --jsonArray
+Here, --jsonArray accepts the import of data expressed with multiple 
+MongoDB documents within a single JSON array.
+Limited to imports of 16 MB or smaller.
+
+Comparison Operators
+$eq $ne $gt $gte
+$lt $lte $in $nin
+db.products.find({ 'price': { $eq: 699 } });
+db.category.find({ price: { $in: [249, 129, 39] } });
+
+Introduction to Cursors
+
+Cursors in MongoDB are used to efficiently 
+retrieve large result sets from queries, providing 
+control over the data retrieval process.
+MongoDB retrieves query results in batches using 
+cursors.
+Cursors are a pointer to the result set on the server.
+Cursors are used to iterate through query results.
+
+Automatic Batching
+MongoDB retrieves query results in batches, not all at 
+once.
+Default batch size is usually 101 documents.
+This improves memory efficiency and network usage.
+
+Cursor Methods
+count() limit() skip() sort()
+db.products.find({ price: { $gt: 250 } }).count();
+db.products.find({ price: { $gt: 250 } }).limit(5);
+db.products.find({ price: { $gt: 250 } }).limit(5).skip(2);
+db.products.find({ price: { $gt: 1250 } }'.limit(3).sort({ price: 1 });
+(1) for ascending and (-1) for descending
+
+
+Cursor Methods (Caveats)
+Performance Implications
+• skip() can be inefficient for 
+large offsets.
+• Using sort() on large result 
+sets may impact performance.
+Use with Caution
+• Be cautious when using 
+limit() and skip() on large 
+collections.
+• Consider using indexing to 
+optimize query performance.
+
+
+Logical Operators
+$and $or $not $nor
+{ $and: [ { condition1 }, { condition2 }, ... ]
+{ field: { $not: { operator: value } } }
+
+Complex Expressions
+The $expr operator allows using aggregation expressions within a 
+query.
+Useful when you need to compare fields from the same document in a 
+more complex manner.
+Syntax
+{ $expr: { operator: [field, value] } }
+Example
+db.products.find({ $expr: { $gt: ['$price', 1340] } });
+
+
+Elements Operator
+$exists $type $size
+{ field: { $exists: <boolean>} }
+{ field: { $type: "<bson-data-type>" } }
+{ field: { $size: <array-length> } }
+
+
+Projection
+db.collection.find({}, { field1: 1, field2: 1 })
+To include specific fields, use projection with a value of 1 for the fields you want.
+To exclude fields, use projection with a value of 0 for the fields you want to 
+exclude.
+You cannot include and exclude fields simultaneously in the same query 
+projection
+
+
+Embedded Documents
+Query documents inside embedded documents using dot notation.
+db.collection.find({ “parent.child”: value })
+
+$all vs $elemMatch
+The $all operator selects the documents where the value of a field is an array 
+that contains all the specified elements.
+{ <field>: { $all: [ <value1> , <value2> ... ] } }
+The $elemMatch  operator matches documents that contain an array field with 
+at least one element that matches all the specified query criteria.
+{ <field>: { $elemMatch: { <query1>, <query2>, ... } } }
+
+Update Operations in 
+MongoDB
+updateOne() and updateMany()
+Removing and renaming fields
+Adding, removing items from array
+Updating embedded documents
+
+updateOne() and updateMany()
+db.collectionName.updateOne(
+ { filter },
+ { $set: { existingField: newValue, newField: "new value", // ... }, }
+);
+db.collectionName.updateMany(
+ { filter },
+ { $set: { existingField: newValue, // ... }, }
+);
+
+
+Removing and Renaming Fields
+db.collectionName.updateOne( { filter }, { $unset: { fieldName: 1 } } );
+db.collectionName.updateOne(
+ { filter },
+ { $rename: { oldFieldName: "newFieldName" } }
+);
+
+
+Updating arrays and Embedded Documents
+db.collectionName.updateOne(
+  { filter },
+  { $push: { arrayField: "new element" } }
+);
+db.collectionName.updateOne(
+  { filter },
+  { $pop: { arrayField: value } }
+);
+db.collectionName.updateOne(
+  { filter },
+  { $set: { "arrayField.$.text": "Updated text" } }
+);
+
+Delete Operations in MongoDB
+db.collectionName.deleteOne({ filter });
+db.sales.deleteMany({ price: 55 });
+
+Indexes in MongoDB
+What are Indexes?
+Benefits of Indexes
+Managing Indexes
+Unique, Text Index
+When not to use Indexes?
+
+What are Indexes?
+Indexes are specialized data structures that optimize data retrieval speed in 
+MongoDB.
+Indexes store a fraction of data in a more searchable format.
+They enable MongoDB to locate data faster during queries.
+Indexes are separate from collections and multiple indexes can exist per 
+collection.
+
+
+Benefits of Indexes
+Faster Querying: Indexes 
+drastically accelerate data 
+retrieval, particularly for large 
+collections.
+Efficient Sorting: Indexes 
+facilitate rapid sorting based 
+on specific fields.
+Improved Aggregation: 
+Aggregation operations 
+become more efficient with 
+optimized indexes.
+Indexing on Multiple Fields: 
+Complex queries can be 
+executed efficiently by utilizing 
+multiple fields in indexes.
+
+
+explain()
+Use explain() method to understand query execution in detail.
+db.products.find({ name: 'Air Fryer' }).explain();
+db.products.find({ name: 'Air Fryer' }).explain("executionStats");
+Use it to measure the time taken to execute a query.
+
+Managing Indexes
+db.products.createIndex({ field: 1 });
+(1) for storing indexes in ascending order.
+(-1) for storing indexes in descending order.
+db.collection.getIndexes();
+_id is a default index.
+db.collection.dropIndex({ field: 1 });
+db.collection.dropIndex(“index_name”);
+
+
+Unique and Text Indexes
+db.collection.createIndex({ field: 1 }, { unique: true });
+db.collection.createIndex({ field: "text" });
+db.collection.find({ $text: { $search: "keyword" } });
+Searching using index is faster than $regex searching.
+db.products.find({ field: { $regex: "air" } })
+
+
+When not to use Indexes?
+Certainly! Let's delve into the nuances of when to use indexes and when to exercise caution. Indexes are powerful tools for optimizing database performance, but like any tool, they should be wielded judiciously. Here are some scenarios to consider:
+
+1. **Rarely Used Fields**:
+   - **Avoid indexing fields that are seldom used in queries.** When you create an index, it consumes disk space and memory. If a field is rarely involved in search conditions or sorting, the overhead of maintaining an index might outweigh the benefits.
+   - For example, if you have a column that stores infrequently accessed metadata (such as a "Notes" field), think twice before indexing it. The cost of maintaining the index might not be justified by the occasional queries that touch this field.
+
+2. **Balancing Act**:
+   - **Indexing requires resources**, both in terms of storage and memory. Overindexing can strain system resources and impact overall performance.
+   - Strive for a balance: create indexes strategically based on the most critical queries. Avoid creating too many indexes, especially on columns that aren't frequently used in WHERE clauses or ORDER BY statements.
+   - Remember that every index adds overhead to data modification operations (INSERT, UPDATE, DELETE). The more indexes you have, the more work the database engine needs to do during these operations.
+
+3. **Indexing Small Collections**:
+   - In smaller collections (tables with relatively few rows), the **cost of index maintenance** might outweigh the benefits gained from querying.
+   - Consider the trade-off: if your table is tiny and queries are lightning-fast even without an index, adding an index might not provide significant advantages.
+   - Evaluate the query patterns and the size of your dataset. If the table is small and queries are infrequent, you might opt for simplicity and skip indexing.
+
+Remember that indexing decisions depend on the specific context of your application, workload, and database system. Regularly monitor your system, analyze query performance, and adjust your indexing strategy as needed. It's an ongoing process, and there's no one-size-fits-all solution¹²⁵. 🛠️
+
+If you have further questions or need more guidance, feel free to ask!
+
+Aggregation in MongoDB
+
+What is Aggregation?
+Definition: Aggregation is the process of performing transformations on documents 
+and combining them to produce computed results.
+Pipeline Stages: Aggregations consist of multiple pipeline stages, each performing a 
+specific operation on the input data.
+Benefits
+Aggregating Data: Complex calculations and operations are possible.
+Advanced Transformations: Data can be combined, reshaped, and computed for insights.
+Efficient Processing: Aggregation handles large datasets efficiently.
+
+
+$match
+The $match stage is similar to the query used as the first argument in .find(). It filters documents based on 
+specified conditions.
+Syntax
+{ $match: { <query> } }
+Example
+db.products.aggregate([
+ { $match: { company: "64c23350e32f4a51b19b9235" } }
+]);
+
+
+$group
+The $group stage groups documents by specified fields and performs aggregate operations on grouped data
+{
+  $group:
+    {
+      _id: <expression>, // Group key
+      <field1>: { <accumulator1> : <expression1> },
+      ...
+    }
+}
+db.products.aggregate([
+ { $group: { _id: { comp: "$company" }, totalProducts: { $sum: 1 } } }
+]);
+This groups products by company and calculates the total number of products for each company.
+
+
+$group (continued)
+The $group stage can calculate various aggregate values within grouped data.
+db.products.aggregate([
+ { $group: { 
+  _id: { comp: "$company" }, 
+  totalPrice: { $sum: "$price" }, 
+  totalProducts: { $sum: 1 },
+  averagePrice: { $avg: "$price" }
+ } }
+]);
+
+
+$sort
+{ $sort: { <field>: <order> } }
+db.products.aggregate([
+ { $sort: { totalProducts: 1 } }
+]);
+
+
+$project
+The $project stage reshapes documents, includes or excludes fields, and performs operations on fields.
+{ $project: { <field1>: <expression1>, ... } }
+db.products.aggregate([
+ { $project: { name: 1, discountedPrice: { $subtract: ["$price", 5] } } }
+]);
+Projects the name field and calculates a discountedPrice field by subtracting 5 from the price.
+$sum, $subtract, $multiply, $avg, etc. are types of expression operator.
+
+
+$push
+The $push stage adds elements to an array field within documents.
+{ $push: <expression> }
+db.products.aggregate([
+ { $group: { _id: { company: "$company" }, products: { $push: "$name" } } }
+]);
+
+
+$unwind
+The $unwind stage deconstructs an array field and produces multiple documents.
+{ $unwind: <array> }
+db.products.aggregate([
+ { $unwind: "$colors" },
+ { $group: { _id: { company: "$company" }, products: { $push: "$colors" } } }
+]);
+Deconstructs the colors array field, groups products by company, and creates an array of colors for each 
+company.
+
+
+$addToSet
+The $addToSet stage adds elements to an array field while preventing duplicates.
+db.products.aggregate([
+ { $unwind: "$colors" },
+ { $group: {
+  _id: { company: "$company" },
+  products: { $addToSet: "$colors" }
+ } }
+])
+Groups products by company and creates an array of unique colors for each company.
+
+
+$size
+The $size stage calculates the length of an array field.
+{ $size: <array> }
+db.products.aggregate([
+ { $project: { name: 1, numberOfColors: { $size: "$colors" } } }
+]);
+Projects the name field and calculates the number of colors in the colors array.
+
+
+$limit and $skip
+The $limit and $skip stages are useful for pagination, limiting, and skipping results.
+{ $limit: <positive integer> }
+db.products.aggregate([
+ { $skip: 10 },
+ { $limit: 10 }
+]);
+
+
+
+$filter
+The $filter stage filters elements of an array based on specified conditions.
+{
+    $project: {
+        <field>: {
+            $filter: {
+                input: '$<array>’,
+                as: '<variable>’
+                cond: <expression>
+            }
+        }
+    }
+}
+
+
+
+$addFields
+The $addFields stage adds new fields to documents in a cleaner way compared to $project.
+{ $addFields: { <field1>: <expression1>, ... } }
+db.products.aggregate([
+ { $addFields: { discountedPrice: { $subtract: ["$price", 5] } } }
+]);
+
+
+Introduction to MongoDB Atlas
+MongoDB Atlas is MongoDB's fully managed cloud database service.
+It offers an easy way to deploy, manage, and scale MongoDB databases in the cloud.
+Atlas eliminates the need for manual setup and maintenance, allowing developers to focus on 
+their applications.
+It provides automated scaling options to accommodate growing workloads.
+Atlas supports global clusters, enabling databases to be deployed across multiple regions for better 
+data availability and reduced latency.
+
+
+MongoDB Atlas 
+Setup
+
+Working with MongoDB 
+Compass
+
+Working with MongoDB 
+Drivers
+Introduction to MongoDB Drivers
+Working with Node.js MongoDB Drivers
+
+Introduction to MongoDB Drivers
+Software libraries that allow applications to 
+interact with MongoDB databases.
+MongoDB offers official and community-
+supported drivers for various programming 
+languages.
+Drivers provide APIs tailored to specific 
+programming languages.
+
+
+Getting Started with Node.js MongoDB Driver
+Download and install Node.js from official 
+Node.js website.
+Create a node.js project using npm init –y
+Install mongodb driver using npm install 
+mongodb
+https://www.npmjs.com/package/mongodb
+Create a connection with MongoDB database 
+and start working with it.
+
+
+Getting Started with Node.js MongoDB Driver
+Connect to MongoDB Server: Use the MongoClient class and a valid URI to establish a connection to the 
+MongoDB server.
+Select a Database: Access a specific database using the client.db(databaseName) method.
+Access a Collection: Retrieve a collection reference using the db.collection(collectionName) method.
+Perform Operations: Perform CRUD operations like querying, inserting, updating, and deleting documents 
+within the collection.
+Close Connection: Safely close the connection using the client.close() method when done
+
+
+Working with Mongoose
+Introduction to MongoDB Drivers
+Working with Node.js MongoDB Drivers
+
+
+Getting Started with Node.js MongoDB Driver
+It's an Object Data Modeling (ODM) library for 
+MongoDB and Node.js.
+It makes MongoDB interaction more 
+straightforward and organized.
+It provides a structured, schema-based data 
+modeling approach.
+
+
+Why Mongoose instead of official driver?
+
+Structured 
+Schemas
+•Mongoose lets you 
+define your data's 
+structure using 
+schemas which 
+makes it easier to 
+understand your 
+database structure 
+and work with it.
+
+Validation
+•Mongoose provides 
+built-in validation to 
+ensure validity 
+before saving it to 
+database
+
+Relationships
+•MongoDB doesn’t 
+provide relations 
+itself. So, Mongoose 
+helps to replicate 
+relations in 
+MongoDB and helps 
+us to relate 
+schemas with each 
+other easily (one-to-
+one, one-to-many, 
+etc.)
+
+Middleware
+•Mongoose offers 
+running custom 
+functions before or 
+after certain 
+operations which 
+can be useful in 
+many cases.
+
+Complex 
+Queries
+•MongoDB helps to 
+write complex 
+queries, 
+aggregations, etc. 
+with simpler syntax 
+to help us to work 
+on projects easily
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

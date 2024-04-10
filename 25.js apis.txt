@@ -1,0 +1,1563 @@
+// Window.console
+
+// console
+// The console object provides access to the debugging console (e.g., the Web 
+// console in Firefox). The specifics of how it works vary from browser to browser or
+//  server runtimes (Node.js, for example), but there is a de facto set of features
+//  that are typically provided.
+
+// The console object can be accessed from any global object. Window on browsing 
+// scopes and WorkerGlobalScope as specific variants in workers via the property 
+// console. It's exposed as Window.console, and can be referenced as console. For
+//  example:
+
+console.log("Failed to open the specified link");
+
+// This page documents the Methods available on the console object and gives 
+// a few Usage examples.
+
+// Note: This feature is available in Web Workers
+
+// Note: Certain online IDEs and editors may implement the console API differently 
+// than the browsers. As a result, certain functionality of the console API, such as
+//  the timer methods, may not be outputted in the console of online IDEs or editors.
+//  Always open your browser's DevTools console to see the logs as shown in this documentation.
+
+// Instance methods
+console.assert()
+// Log a message and stack trace to console if the first argument is false.
+
+console.clear()
+// Clear the console.
+
+console.count()
+// Log the number of times this line has been called with the given label.
+
+console.countReset()
+// Resets the value of the counter with the given label.
+
+console.debug()
+// Outputs a message to the console with the log level debug.
+
+console.dir()
+// Displays an interactive listing of the properties of a specified JavaScript object. This listing lets you use disclosure triangles to examine the contents of child objects.
+
+console.dirxml()
+// Displays an XML/HTML Element representation of the specified object if possible or the JavaScript Object view if it is not possible.
+
+console.error()
+// Outputs an error message. You may use string substitution and additional arguments with this method.
+
+console.group()
+// Creates a new inline group, indenting all following output by another level. To move back out a level, call console.groupEnd().
+
+console.groupCollapsed()
+// Creates a new inline group, indenting all following output by another level. However, unlike console.group() this starts with the inline group collapsed requiring the use of a disclosure button to expand it. To move back out a level, call console.groupEnd().
+
+console.groupEnd()
+// Exits the current inline group.
+
+console.info()
+// Informative logging of information. You may use string substitution and additional arguments with this method.
+/
+console.log()
+// For general output of logging information. You may use string substitution and additional arguments with this method.
+
+console.profile() Non-standard
+// Starts the browser's built-in profiler (for example, the Firefox performance tool). You can specify an optional name for the profile.
+
+console.profileEnd() Non-standard
+// Stops the profiler. You can see the resulting profile in the browser's performance tool (for example, the Firefox performance tool).
+
+console.table()
+// Displays tabular data as a table.
+
+console.time()
+// Starts a timer with a name specified as an input parameter. Up to 10,000 simultaneous timers can run on a given page.
+
+console.timeEnd()
+// Stops the specified timer and logs the elapsed time in milliseconds since it started.
+
+console.timeLog()
+// Logs the value of the specified timer to the console.
+
+console.timeStamp() Non-standard
+// Adds a marker to the browser performance tool's timeline (Chrome or Firefox).
+
+console.trace()
+// Outputs a stack trace.
+
+console.warn()
+// Outputs a warning message. You may use string substitution and additional arguments with this method.
+
+// Examples
+// Outputting text to the console
+// The console's most frequently used feature is logging text and other data. There are several categories of output you can generate using the console.log(), console.info(), console.warn(), console.error(), or console.debug() methods. Each of these results in output styled differently in the log, and you can use the filtering controls provided by your browser to view only the kinds of output that interest you.
+
+// There are two ways to use each of the output methods:
+
+// Pass in a variable number of arguments whose string representations get concatenated into one string, then output to the console.
+// Pass in a string containing zero or more substitution strings followed by a variable number of arguments to replace them.
+// Outputting a single object
+// The simplest way to use the logging methods is to output a single object:
+
+// JS
+// Copy to Clipboard
+const someObject = { str: "Some text", id: 5 };
+console.log(someObject);
+// The output looks something like this:
+// {str:"Some text", id:5}
+
+// Outputting multiple objects
+// You can also output multiple objects by listing them when calling the logging method, like this:
+
+const car = "Dodge Charger";
+const someObject = { str: "Some text", id: 5 };
+console.info("My first car was a", car, ". The object is:", someObject);
+// The output will look like this:
+// My first car was a Dodge Charger. The object is: {str:"Some text", id:5}
+// Using string substitutions
+// When passing a string to one of the console object's methods that accepts a string (such as console.log()), you may use these substitution strings:
+
+// %o or %O
+// Outputs a JavaScript object. Clicking the object name opens more information about it in the inspector.
+
+// %d or %i
+// Outputs an integer. Number formatting is supported, for example console.log("Foo %.2d", 1.1) will output the number as two significant figures with a leading 0: Foo 01.
+
+// %s
+// Outputs a string.
+
+// %f
+// Outputs a floating-point value. Formatting is supported, for example console.log("Foo %.2f", 1.1) will output the number to 2 decimal places: Foo 1.10.
+
+// Note: Precision formatting doesn't work in Chrome.
+
+// Each of these pulls the next argument after the format string off the parameter list. For example:
+
+// JS
+// Copy to Clipboard
+for (let i = 0; i < 5; i++) {
+  console.log("Hello, %s. You've called me %d times.", "Bob", i + 1);
+}
+// The output looks like this:
+
+// Hello, Bob. You've called me 1 times.
+// Hello, Bob. You've called me 2 times.
+// Hello, Bob. You've called me 3 times.
+// Hello, Bob. You've called me 4 times.
+// Hello, Bob. You've called me 5 times.
+// Styling console output
+// You can use the %c directive to apply a CSS style to console output:
+
+console.log(
+  "This is %cMy stylish message",
+  "color: yellow; font-style: italic; background-color: blue;padding: 2px",
+);
+// The text before the directive will not be affected, but the text after the directive will be styled using the CSS declarations in the parameter.
+
+// Styled Text in Firefox console
+// You may use %c multiple times:
+
+// console.log(
+//   "Multiple styles: %cred %corange",
+//   "color: red",
+//   "color: orange",
+//   "Additional unformatted message",
+// );
+
+// Event
+// The Event interface represents an event which takes place in the DOM.
+
+// An event can be triggered by the user action e.g. clicking the mouse button or
+//  tapping keyboard, or generated by APIs to represent the progress of an 
+// asynchronous task. It can also be triggered programmatically, such as by calling 
+// the HTMLElement.click() method of an element, or by defining the event, then 
+// sending it to a specified target using EventTarget.dispatchEvent().
+
+// There are many types of events, some of which use other interfaces based on the 
+// main Event interface. Event itself contains the properties and methods which are 
+// common to all events.
+
+// Many DOM elements can be set up to accept (or "listen" for) these events, and 
+// execute code in response to process (or "handle") them. Event-handlers are usually
+//  connected (or "attached") to various HTML elements (such as <button>, <div>, 
+{/* <span>, etc.) using EventTarget.addEventListener(), and this generally replaces using the old HTML event handler attributes. Further, when properly added, such handlers can also be disconnected if needed using removeEventListener(). */}
+
+// Note: One element can have several such handlers, even for the exact same 
+// event—particularly if separate, independent code modules attach them, each for its 
+// own independent purposes. (For example, a webpage with an advertising-module and 
+// statistics-module both monitoring video-watching.)
+
+// When there are many nested elements, each with its own handler(s), event processing
+//  can become very complicated—especially where a parent element receives the very 
+// same event as its child elements because "spatially" they overlap so the event 
+// technically occurs in both, and the processing order of such events depends on the
+//  Event bubbling and capture settings of each handler triggered.
+
+// Interfaces based on Event
+// Below is a list of interfaces which are based on the main Event interface, with 
+// links to their respective documentation in the MDN API reference.
+
+
+// Instance properties
+// Event.bubbles Read only
+// A boolean value indicating whether or not the event bubbles up through the DOM.
+
+// Event.cancelable Read only
+// A boolean value indicating whether the event is cancelable.
+
+// Event.composed Read only
+// A boolean indicating whether or not the event can bubble across the boundary between the shadow DOM and the regular DOM.
+
+// Event.currentTarget Read only
+// A reference to the currently registered target for the event. This is the object to which the event is currently slated to be sent. It's possible this has been changed along the way through retargeting.
+
+// Event.defaultPrevented Read only
+// Indicates whether or not the call to event.preventDefault() canceled the event.
+
+// Event.eventPhase Read only
+// Indicates which phase of the event flow is being processed. It is one of the following numbers: NONE, CAPTURING_PHASE, AT_TARGET, BUBBLING_PHASE.
+
+// Event.isTrusted Read only
+// Indicates whether or not the event was initiated by the browser (after a user click, for instance) or by a script (using an event creation method, for example).
+
+// Event.target Read only
+// A reference to the object to which the event was originally dispatched.
+
+// Event.timeStamp Read only
+// The time at which the event was created (in milliseconds). By specification, this value is time since epoch—but in reality, browsers' definitions vary. In addition, work is underway to change this to be a DOMHighResTimeStamp instead.
+
+// Event.type Read only
+// The name identifying the type of the event.
+
+// Event.explicitOriginalTarget Non-standard Read only
+// The explicit original target of the event.
+
+// Event.originalTarget Non-standard Read only
+// The original target of the event, before any retargetings.
+
+// Event.returnValue Deprecated
+// A historical property still supported in order to ensure existing sites continue to work. Use Event.preventDefault() and Event.defaultPrevented instead.
+
+// Event.scoped Read only Deprecated
+// A boolean value indicating whether the given event will bubble across through the shadow root into the standard DOM. Use composed instead.
+
+// Instance methods
+// Event.composedPath()
+// Returns the event's path (an array of objects on which listeners will be invoked). This does not include nodes in shadow trees if the shadow root was created with its ShadowRoot.mode closed.
+
+// Event.preventDefault()
+// Cancels the event (if it is cancelable).
+
+// Event.stopImmediatePropagation()
+// For this particular event, prevent all other listeners from being called. This includes listeners attached to the same element as well as those attached to elements that will be traversed later (during the capture phase, for instance).
+
+// Event.stopPropagation()
+// Stops the propagation of events further along in the DOM.
+
+// Event: Event() constructor
+// The Event() constructor creates a new 
+// Event object. An event created in this 
+// way is called a synthetic event, as 
+// opposed to an event fired by the 
+// browser, and can be dispatched by a script.
+
+// Syntax
+new Event(type)
+new Event(type, options)
+// Values
+// type
+// A string with the name of the event.
+
+// options Optional
+// An object with the following properties:
+
+// bubbles Optional
+// A boolean value indicating whether 
+// the event bubbles. The default is false.
+
+// cancelable Optional
+// A boolean value indicating whether 
+// the event can be cancelled. The default is false.
+
+// composed Optional
+// A boolean value indicating whether the 
+// event will trigger listeners outside of 
+// a shadow root (see Event.composed for
+//  more details). The default is false.
+
+// Return value
+// A new Event object.
+
+// Example
+// create a look event that bubbles up and cannot be canceled
+
+const evt = new Event("look", { bubbles: true, cancelable: false });
+document.dispatchEvent(evt);
+
+// event can be dispatched from any element, not only the document
+myDiv.dispatchEvent(evt);
+
+// Event: preventDefault() method
+// The preventDefault() method of the Event 
+// interface tells the user agent that if 
+// the event does not get explicitly handled, 
+// its default action should not be taken 
+// as it normally would be.
+
+// The event continues to propagate as usual, 
+// unless one of its event listeners 
+// calls stopPropagation() or 
+// stopImmediatePropagation(), either 
+// of which terminates propagation at once.
+
+// As noted below, calling preventDefault() 
+// for a non-cancelable event, such as one 
+// dispatched via EventTarget.dispatchEvent(), 
+// without specifying cancelable: true has no effect.
+
+// Syntax
+// JS
+// Copy to Clipboard
+event.preventDefault()
+// Examples
+// Blocking default click handling
+// Toggling a checkbox is the default 
+// action of clicking on a checkbox. 
+// This example demonstrates how to 
+// prevent that from happening:
+
+// JavaScript
+// JS
+// Play
+// Copy to Clipboard
+const checkbox = document.querySelector("#id-checkbox");
+
+checkbox.addEventListener("click", checkboxClick, false);
+
+function checkboxClick(event) {
+    let warn = "preventDefault() won't let you check this!<br>";
+    document.getElementById("output-box").innerHTML += warn;
+    event.preventDefault();
+}
+// HTML
+// HTML
+// Play
+// Copy to Clipboard
+// <p>Please click on the checkbox control.</p>
+
+// <form>
+//   <label for="id-checkbox">Checkbox:</label>
+//   <input type="checkbox" id="id-checkbox" />
+// </form>
+
+// <div id="output-box"></div>
+// Result
+// Play
+
+// Stopping keystrokes from 
+// reaching an edit field
+// The following example demonstrates 
+// how invalid text input can be stopped 
+// from reaching the input field with 
+// preventDefault(). Nowadays, you 
+// should usually use native HTML 
+// form validation instead.
+
+// HTML
+// The HTML form below captures user 
+// input. Since we're only interested 
+// in keystrokes, we're disabling 
+// autocomplete to prevent the browser 
+// from filling in the input field 
+// with cached values.
+
+// HTML
+// Play
+// Copy to Clipboard
+// <div class="container">
+//   <p>Please enter your name using lowercase letters only.</p>
+
+//   <form>
+//     <input type="text" id="my-textbox" autocomplete="off" />
+//   </form>
+// </div>
+// CSS
+// We use a little bit of CSS for 
+// the warning box we'll draw when 
+// the user presses an invalid key:
+
+// CSS
+// Play
+// Copy to Clipboard
+// .warning {
+//   border: 2px solid #f39389;
+//   border-radius: 2px;
+//   padding: 10px;
+//   position: absolute;
+//   background-color: #fbd8d4;
+//   color: #3b3c40;
+// }
+// JavaScript
+// And here's the JavaScript code that d
+// oes the job. First, listen for keydown events:
+
+// JS
+// Play
+// Copy to Clipboard
+const myTextbox = document.getElementById("my-textbox");
+myTextbox.addEventListener("keydown", checkName, false);
+// The checkName() function, which looks 
+// at the pressed key and decides whether 
+// to allow it:
+
+// JS
+// Play
+// Copy to Clipboard
+function checkName(evt) {
+    const key = evt.key;
+    const lowerCaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
+    if (!lowerCaseAlphabet.includes(key)) {
+        evt.preventDefault();
+        displayWarning(
+            "Please use lowercase letters only.\n" + `Key pressed: ${key}\n`,
+        );
+    }
+}
+// The displayWarning() function presents 
+// a notification of a problem. It's not 
+// an elegant function but does the job 
+// for the purposes of this example:
+
+// JS
+// Play
+// Copy to Clipboard
+let warningTimeout;
+const warningBox = document.createElement("div");
+warningBox.className = "warning";
+
+function displayWarning(msg) {
+    warningBox.innerHTML = msg;
+
+    if (document.body.contains(warningBox)) {
+        clearTimeout(warningTimeout);
+    } else {
+        // insert warningBox after myTextbox
+        myTextbox.parentNode.insertBefore(warningBox, myTextbox.nextSibling);
+    }
+
+    warningTimeout = setTimeout(() => {
+        warningBox.parentNode.removeChild(warningBox);
+        warningTimeout = -1;
+    }, 2000);
+}
+// Result
+// Play
+
+// Notes
+// Calling preventDefault() during any 
+// stage of event flow cancels the event, 
+// meaning that any default action normally 
+// taken by the implementation as a result 
+// of the event will not occur.
+
+// You can use Event.cancelable to check if 
+// the event is cancelable. Calling 
+// preventDefault() for a non-cancelable 
+// event has no effect.
+
+// Event: stopImmediatePropagation() method
+// The stopImmediatePropagation() method of 
+// the Event interface prevents other 
+// listeners of the same event from being called.
+
+// If several listeners are attached to 
+// the same element for the same event type, 
+// they are called in the order in which 
+// they were added. If 
+// stopImmediatePropagation() is 
+// invoked during one such call, no 
+// remaining listeners will be called,
+//  either on that element or any other element.
+
+// Syntax
+event.stopImmediatePropagation()
+// Examples
+// Comparing event-stopping functions
+// The example below has three buttons inside 
+// of three nested divs. Each button has 
+// three event listeners registered for 
+// click events, and each div has an event
+//  listener, also registered for click events.
+
+// The top button allows normal event propagation.
+// The middle button calls stopPropagation() 
+// in its first event handler.
+
+// The bottom button calls 
+// stopImmediatePropagation() in its first event handler.
+// HTML
+// HTML
+// Play
+// Copy to Clipboard
+            // <h2>Click on the buttons</h2>
+            // <div>
+            //   outer div<br />
+            //   <div>
+            //     middle div<br />
+            //     <div>
+            //       inner div<br />
+            //       <button>allow propagation</button><br />
+            //       <button id="stopPropagation">stop propagation</button><br />
+            //       <button id="stopImmediatePropagation">immediate stop propagation</button>
+            //     </div>
+            //   </div>
+            // </div>
+            // <pre></pre>
+// CSS
+// CSS
+// Play
+// Copy to Clipboard
+            // div {
+            //   display: inline-block;
+            //   padding: 10px;
+            //   background-color: #fff;
+            //   border: 2px solid #000;
+            //   margin: 10px;
+            // }
+
+            // button {
+            //   width: 100px;
+            //   color: #008;
+            //   padding: 5px;
+            //   background-color: #fff;
+            //   border: 2px solid #000;
+            //   border-radius: 30px;
+            //   margin: 5px;
+            // }
+// JavaScript
+// JS
+// Play
+// Copy to Clipboard
+const outElem = document.querySelector("pre");
+
+/* Clear the output */
+document.addEventListener(
+  "click",
+  () => {
+    outElem.textContent = "";
+  },
+  true,
+);
+
+/* Set event listeners for the buttons */
+document.querySelectorAll("button").forEach((elem) => {
+  for (let i = 1; i <= 3; i++) {
+    elem.addEventListener("click", (evt) => {
+      /* Do any propagation stopping in first event handler */
+      if (i === 1 && elem.id) {
+        evt[elem.id]();
+        outElem.textContent += `Event handler for event 1 calling ${elem.id}()\n`;
+      }
+
+      outElem.textContent += `Click event ${i} processed on "${elem.textContent}" button\n`;
+    });
+  }
+});
+
+// /* Set event listeners for the divs */
+document
+  .querySelectorAll("div")
+  .forEach((elem) =>
+    elem.addEventListener(
+      "click",
+      (evt) =>
+        (outElem.textContent += `Click event processed on "${elem.firstChild.data.trim()}"\n`),
+    ),
+  );
+// Result
+// Each click-event handler displays a status 
+// message when it is called. If you press 
+// the middle button, you will see that 
+// stopPropagation() allows all of the event 
+// handlers registered for clicks on that 
+// button to execute but prevents execution 
+// of the click-event handlers for the divs, 
+// which would normally follow. However, if 
+// you press the bottom button, 
+// stopImmediatePropagation() stops 
+// all propagation after the event that called it.
+
+// Event: stopPropagation() method
+// The stopPropagation() method of the 
+// Event interface prevents further 
+// propagation of the current event 
+// in the capturing and bubbling phases.
+//  It does not, however, prevent any 
+// default behaviors from occurring; for 
+// instance, clicks on links are still 
+// processed. If you want to stop those 
+// behaviors, see the preventDefault() method. 
+// It also does not prevent propagation 
+// to other event-handlers of the current 
+// element. If you want to stop those, 
+// see stopImmediatePropagation().
+
+// Syntax
+event.stopPropagation()
+
+// Event: bubbles property
+// The bubbles read-only property of the 
+// Event interface indicates whether the 
+// event bubbles up through the DOM tree or not.
+
+// Note: See Event bubbling and capture 
+// for more information on bubbling.
+
+// Value
+// A boolean value, which is true if the 
+// event bubbles up through the DOM tree.
+
+// Example
+function handleInput(e) {
+    // Check whether the event bubbles passes the event along
+    if (!e.bubbles) {
+        passItOn(e);
+    }
+    // Already bubbling
+    doOutput(e);
+}
+
+// Event: cancelable property
+// The cancelable read-only property of 
+// the Event interface indicates whether 
+// the event can be canceled, and therefore 
+// prevented as if the event never happened.
+
+// If the event is not cancelable, then 
+// its cancelable property will be false 
+// and the event listener cannot stop 
+// the event from occurring.
+
+// Most browser-native events that can be 
+// canceled are the ones that result from 
+// the user interacting with the page. 
+// Canceling the click, wheel, or beforeunload 
+// events would prevent the user from clicking
+//  on something, scrolling the page with the 
+// mouse wheel, or navigating away from the 
+// page, respectively.
+
+// Synthetic events created by other 
+// JavaScript code define if they can
+//  be canceled when they are created.
+
+// To cancel an event, call the 
+// preventDefault() method on the event. 
+// This keeps the implementation from 
+// executing the default action that 
+// is associated with the event.
+
+// Event listeners that handle multiple 
+// kinds of events may want to check 
+// cancelable before invoking their 
+// preventDefault() methods.
+
+// Value
+// A boolean value, which is true if 
+// the event can be canceled.
+
+// Example
+// For example, browser vendors are 
+// proposing that the wheel event can 
+// only be canceled the first time the 
+// listener is called — any following 
+// wheel events cannot be canceled.
+
+// JS
+// Copy to Clipboard
+function preventScrollWheel(event) {
+    if (typeof event.cancelable !== "boolean" || event.cancelable) {
+        // The event can be canceled, so we do so.
+        event.preventDefault();
+    } else {
+        // The event cannot be canceled, so it is not safe
+        // to call preventDefault() on it.
+        console.warn(`The following event couldn't be canceled:`);
+        console.dir(event);
+    }
+}
+
+document.addEventListener("wheel", preventScrollWheel);
+
+// Event: currentTarget property
+// The currentTarget read-only property 
+// of the Event interface identifies the 
+// element to which the event handler has
+//  been attached.
+
+// This will not always be the same as the 
+// element on which the event was fired, 
+// because the event may have fired on a 
+// descendant of the element with the handler, 
+// and then bubbled up to the element with 
+// the handler. The element on which the 
+// event was fired is given by Event.target.
+
+// Value
+// An EventTarget representing the object 
+// to which the current event handler is attached.
+
+// Examples
+// currentTarget versus target
+// This example illustrates the difference 
+// between currentTarget and target.
+
+// HTML
+// The page has a "parent" <div> containing a "child" <div>.
+
+// HTML
+// Play
+// Copy to Clipboard
+            // <div id="parent">
+            //   Click parent
+            //   <div id="child">Click child</div>
+            // </div>
+
+            // <button id="reset">Reset</button>
+            // <pre id="output"></pre>
+// JavaScript
+// The event handler is attached to 
+// the parent. It logs the value of 
+// event.currentTarget and event.target.
+
+// We also have a "Reset" button that 
+// just reloads the example.
+
+// JS
+// Play
+// Copy to Clipboard
+const output = document.querySelector("#output");
+const parent = document.querySelector("#parent");
+parent.addEventListener("click", (event) => {
+  const currentTarget = event.currentTarget.getAttribute("id");
+  const target = event.target.getAttribute("id");
+  output.textContent = `Current target: ${currentTarget}\n`;
+  output.textContent += `Target: ${target}`;
+});
+
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", () => document.location.reload());
+// Result
+// If you click inside the child <div>, 
+// then target identifies the child. If 
+// you click inside the parent <div>, 
+// then target identifies the parent.
+
+// In both cases, currentTarget identifies 
+// the parent, because that's the element 
+// that the handler is attached to.
+
+// Event: isTrusted property
+// The isTrusted read-only property 
+// of the Event interface is a boolean 
+// value that is true when the event 
+// was generated by a user action, 
+// and false when the event was created 
+// or modified by a script or dispatched 
+// via EventTarget.dispatchEvent().
+
+// Value
+// A boolean value.
+
+// Example
+// JS
+// Copy to Clipboard
+if (e.isTrusted) {
+  /* The event is trusted */
+} else {
+  /* The event is not trusted */
+}
+
+// Event: target property
+// The read-only target property of the 
+// Event interface is a reference to 
+// the object onto which the event 
+// was dispatched. It is different from 
+// Event.currentTarget when the event 
+// handler is called during the bubbling 
+// or capturing phase of the event.
+
+// Value
+// The associated EventTarget.
+
+// Example
+// The event.target property can be used 
+// in order to implement event delegation.
+
+// Make a list
+const ul = document.createElement("ul");
+document.body.appendChild(ul);
+
+const li1 = document.createElement("li");
+const li2 = document.createElement("li");
+ul.appendChild(li1);
+ul.appendChild(li2);
+
+function hide(evt) {
+    // evt.target refers to the clicked <li> element
+    // This is different than evt.currentTarget, which would refer to the parent <ul> in this context
+    evt.target.style.visibility = "hidden";
+}
+
+// Attach the listener to the list
+// It will fire when each <li> is clicked
+ul.addEventListener("click", hide, false);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// History API
+// Guides
+//     Working with the History API
+// Interfaces
+//     History
+//     PopStateEvent
+// Properties
+//     Window.history
+// Events
+//     Window:popstate
+
+
+
+
+// History API
+// The History API provides access to 
+// the browser's session history (not 
+// to be confused with WebExtensions history) through the history 
+// global object. It exposes useful methods and properties that let you navigate 
+// back and forth through the user's history, and manipulate the contents of the 
+// history stack.
+
+// Note: This API is only available on the main thread (Window). It cannot be 
+// accessed in Worker or Worklet contexts.
+
+// Concepts and usage
+// Moving backward and forward through the user's history is done using the back(), 
+// forward(), and go() methods.
+
+// Moving forward and backward
+// To move backward through history:
+
+// JS
+// Copy to Clipboard
+history.back();
+// This acts exactly as if the user clicked on the Back button in their browser toolbar.
+
+// Similarly, you can move forward (as if the user clicked the Forward button), like this:
+
+// JS
+// Copy to Clipboard
+history.forward();
+// Moving to a specific point in history
+// You can use the go() method to load a specific page from session history, identified by its relative position to the current page. (The current page's relative position is 0.)
+
+// To move back one page (the equivalent of calling back()):
+
+// JS
+// Copy to Clipboard
+history.go(-1);
+// To move forward a page, just like calling forward():
+
+// JS
+// Copy to Clipboard
+history.go(1);
+// Similarly, you can move forward 2 pages by passing 2, and so forth.
+
+// Another use for the go() method is to refresh the current page by either passing 0, or by invoking it without an argument:
+
+// JS
+// Copy to Clipboard
+// The following statements
+// both have the effect of
+// refreshing the page
+history.go(0);
+history.go();
+// You can determine the number of pages in the history stack by looking at the value of the length property:
+
+// JS
+// Copy to Clipboard
+const numberOfEntries = history.length;
+// Interfaces
+// History
+// Allows manipulation of the browser session history (that is, the pages visited in the tab or frame that the current page is loaded in).
+
+// PopStateEvent
+// The interface of the popstate event.
+
+// Examples
+// The following example assigns a listener for the popstate event. It then illustrates some of the methods of the history object to add, replace, and move within the browser history for the current tab.
+
+// JS
+// Copy to Clipboard
+window.addEventListener("popstate", (event) => {
+  alert(
+    `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+  );
+});
+
+history.pushState({ page: 1 }, "title 1", "?page=1");
+history.pushState({ page: 2 }, "title 2", "?page=2");
+history.replaceState({ page: 3 }, "title 3", "?page=3");
+history.back(); // alerts "location: http://example.com/example.html?page=1, state: {"page":1}"
+history.back(); // alerts "location: http://example.com/example.html, state: null"
+history.go(2); // alerts "location: http://example.com/example.html?page=3, state: {"page":3}"
+
+
+
+
+// Working with the History API
+// The History API enables a website 
+// to interact with the browser's 
+// session history: that is, the list 
+// of pages that the user has visited 
+// in a given window. As the user visits 
+// new pages, for example by clicking 
+// links, those new pages are added to 
+// the session history. The user can 
+// also move back and forth through 
+// the history using the browser's 
+// "Back" and "Forward" buttons.
+
+// The main interface defined in the 
+// History API is the History interface, 
+// and this defines two quite distinct 
+// sets of methods:
+
+// Methods to navigate to a page in the session history:
+History.back()
+History.forward()
+History.go()
+// Methods to modify the session history:
+History.pushState()
+History.replaceState()
+// In this guide we'll be concerned only 
+// with the second set of methods, as 
+// these have more complex behavior.
+
+// The pushState() method adds a new entry 
+// to the session history, while the 
+// replaceState() method updates the 
+// session history entry for the current 
+// page. Both these methods take a state 
+// parameter which can contain any serializable 
+// object . When the browser navigates to 
+// this history entry, the browser fires 
+// a popstate event, which contains the 
+// state object associated with that entry.
+
+// The main purpose of these APIs is to 
+// support websites like Single-page 
+// applications, that use JavaScript 
+// APIs such as fetch() to update the 
+// page with new content, instead of 
+// loading a whole new page.
+
+// Single-page applications and session history
+// Traditionally, websites are implemented 
+// as a collection of pages. When users 
+// navigate to different parts of the 
+// site by clicking links, the browser 
+// loads a whole new page each time.
+
+// While this is great for many sites, 
+// it can have some disadvantages:
+
+// It can be inefficient to load a whole 
+// page every time, when only part of the 
+// page needs to be updated.
+
+// It is hard to maintain application 
+// state when navigating across pages
+
+// For these reasons, a popular pattern 
+// for web apps is the single-page application
+//  (SPA), in which the site consists of a 
+// single page, and when the user clicks links, the page:
+
+
+// Prevents the default behavior of loading a new page
+// Fetches new content to display
+// Updates the page with the new content
+// For example:
+
+// JS
+// Copy to Clipboard
+document.addEventListener("click", async (event) => {
+  const creature = event.target.getAttribute("data-creature");
+  if (creature) {
+    // Prevent a new page from loading
+    event.preventDefault();
+    try {
+      // Fetch new content
+      const response = await fetch(`creatures/${creature}.json`);
+      const json = await response.json();
+      // Update the page with the new content
+      displayContent(json);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+});
+// In this click handler, if the 
+// link contains a data attribute 
+// "data-creature", then we use the
+//  value of that attribute to fetch 
+// a JSON file containing the new 
+// content for the page.
+
+// The JSON file might look like this:
+
+// JSON
+// Copy to Clipboard
+      // {
+      //   "description": "Bald eagles are not actually bald.",
+      //   "image": {
+      //     "src": "images/eagle.jpg",
+      //     "alt": "A bald eagle"
+      //   },
+      //   "name": "Eagle"
+      // }
+      // Our displayContent() function updates the page with the JSON:
+
+// JS
+// Copy to Clipboard
+// Update the page with the new content
+function displayContent(content) {
+  document.title = `Creatures: ${content.name}`;
+
+  const description = document.querySelector("#description");
+  description.textContent = content.description;
+
+  const photo = document.querySelector("#photo");
+  photo.setAttribute("src", content.image.src);
+  photo.setAttribute("alt", content.image.alt);
+}
+// The problem is that it breaks 
+// the expected behavior of the 
+// browser's "Back" and "Forward" buttons.
+
+// From the user's point of view, 
+// they clicked a link and the page
+//  updated, so it looks like a new 
+// page. If they then press the browser's
+//  "Back" button, they expect to go to 
+// the state before they clicked the link.
+// 
+
+// But as far as the browser is concerned, 
+// the last link didn't load a new page, 
+// so "Back" will take the browser to 
+// whichever page was loaded before 
+// the user opened the SPA.
+
+// This is essentially the problem that 
+// pushState(), replaceState(), and the 
+// popstate event solve. They enable us 
+// to synthesize history entries, and to 
+// be notified when the current session 
+// history entry changes to one of these 
+// entries (for example, because the user
+//  pressed the "Back" or "Forward" buttons).
+
+// Using pushState()
+// We can add a history entry to the 
+// click handler above as follows:
+
+// JS
+// Copy to Clipboard
+document.addEventListener("click", async (event) => {
+  const creature = event.target.getAttribute("data-creature");
+  if (creature) {
+    event.preventDefault();
+    try {
+      const response = await fetch(`creatures/${creature}.json`);
+      const json = await response.json();
+      displayContent(json);
+      // Add a new entry to the history.
+      // This simulates loading a new page.
+      history.pushState(json, "", creature);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+});
+// Here, we're calling pushState() with three arguments:
+
+// json: this is the content we just fetched.
+//  It will be stored with the history entry, 
+// and later included as the state property 
+// of the argument passed to the popstate event handler.
+
+// "": this is needed for backward compatibility 
+// with legacy sites, and should always be an empty string
+
+// creature: this will be used as the URL for 
+// the entry. It will be shown in the browser's
+//  URL bar, and will be used as the value of 
+// the Referer header in any HTTP requests 
+// that the page makes. Note that this must 
+// be same-origin with the page.
+
+// Using the popstate event
+// Suppose the user:
+
+// Clicks a link in our SPA, so we 
+// update the page and add history 
+// entry A using pushState()
+
+// Clicks another link in our SPA, 
+// so we update the page and add 
+// history entry B using pushState()
+
+// Presses the "Back" button
+// Now the new current history entry 
+// is A, so the browser fires the 
+// popstate event, and the event 
+// handler argument includes the 
+// JSON that we passed to pushState() 
+// when we handled the navigation to 
+// A. This means we can restore the 
+// correct content with an event handler 
+// like this:
+
+// JS
+// Copy to Clipboard
+// Handle forward/back buttons
+window.addEventListener("popstate", (event) => {
+  // If a state has been provided, we have a "simulated" page
+  // and we update the current page.
+  if (event.state) {
+    // Simulate the loading of the previous page
+    displayContent(event.state);
+  }
+});
+// Using replaceState()
+// There's one more piece we need to add. 
+// When the user loads the SPA, the browser 
+// adds a history entry. Because this was 
+// an actual page load, the entry has no 
+// state associated with it. So suppose the user:
+
+// Loads the SPA: the browser adds a history entry
+// Clicks a link inside the SPA: the click 
+
+// handler updates the page and adds a 
+// history entry with pushState()
+
+// Presses the "Back" button
+// Now we want to go back to the SPA's 
+// initial state, but since this is a 
+// navigation in the same document, 
+// the page will not be reloaded, and
+//  since the history entry for the 
+// initial page has no state, we can't
+//  use popstate to restore it.
+
+// The solution here is to use replaceState()
+//  to set the state object for the 
+// initial page. For example:
+
+// JS
+// Copy to Clipboard
+// Create state on page load and replace the current history with it
+const image = document.querySelector("#photo");
+const initialState = {
+  description: document.querySelector("#description").textContent,
+  image: {
+    src: image.getAttribute("src"),
+    alt: image.getAttribute("alt"),
+  },
+  name: "Home",
+};
+history.replaceState(initialState, "", document.location.href);
+// On page load, we collect all the 
+// parts of the page that we need to
+//  restore when the user returns to 
+// the starting point for the SPA. This
+//  has the same structure as the JSON 
+// we fetch when handling other navigations. 
+// We pass this initialState object into 
+// replaceState(), which effectively adds
+//  the state object to the current history entry.
+
+// When the user returns to our starting 
+// point, the popstate event will contain
+//  this initial state, and we can use our
+//  displayContent() function to update the page.
+
+// A complete example
+// You can find this complete example 
+// at https://github.com/mdn/dom-examples/tree/main/history-api,
+//  and see the demo live at https://mdn.github.io/dom-examples/history-api/.
+
+// See also
+// History API
+// history global object
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Geolocation API
+// Secure context: This feature is 
+// available only in secure contexts 
+// (HTTPS), in some or all supporting browsers.
+
+// The Geolocation API allows the user 
+// to provide their location to 
+// web applications if they so desire. 
+// For privacy reasons, the user is 
+// asked for permission to report 
+// location information.
+
+// WebExtensions that wish to use 
+// the Geolocation object must add 
+// the "geolocation" permission to 
+// their manifest. The user's operating 
+// system will prompt the user to allow 
+// location access the first time it is requested.
+
+// Concepts and usage
+// You will often want to retrieve a 
+// user's location information in your 
+// web app, for example to plot their 
+// location on a map, or display 
+// personalized information relevant 
+// to their location.
+
+// The Geolocation API is accessed via
+//  a call to navigator.geolocation; 
+// this will cause the user's browser 
+// to ask them for permission to access 
+// their location data. If they accept, 
+// then the browser will use the best 
+// available functionality on the device 
+// to access this information (for example, GPS).
+
+// The developer can now access this 
+// location information in a couple 
+// of different ways:
+
+Geolocation.getCurrentPosition()
+// : Retrieves the device's current location.
+Geolocation.watchPosition()
+// : Registers a handler function 
+// that will be called automatically
+//  each time the position of the 
+// device changes, returning the updated location.
+
+// In both cases, the method call 
+// takes up to three arguments:
+
+// A mandatory success callback: 
+// If the location retrieval is successful,
+//  the callback executes with a 
+// GeolocationPosition object as its 
+// only parameter, providing access to
+//  the location data.
+
+// An optional error callback: If the
+//  location retrieval is unsuccessful,
+//  the callback executes with a 
+// GeolocationPositionError object as 
+// its only parameter, providing access 
+// information on what went wrong.
+
+// An optional object which provides 
+// options for retrieval of the position data.
+
+// For further information on Geolocation 
+// usage, read Using the Geolocation API.
+
+// Interfaces
+// Geolocation
+// The main class of this API — contains 
+// methods to retrieve the user's current 
+// position, watch for changes in their 
+// position, and clear a previously-set watch.
+
+// GeolocationPosition
+// Represents the position of a user. 
+// A GeolocationPosition instance is 
+// returned by a successful call to 
+// one of the methods contained inside 
+// Geolocation, inside a success callback, 
+// and contains a timestamp plus a
+//  GeolocationCoordinates object instance.
+
+// GeolocationCoordinates
+// Represents the coordinates of a user's
+//  position; a GeolocationCoordinates 
+// instance contains latitude, longitude,
+//  and other important related information.
+
+// GeolocationPositionError
+// A GeolocationPositionError is returned
+//  by an unsuccessful call to one of the 
+// methods contained inside Geolocation, 
+// inside an error callback, and contains 
+// an error code and message.
+
+
+// Extensions to other interfaces
+// Navigator.geolocation
+// The entry point into the API. Returns
+//  a Geolocation object instance, from 
+// which all other functionality can be accessed.
+
+// Using the Geolocation API
+
+// Secure context: This feature 
+// is available only in secure 
+// contexts (HTTPS), in some or 
+// all supporting browsers.
+
+// The Geolocation API is used to 
+// retrieve the user's location, 
+// so that it can for example be 
+// used to display their position 
+// using a mapping API. This article 
+// explains the basics of how to use it.
+
+// The geolocation object
+// The Geolocation API is available 
+// through the navigator.geolocation object.
+
+// If the object exists, geolocation 
+// services are available. You can 
+// test for the presence of geolocation thusly:
+
+// JS
+// Copy to Clipboard
+if ("geolocation" in navigator) {
+  /* geolocation is available */
+} else {
+  /* geolocation IS NOT available */
+}
+// Getting the current position
+// To obtain the user's current location,
+//  you can call the getCurrentPosition() 
+// method. This initiates an asynchronous 
+// request to detect the user's position, 
+// and queries the positioning hardware to 
+// get up-to-date information. When the 
+// position is determined, the defined 
+// callback function is executed. You can 
+// optionally provide a second callback 
+// function to be executed if an error occurs. 
+// A third, optional, parameter is an options 
+// object where you can set the maximum age 
+// of the position returned, the time to wait 
+// for a request, and if you want high 
+// accuracy for the position.
+
+// Note: By default, getCurrentPosition() 
+// tries to answer as fast as possible with 
+// a low accuracy result. It is useful if 
+// you need a quick answer regardless of 
+// the accuracy. Devices with a GPS, for 
+// example, can take a minute or more to 
+// get a GPS fix, so less accurate data 
+// (IP location or Wi-Fi) may be returned 
+// to getCurrentPosition().
+
+// JS
+// Copy to Clipboard
+navigator.geolocation.getCurrentPosition((position) => {
+  doSomething(position.coords.latitude, position.coords.longitude);
+});
+// The above example will cause the 
+// doSomething() function to execute
+//  when the location is obtained.
+
+// Watching the current position
+// If the position data changes (either 
+// by device movement or if more accurate
+//  geo information arrives), you can set 
+// up a callback function that is called
+//  with that updated position information.
+//  This is done using the watchPosition() 
+// function, which has the same input 
+// parameters as getCurrentPosition(). 
+// The callback function is called multiple 
+// times, allowing the browser to either 
+// update your location as you move, or 
+// provide a more accurate location as 
+// different techniques are used to 
+// geolocate you. The error callback function, 
+// which is optional just as it is for
+//  getCurrentPosition(), can be called repeatedly.
+
+// Note: You can use watchPosition() 
+// without an initial getCurrentPosition() call.
+
+// JS
+// Copy to Clipboard
+const watchID = navigator.geolocation.watchPosition((position) => {
+  doSomething(position.coords.latitude, position.coords.longitude);
+});
+// The watchPosition() method returns an 
+// ID number that can be used to uniquely 
+// identify the requested position watcher; 
+// you use this value in tandem with the 
+// clearWatch() method to stop watching 
+// the user's location.
+// 
+
+// JS
+// Copy to Clipboard
+navigator.geolocation.clearWatch(watchID);
+// Fine tuning the response
+// Both getCurrentPosition() and watchPosition()
+//  accept a success callback, an optional 
+// error callback, and an optional options object.
+
+// This object allows you to specify whether 
+// to enable high accuracy, a maximum age for 
+// the returned position value (up until this 
+// age it will be cached and reused if the 
+// same position is requested again; after this
+//  the browser will request fresh position data), 
+// and a timeout value that dictates how long 
+// the browser should attempt to get the 
+// position data for, before it times out.
+
+// A call to watchPosition could look like:
+
+// JS
+// Copy to Clipboard
+function success(position) {
+  doSomething(position.coords.latitude, position.coords.longitude);
+}
+
+function error() {
+  alert("Sorry, no position available.");
+}
+
+const options = {
+  enableHighAccuracy: true,
+  maximumAge: 30000,
+  timeout: 27000,
+};
+
+const watchID = navigator.geolocation.watchPosition(success, error, options);
+// Describing a position
+// The user's location is described 
+// using a GeolocationPosition object 
+// instance, which itself contains a 
+// GeolocationCoordinates object instance.
+
+// The GeolocationPosition instance 
+// contains only two things, a coords 
+// property that contains the 
+// GeolocationCoordinates instance, 
+// and a timestamp property that 
+// contains a timestamp, given as 
+// Unix time in milliseconds, at which 
+// the position data was retrieved.
+
+// The GeolocationCoordinates instance 
+// contains a number of properties, 
+// but the two you'll use most commonly 
+// are latitude and longitude, which are 
+// what you need to draw your position on 
+// a map. Hence many Geolocation success 
+// callbacks look fairly simple:
+
+// JS
+// Copy to Clipboard
+function success(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  // Do something with your latitude and longitude
+}
+// You can however get a number of other
+//  bits of information from a 
+// GeolocationCoordinates object,
+//  including altitude, speed, what
+//  direction the device is facing,
+//  and an accuracy measure of the
+//  altitude, longitude, and latitude data.
+
+// Handling errors
+// The error callback function,
+//  if provided when calling 
+// getCurrentPosition() or watchPosition(), 
+// expects a GeolocationPositionError 
+// object instance as its first parameter. 
+// This object type contains two properties, 
+// a code indicating what type of error has 
+// been returned, and a human-readable 
+// message that describes what the error 
+// code means.
+
+// You could use it like so:
+
+// JS
+// Copy to Clipboard
+function errorCallback(error) {
+  alert(`ERROR(${error.code}): ${error.message}`);
+}
+// Examples
+// In the following example the 
+// Geolocation API is used to retrieve 
+// the user's latitude and longitude. 
+// If successful, the available hyperlink
+//  is populated with an openstreetmap.org
+//  URL that will show their location.
+
+// HTML
+// HTML
+// Play
+// Copy to Clipboard
+      // <button id="find-me">Show my location</button><br />
+      // <p id="status"></p>
+      // <a id="map-link" target="_blank"></a>
+// JavaScript
+// JS
+// Play
+// Copy to Clipboard
+function geoFindMe() {
+  const status = document.querySelector("#status");
+  const mapLink = document.querySelector("#map-link");
+
+  mapLink.href = "";
+  mapLink.textContent = "";
+
+  function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    status.textContent = "";
+    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+  }
+
+  function error() {
+    status.textContent = "Unable to retrieve your location";
+  }
+
+  if (!navigator.geolocation) {
+    status.textContent = "Geolocation is not supported by your browser";
+  } else {
+    status.textContent = "Locating…";
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+}
+
+document.querySelector("#find-me").addEventListener("click", geoFindMe);
+Result
+
+
+

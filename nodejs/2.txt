@@ -1,0 +1,537 @@
+// Node - or Node.js, as it is called to 
+// distinguish it from other "nodes" - is 
+// an event-driven I/O framework for the 
+// V8 JavaScript engine.
+
+Node.js allows 
+// Javascript to be executed on the server 
+// side, and it uses the wicked fast
+//  V8 Javascript engine which was 
+// developed by Google for the Chrome browser.
+
+
+// The basic philosophy of node.js is:
+
+// Non-blocking I/O - every I/O call must 
+// take a callback, whether it is to retrieve 
+// information from disk, network or another process.
+
+// Built-in support for the most 
+// important protocols (HTTP, DNS, TLS)
+// Low-level. Do not remove functionality present 
+// at the POSIX layer
+
+// Stream everything; never force the buffering of data.
+// Node.js is different from client-side Javascript 
+// in that it removes certain things, like DOM 
+// manipulation, and adds support for evented I/O, 
+// processes, streams, HTTP, SSL, DNS, string and 
+// buffer processing and C/C++ addons.
+
+
+how does node run your code?
+
+// The Event Loop - understanding how Node 
+// executes Javascript code
+// The event loop is a mechanism which allows 
+// you to specify what happens when a particular 
+// event occurs. when you start 
+// an operation like reading a file, you can 
+// pass control back to Node and have your 
+// code run when the data has been read. 
+
+// you  can think of event loop as a mechanism 
+// that used to execute a list of tasks(which is actually a code ) 
+// bound to the event  , which means when the event is triggered 
+// the bounded code to it will get executed .
+
+// setTimeout is used to call a function after the specified time . 
+
+you aren’t supposed to worry about 
+// what happens in the backend: just use callbacks 
+// when you are doing I/O; and you are guaranteed 
+// that your code is never interrupted and that doing
+//  I/O will not block other requests.
+
+// Long polling is a simple technique for 
+// reading data from a server.
+
+// At its core, JavaScript is designed to 
+// be non-blocking on the "main" thread, 
+// this is where views are rendered. You 
+// can imagine the importance of this in 
+// the browser. When the main thread 
+// becomes blocked it results in the 
+// infamous "freezing" that end users 
+// dread, and no other events can be 
+// dispatched resulting in the loss of 
+// data acquisition, for example.
+
+// Blocking methods execute synchronously 
+// and non-blocking methods execute asynchronously.
+
+// In Node.js, JavaScript that 
+// exhibits poor performance due to 
+// being CPU intensive rather than 
+// waiting on a non-JavaScript operation, 
+// such as I/O, isn't typically referred 
+// to as blocking.
+
+// All of the I/O methods in the Node.js 
+// standard library provide asynchronous 
+// versions, which are non-blocking, and 
+// accept callback functions. Some methods 
+// also have blocking counterparts, which 
+// have names that end with Sync.
+
+const fs = require('node:fs');
+const data = fs.readFileSync('/file.md'); // blocks here until file is read
+// JavaScript
+// And here is an equivalent asynchronous example:
+const fs = require('node:fs');
+fs.readFile('/file.md', (err, data) => {
+  if (err) throw err;
+});
+// The first example appears simpler than 
+// the second but has the disadvantage of 
+// the second line blocking the execution 
+// of any additional JavaScript until the
+//  entire file is read. 
+
+
+// The event loop is different than 
+// models in many other languages where 
+// additional threads may be created 
+// to handle concurrent work.
+
+ JavaScript was born inside the 
+// browser, its main job, in the beginning, 
+// was to respond to user actions, like 
+// onClick, onMouseOver, onChange, 
+// onSubmit and so on.
+
+ How could it 
+// do this with a synchronous programming model?
+// The answer was in its environment. 
+// The browser provides a way to do it 
+// by providing a set of APIs that can 
+// handle this kind of functionality.
+// A callback is a simple function 
+// that's passed as a value to another 
+// function, and will only be executed 
+// when the event happens. We can do 
+// this because JavaScript has first-class 
+// functions, which can be assigned to 
+// variables and passed around to other 
+// functions (called higher-order functions)
+// The problem with callbacks
+// Callbacks are great for simple cases!
+// However every callback adds a level 
+// of nesting, and when you have lots 
+// of callbacks, the code starts to be 
+// complicated very quickly
+
+// Node.js also provides a sync 
+// method, which blocks the 
+// thread until the file stats are ready
+
+// A common task for a web server 
+// can be to open a file on the 
+// server and return the content 
+// to the client.
+
+
+// Here is how Node.js handles a file request:
+// Sends the task to the computer's file system.
+// Ready to handle the next request.
+// When the file system has opened 
+// and read the file, the server 
+// returns the content to the client.
+// Node.js eliminates the waiting, 
+// and simply continues with the next request.
+
+
+// What Can Node.js Do?
+// Node.js can generate dynamic page content
+// Node.js can create, open, read, 
+// write, delete, and close files on the server
+// Node.js can collect form data
+// Node.js can add, delete, modify data in your database
+
+
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end('Hello World!');
+}).listen(8080);
+// Save the file on your 
+// computer: C:\Users\Your Name\myfirst.js
+// The code tells the computer 
+// to write "Hello World!" if 
+// anyone (e.g. a web browser) 
+// tries to access your computer 
+// on port 8080.
+
+// What is a Module in Node.js?
+// Consider modules to be the 
+// same as JavaScript libraries.
+
+// Built-in Modules
+// Node.js has a set of built-in 
+// modules which you can use 
+// without any further installation.
+
+// Include Modules
+// To include a module, use the 
+// require() function with the 
+// name of the module
+// so go to https://nodejs.org/docs
+// an whatever options you see on the 
+// left side bar like http , os , path ..
+// they all are bilt in modules in node js 
+// which do not need any furthur installation,
+// and also the function like require that we 
+// see above , which did not need any include 
+// that is a global in node js , you can 
+// also check it in globals modules of https://nodejs.org/docs .
+
+// in addition to that we can also , 
+// Create Your Own Modules
+// You can create your own modules, 
+// and easily include them in your 
+// applications.
+
+
+// Example Get your own Node.js Server
+// Create a module that returns 
+// the current date and time:
+
+exports.myDateTime = function () {
+  return Date();
+};
+// Use the exports keyword to make 
+// properties and methods available 
+// outside the module file.
+
+// Save the code above in a file 
+// called "myfirstmodule.js"
+
+// Include Your Own Module
+// Now you can include and use the 
+// module in any of your Node.js files.
+
+// Example
+// Use the module "myfirstmodule" 
+// in a Node.js file:
+
+var http = require('http');
+var dt = require('./myfirstmodule');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write("The date and time are currently: " + dt.myDateTime());
+  res.end();
+}).listen(8080);
+
+in the node js website  , i see same code in two formats cjs and ems .. why ? what is differences of using them ?
+
+Certainly! Let's explore the differences between **CommonJS (CJS)** and **ECMAScript Modules (ESM)** in JavaScript:
+
+1. **CommonJS (CJS)**:
+   - **Syntax**: CJS uses `require()` to import modules and `module.exports` or `exports` to export values.
+   - **Synchronous Loading**: CJS loads modules synchronously, which means it waits for the module to be fully loaded before proceeding.
+   - **Node.js Usage**: Node.js primarily uses CJS for its backend modules.
+   - **Browser Compatibility**: CJS does not work directly in browsers; it requires transpilation and bundling.
+   - **Example**:
+     ```javascript
+     // Importing
+     const myModule = require('./myModule.js');
+     // Exporting
+     module.exports = function doSomething(n) { /* ... */ };
+     ```
+
+2. **ECMAScript Modules (ESM)**:
+   - **Syntax**: ESM uses `import` and `export` statements for module handling.
+   - **Asynchronous Loading**: ESM loads modules asynchronously, allowing better performance and parallel loading.
+   - **Browser Compatibility**: ESM works directly in modern browsers without transpilation.
+   - **Tree-Shakeable**: ESM supports tree-shaking, meaning unused exports can be eliminated during bundling.
+   - **Example**:
+     ```javascript
+     // Importing
+     import myFunction from './myModule.js';
+     // Exporting
+     export default function myFunction() { /* ... */ }
+     ```
+
+// Node.js File System Module
+// Node.js as a File Server
+
+// The Node.js file system module 
+// allows you to work with the 
+// file system on your computer.
+
+// Common use for the File System module:
+
+// Read files
+// Create files
+// Update files
+// Delete files
+// Rename files
+// Read Files
+
+
+// Assume we have the following HTML 
+// file (located in the same folder 
+// as Node.js):
+
+// demofile1.html
+          // <html>
+          // <body>
+          // <h1>My Header</h1>
+          // <p>My paragraph.</p>
+          // </body>
+          // </html>
+// Create a Node.js file 
+// that reads the HTML file, 
+// and return the content:
+
+// ExampleGet your own Node.js Server
+var http = require('http');
+var fs = require('fs');
+http.createServer(function (req, res) {
+  fs.readFile('demofile1.html', function(err, data) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    return res.end();
+  });
+}).listen(8080);
+// Save the code above in a file 
+// called "demo_readfile.js", 
+// and initiate the file:
+
+// Initiate demo_readfile.js:
+
+// C:\Users\Your Name>node demo_readfile.js
+// If you have followed the same 
+// steps on your computer, you will 
+// see the same result as the 
+// example: http://localhost:8080
+
+fs.appendFile()
+fs.open()
+fs.writeFile()
+// The fs.appendFile() method 
+// appends specified content to 
+// a file. If the file does not 
+// exist, the file will be created
+
+// Node.js URL Module
+// The Built-in URL Module
+
+// The URL module splits up a 
+// web address into readable parts.
+
+// To include the URL module, 
+// use the require() method:
+
+var url = require('url');
+
+// Parse an address with the 
+// url.parse() method, and it 
+// will return a URL object 
+// with each part of the 
+// address as properties:
+
+// ExampleGet your own Node.js Server
+// Split a web address into readable parts:
+
+var url = require('url');
+var adr = 'http://localhost:8080/default.htm?year=2017&month=february';
+var q = url.parse(adr, true);
+
+console.log(q.host); //returns 'localhost:8080'
+console.log(q.pathname); //returns '/default.htm'
+console.log(q.search); //returns '?year=2017&month=february'
+
+var qdata = q.query; //returns an object: { year: 2017, month: 'february' }
+console.log(qdata.month); //returns 'february'
+
+// Node.js File Server
+// Now we know how to parse the 
+// query string, and in the 
+// previous chapter we learned 
+// how to make Node.js behave 
+// as a file server. Let us 
+// combine the two, and serve 
+// the file requested by the client.
+
+// Create two html files and 
+// save them in the same folder 
+// as your node.js files.
+
+// summer.html
+
+        // <!DOCTYPE html>
+        // <html>
+        // <body>
+        // <h1>Summer</h1>
+        // <p>I love the sun!</p>
+        // </body>
+        // </html>
+// winter.html
+
+        // <!DOCTYPE html>
+        // <html>
+        // <body>
+        // <h1>Winter</h1>
+        // <p>I love the snow!</p>
+        // </body>
+        // </html>
+        
+// Create a Node.js file that 
+// opens the requested file 
+// and returns the content to 
+// the client. If anything goes 
+// wrong, throw a 404 error:
+
+// demo_fileserver.js:
+
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
+
+http.createServer(function (req, res) {
+  var q = url.parse(req.url, true);
+  var filename = "." + q.pathname;
+  fs.readFile(filename, function(err, data) {
+    if (err) {
+      res.writeHead(404, {'Content-Type': 'text/html'});
+      return res.end("404 Not Found");
+    } 
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    return res.end();
+  });
+}).listen(8080);
+// Remember to initiate the file:
+
+// Initiate demo_fileserver.js:
+
+// C:\Users\Your Name>node demo_fileserver.js
+// If you have followed the same steps 
+// on your computer, you should see 
+// two different results when 
+// opening these two addresses:
+
+// http://localhost:8080/summer.html
+
+// Will produce this result:
+
+// Summer
+// I love the sun!
+
+// http://localhost:8080/winter.html
+
+// Will produce this result:
+
+// Winter
+// I love the snow!
+
+
+// Node.js NPM
+// What is NPM?
+
+// NPM is a package manager 
+// for Node.js packages, 
+// or modules if you like.
+
+// www.npmjs.com hosts 
+// thousands of free packages 
+// to download and use.
+
+// The NPM program is installed 
+// on your computer when you 
+// install Node.js
+
+// NPM is already ready to 
+// run on your computer!
+
+// What is a Package?
+// A package in Node.js contains 
+// all the files you need for a module.
+
+// Modules are JavaScript 
+// libraries you can include 
+// in your project.
+
+// Download a Package
+// Downloading a package is very easy.
+
+// Open the command line interface 
+// and tell NPM to download the 
+// package you want.
+
+// I want to download a package called "upper-case":
+
+// Download "upper-case":
+
+// C:\Users\Your Name>npm install upper-case
+// Now you have downloaded and 
+// installed your first package!
+
+// NPM creates a folder named 
+// "node_modules", where the package 
+// will be placed. All packages you 
+// install in the future will be 
+// placed in this folder.
+
+// My project now has a folder structure like this:
+
+// C:\Users\My Name\node_modules\upper-case
+
+// Using a Package
+// Once the package is installed, 
+// it is ready to use.
+
+// Include the "upper-case" package 
+// the same way you include any other module:
+
+var uc = require('upper-case');
+// Create a Node.js file that will 
+// convert the output "Hello World!" 
+// into upper-case letters:
+
+// ExampleGet your own Node.js Server
+var http = require('http');
+var uc = require('upper-case');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write(uc.upperCase("Hello World!"));
+  res.end();
+}).listen(8080);
+// Save the code above in a file 
+// called "demo_uppercase.js", 
+// and initiate the file:
+
+// Initiate demo_uppercase:
+
+// C:\Users\Your Name>node demo_uppercase.js
+
+// If you have followed the same 
+// steps on your computer, you will 
+// see the same result as the 
+// example: http://localhost:8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+

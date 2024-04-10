@@ -1,0 +1,5672 @@
+// function - w3scholls - a smooth and logical flow 
+
+console.log("JavaScript Function Definitions")
+
+// JavaScript functions are defined with the function keyword.
+// You can use a function declaration or a function expression.
+
+// Function Declarations
+// Earlier in this tutorial, you learned that functions are 
+// declared with the following syntax:
+
+function functionName(parameters) {
+    // code to be executed
+}
+// Declared functions are not executed immediately. They are 
+// "saved for later use", and will be executed later, when 
+// they are invoked (called upon).
+
+// Example
+function myFunction(a, b) {
+    return a * b;
+}
+// Semicolons are used to separate executable JavaScript statements.
+// Since a function declaration is not an executable 
+// statement, it is not common to end it with a semicolon.
+
+// Function Expressions
+// A JavaScript function can also be defined using an expression.
+// A function expression can be stored in a variable:
+
+// Example
+const x = function (a, b) { return a * b };
+// After a function expression has been stored in a variable, 
+// the variable can be used as a function:
+
+// Example
+const x = function (a, b) { return a * b };
+let z = x(4, 3);
+// The function above is actually an anonymous function 
+// (a function without a name).
+
+// Functions stored in variables do not need function names. 
+// They are always invoked (called) using the variable name.
+
+// The function above ends with a semicolon because it 
+// is a part of an executable statement.
+
+console.log("The Function() Constructor")
+// As you have seen in the previous examples, JavaScript 
+// functions are defined with the function keyword.
+
+// Functions can also be defined with a built-in JavaScript 
+// function constructor called Function().
+
+// Example
+const myFunction = new Function("a", "b", "return a * b");
+
+let x = myFunction(4, 3);
+// You actually don't have to use the function constructor. 
+// The example above is the same as writing:
+
+// Example
+const myFunction = function (a, b) { return a * b };
+
+let x = myFunction(4, 3);
+// Most of the time, you can avoid using the new keyword 
+// in JavaScript.
+
+// Function Hoisting
+// Earlier in this tutorial, you learned about 
+// "hoisting" (JavaScript Hoisting).
+// Hoisting is JavaScript's default behavior of moving 
+// declarations to the top of the current scope.
+// Hoisting applies to variable declarations and to function 
+// declarations.
+// Because of this, JavaScript functions can be called 
+// before they are declared:
+
+myFunction(5);
+
+function myFunction(y) {
+    return y * y;
+}
+// Functions defined using an expression are not hoisted.
+
+// Self-Invoking Functions
+// Function expressions can be made "self-invoking".
+// A self-invoking expression is invoked (started) 
+// automatically, without being called.
+// Function expressions will execute automatically if 
+// the expression is followed by ().
+// You cannot self-invoke a function declaration.
+// You have to add parentheses around the function to 
+// indicate that it is a function expression:
+
+// Example
+(function () {
+    let x = "Hello!!";  // I will invoke myself
+})();
+// The function above is actually an anonymous self-invoking 
+// function (function without name).
+
+// Functions Can Be Used as Values
+// JavaScript functions can be used as values:
+
+// Example
+function myFunction(a, b) {
+    return a * b;
+}
+
+let x = myFunction(4, 3);
+// JavaScript functions can be used in expressions:
+
+// Example
+function myFunction(a, b) {
+    return a * b;
+}
+
+let x = myFunction(4, 3) * 2;
+
+
+// Functions are Objects
+// The typeof operator in JavaScript returns "function" for 
+// functions.
+
+// But, JavaScript functions can best be described as objects.
+// JavaScript functions have both properties and methods.
+// The arguments.length property returns the number 
+// of arguments received when the function was invoked:
+
+// Example
+function myFunction(a, b) {
+    return arguments.length;
+}
+// The toString() method returns the function as a string:
+
+// Example
+function myFunction(a, b) {
+    return a * b;
+}
+
+// let text = myFunction.toString();
+// A function defined as the property of an object, is called 
+// a method to the object.
+// A function designed to create new objects, is called an 
+// object constructor.
+
+// Arrow Functions
+// Arrow functions allows a short syntax for writing 
+// function expressions.
+
+// You don't need the function keyword, the return keyword, 
+// and the curly brackets.
+
+// Example
+// ES5
+var x = function (x, y) {
+    return x * y;
+}
+
+// ES6
+const x = (x, y) => x * y;
+// Arrow functions do not have their own this. They are not 
+// well suited for defining object methods.
+
+// Arrow functions are not hoisted. They must be defined 
+// before they are used.
+// Using const is safer than using var, because a function 
+// expression is always constant value.
+// You can only omit the return keyword and the curly 
+// brackets if the function is a single statement. 
+// Because of this, it might be a good habit to always 
+// keep them:
+
+// Example
+const x = (x, y) => { return x * y };
+
+
+console.log("JavaScript Function Parameters")
+
+// A JavaScript function does not perform 
+// any checking on parameter values (arguments).
+
+// Function Parameters and Arguments
+// Earlier in this tutorial, you learned 
+// that functions can have parameters:
+
+function functionName(parameter1, parameter2, parameter3) {
+    // code to be executed
+}
+// Function parameters are the names 
+// listed in the function definition.
+// Function arguments are the real 
+// values passed to (and received by) the function.
+
+console.log(" Parameter Rules")
+// JavaScript function definitions do not specify data types 
+// for parameters.
+
+// JavaScript functions do not perform type checking on 
+// the passed arguments.
+
+// JavaScript functions do not check the number of arguments 
+// received.
+
+console.log("Default Parameters")
+// If a function is called with missing arguments 
+// (less than declared), the missing values are set to 
+// undefined.
+
+// Sometimes this is acceptable, but sometimes it is better 
+// to assign a default value to the parameter:
+
+// Example
+function myFunction(x, y) {
+    if (y === undefined) {
+        y = 2;
+    }
+}
+
+console.log("Default Parameter Values")
+// ES6 allows function parameters to have default values.
+
+// Example
+// If y is not passed or undefined, then y = 10.
+
+function myFunction(x, y = 10) {
+    return x + y;
+}
+myFunction(5);
+
+// Function Rest Parameter
+// The rest parameter (...) allows a function to treat 
+// an indefinite number of arguments as an array:
+
+// Example
+function sum(...args) {
+    let sum = 0;
+    for (let arg of args) sum += arg;
+    return sum;
+}
+
+let x = sum(4, 9, 16, 25, 29, 100, 66, 77);
+
+
+console.log("The Arguments Object")
+// JavaScript functions have a built-in object called 
+// the arguments object.
+// The argument object contains an array of the arguments 
+// used when the function was called (invoked).
+// This way you can simply use a function to find (for 
+// instance) the highest value in a list of numbers:
+
+// Example
+x = findMax(1, 123, 500, 115, 44, 88);
+
+function findMax() {
+    let max = -Infinity;
+    for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i] > max) {
+            max = arguments[i];
+        }
+    }
+    return max;
+}
+// Or create a function to sum all input values:
+
+// Example
+x = sumAll(1, 123, 500, 115, 44, 88);
+
+function sumAll() {
+    let sum = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+}
+// If a function is called with too many arguments (more 
+// than declared), these arguments can be reached using 
+// the arguments object.
+
+console.log(" Arguments are Passed by Value")
+
+// The parameters, in a function call, 
+// are the function's arguments.
+// JavaScript arguments are passed by value: 
+// The function only gets to know the values, not the argument's locations.
+// If a function changes an argument's value, 
+// it does not change the parameter's original value.
+// Changes to arguments are not visible (reflected) outside 
+// the function.
+
+console.log("Objects are Passed by Reference")
+// In JavaScript, object references are values.
+// Because of this, objects will behave like they 
+// are passed by reference:
+// If a function changes an object property, it changes 
+// the original value.
+// Changes to object properties are visible (reflected) 
+// outside the function.
+
+
+console.log("JavaScript Function Invocation")
+
+// The code inside a JavaScript function will execute when 
+// "something" invokes it.
+
+// Invoking a JavaScript Function
+// The code inside a function is not executed when the 
+// function is defined.
+
+// The code inside a function is executed when the function 
+// is invoked.
+
+// It is common to use the term "call a function" 
+// instead of "invoke a function".
+
+// It is also common to say "call upon a function", 
+// "start a function", or "execute a function".
+
+// In this tutorial, we will use invoke, because a JavaScript 
+// function can be invoked without being called.
+
+// Invoking a Function as a Function
+// Example
+function myFunction(a, b) {
+    return a * b;
+}
+myFunction(10, 2);           // Will return 20
+
+// The function above does not belong to any object. 
+// But in JavaScript there is always a default global object.
+// In HTML the default global object is the HTML page 
+// itself, so the function above "belongs" to the HTML page.
+// In a browser the page object is the browser window. 
+// The function above automatically becomes a window function.
+
+// Note
+// This is a common way to invoke a JavaScript function, 
+// but not a very good practice.
+// Global variables, methods, or functions can easily 
+// create name conflicts and bugs in the global object.
+
+// myFunction() and window.myFunction() is the same function:
+
+// Example
+function myFunction(a, b) {
+    return a * b;
+}
+window.myFunction(10, 2);    // Will also return 20
+// What is this?
+// In JavaScript, the this keyword refers to an object.
+
+// Which object depends on how this is being invoked (used or called).
+// The this keyword refers to different objects depending on how it is used:
+
+// In an object method, this refers to the object.
+// Alone, this refers to the global object.
+// In a function, this refers to the global object.
+// In a function, in strict mode, this is undefined.
+// In an event, this refers to the element that received the event.
+// Methods like call(), apply(), and bind() can refer this to any object.
+// Note
+// this is not a variable. It is a keyword. You cannot change the value of this.
+
+console.log("The Global Object")
+// When a function is called without an owner object, 
+// the value of this becomes the global object.
+// In a web browser the global object is the browser window.
+// This example returns the window object as the value of this:
+
+// Example
+let x = myFunction();            // x will be the window object
+
+function myFunction() {
+    return this;
+}
+// Invoking a function as a global function, causes the value 
+// of this to be the global object.
+// Using the window object as a variable can easily crash 
+// your program.
+
+console.log("Invoking a Function as a Method")
+// In JavaScript you can define functions as object methods.
+// The following example creates an object (myObject), 
+// with two properties (firstName and lastName), and 
+// a method (fullName):
+
+// Example
+const myObject = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+myObject.fullName();         // Will return "John Doe"
+// The fullName method is a function. The function belongs 
+// to the object. myObject is the owner of the function.
+// The thing called this, is the object that "owns" the 
+// JavaScript code. In this case the value of this is myObject.
+// Test it! Change the fullName method to return the value of this:
+
+// Example
+const myObject = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function () {
+        return this;
+    }
+}
+
+// This will return [object Object] (the owner object)
+myObject.fullName();
+// Invoking a function as an object method, causes the 
+//value of this to be the object itself.
+
+console.log("Invoking a Function with a Function Constructor")
+// If a function invocation is preceded with the new keyword,
+//  it is a constructor invocation.
+// It looks like you create a new function, but since 
+// JavaScript functions are objects you actually create 
+// a new object:
+
+// Example
+// This is a function constructor:
+function myFunction(arg1, arg2) {
+    this.firstName = arg1;
+    this.lastName = arg2;
+}
+
+// This creates a new object
+const myObj = new myFunction("John", "Doe");
+
+// This will return "John"
+myObj.firstName;
+// A constructor invocation creates a new object. 
+// The new object inherits the properties and methods 
+// from its constructor.
+
+// The this keyword in the constructor does not have a value.
+// The value of this will be the new object created when 
+// the function is invoked.
+
+
+console.log("JavaScript Function call()")
+
+// Method Reuse
+// With the call() method, you can write a method that 
+// can be used on different objects.
+
+// All Functions are Methods
+// In JavaScript all functions are object methods.
+
+// If a function is not a method of a JavaScript object, 
+// it is a function of the global object (see previous chapter).
+
+// The example below creates an object with 3 properties, 
+// firstName, lastName, fullName.
+
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+// This will return "John Doe":
+person.fullName();
+// In the example above, this refers to the person object.
+// this.firstName means the firstName property of this.
+
+// Same as:
+
+// this.firstName means the firstName property of person.
+
+// What is this?
+// In JavaScript, the this keyword refers to an object.
+// Which object depends on how this is being invoked (used or called).
+// The this keyword refers to different objects depending on how it is used:
+
+// In an object method, this refers to the object.
+// Alone, this refers to the global object.
+// In a function, this refers to the global object.
+// In a function, in strict mode, this is undefined.
+// In an event, this refers to the element that received the event.
+// Methods like call(), apply(), and bind() can refer this to any object.
+// Note
+// this is not a variable. It is a keyword. You cannot change the value of this.
+
+
+console.log("The JavaScript call() Method")
+
+// The call() method is a predefined JavaScript method.
+// It can be used to invoke (call) a method with 
+// an owner object as an argument (parameter).
+// With call(), an object can use a method belonging to another object.
+// This example calls the fullName method of person, using it on person1:
+
+// Example
+const person = {
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+const person1 = {
+    firstName: "John",
+    lastName: "Doe"
+}
+const person2 = {
+    firstName: "Mary",
+    lastName: "Doe"
+}
+
+// This will return "John Doe":
+person.fullName.call(person1);
+
+// This example calls the fullName method of person, using it on person2:
+
+// Example
+const person = {
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+const person1 = {
+    firstName: "John",
+    lastName: "Doe"
+}
+const person2 = {
+    firstName: "Mary",
+    lastName: "Doe"
+}
+
+// This will return "Mary Doe"
+person.fullName.call(person2);
+
+// The call() Method with Arguments
+// The call() method can accept arguments:
+
+// Example
+const person = {
+    fullName: function (city, country) {
+        return this.firstName + " " + this.lastName + "," + city + "," + country;
+    }
+}
+
+const person1 = {
+    firstName: "John",
+    lastName: "Doe"
+}
+
+person.fullName.call(person1, "Oslo", "Norway");
+
+
+console.log("JavaScript Function apply()")
+
+// Method Reuse
+// With the apply() method, you can write a method 
+// that can be used on different objects.
+
+// The JavaScript apply() Method
+// The apply() method is similar to the call() method 
+// (previous chapter).
+// In this example the fullName method of person is applied on person1:
+
+// Example
+const person = {
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+const person1 = {
+    firstName: "Mary",
+    lastName: "Doe"
+}
+
+// This will return "Mary Doe":
+person.fullName.apply(person1);
+
+// The Difference Between call() and apply()
+// The difference is:
+
+// The call() method takes arguments separately.
+// The apply() method takes arguments as an array.
+// The apply() method is very handy if you want to use 
+// an array instead of an argument list.
+
+// The apply() Method with Arguments
+// The apply() method accepts arguments in an array:
+
+// Example
+const person = {
+    fullName: function (city, country) {
+        return this.firstName + " " + this.lastName + "," + city + "," + country;
+    }
+}
+
+const person1 = {
+    firstName: "John",
+    lastName: "Doe"
+}
+
+person.fullName.apply(person1, ["Oslo", "Norway"]);
+
+// Compared with the call() method:
+
+// Example
+const person = {
+    fullName: function (city, country) {
+        return this.firstName + " " + this.lastName + "," + city + "," + country;
+    }
+}
+
+const person1 = {
+    firstName: "John",
+    lastName: "Doe"
+}
+
+person.fullName.call(person1, "Oslo", "Norway");
+
+// Simulate a Max Method on Arrays
+// You can find the largest number (in a list of numbers) using the Math.max() method:
+
+// Example
+Math.max(1, 2, 3);  // Will return 3
+
+// Since JavaScript arrays do not have a max() method, 
+// you can apply the Math.max() method instead.
+
+// Example
+Math.max.apply(null, [1, 2, 3]); // Will also return 3
+
+// The first argument (null) does not matter. 
+// It is not used in this example.
+
+// These examples will give the same result:
+
+// Example
+Math.max.apply(Math, [1, 2, 3]); // Will also return 3
+
+// Example
+Math.max.apply(" ", [1, 2, 3]); // Will also return 3
+
+// Example
+Math.max.apply(0, [1, 2, 3]); // Will also return 3
+
+// JavaScript Strict Mode
+// In JavaScript strict mode, if the first argument of 
+// the apply() method is not an object, it becomes the 
+// owner (object) of the invoked function. In "non-strict" 
+// mode, it becomes the global object.
+
+
+console.log("JavaScript Function bind()")
+
+// Function Borrowing
+// With the bind() method, an object can borrow a method 
+// from another object.
+
+// The example below creates 2 objects (person and member).
+
+// The member object borrows the fullname method from 
+// the person object:
+
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+const member = {
+    firstName: "Hege",
+    lastName: "Nilsen",
+}
+
+let fullName = person.fullName.bind(member);
+// Preserving this
+// Sometimes the bind() method has to be used to prevent losing this.
+
+// In the following example, the person object has a display method. In the display method, this refers to the person object:
+
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    display: function () {
+        let x = document.getElementById("demo");
+        x.innerHTML = this.firstName + " " + this.lastName;
+    }
+}
+
+person.display();
+// When a function is used as a callback, this is lost.
+
+// This example will try to display the person name after 3 seconds, but it will display undefined instead:
+
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    display: function () {
+        let x = document.getElementById("demo");
+        x.innerHTML = this.firstName + " " + this.lastName;
+    }
+}
+
+setTimeout(person.display, 3000);
+// The bind() method solves this problem.
+
+// In the following example, the bind() method is used to bind person.display to person.
+
+// This example will display the person name after 3 seconds:
+
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    display: function () {
+        let x = document.getElementById("demo");
+        x.innerHTML = this.firstName + " " + this.lastName;
+    }
+}
+
+let display = person.display.bind(person);
+setTimeout(display, 3000);
+// What is this?
+// In JavaScript, the this keyword refers to an object.
+
+// Which object depends on how this is being invoked (used or called).
+
+// The this keyword refers to different objects depending on how it is used:
+
+// In an object method, this refers to the object.
+// Alone, this refers to the global object.
+// In a function, this refers to the global object.
+// In a function, in strict mode, this is undefined.
+// In an event, this refers to the element that received the event.
+// Methods like call(), apply(), and bind() can refer this to any object.
+// Note
+// this is not a variable. It is a keyword. You cannot change the value of this.
+
+console.log("JavaScript Closures")
+
+// JavaScript variables can belong to the local or global scope.
+
+// Global variables can be made local (private) with closures.
+
+// Global Variables
+// A function can access all variables defined inside the function, like this:
+
+// Example
+function myFunction() {
+    let a = 4;
+    return a * a;
+}
+// But a function can also access variables defined outside the function, like this:
+
+// Example
+let a = 4;
+function myFunction() {
+    return a * a;
+}
+// In the last example, a is a global variable.
+// In a web page, global variables belong to the page.
+// Global variables can be used (and changed) by all other scripts in the page.
+// In the first example, a is a local variable.
+// A local variable can only be used inside the function 
+// where it is defined. It is hidden from other functions 
+// and other scripting code.
+// Global and local variables with the same name are 
+// different variables. Modifying one, does not modify 
+// the other.
+
+// Note
+// Variables created without a declaration keyword 
+// (var, let, or const) are always global, even if they 
+// are created inside a function.
+
+// Example
+// function myFunction() {
+//   a = 4;
+// }
+// Variable Lifetime
+// Global variables live until the page is discarded, like 
+// when you navigate to another page or close the window.
+
+// Local variables have short lives. They are created when 
+// the function is invoked, and deleted when the function 
+// is finished.
+
+console.log("A Counter Dilemma")
+// Suppose you want to use a variable for counting 
+// something, and you want this counter to be available 
+// to all functions.
+
+// You could use a global variable, and a function to 
+// increase the counter:
+
+// Example
+// Initiate counter
+let counter = 0;
+
+// Function to increment counter
+function add() {
+    counter += 1;
+}
+
+// Call add() 3 times
+add();
+add();
+add();
+
+// The counter should now be 3
+// There is a problem with the solution above: Any code 
+// on the page can change the counter, without calling add().
+
+// The counter should be local to the add() function, 
+// to prevent other code from changing it:
+
+// Example
+// Initiate counter
+let counter = 0;
+
+// Function to increment counter
+function add() {
+    let counter = 0;
+    counter += 1;
+}
+
+// Call add() 3 times
+add();
+add();
+add();
+
+//The counter should now be 3. But it is 0
+// It did not work because we display the global counter 
+// instead of the local counter.
+
+// We can remove the global counter and access the 
+// local counter by letting the function return it:
+
+// Example
+// Function to increment counter
+function add() {
+    let counter = 0;
+    counter += 1;
+    return counter;
+}
+
+// Call add() 3 times
+add();
+add();
+add();
+
+//The counter should now be 3. But it is 1.
+// It did not work because we reset the local counter 
+// every time we call the function.
+
+//  A JavaScript inner function can solve this.
+
+// JavaScript Nested Functions
+// All functions have access to the global scope.
+
+// In fact, in JavaScript, all functions have access to 
+// the scope "above" them.
+
+// JavaScript supports nested functions. Nested functions 
+// have access to the scope "above" them.
+
+// In this example, the inner function plus() has access 
+// to the counter variable in the parent function:
+
+// Example
+function add() {
+    let counter = 0;
+    function plus() { counter += 1; }
+    plus();
+    return counter;
+}
+// This could have solved the counter dilemma, if we could reach the plus() function from the outside.
+
+// We also need to find a way to execute counter = 0 only once.
+
+// We need a closure.
+
+console.log("JavaScript Closures")
+// Remember self-invoking functions? What does this function do?
+
+// Example
+const add = (function () {
+    let counter = 0;
+    return function () { counter += 1; return counter }
+})();
+
+add();
+add();
+add();
+
+// // the counter is now 3
+// Example Explained
+// The variable add is assigned to the return value of a self-invoking function.
+
+// The self-invoking function only runs once. It sets the 
+// counter to zero (0), and returns a function expression.
+// This way add becomes a function. The "wonderful" part 
+// is that it can access the counter in the parent scope.
+// This is called a JavaScript closure. It makes it possible 
+// for a function to have "private" variables.
+// The counter is protected by the scope of the anonymous 
+// function, and can only be changed using the add function.
+// A closure is a function having access to the parent scope, 
+// even after the parent function has closed.
+
+
+
+// Closures
+// A closure is the combination of a function bundled together (enclosed) 
+// with references to its surrounding state (the lexical environment). 
+// In other words, a closure gives you access to an outer function's 
+// scope from an inner function. In JavaScript, closures are created 
+// every time a function is created, at function creation time.
+
+// Lexical scoping
+// Consider the following example code:
+
+function init() {
+    var name = "Mozilla"; // name is a local variable created by init
+    function displayName() {
+        // displayName() is the inner function, that forms the closure
+        console.log(name); // use variable declared in the parent function
+    }
+    displayName();
+}
+init();
+// init() creates a local variable called name and a function 
+// called displayName(). The displayName() function is an inner 
+// function that is defined inside init() and is available only 
+// within the body of the init() function. Note that the displayName()
+//  function has no local variables of its own. However, since inner 
+// functions have access to the variables of outer functions,
+//  displayName() can access the variable name declared in 
+// the parent function, init().
+
+// Run the code using this JSFiddle link and notice that the 
+// console.log() statement within the displayName() function 
+// successfully displays the value of the name variable, which 
+// is declared in its parent function. This is an example of 
+// lexical scoping, which describes how a parser resolves 
+// variable names when functions are nested. The word lexical 
+// refers to the fact that lexical scoping uses the location 
+// where a variable is declared within the source code to
+//  determine where that variable is available. Nested functions 
+// have access to variables declared in their outer scope.
+
+// In this particular example, the scope is called a function scope, 
+// because the variable is accessible and only accessible within 
+// the function body where it's declared.
+
+// Scoping with let and const
+// Traditionally (before ES6), JavaScript only had two kinds of scopes: 
+// function scope and global scope. Variables declared with var are 
+// either function-scoped or global-scoped, depending on whether 
+// they are declared within a function or outside a function. 
+// This can be tricky, because blocks with curly braces do 
+// not create scopes:
+
+if (Math.random() > 0.5) {
+    var x = 1;
+} else {
+    var x = 2;
+}
+console.log(x);
+// In ES6, JavaScript introduced the let and const declarations, 
+// which, among other things like temporal dead zones, allow you 
+// to create block-scoped variables.
+
+if (Math.random() > 0.5) {
+    const x = 1;
+} else {
+    const x = 2;
+}
+console.log(x); // ReferenceError: x is not defined
+// In essence, blocks are finally treated as scopes in ES6, 
+// but only if you declare variables with let or const. 
+// In addition, ES6 introduced modules, which introduced 
+// another kind of scope. Closures are able to capture 
+// variables in all these scopes, which we will introduce later.
+
+// Closure
+// Consider the following code example:
+
+function makeFunc() {
+    const name = "Mozilla";
+    function displayName() {
+        console.log(name);
+    }
+    return displayName;
+}
+
+const myFunc = makeFunc();
+myFunc();
+// Running this code has exactly the same effect as 
+// the previous example of the init() function above. 
+// What's different (and interesting) is that the 
+// displayName() inner function is returned from the 
+// outer function before being executed.
+
+// At first glance, it might seem unintuitive that this 
+// code still works. In some programming languages, 
+// the local variables within a function exist for 
+// just the duration of that function's execution.
+//  Once makeFunc() finishes executing, you might 
+// expect that the name variable would no longer be 
+// accessible. However, because the code still works as expected, this is 
+// obviously not the case in JavaScript.
+
+// The reason is that functions in JavaScript form closures. A closure is 
+// the combination of a function and the lexical environment within which 
+// that function was declared. This environment consists of any local variables 
+// that were in-scope at the time the closure was created. In this case, myFunc 
+// is a reference to the instance of the function displayName that is created 
+// when makeFunc is run. The instance of displayName maintains a reference to 
+// its lexical environment, within which the variable name exists. For this 
+// reason, when myFunc is invoked, the variable name remains available for use, 
+// and "Mozilla" is passed to console.log.
+
+// Here's a slightly more interesting example—a makeAdder function:
+
+function makeAdder(x) {
+    return function (y) {
+        return x + y;
+    };
+}
+
+const add5 = makeAdder(5);
+const add10 = makeAdder(10);
+
+console.log(add5(2)); // 7
+console.log(add10(2)); // 12
+// In this example, we have defined a function makeAdder(x), that takes 
+// a single argument x, and returns a new function. The function it returns 
+// takes a single argument y, and returns the sum of x and y.
+
+// In essence, makeAdder is a function factory. It creates functions that can add 
+// a specific value to their argument. In the above example, the function 
+// factory creates two new functions—one that adds five to its argument, and 
+// one that adds 10.
+
+// add5 and add10 both form closures. They share the same function body 
+// definition, but store different lexical environments. In add5's 
+// lexical environment, x is 5, while in the lexical environment for add10, 
+// x is 10.
+
+// Practical closures
+// Closures are useful because they let you associate data (the lexical 
+// environment) with a function that operates on that data. This has obvious
+//  parallels to object-oriented programming, where objects allow you to 
+// associate data (the object's properties) with one or more methods.
+
+// Consequently, you can use a closure anywhere that you might normally use 
+// an object with only a single method.
+
+// Situations where you might want to do this are particularly common on the web.
+//  Much of the code written in front-end JavaScript is event-based. You define 
+// some behavior, and then attach it to an event that is triggered by the user 
+// (such as a click or a keypress). The code is attached as a callback 
+// (a single function that is executed in response to the event).
+
+// For instance, suppose we want to add buttons to a page to adjust the text size. 
+// One way of doing this is to specify the font-size of the body element (in pixels),
+//  and then set the size of the other elements on the page (such as headers) 
+// using the relative em unit:
+
+// CSS
+// Copy to Clipboard
+// body {
+//   font-family: Helvetica, Arial, sans-serif;
+//   font-size: 12px;
+// }
+
+// h1 {
+//   font-size: 1.5em;
+// }
+
+// h2 {
+//   font-size: 1.2em;
+// }
+// Such interactive text size buttons can change the font-size property of the body
+//  element, and the adjustments are picked up by other elements on the page thanks 
+// to the relative units.
+
+// Here's the JavaScript:
+function makeSizer(size) {
+    return function () {
+        document.body.style.fontSize = `${size}px`;
+    };
+}
+
+const size12 = makeSizer(12);
+const size14 = makeSizer(14);
+const size16 = makeSizer(16);
+// size12, size14, and size16 are now functions that resize the body text to 12, 14,
+//  and 16 pixels, respectively. You can attach them to buttons as demonstrated in 
+// the following code example.
+
+document.getElementById("size-12").onclick = size12;
+document.getElementById("size-14").onclick = size14;
+document.getElementById("size-16").onclick = size16;
+// HTML
+// Copy to Clipboard
+// <button id="size-12">12</button>
+// <button id="size-14">14</button>
+// <button id="size-16">16</button>
+// Run the code using JSFiddle.
+
+// Emulating private methods with closures
+// Languages such as Java allow you to declare methods as private, meaning that 
+// they can be called only by other methods in the same class.
+
+// JavaScript, prior to classes, didn't have a native way of declaring private 
+// methods, but it was possible to emulate private methods using closures. 
+// Private methods aren't just useful for restricting access to code. They 
+// also provide a powerful way of managing your global namespace.
+
+// The following code illustrates how to use closures to define public functions 
+// that can access private functions and variables. Note that these closures 
+// follow the Module Design Pattern.
+
+const counter = (function () {
+    let privateCounter = 0;
+    function changeBy(val) {
+        privateCounter += val;
+    }
+
+    return {
+        increment() {
+            changeBy(1);
+        },
+
+        decrement() {
+            changeBy(-1);
+        },
+
+        value() {
+            return privateCounter;
+        },
+    };
+})();
+
+console.log(counter.value()); // 0.
+
+counter.increment();
+counter.increment();
+console.log(counter.value()); // 2.
+
+counter.decrement();
+console.log(counter.value()); // 1.
+// In previous examples, each closure had its own lexical environment. Here though, 
+// there is a single lexical environment that is shared by the three functions: 
+// counter.increment, counter.decrement, and counter.value.
+
+// The shared lexical environment is created in the body of an anonymous function, 
+// which is executed as soon as it has been defined (also known as an IIFE). The 
+// lexical environment contains two private items: a variable called privateCounter,
+//  and a function called changeBy. You can't access either of these private members 
+// from outside the anonymous function. Instead, you can access them using the three
+//  public functions that are returned from the anonymous wrapper.
+
+
+// Those three public functions form closures that share the same lexical environment.
+//  Thanks to JavaScript's lexical scoping, they each have access to the 
+// privateCounter variable and the changeBy function.
+
+const makeCounter = function () {
+    let privateCounter = 0;
+    function changeBy(val) {
+        privateCounter += val;
+    }
+    return {
+        increment() {
+            changeBy(1);
+        },
+
+        decrement() {
+            changeBy(-1);
+        },
+
+        value() {
+            return privateCounter;
+        },
+    };
+};
+
+const counter1 = makeCounter();
+const counter2 = makeCounter();
+
+console.log(counter1.value()); // 0.
+
+counter1.increment();
+counter1.increment();
+console.log(counter1.value()); // 2.
+
+counter1.decrement();
+console.log(counter1.value()); // 1.
+console.log(counter2.value()); // 0.
+// Notice how the two counters maintain their independence from one another. Each 
+// closure references a different version of the privateCounter variable through its 
+// own closure. Each time one of the counters is called, its lexical environment 
+// changes by changing the value of this variable. Changes to the variable value in 
+// one closure don't affect the value in the other closure.
+
+// Note: Using closures in this way provides benefits that are normally associated 
+// with object-oriented programming. In particular, data hiding and encapsulation.
+
+// Closure scope chain
+// Every closure has three scopes:
+
+// Local scope (Own scope)
+// Enclosing scope (can be block, function, or module scope)
+// Global scope
+// A common mistake is not realizing that in the case where the outer function is 
+// itself a nested function, access to the outer function's scope includes the 
+// enclosing scope of the outer function—effectively creating a chain of function 
+// scopes. To demonstrate, consider the following example code.
+
+// global scope
+const e = 10;
+function sum(a) {
+    return function (b) {
+        return function (c) {
+            // outer functions scope
+            return function (d) {
+                // local scope
+                return a + b + c + d + e;
+            };
+        };
+    };
+}
+
+console.log(sum(1)(2)(3)(4)); // 20
+// You can also write without anonymous functions:
+
+// global scope
+const e = 10;
+function sum(a) {
+    return function sum2(b) {
+        return function sum3(c) {
+            // outer functions scope
+            return function sum4(d) {
+                // local scope
+                return a + b + c + d + e;
+            };
+        };
+    };
+}
+
+const sum2 = sum(1);
+const sum3 = sum2(2);
+const sum4 = sum3(3);
+const result = sum4(4);
+console.log(result); // 20
+// In the example above, there's a series of nested functions, all of which have
+//  access to the outer functions' scope. In this context, we can say that closures 
+// have access to all outer function scopes.
+
+// Closures can capture variables in block scopes and module scopes as well. For 
+// example, the following creates a closure over the block-scoped variable y:
+
+function outer() {
+    let getY;
+    {
+        const y = 6;
+        getY = () => y;
+    }
+    console.log(typeof y); // undefined
+    console.log(getY()); // 6
+}
+
+outer();
+// Closures over modules can be more interesting.
+// myModule.js
+let x = 5;
+export const getX = () => x;
+export const setX = (val) => {
+    x = val;
+};
+// Here, the module exports a pair of getter-setter functions, which close over the 
+// module-scoped variable x. Even when x is not directly accessible from other 
+// modules, it can be read and written with the functions.
+
+import { getX, setX } from "./myModule.js";
+
+console.log(getX()); // 5
+setX(6);
+console.log(getX()); // 6
+// Closures can close over imported values as well, which are regarded as live 
+// bindings, because when the original value changes, the imported one changes 
+// accordingly.
+
+// myModule.js
+export let x = 1;
+export const setX = (val) => {
+    x = val;
+};
+// closureCreator.js
+import { x } from "./myModule.js";
+
+export const getX = () => x; // Close over an imported live binding
+// JS
+// Copy to Clipboard
+import { getX } from "./closureCreator.js";
+import { setX } from "./myModule.js";
+
+console.log(getX()); // 1
+setX(2);
+console.log(getX()); // 2
+// Creating closures in loops: A common mistake
+// Prior to the introduction of the let keyword, a common problem with closures
+//  occurred when you created them inside a loop. To demonstrate, consider the 
+// following example code.
+
+// HTML
+// Copy to Clipboard
+// <p id="help">Helpful notes will appear here</p>
+// <p>Email: <input type="text" id="email" name="email" /></p>
+// <p>Name: <input type="text" id="name" name="name" /></p>
+// <p>Age: <input type="text" id="age" name="age" /></p>
+// JS
+// Copy to Clipboard
+function showHelp(help) {
+    document.getElementById("help").textContent = help;
+}
+
+function setupHelp() {
+    var helpText = [
+        { id: "email", help: "Your email address" },
+        { id: "name", help: "Your full name" },
+        { id: "age", help: "Your age (you must be over 16)" },
+    ];
+
+    for (var i = 0; i < helpText.length; i++) {
+        // Culprit is the use of `var` on this line
+        var item = helpText[i];
+        document.getElementById(item.id).onfocus = function () {
+            showHelp(item.help);
+        };
+    }
+}
+
+setupHelp();
+// Try running the code in JSFiddle.
+
+// The helpText array defines three helpful hints, each associated with the ID of an 
+// input field in the document. The loop cycles through these definitions, hooking up 
+// an onfocus event to each one that shows the associated help method.
+
+// If you try this code out, you'll see that it doesn't work as expected. No matter 
+// what field you focus on, the message about your age will be displayed.
+
+// The reason for this is that the functions assigned to onfocus form closures; they
+//  consist of the function definition and the captured environment from the setupHelp
+//  function's scope. Three closures have been created by the loop, but each one 
+// shares the same single lexical environment, which has a variable with changing 
+// values (item). This is because the variable item is declared with var and thus has
+//  function scope due to hoisting. The value of item.help is determined when the 
+// onfocus callbacks are executed. Because the loop has already run its course by that
+//  time, the item variable object (shared by all three closures) has been left 
+// pointing to the last entry in the helpText list.
+
+// One solution in this case is to use more closures: in particular, to use a function
+//  factory as described earlier:
+
+function showHelp(help) {
+    document.getElementById("help").textContent = help;
+}
+
+function makeHelpCallback(help) {
+    return function () {
+        showHelp(help);
+    };
+}
+
+function setupHelp() {
+    var helpText = [
+        { id: "email", help: "Your email address" },
+        { id: "name", help: "Your full name" },
+        { id: "age", help: "Your age (you must be over 16)" },
+    ];
+
+    for (var i = 0; i < helpText.length; i++) {
+        var item = helpText[i];
+        document.getElementById(item.id).onfocus = makeHelpCallback(item.help);
+    }
+}
+
+setupHelp();
+// Run the code using this JSFiddle link.
+
+// This works as expected. Rather than the callbacks all sharing a single lexical 
+// environment, the makeHelpCallback function creates a new lexical environment for
+//  each callback, in which help refers to the corresponding string from the helpText array.
+
+// One other way to write the above using anonymous closures is:
+
+function showHelp(help) {
+    document.getElementById("help").textContent = help;
+}
+
+function setupHelp() {
+    var helpText = [
+        { id: "email", help: "Your email address" },
+        { id: "name", help: "Your full name" },
+        { id: "age", help: "Your age (you must be over 16)" },
+    ];
+
+    for (var i = 0; i < helpText.length; i++) {
+        (function () {
+            var item = helpText[i];
+            document.getElementById(item.id).onfocus = function () {
+                showHelp(item.help);
+            };
+        })(); // Immediate event listener attachment with the current value of item (preserved until iteration).
+    }
+}
+
+setupHelp();
+// If you don't want to use more closures, you can use the let or const keyword:
+
+function showHelp(help) {
+    document.getElementById("help").textContent = help;
+}
+
+function setupHelp() {
+    const helpText = [
+        { id: "email", help: "Your email address" },
+        { id: "name", help: "Your full name" },
+        { id: "age", help: "Your age (you must be over 16)" },
+    ];
+
+    for (let i = 0; i < helpText.length; i++) {
+        const item = helpText[i];
+        document.getElementById(item.id).onfocus = () => {
+            showHelp(item.help);
+        };
+    }
+}
+
+setupHelp();
+// This example uses const instead of var, so every closure binds the block-scoped 
+// variable, meaning that no additional closures are required.
+
+// Another alternative could be to use forEach() to iterate over the helpText array 
+// and attach a listener to each <input>, as shown:
+
+function showHelp(help) {
+    document.getElementById("help").textContent = help;
+}
+
+function setupHelp() {
+    var helpText = [
+        { id: "email", help: "Your email address" },
+        { id: "name", help: "Your full name" },
+        { id: "age", help: "Your age (you must be over 16)" },
+    ];
+
+    helpText.forEach(function (text) {
+        document.getElementById(text.id).onfocus = function () {
+            showHelp(text.help);
+        };
+    });
+}
+
+setupHelp();
+// Performance considerations
+// As mentioned previously, each function instance manages its own scope and closure.
+//  Therefore, it is unwise to unnecessarily create functions within other functions 
+// if closures are not needed for a particular task, as it will negatively affect 
+// script performance both in terms of processing speed and memory consumption.
+
+// For instance, when creating a new object/class, methods should normally be 
+// associated to the object's prototype rather than defined into the object 
+// constructor. The reason is that whenever the constructor is called, the methods 
+// would get reassigned (that is, for every object creation).
+
+// Consider the following case:
+
+function MyObject(name, message) {
+    this.name = name.toString();
+    this.message = message.toString();
+    this.getName = function () {
+        return this.name;
+    };
+
+    this.getMessage = function () {
+        return this.message;
+    };
+}
+// Because the previous code does not take advantage of the benefits of using closures
+//  in this particular instance, we could instead rewrite it to avoid using closures
+//  as follows:
+
+function MyObject(name, message) {
+    this.name = name.toString();
+    this.message = message.toString();
+}
+MyObject.prototype = {
+    getName() {
+        return this.name;
+    },
+    getMessage() {
+        return this.message;
+    },
+};
+// However, redefining the prototype is not recommended. The following example 
+// instead appends to the existing prototype:
+
+function MyObject(name, message) {
+    this.name = name.toString();
+    this.message = message.toString();
+}
+MyObject.prototype.getName = function () {
+    return this.name;
+};
+MyObject.prototype.getMessage = function () {
+    return this.message;
+};
+// In the two previous examples, the inherited prototype can be shared by all objects
+//  and the method definitions need not occur at every object creation. See
+// Inheritance and the prototype chain for more.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// functions - mdn 
+
+// Functions
+// Generally speaking, a function is 
+// a "subprogram" that can be called 
+// by code external (or internal, in 
+// the case of recursion) to the function. 
+// Like the program itself, a function 
+// is composed of a sequence of statements 
+// called the function body. Values can 
+// be passed to a function as parameters, 
+// and the function will return a value.
+
+// In JavaScript, functions are first-class 
+// objects, because they can be passed to 
+// other functions, returned from functions, 
+// and assigned to variables and properties. 
+// They can also have properties and methods 
+// just like any other object. What distinguishes 
+// them from other objects is that functions 
+// can be called.
+
+// For more examples and explanations, 
+// see the JavaScript guide about functions.
+
+// Description
+// Function values are typically instances 
+// of Function. See Function for information 
+// on properties and methods of Function objects. 
+// Callable values cause typeof to return 
+// "function" instead of "object".
+
+// Note: Not all callable values are instanceof 
+// Function. For example, the Function.prototype 
+// object is callable but not an instance of Function. 
+// You can also manually set the prototype chain of 
+// your function so it no longer inherits from 
+// Function.prototype. However, such cases are 
+// extremely rare.
+
+// Return value
+// By default, if a function's execution doesn't 
+// end at a return statement, or if the return 
+// keyword doesn't have an expression after it, 
+// then the return value is undefined. The return 
+// statement allows you to return an arbitrary 
+// value from the function. One function call 
+// can only return one value, but you can simulate 
+// the effect of returning multiple values by 
+// returning an object or array and destructuring the result.
+
+// Note: Constructors called with new have a 
+// different set of logic to determine their return values.
+
+// Passing arguments
+// Parameters and arguments have slightly different 
+// meanings, but in MDN web docs, we often use 
+// them interchangeably. For a quick reference:
+
+// JS
+// Copy to Clipboard
+function formatNumber(num) {
+  return num.toFixed(2);
+}
+
+formatNumber(2);
+// In this example, the num variable is 
+// called the function's parameter: it's 
+// declared in the parenthesis-enclosed 
+// list of the function's definition. The 
+// function expects the num parameter to be 
+// a number — although this is not enforceable 
+// in JavaScript without writing runtime 
+// validation code. In the formatNumber(2) 
+// call, the number 2 is the function's 
+// argument: it's the value that is actually 
+// passed to the function in the function call. 
+// The argument value can be accessed inside 
+// the function body through the corresponding 
+// parameter name or the arguments object.
+
+// Arguments are always passed by value and 
+// never passed by reference. This means that 
+// if a function reassigns a parameter, the 
+// value won't change outside the function. 
+// More precisely, object arguments are passed 
+// by sharing, which means if the object's 
+// properties are mutated, the change will 
+// impact the outside of the function. For example:
+
+// JS
+// Copy to Clipboard
+function updateBrand(obj) {
+  // Mutating the object is visible outside the function
+  obj.brand = "Toyota";
+  // Try to reassign the parameter, but this won't affect
+  // the variable's value outside the function
+  obj = null;
+}
+
+const car = {
+  brand: "Honda",
+  model: "Accord",
+  year: 1998,
+};
+
+console.log(car.brand); // Honda
+
+// Pass object reference to the function
+updateBrand(car);
+
+// updateBrand mutates car
+console.log(car.brand); // Toyota
+// The this keyword refers to the object 
+// that the function is accessed on — it 
+// does not refer to the currently executing 
+// function, so you must refer to the function 
+// value by name, even within the function body.
+
+// Defining functions
+// Broadly speaking, JavaScript has 
+// four kinds of functions:
+
+// Regular function: can return anything; 
+// always runs to completion after invocation
+// Generator function: returns a Generator 
+// object; can be paused and resumed with the yield operator
+// Async function: returns a Promise; can be 
+// paused and resumed with the await operator
+// Async generator function: returns an 
+// AsyncGenerator object; both the await 
+// and yield operators can be used
+// For every kind of function, there are 
+// three ways to define it:
+
+// Declaration
+// function, function*, async function, async function*
+
+// Expression
+// function, function*, async function, async function*
+
+// Constructor
+// Function(), GeneratorFunction(), AsyncFunction(), AsyncGeneratorFunction()
+
+// In addition, there are special syntaxes 
+// for defining arrow functions and methods, 
+// which provide more precise semantics for 
+// their usage. Classes are conceptually not 
+// functions (because they throw an error when 
+// called without new), but they also inherit 
+// from Function.prototype and have typeof MyClass === "function".
+
+// JS
+// Copy to Clipboard
+// Constructor
+const multiply = new Function("x", "y", "return x * y");
+
+// Declaration
+function multiply(x, y) {
+  return x * y;
+} // No need for semicolon here
+
+// Expression; the function is anonymous but assigned to a variable
+const multiply = function (x, y) {
+  return x * y;
+};
+// Expression; the function has its own name
+const multiply = function funcName(x, y) {
+  return x * y;
+};
+
+// Arrow function
+const multiply = (x, y) => x * y;
+
+// Method
+const obj = {
+  multiply(x, y) {
+    return x * y;
+  },
+};
+// All syntaxes do approximately the same 
+// thing, but there are some subtle behavior differences.
+
+// The Function() constructor, function 
+// expression, and function declaration syntaxes 
+// create full-fledged function objects, which 
+// can be constructed with new. However, 
+// arrow functions and methods cannot be 
+// constructed. Async functions, generator 
+// functions, and async generator functions 
+// are not constructible regardless of syntax.
+
+// The function declaration creates functions 
+// that are hoisted. Other syntaxes do not hoist 
+// the function and the function value is only 
+// visible after the definition.
+
+// The arrow function and Function() constructor 
+// always create anonymous functions, which means 
+// they can't easily call themselves recursively. 
+// One way to call an arrow function recursively 
+// is by assigning it to a variable.
+
+// The arrow function syntax does not have 
+// access to arguments or this.
+
+// The Function() constructor cannot access 
+// any local variables — it only has access 
+// to the global scope.
+
+// The Function() constructor causes runtime 
+// compilation and is often slower than other syntaxes.
+
+// For function expressions, there is a distinction 
+// between the function name and the variable the 
+// function is assigned to. The function name 
+// cannot be changed, while the variable the 
+// function is assigned to can be reassigned. 
+// The function name can be different from the 
+// variable the function is assigned to — they 
+// have no relation to each other. The function 
+// name can be used only within the function's body. 
+// Attempting to use it outside the function's body 
+// results in an error (or gets another value, if 
+// the same name is declared elsewhere). For example:
+
+// JS
+// Copy to Clipboard
+const y = function x() {};
+console.log(x); // ReferenceError: x is not defined
+
+// On the other hand, the variable the function 
+// is assigned to is limited only by its scope, 
+// which is guaranteed to include the scope in 
+// which the function is declared.
+
+// A function declaration also creates a 
+// variable with the same name as the function 
+// name. Thus, unlike those defined by function 
+// expressions, functions defined by function 
+// declarations can be accessed by their name 
+// in the scope they were defined in, as well 
+// as in their own body.
+
+// A function defined by new Function will 
+// dynamically have its source assembled, 
+// which is observable when you serialize it. 
+// For example, console.log(new Function().toString()) gives:
+
+// JS
+// Copy to Clipboard
+function anonymous(
+) {
+
+}
+// This is the actual source used to 
+// compile the function. However, although 
+// the Function() constructor will create 
+// the function with name anonymous, this name 
+// is not added to the scope of the body. The 
+// body only ever has access to global variables. 
+// For example, the following would result in an error:
+
+// JS
+// Copy to Clipboard
+new Function("alert(anonymous);")();
+// A function defined by a function expression 
+// or by a function declaration inherits the 
+// current scope. That is, the function forms 
+// a closure. On the other hand, a function 
+// defined by a Function constructor does not 
+// inherit any scope other than the global 
+// scope (which all functions inherit).
+
+// JS
+// Copy to Clipboard
+// p is a global variable
+globalThis.p = 5;
+function myFunc() {
+  // p is a local variable
+  const p = 9;
+
+  function decl() {
+    console.log(p);
+  }
+  const expr = function () {
+    console.log(p);
+  };
+  const cons = new Function("\tconsole.log(p);");
+
+  decl();
+  expr();
+  cons();
+}
+myFunc();
+
+// Logs:
+// 9 (for 'decl' by function declaration (current scope))
+// 9 (for 'expr' by function expression (current scope))
+// 5 (for 'cons' by Function constructor (global scope))
+
+// Functions defined by function expressions and 
+// function declarations are parsed only once, 
+// while a function defined by the Function 
+// constructor parses the string passed to 
+// it each and every time the constructor 
+// is called. Although a function expression 
+// creates a closure every time, the function 
+// body is not reparsed, so function expressions 
+// are still faster than new Function(...). 
+// Therefore the Function constructor should 
+// generally be avoided whenever possible.
+
+// A function declaration may be unintentionally 
+// turned into a function expression when it 
+// appears in an expression context.
+
+// JS
+// Copy to Clipboard
+// A function declaration
+function foo() {
+  console.log("FOO!");
+}
+
+doSomething(
+  // A function expression passed as an argument
+  function foo() {
+    console.log("FOO!");
+  },
+);
+// On the other hand, a function expression 
+// may also be turned into a function declaration. 
+// An expression statement cannot begin with 
+// the function or async function keywords, 
+// which is a common mistake when implementing 
+// IIFEs (Immediately Invoked Function Expressions).
+
+// JS
+// Copy to Clipboard
+function () { // SyntaxError: Function statements require a function name
+  console.log("FOO!");
+}();
+
+function foo() {
+  console.log("FOO!");
+}(); // SyntaxError: Unexpected token ')'
+// Instead, start the expression statement 
+// with something else, so that the function 
+// keyword unambiguously starts a function 
+// expression. Common options include 
+// grouping and using void.
+
+// JS
+// Copy to Clipboard
+(function () {
+  console.log("FOO!");
+})();
+
+void function () {
+  console.log("FOO!");
+}();
+// Function parameters
+// Each function parameter is a simple 
+// identifier that you can access in the local scope.
+
+// JS
+// Copy to Clipboard
+function myFunc(a, b, c) {
+  // You can access the values of a, b, and c here
+}
+// There are three special parameter syntaxes:
+
+// Default parameters allow formal parameters 
+// to be initialized with default values if 
+// no value or undefined is passed.
+
+// The rest parameter allows representing 
+// an indefinite number of arguments as an array.
+
+// Destructuring allows unpacking elements 
+// from arrays, or properties from objects, 
+// into distinct variables.
+
+// JS
+// Copy to Clipboard
+function myFunc({ a, b }, c = 1, ...rest) {
+  // You can access the values of a, b, c, and rest here
+}
+// There are some consequences if one of 
+// the above non-simple parameter syntaxes is used:
+
+// You cannot apply "use strict" to the 
+// function body — this causes a syntax error.
+
+// Even if the function is not in strict mode, 
+// the arguments object stops syncing with 
+// the named parameters, and arguments.callee 
+// throws an error when accessed.
+
+// The arguments object
+// You can refer to a function's arguments 
+// within the function by using the arguments object.
+
+// arguments
+// An array-like object containing the arguments 
+// passed to the currently executing function.
+
+// arguments.callee
+// The currently executing function.
+
+// arguments.length
+// The number of arguments passed to the function.
+
+// Getter and setter functions
+// You can define accessor properties on any 
+// standard built-in object or user-defined 
+// object that supports the addition of new 
+// properties. Within object literals and 
+// classes, you can use special syntaxes 
+// to define the getter and setter of an 
+// accessor property.
+
+// get
+// Binds an object property to a function 
+// that will be called when that property is looked up.
+
+// set
+// Binds an object property to a function 
+// to be called when there is an attempt 
+// to set that property.
+
+// Note that these syntaxes create an object 
+// property, not a method. The getter and 
+// setter functions themselves can only be 
+// accessed using reflective APIs such as 
+// Object.getOwnPropertyDescriptor().
+
+// Block-level functions
+// In strict mode, functions inside blocks 
+// are scoped to that block. Prior to ES2015, 
+// block-level functions were forbidden in strict mode.
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+function f() {
+  return 1;
+}
+
+{
+  function f() {
+    return 2;
+  }
+}
+
+f() === 1; // true
+
+// f() === 2 in non-strict mode
+// Block-level functions in non-strict code
+// In a word: Don't.
+
+// In non-strict code, function declarations 
+// inside blocks behave strangely. For example:
+
+// JS
+// Copy to Clipboard
+if (shouldDefineZero) {
+  function zero() {
+    // DANGER: compatibility risk
+    console.log("This is zero.");
+  }
+}
+// The semantics of this in strict mode are 
+// well-specified — zero only ever exists 
+// within that scope of the if block. If 
+// shouldDefineZero is false, then zero 
+// should never be defined, since the block 
+// never executes. However, historically, 
+// this was left unspecified, so different 
+// browsers implemented it differently in 
+// non-strict mode. For more information,
+//  see the function declaration reference.
+
+// A safer way to define functions conditionally 
+// is to assign a function expression to a variable:
+
+// JS
+// Copy to Clipboard
+// Using a var makes it available as a global variable,
+// with closer behavior to a top-level function declaration
+var zero;
+if (shouldDefineZero) {
+  zero = function () {
+    console.log("This is zero.");
+  };
+}
+// Examples
+// Returning a formatted number
+// The following function returns a string 
+// containing the formatted representation 
+// of a number padded with leading zeros.
+
+// JS
+// Copy to Clipboard
+// This function returns a string padded with leading zeros
+function padZeros(num, totalLen) {
+  let numStr = num.toString(); // Initialize return value as string
+  const numZeros = totalLen - numStr.length; // Calculate no. of zeros
+  for (let i = 1; i <= numZeros; i++) {
+    numStr = `0${numStr}`;
+  }
+  return numStr;
+}
+// The following statements call the padZeros function.
+
+// JS
+// Copy to Clipboard
+let result;
+result = padZeros(42, 4); // returns "0042"
+result = padZeros(42, 2); // returns "42"
+result = padZeros(5, 4); // returns "0005"
+
+// Determining whether a function exists
+// You can determine whether a function exists 
+// by using the typeof operator. In the following 
+// example, a test is performed to determine if 
+// the window object has a property called noFunc 
+// that is a function. If so, it is used;
+//  otherwise, some other action is taken.
+
+// JS
+// Copy to Clipboard
+if (typeof window.noFunc === "function") {
+  // use noFunc()
+} else {
+  // do something else
+}
+// Note that in the if test, a reference to 
+// noFunc is used — there are no parentheses 
+// () after the function name so the actual 
+// function is not called.
+
+
+// Arrow function expressions
+// An arrow function expression is 
+// a compact alternative to a traditional 
+// function expression, with some semantic 
+// differences and deliberate limitations in usage:
+
+// Arrow functions don't have their own 
+// bindings to this, arguments, or super, 
+// and should not be used as methods.
+
+// Arrow functions cannot be used as 
+// constructors.Calling them with new throws 
+// a TypeError.They also don't have access 
+// to the new.target keyword.
+
+// Arrow functions cannot use yield within 
+// their body and cannot be created as generator functions.
+// Try it
+
+const materials = ['Hydrogen', 'Helium', 'Lithium', 'Beryllium'];
+
+console.log(materials.map((material) => material.length));
+// Expected output: Array [8, 6, 7, 9]
+
+// Syntax
+// JS
+// Copy to Clipboard
+() => expression
+
+param => expression
+
+    (param) => expression
+
+        (param1, paramN) => expression
+
+            () => {
+    statements
+}
+
+param => {
+    statements
+}
+
+(param1, paramN) => {
+    statements
+}
+// Rest parameters, default parameters, 
+// and destructuring within params 
+// are supported, and always require parentheses:
+
+// JS
+// Copy to Clipboard
+(a, b, ...r) => expression
+    (a = 400, b = 20, c) => expression
+        ([a, b] = [10, 20]) => expression
+            ({ a, b } = { a: 10, b: 20 }) => expression
+// Arrow functions can be async 
+// by prefixing the expression 
+// with the async keyword.
+
+//     JS
+// Copy to Clipboard
+async param => expression
+async (param1, param2, ...paramN) => {
+    statements
+}
+// Description
+// Let's decompose a traditional anonymous 
+// function down to the simplest arrow function 
+// step-by-step. Each step along the way is 
+// a valid arrow function.
+
+// Note: Traditional function expressions 
+// and arrow functions have more differences 
+// than their syntax.We will introduce their 
+// behavior differences in more detail in 
+// the next few subsections.
+
+//     JS
+// Copy to Clipboard
+// Traditional anonymous function
+(function (a) {
+    return a + 100;
+});
+
+// // 1. Remove the word "function" and 
+// place arrow between the argument and 
+// opening body brace
+(a) => {
+    return a + 100;
+};
+
+// 2. Remove the body braces and word 
+// "return" — the return is implied.
+(a) => a + 100;
+
+// 3. Remove the parameter parentheses
+a => a + 100;
+// In the example above, both the parentheses 
+// around the parameter and the braces around 
+// the function body may be omitted.However, 
+// they can only be omitted in certain cases.
+
+// The parentheses can only be omitted if the 
+// function has a single simple parameter.If 
+// it has multiple parameters, no parameters, 
+// or default, destructured, or rest parameters, 
+// the parentheses around the parameter list are required.
+
+//     JS
+// Copy to Clipboard
+// Traditional anonymous function
+(function (a, b) {
+    return a + b + 100;
+});
+
+// Arrow function
+(a, b) => a + b + 100;
+
+const a = 4;
+const b = 2;
+
+// Traditional anonymous function (no parameters)
+(function () {
+    return a + b + 100;
+});
+
+// Arrow function (no parameters)
+() => a + b + 100;
+// The braces can only be omitted if the 
+// function directly returns an expression.If 
+// the body has additional lines of processing, 
+// the braces are required — and so is the 
+// return keyword.Arrow functions cannot 
+// guess what or when you want to return.
+
+//     JS
+// Copy to Clipboard
+// Traditional anonymous function
+(function (a, b) {
+    const chuck = 42;
+    return a + b + chuck;
+});
+
+// Arrow function
+(a, b) => {
+    const chuck = 42;
+    return a + b + chuck;
+};
+// Arrow functions are always unnamed.If the 
+// arrow function needs to call itself, use 
+// a named function expression instead.You 
+// can also assign the arrow function to 
+// a variable so it has a name.
+
+//     JS
+// Copy to Clipboard
+// Traditional Function
+function bob(a) {
+    return a + 100;
+}
+
+// Arrow Function
+const bob2 = (a) => a + 100;
+// Function body
+// Arrow functions can have either an 
+// expression body or the usual block body.
+
+// In an expression body, only a single 
+// expression is specified, which becomes 
+// the implicit return value.In a block 
+// body, you must use an explicit return statement.
+
+//     JS
+// Copy to Clipboard
+const func = (x) => x * x;
+// expression body syntax, implied "return"
+
+const func2 = (x, y) => {
+    return x + y;
+};
+// with block body, explicit "return" needed
+
+// Returning object literals using the 
+// expression body syntax 
+// (params) => { object: literal } 
+// does not work as expected.
+
+//     JS
+// Copy to Clipboard
+const func = () => { foo: 1 };
+// Calling func() returns undefined!
+
+const func2 = () => { foo: function () { } };
+// SyntaxError: function statement requires a name
+
+const func3 = () => { foo() { } };
+// SyntaxError: Unexpected token '{'
+// This is because JavaScript only sees 
+// the arrow function as having an expression 
+// body if the token following the arrow is 
+// not a left brace, so the code inside 
+// braces({}) is parsed as a sequence of 
+// statements, where foo is a label, not 
+// a key in an object literal.
+
+// To fix this, wrap the object literal in parentheses:
+
+// JS
+// Copy to Clipboard
+const func = () => ({ foo: 1 });
+// Cannot be used as methods
+// Arrow function expressions should only be 
+// used for non - method functions because 
+// they do not have their own this.Let's 
+// see what happens when we try to use them as methods:
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+const obj = {
+    i: 10,
+    b: () => console.log(this.i, this),
+    c() {
+        console.log(this.i, this);
+    },
+};
+
+obj.b(); // logs undefined, Window { /* … */ } (or the global object)
+obj.c(); // logs 10, Object { /* … */ }
+// Another example involving Object.defineProperty():
+
+// JS
+// Copy to Clipboard
+"use strict";
+
+const obj = {
+    a: 10,
+};
+
+Object.defineProperty(obj, "b", {
+    get: () => {
+        console.log(this.a, typeof this.a, this); // undefined 'undefined' Window { /* … */ } (or the global object)
+        return this.a + 10; // represents global object 'Window', therefore 'this.a' returns 'undefined'
+    },
+});
+// Because a class's body has a this 
+// context, arrow functions as class 
+// fields close over the class's this 
+// context, and the this inside the arrow 
+// function's body will correctly point 
+// to the instance (or the class itself, 
+// for static fields). However, because it 
+// is a closure, not the function's own binding, 
+// the value of this will not change based 
+// on the execution context.
+
+//     JS
+// Copy to Clipboard
+class C {
+    a = 1;
+    autoBoundMethod = () => {
+        console.log(this.a);
+    };
+}
+
+const c = new C();
+c.autoBoundMethod(); // 1
+const { autoBoundMethod } = c;
+autoBoundMethod(); // 1
+// If it were a normal method, it 
+// should be undefined in this case
+
+// Arrow function properties are 
+// often said to be "auto-bound methods", 
+// because the equivalent with normal methods is:
+
+// JS
+// Copy to Clipboard
+class C {
+    a = 1;
+    constructor() {
+        this.method = this.method.bind(this);
+    }
+    method() {
+        console.log(this.a);
+    }
+}
+// Note: Class fields are defined on the 
+// instance, not on the prototype, so every 
+// instance creation would create a new 
+// function reference and allocate a new 
+// closure, potentially leading to more 
+// memory usage than a normal unbound method.
+
+// For similar reasons, the call(), apply(), 
+// and bind() methods are not useful when 
+// called on arrow functions, because arrow 
+// functions establish this based on the scope 
+// the arrow function is defined within, and 
+// the this value does not change based on 
+// how the function is invoked.
+
+// No binding of arguments
+// Arrow functions do not have their own 
+// arguments object.Thus, in this example, 
+// arguments is a reference to the arguments 
+// of the enclosing scope:
+
+// JS
+// Copy to Clipboard
+function foo(n) {
+    const f = () => arguments[0] + n; // foo's implicit arguments binding. arguments[0] is n
+    return f();
+}
+
+foo(3); // 3 + 3 = 6
+// Note: You cannot declare a variable 
+// called arguments in strict mode, so 
+// the code above would be a syntax 
+// error.This makes the scoping effect 
+// of arguments much easier to comprehend.
+
+// In most cases, using rest parameters is 
+// a good alternative to using an arguments object.
+
+//     JS
+// Copy to Clipboard
+function foo(n) {
+    const f = (...args) => args[0] + n;
+    return f(10);
+}
+
+foo(1); // 11
+// Cannot be used as constructors
+// Arrow functions cannot be used as 
+// constructors and will throw an error 
+// when called with new.They also do 
+// not have a prototype property.
+
+//     JS
+// Copy to Clipboard
+const Foo = () => { };
+const foo = new Foo(); // TypeError: Foo is not a constructor
+console.log("prototype" in Foo); // false
+// Cannot be used as generators
+// The yield keyword cannot be used in 
+// an arrow function's body (except when 
+// used within generator functions further 
+// nested within the arrow function). As a 
+// consequence, arrow functions cannot be 
+// used as generators.
+
+// Line break before arrow
+// An arrow function cannot contain a 
+// line break between its parameters 
+// and its arrow.
+
+//     JS
+// Copy to Clipboard
+const func = (a, b, c)
+    => 1;
+// SyntaxError: Unexpected token '=>'
+// For the purpose of formatting, you 
+// may put the line break after the 
+// arrow or use parentheses / braces 
+// around the function body, as shown 
+// below.You can also put line breaks 
+// between parameters.
+
+//     JS
+// Copy to Clipboard
+const func = (a, b, c) =>
+    1;
+
+const func2 = (a, b, c) => (
+    1
+);
+
+const func3 = (a, b, c) => {
+    return 1;
+};
+
+const func4 = (
+    a,
+    b,
+    c,
+) => 1;
+// Precedence of arrow
+// Although the arrow in an arrow 
+// function is not an operator, arrow 
+// functions have special parsing rules 
+// that interact differently with operator 
+// precedence compared to regular functions.
+
+//     JS
+// Copy to Clipboard
+let callback;
+
+callback = callback || () => { };
+// SyntaxError: invalid arrow-function arguments
+// Because => has a lower precedence than 
+// most operators, parentheses are necessary 
+// to avoid callback || () being parsed as 
+// the arguments list of the arrow function.
+
+// JS
+// Copy to Clipboard
+callback = callback || (() => { });
+// Examples
+// Using arrow functions
+// JS
+// Copy to Clipboard
+// An empty arrow function returns undefined
+const empty = () => { };
+
+(() => "foobar")();
+// Returns "foobar"
+// (this is an Immediately Invoked Function Expression)
+
+const simple = (a) => (a > 15 ? 15 : a);
+simple(16); // 15
+simple(10); // 10
+
+const max = (a, b) => (a > b ? a : b);
+
+// Easy array filtering, mapping, etc.
+const arr = [5, 6, 13, 0, 1, 18, 23];
+
+const sum = arr.reduce((a, b) => a + b);
+// 66
+
+const even = arr.filter((v) => v % 2 === 0);
+// [6, 0, 18]
+
+const double = arr.map((v) => v * 2);
+// [10, 12, 26, 0, 2, 36, 46]
+
+// More concise promise chains
+promise
+    .then((a) => {
+        // …
+    })
+    .then((b) => {
+        // …
+    });
+
+// Parameterless arrow functions 
+// that are visually easier to parse
+setTimeout(() => {
+    console.log("I happen sooner");
+    setTimeout(() => {
+        // deeper code
+        console.log("I happen later");
+    }, 1);
+}, 1);
+// Using call, bind, and apply
+// The call(), apply(), and bind() methods 
+// work as expected with traditional functions, 
+// because we establish the scope for each of the methods:
+
+//     JS
+// Copy to Clipboard
+const obj = {
+    num: 100,
+};
+
+// Setting "num" on globalThis to 
+// show how it is NOT used.
+globalThis.num = 42;
+
+// A simple traditional function to operate on "this"
+const add = function (a, b, c) {
+    return this.num + a + b + c;
+};
+
+console.log(add.call(obj, 1, 2, 3)); // 106
+console.log(add.apply(obj, [1, 2, 3])); // 106
+const boundAdd = add.bind(obj);
+console.log(boundAdd(1, 2, 3)); // 106
+// With arrow functions, since our add 
+// function is essentially created on the globalThis(global) scope, it will assume this is the globalThis.
+
+//     JS
+// Copy to Clipboard
+const obj = {
+    num: 100,
+};
+
+// Setting "num" on globalThis to show 
+// how it gets picked up.
+globalThis.num = 42;
+
+// Arrow function
+const add = (a, b, c) => this.num + a + b + c;
+
+console.log(add.call(obj, 1, 2, 3)); // 48
+console.log(add.apply(obj, [1, 2, 3])); // 48
+const boundAdd = add.bind(obj);
+console.log(boundAdd(1, 2, 3)); // 48
+// Perhaps the greatest benefit of using 
+// arrow functions is with methods like 
+// setTimeout() and 
+// EventTarget.prototype.addEventListener() 
+// that usually require some kind of closure, 
+// call(), apply(), or bind() to ensure that 
+// the function is executed in the proper scope.
+
+// With traditional function expressions,
+//  code like this does not work as expected:
+
+// JS
+// Copy to Clipboard
+const obj = {
+    count: 10,
+    doSomethingLater() {
+        setTimeout(function () {
+            // the function executes on the window scope
+            this.count++;
+            console.log(this.count);
+        }, 300);
+    },
+};
+
+obj.doSomethingLater(); // logs "NaN", because the property "count" is not in the window scope.
+// With arrow functions, the this scope 
+// is more easily preserved:
+
+// JS
+// Copy to Clipboard
+const obj = {
+    count: 10,
+    doSomethingLater() {
+        // The method syntax binds "this" to the "obj" context.
+        setTimeout(() => {
+            // Since the arrow function doesn't have its own binding and
+            // setTimeout (as a function call) doesn't create a binding
+            // itself, the "obj" context of the outer method is used.
+            this.count++;
+            console.log(this.count);
+        }, 300);
+    },
+};
+
+obj.doSomethingLater(); // logs 11
+
+// Default parameters
+// Default function parameters allow 
+// named parameters to be initialized 
+// with default values if no value or undefined is passed.
+
+// Try it
+function multiply(a, b = 1) {
+    return a * b;
+}
+
+console.log(multiply(5, 2));
+// Expected output: 10
+
+console.log(multiply(5));
+// Expected output: 5
+
+// Syntax
+function fnName(param1 = defaultValue1, /* …, */ paramN = defaultValueN) {
+    // …
+}
+// Description
+// In JavaScript, function parameters 
+// default to undefined.However, it's 
+// often useful to set a different 
+// default value. This is where default 
+// parameters can help.
+
+// In the following example, if no value 
+// is provided for b when multiply is called, 
+// b's value would be undefined when evaluating 
+// a * b and multiply would return NaN.
+
+// JS
+// Copy to Clipboard
+function multiply(a, b) {
+    return a * b;
+}
+
+multiply(5, 2); // 10
+multiply(5); // NaN !
+// In the past, the general strategy for 
+// setting defaults was to test parameter 
+// values in the function body and assign 
+// a value if they are undefined.In the 
+// following example, b is set to 1 if 
+// multiply is called with only one argument:
+
+// JS
+// Copy to Clipboard
+function multiply(a, b) {
+    b = typeof b !== "undefined" ? b : 1;
+    return a * b;
+}
+
+multiply(5, 2); // 10
+multiply(5); // 5
+// With default parameters, checks in the 
+// function body are no longer necessary.Now, 
+// you can assign 1 as the default value 
+// for b in the function head:
+
+//     JS
+// Copy to Clipboard
+function multiply(a, b = 1) {
+    return a * b;
+}
+
+multiply(5, 2); // 10
+multiply(5); // 5
+multiply(5, undefined); // 5
+// Parameters are still set left - 
+// to - right, overwriting default 
+// parameters even if there are 
+// later parameters without defaults.
+
+//     JS
+// Copy to Clipboard
+function f(x = 1, y) {
+    return [x, y];
+}
+
+f(); // [1, undefined]
+f(2); // [2, undefined]
+// Note: The first default parameter 
+// and all parameters after it will
+//  not contribute to the function's length.
+
+// The default parameter initializers 
+// live in their own scope, which is a 
+// parent of the scope created for the 
+// function body.
+
+// This means that earlier parameters can 
+// be referred to in the initializers of 
+// later parameters.However, functions and 
+// variables declared in the function body 
+// cannot be referred to from default 
+// value parameter initializers; attempting 
+// to do so throws a run - time 
+// ReferenceError.This also includes 
+// var-declared variables in the function body.
+
+// For example, the following function will 
+// throw a ReferenceError when invoked, 
+// because the default parameter value 
+// does not have access to the child 
+// scope of the function body:
+
+//     JS
+// Copy to Clipboard
+function f(a = go()) {
+    function go() {
+        return ":P";
+    }
+}
+
+f(); // ReferenceError: go is not defined
+// This function will print the value of 
+// the parameter a, because the variable 
+// var a is hoisted only to the top of the 
+// scope created for the function body, not 
+// the parent scope created for the parameter 
+// list, so its value is not visible to b.
+
+//     JS
+// Copy to Clipboard
+function f(a, b = () => console.log(a)) {
+    var a = 1;
+    b();
+}
+
+f(); // undefined
+f(5); // 5
+// Examples
+// Passing undefined vs.other falsy values
+// In the second call in this example, 
+// even if the first argument is set 
+// explicitly to undefined(though not 
+// null or other falsy values), the 
+// value of the num argument is still the default.
+
+// JS
+// Copy to Clipboard
+function test(num = 1) {
+    console.log(typeof num);
+}
+
+test(); // 'number' (num is set to 1)
+test(undefined); // 'number' (num is set to 1 too)
+
+// test with other falsy values:
+test(""); // 'string' (num is set to '')
+test(null); // 'object' (num is set to null)
+// Evaluated at call time
+// The default argument is evaluated at 
+// call time.Unlike with Python(for example), 
+// a new object is created each time the 
+// function is called.
+
+//     JS
+// Copy to Clipboard
+function append(value, array = []) {
+    array.push(value);
+    return array;
+}
+
+append(1); // [1]
+append(2); // [2], not [1, 2]
+// This even applies to functions and variables:
+
+// JS
+// Copy to Clipboard
+function callSomething(thing = something()) {
+    return thing;
+}
+
+let numberOfTimesCalled = 0;
+function something() {
+    numberOfTimesCalled += 1;
+    return numberOfTimesCalled;
+}
+
+callSomething(); // 1
+callSomething(); // 2
+// Earlier parameters are available 
+// to later default parameters
+// Parameters defined earlier(to 
+// the left) are available to 
+// later default parameters:
+
+// JS
+// Copy to Clipboard
+function greet(name, greeting, message = `${greeting} ${name}`) {
+    return [name, greeting, message];
+}
+
+greet("David", "Hi"); // ["David", "Hi", "Hi David"]
+greet("David", "Hi", "Happy Birthday!"); // ["David", "Hi", "Happy Birthday!"]
+// This functionality can be approximated 
+// like this, which demonstrates how 
+// many edge cases are handled:
+
+// JS
+// Copy to Clipboard
+function go() {
+    return ":P";
+}
+
+function withDefaults(
+    a,
+    b = 5,
+    c = b,
+    d = go(),
+    e = this,
+    f = arguments,
+    g = this.value,
+) {
+    return [a, b, c, d, e, f, g];
+}
+
+function withoutDefaults(a, b, c, d, e, f, g) {
+    switch (arguments.length) {
+        case 0:
+        case 1:
+            b = 5;
+        case 2:
+            c = b;
+        case 3:
+            d = go();
+        case 4:
+            e = this;
+        case 5:
+            f = arguments;
+        case 6:
+            g = this.value;
+    }
+    return [a, b, c, d, e, f, g];
+}
+
+withDefaults.call({ value: "=^_^=" });
+// [undefined, 5, 5, ":P", {value:"=^_^="}, arguments, "=^_^="]
+
+withoutDefaults.call({ value: "=^_^=" });
+// [undefined, 5, 5, ":P", {value:"=^_^="}, arguments, "=^_^="]
+// Destructured parameter with default value assignment
+// You can use default value assignment with the destructuring assignment syntax.
+
+// A common way of doing that is to set 
+// an empty object / array as the default 
+// value for the destructured parameter; 
+// for example: [x = 1, y = 2] = [].This 
+// makes it possible to pass nothing to 
+// the function and still have those values prefilled:
+
+// JS
+// Copy to Clipboard
+function preFilledArray([x = 1, y = 2] = []) {
+    return x + y;
+}
+
+preFilledArray(); // 3
+preFilledArray([]); // 3
+preFilledArray([2]); // 4
+preFilledArray([2, 3]); // 5
+
+// Works the same for objects:
+function preFilledObject({ z = 3 } = {}) {
+    return z;
+}
+
+preFilledObject(); // 3
+preFilledObject({}); // 3
+preFilledObject({ z: 2 }); // 2
+
+// get
+// The get syntax binds an object property 
+// to a function that will be called when 
+// that property is looked up.It can also 
+// be used in classes.
+
+// Try it
+const obj = {
+    log: ['a', 'b', 'c'],
+    get latest() {
+        return this.log[this.log.length - 1];
+    },
+};
+
+console.log(obj.latest);
+// Expected output: "c"
+
+
+// Syntax
+// JS
+// Copy to Clipboard
+{ get prop() { /* … */ } }
+{ get[expression]() { /* … */ } }
+// There are some additional 
+// syntax restrictions:
+
+// A getter must have exactly zero parameters.
+//     Parameters
+// prop
+// The name of the property to 
+// bind to the given function. 
+// In the same way as other properties 
+// in object initializers, it can be 
+// a string literal, a number literal, 
+// or an identifier.
+
+//     expression
+// You can also use expressions for 
+// a computed property name to bind 
+// to the given function.
+
+// Description
+// Sometimes it is desirable to allow 
+// access to a property that returns 
+// a dynamically computed value, or 
+// you may want to reflect the status 
+// of an internal variable without 
+// requiring the use of explicit method 
+// calls.In JavaScript, this can be 
+// accomplished with the use of a getter.
+
+// It is not possible to simultaneously 
+// have a getter bound to a property and 
+// have that property actually hold a value, 
+// although it is possible to use a getter 
+// and a setter in conjunction to create a 
+// type of pseudo-property.
+
+//     Examples
+// Defining a getter on new objects in 
+// object initializers
+// This will create a pseudo - property 
+// latest for object obj, which will 
+// return the last array item in log.
+
+//     JS
+// Copy to Clipboard
+const obj = {
+    log: ["example", "test"],
+    get latest() {
+        if (this.log.length === 0) return undefined;
+        return this.log[this.log.length - 1];
+    },
+};
+console.log(obj.latest); // "test"
+// Note that attempting to assign a 
+// value to latest will not change it.
+
+// Using getters in classes
+// You can use the exact same syntax to 
+// define public instance getters that 
+// are available on class instances. 
+// In classes, you don't need the comma 
+// separator between methods.
+
+// JS
+// Copy to Clipboard
+class ClassWithGetSet {
+    #msg = "hello world";
+    get msg() {
+        return this.#msg;
+    }
+    set msg(x) {
+        this.#msg = `hello ${x}`;
+    }
+}
+
+const instance = new ClassWithGetSet();
+console.log(instance.msg); // "hello world"
+
+instance.msg = "cake";
+console.log(instance.msg); // "hello cake"
+// Getter properties are defined on the 
+// prototype property of the class and 
+// are thus shared by all instances of 
+// the class. Unlike getter properties 
+// in object literals, getter properties 
+// in classes are not enumerable.
+
+// Static getters and private getters use 
+// similar syntaxes, which are described 
+// in the static and private properties pages.
+
+// Deleting a getter using the delete operator
+// If you want to remove the getter, 
+// you can just delete it:
+
+// JS
+// Copy to Clipboard
+delete obj.latest;
+// Defining a getter on existing 
+// objects using defineProperty
+// To append a getter to an existing object 
+// later at any time, use Object.defineProperty().
+
+//     JS
+// Copy to Clipboard
+const o = { a: 0 };
+
+Object.defineProperty(o, "b", {
+    get() {
+        return this.a + 1;
+    },
+});
+
+console.log(o.b); // Runs the getter, which yields a + 1 (which is 1)
+// Using a computed property name
+// JS
+// Copy to Clipboard
+const expr = "foo";
+
+const obj = {
+    get [expr]() {
+        return "bar";
+    },
+};
+
+console.log(obj.foo); // "bar"
+// Defining static getters
+// JS
+// Copy to Clipboard
+class MyConstants {
+    static get foo() {
+        return "foo";
+    }
+}
+
+console.log(MyConstants.foo); // 'foo'
+MyConstants.foo = "bar";
+console.log(MyConstants.foo); // 'foo', a static getter's value cannot be changed
+// Smart / self - overwriting / lazy getters
+// Getters give you a way to define a 
+// property of an object, but they do 
+// not calculate the property's value 
+// until it is accessed. A getter defers 
+// the cost of calculating the value until 
+// the value is needed. If it is never 
+// needed, you never pay the cost.
+
+// An additional optimization technique 
+// to lazify or delay the calculation of 
+// a property value and cache it for later 
+// access are smart(or memoized) getters.
+// The value is calculated the first time 
+// the getter is called, and is then cached 
+// so subsequent accesses return the cached 
+// value without recalculating it.This is 
+// useful in the following situations:
+
+// If the calculation of a property value 
+// is expensive(takes much RAM or CPU time, 
+// spawns worker threads, retrieves remote file, etc.).
+
+// If the value isn't needed just now. It will 
+// be used later, or in some case it's not used at all.
+
+// If it's used, it will be accessed several times, 
+// and there is no need to re-calculate that value 
+// will never be changed or shouldn't be re - calculated.
+
+//     Note: This means that you shouldn't write a 
+// lazy getter for a property whose value you expect 
+// to change, because if the getter is lazy then 
+// it will not recalculate the value.
+
+// Note that getters are not "lazy" or 
+// "memoized" by nature; you must implement 
+// this technique if you desire this behavior.
+
+// In the following example, the object has 
+// a getter as its own property.On getting 
+// the property, the property is removed 
+// from the object and re - added, but 
+// implicitly as a data property this 
+// time.Finally, the value gets returned.
+
+//     JS
+// Copy to Clipboard
+const obj = {
+    get notifier() {
+        delete this.notifier;
+        this.notifier = document.getElementById("bookmarked-notification-anchor");
+        return this.notifier;
+    },
+};
+// get vs.defineProperty
+// While using the get keyword and 
+// Object.defineProperty() have similar 
+// results, there is a subtle difference 
+// between the two when used on classes.
+
+// When using get the property will be 
+// defined on the instance's prototype, 
+// while using Object.defineProperty() 
+// the property will be defined on the 
+// instance it is applied to.
+
+// JS
+// Copy to Clipboard
+class Example {
+    get hello() {
+        return "world";
+    }
+}
+
+const obj = new Example();
+console.log(obj.hello);
+// "world"
+
+console.log(Object.getOwnPropertyDescriptor(obj, "hello"));
+// undefined
+
+console.log(
+    Object.getOwnPropertyDescriptor(Object.getPrototypeOf(obj), "hello"),
+);
+// { configurable: true, enumerable: false, get: function get hello() { return 'world'; }, set: undefined }
+
+// Method definitions
+// Method definition is a shorter 
+// syntax for defining a function 
+// property in an object initializer.
+// It can also be used in classes.
+
+// Try it
+const obj = {
+    foo() {
+        return 'bar';
+    },
+};
+
+console.log(obj.foo());
+// Expected output: "bar"
+
+
+
+// Syntax
+// JS
+// Copy to Clipboard
+    ({
+        property(parameters) { },
+        *generator(parameters) { },
+        async property(parameters) { },
+        async *generator(parameters) { },
+
+        // with computed keys
+        [expression](parameters) { },
+        *[expression](parameters) { },
+        async [expression](parameters) { },
+        async *[expression](parameters) { },
+    })
+// Description
+// The shorthand syntax is similar 
+// to the getter and setter syntax.
+
+// Given the following code:
+
+// JS
+// Copy to Clipboard
+const obj = {
+    foo: function () {
+        // …
+    },
+    bar: function () {
+        // …
+    },
+};
+// You are now able to shorten this to:
+
+// JS
+// Copy to Clipboard
+const obj = {
+    foo() {
+        // …
+    },
+    bar() {
+        // …
+    },
+};
+// function*, async function, and 
+// async function* properties all 
+// have their respective method 
+// syntaxes; see examples below.
+
+// However, note that the method 
+// syntax is not equivalent to a 
+// normal property with a function 
+// as its value — there are semantic 
+// differences.This makes methods 
+// defined in object literals more 
+// consistent with methods in classes.
+
+// Method definitions are not constructable
+// Methods cannot be constructors! They 
+// will throw a TypeError if you try 
+// to instantiate them.On the other 
+// hand, a property created as a 
+// function can be used as a constructor.
+
+//     JS
+// Copy to Clipboard
+const obj = {
+    method() { },
+};
+new obj.method(); // TypeError: obj.method is not a constructor
+// Using super in method definitions
+// Only functions defined as methods 
+// have access to the super keyword.super.prop 
+// looks up the property on the prototype 
+// of the object that the method was 
+// initialized on.
+
+//     JS
+// Copy to Clipboard
+const obj = {
+    __proto__: {
+        prop: "foo",
+    },
+    notAMethod: function () {
+        console.log(super.prop); // SyntaxError: 'super' keyword unexpected here
+    },
+};
+// Examples
+// Using method definitions
+// JS
+// Copy to Clipboard
+const obj = {
+    a: "foo",
+    b() {
+        return this.a;
+    },
+};
+console.log(obj.b()); // "foo"
+// Method definitions in classes
+// You can use the exact same syntax to 
+// define public instance methods that 
+// are available on class instances. 
+// In classes, you don't need the 
+// comma separator between methods.
+
+// JS
+// Copy to Clipboard
+class ClassWithPublicInstanceMethod {
+    publicMethod() {
+        return "hello world";
+    }
+    secondPublicMethod() {
+        return "goodbye world";
+    }
+}
+
+const instance = new ClassWithPublicInstanceMethod();
+console.log(instance.publicMethod()); // "hello world"
+// Public instance methods are defined 
+// on the prototype property of the 
+// class and are thus shared by all 
+// instances of the class. They are 
+// writable, non - enumerable, and configurable.
+
+// Inside instance methods, this and 
+// super work like in normal methods.Usually, 
+// this refers to the instance itself.In 
+// subclasses, super lets you access the 
+// prototype of the object that the method 
+// is attached to, allowing you to call 
+// methods from the superclass.
+
+//     JS
+// Copy to Clipboard
+class BaseClass {
+    msg = "hello world";
+    basePublicMethod() {
+        return this.msg;
+    }
+}
+
+class SubClass extends BaseClass {
+    subPublicMethod() {
+        return super.basePublicMethod();
+    }
+}
+
+const instance = new SubClass();
+console.log(instance.subPublicMethod()); // "hello world"
+// Static methods and private methods use 
+// similar syntaxes, which are described 
+// in the static and private properties pages.
+
+// Computed property names
+// The method syntax also supports computed property names.
+
+//     JS
+// Copy to Clipboard
+const bar = {
+    foo0: function () {
+        return 0;
+    },
+    foo1() {
+        return 1;
+    },
+    ["foo" + 2]() {
+        return 2;
+    },
+};
+
+console.log(bar.foo0()); // 0
+console.log(bar.foo1()); // 1
+console.log(bar.foo2()); // 2
+// Generator methods
+// Note that the asterisk(*) in the 
+// generator method syntax must be 
+// before the generator property name. 
+// (That is, * g(){} will work, but g * (){} will not.)
+
+// JS
+// Copy to Clipboard
+// Using a named property
+const obj = {
+    g: function* () {
+        let index = 0;
+        while (true) {
+            yield index++;
+        }
+    },
+};
+
+// The same object using shorthand syntax
+const obj2 = {
+    *g() {
+        let index = 0;
+        while (true) {
+            yield index++;
+        }
+    },
+};
+
+const it = obj2.g();
+console.log(it.next().value); // 0
+console.log(it.next().value); // 1
+// Async methods
+// JS
+// Copy to Clipboard
+// Using a named property
+const obj = {
+    f: async function () {
+        await somePromise;
+    },
+};
+
+// The same object using shorthand syntax
+const obj2 = {
+    async f() {
+        await somePromise;
+    },
+};
+// Async generator methods
+// JS
+// Copy to Clipboard
+const obj = {
+    f: async function* () {
+        yield 1;
+        yield 2;
+        yield 3;
+    },
+};
+
+// The same object using shorthand syntax
+const obj2 = {
+    async *f() {
+        yield 1;
+        yield 2;
+        yield 3;
+    },
+};
+
+// Rest parameters
+// The rest parameter syntax allows a function 
+// to accept an indefinite number of arguments 
+// as an array, providing a way to represent 
+// variadic functions in JavaScript.
+
+
+// Try it
+function sum(...theArgs) {
+    let total = 0;
+    for (const arg of theArgs) {
+        total += arg;
+    }
+    return total;
+}
+
+console.log(sum(1, 2, 3));
+// Expected output: 6
+
+console.log(sum(1, 2, 3, 4));
+// Expected output: 10
+
+
+// Syntax
+// JS
+// Copy to Clipboard
+function f(a, b, ...theArgs) {
+    // …
+}
+// Description
+// A function definition's last parameter 
+// can be prefixed with ... (three U+002E 
+// FULL STOP characters), which will cause 
+// all remaining (user supplied) parameters 
+// to be placed within an Array object.
+
+// JS
+// Copy to Clipboard
+function myFun(a, b, ...manyMoreArgs) {
+    console.log("a", a);
+    console.log("b", b);
+    console.log("manyMoreArgs", manyMoreArgs);
+}
+
+myFun("one", "two", "three", "four", "five", "six");
+
+// Console Output:
+// a, one
+// b, two
+// manyMoreArgs, ["three", "four", "five", "six"]
+// A function definition can only have 
+// one rest parameter, and the rest 
+// parameter must be the last parameter 
+// in the function definition.
+
+// JS
+// Copy to Clipboard
+function wrong1(...one, ...wrong) { }
+function wrong2(...wrong, arg2, arg3) { }
+// The rest parameter is not counted 
+// towards the function's length property.
+
+// The difference between rest parameters 
+// and the arguments object
+// There are three main differences between 
+// rest parameters and the arguments object:
+
+// The arguments object is not a real 
+// array, while rest parameters are Array 
+// instances, meaning methods like sort(), 
+// map(), forEach() or pop() can be applied on it directly.
+// The arguments object has the 
+// additional(deprecated) callee property.
+// In a non - strict function with simple 
+// parameters, the arguments object syncs 
+// its indices with the values of parameters.
+// The rest parameter array never updates 
+// its value when the named parameters are re - assigned.
+// The rest parameter bundles all the extra 
+// parameters into a single array, but does 
+// not contain any named argument defined 
+// before the ...restParam.The arguments 
+// object contains all of the parameters — 
+// including the parameters in the ...restParam 
+// array — bundled into one array - like object.
+
+//     Examples
+// Using rest parameters
+// In this example, the first argument is 
+// mapped to a and the second to b, so 
+// these named arguments are used as normal.
+
+//  However, the third argument, manyMoreArgs, 
+// will be an array that contains the third, 
+// fourth, fifth, sixth, …, nth — as many
+//  arguments as the user specifies.
+
+//         JS
+// Copy to Clipboard
+function myFun(a, b, ...manyMoreArgs) {
+    console.log("a", a);
+    console.log("b", b);
+    console.log("manyMoreArgs", manyMoreArgs);
+}
+
+myFun("one", "two", "three", "four", "five", "six");
+
+// a, "one"
+// b, "two"
+// manyMoreArgs, ["three", "four", "five", "six"] <-- an array
+// Below, even though there is just one 
+// value, the last argument still gets put into an array.
+
+//     JS
+// Copy to Clipboard
+// Using the same function definition 
+// from example above
+
+myFun("one", "two", "three");
+
+// a, "one"
+// b, "two"
+// manyMoreArgs, ["three"] <-- an array with just one value
+// Below, the third argument isn't 
+// provided, but manyMoreArgs is still 
+// an array (albeit an empty one).
+
+// JS
+// Copy to Clipboard
+// Using the same function definition from example above
+
+myFun("one", "two");
+
+// a, "one"
+// b, "two"
+// manyMoreArgs, [] <-- still an array
+// Below, only one argument is provided, 
+// so b gets the default value undefined, 
+// but manyMoreArgs is still an empty array.
+
+//     JS
+// Copy to Clipboard
+// Using the same function definition from example above
+
+myFun("one");
+
+// a, "one"
+// b, undefined
+// manyMoreArgs, [] <-- still an array
+// Argument length
+// Since theArgs is an array, a count of 
+// its elements is given by the length 
+// property.If the function's only parameter 
+// is a rest parameter, restParams.length 
+// will be equal to arguments.length.
+
+// JS
+// Copy to Clipboard
+function fun1(...theArgs) {
+    console.log(theArgs.length);
+}
+
+fun1(); // 0
+fun1(5); // 1
+fun1(5, 6, 7); // 3
+// Using rest parameters in combination 
+// with ordinary parameters
+// In the next example, a rest parameter is 
+// used to collect all parameters after the 
+// first parameter into an array.Each one 
+// of the parameter values collected into 
+// the array is then multiplied by the first 
+// parameter, and the array is returned:
+
+
+// JS
+// Copy to Clipboard
+function multiply(multiplier, ...theArgs) {
+    return theArgs.map((element) => multiplier * element);
+}
+
+const arr = multiply(2, 15, 25, 42);
+console.log(arr); // [30, 50, 84]
+// From arguments to an array
+// Array methods can be used on rest 
+// parameters, but not on the arguments object:
+
+// JS
+// Copy to Clipboard
+function sortRestArgs(...theArgs) {
+    const sortedArgs = theArgs.sort();
+    return sortedArgs;
+}
+
+console.log(sortRestArgs(5, 3, 7, 1)); // 1, 3, 5, 7
+
+function sortArguments() {
+    const sortedArgs = arguments.sort();
+    return sortedArgs; // this will never happen
+}
+
+console.log(sortArguments(5, 3, 7, 1));
+// throws a TypeError (arguments.sort is 
+// not a function)
+// Rest parameters were introduced to reduce 
+// the boilerplate code that was commonly used 
+// for converting a set of arguments to an array.
+
+// Before rest parameters, arguments need to be 
+// converted to a normal array before calling 
+// array methods on them:
+
+// JS
+// Copy to Clipboard
+function fn(a, b) {
+    const normalArray = Array.prototype.slice.call(arguments);
+    // — or —
+    const normalArray2 = [].slice.call(arguments);
+    // — or —
+    const normalArrayFrom = Array.from(arguments);
+
+    const first = normalArray.shift(); // OK, gives the first argument
+    const firstBad = arguments.shift(); // ERROR (arguments is not a normal array)
+}
+// Now, you can easily gain access to a normal 
+// array using a rest parameter:
+
+//     JS
+// Copy to Clipboard
+function fn(...args) {
+    const normalArray = args;
+    const first = normalArray.shift(); // OK, gives the first argument
+}
+
+
+// set
+// The set syntax binds an object property 
+// to a function to be called when there 
+// is an attempt to set that property.It 
+// can also be used in classes.
+
+// Try it
+
+const language = {
+    set current(name) {
+        this.log.push(name);
+    },
+    log: [],
+};
+
+language.current = 'EN';
+language.current = 'FA';
+
+console.log(language.log);
+// Expected output: Array ["EN", "FA"]
+
+
+// Syntax
+// JS
+// Copy to Clipboard
+{ set prop(val) { /* … */ } }
+{ set[expression](val) { /* … */ } }
+// There are some additional syntax restrictions:
+
+// A setter must have exactly one parameter.
+//     Parameters
+// prop
+// The name of the property to bind to 
+// the given function. In the same way 
+// as other properties in object initializers, 
+// it can be a string literal, a number 
+// literal, or an identifier.
+
+//     val
+// An alias for the variable that holds 
+// the value attempted to be assigned to prop.
+
+//     expression
+// You can also use expressions for a computed 
+// property name to bind to the given function.
+
+// Description
+// In JavaScript, a setter can be used to 
+// execute a function whenever a specified 
+// property is attempted to be changed.Setters 
+// are most often used in conjunction with 
+// getters to create a type of pseudo-property.
+// It is not possible to simultaneously have a 
+// setter on a property that holds an actual value.
+// 
+
+//     Examples
+// Defining a setter on new objects in object initializers
+// The following example defines a pseudo - 
+// property current of object language.When 
+// current is assigned a value, it updates 
+// log with that value:
+
+// JS
+// Copy to Clipboard
+const language = {
+    set current(name) {
+        this.log.push(name);
+    },
+    log: [],
+};
+
+language.current = "EN";
+console.log(language.log); // ['EN']
+
+language.current = "FA";
+console.log(language.log); // ['EN', 'FA']
+// Note that current is not defined, and 
+// any attempts to access it will result in undefined.
+
+// Using setters in classes
+// You can use the exact same syntax to 
+// define public instance setters that 
+// are available on class instances. 
+// In classes, you don't need the 
+// comma separator between methods.
+
+// JS
+// Copy to Clipboard
+class ClassWithGetSet {
+    #msg = "hello world";
+    get msg() {
+        return this.#msg;
+    }
+    set msg(x) {
+        this.#msg = `hello ${x}`;
+    }
+}
+
+const instance = new ClassWithGetSet();
+console.log(instance.msg); // "hello world"
+
+instance.msg = "cake";
+console.log(instance.msg); // "hello cake"
+// Setter properties are defined on the 
+// prototype property of the class and 
+// are thus shared by all instances of 
+// the class. Unlike setter properties 
+// in object literals, setter properties 
+// in classes are not enumerable.
+
+// Static setters and private setters use 
+// similar syntaxes, which are described 
+// in the static and private properties pages.
+
+// Removing a setter with the delete operator
+// If you want to remove the setter, you can just delete it:
+
+// JS
+// Copy to Clipboard
+delete language.current;
+// Defining a setter on existing objects 
+// using defineProperty
+// To append a setter to an existing object, 
+// use Object.defineProperty().
+
+//     JS
+// Copy to Clipboard
+const o = { a: 0 };
+
+Object.defineProperty(o, "b", {
+    set(x) {
+        this.a = x / 2;
+    },
+});
+
+o.b = 10;
+// Runs the setter, which assigns 10 / 2 (5) to the 'a' property
+
+console.log(o.a); // 5
+// Using a computed property name
+// JS
+// Copy to Clipboard
+const expr = "foo";
+
+const obj = {
+    baz: "bar",
+    set [expr](v) {
+        this.baz = v;
+    },
+};
+
+console.log(obj.baz); // "bar"
+
+obj.foo = "baz";
+// Run the setter
+
+console.log(obj.baz); // "baz"
+
+// The arguments object
+// arguments is an array - like object accessible 
+// inside functions that contains the values 
+// of the arguments passed to that function.
+
+// Try it
+function func1(a, b, c) {
+    console.log(arguments[0]);
+    // Expected output: 1
+
+    console.log(arguments[1]);
+    // Expected output: 2
+
+    console.log(arguments[2]);
+    // Expected output: 3
+}
+
+func1(1, 2, 3);
+
+
+// Description
+// Note: In modern code, 
+// rest parameters should be preferred.
+
+// The arguments object is a local 
+// variable available within all 
+// non - arrow functions.You can 
+// refer to a function's arguments 
+// inside that function by using 
+// its arguments object. It has 
+// entries for each argument the 
+// function was called with, with 
+// the first entry's index at 0.
+
+// For example, if a function is 
+// passed 3 arguments, you can access them as follows:
+
+// JS
+// Copy to Clipboard
+arguments[0]; // first argument
+arguments[1]; // second argument
+arguments[2]; // third argument
+// The arguments object is useful 
+// for functions called with more 
+// arguments than they are formally 
+// declared to accept, called variadic 
+// functions, such as Math.min().This 
+// example function accepts any number 
+// of string arguments and returns the longest one:
+
+// JS
+// Copy to Clipboard
+function longestString() {
+    let longest = "";
+    for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i].length > longest.length) {
+            longest = arguments[i];
+        }
+    }
+    return longest;
+}
+// You can use arguments.length to count 
+// how many arguments the function was 
+// called with.If you instead want to 
+// count how many parameters a function 
+// is declared to accept, inspect that 
+// function's length property.
+
+// Assigning to indices
+// Each argument index can also be set or reassigned:
+
+// JS
+// Copy to Clipboard
+arguments[1] = "new value";
+// Non - strict functions that only 
+// have simple parameters(that is, 
+// no rest, default, or destructured 
+// parameters) will sync the new value 
+// of parameters with the arguments 
+// object, and vice versa:
+
+// JS
+// Copy to Clipboard
+function func(a) {
+    arguments[0] = 99; // updating arguments[0] also updates a
+    console.log(a);
+}
+func(10); // 99
+
+function func2(a) {
+    a = 99; // updating a also updates arguments[0]
+    console.log(arguments[0]);
+}
+func2(10); // 99
+// Non - strict functions that are 
+// passed rest, default, or destructured 
+// parameters will not sync new values 
+// assigned to parameters in the function 
+// body with the arguments object.Instead, 
+// the arguments object in non - strict 
+// functions with complex parameters 
+// will always reflect the values passed 
+// to the function when the function was called.
+
+//     JS
+// Copy to Clipboard
+function funcWithDefault(a = 55) {
+    arguments[0] = 99; // updating arguments[0] does not also update a
+    console.log(a);
+}
+funcWithDefault(10); // 10
+
+function funcWithDefault2(a = 55) {
+    a = 99; // updating a does not also update arguments[0]
+    console.log(arguments[0]);
+}
+funcWithDefault2(10); // 10
+
+// An untracked default parameter
+function funcWithDefault3(a = 55) {
+    console.log(arguments[0]);
+    console.log(arguments.length);
+}
+funcWithDefault3(); // undefined; 0
+// This is the same behavior exhibited 
+// by all strict - mode functions, 
+// regardless of the type of parameters 
+// they are passed.That is, assigning 
+// new values to parameters in the body 
+// of the function never affects the 
+// arguments object, nor will assigning 
+// new values to the arguments indices 
+// affect the value of parameters, even 
+// when the function only has simple parameters.
+
+//     Note: You cannot write a "use strict";
+//  directive in the body of a function 
+// definition that accepts rest, default, 
+// or destructured parameters.Doing 
+// so will throw a syntax error.
+
+
+// arguments is an array - like object
+// arguments is an array - like object, 
+// which means that arguments has a length 
+// property and properties indexed from zero, 
+// but it doesn't have Array's built -in 
+// methods like forEach() or map().However, 
+// it can be converted to a real Array, 
+// using one of slice(), Array.from(), or spread syntax.
+
+//     JS
+// Copy to Clipboard
+const args = Array.prototype.slice.call(arguments);
+// or
+const args = Array.from(arguments);
+// or
+const args = [...arguments];
+// For common use cases, using it as 
+// an array - like object is sufficient, 
+// since it both is iterable and has 
+// length and number indices.For example, 
+// Function.prototype.apply() accepts array - like objects.
+
+//     JS
+// Copy to Clipboard
+function midpoint() {
+    return (
+        (Math.min.apply(null, arguments) + Math.max.apply(null, arguments)) / 2
+    );
+}
+
+console.log(midpoint(3, 1, 4, 1, 5)); // 3
+// Properties
+// arguments.callee Deprecated
+// Reference to the currently executing 
+// function that the arguments belong 
+// to.Forbidden in strict mode.
+
+//     arguments.length
+// The number of arguments that were passed to the function.
+
+// arguments[@@iterator]
+// Returns a new Array iterator object 
+// that contains the values for each index in arguments.
+
+//     Examples
+// Defining a function that concatenates several strings
+// This example defines a function that 
+// concatenates several strings.The function's 
+// only formal argument is a string containing 
+// the characters that separate the items to concatenate.
+
+// JS
+// Copy to Clipboard
+function myConcat(separator) {
+    const args = Array.prototype.slice.call(arguments, 1);
+    return args.join(separator);
+}
+// You can pass as many arguments 
+// as you like to this function. It 
+// returns a string list using each 
+// argument in the list:
+
+// JS
+// Copy to Clipboard
+myConcat(", ", "red", "orange", "blue");
+// "red, orange, blue"
+
+myConcat("; ", "elephant", "giraffe", "lion", "cheetah");
+// "elephant; giraffe; lion; cheetah"
+
+myConcat(". ", "sage", "basil", "oregano", "pepper", "parsley");
+// "sage. basil. oregano. pepper. parsley"
+// Defining a function that creates HTML lists
+// This example defines a function that 
+// creates a string containing HTML for 
+// a list.The only formal argument for 
+// the function is a string that is "u" 
+// if the list is to be unordered(bulleted), 
+// or "o" if the list is to be 
+// ordered(numbered).The function 
+// is defined as follows:
+
+// JS
+// Copy to Clipboard
+function list(type) {
+    let html = `<${type}l><li>`;
+    const args = Array.prototype.slice.call(arguments, 1);
+    html += args.join("</li><li>");
+    html += `</li></${type}l>`; // end list
+    return html;
+}
+// You can pass any number of arguments 
+// to this function, and it adds each 
+// argument as a list item to a list 
+// of the type indicated.For example:
+
+// JS
+// Copy to Clipboard
+list("u", "One", "Two", "Three");
+// "<ul><li>One</li><li>Two</li><li>Three</li></ul>"
+// Using typeof with arguments
+// The typeof operator returns 'object' when used with arguments
+
+// JS
+// Copy to Clipboard
+console.log(typeof arguments); // 'object'
+// The type of individual arguments 
+// can be determined by indexing arguments:
+
+// JS
+// Copy to Clipboard
+console.log(typeof arguments[0]); // returns the type of the first argument
+
+
+// References>JavaScript>Reference>Standard built-in objects>Function>Function.prototype.toString()
+
+// Standard built-in objects
+// Function
+// Constructor
+//      Function() constructor
+// Properties
+// Function.prototype.arguments
+// Non-standardDeprecated
+// Function.prototype.caller
+// Non-standardDeprecated
+// Function: displayName
+// Non-standard
+// Function: length
+// Function: name
+// Function: prototype
+// Methods
+// Function.prototype[@@hasInstance]()
+// Function.prototype.apply()
+// Function.prototype.bind()
+// Function.prototype.call()
+// Function.prototype.toString()
+
+// methods > Function() constructor
+// The Function() constructor creates Function 
+// objects. Calling the constructor directly 
+// can create functions dynamically, but 
+// suffers from security and similar (but 
+// far less significant) performance issues 
+// as eval(). However, unlike eval (which may 
+// have access to the local scope), the Function 
+// constructor creates functions which execute 
+// in the global scope only.
+
+// Syntax
+new Function(functionBody)
+new Function(arg1, functionBody)
+new Function(arg1, arg2, functionBody)
+new Function(arg1, arg2, /* …, */ argN, functionBody)
+
+Function(functionBody)
+Function(arg1, functionBody)
+Function(arg1, arg2, functionBody)
+Function(arg1, arg2, /* …, */ argN, functionBody)
+
+// Note: Function() can be called with or without 
+// new. Both create a new Function instance.
+
+// Description
+// Function objects created with the Function 
+// constructor are parsed when the function is 
+// created. This is less efficient than creating 
+// a function with a function expression or function 
+// declaration and calling it within your code, 
+// because such functions are parsed with the 
+// rest of the code.
+// All arguments passed to the function, except 
+// the last, are treated as the names of the 
+// identifiers of the parameters in the function 
+// to be created, in the order in which they are 
+// passed. The function will be dynamically compiled 
+// as a function expression, with the source 
+// assembled in the following fashion:
+
+`function anonymous(${args.join(",")}
+) {
+${functionBody}
+}`;
+
+// This is observable by calling the 
+// function's toString() method.
+// However, unlike normal function 
+// expressions, the name anonymous is 
+// not added to the functionBody's scope, 
+// since functionBody only has access the 
+// global scope. If functionBody is not in 
+// strict mode (the body itself needs to 
+// have the "use strict" directive since 
+// it doesn't inherit the strictness from 
+// the context), you may use arguments.callee 
+// to refer to the function itself. Alternatively, 
+// you can define the recursive part as an inner function:
+
+const recursiveFn = new Function(
+    "count",
+    `
+  (function recursiveFn(count) {
+    if (count < 0) {
+      return;
+    }
+    console.log(count);
+    recursiveFn(count - 1);
+  })(count);
+  `,
+);
+
+// Note that the two dynamic parts of 
+// the assembled source — the parameters 
+// list args.join(",") and functionBody — 
+// will first be parsed separately to ensure 
+// they are each syntactically valid. This 
+// prevents injection-like attempts.
+
+new Function("/*", "*/) {");
+// SyntaxError: Unexpected end of arg string
+// Doesn't become "function anonymous(/*) {*/) {}"
+
+
+// Examples
+// Specifying arguments with the Function constructor
+// The following code creates a Function 
+// object that takes two arguments.
+
+// Example can be run directly in your JavaScript console
+
+// Create a function that takes two arguments, 
+// and returns the sum of those arguments
+const adder = new Function("a", "b", "return a + b");
+
+// Call the function
+adder(2, 6);
+// 8
+
+// The arguments a and b are formal argument 
+// names that are used in the function body, return a + b.
+
+// Creating a function object from a function 
+// declaration or function expression
+// The function constructor can take in 
+// multiple statements separated by a 
+// semicolon. Function expressions require 
+// a return statement with the function's name
+
+// Observe that new Function is called. 
+// This is so we can call the function 
+// we created directly afterwards
+const sumOfArray = new Function(
+    "const sumArray = (arr) => arr.reduce((previousValue, currentValue) => previousValue + currentValue); return sumArray",
+)();
+
+// call the function
+sumOfArray([1, 2, 3, 4]);
+// 10
+
+// If you don't call new Function at the point of creation, you can use the Function.call() method to call it
+const findLargestNumber = new Function(
+    "function findLargestNumber (arr) { return Math.max(...arr) }; return findLargestNumber",
+);
+
+// call the function
+findLargestNumber.call({}).call({}, [2, 4, 1, 8, 5]);
+// 8
+
+// Function declarations do not require a return statement
+const sayHello = new Function(
+    "return function (name) { return `Hello, ${name}` }",
+)();
+
+// call the function
+sayHello("world");
+// Hello, world
+
+
+// Properties : Function: length
+// The length data property of a Function 
+// instance indicates the number of 
+// parameters expected by the function.
+
+function func1() {}
+function func2(a, b) {}
+console.log(func1.length);
+// Expected output: 0
+console.log(func2.length);
+// Expected output: 2
+
+
+// Value
+// A number.
+
+// Property attributes of Function: length
+// Writable	no
+// Enumerable	no
+// Configurable	yes
+
+// Description
+// A Function object's length property 
+// indicates how many arguments the function 
+// expects, i.e. the number of formal parameters. 
+// This number excludes the rest parameter and 
+// only includes parameters before the first 
+// one with a default value. By contrast, 
+// arguments.length is local to a function 
+// and provides the number of arguments 
+// actually passed to the function.
+
+// The Function constructor is itself a 
+// Function object. Its length data property 
+// has a value of 1.
+
+// Due to historical reasons, Function.prototype 
+// is a callable itself. The length property of 
+// Function.prototype has a value of 0.
+
+// Examples
+// Using function length
+console.log(Function.length); // 1
+
+console.log((() => {}).length); // 0
+console.log(((a) => {}).length); // 1
+console.log(((a, b) => {}).length); // 2 etc.
+
+console.log(((...args) => {}).length);
+// 0, rest parameter is not counted
+
+console.log(((a, b = 1, c) => {}).length);
+// 1, only parameters before the first one with
+// a default value are counted
+
+
+// prperties : Function: name
+// The name data property of a Function 
+// instance indicates the function's 
+// name as specified when it was created, 
+// or it may be either anonymous or '' 
+// (an empty string) for functions 
+// created anonymously.
+
+const func1 = function () {};
+const object = {
+  func2: function () {},
+};
+console.log(func1.name);
+// Expected output: "func1"
+console.log(object.func2.name);
+// Expected output: "func2"
+
+// Value
+// A string.
+
+// Property attributes of Function: name
+// Writable	no
+// Enumerable	no
+// Configurable	yes
+
+
+// Description
+// The function's name property can 
+// be used to identify the function 
+// in debugging tools or error messages. 
+// It has no semantic significance to 
+// the language itself.
+// The name property is read-only and 
+// cannot be changed by the assignment operator:
+
+function someFunction() {}
+someFunction.name = "otherFunction";
+console.log(someFunction.name); // someFunction
+
+// To change it, use Object.defineProperty().
+
+// The name property is typically inferred 
+// from how the function is defined. In 
+// the following sections, we will describe 
+// the various ways in which it can be inferred.
+
+// Function declaration
+// The name property returns the name of a function declaration.
+
+
+function doSomething() {}
+doSomething.name; // "doSomething"
+
+// Default-exported function declaration
+// An export default declaration exports 
+// the function as a declaration instead 
+// of an expression. If the declaration 
+// is anonymous, the name is "default".
+
+// -- someModule.js --
+export default function () {}
+
+// // -- main.js --
+import someModule from "./someModule.js";
+
+someModule.name; // "default"
+
+
+// Function constructor
+// Functions created with the Function() 
+// constructor have name "anonymous".
+new Function().name; // "anonymous"
+
+// Function expression
+// If the function expression is named, 
+// that name is used as the name property.
+const someFunction = function someFunctionName() {};
+someFunction.name; // "someFunctionName"
+
+// Anonymous function expressions created 
+// using the keyword function or arrow 
+// functions would have "" (an empty string) 
+// as their name.
+(function () {}).name; // ""
+(() => {}).name; // ""
+
+// However, such cases are rare — usually, 
+// in order to refer to the expression 
+// elsewhere, the function expression is 
+// attached to an identifier when it's 
+// created (such as in a variable declaration). 
+// In such cases, the name can be inferred, 
+// as the following few subsections demonstrate.
+
+// One practical case where the name cannot 
+// be inferred is a function returned from another function:
+
+    function getFoo() {
+    return () => { };
+}
+getFoo().name; // ""
+
+
+// Variable declaration and method
+// Variables and methods can infer the 
+// name of an anonymous function from 
+// its syntactic position.
+
+const f = function () {};
+const object = {
+  someMethod: function () {},
+};
+
+console.log(f.name); // "f"
+console.log(object.someMethod.name); // "someMethod"
+
+// The same applies to assignment:
+
+let f;
+f = () => {};
+f.name; // "f"
+
+// Initializer and default value
+// Functions in initializers (default 
+// values) of destructuring, default 
+// parameters, class fields, etc., 
+// will inherit the name of the 
+// bound identifier as their name.
+
+const [f = () => {}] = [];
+f.name; // "f"
+
+const { someMethod: m = () => {} } = {};
+m.name; // "m"
+
+function foo(f = () => {}) {
+  console.log(f.name);
+}
+foo(); // "f"
+
+class Foo {
+  static someMethod = () => {};
+}
+Foo.someMethod.name; // someMethod
+
+
+// Shorthand method
+const o = {
+    foo() {},
+  };
+  o.foo.name; // "foo";
+
+// Bound function
+// function foo() {}
+// foo.bind({}).name; // "bound foo"
+
+// Getter and setter
+// When using get and set accessor 
+// properties, "get" or "set" will 
+// appear in the function name.
+const o = {
+    get foo() {},
+    set foo(x) {},
+  };
+  const descriptor = Object.getOwnPropertyDescriptor(o, "foo");
+  descriptor.get.name; // "get foo"
+  descriptor.set.name; // "set foo";
+
+
+// Class
+// A class's name follows the 
+// same algorithm as function 
+// declarations and expressions.
+class Foo {}
+Foo.name; // "Foo"
+
+// Symbol as function name
+// If a Symbol is used a function 
+// name and the symbol has a description, 
+// the method's name is the description 
+// in square brackets.
+const sym1 = Symbol("foo");
+const sym2 = Symbol();
+
+const o = {
+  [sym1]() {},
+  [sym2]() {},
+};
+
+o[sym1].name; // "[foo]"
+o[sym2].name; // "[]"
+
+
+// Private property
+// Private fields and private methods 
+// have the hash (#) as part of their names.
+class Foo {
+    #field = () => { };
+    #method() { }
+    getNames() {
+        console.log(this.#field.name);
+        console.log(this.#method.name);
+    }
+}
+
+new Foo().getNames();
+"#field"
+"#method"
+
+// Examples
+// Telling the constructor name of an object
+// You can use obj.constructor.name to 
+// check the "class" of an object.
+function Foo() {} // Or: class Foo {}
+
+const fooInstance = new Foo();
+console.log(fooInstance.constructor.name); // "Foo"
+
+// However, because static members will 
+// become own properties of the class, we can't 
+// obtain the class name for virtually any 
+// class with a static method property name():
+class Foo {
+    constructor() {}
+    static name() {}
+  }
+
+// With a static name() method Foo.name 
+// no longer holds the actual class name 
+// but a reference to the name() function 
+// object. Trying to obtain the class of 
+// fooInstance via fooInstance.constructor.name 
+// won't give us the class name at all, but 
+// instead a reference to the static class 
+// method. Example:
+const fooInstance = new Foo();
+console.log(fooInstance.constructor.name); // ƒ name() {}
+
+// Due to the existence of static fields, name may not be a function either.
+class Foo {
+    static name = 123;
+}
+console.log(new Foo().constructor.name); // 123
+
+
+// If a class has a static property called 
+// name, it will also become writable. The 
+// built-in definition in the absence of 
+// a custom static definition is read-only:
+Foo.name = "Hello";
+console.log(Foo.name); // "Hello" if class Foo has a static "name" property, but "Foo" if not.
+
+// Therefore you may not rely on the built-in 
+// name property to always hold a class's name.
+
+// methods : Function:prototype
+// The prototype data property of a Function 
+// instance is used when the function is used 
+// as a constructor with the new operator. It 
+// will become the new object's prototype.
+
+// Note: Not all Function objects have the 
+// prototype property — see description.
+
+// Value
+// An object.
+
+// Property attributes of Function: prototype
+// Writable	yes
+// Enumerable	no
+// Configurable	no
+// Note: The prototype property of classes is not writable.
+
+
+// Description
+// When a function is called with new, the 
+// constructor's prototype property will 
+// become the resulting object's prototype.
+
+function Ctor() {}
+const inst = new Ctor();
+console.log(Object.getPrototypeOf(inst) === Ctor.prototype); // true
+
+// You can read Inheritance and the prototype 
+// chain for more information about the 
+// interactions between a constructor 
+// function's prototype property and the 
+// resulting object's prototype.
+
+// A function having a prototype property is 
+// not sufficient for it to be eligible as a 
+// constructor. Generator functions have a 
+// prototype property, but cannot be called with new:
+
+async function* asyncGeneratorFunction() {}
+function* generatorFunction() {}
+
+// Instead, generator functions' prototype property 
+// is used when they are called without new. The 
+// prototype property will become the returned 
+// Generator object's prototype.
+
+// In addition, some functions may have a 
+// prototype but throw unconditionally when 
+// called with new. For example, the Symbol() 
+// and BigInt() functions throw when called 
+// with new, because Symbol.prototype and 
+// BigInt.prototype are only intended to 
+// provide methods for the primitive values, 
+// but the wrapper objects should not be 
+// directly constructed.
+
+// The following functions do not have prototype, 
+// and are therefore ineligible as constructors, 
+// even if a prototype property is later manually assigned:
+
+const method = { foo() {} }.foo;
+const arrowFunction = () => {};
+async function asyncFunction() {}
+
+// The following are valid constructors that have prototype:
+
+// class Class {}
+// function fn() {}
+
+// A bound function does not have a prototype 
+// property, but may be constructable. When 
+// it's constructed, the target function is 
+// constructed instead, and if the target 
+// function is constructable, it would 
+// return a normal instance.
+
+
+const boundFunction = function () {}.bind(null);
+
+// A function's prototype property, by default, 
+// is a plain object with one property: constructor, 
+// which is a reference to the function itself. 
+// The constructor property is writable, 
+// non-enumerable, and configurable.
+
+// 
+// If the prototype of a function is reassigned 
+// with something other than an Object, when the 
+// function is called with new, the returned 
+// object's prototype would be Object.prototype 
+// instead. (In other words, new ignores the prototype
+//  property and constructs a plain object.)
+
+function Ctor() {}
+Ctor.prototype = 3;
+console.log(Object.getPrototypeOf(new Ctor()) === Object.prototype); // true
+
+// Examples
+// Changing the prototype of all instances 
+// by mutating the prototype property
+function Ctor() {}
+const p1 = new Ctor();
+const p2 = new Ctor();
+Ctor.prototype.prop = 1;
+console.log(p1.prop); // 1
+console.log(p2.prop); // 1
+
+// Adding a non-method property to a 
+// class's prototype property
+// Class fields add properties to each instance. 
+// Class methods declare function properties on 
+// the prototype. However, there's no way to add 
+// a non-function property to the prototype. In 
+// case you want to share static data between all 
+// instances (for example, Error.prototype.name 
+// is the same between all error instances), 
+// you can manually assign it on the prototype of a class.
+class Dog {
+    constructor(name) {
+        this.name = name;
+    }
+}
+Dog.prototype.species = "dog";
+console.log(new Dog("Jack").species); // "dog"
+
+// This can be made more ergonomic using static 
+// initialization blocks, which are called 
+// when the class is initialized.
+
+class Dog {
+    static {
+        Dog.prototype.species = "dog";
+    }
+    constructor(name) {
+        this.name = name;
+    }
+}
+console.log(new Dog("Jack").species); // "dog"
+
+
+// mrthods -> Function.prototype[@@hasInstance]()
+// The [@@hasInstance]() method of Function 
+// instances specifies the default procedure 
+// for determining if a constructor function 
+// recognizes an object as one of the 
+// constructor's instances. It is called 
+// by the instanceof operator.
+// Syntax
+func[Symbol.hasInstance](value)
+
+// Parameters
+// value
+// The object to test. Primitive values always return false.
+
+// Return value
+// true if func.prototype is in the prototype 
+// chain of value; otherwise, false. Always 
+// returns false if value is not an object or 
+// this is not a function. If this is a bound 
+// function, returns the result of a instanceof 
+// test on value and the underlying target function.
+
+
+// Exceptions
+// TypeError
+// Thrown if this is not a bound function and this.prototype is not an object.
+
+// Description
+// The instanceof operator calls the [@@hasInstance]() 
+// method of the right-hand side whenever such a 
+// method exists. Because all functions inherit 
+// from Function.prototype by default, they would 
+// all have the [@@hasInstance]() method, so most 
+// of the time, the Function.prototype[@@hasInstance] 
+// method specifies the behavior of instanceof when 
+// the right-hand side is a function. This method 
+// implements the default behavior of the instanceof 
+// operator (the same algorithm when constructor has 
+// no @@hasInstance method).
+
+// Unlike most methods, the 
+// Function.prototype[@@hasInstance]() property 
+// is non-configurable and non-writable. This is a 
+// security feature to prevent the underlying target 
+// function of a bound function from being obtainable. 
+// See this StackOverflow answer for an example.
+
+// Examples
+// Reverting to default instanceof behavior
+// You would rarely need to call this method directly. 
+// Instead, this method is called by the instanceof 
+// operator. You should expect the two results to 
+// usually be equivalent.
+
+
+class Foo {}
+const foo = new Foo();
+console.log(foo instanceof Foo === Foo[Symbol.hasInstance](foo)); // true
+
+// You may want to use this method if you 
+// want to invoke the default instanceof behavior, 
+// but you don't know if a constructor has a 
+// overridden [@@hasInstance]() method.
+
+class Foo {
+    static [Symbol.hasInstance](value) {
+        // A custom implementation
+        return false;
+    }
+}
+
+const foo = new Foo();
+console.log(foo instanceof Foo); // false
+console.log(Function.prototype[Symbol.hasInstance].call(Foo, foo)); // true
+
+
+// methods - Function.prototype.apply()
+// The apply() method of Function instances 
+// calls this function with a given this 
+// value, and arguments provided as an 
+// array (or an array-like object).
+
+const numbers = [5, 6, 2, 3, 7];
+const max = Math.max.apply(null, numbers);
+console.log(max);
+// Expected output: 7
+const min = Math.min.apply(null, numbers);
+console.log(min);
+// Expected output: 2
+
+// Syntax
+// apply(thisArg)
+// apply(thisArg, argsArray)
+
+// Parameters
+// thisArg
+// The value of this provided for the call 
+// to func. If the function is not in 
+// strict mode, null and undefined will be 
+// replaced with the global object, and 
+// primitive values will be converted to objects.
+
+// argsArray Optional
+// An array-like object, specifying the arguments 
+// with which func should be called, or null or 
+// undefined if no arguments should be provided 
+// to the function.
+
+// Return value
+// The result of calling the function with 
+// the specified this value and arguments.
+
+// Description
+// Note: This function is almost identical to 
+// call(), except that the function arguments 
+// are passed to call() individually as a list, 
+// while for apply() they are combined in one 
+// object, typically an array — for example, 
+// func.call(this, "eat", "bananas") vs. 
+// func.apply(this, ["eat", "bananas"]).
+
+// Normally, when calling a function, the 
+// value of this inside the function is the 
+// object that the function was accessed on. 
+// With apply(), you can assign an arbitrary 
+// value as this when calling an existing 
+// function, without first attaching the function 
+// to the object as a property. This allows you 
+// to use methods of one object as generic utility functions.
+// You can also use any kind of object which is 
+// array-like as the second parameter. In practice, 
+// this means that it needs to have a length property, 
+// and integer ("index") properties in the range 
+// (0..length - 1). For example, you could use a 
+// NodeList, or a custom object like { 'length': 2, 
+// '0': 'eat', '1': 'bananas' }. You can also use 
+// arguments, for example:
+
+function wrapper() {
+    return anotherFn.apply(null, arguments);
+}
+// With the rest parameters and parameter spread syntax, this can be rewritten as:
+function wrapper(...args) {
+    return anotherFn(...args);
+  }
+
+// In general, fn.apply(null, args) is 
+// equivalent to fn(...args) with the 
+// parameter spread syntax, except args 
+// is expected to be an array-like object 
+// in the former case with apply(), and an 
+// iterable object in the latter case with 
+// spread syntax.
+
+// Examples
+// Using apply() to append an array to another
+// You can use Array.prototype.push() to append 
+// an element to an array. Because push() accepts 
+// a variable number of arguments, you can also 
+// push multiple elements at once. But if you 
+// pass an array to push(), it will actually 
+// add that array as a single element, instead 
+// of adding the elements individually, ending 
+// up with an array inside an array. On the 
+// other hand, Array.prototype.concat() does 
+// have the desired behavior in this case, but 
+// it does not append to the existing array — 
+// it creates and returns a new array.
+
+// In this case, you can use apply to implicitly 
+// "spread" an array as a series of arguments.
+
+const array = ["a", "b"];
+const elements = [0, 1, 2];
+array.push.apply(array, elements);
+console.info(array); // ["a", "b", 0, 1, 2]
+
+// The same effect can be achieved with the spread syntax.
+
+const array = ["a", "b"];
+const elements = [0, 1, 2];
+array.push(...elements);
+console.info(array); // ["a", "b", 0, 1, 2]
+
+// Using apply() and built-in functions
+// Clever usage of apply() allows you to use 
+// 
+// built-in functions for some tasks that 
+// would probably otherwise require manually 
+// looping over a collection (or using the 
+// spread syntax).
+// For example, we can use Math.max() and 
+// Math.min() to find out the maximum and 
+// minimum value in an array.
+
+// min/max number in an array
+const numbers = [5, 6, 2, 3, 7];
+
+// using Math.min/Math.max apply
+let max = Math.max.apply(null, numbers);
+// This about equal to Math.max(numbers[0], …)
+// or Math.max(5, 6, …)
+
+let min = Math.min.apply(null, numbers);
+
+// vs. simple loop based algorithm
+max = -Infinity;
+min = +Infinity;
+
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > max) {
+        max = numbers[i];
+    }
+    if (numbers[i] < min) {
+        min = numbers[i];
+    }
+}
+
+// But beware: by using apply() (or the 
+// spread syntax) with an arbitrarily long 
+// arguments list, you run the risk of 
+// exceeding the JavaScript engine's 
+// argument length limit.
+
+// The consequences of calling a function 
+// with too many arguments (that is, more 
+// than tens of thousands of arguments) is 
+// unspecified and varies across engines. 
+// (The JavaScriptCore engine has a hard-coded 
+// argument limit of 65536.) Most engines 
+// throw an exception; but there's no 
+// normative specification preventing 
+// other behaviors, such as arbitrarily 
+// limiting the number of arguments actually 
+// passed to the applied function. To illustrate 
+// this latter case: if such an engine had a 
+// limit of four arguments (actual limits are 
+// of course significantly higher), it would 
+// be as if the arguments 5, 6, 2, 3 had 
+// been passed to apply in the examples 
+// above, rather than the full array.
+
+// If your value array might grow into 
+// the tens of thousands, use a hybrid 
+// strategy: apply your function to 
+// chunks of the array at a time:
+
+function minOfArray(arr) {
+    let min = Infinity;
+    const QUANTUM = 32768;
+
+    for (let i = 0; i < arr.length; i += QUANTUM) {
+        const submin = Math.min.apply(
+            null,
+            arr.slice(i, Math.min(i + QUANTUM, arr.length)),
+        );
+        min = Math.min(submin, min);
+    }
+
+    return min;
+}
+
+const min = minOfArray([5, 6, 2, 3, 7]);
+
+
+// Function.prototype.bind()
+// The bind() method of Function instances 
+// creates a new function that, when called, 
+// calls this function with its this keyword 
+// set to the provided value, and a given 
+// sequence of arguments preceding any 
+// provided when the new function is called.
+const module = {
+    x: 42,
+    getX: function () {
+        return this.x;
+    },
+};
+
+const unboundGetX = module.getX;
+console.log(unboundGetX()); // The function gets invoked at the global scope
+// Expected output: undefined
+
+const boundGetX = unboundGetX.bind(module);
+console.log(boundGetX());
+// Expected output: 42
+
+
+
+// Syntax
+bind(thisArg)
+bind(thisArg, arg1)
+bind(thisArg, arg1, arg2)
+bind(thisArg, arg1, arg2, /* …, */ argN)
+
+// Parameters
+// thisArg
+// The value to be passed as the 
+// this parameter to the target function 
+// func when the bound function is called. 
+// If the function is not in strict mode, 
+// null and undefined will be replaced with 
+// the global object, and primitive values 
+// will be converted to objects. The value 
+// is ignored if the bound function is 
+// constructed using the new operator.
+
+// arg1, …, argN Optional
+// Arguments to prepend to arguments 
+// provided to the bound function when 
+// invoking func.
+
+// Return value
+// A copy of the given function with the 
+// specified this value, and initial 
+// arguments (if provided).
+
+// Description
+// The bind() function creates a new 
+// bound function. Calling the bound 
+// function generally results in the 
+// execution of the function it wraps, 
+// which is also called the target function. 
+// The bound function will store the 
+// parameters passed — which include 
+// the value of this and the first few 
+// arguments — as its internal state. 
+// These values are stored in advance, 
+// instead of being passed at call time. 
+// You can generally see 
+// const boundFn = fn.bind(thisArg, arg1, arg2) 
+// as being equivalent to 
+// const boundFn = (...restArgs) => 
+// fn.call(thisArg, arg1, arg2, ...restArgs)
+//  for the effect when it's called (but not
+//  when boundFn is constructed).
+
+// A bound function can be further bound 
+// by calling boundFn.bind(thisArg, /* 
+// more args */), which creates another 
+// bound function boundFn2. The newly 
+// bound thisArg value is ignored, 
+// because the target function of 
+// boundFn2, which is boundFn, already 
+// has a bound this. When boundFn2 is 
+// called, it would call boundFn, which 
+// in turn calls fn. The arguments that 
+// fn ultimately receives are, in order: 
+// the arguments bound by boundFn, arguments 
+// bound by boundFn2, and the arguments 
+// received by boundFn2.
+
+"use strict"; // prevent `this` from being boxed into the wrapper object
+
+function log(...args) {
+  console.log(this, ...args);
+}
+const boundLog = log.bind("this value", 1, 2);
+const boundLog2 = boundLog.bind("new this value", 3, 4);
+boundLog2(5, 6); // "this value", 1, 2, 3, 4, 5, 6
+
+// A bound function may also be constructed 
+// using the new operator if its target 
+// function is constructable. Doing so acts 
+// as though the target function had instead 
+// been constructed. The prepended arguments 
+// are provided to the target function as usual, 
+// while the provided this value is ignored 
+// (because construction prepares its own this, 
+// as seen by the parameters of Reflect.construct). 
+// If the bound function is directly constructed, 
+// new.target will be the target function instead. 
+// (That is, the bound function is transparent 
+// to new.target.)
+
+class Base {
+    constructor(...args) {
+        console.log(new.target === Base);
+        console.log(args);
+    }
+}
+
+const BoundBase = Base.bind(null, 1, 2);
+
+new BoundBase(3, 4); // true, [1, 2, 3, 4]
+
+// However, because a bound function does not 
+// have the prototype property, it cannot be 
+// used as a base class for extends.
+
+class Derived extends class {}.bind(null) {}
+// TypeError: Class extends value does not 
+// have valid prototype property undefined
+// When using a bound function as the 
+// right-hand side of instanceof, instanceof 
+// would reach for the target function (which 
+// is stored internally in the bound function) 
+// and read its prototype instead.
+
+class Base {}
+const BoundBase = Base.bind(null, 1, 2);
+console.log(new Base() instanceof BoundBase); // true
+
+// The bound function has the following properties:
+
+// length
+// The length of the target function minus 
+// the number of arguments being bound (not 
+// counting the thisArg parameter), with 
+// 0 being the minimum value.
+
+// name
+// The name of the target function plus a "bound " prefix.
+// The bound function also inherits the 
+// prototype chain of the target function. 
+// However, it doesn't have other own 
+// properties of the target function 
+// (such as static properties if the 
+// target function is a class).
+
+// Examples
+// Creating a bound function
+// The simplest use of bind() is to make 
+// a function that, no matter how it is 
+// called, is called with a particular 
+// this value.
+
+// A common mistake for new JavaScript 
+// programmers is to extract a method 
+// from an object, then to later call 
+// that function and expect it to use 
+// the original object as its this (e.g., 
+// by using the method in callback-based code).
+// Without special care, however, the 
+// original object is usually lost. 
+// Creating a bound function from the 
+// function, using the original object, 
+// neatly solves this problem:
+
+// Top-level 'this' is bound to 'globalThis' in scripts.
+this.x = 9;
+const module = {
+  x: 81,
+  getX() {
+    return this.x;
+  },
+};
+
+// The 'this' parameter of 'getX' is bound to 'module'.
+console.log(module.getX()); // 81
+
+const retrieveX = module.getX;
+// The 'this' parameter of 'retrieveX' is bound to 'globalThis' in non-strict mode.
+console.log(retrieveX()); // 9
+
+// Create a new function 'boundGetX' with the 'this' parameter bound to 'module'.
+const boundGetX = retrieveX.bind(module);
+console.log(boundGetX()); // 81
+
+
+// Note: If you run this example in 
+// strict mode, the this parameter of 
+// retrieveX will be bound to undefined 
+// instead of globalThis, causing the 
+// retrieveX() call to fail.
+
+// If you run this example in an ECMAScript 
+// module, top-level this will be bound to 
+// undefined instead of globalThis, causing 
+// the this.x = 9 assignment to fail.
+
+// If you run this example in a Node CommonJS 
+// module, top-level this will be bound to 
+// module.exports instead of globalThis. 
+// However, the this parameter of retrieveX 
+// will still be bound to globalThis in 
+// non-strict mode and to undefined in strict mode. 
+// Therefore, in non-strict mode (the default), 
+// the retrieveX() call will return undefined 
+// because this.x = 9 is writing to a different 
+// object (module.exports) from what getX is 
+// reading from (globalThis).
+
+// In fact, some built-in "methods" are also 
+// getters that return bound functions — one 
+// notable example being Intl.NumberFormat.prototype.format(), 
+// which, when accessed, returns a bound function 
+// that you can directly pass as a callback.
+
+// Partially applied functions
+// The next simplest use of bind() is to make 
+// a function with pre-specified initial arguments.
+
+// These arguments (if any) follow the provided 
+// this value and are then inserted at the start 
+// of the arguments passed to the target function, 
+// followed by whatever arguments are passed to the 
+// bound function at the time it is called.
+
+function list(...args) {
+    return args;
+}
+
+function addArguments(arg1, arg2) {
+    return arg1 + arg2;
+}
+
+console.log(list(1, 2, 3)); // [1, 2, 3]
+
+console.log(addArguments(1, 2)); // 3
+
+// Create a function with a preset leading argument
+const leadingThirtySevenList = list.bind(null, 37);
+
+// Create a function with a preset first argument.
+const addThirtySeven = addArguments.bind(null, 37);
+
+console.log(leadingThirtySevenList()); // [37]
+console.log(leadingThirtySevenList(1, 2, 3)); // [37, 1, 2, 3]
+console.log(addThirtySeven(5)); // 42
+console.log(addThirtySeven(5, 10)); // 42
+// (the last argument 10 is ignored)
+
+// With setTimeout()
+// By default, within setTimeout(), the this 
+// keyword will be set to globalThis, which is 
+// window in browsers. When working with class 
+// methods that require this to refer to class 
+// instances, you may explicitly bind this to 
+// the callback function, in order to maintain the instance.
+class LateBloomer {
+    constructor() {
+        this.petalCount = Math.floor(Math.random() * 12) + 1;
+    }
+    bloom() {
+        // Declare bloom after a delay of 1 second
+        setTimeout(this.declare.bind(this), 1000);
+    }
+    declare() {
+        console.log(`I am a beautiful flower with ${this.petalCount} petals!`);
+    }
+}
+
+const flower = new LateBloomer();
+flower.bloom();
+// After 1 second, calls 'flower.declare()'
+
+// You can also use arrow functions for this purpose.
+
+class LateBloomer {
+    bloom() {
+        // Declare bloom after a delay of 1 second
+        setTimeout(() => this.declare(), 1000);
+    }
+}
+
+
+// Bound functions used as constructors
+// Bound functions are automatically suitable 
+// for use with the new operator to construct 
+// new instances created by the target function. 
+// When a bound function is used to construct a 
+// value, the provided this is ignored. However, 
+// provided arguments are still prepended to the 
+// constructor call.
+
+function Point(x, y) {
+    this.x = x;
+    this.y = y;
+}
+
+Point.prototype.toString = function () {
+    return `${this.x},${this.y}`;
+};
+
+const p = new Point(1, 2);
+p.toString();
+// '1,2'
+
+// The thisArg's value doesn't matter because it's ignored
+const YAxisPoint = Point.bind(null, 0 /*x*/);
+
+const axisPoint = new YAxisPoint(5);
+axisPoint.toString(); // '0,5'
+
+axisPoint instanceof Point; // true
+axisPoint instanceof YAxisPoint; // true
+new YAxisPoint(17, 42) instanceof Point; // true
+
+// Note that you need not do anything 
+// special to create a bound function 
+// for use with new. new.target, instanceof, 
+// this etc. all work as expected, as if the 
+// constructor was never bound. The only 
+// difference is that it can no longer be 
+// used for extends.
+// The corollary is that you need not do 
+// anything special to create a bound function 
+// to be called plainly, even if you would 
+// rather require the bound function to only 
+// be called using new. If you call it without 
+// new, the bound this is suddenly not ignored.
+
+const emptyObj = {};
+const YAxisPoint = Point.bind(emptyObj, 0 /*x*/);
+
+// Can still be called as a normal function
+// (although usually this is undesirable)
+YAxisPoint(13);
+
+// The modifications to `this` is now observable from the outside
+console.log(emptyObj); // { x: 0, y: 13 }
+
+// If you wish to restrict a bound function 
+// to only be callable with new, or only be 
+// callable without new, the target function 
+// must enforce that restriction, such as by 
+// checking new.target !== undefined or using 
+// a class instead.
+
+// Binding classes
+// Using bind() on classes preserves most of 
+// the class's semantics, except that all 
+// static own properties of the current 
+// class are lost. However, because the prototype 
+// chain is preserved, you can still access static 
+// properties inherited from the parent class.
+class Base {
+    static baseProp = "base";
+}
+
+class Derived extends Base {
+    static derivedProp = "derived";
+}
+
+const BoundDerived = Derived.bind(null);
+console.log(BoundDerived.baseProp); // "base"
+console.log(BoundDerived.derivedProp); // undefined
+console.log(new BoundDerived() instanceof Derived); // true
+
+// Transforming methods to utility functions
+// bind() is also helpful in cases where you want 
+// to transform a method which requires a specific 
+// this value to a plain utility function that 
+// accepts the previous this parameter as a 
+// normal parameter. This is similar to how 
+// general-purpose utility functions work: 
+// instead of calling array.map(callback), 
+// you use map(array, callback), which avoids 
+// mutating Array.prototype, and allows you to 
+// use map with array-like objects that are 
+// not arrays (for example, arguments).
+
+// Take Array.prototype.slice(), for example, 
+// which you want to use for converting an 
+// array-like object to a real array. You 
+// could create a shortcut like this:
+
+const slice = Array.prototype.slice;
+
+// ...
+
+slice.call(arguments);
+
+// Note that you can't save slice.call 
+// and call it as a plain function, because 
+// the call() method also reads its this value, 
+// which is the function it should call. In this 
+// case, you can use bind() to bind the value 
+// of this for call(). In the following piece of 
+// code, slice() is a bound version of 
+// Function.prototype.call(), with the this 
+// value bound to Array.prototype.slice(). 
+// This means that additional call() calls can be eliminated:
+
+// Same as "slice" in the previous example
+const unboundSlice = Array.prototype.slice;
+const slice = Function.prototype.call.bind(unboundSlice);
+
+// ...
+
+slice(arguments);
+
+// method > Function.prototype.call()
+
+// Function.prototype.call()
+// The call() method of Function instances 
+// calls this function with a given this 
+// value and arguments provided individually.
+
+// Try it
+function Product(name, price) {
+    this.name = name;
+    this.price = price;
+}
+
+function Food(name, price) {
+    Product.call(this, name, price);
+    this.category = 'food';
+}
+
+console.log(new Food('cheese', 5).name);
+// Expected output: "cheese"
+
+// syntax
+call(thisArg)
+call(thisArg, arg1)
+call(thisArg, arg1, arg2)
+call(thisArg, arg1, arg2, /* …, */ argN)
+
+// Parameters
+// thisArg
+// The value to use as this when calling func. 
+// If the function is not in strict mode, null 
+// and undefined will be replaced with the 
+// global object, and primitive values will 
+// be converted to objects.
+
+// arg1, …, argN Optional
+// Arguments for the function.
+
+// Return value
+// The result of calling the function 
+// with the specified this value and arguments.
+
+// Description
+// Note: This function is almost identical 
+// to apply(), except that the function arguments 
+// are passed to call() individually as a list, 
+// while for apply() they are combined in one 
+// object, typically an array — for example, 
+// func.call(this, "eat", "bananas") vs. 
+// func.apply(this, ["eat", "bananas"]).
+
+// Normally, when calling a function, the 
+// value of this inside the function is 
+// the object that the function was 
+// accessed on. With call(), you can 
+// assign an arbitrary value as this when 
+// calling an existing function, without 
+// first attaching the function to the 
+// object as a property. This allows you
+//  to use methods of one object as 
+// generic utility functions.
+
+// Warning: Do not use call() to chain 
+// constructors (for example, to implement 
+// inheritance). This invokes the constructor 
+// function as a plain function, which means 
+// new.target is undefined, and classes 
+// throw an error because they can't be 
+// called without new. Use Reflect.construct() 
+// or extends instead.
+
+// Examples
+// Using call() to invoke a function 
+// and specifying the this value
+// In the example below, when we call greet, 
+// the value of this will be bound to object 
+// obj, even when greet is not a method of obj.
+
+function greet() {
+    console.log(this.animal, "typically sleep between", this.sleepDuration);
+}
+
+const obj = {
+    animal: "cats",
+    sleepDuration: "12 and 16 hours",
+};
+
+greet.call(obj); // cats typically sleep between 12 and 16 hours
+
+// Using call() to invoke a function 
+// without specifying the first argument
+// If the first thisArg parameter is omitted, 
+// it defaults to undefined. In non-strict 
+// mode, the this value is then substituted 
+// with globalThis (which is akin to the global object).
+
+globalThis.globProp = "Wisen";
+
+function display() {
+  console.log(`globProp value is ${this.globProp}`);
+}
+
+display.call(); // Logs "globProp value is Wisen"
+
+// In strict mode, the value of this 
+// is not substituted, so it stays as undefined.
+
+"use strict";
+
+globalThis.globProp = "Wisen";
+
+function display() {
+  console.log(`globProp value is ${this.globProp}`);
+}
+
+display.call(); // throws TypeError: Cannot read the property of 'globProp' of undefined
+
+
+// Transforming methods to utility functions
+// call() is almost equivalent to a 
+// normal function call, except that 
+// this is passed as a normal parameter 
+// instead of as the value that the function 
+// was accessed on. This is similar to how 
+// general-purpose utility functions work: 
+// instead of calling array.map(callback), 
+// you use map(array, callback), which avoids 
+// mutating Array.prototype, and allows you 
+// to use map with array-like objects that are 
+// not arrays (for example, arguments).
+
+// Take Array.prototype.slice(), for example, 
+// which you want to use for converting an 
+// array-like object to a real array. You 
+// could create a shortcut like this:
+
+const slice = Array.prototype.slice;
+
+// ...
+
+slice.call(arguments);
+
+// Note that you can't save slice.call 
+// and call it as a plain function, because 
+// the call() method also reads its this value, 
+// which is the function it should call. In this
+//  case, you can use bind() to bind the value 
+// of this for call(). In the following piece of 
+// code, slice() is a bound version of 
+// Function.prototype.call(), with the this 
+// value bound to Array.prototype.slice(). 
+// This means that additional call() calls 
+// can be eliminated:
+
+// Same as "slice" in the previous example
+const unboundSlice = Array.prototype.slice;
+const slice = Function.prototype.call.bind(unboundSlice);
+
+// ...
+
+slice(arguments);
+
+// method > Function.prototype.toString()
+// The toString() method of Function instances 
+// returns a string representing the source 
+// code of this function.
+
+function sum(a, b) {
+    return a + b;
+}
+
+console.log(sum.toString());
+// Expected output: "function sum(a, b) {
+//                     return a + b;
+//                   }"
+
+console.log(Math.abs.toString());
+// Expected output: "function abs() { [native code] }"
+
+
+// Syntax
+// toString()
+
+// Parameters
+// None.
+
+// Return value
+// A string representing the source code of the function.
+
+// Description
+// The Function object overrides the 
+// toString() method inherited from Object; 
+// it does not inherit 
+// Object.prototype.toString.For user - 
+// defined Function objects, the toString 
+// method returns a string containing the 
+// 
+// source text segment which was used to define the function.
+// JavaScript calls the toString method 
+// automatically when a Function is to be 
+// represented as a text value, e.g.when 
+// a function is concatenated with a string.
+// The toString() method will throw a 
+// TypeError exception("Function.prototype.toString 
+// called on incompatible object"), if its 
+// this value object is not a Function object.
+
+
+
+    Function.prototype.toString.call("foo"); // throws TypeError
+
+// If the toString() method is called on 
+// built -in function objects, a function 
+// created by Function.prototype.bind(), 
+// or other non - JavaScript functions, 
+// then toString() returns a native 
+// function string which looks like
+
+function someName() { [native code] }
+
+// For intrinsic object methods and functions, 
+// someName is the initial name of the 
+// function; otherwise its content may 
+// be implementation - defined, but will 
+// always be in property name syntax, like[1 + 1], someName, or 1.
+
+// Note: This means using eval() on 
+// native function strings is a 
+// guaranteed syntax error.
+
+// If the toString() method is called on 
+// a function created by the Function 
+// constructor, toString() returns the 
+// source code of a synthesized function 
+// declaration named "anonymous" using 
+// the provided parameters and function body. 
+// For example, Function("a", "b", 
+// "return a + b").toString() will return:
+
+function anonymous(a, b
+) {
+    return a + b
+}
+
+// Examples
+// Comparing actual source code and toString results
+
+function test(fn) {
+    console.log(fn.toString());
+}
+
+function f() { }
+class A {
+    a() { }
+}
+function* g() { }
+
+test(f); // "function f() {}"
+test(A); // "class A { a() {} }"
+test(g); // "function* g() {}"
+test((a) => a); // "(a) => a"
+test({ a() { } }.a); // "a() {}"
+test({ *a() { } }.a); // "*a() {}"
+test({ [0]() { } }[0]); // "[0]() {}"
+test(Object.getOwnPropertyDescriptor({ get a() { } }, "a").get); // "get a() {}"
+test(Object.getOwnPropertyDescriptor({ set a(x) { } }, "a").set); // "set a(x) {}"
+test(Function.prototype.toString); // "function toString() { [native code] }"
+test(function f() { }.bind(0)); // "function () { [native code] }"
+test(Function("a", "b")); // function anonymous(a\n) {\nb\n}
+
+
+// Note that after the 
+// Function.prototype.toString() revision, 
+// when toString() is called, implementations 
+// are never allowed to synthesize a function's
+//  source that is not a native function string. 
+// The method always returns the exact source 
+// code used to create the function — including 
+// the getter and setter examples above. The 
+// Function constructor itself has the capability 
+// of synthesizing the source code for the function 
+// (and is therefore a form of implicit eval()).
+
+// Getting source text of a function
+//     It is possible to get the source text of 
+// a function by coercing it to a string — for 
+// example, by wrapping it in a template literal:
+
+
+function foo() {
+    return "bar";
+}
+console.log(`${foo}`);
+// function foo() {
+//   return "bar";
+// }
+
+
+// This source text is exact, including 
+// any interspersed comments(which won't 
+// be stored by the engine's internal 
+// representation otherwise).
+
+function foo /* a comment */() {
+    return "bar";
+}
+console.log(foo.toString());
+// function foo /* a comment */() {
+//   return "bar";
+// }
+
+
+
+
+

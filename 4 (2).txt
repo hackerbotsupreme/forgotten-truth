@@ -1,0 +1,3146 @@
+. The super keyword is used to call the constructor of the parent class
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+The `try-catch-finally`  It allows you to handle errors (exceptions) gracefully and execute cleanup code , , ensuring that your program continues to function even when an error occurs.
+
+- `try`: This block contains the code that might throw an exception. If an exception is thrown, the execution of this block is immediately stopped, and control is passed to the `catch` block.
+
+- `catch`: This block is executed if an exception is thrown in the `try` block. The thrown exception is passed as an argument to this block, allowing you to handle the error.
+
+- `finally`: This block is executed after the `try` and `catch` blocks, regardless of whether an exception was thrown or caught. It's typically used for cleanup code that should run no matter what happens (e.g., closing a file or a network connection).
+////////////////////////////////////////////////////////////////////////////////////////
+Exceptions: These are errors that are explicitly thrown by the programmer using the throw statement. The thrown exception can be a string, a number, a boolean or an object. These can be caught in a try-catch block.
+////////////////////////////////////////////////////////////////////////////////////////
+
+What types of errors can be caught by a `try-catch` block in JavaScript?
+Syntax Errors: These are errors that occur when the JavaScript interpreter encounters code that it cannot parse due to incorrect syntax. However, syntax errors are usually caught before the code is executed, so they would not typically be caught in a try-catch block.
+
+Runtime Errors: These are errors that occur during the execution of the code. They can be caused by a variety of issues, such as calling a function that doesn’t exist, trying to access a property on null or undefined, or trying to use a variable that hasn’t been declared. These types of errors can be caught in a try-catch block.
+
+Logical Errors: These are errors in the logic of your program. They don’t cause the program to crash, but they can lead to incorrect results. Logical errors cannot be caught with a try-catch block because they don’t cause an error to be thrown.
+
+Exceptions: These are errors that are explicitly thrown by the programmer using the throw statement. The thrown exception can be a string, a number, a boolean or an object. These can be caught in a try-catch block.
+///////////////////////////////////////////////////////////////////////////////////////
+Can you explain the difference between a `catch` block and a `finally` block?
+
+ The catch block is used to handle exceptions (errors) that occur in a try block. The code inside the catch block is executed only if an error occurs in the try block. The error object, which contains details about the error, is passed to the catch block as an argument.
+
+try {
+    // Code that may throw an error
+} catch (error) {
+    // Handle the error
+}
+
+Finally Block: The finally block contains code that will be executed regardless of whether an error occurred in the try block or not. This means the finally block is executed after the try and catch blocks, but before the code that follows the try...catch...finally block. It’s often used for cleanup tasks, like closing files or clearing resources that were set up in the try block. 
+
+try {
+    // Code that may throw an error
+} catch (error) {
+    // Handle the error
+} finally {
+    // Code that is always executed
+}
+
+2.4. Can a `try` block exist without a `catch` block? What about without a `finally` block?
+Yes, a `try` block can exist without a `catch` block, but it must be followed by a `finally` block. Similarly, a `try` block can exist without a `finally` block, but it must be followed by a `catch` block. 
+
+Here's an example of a `try` block without a `catch` block:
+
+```javascript
+try {
+  // Some code...
+} finally {
+  // Cleanup code...
+}
+```
+
+In this case, if an error occurs in the `try` block, it will not be caught and will propagate up the call stack. However, before the error is propagated, the `finally` block will be executed.
+
+And here's an example of a `try` block without a `finally` block:
+
+```javascript
+try {
+  // Some code...
+} catch (err) {
+  // Error handling code...
+}
+```
+
+In this case, if an error occurs in the `try` block, it will be caught by the `catch` block. If no error occurs, the `catch` block will be skipped.
+
+So, while a `try` block must be accompanied by at least one `catch` or `finally` block, it doesn't need to have both. The `catch` block is used for error handling, while the `finally` block is used for cleanup actions that should be performed regardless of whether an error occurred. 😊
+
+5. How would you handle specific types of exceptions, for example, handling `TypeError` differently from `ReferenceError`?
+In JavaScript, you can handle specific types of exceptions by checking the `instanceof` the error object in the `catch` block. Here's an example:
+
+```javascript
+try {
+  // Some code...
+} catch (err) {
+  if (err instanceof TypeError) {
+    // Handle TypeError
+    console.log('TypeError caught: ', err.message);
+  } else if (err instanceof ReferenceError) {
+    // Handle ReferenceError
+    console.log('ReferenceError caught: ', err.message);
+  } else {
+    // Handle all other types of errors
+    console.log('Error caught: ', err.message);
+  }
+}
+```
+
+In this example, if a `TypeError` is thrown, it will be caught and handled by the `TypeError` block. Similarly, if a `ReferenceError` is thrown, it will be caught and handled by the `ReferenceError` block. All other types of errors will be caught and handled by the general error block.
+
+This way, you can customize the error handling logic based on the type of error. 😊
+
+6. Can you provide an example where a `finally` block is useful in a real-world application?
+Absolutely! A `finally` block is often used for cleanup tasks that should be executed regardless of whether an operation succeeds or fails. Here's a real-world example related to database operations:
+
+```javascript
+let connection;
+
+try {
+  connection = await db.getConnection();
+  // Perform database operations...
+} catch (err) {
+  console.error('An error occurred: ', err.message);
+} finally {
+  if (connection) {
+    // Always try to close the database connection, whether an error occurred or not.
+    connection.close();
+  }
+}
+```
+
+In this example, we're performing some operations on a database. We first attempt to get a connection to the database. If an error occurs during the database operations, it's caught and logged. But regardless of whether an error occurred, we want to make sure that the database connection is closed. This is done in the `finally` block.
+
+This ensures that resources are properly cleaned up even when errors occur, preventing potential memory leaks or other issues related to resource management. 😊
+
+7. How does asynchronous error handling work with Promises or async/await in comparison to `try-catch`?
+Asynchronous error handling in JavaScript can be achieved using Promises or async/await, and these can be used in conjunction with `try-catch` blocks for more effective error handling.
+
+**Promises:**
+A Promise in JavaScript represents a value that may not be available yet. It's an object that may produce a value at some point in the future. When a promise is rejected, the error can be caught using the `.catch()` method:
+
+```javascript
+doSomething()
+  .then(result => {
+    // Handle the result
+  })
+  .catch(error => {
+    // Handle the error
+  });
+```
+
+In this example, if `doSomething()` returns a promise that gets rejected, the error will be caught and handled in the `catch` block.
+
+**Async/Await:**
+The async/await syntax is a way to work with promises in a more comfortable, synchronous-looking manner. When using async/await, you can catch errors using `try-catch` blocks:
+
+```javascript
+try {
+  const result = await doSomething();
+  // Handle the result
+} catch (error) {
+  // Handle the error
+}
+```
+
+In this example, if `doSomething()` returns a promise that gets rejected, the error will be caught by the `catch` block.
+
+So, while `try-catch` is traditionally used for synchronous error handling, it can also be used for asynchronous error handling when combined with async/await. This can make your asynchronous code easier to read and write, while still allowing you to handle errors effectively. 😊
+
+8. What are some common pitfalls or mistakes to avoid when using `try-catch-finally` in JavaScript?
+Sure, here are some common pitfalls or mistakes to avoid when using `try-catch-finally` in JavaScript:
+
+1. **Not handling Promises correctly:** When using Promises or async/await, remember that errors need to be caught using `.catch()` or a `try-catch` block. If you forget to do this, the error might go unnoticed.
+
+2. **Catching too many exceptions:** If you use a `try-catch` block around large amounts of code or entire functions, it can make it harder to identify where an error is coming from. It's generally better to use `try-catch` blocks around the specific lines of code where an error might occur.
+
+3. **Not re-throwing errors when needed:** Sometimes, you might want to catch an error to log it or perform some action, but then re-throw it so it can be caught and handled elsewhere. If you forget to re-throw the error, it can make it seem like the error was handled when it wasn't.
+
+4. **Throwing strings instead of Error objects:** Always throw instances of `Error` or a subclass of `Error`. Throwing strings or other types doesn't provide a stack trace and can make debugging more difficult.
+
+5. **Forgetting the `finally` block:** The `finally` block is executed regardless of whether an error occurred. This is useful for cleanup tasks, like closing a file or a network connection. Forgetting to use `finally` can lead to resources not being properly cleaned up.
+
+6. **Ignoring caught errors:** If you catch an error but don't handle it or log it, this can lead to silent failures where something goes wrong but you have no way of knowing what happened.
+
+Remember, error handling is a crucial part of writing robust, reliable code. It's important to think carefully about how to handle errors in your application. 😊
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+Remember, if an error is not caught (i.e., there is no catch block), it propagates up to the call stack until it is either caught or it causes the program to exit. So, it’s important to handle errors appropriately to prevent unexpected program behavior.
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+ The main difference between HTTP and HTTPS is the port they use. By default, HTTP uses port 80 and HTTPS uses port 443.
+
+///////////////////////////////////////////////////////////////////////////////////////
+DNS Lookup: When you enter a URL, your web browser performs a DNS (Domain Name System) lookup to translate the domain name to an IP address. This IP address is used to locate the server that hosts the website you’re trying to access.HTTP Request and Response: Once the server has been located via its IP address, your browser sends an HTTP request to the server for the webpage. The server then sends back an HTTP response, which includes the HTML, CSS, and JavaScript needed to render the webpage in your browser.
+Access Control: If the server allows your request (based on factors like your IP address, the HTTP method of the request, etc.), it will respond with the requested data. If not, it will respond with an error status code.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+the difference between REST (Representational State Transfer) and SOAP (Simple Object Access Protocol) APIs:
+
+Protocol:
+
+SOAP is a protocol with a defined set of rules and standards. It uses XML for message exchange and can operate over HTTP, SMTP, TCP, UDP, or other protocols.
+REST is an architectural style, not a protocol. It doesn’t have a defined set of rules but it typically uses HTTP or HTTPS protocols. It can use different data formats like XML, JSON, etc., but JSON is the most common.
+Message Format:
+
+SOAP uses XML for all messages.
+REST can use multiple message formats including XML, JSON, HTML, plain text, etc. JSON is the most commonly used format due to its lightweight nature.
+Performance:
+
+SOAP has additional overhead due to its extensive use of XML which can affect performance and speed.
+REST is generally faster and more efficient as it can use lighter message formats like JSON.
+Statefulness:
+
+SOAP supports both stateless and stateful operations.
+REST is stateless, meaning each HTTP request from the client to server must contain all the information needed to understand and process the request.
+Security:
+
+SOAP has built-in WS-Security features for enforcing security on the application level.
+REST relies on the underlying transport protocol (usually HTTP or HTTPS) for security.
+Error Handling:
+
+SOAP uses standard HTTP error codes as well as SOAP fault codes for error handling.
+REST uses standard HTTP status codes for error handling.
+In summary, the choice between SOAP and REST depends on the specific requirements of the project. SOAP might be a better choice for applications that require high security, ACID-compliant transactions, and formal contracts between client and server. REST might be a better choice for web services with good performance, scalability, and simplicity.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// https://www.bing.com/tutorials/search?toncp=0&form=NTPCHB&q=Bing+AI&showconv=0#how to make website 
+// what is wrong here ? 
+// Note: Fragment identifiers should not contain spaces. In your example, 
+//`#how to make website` should be `#howtomakewebsite` or something similar. Also, 
+//the fragment identifier doesn't change the page that is loaded, it just changes the 
+//part of the page that the browser scrolls to. So, unless there's an element with 
+//the id `howtomakewebsite` on the page, the browser won't scroll to anywhere different.
+// so correct url would be , 
+// `https://www.bing.com/search?toncp=0&form=NTPCHB&q=Bing+AI&showconv=0#howtomakewebsite`
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// `https://www.bing.com/tutorials/search?toncp=0&form=NTPCHB&q=Bing+AI&showconv=0#howtomakewebsite` 
+// here , 
+// communication  protocol - https
+// www - subdomain 
+// bing.com - domain 
+// domain name - bing 
+// domain extension - .com 
+// path/path to resource - tutorials/search
+// endpoint is - search 
+// query string is - ?toncp=0&form=NTPCHB&q=Bing+AI&showconv=0
+// fragmant identifier is - #howtomakewebsite
+// http://127.0.0.1:5500/index.html -> location 
+// protocol is - http: -> console.log(location.protocol)
+// host - 127.0.0.1:5500 -> console.log(location.host)
+// hostname - 127.0.0.1 ->console.log(location.hostname)
+// port - 5500 -> console.log(location.port)
+// path/pathname = /index.html -> console.log(location.pathname)
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+url is also called or known as path to resource .
+
+understanding of cors is important to work with fetch and network communication 
+
+//**Cross-Origin Resource Sharing (CORS)** policy. 
+//CORS is a security feature implemented by web browsers 
+//to prevent malicious websites from making requests to 
+//other websites on behalf of the user. The policy restricts 
+//web pages from making requests to a different domain than 
+//the one that served the web page. This is done to prevent 
+//unauthorized access to sensitive data.
+"how cors protects users " - it 
+// protect servers data from unautorized acccess but how 
+// does it protect users , It works by 
+// enforcing the **same-origin policy**, which restricts 
+// web pages from making requests to a different domain 
+// than the one that served the page ¹³. This prevents 
+// malicious websites from accessing sensitive data from 
+// other websites that the user is logged into, such as 
+// cookies, session tokens, and other authentication 
+// credentials ¹³. // For example, if a user is logged into their bank 
+//account and visits a malicious website that tries to 
+//steal their banking information, the CORS policy will 
+//prevent the malicious website from accessing the user's 
+//banking data ¹³. 
+// This is because the bank's website and the malicious 
+//website are hosted on different domains, and the 
+//same-origin policy enforced by the browser prevents 
+//the malicious website from making requests to the bank's 
+//website ¹³. 
+// However, it's important to note that the same-origin 
+//policy is not foolproof and can be bypassed by certain 
+//types of attacks, such as cross-site scripting (XSS) 
+//attacks ¹³. Therefore, it's important to take additional 
+//security measures, such as keeping your browser and 
+//operating system up-to-date, using strong and unique 
+//passwords, and enabling two-factor authentication 
+//wherever possible ¹³.
+
+cors protect servers data from unautorized acccess"- 
+// Cross-Origin Resource Sharing (CORS) is a security 
+//feature that helps protect server data from unauthorized 
+//access. It works by selectively relaxing the Same-Origin 
+//Policy (SOP) restrictions and enabling controlled access 
+//to resources from different domains1.
+
+// Here’s how CORS works:
+
+// Preflight Request: Before making the actual request, 
+//the browser sends a preflight request to the server to 
+//check if it’s safe to send the actual request. This adds 
+//an extra layer of security by ensuring that servers 
+//explicitly allow cross-origin requests and specify 
+//the allowed methods and headers2.
+// Access Control: The server responds to the preflight 
+//request with specific HTTP headers, such as 
+//“Access-Control-Allow-Origin”, which specify which 
+//domains are allowed to access the server’s resources3. 
+//If the server doesn’t allow the requesting domain, 
+//the browser blocks the request.
+// Actual Request: If the preflight check is successful, 
+//the browser sends the actual request.
+
+// If you’re the owner of the server, you can configure it 
+//to include the appropriate CORS headers in the response. 
+//The exact way to do this depends on what kind of server 
+//you’re using. For example, if you’re using Express.js, you 
+//can use the cors middleware to add CORS headers.
+
+// However, if you’re making a request to a server that you 
+//don’t control (like in your case with the fetch request), 
+//you can’t directly add CORS headers to the response. The 
+//server owner has to do that.
+
+
+
+// error 1 
+// Access to fetch at 
+//'https://goweather.herokuapp.com/weather/Ny' 
+//from origin 'http://127.0.0.1:5500' has been 
+//blocked by CORS policy: No 'Access-Control-Allow-Origin' 
+//header is present on the requested resource. 
+//If an opaque response serves your needs, set the 
+//request's mode to 'no-cors' to fetch the resource 
+//with CORS disabled.
+
+// The first error message you see is because the server 
+//hosting the API does not allow cross-origin requests. 
+//The error message indicates that the server did not include
+// the **Access-Control-Allow-Origin** header in its response, 
+//which is required by the browser to allow the request to be 
+//made.
+
+//net::ERR_FAILED 503 (Service Unavailable)- // The second error message indicates that the server is 
+//currently unavailable.
+
+whatHappensAfterRequest
+When a client (like a web browser) makes a 
+cross-origin HTTP request, it first sends a preflight 
+request using the OPTIONS method. This preflight request 
+includes `Access-Control-Request-*` headers to inform 
+the server about the actual request that will follow.
+
+The server then responds to the preflight request with 
+`Access-Control-Allow-*` headers. These headers indicate 
+whether the actual request is allowed:
+
+- `Access-Control-Allow-Origin` specifies which origins are allowed to access the resource.
+- `Access-Control-Allow-Methods` specifies which HTTP methods are allowed for the actual request.
+- `Access-Control-Allow-Headers` specifies which HTTP headers can be used in the actual request.
+
+If the server's response to the preflight request includes 
+the appropriate `Access-Control-Allow-*` headers, and if the 
+values of these headers match the actual request, then 
+the browser sends the actual request to the API endpoint. 
+The API follows the route and returns the appropriate 
+response.
+
+So, in summary, the process involves the client sending 
+a request, the server checking the request against its 
+CORS policy, and if everything checks out, the server 
+processes the request and sends back a response.
+Remember, this process is a part of the browser's security 
+measures to prevent unauthorized access to resources on 
+different origins. It's an essential aspect of web security. 
+
+The server (API provider) sets the 
+`Access-Control-Allow-*` headers in its responses. These 
+headers are used to specify which origins, methods, and 
+headers are allowed for the client's (API consumer's) 
+requests.
+
+For example, if a server wants to allow a client from 
+`http://example.com` to make `GET` and `POST` requests, 
+it would include these headers in its response:
+
+```
+Access-Control-Allow-Origin: http://example.com
+Access-Control-Allow-Methods: GET, POST
+```
+
+This tells the browser that it's okay to allow the web 
+page at `http://example.com` to make `GET` and `POST` 
+requests to the server. these headers are set on the server-side and are 
+included in the server's responses to the client's HTTP 
+requests. The exact way to set these headers depends on 
+your server's software and configuration. If you're unsure, 
+consider consulting with a web development expert or a 
+trusted mentor. 😊
+
+In the context of HTTP/HTTPS, which is the protocol used for 
+communication in web services.
+there are several methods 
+that can be used on the server-side to handle requests. 
+These methods correspond to different types of actions 
+that can be performed on a resource:
+
+1. **GET**: Retrieves a representation of a resource.
+2. **POST**: Submits data to be processed by the resource.
+3. **PUT**: Updates an existing resource or creates it if it doesn't exist.
+4. **DELETE**: Deletes a resource.
+5. **HEAD**: Similar to GET, but only retrieves the headers (not the body of the resource).
+6. **OPTIONS**: Returns the HTTP methods that the server supports for the specified URL.
+7. **PATCH**: Applies partial modifications to a resource.
+8. **CONNECT**: Used to establish a network connection for use with a proxy.
+9. **TRACE**: Performs a message loop-back test along the path to the target resource.
+
+These methods are defined in the HTTP/1.1 specification. 
+However, not all servers or APIs will support all methods. 
+The allowed methods for a particular resource depend on the 
+server's implementation. 
+
+Remember, each of these methods can have different 
+implications for the security and performance of your 
+application, so it's important to choose the right method 
+for each operation. If you're unsure, consider consulting 
+with a web development expert or a trusted mentor. 😊
+
+Sure, here's an example of an HTTP GET request made from 
+the client-side using JavaScript's Fetch API:
+
+```javascript
+fetch('https://api.example.com/data',{
+  method: 'GET', // or 'POST'
+  headers: {
+    'Content-Type': 'application/json',
+    // 'Authorization': 'Bearer your-token (if needed)',
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch((error) => {
+  console.error('Error:', error);
+});
+```
+
+In this example, `fetch` is used to make an HTTP request 
+to the URL `https://api.example.com/data`. The `method: 
+'GET'` option means that this is a GET request. The 
+`headers` option is used to set the Content-Type header 
+to `application/json`, indicating that the request body 
+format is JSON.
+
+The `then` method is used to specify what should happen 
+when the Promise returned by `fetch` is fulfilled. In this 
+case, it converts the response to JSON with `response.json()`,
+ and then logs the data to the console with `console.log(data)`.
+
+The `catch` method is used to handle any errors that may 
+occur during the fetch operation. If an error occurs, it 
+logs the error message to the console with 
+`console.error('Error:', error)`.
+
+Remember, this is just a basic example. Real-world 
+applications may need to handle more complex situations, 
+like authentication, error handling, and more.
+
+68. how can i set headers for the server side to tell that 
+allow this origin to make api request using provider ?
+69.Sure, you can set headers on the server-side to specify 
+which origins are allowed to make API requests. This involves 
+including the `Access-Control-Allow-Origin` header in the 
+server's responses. Here's an example of how you might do 
+this using Express.js, a popular Node.js web application 
+framework:
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://example.com'); // replace this with your origin
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+app.get('/api/data', (req, res) => {
+  res.json({ message: 'Hello, world!' });
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+```
+
+In this example, `app.use()` is used to add middleware 
+that sets the `Access-Control-Allow-Origin` and 
+`Access-Control-Allow-Headers` headers on every response. 
+Replace `'http://example.com'` with the origin you want 
+to allow.
+
+Please note that allowing all origins (`*`) can be a 
+security risk, so it's generally best to specify the 
+exact origins that should be allowed.
+
+Remember, this is just a basic example. Depending on your 
+server setup and requirements, you might need to set 
+additional CORS headers or handle preflight `OPTIONS` 
+requests. If you're unsure, consider consulting with a 
+web development expert or a trusted mentor. 😊
+
+
+68. iS the vite does not include/PROVIDES the fully  functional 
+server side like node js or next js  its only a frontend 
+build tool for the 
+freont end , so if we need complex api interactions we  
+need to setup the server diff ?
+
+Yes, you’re correct. Vite is a build tool that focuses on the frontend. 
+It provides a development server with hot module replacement (HMR) and 
+a build command for bundling your project for production. However, it 
+doesn’t include a fully functional server-side environment like Node.js or Next.js.
+
+If you need to handle complex API interactions, you would indeed need 
+to set up a separate server. This could be a Node.js server, a 
+serverless function, or any other backend that can process API 
+requests. This server would be separate from the Vite development 
+server, which is primarily for serving and bundling your frontend code.
+
+So, in a typical setup, you might have:
+
+A Vite project for your frontend code.
+A Node.js/Express.js (or similar) project for your backend code.
+These would run on different ports during development, and you’d proxy API requests from the frontend to the backend using Vite’s dev server proxy. For production, you’d bundle your frontend using Vite, and your backend server would serve both the API and the static frontend bundle.
+
+69. and remember whenever we make an api call from the 
+server site we needto set up or configure the server 
+to handle the cors issue . 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+fetch -> detch is an api  provided by the browser (fetch is a global method in browser )  , 
+syntax -> 
+fetch(url, options)
+  .then(response => {
+    // handle response
+  })
+  .catch(error => {
+    // handle error
+  });
+The `fetch` function takes in one mandatory argument, 
+//the path to the resource you want to fetch.
+
+`fetch` only rejects a promise if there 
+//is a network error or if anything prevented the request 
+//from completing. It will not reject on HTTP error status 
+//even if the response is an HTTP 404 or 500. Instead, 
+//as soon as the server responds with headers, the Promise 
+//will resolve normally (with the ok property of the response 
+//set to false),
+A fetch() promise only rejects when a network error is encountered (which is usually when
+ there's a permissions issue or similar). A fetch() promise does not reject on 
+ HTTP errors (404, etc.). Instead, a then() handler must check the Response.ok 
+ and/or Response.status properties.
+
+The fetch() method is controlled by the connect-src directive 
+of Content Security Policy rather than the directive of 
+the resources it's retrieving.
+
+
+// The `options` object in the `fetch()` method is an 
+// optional parameter that allows you to specify additional 
+// settings for the request, such as the request method, 
+// headers, and other parameters.// method , header , mode , cache , 
+credentials , redirect , referrer , referrer etc, 
+// - `method`: The HTTP method to use for the request. 
+  // The default is `'GET'`.
+// - `headers`: An object containing the headers to include 
+  // in the request. Each header is specified as a key-value 
+  // pair.
+// - `mode`: The mode of the request. This can be `'cors'`, 
+  // `'no-cors'`, `'same-origin'`, or `'navigate'`.
+// - `cache`: The cache mode of the request. This can be 
+    // `'default'`, `'no-store'`, `'reload'`, `'no-cache'`, 
+    // or `'force-cache'`.
+// - `credentials`: The credentials mode of the request. 
+  // This can be `'omit'`, `'same-origin'`, or `'include'`.
+// - `redirect`: The redirect mode of the request. This can 
+  // be `'follow'`, `'error'`, or `'manual'`.
+// - `referrer`: The referrer of the request. This can be 
+  // `'no-referrer'`, `'client'`, or a URL.
+// - `referrerPolicy`: The referrer policy of the request. 
+  // This can be `'no-referrer'`, 
+  // `'no-referrer-when-downgrade'`, `'origin'`, 
+  // `'origin-when-cross-origin'`, `'unsafe-url'`, or a URL.
+
+fetch() methods mdn 
+Syntax
+JS
+Copy to Clipboard
+fetch(resource)
+fetch(resource, options)
+Parameters
+resource
+This defines the resource that you wish to fetch. This can either be:
+
+A string or any other object with a stringifier — including a URL object — 
+that provides the URL of the resource you want to fetch.
+A Request object.
+
+
+options Optional
+An object containing any custom settings you want to apply to the request. 
+The possible options are:
+
+method
+The request method, e.g., "GET", "POST". The default is "GET". Note that 
+the Origin header is not set on Fetch requests with a method of HEAD or GET. 
+Any string that is a case-insensitive match for one of the methods 
+in RFC 9110 will be uppercased automatically. If you want to use 
+a custom method (like PATCH), you should uppercase it yourself.
+
+headers
+Any headers you want to add to your request, contained within a Headers object 
+or an object literal with String values. Note that some names are forbidden.
+
+Note: The Authorization HTTP header may be added to a request, 
+but will be removed if the request is redirected cross-origin.
+
+body
+Any body that you want to add to your request: this can be a Blob, 
+an ArrayBuffer, a TypedArray, a DataView, a FormData, a URLSearchParams, 
+string object or literal, or a ReadableStream object. This latest possibility 
+is still experimental; check the compatibility information to verify you 
+can use it. Note that a request using the GET or HEAD method cannot have a body.
+
+mode
+The mode you want to use for the request, e.g., cors, no-cors, or same-origin.
+
+credentials
+Controls what browsers do with credentials 
+(cookies, HTTP authentication entries, and TLS client certificates). 
+Must be one of the following strings.
+
+omit
+Tells browsers to exclude credentials from the request, and 
+ignore any credentials sent back in the response (e.g., any Set-Cookie header).
+
+same-origin
+Tells browsers to include credentials with requests to same-origin URLs, 
+and use any credentials sent back in responses from same-origin URLs. 
+This is the default value.
+
+include
+Tells browsers to include credentials in both same- and cross-origin requests, 
+and always use any credentials sent back in responses.
+
+Note: Credentials may be included in simple and "final" cross-origin requests, 
+but should not be included in CORS preflight requests.
+
+cache
+A string indicating how the request will interact with the browser's HTTP cache. 
+The possible values, default, no-store, reload, no-cache, force-cache, and 
+only-if-cached, are documented in the article for 
+the cache property of the Request object.
+
+redirect
+How to handle a redirect response:
+
+follow
+Automatically follow redirects. Unless otherwise stated the redirect mode is set to follow.
+
+error
+Abort with an error if a redirect occurs.
+
+manual
+Caller intends to process the response in another context. See WHATWG fetch standard for more information.
+
+referrer
+A string specifying the referrer of the request. This can be a same-origin URL, about:client, or an empty string.
+
+referrerPolicy
+Specifies the referrer policy to use for the request. May be one of no-referrer, no-referrer-when-downgrade, same-origin, origin, strict-origin, origin-when-cross-origin, strict-origin-when-cross-origin, or unsafe-url.
+
+integrity
+Contains the subresource integrity value of the request (e.g., sha256-BpfBw7ivV8q2jLiT13fxDYAe2tJllusRSZ273h2nFSE=).
+
+keepalive
+The keepalive option can be used to allow the request to outlive the page. Fetch with the keepalive flag is a replacement for the Navigator.sendBeacon() API.
+
+signal
+An AbortSignal object instance; allows you to communicate with a fetch request and abort it if desired via an AbortController.
+
+priority
+Specifies the priority of the fetch request relative to other requests of the same type. Must be one of the following strings:
+
+high
+A high-priority fetch request relative to other requests of the same type.
+
+low
+A low-priority fetch request relative to other requests of the same type.
+
+auto
+Automatically determine the priority of the fetch request relative to other requests of the same type (default).
+
+Return value
+A Promise that resolves to a Response object.
+
+Exceptions
+AbortError DOMException
+The request was aborted due to a call to the AbortController abort() method.
+
+TypeError
+Can occur for the following reasons:
+
+Reason	Failing examples
+
+Invalid header name.	
+
+// space in "C ontent-Type"
+const headers = {
+  'C ontent-Type': 'text/xml',
+  'Breaking-Bad': '<3',
+};
+fetch('https://example.com/', { headers });
+        
+
+Invalid header value. The header object must contain exactly two elements.	
+const headers = [
+  ['Content-Type', 'text/html', 'extra'],
+  ['Accept'],
+];
+fetch('https://example.com/', { headers });
+
+        
+Invalid URL or scheme, or using a scheme that fetch does not support, or using a scheme that is not supported for a particular request mode.	
+fetch('blob://example.com/', { mode: 'cors' });
+        
+
+URL includes credentials.	
+fetch('https://user:password@example.com/');
+        
+
+Invalid referrer URL.	
+fetch('https://example.com/', { referrer: './abc\u0000df' });
+        
+
+Invalid modes (navigate and websocket).	
+fetch('https://example.com/', { mode: 'navigate' });
+        
+
+If the request cache mode is "only-if-cached" and the request mode is other than "same-origin".	
+fetch('https://example.com/', {
+  cache: 'only-if-cached',
+  mode: 'no-cors',
+});
+        
+
+If the request method is an invalid name token or one of the forbidden headers ('CONNECT', 'TRACE' or 'TRACK').	
+fetch('https://example.com/', { method: 'CONNECT' });
+        
+
+If the request mode is "no-cors" and the request method is not a CORS-safe-listed method ('GET', 'HEAD', or 'POST').	
+fetch('https://example.com/', {
+  method: 'CONNECT',
+  mode: 'no-cors',
+});
+        
+
+If the request method is 'GET' or 'HEAD' and the body is non-null or not undefined.	
+fetch('https://example.com/', {
+  method: 'GET',
+  body: new FormData(),
+});
+        
+
+If fetch throws a network error.	
+Examples
+In our Fetch Request example (see Fetch Request live) we create 
+a new Request object using the relevant constructor, then fetch 
+it using a fetch() call. Since we are fetching an image, we run 
+Response.blob() on the response to give it the proper MIME type 
+so it will be handled properly, then create an Object URL of it 
+and display it in an <img> element.
+
+
+JS
+Copy to Clipboard
+const myImage = document.querySelector("img");
+
+const myRequest = new Request("flowers.jpg");
+
+fetch(myRequest)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.blob();
+  })
+  .then((response) => {
+    myImage.src = URL.createObjectURL(response);
+  });
+
+In the Fetch with init then Request example (see Fetch Request init live), 
+we do the same thing except that we pass in an init object when we invoke fetch():
+
+JS
+Copy to Clipboard
+const myImage = document.querySelector("img");
+
+const myHeaders = new Headers();
+myHeaders.append("Accept", "image/jpeg");
+
+const myInit = {
+  method: "GET",
+  headers: myHeaders,
+  mode: "cors",
+  cache: "default",
+};
+
+const myRequest = new Request("flowers.jpg");
+
+fetch(myRequest, myInit).then((response) => {
+  // …
+});
+You could also pass the init object in with the Request constructor to get the same effect:
+
+JS
+Copy to Clipboard
+const myRequest = new Request("flowers.jpg", myInit);
+You can also use an object literal as headers in init.
+
+JS
+Copy to Clipboard
+const myInit = {
+  method: "GET",
+  headers: {
+    Accept: "image/jpeg",
+  },
+  mode: "cors",
+  cache: "default",
+};
+
+const myRequest = new Request("flowers.jpg", myInit);
+
+
+to get 
+//through cors to fetch data ,
+// and to do do so you need to set headers ,
+// which can only be done in server-side and client side . 
+//CORS (Cross-Origin Resource Sharing) is indeed a 
+//mechanism that uses additional HTTP headers to tell 
+//browsers to give a web application running at one origin, 
+//access to selected resources from a different origin.
+server needs to respnd with Access-Control-* headers to allow 
+//the browser to permit the cross-origin request.
+
+
+when should we use this no-cors in mode ?
+ This mode is 
+//useful when you only need to send data to the server and 
+//do not need to access the response data 3. and the response 
+//from the server is opaque, meaning that its contents 
+//cannot be accessed by JavaScript code
+
+// When you try to fetch resources from a different origin 
+//(in this case, 'https://www.google.com/' from 
+//'http://127.0.0.1:5500'), the browser sends a 
+//CORS (Cross-Origin Resource Sharing) preflight request 
+//to the server to check if it's okay to send the actual 
+//request. The server must respond with the appropriate 
+//`Access-Control-Allow-Origin` header to allow the request
+// msg go on by the browser/only then browser lets the reuest go from the origin http://127.0.0.1:5500 ,
+//  and take your requested files
+// from the server  response . 
+
+console.log("do not put function call inside the then/catch")
+console.log(" or else that will be exected regardless promise resolve or rejects")
+remember , The promise resolves to the Response object representing the response to your request.
+like ,
+fetch("https://jsonplaceholder.typicode.com/todos")
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .then(console.log("promise rsolved"))
+    .catch(console.error("promise rejected"))
+// then why ? if promise is resolved then why catch is executed 
+
+// The reason why both the `then` and `catch` blocks are 
+// executed in your code is due to how you've written the 
+// `catch` block. 
+// In your code, `console.error("promise rejected")` is not 
+// a function, but a call to a function. This means it gets 
+// executed immediately when the Promise is set up, not 
+// when an error occurs ,if the function is called immediately 
+// (like in your original code), it will execute 
+// regardless of whether the Promise was resolved or 
+// rejected¹².
+// Here's the corrected version of your code:
+
+fetch("https://jsonplaceholder.typicode.com/todos")
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .then(() => console.log("promise resolved"))
+    .catch(() => console.error("promise rejected"));
+// `console.log("promise resolved")` and 
+// `console.error("promise rejected")` are wrapped in 
+// arrow functions, so they will only be called when 
+// the Promise is either resolved or rejected¹².
+
+// if the internet is disconnected , then thiserror will show up in the console 
+// GET https://jsonplaceholder.typicode.com/todos/1 net::ERR_INTERNET_DISCONNECTED
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+Request: json() method
+The json() method of the Request interface reads the request body and returns it as a promise that resolves with the result of parsing the body text as JSON.
+
+Note that despite the method being named json(), the result is not JSON but is instead the result of taking JSON as input and parsing it to produce a JavaScript object.
+
+Syntax
+JS
+
+Copy to Clipboard
+json()
+
+Parameters
+None.
+//////////////////////////////////////////////////////////////////////////////////////////
+
+The Browser Object Model (BOM) allows JavaScript to "talk to" the browser.
+There are no official standards for the Browser Object Model (BOM).
+
+The Window Object - the global object 
+// The window object is supported by all browsers. 
+// It represents the browser's window. - WHAT YOU SEE WHEN YOU open a browser . 
+// All global JavaScript objects, functions, and 
+// variables automatically become members of the window object.
+// Global variables are properties of the window object.
+// Global function are methods of the window object.
+// Even the document object (of the HTML DOM) is a property of the window object
+
+// some most common window methods 
+// window.innerWidth , window.innerHeight , window.screen
+// window.open() - open a new window
+// window.close() - close the current window
+// window.moveTo() - move the current window
+// window.resizeTo() - resize the current window
+// screen.width
+// screen.height
+// screen.availWidth
+// screen.availHeight
+// screen.colorDepth
+// screen.pixelDepth
+
+// The window.location/location  object can be used to get the 
+// current page address (URL) and to redirect the browser 
+// to a new page.
+// window.location.assign() loads a new document
+// Window Location Assign
+// The window.location.assign() method loads a new document.
+
+// Example
+// Load a new document:
+
+// <html>
+// <head>
+// <script>
+// function newDoc() {
+//   window.location.assign("https://www.w3schools.com")
+// }
+// </script>
+// </head>
+// <body>
+// <input type="button" value="Load new document" onclick="newDoc()">
+// </body>
+// </html>
+
+// The window.history object contains the browsers history.
+// Window History
+// The window.history object can be written without the window prefix.
+// To protect the privacy of the users, there are limitations 
+// to how JavaScript can access this object.
+// Some methods:
+// history.back() - same as clicking back in the browser
+// history.forward() - same as clicking forward in the browser
+// Window History Back
+// The history.back() method loads the previous URL in the history list.
+// This is the same as clicking the Back button in the browser.
+// Example
+// Create a back button on a page:
+
+// <html>
+// <head>
+// <script>
+// function goBack() {
+//   window.history.back()
+// }
+// </script>
+// </head>
+// <body>
+
+// <input type="button" value="Back" onclick="goBack()">
+
+// </body>
+// </html>
+// The output of the code above will be:
+////////////
+// Window History Forward
+// The history.forward() method loads the next URL in the history list.
+
+// This is the same as clicking the Forward button in the browser.
+
+// Example
+// Create a forward button on a page:
+
+// <html>
+// <head>
+// <script>
+// function goForward() {
+//   window.history.forward()
+// }
+// </script>
+// </head>
+// <body>
+
+// <input type="button" value="Forward" onclick="goForward()">
+
+// </body>
+// </html>
+
+// The window.navigator object contains information about the visitor's browser.
+// Window Navigator
+// The window.navigator object can be written without the window prefix.
+
+// Some examples:
+// navigator.cookieEnabled - (Browser Cookies) The cookieEnabled property returns true if cookies are enabled, otherwise false
+// navigator.appCodeName
+// navigator.platform
+
+The `navigator.appCodeName` and `navigator.platform` properties are indeed deprecated. They were used to get the code name of the browser and the platform (operating system) respectively. However, they are being phased out due to privacy concerns and changes in web standards¹⁵.
+
+As an alternative, you can use the User-Agent Client Hints API, which provides more privacy-preserving ways to access the same kind of information³⁶. Here's how you can use it:
+
+```javascript
+if (navigator.userAgentData) {
+  console.log(navigator.userAgentData.platform);
+} else {
+  console.log('User-Agent Client Hints API not supported');
+}
+```
+
+In this code, `navigator.userAgentData.platform` gives you the platform information. Please note that this API is relatively new and may not be supported in all browsers³⁶.
+
+Remember, it's generally recommended to use feature detection over browser detection when possible, as it leads to more robust and future-proof code¹. 😊
+
+Remember, it’s generally recommended to use feature detection - how to implement feature detection ?
+
+Feature detection is a technique used in JavaScript to determine whether a certain feature, method, or API is available in the user's browser. This allows you to write code that works across different browsers, even if they have different levels of support for certain features.
+
+Here's an example of feature detection for the `fetch` API, which is used to make HTTP requests:
+
+```javascript
+if (window.fetch) {
+  // If fetch is supported, use it to make a request
+  fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+} else {
+  // If fetch is not supported, fall back to XMLHttpRequest or some other method
+  console.log('Fetch is not supported in this browser.');
+}
+```
+
+In this code, `window.fetch` checks if the `fetch` function is available in the global `window` object. If it is, the code inside the `if` block is executed. If `fetch` is not supported, the code inside the `else` block is executed.
+
+This way, you can ensure that your code works in as many environments as possible, and provide fallbacks for older or less feature-rich browsers. 😊
+
+//  navigator.cookieEnabled:
+// Example
+{/* <p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+"cookiesEnabled is " + navigator.cookieEnabled;
+</script> */}
+// Browser Application Name
+// The appName property returns the application name of the browser:
+
+// Example
+{/* <p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+"navigator.appName is " + navigator.appName;
+</script> */}
+
+// Warning
+// This property is removed (deprecated) in the latest web standard.
+// Most browsers (IE11, Chrome, Firefox, Safari) returns Netscape as appName.
+
+// Browser Application Code Name
+// The appCodeName property returns the application code name of the browser:
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML =
+// "navigator.appCodeName is " + navigator.appCodeName;
+// </script>
+// Warning
+// This property is removed (deprecated) in the latest web standard.
+// Most browsers (IE11, Chrome, Firefox, Safari, Opera) returns Mozilla as appCodeName.
+
+
+// The Browser Engine
+// The product property returns the product name of the browser engine:
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML =
+// "navigator.product is " + navigator.product;
+// </script>
+// Warning
+// This property is removed (deprecated) in the latest web standard.
+// Most browsers returns Gecko as product.
+
+// The Browser Version
+// The appVersion property returns version information about the browser:
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML = navigator.appVersion;
+// </script>
+// The Browser Agent
+// The userAgent property returns the user-agent header sent by the browser to the server:
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML = navigator.userAgent;
+// </script>
+// Warning
+// The information from the navigator object can often be misleading.
+
+// The navigator object should not be used to detect browser versions because:
+
+// Different browsers can use the same name
+// The navigator data can be changed by the browser owner
+// Some browsers misidentify themselves to bypass site tests
+// Browsers cannot report new operating systems, released later than the browser
+// The Browser Platform
+// The platform property returns the browser platform (operating system):
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML = navigator.platform;
+// </script>
+// The Browser Language
+// The language property returns the browser's language:
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML = navigator.language;
+// </script>
+// Is The Browser Online?
+// The onLine property returns true if the browser is online:
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML = navigator.onLine;
+// </script>
+// Is Java Enabled?
+// The javaEnabled() method returns true if Java is enabled:
+
+// Example
+// <p id="demo"></p>
+
+// <script>
+// document.getElementById("demo").innerHTML = navigator.javaEnabled();
+// </script>
+
+
+
+console.log("JavaScript Popup Boxes")
+// JavaScript has three kind of popup boxes: Alert box, Confirm box, and Prompt box.
+
+// Alert Box
+// An alert box is often used if you want to make sure information comes through to the user.
+// When an alert box pops up, the user will have to click "OK" to proceed.
+
+// Syntax
+// window.alert("sometext");
+// The window.alert() method can be written without the window prefix.
+
+// Example
+// alert("I am an alert box!");
+// Confirm Box
+// A confirm box is often used if you want the user to verify or accept something.
+// When a confirm box pops up, the user will have to click either "OK" or "Cancel" to proceed.
+// If the user clicks "OK", the box returns true. If the user clicks "Cancel", the box returns false.
+
+// Syntax
+// window.confirm("sometext");
+// The window.confirm() method can be written without the window prefix.
+
+// Example
+// if (confirm("Press a button!")) {
+//   txt = "You pressed OK!";
+// } else {
+//   txt = "You pressed Cancel!";
+// }
+// Prompt Box
+// A prompt box is often used if you want the user to input a value before entering a page.
+// When a prompt box pops up, the user will have to click either "OK" or "Cancel" to proceed after entering an input value.
+// If the user clicks "OK" the box returns the input value. If the user clicks "Cancel" the box returns null.
+
+// Syntax
+// window.prompt("sometext","defaultText");
+// The window.prompt() method can be written without the window prefix.
+
+// Example
+// let person = prompt("Please enter your name", "Harry Potter");
+// let text;
+// if (person == null || person == "") {
+//   text = "User cancelled the prompt.";
+// } else {
+//   text = "Hello " + person + "! How are you today?";
+// }
+
+
+console.log("JavaScript Timing Events")
+
+// 123456789101112	
+// JavaScript can be executed in time-intervals.
+// This is called timing events.
+// Timing Events
+// The window object allows execution of code at specified time intervals.
+// These time intervals are called timing events.
+// The two key methods to use with JavaScript are:
+// setTimeout(function, milliseconds)
+// Executes a function, after waiting a specified number of milliseconds.
+// setInterval(function, milliseconds)
+// Same as setTimeout(), but repeats the execution of the function continuously.
+// The setTimeout() and setInterval() are both methods of the HTML DOM Window object.
+
+// Example
+// Click a button. Wait 3 seconds, and the page will alert "Hello":
+
+// <button onclick="setTimeout(myFunction, 3000)">Try it</button>
+
+// <script>
+// function myFunction() {
+//   alert('Hello');
+// }
+// </script>
+// How to Stop the Execution?
+// The clearTimeout() method stops the execution of the function specified in setTimeout().
+// window.clearTimeout(timeoutVariable)
+// The window.clearTimeout() method can be written without the window prefix.
+// The clearTimeout() method uses the variable returned from setTimeout():
+// myVar = setTimeout(function, milliseconds);
+// clearTimeout(myVar);
+// If the function has not already been executed, you can stop the execution by calling the clearTimeout() method:
+
+// Example
+// Same example as above, but with an added "Stop" button:
+// <button onclick="myVar = setTimeout(myFunction, 3000)">Try it</button>
+// <button onclick="clearTimeout(myVar)">Stop it</button>
+// The setInterval() Method
+// The setInterval() method repeats a given function at every given time-interval.
+
+
+
+// window.setInterval(function, milliseconds);
+// The window.setInterval() method can be written without the window prefix.
+// The first parameter is the function to be executed.
+// The second parameter indicates the length of the time-interval between each execution.
+// This example executes a function called "myTimer" once every second (like a digital watch).
+
+// Example
+// Display the current time:
+
+// setInterval(myTimer, 1000);
+
+// function myTimer() {
+//   const d = new Date();
+//   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+// }
+// There are 1000 milliseconds in one second.
+
+// How to Stop the Execution?
+// The clearInterval() method stops the executions of the function specified in the setInterval() method.
+
+// window.clearInterval(timerVariable)
+// The window.clearInterval() method can be written without the window prefix.
+
+// The clearInterval() method uses the variable returned from setInterval():
+
+// let myVar = setInterval(function, milliseconds);
+// clearInterval(myVar);
+// Example
+// Same example as above, but we have added a "Stop time" button:
+
+// <p id="demo"></p>
+
+// <button onclick="clearInterval(myVar)">Stop time</button>
+
+// <script>
+// let myVar = setInterval(myTimer, 1000);
+// function myTimer() {
+//   const d = new Date();
+//   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+// }
+// </script>
+
+
+console.log("JavaScript Cookies")
+// Cookies let you store user information in web pages.
+// What are Cookies?
+// Cookies are data, stored in small text files, on your computer.
+// When a web server has sent a web page to a browser, 
+//the connection is shut down, and the server forgets everything about the user.
+// Cookies were invented to solve the problem "how to remember information about the user":
+// When a user visits a web page, his/her name can be stored in a cookie.
+// Next time the user visits the page, the cookie "remembers" his/her name.
+// Cookies are saved in name-value pairs like:
+
+// username = John Doe
+// When a browser requests a web page from a server, cookies belonging to the page are added to the request. This way the server gets the necessary data to "remember" information about users.
+
+// None of the examples below will work if your browser has local cookies support turned off.
+
+// Create a Cookie with JavaScript
+// JavaScript can create, read, and delete cookies with the document.cookie property.
+
+// With JavaScript, a cookie can be created like this:
+
+// document.cookie = "username=John Doe";
+// You can also add an expiry date (in UTC time). By default, the cookie is deleted when the browser is closed:
+
+// document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+// With a path parameter, you can tell the browser what path the cookie belongs to. By default, the cookie belongs to the current page.
+
+// document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+// Read a Cookie with JavaScript
+// With JavaScript, cookies can be read like this:
+
+// let x = document.cookie;
+// document.cookie will return all cookies in one string much like: cookie1=value; cookie2=value; cookie3=value;
+
+// Change a Cookie with JavaScript
+// With JavaScript, you can change a cookie the same way as you create it:
+
+// document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+// The old cookie is overwritten.
+
+// Delete a Cookie with JavaScript
+// Deleting a cookie is very simple.
+
+// You don't have to specify a cookie value when you delete a cookie.
+
+// Just set the expires parameter to a past date:
+
+// document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+// You should define the cookie path to ensure that you delete the right cookie.
+
+// Some browsers will not let you delete a cookie if you don't specify the path.
+
+// The Cookie String
+// The document.cookie property looks like a normal text string. But it is not.
+
+// Even if you write a whole cookie string to document.cookie, when you read it out again, you can only see the name-value pair of it.
+
+// If you set a new cookie, older cookies are not overwritten. The new cookie is added to document.cookie, so if you read document.cookie again you will get something like:
+
+// cookie1 = value; cookie2 = value;
+
+// Display All Cookies  Create Cookie 1  Create Cookie 2 Delete Cookie 1  Delete Cookie 2
+
+// If you want to find the value of one specified cookie, you must write a JavaScript function that searches for the cookie value in the cookie string.
+
+// JavaScript Cookie Example
+// In the example to follow, we will create a cookie that stores the name of a visitor.
+
+// The first time a visitor arrives to the web page, he/she will be asked to fill in his/her name. The name is then stored in a cookie.
+
+// The next time the visitor arrives at the same page, he/she will get a welcome message.
+
+// For the example we will create 3 JavaScript functions:
+
+// A function to set a cookie value
+// A function to get a cookie value
+// A function to check a cookie value
+// A Function to Set a Cookie
+// First, we create a function that stores the name of the visitor in a cookie variable:
+
+// Example
+// function setCookie(cname, cvalue, exdays) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//   let expires = "expires="+ d.toUTCString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// }
+// Example explained:
+
+// The parameters of the function above are the name of the cookie (cname), the value of the cookie (cvalue), and the number of days until the cookie should expire (exdays).
+
+// The function sets a cookie by adding together the cookiename, the cookie value, and the expires string.
+
+// A Function to Get a Cookie
+// Then, we create a function that returns the value of a specified cookie:
+
+// Example
+// function getCookie(cname) {
+//   let name = cname + "=";
+//   let decodedCookie = decodeURIComponent(document.cookie);
+//   let ca = decodedCookie.split(';');
+//   for(let i = 0; i <ca.length; i++) {
+//     let c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+// Function explained:
+
+// Take the cookiename as parameter (cname).
+
+// Create a variable (name) with the text to search for (cname + "=").
+
+// Decode the cookie string, to handle cookies with special characters, e.g. '$'
+
+// Split document.cookie on semicolons into an array called ca (ca = decodedCookie.split(';')).
+
+// Loop through the ca array (i = 0; i < ca.length; i++), and read out each value c = ca[i]).
+
+// If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length, c.length).
+
+// If the cookie is not found, return "".
+
+// A Function to Check a Cookie
+// Last, we create the function that checks if a cookie is set.
+
+// If the cookie is set it will display a greeting.
+
+// If the cookie is not set, it will display a prompt box, asking for the name of the user, and stores the username cookie for 365 days, by calling the setCookie function:
+
+// Example
+// function checkCookie() {
+//   let username = getCookie("username");
+//   if (username != "") {
+//    alert("Welcome again " + username);
+//   } else {
+//     username = prompt("Please enter your name:", "");
+//     if (username != "" && username != null) {
+//       setCookie("username", username, 365);
+//     }
+//   }
+// }
+// All Together Now
+// Example
+// function setCookie(cname, cvalue, exdays) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+//   let expires = "expires="+d.toUTCString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// }
+
+// function getCookie(cname) {
+//   let name = cname + "=";
+//   let ca = document.cookie.split(';');
+//   for(let i = 0; i < ca.length; i++) {
+//     let c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+
+// function checkCookie() {
+//   let user = getCookie("username");
+//   if (user != "") {
+//     alert("Welcome again " + user);
+//   } else {
+//     user = prompt("Please enter your name:", "");
+//     if (user != "" && user != null) {
+//       setCookie("username", user, 365);
+//     }
+//   }
+// }
+// The example above runs the checkCookie() function when the page loads.
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+window.document.getElementById("header");
+document.getElementById("header"); - how both are same ?
+
+In JavaScript, window is the global object, and document is a property of the window object. So when you call window.document.getElementById("header"), you’re accessing the document property of the window object and then calling the getElementById method on it.
+
+However, because window is the global object, its properties can be accessed directly without referencing window. That’s why document.getElementById("header") works the same way - it’s just a shorter way to write the same thing.
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// All modern computers use 24 bit or 32 bit hardware for color resolution:
+
+// 24 bits =      16,777,216 different "True Colors"
+// 32 bits = 4,294,967,296 different "Deep Colors"
+// Older computers used 16 bits: 65,536 different "High Colors" resolution.
+// The #rrggbb (rgb) values used in HTML represents 
+// "True Colors" (16,777,216 different colors)
+
+document.getElementById("demo").innerHTML =
+"Screen Color Depth: " + screen.colorDepth;
+// Result will be:
+
+// Screen Color Depth: 24
+document.getElementById("demo").innerHTML =
+"Screen Pixel Depth: " + screen.pixelDepth;
+// Result will be:
+
+// Screen Pixel Depth: 24
+// For modern computers, Color Depth and Pixel Depth are equal.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+http security 
+
+Content Security Policy (CSP) : Content Security Policy (CSP) is a security standard introduced to prevent Cross-Site Scripting (XSS) and other code injection attacks. It allows you to specify the domains that the browser should consider as valid sources of executable scripts.
+
+To configure CSP, you need to add a Content-Security-Policy header to your web page’s HTTP response. This header is configured on the server-side, typically within your application’s middleware if you’re using Node.js/Express.js, or in the .htaccess file for Apache servers.
+Content-Security-Policy: default-src 'self'; script-src 'self' https://apis.google.com; object-src 'none'; style-src 'self' https://fonts.googleapis.com; img-src 'self'; media-src 'none'; frame-src https://www.youtube.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'
+
+In this example, default-src 'self' allows resources only from the same origin. script-src 'self' https://apis.google.com allows scripts to be loaded from the same origin and https://apis.google.com. Other directives like object-src, style-src, img-src, media-src, frame-src, font-src, and connect-src control different types of resources.
+while Content Security Policy (CSP) is a powerful tool for enhancing the security of a website, it is not a standalone solution that can address all security concerns. It should be used in combination with other security best practices for a comprehensive approach to web security.
+
+Content Security Policy (CSP)
+Content Security Policy (CSP) is an added layer of security that 
+helps to detect and mitigate certain types of attacks, including 
+Cross-Site Scripting (XSS) and data injection attacks. These attacks 
+are used for everything from data theft, to site defacement, to malware distribution.
+
+CSP is designed to be fully backward compatible (except CSP version 2 where there 
+are some explicitly-mentioned inconsistencies in backward compatibility; 
+more details here section 1.1). Browsers that don't support it still work with 
+servers that implement it, and vice versa: browsers that don't support CSP ignore it, 
+functioning as usual, defaulting to the standard same-origin policy for web content. 
+If the site doesn't offer the CSP header, browsers likewise use the 
+standard same-origin policy.
+
+To enable CSP, you need to configure your web server to return the 
+Content-Security-Policy HTTP header. (Sometimes you may see mentions of the 
+X-Content-Security-Policy header, but that's an older version and you don't need to 
+specify it anymore.)
+
+Alternatively, the <meta> element can be used to configure a policy, for example:
+
+HTML
+Copy to Clipboard
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; img-src https://*; child-src 'none';" />
+
+Note: Some features, such as sending CSP violation reports, are only 
+available when using the HTTP headers.
+
+Threats
+Mitigating cross-site scripting
+A primary goal of CSP is to mitigate and report XSS attacks. 
+XSS attacks exploit the browser's trust in the content received 
+from the server. Malicious scripts are executed by the victim's browser 
+because the browser trusts the source of the content, even when it's not 
+coming from where it seems to be coming from.
+
+CSP makes it possible for server administrators to reduce or eliminate 
+the vectors by which XSS can occur by specifying the domains that the 
+browser should consider to be valid sources of executable scripts. 
+A CSP compatible browser will then only execute scripts loaded in 
+source files received from those allowed domains, ignoring all other 
+scripts (including inline scripts and event-handling HTML attributes).
+
+As an ultimate form of protection, sites that want to never allow scripts 
+to be executed can opt to globally disallow script execution.
+
+Mitigating packet sniffing attacks
+In addition to restricting the domains from which content can be loaded, 
+the server can specify which protocols are allowed to be used; for example 
+(and ideally, from a security standpoint), a server can specify that all 
+content must be loaded using HTTPS. A complete data transmission security 
+strategy includes not only enforcing HTTPS for data transfer, but also 
+marking all cookies with the secure attribute and providing automatic redirects 
+from HTTP pages to their HTTPS counterparts. Sites may also use the 
+Strict-Transport-Security HTTP header to ensure that browsers connect 
+to them only over an encrypted channel.
+
+Using CSP
+Configuring Content Security Policy involves adding the Content-Security-Policy 
+HTTP header to a web page and giving it values to control what resources the user 
+agent is allowed to load for that page. For example, a page that uploads and
+ displays images could allow images from anywhere, but restrict a form action to 
+ a specific endpoint. A properly designed Content Security Policy helps protect 
+a page against a cross-site scripting attack. This article explains how to construct
+ such headers properly, and provides examples.
+
+Specifying your policy
+You can use the Content-Security-Policy HTTP header to specify your policy, like this:
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: policy
+The policy is a string containing the policy directives describing your 
+Content Security Policy.
+
+Writing a policy
+A policy is described using a series of policy directives, each 
+of which describes the policy for a certain resource type or policy area. 
+Your policy should include a default-src policy directive, which is a 
+fallback for other resource types when they don't have policies of 
+their own (for a complete list, see the description of the default-src directive).
+ A policy needs to include a default-src or script-src directive to prevent 
+ inline scripts from running, as well as blocking the use of eval().
+A policy needs to include a default-src or style-src directive to restrict 
+inline styles from being applied from a <style> element or a style attribute. 
+There are specific directives for a wide variety of types of items, so that 
+each type can have its own policy, including fonts, frames, images, audio 
+and video media, scripts, and workers.
+
+For a complete list of policy directives, see the reference page for the 
+Content-Security-Policy header.
+
+Examples: Common use cases
+This section provides examples of some common security policy scenarios.
+
+Example 1
+A website administrator wants all content to come from the site's own
+origin (this excludes subdomains.)
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src 'self'
+Example 2
+A website administrator wants to allow content from a trusted domain and 
+all its subdomains (it doesn't have to be the same domain that the CSP is set on.)
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src 'self' example.com *.example.com
+Example 3
+A website administrator wants to allow users of a web application to include 
+images from any origin in their own content, but to restrict audio or video 
+media to trusted providers, and all scripts only to a specific server that 
+hosts trusted code.
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src 'self'; img-src *; media-src example.org 
+example.net; script-src userscripts.example.com
+Here, by default, content is only permitted from the document's origin, with the 
+following exceptions:
+
+Images may load from anywhere (note the "*" wildcard).
+Media is only allowed from example.org and example.net (and not
+ from subdomains of those sites).
+Executable script is only allowed from userscripts.example.com.
+Example 4
+A website administrator for an online banking site wants to ensure that all 
+its content is loaded using TLS, in order to prevent attackers from 
+eavesdropping on requests.
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src https://onlinebanking.example.com
+The server permits access only to documents being loaded specifically over
+ HTTPS through the single origin onlinebanking.example.com.
+
+Example 5
+A website administrator of a web mail site wants to allow HTML in email, as well 
+as images loaded from anywhere, but not JavaScript or other potentially dangerous content.
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src 'self' *.example.com; img-src *
+Note that this example doesn't specify a script-src; with the example CSP, 
+this site uses the setting specified by the default-src directive, which 
+means that scripts can be loaded only from the originating server.
+
+Testing your policy
+To ease deployment, CSP can be deployed in report-only mode. The policy is 
+not enforced, but any violations are reported to a provided URI. Additionally, 
+a report-only header can be used to test a future revision to a policy without 
+actually deploying it.
+
+You can use the Content-Security-Policy-Report-Only HTTP header to specify your 
+policy, like this:
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy-Report-Only: policy
+If both a Content-Security-Policy-Report-Only header and a Content-Security-Policy 
+header are present in the same response, both policies are honored. The policy 
+specified in Content-Security-Policy headers is enforced while the 
+Content-Security-Policy-Report-Only policy generates reports but is not enforced.
+
+Enabling reporting
+By default, violation reports aren't sent. To enable violation reporting, 
+you need to specify the report-to policy directive, providing at least one 
+URI to which to deliver the reports:
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src 'self'; 
+report-to http://reportcollector.example.com/collector.cgi
+Then you need to set up your server to receive the reports; it can store or process 
+them in whatever manner you determine is appropriate.
+
+Violation report syntax
+The report JSON object is sent with an application/csp-report Content-Type and 
+contains the following data:
+
+blocked-uri
+The URI of the resource that was blocked from loading by the Content Security Policy. 
+If the blocked URI is from a different origin than the document-uri, then 
+the blocked URI is truncated to contain just the scheme, host, and port.
+
+disposition
+Either "enforce" or "report" depending on whether the 
+Content-Security-Policy-Report-Only header or 
+the Content-Security-Policy header is used.
+
+document-uri
+The URI of the document in which the violation occurred.
+
+effective-directive
+The directive whose enforcement caused the violation. Some 
+browsers may provide different values, such as Chrome providing 
+style-src-elem/style-src-attr, even when the actually enforced 
+directive was style-src.
+
+original-policy
+The original policy as specified by the Content-Security-Policy HTTP header.
+
+referrer Deprecated Non-standard
+The referrer of the document in which the violation occurred.
+
+script-sample
+The first 40 characters of the inline script, event handler, or style that 
+caused the violation. Only applicable to script-src* and style-src* violations, 
+when they contain the 'report-sample'
+
+status-code
+The HTTP status code of the resource on which the global object was instantiated.
+
+violated-directive Deprecated
+The directive whose enforcement caused the violation. The violated-directive 
+is a historic name for the effective-directive field and contains the same value.
+
+Sample violation report
+Let's consider a page located at http://example.com/signup.html. It uses the 
+following policy, disallowing everything but stylesheets from cdn.example.com.
+
+HTTP
+Copy to Clipboard
+Content-Security-Policy: default-src 'none'; style-src cdn.example.com; 
+report-to /_/csp-reports
+The HTML of signup.html looks like this:
+
+HTML
+Copy to Clipboard
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    Here be content.
+  </body>
+</html>
+
+Can you spot the mistake? Stylesheets are allowed to be loaded only from 
+cdn.example.com, yet the website tries to load one from its own origin 
+(http://example.com). A browser capable of enforcing CSP would send the 
+following violation report as a POST request to http://example.com/_/csp-reports, 
+when the document is visited:
+
+JSON
+Copy to Clipboard
+{
+  "csp-report": {
+    "blocked-uri": "http://example.com/css/style.css",
+    "disposition": "report",
+    "document-uri": "http://example.com/signup.html",
+    "effective-directive": "style-src-elem",
+    "original-policy": "default-src 'none'; style-src cdn.example.com; report-to /_/csp-reports",
+    "referrer": "",
+    "status-code": 200,
+    "violated-directive": "style-src-elem"
+  }
+}
+As you can see, the report includes the full path to the violating 
+resource in blocked-uri. This is not always the case. For example, 
+if the signup.html attempted to load CSS from 
+http://anothercdn.example.com/stylesheet.css, the browser would not 
+include the full path, but only the origin (http://anothercdn.example.com). 
+The CSP specification gives an explanation of this odd behavior. 
+In summary, this is done to prevent leaking sensitive information 
+about cross-origin resources.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+tcp / ip what they used for ? 
+
+Sure, let's break it down:
+
+**TCP (Transmission Control Protocol)** is one of the main protocols in the Internet protocol suite. It's used to send data over the internet in a reliable and ordered manner. Here's what it does:
+
+- **Reliable Delivery**: TCP ensures that all data packets reach the destination in the correct order. If a packet is lost during transmission, TCP will retransmit the packet.
+- **Ordered Delivery**: If packets arrive in the wrong order, TCP rearranges them.
+- **Error Checking**: TCP includes a checksum in its header for error detection.
+- **Flow Control**: TCP controls the rate of data transmission between two networks to prevent the receiving host from being overwhelmed with data.
+
+**IP Address (Internet Protocol Address)** is a numerical label assigned to each device participating in a computer network that uses the Internet Protocol for communication. Here's what it's used for:
+
+- **Identification**: Each device on a network has a unique IP address. This allows the network to identify where information is coming from and where it should be sent.
+- **Location Addressing**: IP addresses are used to route packets of data across the network. Each packet contains both the sender's and the receiver's IP addresses, which guides the packet to its destination.
+
+In summary, TCP is used for transmitting data reliably over the internet, and an IP address is used to identify and locate devices on a network. They work together (in the TCP/IP protocol suite) to deliver data from one device to another on the internet. 😊
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+Strict-Transport-Security
+The HTTP Strict-Transport-Security response header 
+(often abbreviated as HSTS) informs browsers that 
+the site should only be accessed using HTTPS, 
+and that any future attempts to access it using 
+HTTP should automatically be converted to HTTPS.
+
+Note: This is more secure than simply configuring 
+a HTTP to HTTPS (301) redirect on your server, where 
+the initial HTTP connection is still vulnerable 
+to a man-in-the-middle attack.
+
+Header type	Response        header
+Forbidden header name	    no
+
+
+Syntax
+HTTP
+Copy to Clipboard
+Strict-Transport-Security: max-age=<expire-time>
+Strict-Transport-Security: max-age=<expire-time>; includeSubDomains
+Strict-Transport-Security: max-age=<expire-time>; includeSubDomains; preload
+
+
+Directives
+max-age=<expire-time>
+The time, in seconds, that the browser should remember 
+that a site is only to be accessed using HTTPS.
+
+includeSubDomains Optional
+If this optional parameter is specified, this rule 
+applies to all of the site's subdomains as well.
+
+preload Optional Non-standard
+See Preloading Strict Transport Security for details. When using 
+preload, the max-age directive must be at least 31536000 (1 year), 
+and the includeSubDomains directive must be present. Not part 
+of the specification.
+
+Description
+If a website accepts a connection through HTTP and redirects to HTTPS, 
+visitors may initially communicate with the non-encrypted version of 
+the site before being redirected, if, for example, the visitor types 
+http://www.foo.com/ or even just foo.com. This creates an opportunity 
+for a man-in-the-middle attack. The redirect could be exploited to direct 
+visitors to a malicious site instead of the secure version of the original site.
+
+The HTTP Strict Transport Security header informs the browser 
+that it should never load a site using HTTP and should automatically 
+convert all attempts to access the site using HTTP to HTTPS requests instead.
+
+Note: The Strict-Transport-Security header is ignored by the browser 
+when your site has only been accessed using HTTP. Once your site is accessed 
+over HTTPS with no certificate errors, the browser knows your site is HTTPS 
+capable and will honor the Strict-Transport-Security header. Browsers 
+do this as attackers may intercept HTTP connections to the site and 
+inject or remove the header.
+
+An example scenario
+You log into a free Wi-Fi access point at an airport and start surfing 
+the web, visiting your online banking service to check your balance 
+and pay a couple of bills. Unfortunately, the access point you're using 
+is actually a hacker's laptop, and they're intercepting your 
+original HTTP request and redirecting you to a clone of your bank's site 
+instead of the real thing. Now your private data is exposed to the hacker.
+
+Strict Transport Security resolves this problem; as long as you've accessed 
+your bank's website once using HTTPS, and the bank's website uses 
+Strict Transport Security, your browser will know to automatically use 
+only HTTPS, which prevents hackers from performing 
+this sort of man-in-the-middle attack.
+
+How the browser handles it
+The first time your site is accessed using HTTPS and it returns 
+the Strict-Transport-Security header, the browser records this 
+information, so that future attempts to load the site using HTTP 
+will automatically use HTTPS instead.
+
+When the expiration time specified by the Strict-Transport-Security 
+header elapses, the next attempt to load the site via HTTP will 
+proceed as normal instead of automatically using HTTPS.
+
+Whenever the Strict-Transport-Security header is delivered to the 
+browser, it will update the expiration time for that site, so sites 
+can refresh this information and prevent the timeout from expiring. 
+Should it be necessary to disable Strict Transport Security, setting 
+the max-age to 0 (over an https connection) will immediately expire 
+the Strict-Transport-Security header, allowing access via http.
+
+Preloading Strict Transport Security
+Google maintains an HSTS preload service. By following the guidelines 
+and successfully submitting your domain, you can ensure that browsers 
+will connect to your domain only via secure connections. While the 
+service is hosted by Google, all browsers are using this preload list. 
+However, it is not part of the HSTS specification and should not be 
+treated as official.
+
+Information regarding the HSTS preload list in Chrome: https://www.chromium.org/hsts
+Consultation of the Firefox HSTS preload list: nsSTSPreloadList.inc
+
+Examples
+All present and future subdomains will be HTTPS for a max-age of 1 year. 
+This blocks access to pages or subdomains that can only be served over HTTP.
+
+HTTP
+Copy to Clipboard
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Although a max-age of 1 year is acceptable for a domain, two years is 
+the recommended value as explained on https://hstspreload.org.
+
+In the following example, max-age is set to 2 years, and is suffixed 
+with preload, which is necessary for inclusion in all major web browsers' 
+HSTS preload lists, like Chromium, Edge, and Firefox.
+
+HTTP
+Copy to Clipboard
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+X-Content-Type-Options
+The X-Content-Type-Options response HTTP header is a marker used 
+by the server to indicate that the MIME types advertised in the 
+Content-Type headers should be followed and not be changed. The 
+header allows you to avoid MIME type sniffing by saying that the 
+MIME types are deliberately configured.
+
+This header was introduced by Microsoft in IE 8 as a way for webmasters 
+to block content sniffing that was happening and could transform 
+non-executable MIME types into executable MIME types. Since then, 
+other browsers have introduced it, even if their MIME sniffing 
+algorithms were less aggressive.
+
+Starting with Firefox 72, top-level documents also avoid MIME sniffing 
+(if Content-type is provided). This can cause HTML web pages to 
+be downloaded instead of being rendered when they are served with 
+a MIME type other than text/html. Make sure to set both headers correctly.
+
+Site security testers usually expect this header to be set.
+
+Note: X-Content-Type-Options only apply request-blocking due 
+to nosniff for request destinations of "script" and "style". 
+However, it also enables Cross-Origin Read Blocking (CORB) protection 
+for HTML, TXT, JSON and XML files (excluding SVG image/svg+xml).
+
+Header type	Response    header
+Forbidden header name	no
+
+Syntax
+HTTP
+Copy to Clipboard
+X-Content-Type-Options: nosniff
+
+Directives 
+
+nosniff
+Blocks a request if the request destination is of type style and 
+the MIME type is not text/css, or of type script and the MIME type 
+is not a JavaScript MIME type.
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+X-Frame-Options
+The X-Frame-Options HTTP response header can be used 
+to indicate whether a browser should be allowed to render 
+a page in a <frame>, <iframe>, <embed> or <object>. Sites 
+can use this to avoid click-jacking attacks, by ensuring 
+that their content is not embedded into other sites.
+
+The added security is provided only if the user accessing 
+the document is using a browser that supports X-Frame-Options.
+
+Warning: The Content-Security-Policy HTTP header has 
+a frame-ancestors directive which obsoletes this header 
+for supporting browsers.
+
+Header type	Response      header
+Forbidden header name	    no
+
+
+Syntax
+There are two possible directives for X-Frame-Options:
+
+HTTP
+Copy to Clipboard
+X-Frame-Options: DENY
+X-Frame-Options: SAMEORIGIN
+
+
+Directives
+If you specify DENY, not only will the browser attempt 
+to load the page in a frame fail when loaded from other sites, 
+attempts to do so will fail when loaded from the same site. 
+On the other hand, if you specify SAMEORIGIN, you can still 
+use the page in a frame as long as the site including it in 
+a frame is the same as the one serving the page.
+
+DENY
+The page cannot be displayed in a frame, 
+regardless of the site attempting to do so.
+
+SAMEORIGIN
+The page can only be displayed if all ancestor 
+frames are same origin to the page itself.
+
+ALLOW-FROM origin Deprecated
+This is an obsolete directive. Modern browsers that 
+encounter response headers with this directive will 
+ignore the header completely. The 
+Content-Security-Policy HTTP header has 
+a frame-ancestors directive which you should use instead.
+
+Examples
+Warning: Setting X-Frame-Options inside the 
+<meta> element (e.g., <meta http-equiv="X-Frame-Options" content="deny">) 
+has no effect and should not be used! X-Frame-Options 
+is only enforced via HTTP headers, as shown in the examples below.
+
+Configuring Apache
+To configure Apache to send the X-Frame-Options header 
+for all pages, add this to your site's configuration:
+
+APACHECONF
+Copy to Clipboard
+Header always set X-Frame-Options "SAMEORIGIN"
+To configure Apache to set X-Frame-Options to DENY, 
+add this to your site's configuration:
+
+APACHECONF
+Copy to Clipboard
+Header set X-Frame-Options "DENY"
+
+Configuring Nginx
+To configure Nginx to send the X-Frame-Options header, 
+add this either to your http, server or location configuration:
+
+NGINX
+Copy to Clipboard
+add_header X-Frame-Options SAMEORIGIN always;
+You can set the X-Frame-Options header to DENY using:
+
+NGINX
+Copy to Clipboard
+add_header X-Frame-Options DENY always;
+
+Configuring IIS
+To configure IIS to send the X-Frame-Options header, 
+add this to your site's Web.config file:
+
+XML
+Copy to Clipboard
+<system.webServer>
+  …
+  <httpProtocol>
+    <customHeaders>
+      <add name="X-Frame-Options" value="SAMEORIGIN" />
+    </customHeaders>
+  </httpProtocol>
+  …
+</system.webServer>
+For more information, see the Microsoft support article on 
+setting this configuration using the IIS Manager user interface.
+
+Configuring HAProxy
+To configure HAProxy to send the X-Frame-Options header, 
+add this to your front-end, listen, or backend configuration:
+
+rspadd X-Frame-Options:\ SAMEORIGIN
+Alternatively, in newer versions:
+
+http-response set-header X-Frame-Options SAMEORIGIN
+
+
+Configuring Express
+You can use Helmet to configure an Express app to set 
+the legacy X-Frame-Options header on old browsers.
+
+Warning: It's recommended to use the Content-Security-Policy 
+HTTP header with the frame-ancestors directive instead.
+
+To use Helmet to set X-Frame-Options, add the following to 
+your server configuration to set the SAMEORIGIN directive:
+
+JS
+Copy to Clipboard
+const helmet = require("helmet");
+const app = express();
+app.use(
+  helmet({
+    xFrameOptions: { action: "sameorigin" },
+  }),
+);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+X-XSS-Protection
+Non-standard: This feature is non-standard and is not on a standards track. 
+Do not use it on production sites facing the Web: it will not work for every user. 
+There may also be large incompatibilities between implementations and 
+the behavior may change in the future.
+
+The HTTP X-XSS-Protection response header is a 
+feature of Internet Explorer, Chrome and Safari 
+that stops pages from loading when they detect 
+reflected cross-site scripting (XSS) attacks. 
+These protections are largely unnecessary in modern 
+browsers when sites implement a strong 
+Content-Security-Policy that disables the use of 
+inline JavaScript ('unsafe-inline').
+
+Warning: Even though this feature can protect users 
+of older web browsers that don't yet support CSP, 
+in some cases, XSS protection can create 
+XSS vulnerabilities in otherwise safe websites. 
+See the section below for more information.
+
+Note:
+Chrome has removed their XSS Auditor
+Firefox has not, and will not implement X-XSS-Protection
+Edge has retired their XSS filter
+This means that if you do not need to support legacy browsers, 
+it is recommended that you use Content-Security-Policy without 
+allowing unsafe-inline scripts instead.
+
+Header type	Response            header
+Forbidden header name	          no
+
+
+Syntax
+HTTP
+Copy to Clipboard
+X-XSS-Protection: 0
+X-XSS-Protection: 1
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=<reporting-uri>
+0
+Disables XSS filtering.
+
+1
+Enables XSS filtering (usually default in browsers). 
+If a cross-site scripting attack is detected, the 
+browser will sanitize the page (remove the unsafe parts).
+
+1; mode=block
+Enables XSS filtering. Rather than sanitizing the page, 
+the browser will prevent rendering of the page if an attack is detected.
+
+1; report=<reporting-URI> (Chromium only)
+Enables XSS filtering. If a cross-site scripting attack is 
+detected, the browser will sanitize the page and report the 
+violation. This uses the functionality of the CSP report-uri 
+directive to send a report.
+
+Vulnerabilities caused by XSS filtering
+Consider the following excerpt of HTML code for a webpage:
+
+HTML
+Copy to Clipboard
+<script>
+  var productionMode = true;
+</script>
+<!-- [...] -->
+<script>
+  if (!window.productionMode) {
+    // Some vulnerable debug code
+  }
+</script>
+This code is completely safe if the browser doesn't 
+perform XSS filtering. However, if it does and the 
+search query is 
+?something=%3Cscript%3Evar%20productionMode%20%3D%20true%3B%3C%2Fscript%3E, 
+the browser might execute the scripts in the page 
+ignoring <script>var productionMode = true;</script> 
+(thinking the server included it in the response because 
+it was in the URI), causing window.productionMode to be 
+evaluated to undefined and executing the unsafe debug code.
+
+Setting the X-XSS-Protection header to either 
+0 or 1; mode=block prevents vulnerabilities like 
+the one described above. The former would make 
+the browser run all scripts and the latter would 
+prevent the page from being processed at all 
+(though this approach might be vulnerable to 
+side-channel attacks if the website is embeddable in an <iframe>).
+
+Example
+Block pages from loading when they detect reflected XSS attacks:
+
+HTTP
+Copy to Clipboard
+X-XSS-Protection: 1; mode=block
+
+PHP
+Copy to Clipboard
+header("X-XSS-Protection: 1; mode=block");
+Apache (.htaccess)
+
+APACHECONF
+Copy to Clipboard
+<IfModule mod_headers.c>
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+Nginx
+
+NGINX
+Copy to Clipboard
+add_header "X-XSS-Protection" "1; mode=block";
+
+
+Specifications
+Not part of any specifications or drafts.
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+clicking on this section redirects us in this site , 
+well dont ignore read and understand it . 
+https://infosec.mozilla.org/guidelines/web_security
+- some really practical things you can see and learn,implement from this about 
+i can i can do practical using these docs , and if uou learn things properly 
+you can see , which leads to github code of firefox , contributing to it ,
+will really shine the spotlight on ypur profile and capability 
+
+////////////////////////////////////////////////////////////////////////////////////
+
+Transport Layer Security (TLS/SSL)
+Transport Layer Security provides assurances about the confidentiality, 
+authentication, and integrity of all communications both inside and 
+outside of Mozilla. To protect our users and networked systems, 
+the support and use of encrypted communications using TLS is 
+mandatory for all systems.
+
+
+HTTPS
+Websites or API endpoints that only communicate with modern browsers 
+and systems should use the Mozilla modern TLS configuration.
+
+Websites intended for general public consumption should use 
+the Mozilla intermediate TLS configuration.
+
+Websites that require backwards compatibility with extremely old 
+browsers and operating systems may use the Mozilla backwards 
+compatible TLS configuration. This is not recommended, and 
+use of this compatibility level should be done only after 
+consulting the security team for a risk assessment.
+
+Compatibility
+Configuration	Oldest compatible clients
+Modern	Firefox 63, Android 10.0, Chrome 70, Edge 75, Java 11, OpenSSL 1.1.1, Opera 57, and Safari 12.1
+Intermediate	Firefox 27, Android 4.4.2, Chrome 31, Edge, IE 11 on Windows 7, Java 8u31, OpenSSL 1.0.1, Opera 20, Safari 9
+Backwards Compatible (Old)	Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1
+
+
+See Also
+Mozilla Server Side TLS Guidelines
+Mozilla Server Side TLS Configuration Generator - generates software configurations for the three levels of compatibility
+
+
+HTTP Strict Transport Security
+HTTP Strict Transport Security (HSTS) is an HTTP header that notifies 
+user agents to only connect to a given site over HTTPS, even if the 
+scheme chosen was HTTP. Browsers that have had HSTS set for a given 
+site will transparently upgrade all requests to HTTPS. HSTS also tells 
+the browser to treat TLS and certificate-related errors more strictly 
+by disabling the ability for users to bypass the error page.
+
+The header consists of one mandatory parameter (max-age) and two 
+optional parameters (includeSubDomains and preload), separated by semicolons.
+
+Directives
+max-age: how long user agents will redirect to HTTPS, in seconds
+includeSubDomains: whether user agents should upgrade requests on subdomains
+preload: whether the site should be included in the HSTS preload list
+max-age must be set to a minimum of six months (15768000), but longer periods 
+such as two years (63072000) are recommended. Note that once this value is set, 
+the site must continue to support HTTPS until the expiry time has been reached.
+
+includeSubDomains notifies the browser that all subdomains of the current origin 
+should also be upgraded via HSTS. For example, setting includeSubDomains on 
+domain.example.com will also set it on host1.domain.example.com and 
+host2.domain.example.com. Extreme care is needed when setting the 
+includeSubDomains flag, as it could disable sites on subdomains that 
+don’t yet have HTTPS enabled.
+
+preload allows the website to be included in the HSTS preload list, 
+upon submission. As a result, web browsers will do HTTPS upgrades to 
+the site without ever having to receive the initial HSTS header. This 
+prevents downgrade attacks upon first use and is recommended for all 
+high risk websites. Note that being included in the HSTS preload list 
+requires that includeSubDomains also be set.
+
+Examples
+# Only connect to this site via HTTPS for the two years (recommended)
+Strict-Transport-Security: max-age=63072000
+# Only connect to this site and subdomains via HTTPS for the next two years and also include in the preload list
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+See Also
+MDN on HTTP Strict Transport Security
+RFC6797: HTTP Strict Transport Security (HSTS)
+
+
+HTTP Redirections
+Websites may continue to listen on port 80 (HTTP) so that users do 
+not get connection errors when typing a URL into their address bar, 
+as browsers currently connect via HTTP for their initial request. 
+Sites that listen on port 80 should only redirect to the same resource 
+on HTTPS. Once the redirection has occurred, HSTS should ensure that all 
+future attempts go to the site via HTTP are instead sent directly to 
+the secure site. APIs or websites not intended for public consumption 
+should disable the use of HTTP entirely.
+
+Sites should avoid redirections from HTTP to HTTPS on a different host, 
+as this prevents HSTS from being set. Instead, for example, first 
+redirect from http://example.com/ to https://example.com/ and then 
+in a second redirect, redirect from https://example.com/ to https://example.org/
+
+Examples
+# Redirect all incoming http requests to the same site and URI on https, using nginx
+server {
+  listen 80;
+
+  return 301 https://$host$request_uri;
+}
+
+# Redirect for site.example.org from http to https, using Apache
+<VirtualHost *:80>
+  ServerName site.example.org
+  Redirect permanent / https://site.example.org/
+</VirtualHost>
+
+
+HTTP Public Key Pinning
+Maximum risk sites may enable the use of HTTP Public Key Pinning (HPKP). 
+HPKP instructs a user agent to bind a site to specific root certificate 
+authority, intermediate certificate authority, or end-entity public key. 
+This prevents certificate authorities from issuing unauthorized certificates 
+for a given domain that would nevertheless be trusted by the browsers. These 
+fraudulent certificates would allow an active attacker to MitM and impersonate 
+a website, intercepting credentials and other sensitive data.
+
+Due to the risk of knocking yourself off the internet, HPKP must be implemented 
+with extreme care. This includes having backup key pins, testing on a 
+non-production domain, testing with Public-Key-Pins-Report-Only and then 
+finally doing initial testing with a very short-lived max-age directive. 
+Because of the risk of creating a self-denial-of-service and the very low 
+risk of a fraudulent certificate being issued, it is not recommended for 
+most websites to implement HPKP.
+
+Directives
+max-age: number of seconds the user agent will enforce the key pins and 
+require a site to use a cert that satisfies them
+includeSubDomains: whether user agents should pin all subdomains to the same pins
+Unlike with HSTS, what to set max-age is highly individualized to a given site.
+ A longer value is more secure, but screwing up your key pins will result in your 
+site being unavailable for a longer period of time. Recommended 
+values fall between 15 and 120 days.
+
+Examples
+# Pin to DigiCert, Let's Encrypt, and the local public-key, including subdomains, for 15 days
+Public-Key-Pins: max-age=1296000; includeSubDomains; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+ pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="; pin-sha256="P0NdsLTMT6LSwXLuSEHNlvg4WxtWb5rIJhfZMyeXUE0="
+
+
+See Also
+About Public Key Pinning
+The HPKP Toolset - helpful tools for generating key pins
+Resource Loading
+All resources — whether on the same origin or not — should be loaded over 
+secure channels. Secure (HTTPS) websites that attempt to load active resources 
+such as JavaScript insecurely will be blocked by browsers. As a result, users 
+will experience degraded UIs and “mixed content” warnings. Attempts to load 
+passive content (such as images) insecurely, although less risky, will still 
+lead to degraded UIs and can allow active attackers to deface websites or phish users.
+
+Despite the fact that modern browsers make it evident that websites are loading 
+resources insecurely, these errors still occur with significant frequency. To 
+prevent this from occurring, developers should verify that all resources are 
+loaded securely prior to deployment.
+
+Examples
+<!-- HTTPS is a fantastic way to load a JavaScript resource -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Attempts to load over HTTP will be blocked and will generate mixed content warnings -->
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Although passive content won't be blocked, it will still generate mixed content warnings -->
+<img src="http://very.badssl.com/image.jpg">
+
+
+See Also
+MDN on Mixed Content
+
+
+Content Security Policy
+Content Security Policy (CSP) is an HTTP header that allows site operators 
+fine-grained control over where resources on their site can be loaded from. 
+The use of this header is the best method to prevent cross-site scripting (XSS) 
+vulnerabilities. Due to the difficulty in retrofitting CSP into existing websites,
+ CSP is mandatory for all new websites and is strongly recommended for all 
+existing high-risk sites.
+
+The primary benefit of CSP comes from disabling the use of unsafe inline JavaScript. 
+Inline JavaScript – either reflected or stored – means that improperly escaped 
+user-inputs can generate code that is interpreted by the web browser as JavaScript. 
+By using CSP to disable inline JavaScript, you can effectively eliminate almost 
+all XSS attacks against your site.
+
+Note that disabling inline JavaScript means that all JavaScript must be loaded 
+from <script> src tags . Event handlers such as onclick used directly on a tag 
+will fail to work, as will JavaScript inside <script> tags but not loaded via src. 
+Furthermore, inline stylesheets using either <style> tags or the style attribute 
+will also fail to load. As such, care must be taken when designing sites so that 
+CSP becomes easier to implement.
+
+Implementation Notes
+Aiming for default-src https: is a great first goal, as it 
+disables inline code and requires https.
+
+For existing websites with large codebases that would require too 
+much work to disable inline scripts, default-src https: 'unsafe-inline' 
+is still helpful, as it keeps resources from being accidentally loaded 
+over http. However, it does not provide any XSS protection.
+
+It is recommended to start with a reasonably locked down policy such 
+as default-src 'none'; img-src 'self'; script-src 'self'; style-src 
+'self' and then add in sources as revealed during testing.
+
+In lieu of the preferred HTTP header, pages can instead include a 
+<meta http-equiv=“Content-Security-Policy” content=“…”> tag. If they do, 
+it should be the first <meta> tag that appears inside <head>.
+
+Care needs to be taken with data: URIs, as these are unsafe inside 
+script-src and object-src (or inherited from default-src).
+
+Similarly, the use of script-src 'self' can be unsafe for sites 
+with JSONP endpoints. These sites should use a script-src that 
+includes the path to their JavaScript source folder(s).
+Unless sites need the ability to execute plugins such as 
+Flash or Silverlight, they should disable their execution 
+with object-src 'none'.
+
+Sites should ideally use the report-uri directive, which POSTs 
+JSON reports about CSP violations that do occur. This allows 
+CSP violations to be caught and repaired quickly.
+
+Prior to implementation, it is recommended to use the 
+Content-Security-Policy-Report-Only HTTP header, to see 
+if any violations would have occurred with that policy.
+
+
+
+Examples
+# Disable unsafe inline/eval, only allow loading of 
+resources (images, fonts, scripts, etc.) over https
+# Note that this does not provide any XSS protection
+Content-Security-Policy: default-src https:
+
+
+<!-- Do the same thing, but with a <meta> tag -->
+<meta http-equiv="Content-Security-Policy" content="default-src https:">
+
+
+# Disable the use of unsafe inline/eval, allow everything else except plugin execution
+Content-Security-Policy: default-src *; object-src 'none'
+
+
+# Disable unsafe inline/eval, only load resources from same origin except also allow images from imgur
+# Also disables the execution of plugins
+Content-Security-Policy: default-src 'self'; img-src 'self' https://i.imgur.com; object-src 'none'
+
+
+# Disable unsafe inline/eval and plugins, only load scripts and stylesheets from same origin, fonts from google,
+# and images from same origin and imgur. Sites should aim for policies like this.
+Content-Security-Policy: default-src 'none'; font-src https://fonts.gstatic.com;
+			 img-src 'self' https://i.imgur.com; object-src 'none'; script-src 'self'; style-src 'self'
+
+
+# Pre-existing site that uses too much inline code to fix
+# but wants to ensure resources are loaded only over https and disable plugins
+Content-Security-Policy: default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'
+
+
+# Don't implement the above policy yet; instead just report violations that would have occurred
+Content-Security-Policy-Report-Only: default-src https:; report-uri /csp-violation-report-endpoint/
+
+# Disable the loading of any resources and disable framing, recommended for APIs to use
+Content-Security-Policy: default-src 'none'; frame-ancestors 'none'
+
+See Also
+An Introduction to Content Security Policy
+Content Security Policy Level 2 Standard
+Google CSP Evaluator
+Using the frame-ancestors directive to prevent framing
+
+
+contribute.json
+contribute.json is a text file placed within the root directory 
+of a website that describes what it is, where its source exists, 
+what technologies it uses, and how to reach support and contribute. 
+contribute.json is a Mozilla standard used to describe all active 
+Mozilla websites and projects.
+
+Its existence can greatly speed up the process of bug triage, 
+particularly for smaller websites with just a handful of maintainers. 
+It further assists security researchers to find testable websites and 
+instructs them on where to file their bugs against. As such, 
+contribute.json is mandatory for all Mozilla websites, and must 
+be maintained as contributors join and depart projects.
+
+Require subkeys include name, description, bugs, participate 
+(particularly irc and irc-contacts), and urls.
+
+Examples
+{
+  "name": "Bedrock",
+    "description": "The app powering www.mozilla.org.",
+    "repository": {
+      "url": "https://github.com/mozilla/bedrock",
+      "license": "MPL2",
+      "tests": "https://travis-ci.org/mozilla/bedrock/"
+    },
+    "participate": {
+      "home": "https://wiki.mozilla.org/Webdev/GetInvolved/mozilla.org",
+      "docs": "https://bedrock.readthedocs.io/en/latest/",
+      "mailing-list": "https://www.mozilla.org/about/forums/#dev-mozilla-org",
+      "irc": "irc://irc.mozilla.org/#www",
+      "irc-contacts": [
+        "someperson1",
+        "someperson2",
+        "someperson3"
+      ]
+    },
+    "bugs": {
+      "list": "https://bugzilla.mozilla.org/describecomponents.cgi?product=www.mozilla.org",
+      "report": "https://bugzilla.mozilla.org/enter_bug.cgi?product=www.mozilla.org",
+      "mentored": "https://bugzilla.mozilla.org/buglist.cgi?f1=bug_mentor&o1=isnotempty
+                   &query_format=advanced&bug_status=NEW&product=www.mozilla.org&list_id=10866041"
+    },
+    "urls": {
+      "prod": "https://www.mozilla.org",
+      "stage": "https://www.allizom.org",
+      "dev": "https://www-dev.allizom.org",
+      "demo1": "https://www-demo1.allizom.org"
+    },
+    "keywords": [
+      "python",
+      "less-css",
+      "django",
+      "html5",
+      "jquery"
+    ]
+}
+See Also
+The contribute.json Standard
+
+
+Cookies
+All cookies should be created such that their access is as limited 
+as possible. This can help minimize damage from cross-site scripting 
+(XSS) vulnerabilities, as these cookies often contain session 
+identifiers or other sensitive information.
+
+Directives
+Name: Cookie names may be either be prepended with either 
+__Secure- or __Host- to prevent cookies from being overwritten 
+by insecure sources
+Use __Host- for all cookies needed only on a specific domain 
+(no subdomains) where Path is set to /
+Use __Secure- for all other cookies sent from secure origins 
+(such as HTTPS)
+Secure: All cookies must be set with the Secure flag, 
+indicating that they should only be sent over HTTPS
+HttpOnly: Cookies that don’t require access from JavaScript 
+should be set with the HttpOnly flag
+Expiration: Cookies should expire as soon as is necessary: 
+session identifiers in particular should expire quickly
+Expires: Sets an absolute expiration date for a given cookie
+Max-Age: Sets a relative expiration date for a given cookie (not supported by IE <8)
+Domain: Cookies should only be set with this if they need to 
+be accessible on other domains, and should be set to the most 
+restrictive domain possible
+Path: Cookies should be set to the most restrictive path possible, 
+but for most applications this will be set to the root directory
+SameSite: Forbid sending the cookie via cross-origin requests 
+(such as from <img> tags, etc.), as a strong anti-CSRF measure
+SameSite=Strict: Only send the cookie when site is directly navigated to
+SameSite=Lax: Send the cookie when navigating to your site from another site
+
+
+Examples
+# Session identifier cookie only accessible on this host that gets purged when the user closes their browser
+Set-Cookie: MOZSESSIONID=980e5da39d4b472b9f504cac9; Path=/; Secure; HttpOnly
+
+# Session identifier for all example.org sites that expires in 30 days using the __Secure- prefix
+# This cookie is not sent cross-origin, but is sent when navigating to any Mozilla site from another site
+Set-Cookie: __Secure-MOZSESSIONID=7307d70a86bd4ab5a00499762; Max-Age=2592000; Domain=example.org; Path=/; Secure; HttpOnly; SameSite=Lax
+
+
+# Sets a long-lived cookie for the current host, accessible by Javascript, when the user accepts the ToS
+# This cookie is sent when navigating to your sent from another site, such as by clicking a link
+Set-Cookie: __Host-ACCEPTEDTOS=true; Expires=Fri, 31 Dec 9999 23:59:59 GMT; Path=/; Secure; SameSite=Lax
+
+# Session identifier used for a secure site, such as bugzilla.example.org. It isn't sent from cross-origin
+# requests, nor is it sent when navigating to bugzilla.example.org from another site. Used in conjunction with
+# other anti-CSRF measures, this is a very strong way to defend your site against CSRF attacks.
+Set-Cookie: __Host-BMOSESSIONID=YnVnemlsbGE=; Max-Age=2592000; Path=/; Secure; HttpOnly; SameSite=Strict
+
+
+See Also
+RFC 6265 (HTTP Cookies)
+HTTP Cookie Prefixes
+Same-site Cookies
+
+Cross-origin Resource Sharing
+Access-Control-Allow-Origin is an HTTP header that defines 
+which foreign origins are allowed to access the content of 
+pages on your domain via scripts using methods such as XMLHttpRequest. 
+crossdomain.xml and clientaccesspolicy.xml provide similar 
+functionality, but for Flash and Silverlight-based applications, 
+respectively.
+
+These should not be present unless specifically needed. Use cases 
+include content delivery networks (CDNs) that provide hosting for 
+JavaScript/CSS libraries and public API endpoints. If present, 
+they should be locked down to as few origins and resources as 
+is needed for proper function. For example, if your server provides 
+both a website and an API intended for XMLHttpRequest access on a 
+remote websites, only the API resources should return the 
+Access-Control-Allow-Origin header. Failure to do so will 
+allow foreign origins to read the contents of any page on your origin.
+
+Examples
+# Allow any site to read the contents of this JavaScript library, so that subresource integrity works
+Access-Control-Allow-Origin: *
+# Allow https://random-dashboard.example.org to read the returned results of this API
+Access-Control-Allow-Origin: https://random-dashboard.example.org
+<!-- Allow Flash from https://random-dashboard.example.org to read page contents -->
+<cross-domain-policy xsi:noNamespaceSchemaLocation="http://www.adobe.com/xml/schemas/PolicyFile.xsd">
+  <allow-access-from domain="random-dashboard.example.org"/>
+  <site-control permitted-cross-domain-policies="master-only"/>
+  <allow-http-request-headers-from domain="random-dashboard.example.org" headers="*" secure="true"/>
+</cross-domain-policy>
+<!-- The same thing, but for Silverlight-->
+<?xml version="1.0" encoding="utf-8"?>
+<access-policy>
+  <cross-domain-access>
+    <policy>
+      <allow-from http-request-headers="*">
+        <domain uri="https://random-dashboard.example.org"/>
+      </allow-from>
+      <grant-to>
+        <resource path="/" include-subpaths="true"/>
+      </grant-to>
+    </policy>
+  </cross-domain-access>
+</access-policy>
+
+See Also
+CORS for Developers
+MDN on HTTP access control (CORS)
+Adobe on Setting crossdomain.xml
+Microsoft on Setting clientaccesspolicy.xml
+
+
+CSRF Prevention
+Cross-site request forgeries are a class of attacks where unauthorized 
+commands are transmitted to a website from a trusted user. Because they 
+inherit the users cookies (and hence session information), they appear 
+to be validly issued commands. A CSRF attack might look like this:
+
+<!-- Attempt to delete a user's account -->
+<img src="https://accounts.example.org/management/delete?confirm=true">
+When a user visits a page with that HTML fragment, the browser will 
+attempt to make a GET request to that URL. If the user is logged in, 
+the browser will provide their session cookies and the account deletion 
+attempt will be successful.
+
+
+
+While there are a variety of mitigation strategies such as 
+Origin/Referrer checking and challenge-response systems 
+(such as CAPTCHA), the most common and transparent method 
+of CSRF mitigation is through the use of anti-CSRF tokens. 
+Anti-CSRF tokens prevent CSRF attacks by requiring the existence 
+of a secret, unique, and unpredictable token on all destructive 
+changes. These tokens can be set for an entire user session, rotated 
+on a regular basis, or be created uniquely for each request. Although 
+SameSite cookies are the best defense against CSRF attacks, they are 
+not yet fully supported in all browsers and should be used in conjunction 
+with other anti-CSRF defenses.
+
+Examples
+<!-- A secret anti-CSRF token, included in the form to delete an account -->
+<input type="hidden" name="csrftoken" value="1df93e1eafa42012f9a8aff062eeb1db0380b">
+
+# Server-side: set an anti-CSRF cookie that JavaScript must send as an X header, which can't be done cross-origin
+Set-Cookie: CSRFTOKEN=1df93e1eafa42012f9a8aff062eeb1db0380b; Path=/; Secure; SameSite=Strict
+
+// Client-side, have JavaScript add it as an X header to the XMLHttpRequest
+var token = readCookie(CSRFTOKEN);                   // read the cookie
+httpRequest.setRequestHeader('X-CSRF-Token', token); // add it as an X-CSRF-Token header
+
+See Also
+Wikipedia on CRSF Attacks and Prevention
+OWASP CSRF Prevention Cheat Sheet
+
+
+Referrer Policy
+When a user navigates to a site via a hyperlink or a website loads an 
+external resource, browsers inform the destination site of the origin 
+of the requests through the use of the HTTP Referer (sic) header. 
+Although this can be useful for a variety of purposes, it can also 
+place the privacy of users at risk. HTTP Referrer Policy allows sites 
+to have fine-grained control over how and when browsers transmit the HTTP Referer header.
+
+In normal operation, if a page at https://example.com/page.html contains 
+<img src="https://not.example.com/image.jpg">, then the browser will 
+send a request like this:
+
+GET /image.jpg HTTP/1.1
+Host: not.example.com
+Referer: https://example.com/page.html
+
+In addition to the privacy risks that this entails, the browser 
+may also transmit internal-use-only URLs that it may not have 
+intended to reveal. If you as the site operator want to limit 
+the exposure of this information, you can use HTTP Referrer Policy 
+to either eliminate the Referer header or reduce the amount of 
+information that it contains.
+
+Directives
+no-referrer: never send the Referer header
+same-origin: send referrer, but only on requests to the same origin
+strict-origin: send referrer to all origins, but only the URL without the path (e.g. https://example.com/)
+strict-origin-when-cross-origin: send full referrer on same origin, URL without the path on foreign origin
+
+
+Notes
+Although there are other options for referrer policies, they 
+do not protect user privacy and limit exposure in the same way as the options above.
+
+no-referrer-when-downgrade is the default behavior for all 
+current browsers, and can be used when sites are concerned 
+about breaking existing systems that rely on the full Referrer 
+header for their operation.
+
+Referrer Policy has good support across modern browsers. The 
+exception is Microsoft Edge, which still supports an older 
+version of the specification.
+
+Examples
+# On example.com, only send the Referer header when loading or linking to other example.com resources
+Referrer-Policy: same-origin
+
+# Only send the shortened referrer to a foreign origin, full referrer to a local host
+Referrer-Policy: strict-origin-when-cross-origin
+
+# Disable referrers for browsers that don't support strict-origin-when-cross-origin
+# Uses strict-origin-when-cross-origin for browsers that do
+Referrer-Policy: no-referrer, strict-origin-when-cross-origin
+
+<!-- Do the same, but with a meta tag -->
+<meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin">
+
+<!-- Do the same, but only for a single link -->
+<a href="https://example.org/" referrerpolicy="no-referrer, strict-origin-when-cross-origin">
+
+See Also
+Referrer Policy standard
+MDN on Referrer Policy
+
+
+robots.txt
+robots.txt is a text file placed within the root directory of a site 
+that tells robots (such as indexers employed by search engines) how 
+to behave, by instructing them not to crawl certain paths on the website. 
+This is particularly useful for reducing load on your website through 
+disabling the crawling of automatically generated content. It can also 
+be helpful for preventing the pollution of search results, for resources 
+that don’t benefit from being searchable.
+
+Sites may optionally use robots.txt, but should only use it for these 
+purposes. It should not be used as a way to prevent the disclosure of 
+private information or to hide portions of a website. Although this does 
+prevent these sites from appearing in search engines, it does not prevent 
+its discovery from attackers, as robots.txt is frequently used for reconnaissance.
+
+Examples
+# Stop all search engines from crawling this site
+User-agent: *
+Disallow: /
+
+# Using robots.txt to hide certain directories is a terrible idea
+User-agent: *
+Disallow: /secret/admin-interface
+
+
+See Also
+About robots.txt
+
+
+Subresource Integrity
+Subresource integrity is a recent W3C standard that protects against 
+attackers modifying the contents of JavaScript libraries hosted on 
+content delivery networks (CDNs) in order to create vulnerabilities 
+in all websites that make use of that hosted library.
+
+For example, JavaScript code on jquery.org that is loaded from 
+example.org has access to the entire contents of everything of 
+example.org. If this resource was successfully attacked, it could 
+modify download links, deface the site, steal credentials, cause 
+denial-of-service attacks, and more.
+
+Subresource integrity locks an external JavaScript resource to its 
+known contents at a specific point in time. If the file is modified 
+at any point thereafter, supporting web browsers will refuse to load 
+it. As such, the use of subresource integrity is mandatory for all 
+external JavaScript resources loaded from sources not hosted on 
+Mozilla-controlled systems.
+
+Note that CDNs must support the Cross Origin Resource Sharing (CORS) 
+standard by setting the Access-Control-Allow-Origin header. Most CDNs 
+already do this, but if the CDN you are loading does not support CORS, 
+please contact the Security Assurance team. We are happy to contact 
+the CDN on your behalf.
+
+Directives
+integrity: a cryptographic hash of the file, prepended with the hash function used to generate it
+crossorigin: should be anonymous to inform browsers to send anonymous requests without cookies
+
+
+Examples
+<!-- Load jQuery 2.1.4 from their CDN -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"
+  integrity="sha384-R4/ztc4ZlRqWjqIuvf6RX5yb/v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC"
+  crossorigin="anonymous"></script>
+<!-- Load AngularJS 1.4.8 from their CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"
+  integrity="sha384-r1y8TJcloKTvouxnYsi4PJAx+nHNr90ibsEn3zznzDzWBN9X3o3kbHLSgcIPtzAp"
+  crossorigin="anonymous"></script>
+# Generate the hash myself
+$ curl -s https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js | \
+    openssl dgst -sha384 -binary | \
+    openssl base64 -A
+
+r1y8TJcloKTvouxnYsi4PJAx+nHNr90ibsEn3zznzDzWBN9X3o3kbHLSgcIPtzAp
+
+
+See Also
+SRI Hash Generator - generates <script> tags for you, and 
+informs you if the CDN lacks CORS support
+Subresource Integrity W3C Standard
+MDN on Subresource Integrity
+X-Content-Type-Options
+X-Content-Type-Options is a header supported by Internet Explorer, 
+Chrome and Firefox 50+ that tells it not to load scripts and 
+stylesheets unless the server indicates the correct MIME type. 
+Without this header, these browsers can incorrectly detect files 
+as scripts and stylesheets, leading to XSS attacks. As such, all 
+sites must set the X-Content-Type-Options header and the 
+appropriate MIME types for files that they serve.
+
+Examples
+# Prevent browsers from incorrectly detecting non-scripts as scripts
+X-Content-Type-Options: nosniff
+
+
+See Also
+Microsoft on Reducing MIME Type Security Risks
+
+
+X-Frame-Options
+X-Frame-Options is an HTTP header that allows sites control over 
+how your site may be framed within an iframe. Clickjacking 
+is a practical attack that allows malicious sites to trick 
+users into clicking links on your site even though they may 
+appear to not be on your site at all. As such, the use of the 
+X-Frame-Options header is mandatory for all new websites, and 
+all existing websites are expected to add support for X-Frame-Options 
+as soon as possible.
+
+Note that X-Frame-Options has been superseded by the Content Security 
+Policy’s frame-ancestors directive, which allows considerably more 
+granular control over the origins allowed to frame a site. As 
+frame-ancestors is not yet supported in IE11 and older, Edge, 
+Safari 9.1 (desktop), and Safari 9.2 (iOS), it is recommended 
+that sites employ X-Frame-Options in addition to using CSP.
+
+Sites that require the ability to be iframed must use either Content 
+Security Policy and/or employ JavaScript defenses to prevent 
+clickjacking from malicious origins.
+
+Directives
+DENY: disallow allow attempts to iframe site (recommended)
+SAMEORIGIN: allow the site to iframe itself
+ALLOW-FROM uri: deprecated; instead use CSP’s frame-ancestors directive
+Examples
+# Block site from being framed with X-Frame-Options and CSP
+Content-Security-Policy: frame-ancestors 'none'
+X-Frame-Options: DENY
+# Only allow my site to frame itself
+Content-Security-Policy: frame-ancestors 'self'
+X-Frame-Options: SAMEORIGIN
+# Allow only framer.example.org to frame site
+# Note that this blocks framing from browsers that don't support CSP2+
+Content-Security-Policy: frame-ancestors https://framer.example.org
+X-Frame-Options: DENY
+
+
+See Also
+MDN on X-Frame-Options
+CSP standard on ‘frame-ancestors’
+OWASP Clickjacking Defense Cheat Sheet
+
+
+X-XSS-Protection
+In modern browsers, X-XSS-Protection has been deprecated in favor 
+of the Content-Security-Policy to disable the use of inline JavaScript. 
+Its use can introduce XSS vulnerabilities in otherwise safe websites. 
+This should not be used unless you need to support older web browsers 
+that don’t yet support CSP. It is thus recommended to set the header 
+as X-XSS-Protection: 0.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+Basics of HTTP
+HTTP is an extensible protocol that relies on concepts 
+like resources and Uniform Resource Identifiers 
+(URIs), simple message structure, and client-server 
+communication flow. On top of these basic concepts, 
+numerous extensions have been developed over the years 
+that add updated functionality and semantics with 
+new HTTP methods or headers.
+
+the web -> http +css + js + web apis 
+http -> dns + udp + ip + tcp
+
+http  is an application layer protocol that is sent over TCP, or over a TLS-encrypted TCP connection, though any reliable transport protocol could theoretically be used. Due to its extensibility, it is used to not only fetch hypertext documents, but also images and videos or to post content to servers, like with HTML form results. HTTP can also be used to fetch parts of documents to update Web pages on demand.
+
+Components of HTTP-based systems
+HTTP is a client-server protocol: requests are sent by one entity, the user-agent (or a proxy on behalf of it). Most of the time the user-agent is a Web browser, but it can be anything, for example, a robot that crawls the Web to populate and maintain a search engine index.
+
+
+Between the client and the server there are numerous entities, collectively called proxies, which perform different operations and act as gateways or caches, for example.
+client -> proxy -> proxy -> server 
+
+In reality, there are more computers between a browser and the server handling the request: there are routers, modems, and more. Thanks to the layered design of the Web, these are hidden in the network and transport layers. HTTP is on top, at the application layer. Although important for diagnosing network problems, the underlying layers are mostly irrelevant to the description of HTTP.
+
+Client: the user-agent
+The user-agent is any tool that acts on behalf of the user. This role is primarily performed by the Web browser, but it may also be performed by programs used by engineers and Web developers to debug their applications.
+
+The browser is always the entity initiating the request. It is never the server (though some mechanisms have been added over the years to simulate server-initiated messages).
+
+To display a Web page, the browser sends an original request to fetch the HTML document that represents the page. It then parses this file, making additional requests corresponding to execution scripts, layout information (CSS) to display, and sub-resources contained within the page (usually images and videos). The Web browser then combines these resources to present the complete document, the Web page. Scripts executed by the browser can fetch more resources in later phases and the browser updates the Web page accordingly.
+
+A Web page is a hypertext document. This means some parts of the displayed content are links, which can be activated (usually by a click of the mouse) to fetch a new Web page, allowing the user to direct their user-agent and navigate through the Web. The browser translates these directions into HTTP requests, and further interprets the HTTP responses to present the user with a clear response.
+
+
+
+The Web server
+On the opposite side of the communication channel is the server, which serves the document as requested by the client. A server appears as only a single machine virtually; but it may actually be a collection of servers sharing the load (load balancing), or other software (such as caches, a database server, or e-commerce servers), totally or partially generating the document on demand.
+
+A server is not necessarily a single machine, but several server software instances can be hosted on the same machine. With HTTP/1.1 and the Host header, 
+Proxies
+Between the Web browser and the server, numerous computers and machines relay the HTTP messages. Due to the layered structure of the Web stack, most of these operate at the transport, network or physical levels, becoming transparent at the HTTP layer and potentially having a significant impact on performance. Those operating at the application layers are generally called proxies. These can be transparent, forwarding on the requests they receive without altering them in any way, or non-transparent, in which case they will change the request in some way before passing it along to the server. Proxies may perform numerous functions:
+
+caching (the cache can be public or private, like the browser cache)
+filtering (like an antivirus scan or parental controls)
+load balancing (to allow multiple servers to serve different requests)
+authentication (to control access to different resources)
+logging (allowing the storage of historical information)they may even share the same IP address.
+
+
+Basic aspects of HTTP
+HTTP is simple
+HTTP is generally designed to be simple and human-readable, even with the added complexity introduced in HTTP/2 by encapsulating HTTP messages into frames. HTTP messages can be read and understood by humans, providing easier testing for developers, and reduced complexity for newcomers.
+
+HTTP is stateless, but not sessionless
+HTTP is stateless: there is no link between two requests being successively carried out on the same connection. This immediately has the prospect of being problematic for users attempting to interact with certain pages coherently, for example, using e-commerce shopping baskets. But while the core of HTTP itself is stateless, HTTP cookies allow the use of stateful sessions. Using header extensibility, HTTP Cookies are added to the workflow, allowing session creation on each HTTP request to share the same context, or the same state.
+
+
+
+HTTP and connections
+A connection is controlled at the transport layer, and therefore fundamentally out of scope for HTTP. HTTP doesn't require the underlying transport protocol to be connection-based; it only requires it to be reliable, or not lose messages (at minimum, presenting an error in such cases). Among the two most common transport protocols on the Internet, TCP is reliable and UDP isn't. HTTP therefore relies on the TCP standard, which is connection-based.
+
+Before a client and server can exchange an HTTP request/response pair, they must establish a TCP connection, a process which requires several round-trips. The default behavior of HTTP/1.0 is to open a separate TCP connection for each HTTP request/response pair. This is less efficient than sharing a single TCP connection when multiple requests are sent in close succession.
+
+
+Experiments are in progress to design a better transport protocol more suited to HTTP. For example, Google is experimenting with QUIC which builds on UDP to provide a more reliable and efficient transport protocol.
+
+What can be controlled by HTTP
+This extensible nature of HTTP has, over time, allowed for more control and functionality of the Web. Cache and authentication methods were functions handled early in HTTP history. The ability to relax the origin constraint, by contrast, was only added in the 2010s.
+
+Here is a list of common features controllable with HTTP:
+
+Caching: How documents are cached can be controlled by HTTP. The server can instruct proxies and clients about what to cache and for how long. The client can instruct intermediate cache proxies to ignore the stored document.
+
+Relaxing the origin constraint: To prevent snooping and other privacy invasions, Web browsers enforce strict separation between websites. Only pages from the same origin can access all the information of a Web page. Though such a constraint is a burden to the server, HTTP headers can relax this strict separation on the server side, allowing a document to become a patchwork of information sourced from different domains; there could even be security-related reasons to do so.
+
+Authentication: Some pages may be protected so that only specific users can access them. Basic authentication may be provided by HTTP, either using the WWW-Authenticate and similar headers, or by setting a specific session using HTTP cookies.
+
+Proxy and tunneling: Servers or clients are often located on intranets and hide their true IP address from other computers. HTTP requests then go through proxies to cross this network barrier. Not all proxies are HTTP proxies. The SOCKS protocol, for example, operates at a lower level. Other protocols, like ftp, can be handled by these proxies.
+
+Sessions: Using HTTP cookies allows you to link requests with the state of the server. This creates sessions, despite basic HTTP being a state-less protocol. This is useful not only for e-commerce shopping baskets, but also for any site allowing user configuration of the output.
+
+HTTP flow
+When a client wants to communicate with a server, either the final server or an intermediate proxy, it performs the following steps:
+
+Open a TCP connection: The TCP connection is used to send a request, or several, and receive an answer. The client may open a new connection, reuse an existing connection, or open several TCP connections to the servers.
+Send an HTTP message: HTTP messages (before HTTP/2) are human-readable. With HTTP/2, these simple messages are encapsulated in frames, making them impossible to read directly, but the principle remains the same. For example:
+HTTP
+Copy to Clipboard
+GET / HTTP/1.1
+Host: developer.mozilla.org
+Accept-Language: fr
+Read the response sent by the server, such as:
+HTTP
+Copy to Clipboard
+HTTP/1.1 200 OK
+Date: Sat, 09 Oct 2010 14:28:02 GMT
+Server: Apache
+Last-Modified: Tue, 01 Dec 2009 20:18:22 GMT
+ETag: "51142bc1-7449-479b075b2891b"
+Accept-Ranges: bytes
+Content-Length: 29769
+Content-Type: text/html
+
+<!DOCTYPE html>… (here come the 29769 bytes of the requested web page)
+Close or reuse the connection for further requests.
+If HTTP pipelining is activated, several requests can be sent without waiting for the first response to be fully received. HTTP pipelining has proven difficult to implement in existing networks, where old pieces of software coexist with modern versions. HTTP pipelining has been superseded in HTTP/2 with more robust multiplexing requests within a frame.
+
+
+HTTP Messages
+
+Requests
+An example HTTP request:
+
+get/HTTP/1.1
+Host : developer.mozila.org
+Accept-Language : fr 
+
+get is method
+/ -> is path 
+1.1 -> is protocol 
+Host : developer.mozila.org
+Accept-Language : fr  -> these are headers 
+
+Requests consist of the following elements:
+
+An HTTP method, usually a verb like GET, POST, or a noun like OPTIONS or HEAD that defines the operation the client wants to perform. Typically, a client wants to fetch a resource (using GET) or post the value of an HTML form (using POST), though more operations may be needed in other cases.
+The path of the resource to fetch; the URL of the resource stripped from elements that are obvious from the context, for example without the protocol (http://), the domain (here, developer.mozilla.org), or the TCP port (here, 80).
+The version of the HTTP protocol.
+Optional headers that convey additional information for the servers.
+A body, for some methods like POST, similar to those in responses, which contain the resource sent.
+
+
+Responses
+An example response:
+
+version of protocol  status code  messaege
+HTTP/1.1 200  ok 
+Host : developer.mozila.org
+Accept-Language : fr 
+
+Responses consist of the following elements:
+
+The version of the HTTP protocol they follow.
+A status code, indicating if the request was successful or not, and why.
+A status message, a non-authoritative short description of the status code.
+HTTP headers, like those for requests.
+Optionally, a body containing the fetched resource.
+
+
+APIs based on HTTP
+The most commonly used API based on HTTP is the Fetch API, which can be used to make HTTP requests from JavaScript. The Fetch API replaces the XMLHttpRequest API.
+
+Another API, server-sent events, is a one-way service that allows a server to send events to the client, using HTTP as a transport mechanism. Using the EventSource interface, the client opens a connection and establishes event handlers. The client browser automatically converts the messages that arrive on the HTTP stream into appropriate Event objects. Then it delivers them to the event handlers that have been registered for the events' type if known, or to the onmessage event handler if no type-specific event handler was established.
+
+Evolution of HTTP
+
+
+
+
+
+
+
+
+
+

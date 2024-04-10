@@ -1,0 +1,1891 @@
+console.log("special uses of map , filter , reduce with objects ")
+
+
+// map,filter,reduce - all are hof(all have callbacks/function 
+// as argument) and they are non-mutator methods 
+// map -
+//  map is used to transform each element of the array . 
+// its a non-mutator means its creates a copy then changes 
+// it and returns it .
+//  map takes 3 areguments value , index and array  in its 
+// callback function . 
+//   when you need to transform or remove  an element in the 
+// array  that meets a certain condition then map is used . 
+
+// if we need to filter an array/filtered array  based on a 
+// condition then we use the filter method . 
+// and they are the one that are mostly used . its a 
+// non-mutator method . 
+// and it takes each element of the array of that array in 
+// its callback then checks if the 
+// calback returns true or false for that element and decides
+//  if its to be included or not . 
+
+// reduce - the callback function of this is called reducer 
+// function . 
+// it converts the array into one single  value . it takes 
+// two arguments in its callback . 
+
+//  accumulator , startvalue . its a non-mutator . 
+
+// i have covered the main points but these are some critical
+//  details of thses properties  .
+
+// - **map**: The `map` method creates a new array populated 
+// with the results of calling a provided function on every 
+// element in the calling array. It does not mutate the 
+// original array. However, it's important to note that 
+// if the callback function mutates an element (for example, 
+// if the elements are objects or arrays), those changes will 
+// be reflected in the original array because objects and 
+// arrays in JavaScript are reference types.
+
+// - **filter**: The `filter` method creates a new array 
+// with all elements that pass the test implemented by the 
+// provided function. It does not mutate the original array.
+//  However, similar to `map`, if the elements are reference 
+// types and are mutated inside the callback, those changes 
+// will be reflected in the original array.
+
+// - **reduce**: The `reduce` method executes a reducer 
+// function on each element of the array, resulting in 
+// a single output value. It does not mutate the original 
+// array. The reducer function takes four arguments: 
+// accumulator, current value, current index, and source 
+// array. If an initialValue is provided to the `reduce`
+//  method, it will be used as the first argument to the 
+// first call of the callback. If no initialValue is 
+// provided, the first element in the array will be used as 
+// the initial accumulator value and skipped as current value.
+
+// Remember, while these methods do not mutate the original 
+// array, they may still have mutating effects on the 
+// elements of the array if those elements are objects or 
+// arrays and are mutated within the callback function. 
+// This is because objects and arrays in JavaScript are 
+// reference types. So, when working with arrays of objects 
+// or arrays, it's important to avoid mutating the elements 
+// inside the callback function if you want to ensure that
+//  the original array is not changed.
+
+// and lastly 
+// The map, filter, and reduce methods in JavaScript create 
+// a shallow copy of the array. This means that they copy 
+// the references to objects and arrays, not the actual 
+// objects or arrays themselves.
+
+// Here’s what this means:
+// For primitive values (like numbers, strings, booleans), 
+// a new copy is created. Changes to the copies will not 
+// affect the original array.
+
+// For reference values (like objects and arrays), the
+//  references are copied, not the actual values. This 
+// means that if you modify an object or array that’s an 
+// element of the new array, those changes will be 
+// reflected in the original array, because both the 
+// new and original arrays refer to the same object or array.
+
+
+// deep copy vs shallow copy 
+
+// - **Shallow Copy**: Imagine you have a basket of fruits 
+// (this is your object). A shallow copy would be like 
+// creating a new basket and putting the exact same fruits 
+// from the original basket into the new one. If you change 
+// a fruit in the new basket (like biting an apple), it also 
+// changes in the original basket because it's actually the 
+// same fruit, just in two baskets.
+
+// - **Deep Copy**: A deep copy, on the other hand, is like 
+// creating a new basket and putting new, identical fruits 
+// in it. If you change a fruit in the new basket, the 
+// corresponding fruit in the original basket is not affected 
+// because they are actually different fruits, they just look
+//  the same.
+
+// So, when we say `map`, `filter`, and `reduce` make a 
+// shallow copy, it means if you change an object in the 
+// new array, it will also change in the original array. 
+// But if you change a number or a string in the new array,
+//  it won't change in the original array. This is because 
+// objects are like the fruits in the basket, while numbers 
+// and strings are like labels on the basket itself.
+
+// simple easy to understand examples of deep copy and  
+// shallow copy 
+
+// **Shallow Copy:**
+// ```javascript
+let originalArray1 = [1, 2, {a: 3}];
+let shallowCopy = originalArray1.slice();
+
+console.log(shallowCopy); // Outputs: [1, 2, {a: 3}]
+
+// Change a primitive type
+shallowCopy[0] = 10;
+console.log(originalArray1[0]); // Outputs: 1 (original array is not affected)
+
+// Change an object
+shallowCopy[2].a = 30;
+console.log(originalArray1[2].a); // Outputs: 30 (original array is affected)
+// ```
+
+// In this example, changing a primitive value in the 
+// `shallowCopy` does not affect the `originalArray`. 
+// But changing an object in the `shallowCopy` does 
+// affect the `originalArray` because objects are copied 
+// by reference in a shallow copy.
+
+// **Deep Copy:**
+// ```javascript
+let originalArray = [1, 2, {a: 3}];
+let deepCopy = JSON.parse(JSON.stringify(originalArray));
+
+console.log(deepCopy); // Outputs: [1, 2, {a: 3}]
+
+// Change a primitive type
+deepCopy[0] = 10;
+console.log(originalArray[0]); // Outputs: 1 (original array is not affected)
+
+// Change an object
+deepCopy[2].a = 30;
+console.log(originalArray[2].a); // Outputs: 3 (original array is not affected)
+// ```
+
+// In this example, both changing a primitive value and 
+// an object in the `deepCopy` do not affect the 
+// `originalArray`. This is because 
+// `JSON.parse(JSON.stringify(originalArray))` creates a 
+// deep copy of the `originalArray`.
+
+// Remember, while `JSON.parse(JSON.stringify())` is a
+//  simple way to make a deep copy of an array or object, 
+// it has limitations. It only works with JSON-safe values
+//  - it doesn't correctly copy complex JavaScript objects
+//  like functions, Date objects, or RegExps, and it doesn't 
+// handle circular references. For complex cases, you might 
+// need to use a library or write custom code to make a deep 
+// copy.
+
+// but how does JSON.parse(JSON.stringify(originalArray)) 
+// this works ? 
+
+//  deep copy 
+//  this type of copy is created using pass by value , 
+// means it does not  mater if we change anything in the 
+// new array 
+// the og array will not be changed . 
+
+
+let numbers = [1,2,4,6,8,0,{yrName:"Wifey"}]
+
+let deepCopy = JSON.parse(JSON.stringify(numbers))
+console.log(JSON.stringify(numbers) , "-> this is a json string ")
+console.log(deepCopy)
+deepCopy[6].yrName = "Fufu"
+console.log(deepCopy) // the coopied array is changed 
+console.log(numbers) // the og array have not changed 
+
+// JSON.parse(JSON.stringify(numbers)
+// javescript value ->  object -> 
+// parse - Converts a JavaScript Object Notation (JSON) string into an object.
+// stringify - Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
+// array(value) -> json string(new) -> value  ->which is the  new copy 
+// the deep copy 
+
+let array = ["as", "fuck"]
+console.log(JSON.stringify(array))
+console.log(array) //["as", "fuck"] // array have not changed which  means 
+// json.stringify creates a new json string - from where the new copy is created . 
+// then we convert the json string into whatever format it was in using  
+//  array.parse 
+
+// *******************************************************************************************************
+console.log("map , filter , reduce practical ")
+let arr1 = [45, 23, 21]
+// Array map method
+// Calls a defined callback function on each element of an array, and returns an array that contains the results.
+let ar = arr1.map((value, index, array) => {
+  // console.log(value, index, array)
+  return value + index
+})
+console.log(arr1)
+
+
+let numbers1 = [1, 2, 3, 4, 5];
+
+let squaredNumbers = numbers1.map(element => {
+  return element ** 2;
+});
+
+console.log(squaredNumbers);
+
+console.log("map , filter , reduce ")
+
+// map , filter , reduce  - all three are higher order 
+// function(hoc)
+// means they accepts functions as arguments menas callback
+//  function  
+// they are a part of functional programming 
+
+// map - non-mutator 
+// it applies a function/condition upon  an  array and 
+// returns a new arrray 
+
+let arr = [45, 23, 21]
+// so double the array - simplest example of map 
+console.log(arr)
+let doubleArr = arr.map(element => element*2)
+console.log(doubleArr) 
+console.log(arr) // non-mutator 
+
+// syntax - 
+let a = arr.map((value, index, array) => {
+  // console.log(value, index, array)
+  return value + index
+})
+// first , second and third parameter is considered 
+//  value , index , array by  default 
+console.log(arr)
+
+// ***********************************************************************************************
+
+// note : 
+
+// remember the map and foreach are not the same 
+//  so when does the foreach is used if it does not returns
+//  anything just applies ? 
+
+// The `forEach` method in JavaScript is typically used when 
+// you want to perform an operation or execute a function on 
+// each element in an array, and you don't need to create 
+// a new array or change the original array. Here are some 
+// common use cases:
+
+// 1. **Performing side effects**: If you want to perform an 
+// operation that has a side effect, such as updating the 
+// DOM, making a network request, or logging to the console, 
+// `forEach` is a good choice². For example:
+
+// ```javascript
+let array2 = [1, 2, 3, 4, 5];
+array2.forEach(element => {
+  console.log(element); // logs each element to the console
+});
+// ```
+
+// 2. **Applying a function to each element**: If you have 
+// a function that you want to apply to each element in an 
+// array, you can use `forEach`. The function can be anything
+//  you want, as long as it doesn't need to return a value¹. 
+// For example:
+
+// ```javascript
+let array3 = [1, 2, 3, 4, 5];
+let summ = 0;
+array3.forEach(element => {
+  summ += element; // adds each element to the sum
+});
+console.log(summ); // logs the sum of the elements
+// ```
+
+// 3. **Iterating over an array for learning or debugging**: 
+// If you're learning JavaScript or debugging your code, 
+// `forEach` can be a useful way to inspect each element 
+// in an array⁴.
+
+// Remember, `forEach` is all about executing a function 
+// for each element. It's not about transforming the array 
+// and capturing the results. If you want to transform an 
+// array and capture the results, other methods like `map`
+//  or `filter` might be more appropriate².
+
+
+// *************************************************************************************************************
+
+// Array filter method
+
+let numbers2 = [1, 2, 3, 4, 5];
+
+let evenNumbers = numbers2.filter(element => {
+  return element % 2 === 0;
+});
+
+console.log(evenNumbers);
+// The filter() function is useful when you need to extract 
+// elements from an array that meet specific conditions or
+//  criteria. It provides a concise and expressive way to 
+// perform such filtering operations.
+// Returns the elements of an array that meet the condition
+//  specified in a callback function.
+let arr2 = [45, 23, 21, 0, 3, 5]
+let a2 = arr2.filter((a) => {
+  return a < 10
+})
+// console.log(a2, arr2)
+// *************************************************************************************************************
+
+// Array reduce method
+
+
+let numbers = [1, 2, 3, 4, 5];
+
+let sum = numbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+}, 0);
+
+console.log(sum);
+
+
+// Calls the specified callback function for all the elements
+//  in an array. The return value of the callback function is
+//  the accumulated result, and is provided as an argument in
+//  the next call to the callback function.
+let arr3 = [1, 2, 3, 5, 2, 1]
+const reduce_func = (h1, h2) => {
+  return h1 + h2
+}
+let newarr3 = arr3.reduce(reduce_func)
+console.log(newarr3)
+
+// why cant we use foreach to double the array elements ? 
+let number  = [1,2,4,56,7]
+let doubledNumbers = number.forEach(element => {
+    return element*2
+});
+console.log(doubledNumbers) // undefined 
+// why , bcz the foreact function/method does not reurns 
+// anything by itself 
+// and it dos not creaes a new array or neither changes 
+// any ekemnt of array 
+// it can just read the element  , 
+// and returns true or false , ok.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// References>JavaScript>Reference>Standard built-in objects>Map
+
+
+// Standard built-in objects
+// Map
+// Constructor
+// Map() constructor
+// Properties
+// Map[@@species]
+// Map.prototype.size
+// Methods
+// Map.prototype[@@iterator]()
+// Map.prototype.clear()
+// Map.prototype.delete()
+// Map.prototype.entries()
+// Map.prototype.forEach()
+// Map.prototype.get()
+// Map.groupBy()
+// Map.prototype.has()
+// Map.prototype.keys()
+// Map.prototype.set()
+// Map.prototype.values()
+
+
+// Map
+// The Map object holds key-value pairs and remembers the original insertion order 
+// of the keys. Any value (both objects and primitive values) may be used as either 
+// a key or a value.
+
+// Try it
+const map1 = new Map();
+
+map1.set('a', 1);
+map1.set('b', 2);
+map1.set('c', 3);
+
+console.log(map1.get('a'));
+// Expected output: 1
+
+map1.set('a', 97);
+
+console.log(map1.get('a'));
+// Expected output: 97
+
+console.log(map1.size);
+// Expected output: 3
+
+map1.delete('b');
+
+console.log(map1.size);
+// Expected output: 2
+
+// Description
+// Map objects are collections of key - value pairs.A key in the Map may only occur 
+// once; it is unique in the Map's collection. A Map object is iterated by key-value
+//  pairs — a for...of loop returns a 2-member array of [key, value] for each 
+// iteration. Iteration happens in insertion order, which corresponds to the order 
+// in which each key-value pair was first inserted into the map by the set() method
+//  (that is, there wasn't a key with the same value already in the map when set() 
+// was called).
+
+// The specification requires maps to be implemented "that, on average, provide 
+// access times that are sublinear on the number of elements in the collection".
+// Therefore, it could be represented internally as a hash table(with O(1) lookup), 
+// a search tree(with O(log(N)) lookup), or any other data structure, as long as the
+//  complexity is better than O(N).
+
+// Key equality
+// Value equality is based on the SameValueZero algorithm. (It used to use SameValue,
+//  which treated 0 and - 0 as different.Check browser compatibility.) This means NaN 
+// is considered the same as NaN (even though NaN !== NaN) and all other values are
+//  considered equal according to the semantics of the === operator.
+
+// Objects vs.Maps
+// Object is similar to Map—both let you set keys to values, retrieve those values, 
+// delete keys, and detect whether something is stored at a key.For this reason(and 
+// because there were no built -in alternatives), Object has been used as Map 
+// historically.
+
+//     However, there are important differences that make Map preferable in some cases:
+
+// Map	Object
+// Accidental Keys	A Map does not contain any keys by default. It only contains 
+// what is explicitly put into it.	
+// An Object has a prototype, so it contains default keys that could collide with 
+// your own keys if you're not careful.
+
+// Note: This can be bypassed by using Object.create(null), but this is seldom done.
+
+// Security	A Map is safe to use with user - provided keys and values.	
+// Setting user - provided key - value pairs on an Object may allow an attacker to
+//  override the object's prototype, which can lead to object injection attacks . 
+// Like the accidental keys issue, this can also be mitigated by using a 
+// null-prototype object.
+
+// Key Types	A Map's keys can be any value (including functions, objects, or any 
+// primitive).	The keys of an Object must be either a String or a Symbol.
+
+// Key Order	
+// The keys in Map are ordered in a simple, straightforward way: A Map object 
+// iterates entries, keys, and values in the order of entry insertion.
+
+// Although the keys of an ordinary Object are ordered now, this was not always the 
+// case, and the order is complex.As a result, it's best not to rely on property order.
+
+// The order was first defined for own properties only in ECMAScript 2015; ECMAScript
+//  2020 defines order for inherited properties as well.But note that no single 
+// mechanism iterates all of an object's properties; the various mechanisms each 
+// include different subsets of properties. (for-in includes only enumerable 
+// string-keyed properties; Object.keys includes only own, enumerable, string-keyed 
+// properties; Object.getOwnPropertyNames includes own, string-keyed properties even 
+// if non-enumerable; Object.getOwnPropertySymbols does the same for just Symbol-keyed properties, etc.)
+
+// Size
+
+// The number of items in a Map is easily retrieved from its size property.
+// Determining the number of items in an Object is more roundabout and less efficient.
+// A common way to do it is through the length of the array returned from Object.keys().
+// Iteration	A Map is an iterable, so it can be directly iterated.	
+// Object does not implement an iteration protocol, and so objects are not directly iterable using the JavaScript for...of statement(by default ).
+
+//     Note:
+
+// An object can implement the iteration protocol, or you can get an iterable for 
+// an object using Object.keys or Object.entries.
+// The for...in statement allows you to iterate over the enumerable properties of 
+// an object.
+
+//     Performance	
+// Performs better in scenarios involving frequent additions and removals of key - value pairs.
+
+// Not optimized for frequent additions and removals of key - value pairs.
+
+// Serialization and parsing	
+// No native support for serialization or parsing.
+
+// (But you can build your own serialization and parsing support for Map by using
+//  JSON.stringify() with its replacer argument, and by using JSON.parse() with its
+//  reviver argument.See the Stack Overflow question How do you JSON.stringify an ES6 Map ?).
+
+// Native support for serialization from Object to JSON, using JSON.stringify().
+
+// Native support for parsing from JSON to Object, using JSON.parse().
+
+// Setting object properties
+// Setting Object properties works for Map objects as well, and can cause considerable confusion.
+
+//     Therefore, this appears to work in a way:
+
+// JS
+// Copy to Clipboard
+const wrongMap = new Map();
+wrongMap["bla"] = "blaa";
+wrongMap["bla2"] = "blaaa2";
+
+console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' }
+// But that way of setting a property does not interact with the Map data structure.
+// It uses the feature of the generic object.The value of 'bla' is not stored in the
+//  Map for queries.Other operations on the data fail:
+
+// JS
+// Copy to Clipboard
+wrongMap.has("bla"); // false
+wrongMap.delete("bla"); // false
+console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' }
+// The correct usage for storing data in the Map is through the set(key, value) method.
+
+//     JS
+// Copy to Clipboard
+const contacts = new Map();
+contacts.set("Jessie", { phone: "213-555-1234", address: "123 N 1st Ave" });
+contacts.has("Jessie"); // true
+contacts.get("Hilary"); // undefined
+contacts.set("Hilary", { phone: "617-555-4321", address: "321 S 2nd St" });
+contacts.get("Jessie"); // {phone: "213-555-1234", address: "123 N 1st Ave"}
+contacts.delete("Raymond"); // false
+contacts.delete("Jessie"); // true
+console.log(contacts.size); // 1
+// Map - like browser APIs
+// Browser Map - like objects(or "maplike objects") are Web API interfaces that behave in many ways like a Map.
+
+// Just like Map, entries can be iterated in the same order that they were added to the object.Map - like objects and Map also have properties and methods that share the same name and behavior.However unlike Map they only allow specific predefined types for the keys and values of each entry.
+
+// The allowed types are set in the specification IDL definition.For example, RTCStatsReport is a Map - like object that must use strings for keys and objects for values.This is defined in the specification IDL below:
+
+// WEBIDL
+// Copy to Clipboard
+// interface RTCStatsReport {
+//     readonly maplike<DOMString, object>;
+// };
+// Map - like objects are either read - only or read - writable(see the readonly keyword in the IDL above).
+
+//     Read - only Map - like objects have the property size, and the methods: entries(), forEach(), get(), has(), keys(), values(), and @@iterator.
+// Writeable Map - like objects additionally have the methods: clear(), delete (), and set().
+// The methods and properties have the same behavior as the equivalent entities in Map, except for the restriction on the types of the keys and values.
+
+// The following are examples of read - only Map - like browser objects:
+// AudioParamMap
+// RTCStatsReport
+// EventCounts
+// KeyboardLayoutMap
+// MIDIInputMap
+// MIDIOutputMap
+
+// Constructor
+// Map()
+// Creates a new Map object.
+
+// Static properties
+// Map[@@species]
+// The constructor function that is used to create derived objects.
+
+// Static methods
+// Map.groupBy()
+// Groups the elements of a given iterable using the values returned by a provided callback function. The final returned Map uses the unique values from the test function as keys, which can be used to get the array of elements in each group.
+
+// Instance properties
+// These properties are defined on Map.prototype and shared by all Map instances.
+    Map.prototype.constructor
+// The constructor function that created the instance object.For Map instances, 
+// the initial value is the Map constructor.
+    Map.prototype.size
+// Returns the number of key / value pairs in the Map object.
+    Map.prototype[@@toStringTag]
+// The initial value of the @@toStringTag property is the string "Map".This 
+// property is used in Object.prototype.toString().
+
+// Instance methods
+Map.prototype.clear()
+// Removes all key - value pairs from the Map object.
+    Map.prototype.delete()
+// Returns true if an element in the Map object existed and has been removed, 
+// or false if the element does not exist.map.has(key) will return false afterwards.
+    Map.prototype.entries()
+// Returns a new Iterator object that contains a two - member array of[key, value] 
+// for each element in the Map object in insertion order.
+    Map.prototype.forEach()
+// Calls callbackFn once for each key - value pair present in the Map object, in 
+// insertion order.If a thisArg parameter is provided to forEach, it will be used 
+// as the this value for each callback.
+    Map.prototype.get()
+// Returns the value associated to the passed key, or undefined if there is none.
+    Map.prototype.has()
+// Returns a boolean indicating whether a value has been associated with the passed key in the Map object or not.
+    Map.prototype.keys()
+// Returns a new Iterator object that contains the keys for each element in the Map object in insertion order.
+    Map.prototype.set()
+// Sets the value for the passed key in the Map object.Returns the Map object.
+    Map.prototype.values()
+// Returns a new Iterator object that contains the values for each element in the Map object in insertion order.
+    Map.prototype[@@iterator]()
+// Returns a new Iterator object that contains a two - member array of[key, value] for each element in the Map object in insertion order.
+
+//     Examples
+// Using the Map object
+// JS
+// Copy to Clipboard
+const myMap = new Map();
+
+const keyString = "a string";
+const keyObj = {};
+const keyFunc = function () { };
+
+// setting the values
+myMap.set(keyString, "value associated with 'a string'");
+myMap.set(keyObj, "value associated with keyObj");
+myMap.set(keyFunc, "value associated with keyFunc");
+
+console.log(myMap.size); // 3
+
+// getting the values
+console.log(myMap.get(keyString)); // "value associated with 'a string'"
+console.log(myMap.get(keyObj)); // "value associated with keyObj"
+console.log(myMap.get(keyFunc)); // "value associated with keyFunc"
+
+console.log(myMap.get("a string")); // "value associated with 'a string'", because keyString === 'a string'
+console.log(myMap.get({})); // undefined, because keyObj !== {}
+console.log(myMap.get(function () { })); // undefined, because keyFunc !== function () {}
+// Using NaN as Map keys
+// NaN can also be used as a key.Even though every NaN is not equal 
+// to itself(NaN !== NaN is true), the following example works because NaNs are indistinguishable from each other:
+
+const myMap = new Map();
+myMap.set(NaN, "not a number");
+
+myMap.get(NaN);
+// "not a number"
+
+const otherNaN = Number("foo");
+myMap.get(otherNaN);
+// "not a number"
+// Iterating Map with for...of
+// Maps can be iterated using a for...of loop:
+
+const myMap = new Map();
+myMap.set(0, "zero");
+myMap.set(1, "one");
+
+for (const [key, value] of myMap) {
+    console.log(`${key} = ${value}`);
+}
+// 0 = zero
+// 1 = one
+
+for (const key of myMap.keys()) {
+    console.log(key);
+}
+// 0
+// 1
+
+for (const value of myMap.values()) {
+    console.log(value);
+}
+// zero
+// one
+
+for (const [key, value] of myMap.entries()) {
+    console.log(`${key} = ${value}`);
+}
+// 0 = zero
+// 1 = one
+// Iterating Map with forEach()
+// Maps can be iterated using the forEach() method:
+
+myMap.forEach((value, key) => {
+    console.log(`${key} = ${value}`);
+});
+// 0 = zero
+// 1 = one
+// Relation with Array objects 
+const kvArray = [
+    ["key1", "value1"],
+    ["key2", "value2"],
+];
+
+// Use the regular Map constructor to transform a 2D key-value Array into a map
+const myMap = new Map(kvArray);
+console.log(myMap.get("key1")); // "value1"
+// Use Array.from() to transform a map into a 2D key-value Array
+console.log(Array.from(myMap)); // Will show you exactly the same Array as kvArray
+// A succinct way to do the same, using the spread syntax
+console.log([...myMap]);
+// Or use the keys() or values() iterators, and convert them to an array
+console.log(Array.from(myMap.keys())); // ["key1", "key2"]
+// Cloning and merging Maps
+// Just like Arrays, Maps can be cloned:
+
+const original = new Map([[1, "one"]]);
+
+const clone = new Map(original);
+
+console.log(clone.get(1)); // one
+console.log(original === clone); // false (useful for shallow comparison)
+// Note: Keep in mind that the data itself is not cloned.
+// Maps can be merged, maintaining key uniqueness:
+
+const first = new Map([
+    [1, "one"],
+    [2, "two"],
+    [3, "three"],
+]);
+
+const second = new Map([
+    [1, "uno"],
+    [2, "dos"],
+]);
+
+// Merge two maps. The last repeated key wins.
+// Spread syntax essentially converts a Map to an Array
+const merged = new Map([...first, ...second]);
+
+console.log(merged.get(1)); // uno
+console.log(merged.get(2)); // dos
+console.log(merged.get(3)); // three
+// Maps can be merged with Arrays, too:
+
+const first = new Map([
+    [1, "one"],
+    [2, "two"],
+    [3, "three"],
+]);
+
+const second = new Map([
+    [1, "uno"],
+    [2, "dos"],
+]);
+
+// Merge maps with an array. The last repeated key wins.
+const merged = new Map([...first, ...second, [1, "eins"]]);
+
+console.log(merged.get(1)); // eins
+console.log(merged.get(2)); // dos
+console.log(merged.get(3)); // three
+
+
+
+// Map() constructor
+// The Map() constructor creates Map objects.
+
+//     Syntax
+new Map()
+new Map(iterable)
+// Note: Map() can only be constructed with new.Attempting to call it without new throws a TypeError.
+
+//     Parameters
+// iterable Optional
+// An Array or other iterable object whose elements are key - value pairs. (For 
+// example, arrays with two elements, such as [[1, 'one'], [2, 'two']].) Each 
+// key - value pair is added to the new Map.
+
+//     Examples
+// Creating a new Map
+const myMap = new Map([
+    [1, "one"],
+    [2, "two"],
+    [3, "three"],
+]);
+
+// Map[@@species]
+// The Map[@@species] static accessor property is an unused accessor property specifying how to copy Map objects.
+
+//     Syntax
+Map[Symbol.species]
+// Return value
+// The value of the constructor(this) on which get @@species was called.The return value is used to construct copied Map instances.
+
+//     Description
+// The @@species accessor property returns the default constructor for Map objects.Subclass constructors may override it to change the constructor assignment.
+
+//  Note: This property is currently unused by all Map methods.
+// Examples
+// Species in ordinary objects
+// The @@species property returns the default constructor function, which is the Map constructor for Map.
+Map[Symbol.species]; // function Map()
+// Species in derived objects
+// In an instance of a custom Map subclass, such as MyMap, the MyMap species is the
+//  MyMap constructor.However, you might want to overwrite this, in order to return 
+// parent Map objects in your derived class methods:
+
+class MyMap extends Map {
+    // Overwrite MyMap species to the parent Map constructor
+    static get [Symbol.species]() {
+        return Map;
+    }
+}
+// Map.prototype.size
+// The size accessor property of Map instances returns the number of elements in this map.
+
+// Try it
+const map1 = new Map();
+
+map1.set('a', 'alpha');
+map1.set('b', 'beta');
+map1.set('g', 'gamma');
+
+console.log(map1.size);
+// Expected output: 3
+
+// Description
+// The value of size is an integer representing how many entries the Map object has.A set accessor function for size is undefined; you can not change this property.
+
+//     Examples
+// Using size
+const myMap = new Map();
+myMap.set("a", "alpha");
+myMap.set("b", "beta");
+myMap.set("g", "gamma");
+
+console.log(myMap.size); // 3
+
+
+// Map.prototype[@@iterator]()
+// The[@@iterator]() method of Map instances implements the iterable protocol and allows Map objects to be consumed by most syntaxes expecting iterables, such as the spread syntax and for...of loops.It returns a map iterator object that yields the key - value pairs of the map in insertion order.
+
+// The initial value of this property is the same function object as the initial value of the Map.prototype.entries property.
+
+// Try it
+const map1 = new Map();
+
+map1.set('0', 'foo');
+map1.set(1, 'bar');
+
+const iterator1 = map1[Symbol.iterator]();
+
+for (const item of iterator1) {
+    console.log(item);
+}
+// Expected output: Array ["0", "foo"]
+// Expected output: Array [1, "bar"]
+
+
+// Syntax 
+map[Symbol.iterator]()
+// Parameters
+// None.
+
+// Return value
+// The same return value as Map.prototype.entries(): a new iterable iterator object that yields the key - value pairs of the map.
+
+//     Examples
+// Iteration using for...of loop
+// Note that you seldom need to call this method directly.The existence of the @@iterator method makes Map objects iterable, and iterating syntaxes like the for...of loop automatically call this method to obtain the iterator to loop over.
+
+//     JS
+// Copy to Clipboard
+const myMap = new Map();
+myMap.set("0", "foo");
+myMap.set(1, "bar");
+myMap.set({}, "baz");
+
+for (const entry of myMap) {
+    console.log(entry);
+}
+// ["0", "foo"]
+// [1, "bar"]
+// [{}, "baz"]
+
+for (const [key, value] of myMap) {
+    console.log(`${key}: ${value}`);
+}
+// 0: foo
+// 1: bar
+// [Object]: baz
+// Manually hand - rolling the iterator
+// You may still manually call the next() method of the returned iterator object to achieve maximum control over the iteration process.
+
+//     JS
+Copy to Clipboard
+const myMap = new Map();
+myMap.set("0", "foo");
+myMap.set(1, "bar");
+myMap.set({}, "baz");
+
+const mapIter = myMap[Symbol.iterator]();
+
+console.log(mapIter.next().value); // ["0", "foo"]
+console.log(mapIter.next().value); // [1, "bar"]
+console.log(mapIter.next().value); // [Object, "baz"]
+
+
+Map.prototype.clear()
+// The clear() method of Map instances removes all elements from this map.
+
+// Try it
+const map1 = new Map();
+
+map1.set('bar', 'baz');
+map1.set(1, 'foo');
+
+console.log(map1.size);
+// Expected output: 2
+
+map1.clear();
+
+console.log(map1.size);
+// Expected output: 0
+
+
+// Syntax
+clear()
+// Parameters
+// None.
+
+// Return value
+// None(undefined).
+
+//     Examples
+// Using clear()
+// JS
+// Copy to Clipboard
+const myMap = new Map();
+myMap.set("bar", "baz");
+myMap.set(1, "foo");
+
+console.log(myMap.size); // 2
+console.log(myMap.has("bar")); // true
+
+myMap.clear();
+
+console.log(myMap.size); // 0
+console.log(myMap.has("bar")); // false
+
+
+Map.prototype.delete()
+// The delete () method of Map instances removes the specified element from this map by key.
+
+// Try it
+const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.delete('bar'));
+// Expected result: true
+// True indicates successful removal
+
+console.log(map1.has('bar'));
+// Expected result: false
+
+
+// Syntax 
+mapInstance.delete(key)
+// Parameters
+// key
+// The key of the element to remove from the Map object.
+
+// Return value
+// true if an element in the Map object existed and has been removed, or false if the element does not exist.
+
+//     Examples
+// Using delete ()
+// JS
+// Copy to Clipboard
+const myMap = new Map();
+myMap.set("bar", "foo");
+
+console.log(myMap.delete("bar")); // Returns true. Successfully removed.
+console.log(myMap.has("bar")); // Returns false. The "bar" element is no longer present.
+
+
+Map.prototype.entries()
+// The entries() method of Map instances returns a new map iterator object that contains the[key, value] pairs for each element in this map in insertion order.
+
+// Try it
+const map1 = new Map();
+
+map1.set('0', 'foo');
+map1.set(1, 'bar');
+
+const iterator1 = map1.entries();
+
+console.log(iterator1.next().value);
+// Expected output: Array ["0", "foo"]
+
+console.log(iterator1.next().value);
+// Expected output: Array [1, "bar"]
+
+
+// Syntax 
+entries()
+// Parameters
+// None.
+
+// Return value
+// A new iterable iterator object.
+
+//     Examples
+// Using entries()
+// JS
+// Copy to Clipboard
+const myMap = new Map();
+myMap.set("0", "foo");
+myMap.set(1, "bar");
+myMap.set({}, "baz");
+
+const mapIter = myMap.entries();
+
+console.log(mapIter.next().value); // ["0", "foo"]
+console.log(mapIter.next().value); // [1, "bar"]
+console.log(mapIter.next().value); // [Object, "baz"]
+
+
+// Map.prototype.forEach()
+// The forEach() method of Map instances executes a provided function once per each key / value pair in this map, in insertion order.
+
+// Try it
+function logMapElements(value, key, map) {
+    console.log(`m[${key}] = ${value}`);
+}
+
+new Map([
+    ['foo', 3],
+    ['bar', {}],
+    ['baz', undefined],
+]).forEach(logMapElements);
+
+// Expected output: "m[foo] = 3"
+// Expected output: "m[bar] = [object Object]"
+// Expected output: "m[baz] = undefined"
+
+
+// Syntax 
+forEach(callbackFn)
+forEach(callbackFn, thisArg)
+// Parameters
+// callbackFn
+// A function to execute for each entry in the map.The function is called with the following arguments:
+
+// value
+// Value of each iteration.
+
+//     key
+// Key of each iteration.
+
+//     map
+// The map being iterated.
+
+// thisArg Optional
+// A value to use as this when executing callbackFn.
+
+// Return value
+// None(undefined).
+
+//     Description
+// The forEach method executes the provided callback once for each key of the map which actually exist.It is not invoked for keys which have been deleted.However, it is executed for values which are present but have the value undefined.
+
+// callback is invoked with three arguments:
+
+// the entry's value
+// the entry's key
+// the Map object being traversed
+// If a thisArg parameter is provided to forEach, it will be passed to callback when invoked, for use as its this value.Otherwise, the value undefined will be passed for use as its this value.The this value ultimately observable by callback is determined according to the usual rules for determining the this seen by a function.
+
+// Each value is visited once, except in the case when it was deleted and re - added before forEach has finished.callback is not invoked for values deleted before being visited.New values added before forEach has finished will be visited.
+
+//     Examples
+// Printing the contents of a Map object
+// The following code logs a line for each element in an Map object:
+
+function logMapElements(value, key, map) {
+    console.log(`map.get('${key}') = ${value}`);
+}
+new Map([
+    ["foo", 3],
+    ["bar", {}],
+    ["baz", undefined],
+]).forEach(logMapElements);
+// Logs:
+// "map.get('foo') = 3"
+// "map.get('bar') = [object Object]"
+// "map.get('baz') = undefined"
+
+
+Map.prototype.get()
+// The get() method of Map instances returns a specified element from this map.If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map object.
+
+// Try it
+const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.get('bar'));
+// Expected output: "foo"
+
+console.log(map1.get('baz'));
+// Expected output: undefined
+
+
+// Syntax 
+get(key)
+// Parameters
+// key
+// The key of the element to return from the Map object.
+
+// Return value
+// The element associated with the specified key, or undefined if the key can't be found in the Map object.
+
+// Examples
+// Using get()
+const myMap = new Map();
+myMap.set("bar", "foo");
+
+console.log(myMap.get("bar")); // Returns "foo"
+console.log(myMap.get("baz")); // Returns undefined
+// Using get() to retrieve a reference to an object
+const arr = [];
+const myMap = new Map();
+myMap.set("bar", arr);
+
+myMap.get("bar").push("foo");
+
+console.log(arr); // ["foo"]
+console.log(myMap.get("bar")); // ["foo"]
+// Note that the map holding a reference to the original object effectively means the object cannot be garbage - collected, which may lead to unexpected memory issues.If you want the object stored in the map to have the same lifespan as the original one, consider using a WeakMap.
+
+
+
+//     Map.groupBy()
+// Note: In some versions of some browsers, this method was implemented as the method Array.prototype.groupToMap().Due to web compatibility issues, it is now implemented as a static method.Check the browser compatibility table for details.
+
+// The Map.groupBy() static method groups the elements of a given iterable using the values returned by a provided callback function. The final returned Map uses the unique values from the test function as keys, which can be used to get the array of elements in each group.
+
+// The method is primarily useful when grouping elements that are associated with an object, and in particular when that object might change over time.If the object is invariant, you might instead represent it using a string, and group elements with Object.groupBy().
+
+// Try it
+const inventory = [
+    { name: 'asparagus', type: 'vegetables', quantity: 9 },
+    { name: 'bananas', type: 'fruit', quantity: 5 },
+    { name: 'goat', type: 'meat', quantity: 23 },
+    { name: 'cherries', type: 'fruit', quantity: 12 },
+    { name: 'fish', type: 'meat', quantity: 22 },
+];
+
+const restock = { restock: true };
+const sufficient = { restock: false };
+const result = Map.groupBy(inventory, ({ quantity }) =>
+    quantity < 6 ? restock : sufficient,
+);
+console.log(result.get(restock));
+// [{ name: "bananas", type: "fruit", quantity: 5 }]
+
+
+
+// Syntax 
+Map.groupBy(items, callbackFn)
+// Parameters
+// items
+// An iterable (such as an Array) whose elements will be grouped.
+
+// callbackFn
+// A function to execute for each element in the iterable. It should return a value (object or primitive) indicating the group of the current element. The function is called with the following arguments:
+
+// element
+// The current element being processed.
+
+// index
+// The index of the current element being processed.
+
+// Return value
+// A Map object with keys for each group, each assigned to an array containing the elements of the associated group.
+
+// Description
+// Map.groupBy() calls a provided callbackFn function once for each element in an iterable. The callback function should return a value indicating the group of the associated element. The values returned by callbackFn are used as keys for the Map returned by Map.groupBy(). Each key has an associated array containing all the elements for which the callback returned the same value.
+
+// The elements in the returned Map and the original iterable are the same (not deep copies). Changing the internal structure of the elements will be reflected in both the original iterable and the returned Map.
+
+// This method is useful when you need to group information that is related to a particular object that might potentially change over time. This is because even if the object is modified, it will continue to work as a key to the returned Map. If you instead create a string representation for the object and use that as a grouping key in Object.groupBy(), you must maintain the mapping between the original object and its representation as the object changes.
+
+// Note: To access the groups in the returned Map, you must use the same object that was originally used as a key in the Map (although you may modify its properties). You can't use another object that just happens to have the same name and properties.
+
+// Map.groupBy does not read the value of this. It can be called on any object and a new Map instance will be returned.
+
+// Examples
+// Using Map.groupBy()
+// First we define an array containing objects representing an inventory of different foodstuffs. Each food has a type and a quantity.
+
+// JS
+// Copy to Clipboard
+const inventory = [
+  { name: "asparagus", type: "vegetables", quantity: 9 },
+  { name: "bananas", type: "fruit", quantity: 5 },
+  { name: "goat", type: "meat", quantity: 23 },
+  { name: "cherries", type: "fruit", quantity: 12 },
+  { name: "fish", type: "meat", quantity: 22 },
+];
+// The code below uses Map.groupBy() with an arrow function that returns the object keys named restock or sufficient, depending on whether the element has quantity < 6. The returned result object is a Map so we need to call get() with the key to obtain the array.
+
+// JS
+// Copy to Clipboard
+const restock = { restock: true };
+const sufficient = { restock: false };
+const result = Map.groupBy(inventory, ({ quantity }) =>
+  quantity < 6 ? restock : sufficient,
+);
+console.log(result.get(restock));
+// [{ name: "bananas", type: "fruit", quantity: 5 }]
+// Note that the function argument { quantity } is a basic example of object destructuring syntax for function arguments. This unpacks the quantity property of an object passed as a parameter, and assigns it to a variable named quantity in the body of the function. This is a very succinct way to access the relevant values of elements within a function.
+
+// The key to a Map can be modified and still used. However you can't recreate the key and still use it. For this reason it is important that anything that needs to use the map keeps a reference to its keys.
+
+// JS
+// Copy to Clipboard
+// The key can be modified and still used
+restock["fast"] = true;
+console.log(result.get(restock));
+// [{ name: "bananas", type: "fruit", quantity: 5 }]
+
+// A new key can't be used, even if it has the same structure!
+const restock2 = { restock: true };
+console.log(result.get(restock2)); // undefined
+
+
+
+Map.prototype.has()
+// The has() method of Map instances returns a boolean indicating whether an element with the specified key exists in this map or not.
+
+// Try it
+const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.has('bar'));
+// Expected output: true
+
+console.log(map1.has('baz'));
+// Expected output: false
+
+
+Syntax 
+has(key)
+// Parameters
+// key
+// The key of the element to test for presence in the Map object.
+
+// Return value
+// true if an element with the specified key exists in the Map object; otherwise false.
+
+// Examples
+// Using has()
+const myMap = new Map();
+myMap.set("bar", "foo");
+
+console.log(myMap.has("bar")); // true
+console.log(myMap.has("baz")); // false
+
+
+
+Map.prototype.keys()
+// The keys() method of Map instances returns a new map iterator object that contains the keys for each element in this map in insertion order.
+
+// Try it
+const map1 = new Map();
+
+map1.set('0', 'foo');
+map1.set(1, 'bar');
+
+const iterator1 = map1.keys();
+
+console.log(iterator1.next().value);
+// Expected output: "0"
+
+console.log(iterator1.next().value);
+// Expected output: 1
+
+
+
+Syntax
+keys()
+// Parameters
+// None.
+
+// Return value
+// A new iterable iterator object.
+
+// Examples
+// Using keys()
+const myMap = new Map();
+myMap.set("0", "foo");
+myMap.set(1, "bar");
+myMap.set({}, "baz");
+
+const mapIter = myMap.keys();
+
+console.log(mapIter.next().value); // "0"
+console.log(mapIter.next().value); // 1
+console.log(mapIter.next().value); // {}
+
+
+Map.prototype.set()
+// The set() method of Map instances adds or updates an entry in this map with a specified key and a value.
+
+// Try it
+
+const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.get('bar'));
+// Expected output: "foo"
+
+console.log(map1.get('baz'));
+// Expected output: undefined
+
+
+Syntax
+set(key, value)
+// Parameters
+// key
+// The key of the element to add to the Map object. The key may be any JavaScript type (any primitive value or any type of JavaScript object).
+
+// value
+// The value of the element to add to the Map object. The value may be any JavaScript type (any primitive value or any type of JavaScript object).
+
+// Return value
+// The Map object.
+
+// Examples
+// Using set()
+// JS
+// Copy to Clipboard
+const myMap = new Map();
+
+// Add new elements to the map
+myMap.set("bar", "foo");
+myMap.set(1, "foobar");
+
+// Update an element in the map
+myMap.set("bar", "baz");
+// Using the set() with chaining
+// Since the set() method returns back the same Map object, you can chain the method call like below:
+
+// Add new elements to the map with chaining.
+myMap.set("bar", "foo").set(1, "foobar").set(2, "baz");
+
+
+Map.prototype.values()
+// The values() method of Map instances returns a new map iterator object that contains the values for each element in this map in insertion order.
+
+// Try it
+const map1 = new Map();
+
+map1.set('0', 'foo');
+map1.set(1, 'bar');
+
+const iterator1 = map1.values();
+
+console.log(iterator1.next().value);
+// Expected output: "foo"
+
+console.log(iterator1.next().value);
+// Expected output: "bar"
+
+
+
+// Syntax 
+// values()
+// Parameters
+// None.
+
+// Return value
+// A new iterable iterator object.
+
+// Examples
+// Using values()
+const myMap = new Map();
+myMap.set("0", "foo");
+myMap.set(1, "bar");
+myMap.set({}, "baz");
+
+const mapIter = myMap.values();
+
+console.log(mapIter.next().value); // "foo"
+console.log(mapIter.next().value); // "bar"
+console.log(mapIter.next().value); // "baz"
+
+// Array.prototype.filter()
+// The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+
+// Try it
+const words = ['spray', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter((word) => word.length > 6);
+
+console.log(result);
+// Expected output: Array ["exuberant", "destruction", "present"]
+
+// Syntax
+filter(callbackFn)
+filter(callbackFn, thisArg)
+// Parameters
+// callbackFn
+// A function to execute for each element in the array.It should return a truthy value to keep the element in the resulting array, and a falsy value otherwise.The function is called with the following arguments:
+
+// element
+// The current element being processed in the array.
+
+//     index
+// The index of the current element being processed in the array.
+
+//     array
+// The array filter() was called upon.
+
+// thisArg Optional
+// A value to use as this when executing callbackFn.See iterative methods.
+
+// Return value
+// A shallow copy of the given array containing just the elements that pass the test.If no elements pass the test, an empty array is returned.
+
+//     Description
+// The filter() method is an iterative method.It calls a provided callbackFn function once for each element in an array, and constructs a new array of all the values for which callbackFn returns a truthy value.Array elements which do not pass the callbackFn test are not included in the new array.Read the iterative methods section for more information about how these methods work in general.
+
+// callbackFn is invoked only for array indexes which have assigned values.It is not invoked for empty slots in sparse arrays.
+
+// The filter() method is generic.It only expects the this value to have a length property and integer - keyed properties.
+
+//     Examples
+// Filtering out all small values
+// The following example uses filter() to create a filtered array that has all elements with values less than 10 removed.
+
+//     JS
+// Copy to Clipboard
+function isBigEnough(value) {
+    return value >= 10;
+}
+
+const filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+// filtered is [12, 130, 44]
+// Find all prime numbers in an array
+// The following example returns all prime numbers in the array:
+
+// JS
+// Copy to Clipboard
+const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+function isPrime(num) {
+    for (let i = 2; num > i; i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+    return num > 1;
+}
+
+console.log(array.filter(isPrime)); // [2, 3, 5, 7, 11, 13]
+// Filtering invalid entries from JSON
+// The following example uses filter() to create a filtered JSON of all elements with non - zero, numeric id.
+
+//     JS
+// Copy to Clipboard
+const arr = [
+    { id: 15 },
+    { id: -1 },
+    { id: 0 },
+    { id: 3 },
+    { id: 12.2 },
+    {},
+    { id: null },
+    { id: NaN },
+    { id: "undefined" },
+];
+
+let invalidEntries = 0;
+
+function filterByID(item) {
+    if (Number.isFinite(item.id) && item.id !== 0) {
+        return true;
+    }
+    invalidEntries++;
+    return false;
+}
+
+const arrByID = arr.filter(filterByID);
+
+console.log("Filtered Array\n", arrByID);
+// Filtered Array
+// [{ id: 15 }, { id: -1 }, { id: 3 }, { id: 12.2 }]
+
+console.log("Number of Invalid Entries =", invalidEntries);
+// Number of Invalid Entries = 5
+// Searching in array
+// Following example uses filter() to filter array content based on search criteria.
+
+//     JS
+// Copy to Clipboard
+const fruits = ["apple", "banana", "grapes", "mango", "orange"];
+
+/**
+ * Filter array items based on search criteria (query)
+ */
+function filterItems(arr, query) {
+    return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+}
+
+console.log(filterItems(fruits, "ap")); // ['apple', 'grapes']
+console.log(filterItems(fruits, "an")); // ['banana', 'mango', 'orange']
+// Using the third argument of callbackFn
+// The array argument is useful if you want to access another element in the array, especially when you don't have an existing variable that refers to the array. The following example first uses map() to extract the numerical ID from each name and then uses filter() to select the ones that are greater than its neighbors.
+
+// JS
+// Copy to Clipboard
+const names = ["JC63", "Bob132", "Ursula89", "Ben96"];
+const greatIDs = names
+    .map((name) => parseInt(name.match(/[0-9]+/)[0], 10))
+    .filter((id, idx, arr) => {
+        // Without the arr argument, there's no way to easily access the
+        // intermediate array without saving it to a variable.
+        if (idx > 0 && id <= arr[idx - 1]) return false;
+        if (idx < arr.length - 1 && id <= arr[idx + 1]) return false;
+        return true;
+    });
+console.log(greatIDs); // [132, 96]
+// The array argument is not the array that is being built — there is no way to access the array being built from the callback function.
+
+// Using filter() on sparse arrays
+// filter() will skip empty slots.
+
+//     JS
+// Copy to Clipboard
+console.log([1, , undefined].filter((x) => x === undefined)); // [undefined]
+console.log([1, , undefined].filter((x) => x !== 2)); // [1, undefined]
+// Calling filter() on non - array objects
+// The filter() method reads the length property of this and then accesses each property whose key is a nonnegative integer less than length.
+
+//     JS
+// Copy to Clipboard
+const arrayLike = {
+    length: 3,
+    0: "a",
+    1: "b",
+    2: "c",
+    3: "a", // ignored by filter() since length is 3
+};
+console.log(Array.prototype.filter.call(arrayLike, (x) => x <= "b"));
+// [ 'a', 'b' ]
+
+Array.prototype.reduce()
+// The reduce() method of Array instances executes a user - supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.The final result of running the reducer across all elements of the array is a single value.
+
+// The first time that the callback is run there is no "return value of the previous calculation".If supplied, an initial value may be used in its place.Otherwise the array element at index 0 is used as the initial value and iteration starts from the next element(index 1 instead of index 0).
+
+// Try it
+const array1 = [1, 2, 3, 4];
+
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    initialValue,
+);
+
+console.log(sumWithInitial);
+// Expected output: 10
+
+
+// Syntax
+// JS
+// Copy to Clipboard
+reduce(callbackFn)
+reduce(callbackFn, initialValue)
+// Parameters
+// callbackFn
+// A function to execute for each element in the array.Its return value becomes the value of the accumulator parameter on the next invocation of callbackFn.For the last invocation, the return value becomes the return value of reduce().The function is called with the following arguments:
+
+// accumulator
+// The value resulting from the previous call to callbackFn.On the first call, its value is initialValue if the latter is specified; otherwise its value is array[0].
+
+//     currentValue
+// The value of the current element.On the first call, its value is array[0] if initialValue is specified; otherwise its value is array[1].
+
+//     currentIndex
+// The index position of currentValue in the array.On the first call, its value is 0 if initialValue is specified, otherwise 1.
+
+// array
+// The array reduce() was called upon.
+
+// initialValue Optional
+// A value to which accumulator is initialized the first time the callback is called.If initialValue is specified, callbackFn starts executing with the first value in the array as currentValue.If initialValue is not specified, accumulator is initialized to the first value in the array, and callbackFn starts executing with the second value in the array as currentValue.In this case, if the array is empty(so that there's no first value to return as accumulator), an error is thrown.
+
+// Return value
+// The value that results from running the "reducer" callback function to completion over the entire array.
+
+//     Exceptions
+// TypeError
+// Thrown if the array contains no elements and initialValue is not provided.
+
+//     Description
+// The reduce() method is an iterative method.It runs a "reducer" callback function over all elements in the array, in ascending - index order, and accumulates them into a single value.Every time, the return value of callbackFn is passed into callbackFn again on next invocation as accumulator.The final value of accumulator(which is the value returned from callbackFn on the final iteration of the array) becomes the return value of reduce().Read the iterative methods section for more information about how these methods work in general.
+
+// callbackFn is invoked only for array indexes which have assigned values.It is not invoked for empty slots in sparse arrays.
+
+// Unlike other iterative methods, reduce() does not accept a thisArg argument.callbackFn is always called with undefined as this, which gets substituted with globalThis if callbackFn is non - strict.
+
+//     reduce() is a central concept in functional programming, where it's not possible to mutate any value, so in order to accumulate all values in an array, one must return a new accumulator value on every iteration. This convention propagates to JavaScript's reduce(): you should use spreading or other copying methods where possible to create new arrays and objects as the accumulator, rather than mutating the existing one.If you decided to mutate the accumulator instead of copying it, remember to still return the modified object in the callback, or the next iteration will receive undefined.However, note that copying the accumulator may in turn lead to increased memory usage and degraded performance — see When to not use reduce() for more details.In such cases, to avoid bad performance and unreadable code, it's better to use a simple for loop instead.
+
+// The reduce() method is generic.It only expects the this value to have a length property and integer - keyed properties.
+
+// Edge cases
+// If the array only has one element(regardless of position) and no initialValue is provided, or if initialValue is provided but the array is empty, the solo value will be returned without calling callbackFn.
+
+// If initialValue is provided and the array is not empty, then the reduce method will always invoke the callback function starting at index 0.
+
+// If initialValue is not provided then the reduce method will act differently for arrays with length larger than 1, equal to 1 and 0, as shown in the following example:
+
+// JS
+// Copy to Clipboard
+const getMax = (a, b) => Math.max(a, b);
+
+// callback is invoked for each element in the array starting at index 0
+[1, 100].reduce(getMax, 50); // 100
+[50].reduce(getMax, 10); // 50
+
+// callback is invoked once for element at index 1
+[1, 100].reduce(getMax); // 100
+
+// callback is not invoked
+[50].reduce(getMax); // 50
+[].reduce(getMax, 1); // 1
+
+[].reduce(getMax); // TypeError
+// Examples
+// How reduce() works without an initial value
+// The code below shows what happens if we call reduce() with an array and no initial value.
+
+//     JS
+// Copy to Clipboard
+const array = [15, 16, 17, 18, 19];
+
+function reducer(accumulator, currentValue, index) {
+    const returns = accumulator + currentValue;
+    console.log(
+        `accumulator: ${accumulator}, currentValue: ${currentValue}, index: ${index}, returns: ${returns}`,
+    );
+    return returns;
+}
+
+array.reduce(reducer);
+// The callback would be invoked four times, with the arguments and return values in each call being as follows:
+
+// accumulator	currentValue	index	Return value
+// First call	15	16	1	31
+// Second call	31	17	2	48
+// Third call	48	18	3	66
+// Fourth call	66	19	4	85
+// The array parameter never changes through the process — it's always [15, 16, 17, 18, 19]. The value returned by reduce() would be that of the last callback invocation (85).
+
+// How reduce() works with an initial value
+// Here we reduce the same array using the same algorithm, but with an initialValue of 10 passed as the second argument to reduce():
+
+// JS
+// Copy to Clipboard
+[15, 16, 17, 18, 19].reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    10,
+);
+// The callback would be invoked five times, with the arguments and return values in each call being as follows:
+
+// accumulator	currentValue	index	Return value
+// First call	10	15	0	25
+// Second call	25	16	1	41
+// Third call	41	17	2	58
+// Fourth call	58	18	3	76
+// Fifth call	76	19	4	95
+// The value returned by reduce() in this case would be 95.
+
+// Sum of values in an object array
+// To sum up the values contained in an array of objects, you must supply an initialValue, so that each item passes through your function.
+
+// JS
+// Copy to Clipboard
+const objects = [{ x: 1 }, { x: 2 }, { x: 3 }];
+const sum = objects.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.x,
+    0,
+);
+
+console.log(sum); // 6
+// Function sequential piping
+// The pipe function takes a sequence of functions and returns a new function.When the new function is called with an argument, the sequence of functions are called in order, which each one receiving the return value of the previous function.
+
+// JS
+// Copy to Clipboard
+const pipe =
+    (...functions) =>
+        (initialValue) =>
+            functions.reduce((acc, fn) => fn(acc), initialValue);
+
+// Building blocks to use for composition
+const double = (x) => 2 * x;
+const triple = (x) => 3 * x;
+const quadruple = (x) => 4 * x;
+
+// Composed functions for multiplication of specific values
+const multiply6 = pipe(double, triple);
+const multiply9 = pipe(triple, triple);
+const multiply16 = pipe(quadruple, quadruple);
+const multiply24 = pipe(double, triple, quadruple);
+
+// Usage
+multiply6(6); // 36
+multiply9(9); // 81
+multiply16(16); // 256
+multiply24(10); // 240
+// Running promises in sequence
+// Promise sequencing is essentially function piping demonstrated in the previous section, except done asynchronously.
+
+//     JS
+// Copy to Clipboard
+// Compare this with pipe: fn(acc) is changed to acc.then(fn),
+// and initialValue is ensured to be a promise
+const asyncPipe =
+    (...functions) =>
+        (initialValue) =>
+            functions.reduce((acc, fn) => acc.then(fn), Promise.resolve(initialValue));
+
+// Building blocks to use for composition
+const p1 = async (a) => a * 5;
+const p2 = async (a) => a * 2;
+// The composed functions can also return non-promises, because the values are
+// all eventually wrapped in promises
+const f3 = (a) => a * 3;
+const p4 = async (a) => a * 4;
+
+asyncPipe(p1, p2, f3, p4)(10).then(console.log); // 1200
+// asyncPipe can also be implemented using async/await, which better demonstrates its similarity with pipe:
+
+// JS
+// Copy to Clipboard
+const asyncPipe =
+    (...functions) =>
+        (initialValue) =>
+            functions.reduce(async (acc, fn) => fn(await acc), initialValue);
+// Using reduce() with sparse arrays
+// reduce() skips missing elements in sparse arrays, but it does not skip undefined values.
+
+//     JS
+// Copy to Clipboard
+console.log([1, 2, , 4].reduce((a, b) => a + b)); // 7
+console.log([1, 2, undefined, 4].reduce((a, b) => a + b)); // NaN
+// Calling reduce() on non - array objects
+// The reduce() method reads the length property of this and then accesses each property whose key is a nonnegative integer less than length.
+
+//     JS
+// Copy to Clipboard
+const arrayLike = {
+    length: 3,
+    0: 2,
+    1: 3,
+    2: 4,
+    3: 99, // ignored by reduce() since length is 3
+};
+console.log(Array.prototype.reduce.call(arrayLike, (x, y) => x + y));
+// 9
+// When to not use reduce()
+// Multipurpose higher - order functions like reduce() can be powerful but sometimes difficult to understand, especially for less - experienced JavaScript developers.If code becomes clearer when using other array methods, developers must weigh the readability tradeoff against the other benefits of using reduce().
+
+// Note that reduce() is always equivalent to a for...of loop, except that instead of mutating a variable in the upper scope, we now return the new value for each iteration:
+
+//     JS
+// Copy to Clipboard
+const val = array.reduce((acc, cur) => update(acc, cur), initialValue);
+
+// Is equivalent to:
+let val = initialValue;
+for (const cur of array) {
+    val = update(val, cur);
+}
+// As previously stated, the reason why people may want to use reduce() is to mimic functional programming practices of immutable data.Therefore, developers who uphold the immutability of the accumulator often copy the entire accumulator for each iteration, like this:
+
+//     JS
+// Copy to Clipboard
+const names = ["Alice", "Bob", "Tiff", "Bruce", "Alice"];
+const countedNames = names.reduce((allNames, name) => {
+    const currCount = Object.hasOwn(allNames, name) ? allNames[name] : 0;
+    return {
+        ...allNames,
+        [name]: currCount + 1,
+    };
+}, {});
+// This code is ill - performing, because each iteration has to copy the entire allNames object, which could be big, depending how many unique names there are.This code has worst -case O(N ^ 2) performance, where N is the length of names.
+
+// A better alternative is to mutate the allNames object on each iteration.However, if allNames gets mutated anyway, you may want to convert the reduce() to a simple for loop instead, which is much clearer:
+
+// JS
+// Copy to Clipboard
+const names = ["Alice", "Bob", "Tiff", "Bruce", "Alice"];
+const countedNames = names.reduce((allNames, name) => {
+    const currCount = allNames[name] ?? 0;
+    allNames[name] = currCount + 1;
+    // return allNames, otherwise the next iteration receives undefined
+    return allNames;
+}, Object.create(null));
+// JS
+// Copy to Clipboard
+const names = ["Alice", "Bob", "Tiff", "Bruce", "Alice"];
+const countedNames = Object.create(null);
+for (const name of names) {
+    const currCount = countedNames[name] ?? 0;
+    countedNames[name] = currCount + 1;
+}
+// Therefore, if your accumulator is an array or an object and you are copying the array or object on each iteration, you may accidentally introduce quadratic complexity into your code, causing performance to quickly degrade on large data.This has happened in real - world code — see for example Making Tanstack Table 1000x faster with a 1 line change.
+
+// Some of the acceptable use cases of reduce() are given above(most notably, summing an array, promise sequencing, and function piping).There are other cases where better alternatives than reduce() exist.
+
+// Flattening an array of arrays.Use flat() instead.
+//     JS
+// Copy to Clipboard
+const flattened = array.reduce((acc, cur) => acc.concat(cur), []);
+// JS
+// Copy to Clipboard
+const flattened = array.flat();
+// Grouping objects by a property.Use Object.groupBy() instead.
+//     JS
+// Copy to Clipboard
+const groups = array.reduce((acc, obj) => {
+    const key = obj.name;
+    const curGroup = acc[key] ?? [];
+    return { ...acc, [key]: [...curGroup, obj] };
+}, {});
+// JS
+// Copy to Clipboard
+const groups = Object.groupBy(array, (obj) => obj.name);
+// Concatenating arrays contained in an array of objects.Use flatMap() instead.
+//     JS
+// Copy to Clipboard
+const friends = [
+    { name: "Anna", books: ["Bible", "Harry Potter"] },
+    { name: "Bob", books: ["War and peace", "Romeo and Juliet"] },
+    { name: "Alice", books: ["The Lord of the Rings", "The Shining"] },
+];
+// const allBooks = friends.reduce((acc, cur) => [...acc, ...cur.books], []);
+// JS
+// Copy to Clipboard
+const allBooks = friends.flatMap((person) => person.books);
+// Removing duplicate items in an array.Use Set and Array.from() instead.
+//     JS
+// Copy to Clipboard
+const uniqArray = array.reduce(
+    (acc, cur) => (acc.includes(cur) ? acc : [...acc, cur]),
+    [],
+);
+// JS
+// Copy to Clipboard
+const uniqArray = Array.from(new Set(array));
+// Eliminating or adding elements in an array.Use flatMap() instead.
+//     JS
+// Copy to Clipboard
+// Takes an array of numbers and splits perfect squares into its square roots
+const roots = array.reduce((acc, cur) => {
+    if (cur < 0) return acc;
+    const root = Math.sqrt(cur);
+    if (Number.isInteger(root)) return [...acc, root, root];
+    return [...acc, cur];
+}, []);
+// JS
+// Copy to Clipboard
+const roots = array.flatMap((val) => {
+    if (val < 0) return [];
+    const root = Math.sqrt(val);
+    if (Number.isInteger(root)) return [root, root];
+    return [val];
+});
+// If you are only eliminating elements from an array, you also can use filter().
+// Searching for elements or testing if elements satisfy a condition.Use find() and findIndex(), or some() and every() instead.These methods have the additional benefit that they return as soon as the result is certain, without iterating the entire array.
+//     JS
+// Copy to Clipboard
+const allEven = array.reduce((acc, cur) => acc && cur % 2 === 0, true);
+// JS
+// Copy to Clipboard
+const allEven = array.every((val) => val % 2 === 0);
+// In cases where reduce() is the best choice, documentation and semantic variable naming can help mitigate readability drawbacks.

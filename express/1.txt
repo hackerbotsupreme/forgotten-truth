@@ -1,0 +1,378 @@
+// What is Express?
+// Express is a small framework that sits on top 
+// of Node.js’s web server functionality to 
+// simplify its APIs and add helpful new features.
+// It makes it easier to organize your application’s
+//  functionality with middle ware and routing; 
+// it adds helpful utilities to Node.js’s HTTP objects;
+// it facilitates the rendering of dynamic HTTP objects.
+
+
+// Assuming that you have installed node.js on your 
+// system
+
+$ mkdir gfg
+$ cd gfg 
+$ npm init
+$ npm install express --save
+/* C:\Users\Admin\gfg\node_modules> */npm --version express
+
+const express = require('express');
+
+const app = express();
+const PORT = 3000;
+
+app.listen(PORT, (error) => {
+    if (!error) {
+        console.log("Server is Successfully Runnin and App is listening on port " + PORT)
+    } else {
+        console.log("Error occurred, server can't start", error)
+    };
+}
+);
+node app.js
+
+// Now with all of this, we have created and run 
+// the server successfully
+// open the URL (localhost:3000) on the browser 
+// it will show you cannot GET / because we have 
+// not configured any route on this application yet.
+
+// Routes are the endpoints of the server, which 
+// are configured on our backend server and whenever 
+// someone tries to access those endpoints they 
+// respond accordingly to their definition
+// We can create routes for HTTP 
+// methods like get, post, put, and so on.
+
+// Syntax: The basic syntax of these types of 
+// routes looks like this, the given function 
+// will execute when the path and the request 
+// method resemble.
+
+app.anyMethod(path, function)
+
+// a basic get request 
+// route on the root URL (‘/’ path) of the server.
+
+app.get(path, function)
+
+// first one is the path and, 
+// the second one is a function that will be executed 
+// when anyone requests this path with GET method.
+
+// The req is a giant object which will be received 
+// from the user and res is an object which will be 
+// sent to the user after the function finishes execution.
+
+// we are returning the response to the user. 
+// The send() method takes a string, object, array, 
+// or buffer as an argument and is used to send 
+// the data object back to the client as an HTTP response, 
+// also there are lots of types of response in express 
+// like res.json() which is used to send JSON object,
+//  res.sendFile() which is used to send a file, etc.
+
+const express = require('express');
+
+const app = express();
+const PORT = 3000;
+
+app.get('/', (req, res) => {
+    res.status(200);
+    res.send("Welcome to root URL of Server");
+});
+
+app.listen(PORT, (error) => {
+    if (!error) {
+        console.log("Server is Successfully Runnin and App is listening on port " + PORT)
+    } else {
+        console.log("Error occurred, server can't start", error)
+    }; }
+);
+
+// Step to run the application: Save this code, 
+// restart the server, and open the localhost 
+// on the given port. When client request with 
+// the appropriate method on the specified path ex: 
+// GET request on ‘/’ path, our function is 
+// returning the response as plain text If we 
+// open the network section in chrome developers 
+// tools (press Ctrl+Shift+I to open) we will see
+//  the response returned by the localhost along 
+// with all information.  
+
+// Example 2: Setting up one more get request 
+// route on the ‘/hello’ path. 
+
+const express = require('express');
+
+const app = express();
+const PORT = 3000;
+
+app.get('/hello', (req, res) => {
+    res.set('Content-Type', 'text/html');
+    res.status(200).send("<h1>Hello GFG Learner!</h1>");
+});
+
+app.listen(PORT, (error) => {
+    if (!error) {
+        console.log("Server is Successfully Runnin and App is listening on port " + PORT)
+    } else {
+        console.log("Error occurred, server can't start", error)
+    };
+}
+);
+
+//  Now we will see how to send data to server.
+
+// Sometimes we have to send our data to the server 
+// for processing, for example when you try to log 
+// in on Facebook you send a password and email to 
+// the server, Here we will see how to receive data 
+// from the user request. We can send data with 
+// the request object on the specified path with 
+// appropriate HTTP methods. Till now we were using 
+// the browser to interact with the server, but in 
+// this step, any tool or frontend form is must be 
+// needed to send data because the browser search 
+// bar can only send get requests to receive 
+// resources from the server. 
+
+
+// Example: Setting up a route to be accessed 
+// by users to send data with post requests.
+
+// Before creating a route for receiving data, 
+// we are using an inbuilt middleware, Middleware 
+// is such a broad and more advanced topic so we 
+// are not going to discuss it here, just to 
+// understand a little bit you can think of this 
+// as a piece of code that gets executed between 
+// the request-response cycles.
+
+
+// The express.json() middleware is used to parses 
+// the incoming request object as a JSON object. 
+// The app.use() is the syntax to use any middleware.
+
+// After then we have created a route on 
+// path ‘/’ for post request. 
+
+// const {name}, which is the syntax in ES6 to 
+// extract the given property/es from the object. 
+// Here we are extracting the name property which
+//  was sent by the user with this request object.
+
+// After that, we are simply sending a response to 
+// indicate that we have successfully received data. 
+// If this `${} ` is looking weird to you then let 
+// me tell you that it is the syntax in ES6 to generate 
+// strings with javascript expression in ES6. We can 
+// inject any javascript expression inside ${}.
+
+const express = require('express');
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+app.post('/', (req, res) => {
+    const { name } = req.body;
+    res.send(`Welcome ${name}`);
+})
+
+app.listen(PORT, (error) => {
+    if (!error) {
+        console.log("Server is Successfully Runnin and App is listening on port " + PORT)
+    } else {
+        console.log("Error occurred, server can't start", error)
+    };
+}
+);
+
+// Step to run the application: We are 
+// Accessing the route with Postman. It 
+// is a tool to test APIs, we can use any 
+// other things like Axios, fetch, or any 
+// other thing from the frontend or cURL 
+// from the terminal, but that will make 
+// you divert from the topic, just keep 
+// in mind that our express server only 
+// demands a path with request object it 
+// doesn’t matter from where it is coming. 
+
+//  We have sent the data as a JSON object 
+// with the request body and express is 
+// sending a response back to us along 
+// with the data. It indicates that our 
+// goal to send data to the server succeeded.  
+
+
+// Sending Files from Server(the most im[ortant usecase of a server )
+// Now we will see how to send files from the server.
+
+// Several times we need to transfer the resources 
+// from the server as per user request, there are 
+// majorly two methods to send files one is sending 
+// static files using middleware and the other one 
+// is sending a single file on a route.
+
+// This is our folder structure and we want to 
+// serve the files from the Static Files directory 
+// as static files, and the image.jpg on 
+// a separate route.
+
+
+// Example 1: Serving entire directory using middleware   
+// Express provides us a middleware express.static(), 
+// it accepts two arguments first one is the absolute 
+// root path of the directory whose files we are going to serve. 
+
+// We can simply use it to serve static files, 
+// by providing to app.use().
+
+// Syntax:
+app.use(path, express.static(root, [options]));
+
+
+// First of all, we are importing an inbuilt module `path`, 
+// because later we are going to use one of the functions 
+// provided by this module.
+
+// We are simply mounting a middleware at the ‘/static’ route.
+// The static() middleware requires an absolute path so we 
+// use the path module’s join method.
+// The join() method takes two parameters and joins them as 
+// a path, in NodeJS we have a global attribute __dirname which 
+// contains the path of the directory in which the current file exists.
+// We are providing that joined path to middleware so that 
+// it can start serving the files inside that directory 
+// on the given path.
+
+const express = require('express');
+
+const app = express();
+const PORT = 3000;
+
+const path = require('path')
+app.use('/static', express.static(path.join(__dirname, 'Static Files')))
+
+
+app.listen(PORT, (error) => {
+    if (!error) {
+        console.log("Server is Successfully Runnin and App is listening on port " + PORT)
+    } else {
+        console.log("Error occurred, server can't start", error)
+    };
+}
+);
+
+
+// Step to run the application: This will be the 
+// returned response when we request some static 
+// file from the directory which we are serving 
+// as static. Here you can see we have received 
+// an HTML file as a response for ‘/static/random.html’.
+//  The same things happen when we request 
+// for ‘/static/1.jpg’.
+
+// Example 2: Sending a single file on 
+// a route with the sendFile() function.
+
+// This function accepts an absolute URL of 
+// the file and whenever the route path is 
+// being accessed the server provides 
+// the file as an HTTP response.
+
+// Syntax:
+res.sendFile(fileUrl)
+
+
+
+// We are creating a get request route on the ‘/file’ path
+// After then we are creating the absolute 
+// path by joining the path of current __dirname 
+// and the name of the file we want to send and 
+// then passing it to sendFile().
+
+// Then route sends the image.jpg file to 
+// the user as an HTTP response.
+
+const express = require('express');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+app.get('/file', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image.jpg'));
+});
+//_dirname retrieves the absolute path of the  currently executing script/file
+
+app.listen(PORT, (error) => {
+    if (!error)
+        console.log("Server is Successfully Running, and App is listening on port " + PORT)
+    else
+        console.log("Error occurred, server can't start", error);
+}
+);
+
+// Output: After running the server, When
+// we request the route ‘/file’ the server
+// sends the image.jpg file as a response.
+
+
+// “Hello, World!” in Express JS serves as an
+//  excellent entry point to familiarize 
+// yourself with the framework and embark 
+// on the exploration of its functionalities. 
+
+ Using Basic Routes:
+// It is simple to print Hello World by defining 
+// a root URL (“/”). When a GET request is made 
+// to the root URL, the server responds 
+// with “Hello, World!”.
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('<h1> Hello, World! </h1>');
+});
+
+app.listen(8000, () => {
+  console.log(`Server is listening at http://localhost:8000`);
+});
+// Output:
+
+ Using Middleware:
+// Express middleware functions, distinct in 
+// their ability to interact with requests 
+// and responses
+are employed in this case 
+// to handle all incoming requests and respond 
+// with a simple “Hello, World!” greeting.
+
+// Example: Below is the example to print
+//  hello world using middleware.
+
+
+const express = require('express');
+const app = express();
+
+app.use((req, res) => {
+  res.send('<h1>Hello, World!</h1>');
+});
+
+app.listen(8000, () => console.log('Server listening on port 8000'));
+// Output:
+
+// helloworld
+
+
+
+
+
+
+

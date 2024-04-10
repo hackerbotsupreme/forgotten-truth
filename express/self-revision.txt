@@ -1,0 +1,56 @@
+// Express JS Response Timeout - what is it ? 
+// Express.js app.engine() Function
+// is app.set and app.engine are same ?
+`req.subdomains`
+// Express JS – app.listen vs server.listen
+ //middleware vs  callbacks 
+// NOTE: For best results, use a 
+// reverse proxy cache to improve
+//  performance of serving static assets.
+
+
+// Differences between Node.js and the Browser
+
+// The difference between devDependencies 
+// and dependencies 
+
+
+// Node.js, the difference between 
+// development and production
+
+
+how does node run your code?
+
+
+Certainly! Let's explore the differences between **CommonJS (CJS)** and **ECMAScript Modules (ESM)** in JavaScript:
+
+modules vs library vs packages 
+
+
+// Node.js Events
+// Node.js is perfect 
+//for event-driven applications.
+
+
+what is the relation ship between events and streams ?
+in noed js ?
+
+
+// Any JavaScript object can be converted to an array using
+
+// Any JavaScript object can be stringified 
+// (converted to a string)
+
+// JavaScript Function or Getter?
+accessor vs function 
+
+
+// Why Using Getters and Setters?
+// It gives simpler syntax
+// It allows equal syntax for properties and methods
+// It can secure better data quality
+// It is useful for doing things behind-the-scenes
+
+fwtch
+
+

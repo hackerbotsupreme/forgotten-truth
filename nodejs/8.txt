@@ -1,0 +1,4652 @@
+// Certainly! In the context of **Node.js**, the `process` object represents the **current Node.js process** running on your computer. Let's dive into what this means:
+
+// 1. **What Is a Process?**:
+//    - In computing, a **process** is a fundamental concept.
+//    - **Each program running on a computer represents a process**.
+//    - A process encapsulates a top-level task that an operating system (such as Windows or Linux) manages.
+//    - Key components of a process include:
+//      - **Code**: The executable code that is currently running.
+//      - **Memory**: Allocated memory for data and execution.
+//      - **Files or Sockets**: Open files or network sockets.
+//      - **Threads**: One or more threads executing within the process.
+
+// 2. **Operating System Management**:
+//    - When a process exits (or crashes), the operating system automatically:
+//      - Cleans up resources owned by that process (closes files/sockets, returns memory to the OS, shuts down threads, etc.).
+//      - Shares CPU cores among different processes and threads, allowing them to appear to run concurrently.
+//    - Processes help manage system resources efficiently.
+
+// 3. **Node.js and the `process` Object**:
+//    - The `process` object is a **global object** provided by Node.js.
+//    - It allows you to:
+//      - Access information about the current Node.js process.
+//      - Control various aspects of the runtime environment.
+//      - Perform tasks related to the overall program running.
+//    - Examples of `process` methods:
+//      - `process.exit()`: Exits the application and stops the process.
+//      - `process.env`: Provides access to environment variables.
+//      - `process.argv`: Gives access to command-line arguments.
+//      - And more!
+
+// 4. **Summary**:
+//    - The `process` object is essential in the Node.js ecosystem.
+//    - It provides information about the runtime environment and allows you to interact with the underlying operating system.
+//    - Think of it as a bridge between your Node.js code and the system it runs on.
+
+// For more details, you can explore the [official Node.js documentation](https://nodejs.org/api/process.html) ¹. 🚀
+
+// What is the purpose of the process object in Node JS ?
+// In NodeJS, the process object is a global object that provides access to information and control over the current NodeJS process. It offers various properties and methods to interact with the underlying operating system environment and manage the NodeJS process effectively. Let’s explore the primary purposes of the process object in NodeJS.
+
+// Accessing Command Line Arguments:
+// The process.argv property provides access to the command-line 
+// arguments passed to the NodeJS process when it was started. 
+// It is an array where the first element (process.argv[0]) 
+// is the path to the NodeJS executable, the second element 
+// (process.argv[1]) is the path to the JavaScript file 
+// being executed, and subsequent elements are 
+// the command-line arguments.
+
+console.log(process.argv);
+// Output: ['node', '/path/to/your/script.js', 'arg1', 'arg2', ...]
+
+// Environment Variables:
+// The process.env property contains the environment 
+// variables of the NodeJS process. It provides access 
+// to system-specific information such as user environment 
+// variables, system configuration, and runtime environment details.
+
+console.log(process.env.NODE_ENV);
+// Output: 'development'
+
+// Exiting the Process:
+// The process.exit() method allows developers to 
+// terminate the NodeJS process explicitly. It accepts 
+// an optional exit code parameter, indicating 
+// the status code returned to the operating 
+// system upon termination.
+
+
+process.exit(1); // Terminate the process with an exit code of 1 (indicating an error)
+
+// Handling Uncaught Exceptions:
+// The process.on('uncaughtException', ...) event allows 
+// developers to handle uncaught exceptions globally. 
+// By registering a listener for this event, developers 
+// can perform custom error handling or cleanup operations 
+// before terminating the NodeJS process.
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught exception:', error);
+    process.exit(1); // Terminate the process with an error status code
+});
+// Signals Handling:
+// The process.on('SIGINT', ...) event allows developers 
+// to handle the interruption signal (e.g., Ctrl+C) gracefully. 
+// By registering a listener for this event, developers 
+// can perform cleanup tasks or prompt the user before 
+// terminating the NodeJS process.
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught exception:', error);
+    process.exit(1); // Terminate the process with an error status code
+});
+
+// Conclusion:
+// The process object in NodeJS serves as a gateway 
+// to various system-level functionalities and provides 
+// control over the NodeJS process environment. 
+// By leveraging properties, methods, and events 
+// provided by the process object, developers can 
+// access runtime information, manage command-line arguments,
+//  handle exceptions, and gracefully terminate 
+// the NodeJS process, enhancing the reliability 
+// and robustness of NodeJS applications.
+
+// Explain the Process Object in Node.js
+// In this article, we are going to explore about 
+// process object of Node.js in detail. The Process 
+// object in node.js is a global object that can be 
+// used in any module without requiring it in the 
+// environment. This object is useful in the perspective 
+// of getting the information related to the node.js 
+// environment and sets of the runtime of a program.
+
+//  Listed below are the events of the process:
+// beforeExit
+// exit
+// config
+// argv
+
+// We will describe each of the events below:
+
+// 1. beforeExit Event: This event is fired when all 
+// the task of the program is done and the program 
+// is about to exit but it will always execute 
+// before the exit event.
+
+// Note: You will more clarification between exit 
+// Event and beforeExit Event in the next example.
+
+// Let’s understand with the help of an implementation as explained below:
+
+process.on('beforeExit', function (code) {
+    console.log("Executed After finishing "
+        + "all the tasks with code: ", code);
+});
+
+function add(arr) {
+    let ans = 0
+    for (let ele of arr) {
+        ans += ele
+    }
+    return ans
+}
+
+const store = add([1, 2, 3, 4, 5]);
+console.log("Addition :", store);
+// Output:
+// Addition : 15
+// Executed After finishing all the tasks with code:  0
+
+// 2. exit Event: This event is fired or executed 
+// when the program has finished all the tasks and 
+// is just about to exit from the program but it 
+// always gets fired after the beforeExit Event.
+
+// Let’s understand with the help of an implementation as explained below:
+
+process.on('exit', function (code) {
+    console.log("Executed After the "
+        + "beforeExit Event: ", code);
+});
+
+process.on('beforeExit', function (code) {
+    console.log("Executed After finishing "
+        + "all the tasks with code: ", code);
+});
+
+function add(arr) {
+    let ans = 0
+    for (let ele of arr) {
+        ans += ele
+    }
+    return ans
+}
+
+const store = add([1, 2, 3, 4, 5]);
+console.log("Addition :", store);
+// Output:
+// Addition : 15
+// Executed After finishing all the tasks with code:  0
+// Executed After the beforeExit Event:  0
+
+// Explanation: As you see that the exit event has 
+// been executed after the beforeExit Event. So, 
+// now you would have got a clear difference between 
+// the exit Event and beforeExit Event.
+
+// 3. config Event: This event gives the object of 
+// the current node.js executable file and gives 
+// brief information about the currently running file.
+
+// Let’s understand with the help of an implementation as explained below:
+
+function add(arr) {
+    let ans = 0
+    for (let ele of arr) {
+        ans += ele
+    }
+    return ans
+}
+
+const store = add([1, 2, 3, 4, 5]);
+console.log("Addition :", store);
+
+console.log(process.config);
+
+// 4. argv Event: The process.argv property 
+// gives an array containing the command-line 
+// arguments passed. The first argument always 
+// gives the executable path and the second 
+// argument will give us the path of the executable 
+// javascript file and the remaining will be 
+// an additional argument for the command line argument.
+
+// Let’s understand with the help of an implementation as explained below:
+
+process.argv.forEach((val, index) => {
+    console.log(index + ":" + val);
+});
+
+// Node.js process.ppid Property  is used to get 
+// the PID of the current parent process. 
+process.ppid
+//This property returns 
+// an integer value specifying the PID 
+// of the current parent process.
+
+// Include process module 
+const process = require('process');
+
+// Printing process.pid value 
+console.log("process id is " + process.pid);
+
+// Printing parent process.ppid 
+console.log("parent process id is " + process.ppid);
+// Output:
+// process id is 12024
+// parent process id is 12168
+
+// ### Use Case: Monitoring and Managing Child Processes
+// Imagine you're building a web application 
+// that spawns child processes to perform specific 
+// tasks. These child processes might be responsible 
+// for background jobs, data processing, 
+// or external integrations. You want to monitor 
+// their behavior and ensure proper coordination 
+// between the parent and child processes.
+
+// Here's how you can leverage `process.ppid` 
+// to manage child processes:
+
+// 1. **Scenario**:
+//    - Your web application needs to execute external commands (e.g., running shell scripts, invoking system utilities).
+//    - You spawn child processes using `child_process.spawn()` or similar methods.
+
+// 2. **Monitoring Child Processes**:
+//    - You want to track the parent-child relationship and ensure that child processes are correctly managed.
+//    - The `process.ppid` property provides the PID of the parent process.
+
+const { spawn } = require('child_process');
+
+// Example: Spawning a child process (Linux command: ls -l)
+const lsProcess = spawn('ls', ['-l']);
+
+// Get the parent process PID
+const parentPID = process.pid;
+console.log(`Parent process PID: ${parentPID}`);
+
+// Get the child process PID
+const childPID = lsProcess.pid;
+console.log(`Child process PID: ${childPID}`);
+
+// Other child process management logic...
+
+//    - You spawn a child process using `spawn()`.
+//    - The parent process (your Node.js application) has its own PID (`process.pid`).
+//    - The child process (e.g., executing `ls -l`) also has its own PID (`lsProcess.pid`).
+//    - You can use these PIDs for monitoring, termination, or communication.
+//    - Understanding the parent-child relationship helps you manage processes effectively.
+//    - You can gracefully terminate child processes when needed.
+//    - Monitoring PIDs allows you to track resource usage and handle errors.
+//    - Use signals (e.g., SIGTERM, SIGINT) to gracefully terminate child processes.
+//    - For example: `lsProcess.kill('SIGTERM')`.
+// Remember that this use case is particularly relevant
+//  when dealing with external processes or background jobs. 
+// By leveraging `process.ppid`, you gain insights into 
+// the process hierarchy and ensure proper coordination 
+// swithin your application.
+
+// The process.title property is used to get and 
+// set the title of the process. 
+
+// Include process module 
+const process = require('process');
+// Printing process.title property value 
+console.log("Before modification: PID: " + process.pid
+      + " process title is " + process.title);
+// Setting new process title value 
+process.title = "gekchosCustomProcess";
+// Printing process.title value after modification 
+console.log("After modification: PID: " + process.pid
+      + " process title is " + process.title);
+// Output:
+// Before modification: PID: 14012 process title is Command Prompt - node  title_2
+// After modification: PID: 14012 process title is gekchosCustomProcess
+
+// The process.version property is used to check 
+// the node.js version. 
+
+const process = require('process');
+// Printing process.version 
+console.log("node.js version " + process.version);
+// Output:
+// node.js version v10.16.0
+
+// The process.versions property is used to get the 
+// versions of node.js modules and it’s 
+// dependencies. 
+
+// Include process module
+const process = require('process');
+
+// Printing process.versions property value
+console.log(process.versions);
+
+// Output:
+// { http_parser: '2.8.0',
+//   node: '10.16.0',
+//   v8: '6.8.275.32-node.52',
+//   uv: '1.28.0',
+//   zlib: '1.2.11',
+//   brotli: '1.0.7',
+//   ares: '1.15.0',
+//   modules: '64',
+//   nghttp2: '1.34.0',
+//   napi: '4',
+//   openssl: '1.1.1b',
+//   icu: '64.2',
+//   unicode: '12.1',
+//   cldr: '35.1',
+//   tz: '2019a' 
+// }
+
+const process = require('process');
+
+// Printing process.versions property value
+// and variable count
+var no_versions = 0;
+
+// Calling process.versions property
+var versions = process.versions;
+
+// Iterating through all returned data
+for (var key in versions) {
+     // Printing key and its versions
+     console.log(key + ":\t\t\t" + versions[key]);
+     no_versions++;
+}
+
+// Printing count value
+console.log("Total no of values available = " + no_versions);
+
+// Output:
+// http_parser:            2.8.0
+// node:                   10.16.0
+// v8:                     6.8.275.32-node.52
+// uv:                     1.28.0
+// zlib:                   1.2.11
+// brotli:                 1.0.7
+// ares:                   1.15.0
+// modules:                64
+// nghttp2:                1.34.0
+// napi:                   4
+// openssl:                1.1.1b
+// icu:                    64.2
+// unicode:                12.1
+// cldr:                   35.1
+// tz:                     2019a
+// Total no of values available = 15
+
+// Include process module
+const process = require('process');
+
+// Calling process.versions property
+var versions = process.versions;
+
+// Printing one at a time
+console.log("node version: " + versions.node);
+console.log("openssl version: " + versions.openssl);
+console.log("module versions: " + versions.modules);
+
+// Output:
+// node version: 10.16.0
+// openssl version: 1.1.1b
+// module versions: 64
+
+const querystring = require("querystring"); 
+  
+// Specify the URL query string 
+// to be parsed 
+let urlQuery =  "user=admin&articles=1&articles=2&articles=3&access=true"; 
+  
+// Use the parse() method on the string 
+// with default values 
+let parsedObject = querystring.parse(urlQuery, "&", "="); 
+  
+console.log("Parsed Query:", parsedObject); 
+  
+// Use the parse() method on the string 
+// with maxKeys set to 1 
+parsedObject =  
+  querystring.parse(urlQuery, "&", "=", { maxKeys: 1 }); 
+  
+console.log("\nParsed Query:", parsedObject); 
+  
+// Use the parse() method on the string 
+// with maxKeys set to 2 
+parsedObject =  
+  querystring.parse(urlQuery, "&", "=", { maxKeys: 2 }); 
+  
+console.log("\nParsed Query:", parsedObject); 
+  
+// Use the parse() method on the string 
+// with maxKeys set to 0 (no limits) 
+parsedObject =  
+  querystring.parse(urlQuery, "&", "=", { maxKeys: 0 }); 
+  
+console.log("\nParsed Query:", parsedObject);
+// Output:
+
+// Parsed Query: [Object: null prototype] {
+//   user: 'admin',
+//   articles: [ '1', '2', '3' ],
+//   access: 'true'
+// }
+
+// Parsed Query: [Object: null prototype] { user: 'admin' }
+
+// Parsed Query: [Object: null prototype] 
+//               { user: 'admin', articles: '1' }
+
+// Parsed Query: [Object: null prototype] {
+//   user: 'admin',
+//   articles: [ '1', '2', '3' ],
+//   access: 'true'
+// }
+
+const querystring = require("querystring"); 
+  
+// Specify the URL query string 
+// to be parsed 
+let urlQuery =  "username=user1&units=kgs&units=pounds&permission=false"; 
+
+// Use the parse() method on the string 
+let parsedObject = querystring.parse(urlQuery); 
+  
+console.log("Parsed Query:", parsedObject); 
+  
+// Use the parse() method on the string 
+// with sep as `&&` and eq as `-` 
+urlQuery =  "username-user1&&units-kgs&&units-pounds&&permission-false"; 
+parsedObject = querystring.parse(urlQuery, "&&", "-"); 
+  
+console.log("\nParsed Query:", parsedObject);
+// Output:
+// Parsed Query: [Object: null prototype] {
+//   username: 'user1',
+//   units: [ 'kgs', 'pounds' ],
+//   permission: 'false'
+// }
+
+// Parsed Query: [Object: null prototype] {
+//   username: 'user1',
+//   units: [ 'kgs', 'pounds' ],
+//   permission: 'false'
+// }
+
+// The querystring.stringify() method is used 
+// to produce an URL query string from 
+// the given object that contains 
+// the key-value pairs.
+
+//The method iterates 
+// through the object’s own properties to 
+// generate the query string. It can serialize 
+// a single or an array of strings, numbers, 
+// and booleans. Any other types of values 
+// are coerced to empty strings. During serializing, 
+// the UTF-8 encoding format is used to encode any 
+// character that requires percent-encoding. 
+// To encode using an alternative character 
+// encoding, the encodeURIComponent option
+//  has to be specified. Syntax:
+querystring.stringify(obj[, sep[, eq[, options]]])
+
+// It returns a String that contains 
+// the URL query produced from the given object. 
+
+const querystring = require("querystring");
+
+// Specify the URL object 
+// to be serialized 
+let urlObject = {
+    user: "sam",
+    access: true,
+    role: ["admin", "editor", "manager"],
+};
+
+// Use the stringify() method on the object 
+let parsedQuery = querystring.stringify(urlObject);
+
+console.log("Parsed Query:", parsedQuery);
+// Output:
+// Parsed Query: user=sam&access=true&role=admin&role=editor&role=manager
+
+// Node.js query String module is used as utilities 
+// for parsing and formatting URL query strings. 
+// It can be used to convert query string into
+//  JSON object and vice-versa. 
+
+// Certainly! In the context of **Node.js**, 
+// **streams** are a fundamental concept for 
+// handling and manipulating data efficiently. 
+// Let's explore what streams represent:
+
+// 1. **Definition**:
+//    - A **stream** is essentially a **flow of data** that can be read from or written to in a continuous fashion, piece by piece, without loading the entire dataset into memory.
+//    - Streams allow you to process data incrementally, making them ideal for handling large amounts of information.
+
+// 2. **Key Characteristics**:
+//    - **Sequential Data Handling**:
+//      - Streams provide a way to handle reading/writing files, network communications, or any kind of end-to-end information exchange in an efficient way.
+//      - Instead of waiting for the entire data to be transmitted, you can start processing it as soon as you receive chunks.
+//    - **Memory Efficiency**:
+//      - Streams process data in smaller chunks, avoiding the need to load huge amounts of data into memory before processing.
+//    - **Time Efficiency**:
+//      - You don't have to wait until the entire file or data source is available; you can start working with the data as it arrives.
+
+// 3. **Types of Streams in Node.js**:
+//    - **Readable Streams**:
+//      - Allow you to read data from a source (e.g., files, network sockets).
+//      - Example: `fs.createReadStream()`.
+//    - **Writable Streams**:
+//      - Enable writing data to a destination (e.g., files, network sockets).
+//      - Example: `fs.createWriteStream()`.
+//    - **Duplex Streams**:
+//      - Both readable and writable.
+//      - Example: `net.Socket`.
+//    - **Transform Streams**:
+//      - Modify or transform data as it is written and read.
+//      - Example: `zlib.createDeflate()`.
+
+// 4. **Node.js APIs Using Streams**:
+//    - `net.Socket()`
+//    - `process.stdin()`
+//    - `process.stdout()`
+//    - `process.stderr()`
+//    - `fs.createReadStream()`
+//    - `fs.createWriteStream()`
+//    - `net.connect()`
+//    - `http.request()`
+//    - `zlib.createGzip()`, `zlib.createGunzip()`, `zlib.createDeflate()`, `zlib.createInflate()`
+
+// 5. **Example: Implementing a Readable Stream**:
+//    ```javascript
+   const { Readable } = require('stream');
+   const inStream = new Readable({
+       read() {
+           // Implement your custom read logic here
+       }
+   });
+   inStream.push('GeeksForGeeks : ');
+   inStream.push('A Computer Science portal for Geeks');
+   inStream.push(null); // Signal end of data
+   inStream.pipe(process.stdout); // Echo to standard output
+//    ```
+
+// 6. **Example: Implementing a Writable Stream**:
+//    ```javascript
+   const { Writable } = require('stream');
+   const outStream = new Writable({
+       write(chunk, encoding, callback) {
+           console.log(chunk.toString());
+           callback(); // Indicate success without errors
+       }
+   });
+   process.stdin.pipe(outStream); // Input is streamed here
+//    ```
+
+// Streams are powerful tools for handling data 
+// efficiently, especially when dealing with 
+// large datasets or real-time communication. 🚀
+
+// For more details, you can explore 
+// the [official Node.js documentation on streams](https://nodejs.org/api/stream.html) ¹.
+
+
+
+// In the world of Node.js, efficient data handling and manipulation are paramount, especially when dealing with large datasets. This is where streams come into play, providing a powerful mechanism for working with data in a way that is memory-efficient and responsive. In this comprehensive guide, we will delve deep into the concept of streams in Node.js, exploring their types, use cases, and practical implementation through code samples and examples.
+
+// Understanding Streams in Node.js: A Deep Dive
+
+// 1. Introduction to Streams
+// 1.1. What Are Streams?
+// In Node.js, streams are a fundamental concept for 
+// handling and manipulating data efficiently. 
+// A stream is essentially a flow of data that 
+// can be read from or written to in a continuous 
+// fashion, piece by piece, without loading 
+// the entire dataset into memory. This approach 
+// is especially advantageous when working with 
+// large files or network data, as it minimizes 
+// memory consumption and improves overall performance.
+
+// 1.2. Why Use Streams?
+// The primary benefit of using streams is their memory 
+// efficiency. Instead of loading an entire dataset 
+// into memory, streams allow you to process data 
+// incrementally, significantly reducing the risk 
+// of memory exhaustion. Streams are also well-suited 
+// for scenarios where data arrives over time, such 
+// as reading data from a network socket or processing log files.
+
+// Moreover, streams enhance responsiveness. By breaking 
+// data into smaller chunks, streams enable faster data 
+// processing, making your applications more responsive
+//  to user interactions. This is crucial for real-time
+//  applications where immediate feedback is essential.
+
+// 2. Types of Streams
+// Streams in Node.js come in four main types:
+
+// 2.1. Readable Streams
+// Readable streams are used for reading data from a source, 
+// such as a file, HTTP response, or even user input. 
+// Examples of readable streams include fs.createReadStream 
+// for reading files and http.IncomingMessage for handling HTTP responses.
+
+// Code Sample: Reading from a Readable Stream
+
+// javascript
+const fs = require('fs');
+const readableStream = fs.createReadStream('large-file.txt');
+readableStream.on('data', (chunk) => {
+   console.log(`Received ${chunk.length} bytes of data.`);
+});
+readableStream.on('end', () => {
+   console.log('Finished reading the file.');
+});
+// 2.2. Writable Streams
+// Writable streams, on the other hand, are 
+// used for writing data to a destination, such 
+// as a file or an HTTP request. Examples of 
+// writable streams include fs.createWriteStream 
+// for writing to files and http.ClientRequest 
+// for sending HTTP requests.
+
+// Code Sample: Writing to a Writable Stream
+
+// javascript
+const fs = require('fs');
+const writableStream = fs.createWriteStream('output.txt');
+writableStream.write('Hello, ');
+writableStream.write('world!');
+writableStream.end();
+// 2.3. Duplex Streams
+// Duplex streams represent streams that can 
+// both be read from and written to. They combine
+//  the functionality of both readable and writable streams. 
+// An example of a duplex stream is a TCP socket.
+
+// 2.4. Transform Streams
+// Transform streams are a special type of duplex 
+// stream that allow for data modification as it
+//  passes through the stream. They are commonly 
+// used for tasks like data compression, encryption, 
+// or parsing. The zlib module’s compression streams 
+// are a prime example of transform streams.
+
+// Code Sample: Using a Transform Stream
+
+// javascript
+const fs = require('fs');
+const zlib = require('zlib');
+const readableStream = fs.createReadStream('input.txt');
+const writableStream = fs.createWriteStream('output.txt.gz');
+const gzipStream = zlib.createGzip();
+readableStream.pipe(gzipStream).pipe(writableStream);
+// 3. How Streams Work
+// 3.1. The Stream Lifecycle
+// Streams in Node.js follow a lifecycle that 
+// consists of three main states: Readable, 
+// Writable, and Finished. A readable stream 
+// starts in the “Readable” state, where it 
+// emits data events as chunks of data are read. 
+// As the data is processed and written to a destination, 
+// a writable stream enters the “Writable” state. 
+// Finally, the stream transitions to the “Finished” 
+// state when all data has been read or written,
+//  and relevant events are emitted.
+
+// 3.2. Flowing and Non-Flowing Streams
+// Streams can operate in two different modes: 
+// flowing and non-flowing. In flowing mode, 
+// data is continuously pushed from the source 
+// to the destination, and you need to actively 
+// listen for the data events to process it. 
+// In non-flowing mode, you manually request 
+// chunks of data to be read or written using 
+// the read() or write() methods.
+
+// 4. Using Streams in Node.js
+// 4.1. Reading from Readable Streams
+// Reading from a readable stream involves attaching 
+// listeners to the stream’s data and end events. 
+// The data event is emitted whenever a new chunk 
+// of data is available for consumption, while 
+// the end event indicates that there’s no more data to be read.
+
+// Code Sample: Reading from a Readable Stream
+
+// javascript
+const fs = require('fs');
+const readableStream = fs.createReadStream('large-file.txt');
+readableStream.on('data', (chunk) => {
+   console.log(`Received ${chunk.length} bytes of data.`);
+});
+readableStream.on('end', () => {
+   console.log('Finished reading the file.');
+});
+// 4.2. Writing to Writable Streams
+// Writing to a writable stream involves using 
+// the write() method to send data to the stream 
+// and the end() method to signal the end of 
+// the writing process.
+
+// Code Sample: Writing to a Writable Stream
+
+// javascript
+const fs = require('fs');
+const writableStream = fs.createWriteStream('output.txt');
+writableStream.write('Hello, ');
+writableStream.write('world!');
+writableStream.end();
+// 4.3. Piping Streams
+// Piping is a powerful mechanism in Node.js 
+// streams that allows you to connect a readable 
+// stream to a writable stream. This enables 
+// automatic data transfer from the source 
+// stream to the destination stream.
+
+// Code Sample: Piping Streams
+
+// javascript
+const fs = require('fs');
+const readableStream = fs.createReadStream('input.txt');
+const writableStream = fs.createWriteStream('output.txt');
+readableStream.pipe(writableStream);
+// 4.4. Chaining Transform Streams
+// Chaining multiple transform streams together 
+// can be incredibly useful for performing complex
+//  data manipulations. This is achieved by piping 
+// the output of one transform stream into another.
+
+// Code Sample: Chaining Transform Streams
+
+// javascript
+const fs = require('fs');
+const zlib = require('zlib');
+const readableStream = fs.createReadStream('input.txt');
+const writableStream = fs.createWriteStream('output.txt.gz');
+const gzipStream = zlib.createGzip();
+readableStream.pipe(gzipStream).pipe(writableStream);
+// 5. Practical Use Cases
+// 5.1. File I/O Operations
+// Streams are particularly useful for reading 
+// from and writing to files. By using streams, 
+// you can handle large files without overloading memory.
+
+// 5.2. HTTP Requests and Responses
+// When working with HTTP requests and responses, 
+// streams enable you to handle data in chunks, 
+// making your applications more efficient and responsive.
+
+// 5.3. Data Transformation and Manipulation
+// Transform streams allow you to process data on 
+// the fly, which is especially valuable when you 
+// need to modify data as it’s being read or written. 
+// This is commonly seen in compression, encryption, 
+// and data parsing tasks.
+
+// 6. Error Handling and Stream Events
+// 6.1. Listening for Events
+// Streams emit various events that you can listen 
+// for, such as ‘data’, ‘end’, ‘error’, and more. 
+// These events help you monitor the stream’s progress 
+// and handle different scenarios appropriately.
+
+// 6.2. Handling Errors in Streams
+// When working with streams, it’s crucial to handle 
+// errors to prevent your application from crashing. 
+// Use the ‘error’ event to catch and handle errors gracefully.
+
+// 7. Implementing a Custom Transform Stream
+// 7.1. Extending the Transform Class
+// You can create custom transform streams by extending 
+// the Transform class from the stream module. This 
+// allows you to define your data transformation logic.
+
+// 7.2. Overriding the Transform Method
+// When implementing a custom transform stream, you need 
+// to override the transform method. This method is 
+// called for each chunk of data passing through 
+// the stream, allowing you to modify the data as needed.
+
+// 8. Tips for Efficient Stream Usage
+// 8.1. Setting HighWaterMark
+// The highWaterMark option specifies the maximum amount 
+// of data that can be buffered by a stream at once. 
+// Adjusting this value can optimize memory usage 
+// and improve performance.
+
+// 8.2. Utilizing the Stream Module
+// Node.js provides the stream module with various 
+// classes and functions for working with streams. 
+// Familiarize yourself with this module to harness 
+// the full power of streams in your applications.
+
+// Conclusion
+// In conclusion, understanding streams in Node.js 
+// is essential for developing efficient and responsive 
+// applications that handle data gracefully. By grasping 
+// the concepts of readable, writable, duplex, and 
+// transform streams, you unlock the potential for 
+// efficient data processing, real-time applications, 
+// and seamless file operations. With the knowledge 
+// shared in this guide and the examples provided, 
+// you’re well-equipped to embark on your journey 
+// of mastering streams in Node.js. Happy streaming!
+
+// What exactly are streams?
+// Streams are collections of data — just like arrays 
+// or strings. The difference is that streams might 
+// not be available all at once, and they don’t have
+//  to fit in memory. This makes streams really powerful 
+// when working with large amounts of data, or data that’s 
+// coming from an external source one chunk at a time.
+
+// However, streams are not only about working with big 
+// data. They also give us the power of composability
+//  in our code. Just like we can compose powerful 
+// linux commands by piping other smaller Linux commands, 
+// we can do exactly the same in Node with streams.
+
+const grep = ... // A stream for the grep output
+const wc = ... // A stream for the wc input
+
+// grep.pipe(wc)
+// Many of the built-in modules in Node 
+// implement the streaming interface:
+
+// readable streams 
+// http responses , on the client 
+// http requests , on the server 
+// fs read streams 
+// zlib streams 
+// crypto streams 
+// tcp sockets 
+// child process stdout and stderr 
+// process.stdin
+
+// writable streams 
+// http requests , on the client 
+// http responses , on the server 
+// fs write streams 
+// zlib strams 
+// crypto strams 
+// tcp sockets 
+// child process stdin 
+// process.stdout , process.stderr 
+
+
+
+// The list above has some examples for native
+//  Node.js objects that are also readable and
+//  writable streams. Some of these objects are
+//  both readable and writable streams, like TCP
+//  sockets, zlib and crypto streams.
+
+// Notice that the objects are also closely 
+// related. While an HTTP response is a readable
+//  stream on the client, it’s a writable stream 
+// on the server. This is because in the HTTP case, 
+// we basically read from one object (http.IncomingMessage) 
+// and write to the other (http.ServerResponse).
+
+// Also note how the stdio streams (stdin, stdout, stderr) 
+// have the inverse stream types when it comes to child 
+// processes. This allows for a really easy way to pipe 
+// to and from these streams from the main process stdio streams.
+
+// A streams practical example
+// Theory is great, but often not 100% convincing. Let’s
+//  see an example demonstrating the difference streams 
+// can make in code when it comes to memory consumption.
+
+// Let’s create a big file first:
+
+const fs = require('fs');
+const file = fs.createWriteStream('./big.file');
+
+for(let i=0; i<= 1e6; i++) {
+  file.write('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n');
+}
+
+file.end();
+// Look what I used to create that big file. A writable stream!
+
+// The fs module can be used to read from and write 
+// to files using a stream interface. In the example 
+// above, we’re writing to that big.file through 
+// a writable stream 1 million lines with a loop.
+
+// Running the script above generates a file that’s about ~400 MB.
+
+// Here’s a simple Node web server designed to exclusively serve the big.file:
+
+const fs = require('fs');
+const server = require('http').createServer();
+
+server.on('request', (req, res) => {
+  fs.readFile('./big.file', (err, data) => {
+    if (err) throw err;
+  
+    res.end(data);
+  });
+});
+
+server.listen(8000);
+// When the server gets a request, it’ll serve 
+// the big file using the asynchronous method, 
+// fs.readFile. But hey, it’s not like we’re 
+// blocking the event loop or anything. Every 
+// thing is great, right? Right?
+
+// Well, let’s see what happens when we run the 
+// server, connect to it, and monitor the memory while doing so.
+
+// When I ran the server, it started out with 
+// a normal amount of memory, 8.7 MB:
+
+// 1*125_8HQ4KzJkeBcj1LcEiQ
+// Then I connected to the server. Note what happened 
+// to the memory consumed:
+
+// 1*SGJw31T5Q9Zfsk24l2yirg
+// Wow — the memory consumption jumped to 434.8 MB.
+
+// We basically put the whole big.file content in memory 
+// before we wrote it out to the response object. 
+// This is very inefficient.
+
+// The HTTP response object (res in the code above) is 
+// also a writable stream. This means if we have a 
+// readable stream that represents the content of 
+// big.file, we can just pipe those two on each other 
+// and achieve mostly the same result without 
+// consuming ~400 MB of memory.
+
+// Node’s fs module can give us a readable stream 
+// for any file using the createReadStream method. 
+// We can pipe that to the response object:
+
+const fs = require('fs');
+const server = require('http').createServer();
+
+server.on('request', (req, res) => {
+  const src = fs.createReadStream('./big.file');
+  src.pipe(res);
+});
+
+server.listen(8000);
+// Now when you connect to this server, a magical 
+// thing happens (look at the memory consumption):
+
+// 1*iWNNIMhF9QmD25Vho6-fRQ
+
+// What’s happening?
+// When a client asks for that big file, we stream 
+// it one chunk at a time, which means we don’t 
+// buffer it in memory at all. The memory usage 
+// grew by about 25 MB and that’s it.
+
+// You can push this example to its limits. 
+// Regenerate the big.file with five million 
+// lines instead of just one million, which 
+// would take the file to well over 2 GB, and 
+// that’s actually bigger than the default 
+// buffer limit in Node.
+
+// If you try to serve that file using fs.readFile, 
+// you simply can’t, by default (you can change the 
+// limits). But with fs.createReadStream, there is 
+// no problem at all streaming 2 GB of data to 
+// the requester, and best of all, the process 
+// memory usage will roughly be the same.
+
+// Ready to learn streams now?
+
+// Streams 101
+// There are four fundamental stream types in Node.js: 
+// Readable, Writable, Duplex, and Transform streams.
+
+// A readable stream is an abstraction for a source 
+// from which data can be consumed. An example of 
+// that is the fs.createReadStream method.
+// A writable stream is an abstraction for a destination 
+// to which data can be written. An example of that is 
+// the fs.createWriteStream method.
+// A duplex streams is both Readable and Writable. 
+// An example of that is a TCP socket.
+// A transform stream is basically a duplex stream that 
+// can be used to modify or transform the data as it 
+// is written and read. An example of that is 
+// the zlib.createGzip stream to compress the data 
+// using gzip. You can think of a transform stream 
+// as a function where the input is the writable stream 
+// part and the output is readable stream part. You might 
+// also hear transform streams referred to as “through streams.”
+// All streams are instances of EventEmitter. They emit 
+// events that can be used to read and write data. 
+// However, we can consume streams data in 
+// a simpler way using the pipe method.
+
+// The pipe method
+// Here’s the magic line that you need to remember:
+
+readableSrc.pipe(writableDest)
+// In this simple line, we’re piping the output 
+// of a readable stream — the source of data, 
+// as the input of a writable stream — the destination. 
+// The source has to be a readable stream and the 
+// destination has to be a writable one. Of course, 
+// they can both be duplex/transform streams as well. 
+// In fact, if we’re piping into a duplex stream, 
+// we can chain pipe calls just like we do in Linux:
+
+readableSrc
+  .pipe(transformStream1)
+  .pipe(transformStream2)
+  .pipe(finalWrtitableDest)
+// The pipe method returns the destination stream, 
+// which enabled us to do the chaining above. 
+// For streams a (readable), b and c (duplex), 
+// and d (writable), we can:
+
+a.pipe(b).pipe(c).pipe(d)
+
+// # Which is equivalent to:
+a.pipe(b)
+b.pipe(c)
+c.pipe(d)
+
+// # Which, in Linux, is equivalent to:
+// $ a | b | c | d
+// The pipe method is the easiest way to consume 
+// streams. It’s generally recommended to either 
+// use the pipe method or consume streams with 
+// events, but avoid mixing these two. Usually 
+// when you’re using the pipe method you don’t 
+// need to use events, but if you need to consume
+//  the streams in more custom ways, events would be the way to go.
+
+// Stream events
+// Beside reading from a readable stream source 
+// and writing to a writable destination, the pipe
+//  method automatically manages a few things along 
+// the way. For example, it handles errors, end-of-files, 
+// and the cases when one stream is slower or faster 
+// than the other.
+
+// However, streams can also be consumed with events 
+// directly. Here’s the simplified event-equivalent 
+// code of what the pipe method mainly does to read 
+// and write data:
+
+// # readable.pipe(writable)
+
+readable.on('data', (chunk) => {
+  writable.write(chunk);
+});
+
+readable.on('end', () => {
+  writable.end();
+});
+// Here’s a list of the important events and functions 
+// that can be used with readable and writable streams:
+
+// 1*HGXpeiF5-hJrOk_8tT2jFA
+
+// Screenshot captured from my Pluralsight course - Advanced Node.js
+// The events and functions are somehow related because 
+// they are usually used together.
+
+// The most important events on a readable stream are:
+
+// The data event, which is emitted whenever the stream 
+// passes a chunk of data to the consumer
+// The end event, which is emitted when there is no more 
+// data to be consumed from the stream.
+// The most important events on a writable stream are:
+
+// The drain event, which is a signal that the writable 
+// stream can receive more data.
+// The finish event, which is emitted when all data has 
+// been flushed to the underlying system.
+// Events and functions can be combined to make for 
+// a custom and optimized use of streams. To consume 
+// a readable stream, we can use the pipe/unpipe methods, 
+// or the read/unshift/resume methods. To consume 
+// a writable stream, we can make it the destination
+//  of pipe/unpipe, or just write to it with 
+// the write method and call the end method when we’re done.
+
+// Paused and Flowing Modes of Readable Streams
+// Readable streams have two main modes that affect 
+// the way we can consume them:
+
+// They can be either in the paused mode
+// Or in the flowing mode
+// Those modes are sometimes referred to as pull and push modes.
+
+// All readable streams start in the paused mode by 
+// default but they can be easily switched to flowing 
+// and back to paused when needed. Sometimes,
+//  the switching happens automatically.
+
+// When a readable stream is in the paused mode, 
+// we can use the read() method to read from 
+// the stream on demand, however, for a readable 
+// stream in the flowing mode, the data is 
+// continuously flowing and we have to listen 
+// to events to consume it.
+
+// In the flowing mode, data can actually be lost 
+// if no consumers are available to handle it. This 
+// is why, when we have a readable stream in flowing 
+// mode, we need a data event handler. In fact, just 
+// adding a data event handler switches a paused 
+// stream into flowing mode and removing the data 
+// event handler switches the stream back to paused mode. 
+// Some of this is done for backward compatibility with 
+// the older Node streams interface.
+
+// To manually switch between these two stream modes, 
+// you can use the resume() and pause() methods.
+
+// 1*HI-mtispQ13qm8ib5yey3g
+// Screenshot captured from my Pluralsight course — Advanced Node.js
+// When consuming readable streams using the pipe method, 
+// we don’t have to worry about these modes as pipe 
+// manages them automatically.
+
+// Implementing Streams
+// When we talk about streams in Node.js, there are two main different tasks:
+
+// The task of implementing the streams.
+// The task of consuming them.
+// So far we’ve been talking about only consuming streams. Let’s implement some!
+
+// Stream implementers are usually the ones who require the stream module.
+
+// Implementing a Writable Stream
+// To implement a writable stream, we need to to 
+// use the Writable constructor from the stream module.
+
+const { Writable } = require('stream');
+// We can implement a writable stream in many ways. 
+// We can, for example, extend the Writable constructor if we want
+
+class myWritableStream extends Writable {
+}
+// However, I prefer the simpler constructor 
+// approach. We just create an object from 
+// the Writable constructor and pass it a number 
+// of options. The only required option is a write 
+// function which exposes the chunk of data to be written.
+
+const { Writable } = require('stream');
+
+const outStream = new Writable({
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString());
+    callback();
+  }
+});
+
+process.stdin.pipe(outStream);
+// This write method takes three arguments.
+
+// The chunk is usually a buffer unless we configure the stream differently.
+// The encoding argument is needed in that case, but usually we can ignore it.
+// The callback is a function that we need to call after 
+// we’re done processing the data chunk. It’s what signals 
+// whether the write was successful or not. To signal
+//  a failure, call the callback with an error object.
+// In outStream, we simply console.log the chunk as 
+// a string and call the callback after that without 
+// an error to indicate success. This is a very simple 
+// and probably not so useful echo stream. It will 
+// echo back anything it receives.
+
+// To consume this stream, we can simply use it with 
+// process.stdin, which is a readable stream, so we 
+// can just pipe process.stdin into our outStream.
+
+// When we run the code above, anything we type into 
+// process.stdin will be echoed back using the 
+// outStream console.log line.
+
+// This is not a very useful stream to implement 
+// because it’s actually already implemented and 
+// built-in. This is very much equivalent to process.stdout. 
+// We can just pipe stdin into stdout and we’ll get 
+// the exact same echo feature with this single line:
+
+process.stdin.pipe(process.stdout);
+// Implement a Readable Stream
+// To implement a readable stream, we require 
+// the Readable interface, and construct 
+// an object from it, and implement a read() 
+// method in the stream’s configuration parameter:
+
+const { Readable } = require('stream');
+
+const inStream = new Readable({
+  read() {}
+});
+// There is a simple way to implement readable 
+// streams. We can just directly push the data 
+// that we want the consumers to consume.
+
+const { Readable } = require('stream'); 
+
+const inStream = new Readable({
+  read() {}
+});
+
+inStream.push('ABCDEFGHIJKLM');
+inStream.push('NOPQRSTUVWXYZ');
+
+inStream.push(null); // No more data
+
+inStream.pipe(process.stdout);
+// When we push a null object, that means 
+// we want to signal that the stream does
+//  not have any more data.
+
+// To consume this simple readable stream, 
+// we can simply pipe it into the writable 
+// stream process.stdout.
+
+// When we run the code above, we’ll be 
+// reading all the data from inStream and 
+// echoing it to the standard out. Very simple,
+//  but also not very efficient.
+
+// We’re basically pushing all the data in 
+// the stream before piping it to process.stdout. 
+// The much better way is to push data on demand, 
+// when a consumer asks for it. We can do that 
+// by implementing the read() method in 
+// the configuration object:
+
+const inStream = new Readable({
+  read(size) {
+    // there is a demand on the data... Someone wants to read it.
+  }
+});
+// When the read method is called on a readable 
+// stream, the implementation can push partial 
+// data to the queue. For example, we can push 
+// one letter at a time, starting with character 
+// code 65 (which represents A), and incrementing that on every push:
+
+const inStream = new Readable({
+  read(size) {
+    this.push(String.fromCharCode(this.currentCharCode++));
+    if (this.currentCharCode > 90) {
+      this.push(null);
+    }
+  }
+});
+
+inStream.currentCharCode = 65;
+
+inStream.pipe(process.stdout);
+// While the consumer is reading a readable stream, 
+// the read method will continue to fire, and we’ll 
+// push more letters. We need to stop this cycle 
+// somewhere, and that’s why an if statement to 
+// push null when the currentCharCode is greater 
+// than 90 (which represents Z).
+
+// This code is equivalent to the simpler one
+//  we started with but now we’re pushing data 
+// on demand when the consumer asks for it. 
+// You should always do that.
+
+// Implementing Duplex/Transform Streams
+// With Duplex streams, we can implement both 
+// readable and writable streams with the same 
+// object. It’s as if we inherit from both interfaces.
+
+// Here’s an example duplex stream that combines 
+// the two writable and readable examples implemented above:
+
+const { Duplex } = require('stream');
+
+const inoutStream = new Duplex({
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString());
+    callback();
+  },
+
+  read(size) {
+    this.push(String.fromCharCode(this.currentCharCode++));
+    if (this.currentCharCode > 90) {
+      this.push(null);
+    }
+  }
+});
+
+inoutStream.currentCharCode = 65;
+
+process.stdin.pipe(inoutStream).pipe(process.stdout);
+// By combining the methods, we can use this 
+// duplex stream to read the letters from A to Z 
+// and we can also use it for its echo feature. 
+// We pipe the readable stdin stream into this 
+// duplex stream to use the echo feature and 
+// we pipe the duplex stream itself into 
+// the writable stdout stream to see the letters A through Z.
+
+// It’s important to understand that the readable 
+// and writable sides of a duplex stream operate 
+// completely independently from one another. 
+// This is merely a grouping of two features 
+// into an object.
+
+// A transform stream is the more interesting 
+// duplex stream because its output is computed 
+// from its input.
+
+// For a transform stream, we don’t have to 
+// implement the read or write methods, 
+// we only need to implement a transform method, 
+// which combines both of them. It has the signature
+//  of the write method and we can use it to 
+// push data as well.
+
+// Here’s a simple transform stream which echoes 
+// back anything you type into it after 
+// transforming it to upper case format:
+
+const { Transform } = require('stream');
+
+const upperCaseTr = new Transform({
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase());
+    callback();
+  }
+});
+
+process.stdin.pipe(upperCaseTr).pipe(process.stdout);
+// In this transform stream, which we’re consuming
+//  exactly like the previous duplex stream example, 
+// we only implemented a transform() method. In 
+// that method, we convert the chunk into its 
+// upper case version and then push that version 
+// as the readable part.
+
+// Streams Object Mode
+// By default, streams expect Buffer/String values. 
+// There is an objectMode flag that we can set to 
+// have the stream accept any JavaScript object.
+
+// Here’s a simple example to demonstrate that. 
+// The following combination of transform streams 
+// makes for a feature to map a string of 
+// comma-separated values into a JavaScript 
+// object. So “a,b,c,d” becomes {a: b, c: d}.
+
+const { Transform } = require('stream');
+
+const commaSplitter = new Transform({
+  readableObjectMode: true,
+  
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().trim().split(','));
+    callback();
+  }
+});
+
+const arrayToObject = new Transform({
+  readableObjectMode: true,
+  writableObjectMode: true,
+  
+  transform(chunk, encoding, callback) {
+    const obj = {};
+    for(let i=0; i < chunk.length; i+=2) {
+      obj[chunk[i]] = chunk[i+1];
+    }
+    this.push(obj);
+    callback();
+  }
+});
+
+const objectToString = new Transform({
+  writableObjectMode: true,
+  
+  transform(chunk, encoding, callback) {
+    this.push(JSON.stringify(chunk) + '\n');
+    callback();
+  }
+});
+
+process.stdin
+  .pipe(commaSplitter)
+  .pipe(arrayToObject)
+  .pipe(objectToString)
+  .pipe(process.stdout)
+// We pass the input string (for example, “a,b,c,d”) 
+// through commaSplitter which pushes an array as 
+// its readable data ([“a”, “b”, “c”, “d”]). Adding 
+// the readableObjectMode flag on that stream is 
+// necessary because we’re pushing an object 
+// there, not a string.
+
+// We then take the array and pipe it into 
+// the arrayToObject stream. We need 
+// a writableObjectMode flag to make that 
+// stream accept an object. It’ll also push 
+// an object (the input array mapped into 
+// an object) and that’s why we also needed 
+// the readableObjectMode flag there as well. 
+// The last objectToString stream accepts
+//  an object but pushes out a string, and 
+// that’s why we only needed a writableObjectMode 
+// flag there. The readable part is a normal 
+// string (the stringified object).
+
+// 1*u2kQzUD0ruPpt-xx0UOHoA
+// Usage of the example above
+// Node’s built-in transform streams
+// Node has a few very useful built-in transform 
+// streams. Namely, the zlib and crypto streams.
+
+// Here’s an example that uses the zlib.createGzip() 
+// stream combined with the fs readable/writable 
+// streams to create a file-compression script:
+
+const fs = require('fs');
+const zlib = require('zlib');
+const file = process.argv[2];
+
+fs.createReadStream(file)
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream(file + '.gz'));
+// You can use this script to gzip any file 
+// you pass as the argument. We’re piping 
+// a readable stream for that file into the 
+// zlib built-in transform stream and then 
+// into a writable stream for the new gzipped 
+// file. Simple.
+
+// The cool thing about using pipes is that we 
+// can actually combine them with events if we 
+// need to. Say, for example, I want the user 
+// to see a progress indicator while the script 
+// is working and a “Done” message when the script
+//  is done. Since the pipe method returns 
+// the destination stream, we can chain the 
+// registration of events handlers as well:
+
+const fs = require('fs');
+const zlib = require('zlib');
+const file = process.argv[2];
+
+fs.createReadStream(file)
+  .pipe(zlib.createGzip())
+  .on('data', () => process.stdout.write('.'))
+  .pipe(fs.createWriteStream(file + '.zz'))
+  .on('finish', () => console.log('Done'));
+// So with the pipe method, we get to easily 
+// consume streams, but we can still further 
+// customize our interaction with those streams 
+// using events where needed.
+
+// What’s great about the pipe method though is 
+// that we can use it to compose our program piece
+//  by piece, in a much readable way. For example, 
+// instead of listening to the data event above, 
+// we can simply create a transform stream to 
+// report progress, and replace the .on() call 
+// with another .pipe() call:
+
+const fs = require('fs');
+const zlib = require('zlib');
+const file = process.argv[2];
+
+const { Transform } = require('stream');
+
+const reportProgress = new Transform({
+  transform(chunk, encoding, callback) {
+    process.stdout.write('.');
+    callback(null, chunk);
+  }
+});
+
+fs.createReadStream(file)
+  .pipe(zlib.createGzip())
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(file + '.zz'))
+  .on('finish', () => console.log('Done'));
+// This reportProgress stream is a simple pass-through 
+// stream, but it reports the progress to standard out 
+// as well. Note how I used the second argument in the 
+// callback() function to push the data inside 
+// the transform() method. This is equivalent to
+//  pushing the data first.
+
+// The applications of combining streams are endless. 
+// For example, if we need to encrypt the file before 
+// or after we gzip it, all we need to do is pipe 
+// another transform stream in that exact order 
+// that we needed. We can use Node’s crypto module for that:
+
+const crypto = require('crypto');
+// ...
+
+fs.createReadStream(file)
+  .pipe(zlib.createGzip())
+  .pipe(crypto.createCipher('aes192', 'a_secret'))
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(file + '.zz'))
+  .on('finish', () => console.log('Done'));
+// The script above compresses and then encrypts 
+// the passed file and only those who have the 
+// secret can use the outputted file. We can’t 
+// unzip this file with the normal unzip 
+// utilities because it’s encrypted.
+
+// To actually be able to unzip anything zipped 
+// with the script above, we need to use the 
+// opposite streams for crypto and zlib in 
+// a reverse order, which is simple:
+
+fs.createReadStream(file)
+  .pipe(crypto.createDecipher('aes192', 'a_secret'))
+  .pipe(zlib.createGunzip())
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(file.slice(0, -3)))
+  .on('finish', () => console.log('Done'));
+// Assuming the passed file is the compressed 
+// version, the code above will create a read 
+// stream from that, pipe it into the crypto 
+// createDecipher() stream (using the same secret), 
+// pipe the output of that into the zlib createGunzip() 
+// stream, and then write things out back to a file 
+// without the extension part.
+
+// That’s all I have for this topic. Thanks for reading! Until next time!
+
+// The writable.cork() method is used 
+// to write every data into the buffer memory. When we 
+// use stream.uncork() or stream.end() methods 
+// then the buffer data will be flushed. 
+
+
+//If this method is used then the data 
+// written after this method is not displayed in the 
+// output as these data are stored in the memory and 
+// can be again shown using some other specific methods. 
+
+// Example 1: 
+
+// Node.js program to demonstrate the     
+// writable.cork() method  
+const stream = require('stream');
+// Creating a stream and creating 
+// a write function
+const writable = new stream.Writable({
+  // Write function with its 
+  // parameters
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of
+    // data to string
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Writing data
+writable.write('hi');
+// Calling cork() function
+writable.cork();
+// Again writing some data
+writable.write('hello');
+writable.write('world');
+
+// Output:
+// hi
+// Here, in the above example the data written
+//  before cork() method is only displayed and
+//  the data written after it is corked i.e. stored in the memory. 
+
+// the cork() method
+// is written at last so, none of the data
+// is being stored in the memory. Therefore,
+// all the written data is displayed in the output.
+
+// The writable.destroy() method is an inbuilt 
+// application programming interface of Stream 
+// module which is used to destroy the created 
+// stream and you cannot call the write() method 
+// to write data again after you have already 
+// destroyed the created stream. 
+writable.destroy()
+
+const stream = require('stream');
+
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Writing data 
+writable.write('hi');
+// Again writing some data 
+writable.write('hello');
+// Calling destroy function 
+writable.destroy();
+
+// Output:
+// hi
+// hello
+// Writable {  _writableState:
+//    WritableState {
+//      objectMode: false,     highWaterMark: 16384,
+//      finalCalled: false,
+//      needDrain: false,
+//      ending: false,
+//      ended: false,
+//      finished: false,
+//      destroyed: true,
+//      decodeStrings: true,
+//      defaultEncoding: 'utf8',
+//      length: 0,
+//      writing: false,
+//      corked: 0,
+//      sync: false,
+//      bufferProcessing: false,
+//      onwrite: [Function: bound onwrite],
+//      writecb: null,
+//      writelen: 0,
+//      bufferedRequest: null,
+//      lastBufferedRequest: null,
+//      pendingcb: 2,
+//      prefinished: false,
+//      errorEmitted: false,
+//      emitClose: true,
+//      autoDestroy: false,
+//      bufferedRequestCount: 0,
+//      corkedRequestsFree:
+//       { next: null,
+//         entry: null,
+//         finish: [Function: bound onCorkedFinish] } },
+//   writable: true,
+//   _write: [Function: write],
+//   domain: null,
+//   _events: [Object: null prototype] {},
+//   _eventsCount: 0,
+//   _maxListeners: undefined }
+
+const stream = require('stream');
+
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Writing data 
+writable.write('hi');
+// Again writing some data 
+writable.write('hello');
+// Calling destroy function 
+writable.destroy();
+writable.write('');
+// Output:
+// hi
+// hello
+// Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destro
+// yed
+// at doWrite (_stream_writable.js:411:19)
+// at writeOrBuffer (_stream_writable.js:399:5)
+// at Writable.write (_stream_writable.js:299:11)
+// at /home/runner/QuizzicalFluffyOperation/index.js:29:10
+// at Script.runInContext (vm.js:133:20)
+// at Object. (/run_dir/interp.js:156:20)
+// at Module._compile (internal/modules/cjs/loader.js:778:30)
+// at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:
+// 10)
+//     at Module.load (internal/modules/cjs/loader.js:653:32)
+
+
+// The writable.end() method 
+is an inbuilt application 
+// programming interface of Stream module so that no 
+// more data can be written to the Writable anymore. 
+// The arguments chunk and encoding are optional 
+// which will permit one final new chunk of data 
+// to be written instantly before closing the stream.
+//  Moreover, the optional callback function is added 
+// as a listener for the ‘finish’ event of the Writable stream. 
+writable.end(chunk, encoding, callback)
+
+// Parameters: This method accepts three parameters 
+// as mentioned above and described below:
+
+// chunk: It is an optional data to write. The value 
+// of chunk must be a string, buffer or Uint8Array. 
+// For object mode, the chunk value may be anything other than null.
+// encoding: It holds the encoding value if chunk is a string value.
+// callback: It is an optional callback function for stream.
+// Return Value: It returns the data written before 
+// calling this method and if the end() method has 
+// a chunk of new data then that is also returned 
+// at the end. 
+
+// INcluding stream module 
+const stream = require('stream');
+
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Writing data 
+writable.write('hi');
+
+// Calling end method with its  
+// all the parameters 
+writable.end("last data", "utf8", () => {
+  console.log("Writable stream ended!");
+});
+
+
+// The writable.setDefaultEncoding() methodis used to set 
+// the default encoding for a Writable stream.
+writable.setDefaultEncoding(encoding)
+
+//It returns the encoding
+//  which is made by default.
+
+const stream = require('stream');
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Writing data 
+writable.write('hi');
+// Calling setDefaultEncoding method 
+writable.setDefaultEncoding("utf8");
+
+
+// The writable.uncork() method is used to flush 
+// all the buffered data when stream.cork()
+//  method was called. 
+writable.uncork()
+
+// If this method 
+// is being called then the data which was 
+// being corked is again displayed in the output. 
+
+
+// Node.js program to demonstrate the      
+// writable.uncork() method   
+const stream = require('stream');
+
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Calling cork() function 
+writable.cork();
+// Writing data 
+writable.write('hi');
+// Calling cork() function 
+writable.cork();
+// Again writing some data 
+writable.write('hello');
+// Calling uncork function 
+// using nextTick() 
+process.nextTick(() => {
+  // Calling uncork function 
+  writable.uncork();
+  writable.uncork();
+});
+// Output:
+// hi
+// hello
+// So, you need to call uncork() function
+// the number of times you have called cork
+// function. In the above example we have called
+//  cork() function two times so the uncork function
+//  is also called twice.
+
+// The writable._write() method is an inbuilt application 
+// programming interface of Stream module which is 
+// used to implement a writable stream. Moreover, the user program must
+//  not call it directly. This method implemented 
+// by using child classes and it is called by 
+// the internal Writable class methods only.
+
+writable._write(chunk, encoding, callback)
+// chunk: It is the data to be written which can be of type buffer, string or any.
+....
+
+// Example 1:
+
+// Node.js program to demonstrate the      
+// writable._write() method 
+
+// Constructing writable stream 
+const { Writable } = require("stream");
+// Function to check char 
+const charchecks = new Writable({
+  // Implementing write function 
+  write(chunk, encoding, callback) {
+    // Defining string 
+    const string = chunk.toString();
+    // If string contains below character 
+    // then an error is show else the 
+    // written string is returned 
+    if (string.includes("\/")) {
+      callback(Error("Forbidden character"));
+    }
+    else {
+      // Displays string 
+      console.log(string);
+      callback();
+    }
+  }
+});
+
+// Piping standard input to standard output, if 
+// you don't enter the forbidden character else 
+// it throws error 
+process.stdin.pipe(charchecks).on('error', console.log);
+
+// Enter the string to be written 
+console.log("Enter the string: ");
+// Now, you need to run the code and 
+// enter the String in run time to get the output.
+// Enter the string:
+// GeeksforGeeks
+// GeeksforGeeks // Output
+
+// Enter the string:
+// GfG
+// GfG // Output
+
+// Enter the string:
+// Nidhi
+// Nidhi //Output
+// Now, to exit it you need to press control + C. 
+
+// Example 2:
+
+// Node.js program to demonstrate the      
+// writable._write() method 
+
+// Constructing writable stream 
+const { Writable } = require("stream");
+// Function to check char 
+const charchecks = new Writable({
+  // Implementing write function 
+  write(chunk, encoding, callback) {
+    // Defining string and encoding it 
+    const string = chunk.toString('hex');
+    // Prints encoded string 
+    console.log(string);
+    // If the encoded string contains below  
+    // character then an error is shown else 
+    // the length of the encoded string is  
+    // returned 
+    if (string.includes("c")) {
+      callback(Error("This is an error."));
+    }
+    else {
+      // Displays length of the encoded string 
+      console.log(string.length);
+      callback();
+    }
+  }
+});
+
+// Piping standard input to standard output, if 
+// you don't enter the forbidden character else 
+// it throws an error 
+process.stdin.pipe(charchecks).on('error', console.log);
+
+// Enter the string to be written 
+console.log("Enter the string: ");
+// Now, you need to run the code and enter the String in run time to get the output. Output:
+// Enter the string:
+// Geeks
+// 4765656b730a   // encoded string
+// 12             // length of encoded string
+// Nidhi
+// 4e696468690a
+// 12
+// portal
+// 706f7274616c0a   // encoded string contains "c" so length of it
+// is not returned and an error is thrown
+// Error: This is an error.
+//     at Writable.write [as _write] (/home/runner/QuickwittedDistantCensorware/index.js:25:16)
+//     at doWrite (_stream_writable.js:415:12)
+//     at writeOrBuffer (_stream_writable.js:399:5)
+//     at Writable.write (_stream_writable.js:299:11)
+//     at ReadStream.ondata (_stream_readable.js:710:20)
+//     at ReadStream.emit (events.js:198:13)
+//     at ReadStream.EventEmitter.emit (domain.js:448:20)
+//     at addChunk (_stream_readable.js:288:12)
+//     at readableAddChunk (_stream_readable.js:269:11)
+//     at ReadStream.Readable.push (_stream_readable.js:224:10)
+
+
+// Node.js Stream writable.write() Method
+// The writable.write() method is an inbuilt application
+//  programming interface of Stream module which is 
+// used to write some data to the Writable stream. 
+// The callback function is called once the data 
+// has been completely handled. 
+writable.write( chunk, encoding, callback)
+// chunk: It is an optional data to write. The value 
+// of chunk must be a string, buffer or Uint8Array.
+//  For object mode, the chunk value may be anything other than null.
+// encoding: It holds the encoding value if chunk is a string value.
+// callback: It is an optional callback function for stream.
+// Return Value: It returns false if the ‘drain’ event 
+// is emitted before this method otherwise returns true.
+
+
+// Including stream module 
+const stream = require('stream');
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Calling write method with 
+// all its parameter 
+writable.write("GfG", "utf8", () => {
+  console.log("CS-Portal!");
+});
+// Output:
+// GfG
+// true
+// CS-Portal!
+// Example 2:
+
+// Node.js program to demonstrate the      
+// writable.write() method   
+
+// Including stream module 
+const stream = require('stream');
+
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Calling write method with one 
+// parameter 
+writable.write('GeeksforGeeks');
+// Output:
+// GeeksforGeeks
+// true
+
+
+// The readable.read() method
+is used to read 
+// the data out of the internal buffer. 
+// It returns data as a buffer object
+//  if no encoding is being specified 
+// or if the stream is working in object mode. 
+
+readable.read(size)
+
+// Parameters: This method accepts single 
+// parameter size which specifies the number
+//  of bytes to be read from the internal buffer. 
+// Return Value: If this method is used then 
+// the data read after this method is displayed 
+// in the output and if no data exist in the 
+// buffer then null is returned. 
+
+
+// Include fs module 
+const fs = require("fs");
+// Constructing readable stream 
+const readable = fs.createReadStream("input.txt");
+// Instructions for reading data 
+readable.on('readable', () => {
+  let chunk;
+  // Using while loop and calling 
+  // read method 
+  while (null !== (chunk = readable.read())) {
+    // Displaying the chunk 
+    console.log(`read: ${chunk}`);
+  }
+});
+// console.log("done"); 
+// Output:
+// done
+// read: hello
+
+
+// Include fs module 
+const fs = require("fs");
+// Constructing readable stream 
+const readable = fs.createReadStream("input.txt");
+// Instructions for reading data 
+readable.on('readable', () => {
+  let chunk;
+  // Using while loop and calling 
+  // read method with parameter 
+  while (null !== (chunk = readable.read(1))) {
+    // Displaying the chunk 
+    console.log(`read: ${chunk}`);
+  }
+});
+console.log("done");
+// Output:
+// done
+// read: h
+// read: e
+// read: l
+// read: l
+// read: o
+// In the above example the size of the data is stated
+// so only one byte is read in each step from
+// the file “input.txt” which contains data ‘hello’.
+
+// Node.js Stream readable.destroy() Methodwhich is used to destroy the stream
+readable.destroy(error)
+// Parameters: This method accepts single 
+// parameter error which is optional and 
+// it emits an error while handling error event. 
+
+// Return Value: If this method is used then 
+// the stream is destroyed and if the error 
+// parameter is passed as an argument then 
+// it emits an error event. 
+
+// Include fs module 
+const fs = require("fs");
+
+// Constructing readable stream 
+const readable = fs.createReadStream("input.txt");
+
+// Instructions for reading data 
+readable.on('readable', () => {
+  let chunk;
+  // Using while loop and calling 
+  // read method with parameter 
+  while (null !== (chunk = readable.read(1))) {
+    // Displaying the chunk 
+    console.log(`read: ${chunk}`);
+  }
+});
+
+// Calling destroy method 
+readable.destroy();
+// Displays that the stream is  
+// destroyed 
+console.log("Stream destroyed");
+// Output:
+// Stream destroyed
+
+// Node.js program to demonstrate the      
+// readable.destroy() method   
+
+// Include fs module 
+const fs = require("fs");
+// Constructing readable stream 
+const readable = fs.createReadStream("input.txt");
+// Instructions for reading data 
+readable.on('readable', () => {
+  let chunk;
+  // Using while loop and calling 
+  // read method with parameter 
+  while (null !== (chunk = readable.read())) {
+    // Displaying the chunk 
+    console.log(`read: ${chunk}`);
+  }
+});
+
+// Handling error event 
+readable.on('error', err => {
+  console.log(err);
+});
+
+// Calling destroy method 
+// with parameter 
+readable.destroy(['error']);
+
+// Displays that the stream is  
+// destroyed 
+console.log("Stream destroyed");
+
+// Output:
+// Stream destroyed
+// [ 'error' ]
+// In the above example error event is emitted.
+
+// Node.js Stream readable.pause() Method
+//which is used to stop 
+// the flowing mode from emitting ‘data’ events. 
+// If any data that becomes accessible will 
+// continue to exist in the internal buffer.
+//If this
+//  method is used then the reading of data 
+// is paused at that time. 
+
+const fs = require('fs');
+
+// Create readable stream 
+const readable = fs.createReadStream("input.txt");
+
+// Handling data event 
+readable.on('data', (chunk) => {
+  console.log(`Received ${chunk.length} bytes of data.`);
+  // Calling pause method 
+  readable.pause();
+  // After this any data will be displayed  
+  // after 1 sec. 
+  console.log('No further data will be displayed for 1 second.');
+  // Using setTimeout function 
+  setTimeout(() => {
+    console.log('Now data starts flowing again.');
+    readable.resume();
+  }, 1000);
+});
+
+// Displays that program  
+// is ended 
+console.log("Program ends!!");
+// Output:
+// Program ends!!
+// Received 5 bytes of data.
+// No further data will be displayed for 1 second.
+// Now data starts flowing again.
+
+// However, you can see while running,
+// that after the execution of pause() method,
+//  no further data will be displayed for 1 second.
+
+// Node.js Stream readable.isPaused() is used to check the current
+//  operating state of the Readable streams. 
+const stream = require('stream');
+// Constructing readable stream 
+const readable = new stream.Readable();
+// Calling isPaused method 
+readable.isPaused();
+// Output:
+// false
+
+const stream = require('stream');
+// Constructing readable stream 
+const readable = new stream.Readable();
+// Calling isPaused method 
+readable.isPaused();
+// Calling the pause() function 
+// to pause readable state 
+readable.pause();
+// Again calling isPaused to check 
+// if its paued or not 
+readable.isPaused();
+// Output:
+// true
+
+// Node.js Stream readable.resume() Method
+
+// The readable.resume() method in 
+// a Readable Stream is used to paused
+//  data that can be resumed again and 
+// data starts flowing again. 
+readable.resume()
+/If this method is used 
+// then the data that was paused, starts 
+// flowing again. 
+
+// Include fs module 
+const fs = require('fs');
+
+// Create readable stream 
+const readable = fs.createReadStream("input.text");
+// Handling data event 
+readable.on('data', (chunk) => {
+  console.log(`${chunk}`);
+  // Calling pause method 
+  readable.pause();
+  // After this any data will be displayed  
+  // after 3 sec. 
+  console.log('No additional data will be '
+    + 'displayed for 3 seconds.');
+  // Using setTimeout function 
+  setTimeout(() => {
+    console.log('Now data starts flowing again.');
+    // Calling resume method 
+    readable.resume();
+  }, 3000);
+});
+
+// Displays that program  
+// is ended 
+console.log("Program ends!!");
+// Output:
+// Program ends!!
+// Hello!!!
+// No additional data will be displayed for 3 seconds.
+// Now data starts flowing again.
+
+// The writable.writableFinished property is set 
+// to true instantly before the emit 
+// of the ‘finish’ event. 
+ It returns true if 
+// ‘finish’ event is called before 
+// it else it returns false. 
+
+// Accessing stream module 
+const stream = require('stream');
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Calling write() method 
+writable.write('GfG');
+// Calling writable.writableFinished   
+// Property 
+writable.writableFinished;
+writable.destroy();
+// Output
+// GfG
+
+
+// The writable.writableCorked property is 
+// an inbuilt application programming interface 
+// of Stream module which is used to check 
+// the number of times you need to call 
+// the uncork() function so that you can 
+// fully uncork the stream. 
+
+// The writable.destroyed property is 
+// an inbuilt application programming 
+// interface of Stream module which 
+// is used to check 
+// the writable.destroy() method 
+// is being called or not. 
+
+
+// Accessing stream module 
+const stream = require('stream');
+// Creating a stream and creating  
+// a write function 
+const writable = new stream.Writable({
+  // Write function with its  
+  // parameters 
+  write: function (chunk, encoding, next) {
+    // Converting the chunk of 
+    // data to string 
+    console.log(chunk.toString());
+    next();
+  }
+});
+
+// Writing data 
+writable.write('hi');
+// Again writing some data 
+writable.write('hello');
+// Calling destroy function 
+writable.destroy();
+// Calling the Property 
+writable.destroyed;
+
+// Output:
+// hi
+// hello
+// true
+
+// The writable.writable property is 
+// an inbuilt application programming interface 
+// of Stream module which is used to check 
+// the writable.write() method is safe 
+// to call or not. 
+// It returns true if it is 
+// safe to call writable.write() method 
+// otherwise returns false.
+
+// The writable.writableEnded property is 
+// an inbuilt application programming interface 
+// of Stream module which is used to check 
+// the writable.end() method is being called or not. 
+
+// Syntax:
+writable.writableEnded 
+
+// Return Value: It returns true if writable.end() 
+// method is being called before otherwise returns 
+// false. Below examples illustrate the use 
+// of writable.writableEnded property in Node.js: 
+
+// Node.js Stream readable.destroyed Property
+// The readable.destroyed property is 
+// an inbuilt application programming 
+// interface of Stream module which 
+// is used to check the readable.destroy() 
+// function is being called or not. 
+
+// Syntax:
+readable.destroyed
+// Return Value: It returns true 
+// if readable.destroy() method 
+// is being called otherwise returns 
+// false.
+
+// Include fs module 
+const fs = require("fs"); 
+// Constructing readable stream 
+const readable = fs.createReadStream("input.txt"); 
+// Instructions for reading data 
+readable.on('readable', () => { 
+  let chunk; 
+  // Using while loop and calling 
+  // read method with parameter 
+  while (null !== (chunk = readable.read())) { 
+    // Displaying the chunk 
+    console.log(`read: ${chunk}`); 
+  } 
+}); 
+  
+// Displays that the stream is  
+// destroyed 
+console.log("Program completed!!"); 
+  
+// Calling readable.destroyed 
+// Property 
+readable.destroyed; 
+// Output:
+// Program completed!!
+// false
+// read: hello
+
+// So, here readable.destroy() method is not 
+// called before readable.destroyed property 
+// so it returns false. 
+
+// Node.js program to demonstrate the      
+// readable.destroyed Property   
+  
+// Include fs module 
+const fs = require("fs"); 
+// Constructing readable stream 
+const readable = fs.createReadStream("input.txt"); 
+// Instructions for reading data 
+readable.on('readable', () => { 
+  let chunk; 
+  // Using while loop and calling 
+  // read method with parameter 
+  while (null !== (chunk = readable.read())) { 
+    // Displaying the chunk 
+    console.log(`read: ${chunk}`); 
+  } 
+}); 
+  
+// Handling error event 
+readable.on('error', err => { 
+    console.log(err); 
+}); 
+// Calling destroy method 
+// with parameter 
+readable.destroy('error'); 
+// Displays that the stream is  
+// destroyed 
+console.log("Stream destroyed"); 
+
+// Calling readable.destroyed 
+// Property 
+readable.destroyed; 
+
+// Output:
+// Stream destroyed
+// true
+// error
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Node.js tlsSocket.address() Method
+// The tlsSocket.address() method is an inbuilt 
+// application programming interface of class 
+// TLSSocket within tls module which is used 
+// to get the bound address, the address family 
+// name, and the port of the underlying socket.
+//This method returns the bound address, 
+// the address family name, and the port of the underlying socket.
+
+// Private Key 
+// Step 1: Open Notepad and copy and paste the following key: 
+// Step 2: Save as a private key.pem 
+// Public Certificate 
+// Step 1: Open Notepad and copy and paste the following key: 
+// Step 2: Save as public cert.pem 
+
+const tls = require('tls'),
+    fs = require('fs'),
+    // Port and host address for server
+    PORT = 1337,
+    HOST = '127.0.0.1',
+    value = null;
+// Private key and public certificate for access
+const options = {
+    key: fs.readFileSync('private-key.pem'),
+    cert: fs.readFileSync('public-cert.pem'),
+    rejectUnauthorized: false
+};
+// Creating and initializing server
+const server = tls.createServer(options, function (socket) {
+    // Print the data that we received
+    socket.on('data', function (data) {
+        console.log('\nReceived: %s ',
+            data.toString().replace(/(\n)/gm, ""));
+    });
+    // Getting the bound address of the socket
+    // by using tlsSocket.address() method
+    value = socket.address();
+    console.log("Address : " + value.address);
+    // Stopping the server
+    // by using the close() method
+    server.close();
+});
+
+// Close event
+server.on('close', () => {
+    console.log("Server closed successfully");
+})
+// Start listening on a specific port and address
+// by using listen() method
+server.listen(PORT, HOST, function () {
+    console.log("I'm listening at %s, on port %s", HOST, PORT);
+});
+// Creating and initializing client
+const client = tls.connect(PORT, HOST, options, function () {
+    // Getting the bound address
+    // by using address method
+    const value = client.address();
+    client.write("Bound address : " + value.family)
+    client.end();
+});
+// Output:
+// I'm listening at 127.0.0.1, on port 1337
+// Address : 127.0.0.1
+// Received: Bound address : IPv4
+// Server closed successfully
+
+
+// Node.js program to demonstrate the
+// tlsSocket.address() method
+const tls = require('tls'),
+    fs = require('fs'),
+    // Port and host address for server
+    PORT = 1337,
+    HOST = '127.0.0.1';
+// Private key and public certificate for access
+const options = {
+    key: fs.readFileSync('private-key.pem'),
+    cert: fs.readFileSync('public-cert.pem'),
+    rejectUnauthorized: false
+};
+
+// Creating and initializing server
+const server = tls.createServer(options, function (socket) {
+    // Getting the bound address of the socket
+    // by using tlsSocket.address() method
+    const value = socket.address();
+    socket.write("Address : " + value.family);
+    // Stopping the server
+    // by using the close() method
+    server.close();
+});
+
+// Close event
+server.on('close', () => {
+    console.log("Server closed successfully");
+})
+
+// Start listening on a specific port and address
+// by using listen() method
+server.listen(PORT, HOST, function () {
+    console.log("I'm listening at %s, on port %s", HOST, PORT);
+});
+
+// Creating and initializing client
+const client = tls.connect(PORT, HOST, options, function () {
+    console.log("client is connected");
+});
+
+client.on("data", function (data) {
+    console.log('Received: %s',
+        data.toString().replace(/(\n)/gm, ""));
+    // Close the connection after receiving the message
+    client.end(() => {
+        console.log("client closed successfully")
+    });
+});
+// Run the index.js file using the following command:
+
+node index.js
+
+// Output:
+// I'm listening at 127.0.0.1, on port 1337
+// client is connected
+// Received: Address : IPv4
+// client closed successfully
+// Server closed successfully
+
+// The tlsSocket.enableTrace() method is 
+// an inbuilt application programming interface 
+// of class TLSSocket within tls module which 
+// is used to debug TLS connection problems.
+tlsSocket.enableTrace()
+This method will display 
+// TLS packet trace information in stderr.
+
+// see on sote this tls-ssl module 
+// its pretty long and cant differentiante 
+// have to do on the go.. 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Node.js URLSearchParams.append()
+// In URLSearchParams interface, the append() method 
+// adds a key/value pair specified by user.
+URLSearchParams.append(name, value)
+
+let url = new URL('https://example.com?par=1&par1=3');
+let params = new URLSearchParams(url.search.slice(1));
+//Add a second par parameter. 
+params.append('bar', 5);
+console.log(url);
+// Output:
+// https://example.com?par=1&par1=3&bar=5
+
+// Node.js URLSearchParams.delete()
+// In URLSearchParams interface, the delete() 
+// method deletes the parameter specified by 
+// user and all its associated values. 
+URLSearchParams.delete(name)
+// Parameters: name – The name of the parameter 
+// to be deleted. 
+let url = new URL('https://example.com?par=1&bar=2&par=3');
+let params = new URLSearchParams(url.search.slice(1));
+// Delete the par parameter. 
+params.delete('par');
+console.log(url)
+// Output:
+// https://example.com?bar=2
+
+
+// In the URLSearchParams interface, the entries() 
+// method returns an iterator that allows iterating 
+// through all the key/value pairs present in the object. 
+// The key/value is USVString objects. 
+
+searchParams.entries();
+// Return: Iterator, iterating 
+// over all key-value pairs. 
+
+const searchpar = new URLSearchParams("keya = vala&keyb = valb");
+// Display the key/value pairs
+for (let pair of searchpar.entries()) {
+    console.log(pair[0] + ', ' + pair[1]);
+}
+// Output:
+// keya, vala
+// keyb, valb
+
+//URLSearchParams interface, the foreach() 
+// method returns an iterator which allows to 
+// iterate through all values contained in 
+// this object with the help of a callback function. 
+
+searchParams.forEach(callback);
+// Return: It does not return anything, used for 
+// invoking the function and iterating through it.
+// Create a test URLSearchParams object
+const myURL = new URL('https://example.org/?keya=vala&keyb=valb');
+// Log the values
+myURL.searchParams.forEach(function (value, key) {
+  console.log(value, key);
+});
+// Output:
+// vala keya
+// valb keyb
+
+// Node.js URLSearchParams.get()
+// In URLSearchParams interface, the get() method 
+// returns the first value of the input search parameter. 
+
+URLSearchParams.get(name)
+// Returns:The string will be returned 
+// if the name-value pair is found, else 
+// null will be returned. 
+// Parameters: name – Input the name 
+// of the parameter. 
+var URL = require('url').URL; 
+let url = new URL('https://example.com/?name=Deepak&age=20'); 
+let params = new URLSearchParams(url.search.substring(1)); 
+let name = params.get("name"); // is the string "Deepak" 
+let age = parseInt(params.get("age"), 10); // is the number 20 
+console.log(name) 
+console.log(age) 
+// Output:
+// Deepak
+// 20
+
+// The urlSearchParams.get() method is an inbuilt 
+// application programming interface of class
+//  URLSearchParams within url module which 
+// is used to get the value for particular name 
+// entry present in the URL search params object. 
+const urlSearchParams.get(name)
+// Return value: This method returns 
+// the value for particular name entry 
+// present in the url search params object. 
+// Importing the module 'url' 
+const http = require('url');
+// Creating and initializing  
+// URLSearchParams object 
+const params = new URLSearchParams();
+// Appending value in the object 
+params.append('A', 'Book');
+params.append('B', 'Pen');
+params.append('C', 'Pencile');
+// Getting the value for entry 'A' 
+// by using get() api 
+const value = params.get('A');
+// Display the result 
+console.log("value for A is " + value); 
+// Run app.js file using the following command:
+    // node app.js
+// Output:
+// value for A is Book
+
+
+
+// In URLSearchParams interface, the getAll() 
+// method returns all the values of the input 
+// search parameter in the form of an array. 
+
+// Syntax:
+URLSearchParams.getAll(name)
+// Returns: An array of string according to 
+// the name-value pairs, else an empty array 
+// will be returned. Parameters: name – Input 
+// the name of the parameter. 
+let url = new URL('https://example.com?par=5&bar=2');
+let params = new URLSearchParams(url.search.slice(1));
+//Add a second par parameter.  
+params.append('par', 4);
+console.log(params.getAll('par'))
+// Output:
+// ['5', '4']
+
+// In the URLSearchParams interface, the sort() 
+// method helps to sort all keys/pairs in place.
+//  The sort criteria are unicode points of the keys. 
+// This method uses a stable sorting algorithm. 
+
+searchParams.sort();
+// Return: Sorted order of existing name-value 
+// pairs in place by their names. 
+
+const searchPars = new URLSearchParams("d=4 & c=2 & b=3 & a=1");
+// Sort the key/value pairs
+searchPars.sort();
+// Display the sorted query string
+console.log(searchPars.toString());
+// Output:
+// a=1&b=3&c=2&d=4
+
+// The urlSearchParams.toString() method is 
+// an inbuilt application programming interface 
+// of class URLSearchParams within url module 
+// which is used to get the object of uri 
+// search params object as a string.
+const urlSearchParams.toString()
+// Return value: This method returns the object 
+// of uri search params object as a string.
+
+const http = require('url');
+// Creating and initializing 
+// URLSearchParams object
+const params = new URLSearchParams();
+// Appending value in the object
+params.append('A', 'Book');
+params.append('B', 'Pen');
+params.append('A', 'Pencil');
+// Getting string representation
+// by using toString() api
+const value = params.toString();
+// Display the result
+console.log("String representation"
+      + " of object : " + value);
+// Run app.js file using the following command:  
+node app.js
+// Output:
+// String representation of object : A=Book&B=Pen&A=Pencil
+
+// Node.js URLSearchParams.has() Method
+// In URLSearchParams interface, the has() 
+// method returns a Boolean which tells us 
+// that if the parameter with input name 
+// exists it will return true, else false. 
+let url = new URL('https://example.com?par=5&bar=4'); 
+let param = new URLSearchParams(url.search.slice(1)); 
+  
+param.has('bar') === true;  
+// Output:
+// true
+
+// Node.js URLSearchParams.keys()
+// In URLSearchParams interface, the keys() 
+// method returns an Iterator which allows 
+// us to iterate through all the keys 
+// present in the object. 
+var searchParams = new URLSearchParams("keyA=valueA&keyB=valueB");  
+  
+// Display the key/value pairs  
+for(var key of searchParams.keys()) {  
+  console.log(key);  
+} 
+// Output:
+// keyA
+// keyB
+
+// Node.js URLSearchParams.toString()
+// In URLSearchParams interface, the toString() 
+// method returns a query string which is 
+// suitable for use in a URL. 
+
+// Syntax:
+URLSearchParams.toString()
+// Return:Returns the search parameters 
+// serialized as a string(with Characters
+//  percent-encoded). 
+let url = new URL('https://example.com?foo=1&bar=2'); 
+let params = new URLSearchParams(url.search.slice(1)); 
+  
+//Add another parameter. 
+params.append('par', 4); 
+console.log(params.toString()); 
+// Output:
+// 'foo=1&bar=2&par=4'
+
+// Node.js urlSearchParams.values()
+// In the URLSearchParams interface, the values() 
+// method returns an iterator which allows us 
+// to iterate through all the values present in the object
+const searchParams = new URLSearchParams("keyA=valueA&keyB=valueB");
+ 
+// Display the values
+for(let value of searchParams.values()) {
+      console.log(value);
+}
+// Output:
+// valueA
+// valueB
+
+// Node.js URLSearchParams.set()
+
+// In URLSearchParams interface, 
+// the set() method sets the value 
+// given as an input parameter.If 
+// there are several values matching 
+// the input parameter then it deletes 
+// the others and if the value does 
+// not exist then it creates it. 
+
+// Syntax:
+URLSearchParams.set(name, value)
+// Parameters: name – Input the name of 
+// the parameter. value – Input the value 
+// of the parameter. 
+let url = new URL('https://example.com?fo=4&bar=6'); 
+let params = new URLSearchParams(url.search.slice(1)); 
+  
+//Add another parameter. 
+params.set('par', 5); 
+console.log(params.toString()); 
+
+// Output:
+// fo=4&bar=6&par=5
+
+// Node.js urlObject.auth API
+// With the help of urlObject.auth() method, 
+// we can find the authentication parameter 
+// within the hostname. This method returns 
+// the string of parameters.
+// Syntax :
+urlObject.auth()  
+// Return: Returns the string of authentication parameters. 
+
+const url = require('url');
+const adr =
+    'https://username=jitender:password=geeks@www.geeksforgeeks.com';
+// Parse the address:
+const q = url.parse(adr, true);
+/* The parse method returns an object containing
+ URL properties */
+console.log(q.auth);
+
+// Node.js urlObject.hash API
+// Before we go on to learn about URL objects API 
+// we need to know a brief about URL. If you ever 
+// wanted to provide utilities so as to parse or 
+// resolute your URL, we can do it through 
+// the URL Module. We can divide the URL Module 
+// into two parts:- These are- URL String and URL Object. 
+// The urlObjectHash is a part of URL Object which 
+// is generally based on Legacy API (Though 
+// a newer API is also provided by the name 
+// of WHATWG URL Standard) 
+
+// urlObject.hash: It is used for identifying 
+// the “fragment” portion of a URL. 
+// This property also includes the # character.
+
+// For example: '#hash'.
+// Syntax
+urlObject.hash
+// Example:
+ 
+const url = require('url'); 
+const reqUrl = 'www.example.com/hi#file?=newFile'
+const urlObject = url.parse(reqUrl, true); 
+  
+console.log(urlObject.hash); 
+// OUTPUT:
+// #file?=newFile
+
+
+// Node.js urlObject.host API
+
+// The utilities for URL resolution and parsing 
+// is provided by the URL module. A URL string 
+// is a structured string that contains various 
+// multiple meaningful components. When parsed, 
+// a URL object is returned that contains properties 
+// for each of these components. url.host() return 
+// the host name in the url as a string. 
+
+// Examples:
+// http://localhost:8080/register
+// localhost:8080 - is the host name.
+// https://geeksforgeeks.org/practice
+// geeksforgeeks.org - is the host name.
+
+// In the below example we first create a URL object. 
+// Then after using the .host() function, we will get 
+// the hostname in the URL as output.
+ 
+//Importing the url module 
+const url=require('url'); 
+  
+//creating a new url object 
+var link = new URL("https://google.com/coding_challenges"); 
+  
+//Using the .host() function to print the host name in the url 
+console.log(link.host); 
+// OUTPUT:
+// google.com
+
+
+// Node.js urlObject.search API
+// The urlObject.search() method in Node is used 
+// to get the search query within the hostname 
+// which is followed by the ‘?’ character.
+
+// Syntax : urlObject.search() 
+// Return : Returns the search query after ‘?’ character.
+
+const url = require('url');
+
+var adr =
+    'http://localhost:8080/default.htm?year=2019&month=may';
+// Parse the address: 
+var q = url.parse(adr, true);
+/* The parse method returns an object containing 
+ URL properties */
+console.log(q.search);
+
+// Node.js urlObject.protocol API
+
+// With the help of urlObject.protocol() method, 
+// we can find the name of protocol which is 
+// used by the given hostname.
+
+// Syntax : 
+urlObject.protocol()
+// Return : Returns the protocol used (i.e. – http, https, ftp, etc.)
+const url = require('url');
+
+var adr =
+    'http://localhost:8080/default.htm?year=2019&month=may';
+
+// Parse the address: 
+var q = url.parse(adr, true);
+
+/* The parse method returns an object containing 
+ URL properties */
+console.log(q.protocol);
+
+// Node.js urlObject.href API
+// The urlObject.href API is used to return 
+// the complete URL string along with 
+// the protocols(HTTP) and pathname or other search terms. 
+
+urlObject.href
+
+// For example: 'http://www.geeksforgeeks.com/login/password.html'
+
+// Here, Protocol = http
+//       Path = /login
+//       Host = 'www'
+//       File Name = password.html
+
+const gfg = new URL('https://www.geeksforgeeks.com/login.html '); 
+// Output the fetched url
+console.log(gfg.href);
+
+// Output: 
+//  https://www.geeksforgeeks.com/login.html
+
+const parse = require('url-parse'); 
+const url = parse('https://www.example.com:777/a/b?c=d&e=f#g ');
+console.log(url.href);
+
+// Output: 
+//  https://www.example.com:777/a/b?c=d&e=f#g 
+
+// Node.js urlObject.query API
+
+// The urlObject.query is the query string 
+// returned without the ASCII question mark (?) 
+// or an object returned by the query string 
+// module named as parse() method. 
+// The url.parse() method is used to check 
+// whether the query is a string or an object. 
+// Basically, the argument (parseQueryString) 
+// that is passed to url.parse() method to 
+// tell the nature of the query. 
+
+// Syntax
+urlObject.query
+// Note: If this method returns as a string 
+// then the decoding of the query string is 
+// not performed and if it returns an object 
+// then both key and value pairs are decoded. 
+
+// 'query=string' or {'query': 'object'}
+
+// 'http://localhost:8000/gfg.html?name:GFG'
+
+// Node.js urlObject.slashes API
+// The urlObject.slashes property is used 
+// when one wants to check whether there 
+// is a need for ASCII valued forward-slash 
+// character (/) after the colon (:) in the 
+// protocol (HTTP or HTTPS) of a URL or not. 
+// It returns the Boolean value.
+
+// Syntax: 
+urlObject.slashes
+// The urlObject.slashes property 
+// returns true if two ASCII value forward slashes
+//  are required, otherwise, it returns false.
+
+const parse = require('url-parse');
+
+// Use command 'npm install url-parse' in
+// command prompt to import this module
+const url = parse('www.geeksforgeeks.org');
+
+// Display result in console
+console.log(url.slashes);
+
+// Output: 
+// false
+
+// Node.js urlObject.port API
+
+// The urlObject.port() method in Node is used 
+// to get the numeric port portion of 
+// the host component within the hostname.
+//  The URL’s port number is returned otherwise
+//  None if the port number is not present in the URL.
+
+// Syntax:
+urlObject.port()
+
+// Return: Returns the URL port number or None
+// Example 1: In these examples, we have shown 
+// how the urlObject.port() method is able to 
+// extract the URL’s port number from the hostname. 
+
+const url = require('url');
+let adr =
+    'http://localhost:8080/default.htm?year=2019 & month=may';
+// Parse the address: 
+let q = url.parse(adr, true);
+/* The parse method returns an object containing 
+URL properties */
+console.log(q.port);
+// Output :
+// 8080
+
+// Node.js urlObject.pathname API
+
+// With the help of urlObject.pathname() method, 
+// we can find the name of the path which is used 
+// by the given hostname. This contains all 
+// the things starting from the host (with the port) 
+// and before the beginning of the query or hash 
+// components, which are delimited by one of 
+// the ASCII question mark (?) or hash (#) characters.
+urlObject.pathname()
+
+// Return: Returns the pathname used(i.e.’/p/a/t/h’)
+const url = require('url');
+
+const address =
+    'https://u:p@www.example.com:777/a/b?c=d&e=f#g';
+
+// Parse the address: 
+const q = url.parse(address, true);
+
+/* The parse method returns an object containing 
+ URL properties */
+console.log(q.pathname);
+
+// Output:
+// /a/b
+
+// Node.js URL.hash API
+// The url.hash is an inbuilt application 
+// programming interface of class URL within 
+// url module which is used to get and set 
+// the fragment portion of the URL.
+url.hash
+// Return value: It gets and sets the fragment portion of the URL.
+
+// creating and initializing myURL 
+const myURL = new URL('https://example.org/foo#ram'); 
+// Display href value of myURL before change 
+console.log("Before Change"); 
+console.log(myURL.href); 
+// assigning fragment portion 
+// using hash  
+console.log(); 
+myURL.hash = 'rahim'; 
+// Display href value of myURL after change 
+console.log("After Change"); 
+console.log(myURL.href); 
+// Output: 
+// Before Change
+// https://example.org/foo#ram
+
+// After Change
+// https://example.org/foo#rahim
+
+const myURL = new URL('https://example.org/foo#ram'); 
+// getting the fragment portion 
+// using hash  
+const hash = myURL.hash; 
+// Display hash value  
+console.log(hash); 
+// Output: 
+// #ram
+
+// The url.host is an inbuilt application 
+// programming interface of class URL with 
+// in url module which is used to get and 
+// set the host portion of the URL.
+
+// Syntax:  
+url.host
+// Return value: It gets and sets the host portion of the URL.
+
+const http = require('url');
+// creating and initializing myURL 
+const myURL = new URL('https://example.com:80/foo#ram');
+// Display href value of myURL before change 
+console.log("Before Change");
+console.log(myURL.href);
+// assigning host portion 
+// using host 
+console.log();
+myURL.host = 'example.com:82';
+// Display href value of myURL after change 
+console.log("After Change");
+console.log(myURL.href);
+
+// Output: 
+// Before Change
+// https://example.com:80/foo#ram
+
+// After Change
+// https://example.com:82/foo#ram
+
+// url.origin is an inbuilt application programming 
+// interface(API) of the URL class within the url module. 
+// url.origin API is used to gets the read-only 
+// serialization of the URL’s origin. 
+
+// Syntax: url.origin
+// url : It is an object created by URL constructor.
+const url = require('url'); 
+//Creating an URL_1 object with URL constructor. 
+const URL_1 = new URL("https://www.geeksforgeeks.org/geeks"); 
+//Getting origin of above created URL_1 object 
+console.log(URL_1.origin); 
+
+// URL.username is an inbuilt application 
+// programming interface(API) of the URL 
+// class within Node.JS. 
+// URL.username API is used to get and 
+// set the username of the URL. 
+ url.username
+// URL: It is an object created by a URL constructor.
+
+const URL_1 = new URL("https://ashish:ashish123@www.geeksforgeeks.org/geeks");
+//Getting username of above created URL_1 object
+console.log("Before changing username URL is:")
+console.log(URL_1.href);
+console.log("username: " + URL_1.username);
+//Setting URL_1 username to ashu
+URL_1.username = "ashu";
+//Getting username after setting it to ashu
+console.log("After changing username URL is:")
+console.log(URL_1.href);
+console.log("username: " + URL_1.username);
+
+
+// URL.search is an inbuilt application programming 
+// interface(API) of the URL class within the Node.JS. 
+// URL.search API is used to get and set 
+// the query part of URL. 
+url.search
+// url : It is an object created by URL constructor.
+
+const URL_1 = new URL("https://www.geeksforgeeks.org");
+//Setting query string for URL_1 
+URL_1.search = "articles=web_technologies";
+console.log(URL_1.href);
+//Getting query string after setting  
+console.log(URL_1.search);
+
+// The url.port is an inbuilt application programming 
+// interface of class URL within url module which 
+// is used to get and set the port portion of the URL.
+// the port value may be a number or a string 
+// containing a number in the range 0 to 65535 (inclusive). 
+// Setting the value to the default port of the URL objects 
+// given protocol will result in the port value becoming 
+// the empty string (”). 
+
+// interface of class URL within url module which 
+// is used to get and set the port portion of the URL.
+// the port value may be a number or a string 
+// containing a number in the range 0 to 65535 (inclusive). 
+// Setting the value to the default port of the URL objects 
+// given protocol will result in the port value becoming 
+// the empty string (”). 
+
+// The port value can be an empty string in which 
+// case the port depends on the protocol/scheme:
+// Protocol	port
+// “ftp”	21
+// “file”	 
+// “gopher”	70
+// “http”	80
+// “https”	443
+// “ws”	    80
+// “wss”	443
+// Upon assigning a value to the port, the value
+//  will first be converted to a string using .toString(). 
+
+// If that string is invalid but it begins with 
+// a number, the leading number is assigned to the port. 
+// If the number lies outside the range denoted above, 
+// it is ignored.
+
+const http = require('url');
+// creating and initializing myURL 
+const myURL = new URL('https://example.com:80/foo#ram');
+// Display href and port 
+// value of myURL before change 
+console.log("Before Change");
+console.log(myURL.href);
+// assigning port portion 
+// using port API 
+console.log();
+myURL.port = '12345';
+// Display href and password 
+// value of myURL after change 
+console.log("After Change");
+console.log(myURL.href);
+
+// The url.pathname is an inbuilt application 
+// programming interface of class URL with in 
+// url module which is used to get and set 
+// the pathname portion of the URL.
+const url.pathname
+// Return value: It gets and sets 
+// the pathname portion of the URL.
+
+//importing the module 'url' 
+const http = require('url'); 
+// creating and initializing myURL 
+const myURL = new URL('https://example.com:80/foo#ram'); 
+// Display the href 
+// value of myURL before change 
+console.log("Before Change"); 
+console.log(myURL.href); 
+// assigning pathname portion 
+// using pathname API 
+console.log(); 
+myURL.pathname = '/abcdef'; 
+// Display href  
+// value of myURL after change 
+console.log("After Change"); 
+console.log(myURL.href); 
+
+// The url.password is an inbuilt application 
+// programming interface of class URL with in 
+// url module which is used to get and set 
+// the password portion of the URL. 
+const url.password
+// Return value: It gets and sets the password portion of the URL.
+
+//importing the module 'url' 
+const http = require('url'); 
+// creating and initializing myURL 
+const myURL = new URL('https://pqr:abc@example.com'); 
+// Display password 
+// value of myURL before change 
+console.log("Before Change"); 
+console.log(myURL.password); 
+// assigning password portion 
+// using password API 
+console.log(); 
+// Changing the myUrl.password for the above URL 
+myURL.password = '123'; 
+// Display the changed password 
+// value of myURL after change 
+console.log("After Change"); 
+console.log(myURL.href); 
+
+// The url.href is an inbuilt application 
+// programming interface of class URL with 
+// in the url module which Gets and sets 
+// the serialized URL. Getting the value 
+// of the href property is equivalent to 
+// calling the url.toString() method.Setting 
+// the value of this property to a new value 
+// is equivalent to creating a new URL object 
+// using new URL(value). Each of the URL object’s 
+// properties will be modified.
+const url.href 
+
+//importing the module 'url' 
+const http = require('url'); 
+// creating and initializing myURL 
+const myURL = new URL('https://example.com:80/foo#ram'); 
+// Display href value of myURL before change 
+console.log("Before Change"); 
+console.log(myURL.href); 
+// assigning serialized URL 
+// using href 
+console.log(); 
+myURL.href = 'https://example.com/bar'; 
+// Display href value of myURL after change 
+console.log("After Change"); 
+console.log(myURL.href); 
+
+// The url.hostname is an inbuilt application 
+// programming interface of class URL with in 
+// url module which is used to get and set 
+// the hostname portion of the URL. The key 
+// difference between url.host and url.hostname 
+// is that url.hostname does not include the port.
+const url.hostname
+// Return value: It gets and sets the hostname portion of the URL.
+
+//importing the module 'url' 
+const http = require('url'); 
+// creating and initializing myURL 
+const myURL = new URL('https://example.com:80/foo#ram'); 
+// Display href value of myURL before change 
+console.log("Before Change"); 
+console.log(myURL.href); 
+// assigning hostname portion 
+// using hostname 
+console.log(); 
+myURL.hostname = 'example.org'; 
+// Display href value of myURL after change 
+console.log("After Change"); 
+console.log(myURL.href); 
+
+// This URL.pathToFileURL function converts 
+// the path to a file and ensures that the 
+// URL control characters (/, \, : ) are 
+// correctly appended/adjusted when converting
+//  the given path into a File URL.
+url.pathToFileURL(path)
+// Return Value: This function returns 
+// the file URL object.
+
+const url = require('url');
+// Some random path from system
+const path = 'D:\GeeksForGeeks'
+// Converting the path to properly encoded file
+console.log(url.pathToFileURL(path))
+// Output: 
+// URL {
+//   href: 'file:///D:/GeeksForGeeks',
+//   origin: 'null',
+//   protocol: 'file:',
+//   username: '',
+//   password: '',
+//   host: '',
+//   hostname: '',
+//   port: '',
+//   pathname: '/D:/GeeksForGeeks',
+//   search: '',
+//   searchParams: URLSearchParams {},
+//   hash: ''
+// }
+
+const url = require('url');
+// Some random path from system
+const path = 'D:\NodeJS\node_modules\npm'
+// Converting the path to properly encoded file
+console.log(url.pathToFileURL(path))
+// Output: 
+// URL {
+  //href: 'file:///D:/NodeJS%0Aode_modules%0Apm',
+  //origin: 'null',
+  //protocol: 'file:',
+  //username: '',
+  //password: '',
+  //host: '',
+  // hostname: '',
+  //port: '',
+  //pathname: '/D:/NodeJS%0Aode_modules%0Apm',
+  //search: '',
+  //searchParams: URLSearchParams { },
+  //hash: ''
+// }
+
+// This URL.fileURLToPath function decodes 
+// the file URL to a path string and ensures 
+// that the URL control characters (/, %) 
+// are correctly appended/adjusted when 
+// converting the given file URL into a path. 
+url.fileURLToPath( url )
+// Return Value: It returns a string which 
+// represents the fully-resolved platform-specific 
+// file path.
+
+const url = require('url'); 
+ // Some random path from system 
+const file = 'file://computerscience/geeksforgeeks.txt'
+// Converting our file to properly encoded path                     
+console.log(url.fileURLToPath(file))  
+// Output:
+// \\computerscience\geeksforgeeks.txt
+
+const url = require('url'); 
+// Some random path from system 
+const file = 'file:///C:/path/example/gfg'
+// Converting the file to properly encoded path 
+console.log(url.fileURLToPath(file)) 
+// Output:
+//  C:\path\example\gfg 
+
+// The url.parse() method takes a URL string, parses it, 
+// and it will return a URL object with each part of 
+// the address as properties.
+url.parse( urlString, parseQueryString, slashesDenoteHost)
+
+// urlString: It holds the URL string which needs to parse.
+// parseQueryString: It is a boolean value. If it set to true 
+// then the query property will be set to an object returned 
+// by the querystring module’s parse() method. If it set to 
+// false then the query property on the returned URL object 
+// will be an unparsed, undecoded string. Its default value is false.
+// slashesDenoteHost: It is a boolean value. If it set 
+// to true then the first token after the literal 
+// string // and preceding the next / will be interpreted 
+// as the host. 
+
+// For example: //geeksforgeeks.org/web-technology 
+// contains the result {host: ‘geeksforgeeks.org’, pathname: ‘/web-technology’} 
+// rather than {pathname: ‘//geeksforgeeks.org/web-technology’}. 
+// Its default value is false.
+// Return Value: The url.parse() method returns 
+// an object with each part of the address as properties.
+
+const url = require('url'); 
+  
+// URL address 
+const address =  
+'https://geeksforgeeks.org/projects?sort=newest&lang=nodejs'; 
+  
+// Call parse() method using url module 
+let urlObject = url.parse(address, true); 
+  
+console.log('Url host'); 
+  
+// Returns 'geeksforgeeks.org' 
+console.log(urlObject.host);  
+console.log('Url pathname'); 
+  
+// Returns '/projects' 
+console.log(urlObject.pathname);  
+console.log('Url search'); 
+  
+// Returns '?sort=newest&lang=nodejs' 
+console.log(urlObject.search);  
+   
+// Get query data as an object 
+// Returns an object:  
+// { sort: 'newest', lang: 'nodejs' } 
+let queryData = urlObject.query;  
+console.log(queryData); 
+console.log('Url query object'); 
+  
+// Returns 'nodejs' 
+console.log(queryData.lang);  
+
+// Special Schemes of Node.js URL.protocol API
+// The url.protocol is an inbuilt application programming 
+// interface of class URL within URL module which is used 
+// to get and set the protocol scheme of the URL.
+const url.protocol
+// Return value: It get and set protocol scheme of the URL
+
+// Example 1: This example changes the special protocols 
+// to hypothetical protocols like http->https. 
+ 
+// Node program to demonstrate the   
+// url.protocol API as Setter   
+// Changing of protocols to special 
+// protocols like http->https 
+      
+// Importing the module 'url'  
+const http = require('url');   
+// Creating and initializing myURL  
+const myURL = new URL('http://gfg.org/foo');  
+// Display href value of myURL before change  
+console.log("Before Change");    
+console.log(myURL.href);  
+
+// Assigning protocol portion  
+// using protocol  
+console.log();  
+myURL.protocol = 'https';  
+// Display href value of myURL after change  
+console.log("After Change");  
+console.log(myURL.href);  
+// Output: 
+// Before Change
+// http://gfg.org/foo
+
+// After Change
+// https://gfg.org/foo
+
+
+// Example 2: This example try changes 
+// the non-special protocol to a special
+//  protocol like smtp->http but it will not change.
+
+// Node program to demonstrate the   
+// url.protocol API as Setter   
+// Changing the protocols to special  
+// protocols like smtp->http 
+       
+// Importing the module 'url'  
+const http = require('url');  
+// Creating and initializing myURL  
+const myURL = new URL('smtp://gfg.org/foo');  
+// Display href value of myURL before change  
+console.log("Before Change");  
+console.log(myURL.href);  
+// Assigning protocol portion  
+// using protocol  
+console.log();  
+myURL.protocol = 'http';  
+// Display href value of myURL after change  
+console.log("After Change");  
+console.log(myURL.href);  
+// Output: 
+
+// Before Change
+// smtp://gfg.org/foo
+
+// After Change
+// smtp://gfg.org/foo
+
+// Example 3: This example try to change 
+// the special protocols to hypothetical 
+// protocols like ftp->fish but it will not change.
+ 
+// Node program to demonstrate the   
+// url.protocol API as Setter   
+// Changing of protocols to special 
+// protocols like ftp->fish 
+       
+// Importing the module 'url'  
+const http = require('url');  
+// Creating and initializing myURL  
+const myURL = new URL('ftp://gfg.org/foo');  
+// Display href value of myURL before change  
+console.log("Before Change");  
+console.log(myURL.href);  
+// Assigning protocol portion  
+// using protocol  
+console.log();  
+myURL.protocol = 'fish';  
+// Display href value of myURL after change  
+console.log("After Change");  
+console.log(myURL.href);  
+// Output: 
+
+// Before Change
+// ftp://gfg.org/foo
+
+// After Change
+// ftp://gfg.org/foo
+
+// Example 4: This example try to change 
+// from non-special protocols to hypothetical 
+// protocols like ssh->fish.
+ 
+// Node program to demonstrate the   
+// url.protocol API as Setter   
+// Changing the protocols to special 
+// protocols like ssh->fish 
+       
+// Importing the module 'url'  
+const http = require('url');  
+// Creating and initializing myURL  
+const myURL = new URL('ssh://gfg.org/foo');  
+// Display href value of myURL before change  
+console.log("Before Change");  
+console.log(myURL.href);  
+// Assigning protocol portion  
+// using protocol  
+console.log();  
+myURL.protocol = 'fish';  
+// Display href value of myURL after change  
+console.log("After Change");  
+console.log(myURL.href);  
+// Output: 
+
+// Before Change
+// ssh://gfg.org/foo
+
+// After Change
+// fish://gfg.org/foo
+
+// Example 5: It can be used as a getter.
+ 
+// Node program to demonstrate the  
+// url.pathname API as Getter  
+   
+// Importing the module 'url'  
+const http = require('url');  
+// Creating and initializing myURL  
+const myURL = new URL('https://gfg.org/foo');  
+// Getting the path portion  
+// using pathname  
+const protocol = myURL.protocol;  
+// Display path value  
+console.log(protocol);  
+// Output: 
+
+// https:
+
+// Node.js URL.protocol API
+// The url.protocol is an inbuilt application 
+// programming interface of class URL within 
+// url module which is used to get and set 
+// the protocol portion of the URL. When a URL
+//  is parsed using one of the special protocols, 
+// the url.protocol property may be changed 
+// to another special protocol but cannot 
+// be changed to a non-special protocol, and vice versa.
+const url.protocol
+// Return value: It returns the protocol portion of the URL.
+
+const http = require('url'); 
+    
+// Creating and initializing myURL 
+const myURL = new URL('https://geeksforgeeks.org:80/foo#ram'); 
+    
+// Display href value of myURL before change 
+console.log("Before Change"); 
+console.log(myURL.href); 
+    
+// Assigning protocol portion 
+// using protocol 
+console.log(); 
+myURL.protocol = 'http'; 
+    
+// Display href value of myURL after change 
+console.log("After Change"); 
+console.log(myURL.href); 
+// Output: 
+
+// Before Change
+// https://geeksforgeeks.org:80/foo#ram
+
+// After Change
+// http://geeksforgeeks.org/foo#ram
+
+// Node.js URL.domainToASCII
+// The url.host is an inbuilt application programming 
+// interface of class URL with in url module.
+// It returns the Punycode ASCII serialization of 
+// the domain. If domain is an invalid domain, 
+// the empty string is returned.
+
+// Syntax :
+const url.domainToASCII
+// Domain value : string
+// Return value : string
+// Example :
+const url = require('url'); 
+console.log(url.domainToASCII('español.com')); 
+console.log(url.domainToASCII('??.com')); 
+console.log(url.domainToASCII('xn--iñvalid.com')); 
+// OUTPUT:
+// xn--espaol-zwa.com
+// xn--fiq228c.com
+// Prints an empty string in the 3'rd case
+
+// Note : It performs the inverse operation 
+// to url.domainToUnicode().
+
+// Node.js URL.domainToUnicode
+// The url.domainToUnicode is an inbuilt 
+// application programming interface of 
+// class URL with in url module.
+
+// It returns the Unicode serialization of 
+// the domain. If the domain is invalid, 
+// the empty string is returned.
+
+// Syntax :
+const url.domainToASCII
+// Domain value : string
+// Return value : string
+
+// Example :
+const url = require('url'); 
+console.log(url.domainToUnicode('xn--espaol-zwa.com')); 
+console.log(url.domainToUnicode('xn--fiq228c.com')); 
+console.log(url.domainToUnicode('xn--iñvalid.com')); 
+// OUTPUT:
+// español.com
+// ??.com
+//Empty String will be printed for third case
+// Note : It performs the inverse operation to url.domainToASCII().
+
+
+// Node.js URL.resolve(from,to) API
+// The url.resolve(from, to) is inbuilt method of 
+// class URL that resolves a target URL relative 
+// to a base URL.
+
+// Syntax:
+url.resolve(from, to);
+// Where,
+// from: (type:String) The base URL being resolved against.
+// to : (type:String) The “href” URL being resolved.
+
+// Return value:
+// It returns the resolved URL by given parameters 
+// in from URL by to URL(type:string).
+
+// Parsing of Target URL:
+
+// 1. Preceded by forward slash(“/”) – It will replace 
+// whole path after domain of base URL.
+
+//  2. Not preceded by forward slash(“/”) – It will replace 
+// last word after forward slash(“/”) in path of base URL.
+
+// Examples:
+ 
+// node program to demonstrate the   
+// url.resolve(from, to) method   
+    
+//importing the module 'url'  
+const url = require('url');  
+  
+//We can directly console.log() return value of the method 
+  
+//Method 1: 
+console.log(url.resolve("http://www.google.com/", "/one"));                   
+console.log(url.resolve("http://www.google.com/one/two/three", "/four"));     
+  
+//Method 2: 
+console.log(url.resolve("http://www.google.com/", "one"));                   
+console.log(url.resolve("http://www.google.com/one/two/three", "four"));     
+// OUTPUT: 
+// http://www.google.com/one
+// http://www.google.com/four
+
+// http://www.google.com/one
+// http://www.google.com/one/two/four
+// This code can run with node command in command prompt.(Eg. node file name)
+
+// Node.js URL.format(urlObject) API
+// The URL.format(urlObject) is the inbuilt API provided 
+// by URL class, which takes an object or string and 
+// return a formatted string derived from that object or string. 
+
+// Syntax:
+const url.format(urlObject)
+
+// If the urlObject is not an object or string, 
+// then it will throw a TypeError. 
+
+// Return value: It returns string derived from urlObject. 
+// The urlObject can have the following fields or keys: 
+// protocol
+// slashes
+// auth
+// hostname
+// host
+// port
+// pathname
+// search
+// query
+// hash
+
+// The formatting process is as follows:
+
+// 1. Initially, an empty string (‘’ say result) is created 
+// and then following parameters are looked for in order.
+
+// 2. urlObject.protocol: string
+// If urlObject.protocol is a string it is appended 
+// to the result else if not undefined and not 
+// a string then Error is thrown.
+
+// If urlObject.protocol do not end with ASCII colon ( : ) 
+// then, the literal ‘:’ is appended to the result.
+
+// 3. urlObject.slashes: boolean
+// If either of the following property is true, 
+// then literals ‘//’ are appended to the result:
+
+// urlObject.slashaes is true.
+
+// urlObject.protocol is http, https, ftp, gopher,
+//  or file, then slashes will be automatically
+//  true even if slashes is false.
+
+// 4. urlObject.auth: string
+
+// If the urlObject.auth is not undefined and urlObject.host 
+// or urlObject.hostname is also not undefined then auth 
+// is appended to the result with literal ‘@’ irrespective 
+// of whether the literal ‘@’ present or not at the end.
+
+// 5. urlObject.host: string
+
+// If urlObject.host is a string it is appended to 
+// the result else if not undefined and not a string then Error is thrown.
+// If it is undefined then urlObject.hostname is considered.
+
+// 6. urlObject.hostname: string
+
+// If urlObject.hostname is a string it is appended to 
+// the result else if not undefined and not a string 
+// then Error is thrown.
+
+// If both host and hostname are defined then host 
+// will be given considered.
+
+// 7. urlObject.port: (number | string)
+
+// If hostname is considered and urlObject.port 
+// is defined then literal ‘:’ will be appended 
+// to the result along with urlObject.port.
+
+// 8. urlObject.pathname: string
+// If urlObject.pathname is a string but not empty 
+// string and not starting with literal ‘/’, 
+// then literal ‘/’ is appended to the result.
+
+// urlObject.pathname is appended to the result.
+// Else UrlObject.pathname is not a string then Error is thrown.
+
+// 9. urlObject.search: string
+// If urlObject.search is a string but not empty string 
+// and not starting with literal ‘?’, then literal ‘?’ 
+// is appended to the result.
+// urlObject.search is appended to the result.
+// If urlObject.search is not a string then Error is thrown.
+
+// 10. urlObject.query: Object
+// If urlObject.query is an Object then literal ‘?’ is appended 
+// to the result along with output of calling the querystring 
+// module’s stringify() method passing the value of urlObject.query.
+// If both urlObject.search and urlObject.query are defined 
+// then urlObject.search will only be considered.
+
+// 11. urlObject.hash: string
+// If urlObject.hash is a string but not empty string and 
+// not starting with literal ‘#’, 
+// then literal ‘#’ is appended to the result.
+
+// urlObject.hash is appended to the result.
+// Else urlObject.hash is not a string and is 
+// not undefined then Error is thrown.
+
+// 12. Finally, the result is returned.
+
+// Example 1
+/* 
+  node program to demonstrate the URL.format API. 
+*/  
+    
+//importing the module 'url' 
+const url = require('url'); 
+  
+//creating and initializing urlObject 
+var urlObject={ 
+        protocol: 'https', 
+        hostname: 'example.com', 
+        port: 1800, 
+        pathname: 'sample/path', 
+        query: { 
+                page: 1, 
+                format: 'json'
+        }, 
+        hash: 'first'
+    } 
+  
+//getting the derived URL from urlObject using the url.format function 
+var sampleUrl=url.format(urlObject); 
+  
+//Display the returned value 
+console.log(sampleUrl.toString()); 
+   
+// Output: https://example.com:1800/sample/path?page=1&format=json#first
+// Example 2
+ 
+/* 
+  node program to demonstrate the URL.format API. 
+*/  
+    
+//importing the module 'url' 
+const url = require('url'); 
+  
+//creating and initializing urlObject 
+var urlObject={ 
+        protocol: 'prct', 
+        slashes: false, 
+        host: 'example.com', 
+        auth: 'abc', 
+        pathname: '/sample/path', 
+        search: 'something', 
+        hash: 'first'
+    } 
+  
+//getting the derived URL from urlObject using the url.format function 
+var sampleUrl=url.format(urlObject); 
+  
+//Display the returned value 
+console.log(sampleUrl.toString()); 
+// Output: prct:abc@example.com/sample/path?something#first
+
+// NOTE: The above program will compile and run by using 
+// the node fileName.js command. 
+
+// Node.js URL.format API
+
+// With the help of url.format()method, 
+// we are able to format the hostname
+//  according to our need. We have different 
+// types of other parameters which we can use 
+// to generate the hostname or to change 
+// the hostname as required.
+url.format(URL[, options]) 
+// auth is a boolean value if true then username 
+// and password have to be provided.
+// fragment if true then fragment should be included otherwise not.
+// search if true then provide the search query otherwise not.
+// unicode if true then unicode character 
+// appearing in the hostname should be 
+// encoded directly otherwise not.
+
+// Example 1 : In this example we first import 
+// the url module in node. Then to generate or 
+// format the random url we use the url.format() method.
+ 
+// node program to demonstrate the   
+//  url.format(URL[, options]) 
+    
+//importing the module 'url'  
+const url = require('url'); 
+    
+// creating and initializing myURL  
+var myURL = new URL(''https://abc:xyz@example.com#geeks');  
+    
+// Display href value of myURL before change  
+console.log("Before Change");  
+console.log(myURL.href);  
+    
+// using format method 
+myURL = url.format(myURL, { fragment: true,  
+    unicode: true, auth: false }); 
+    
+// Display href value of myURL after change  
+console.log("After Change");  
+console.log(myURL.href);  
+// Output :
+// Before Change
+// 'https://abc:xyz@example.com#geeks'
+
+// After Change
+// 'https://example.com/#geeks'
+
+// Example 2:
+// node program to demonstrate the   
+//  url.format(URL[, options]) 
+
+// The url.toString() method is an inbuilt application 
+// programming interface(API) of the URL module within 
+// the Node.JS. The url.toString() method is used to 
+// return the serialized URL. The returned value is 
+// equivalent to that of url.href and url.toJSON(). 
+url.toString()
+// url: It is an object created by URL constructor.
+
+// Creating an URL object with URL constructor.  
+const url = new URL("https://www.geeksforgeeks.org");  
+// Using toString() method  
+console.log(url.toString());  
+// Output:
+// https://www.geeksforgeeks.org
+
+// The url.toJSON() method in the node.js URL module 
+// is used to return the serialized URL of the URL object. 
+// The return value of this method is equivalent to 
+// the URL.href and url.toString() methods. If an URL 
+// object is serialized using JSON.stringify() method 
+// then it is called automatically. 
+url.toJSON()
+// Return Value: This method returns 
+// the serialized URL of the URL object. 
+
+const url = require('url');
+ 
+// Creating and initializing myURL variable
+let urls = [
+    new URL('https://www.geeksforgeeks.com'),
+    new URL('https://www.google.com'),
+    new URL('https://www.mygeeks.com')
+];
+ 
+// Display result
+console.log(JSON.stringify(urls));
+// Output:
+// [
+//     "https://www.geeksforgeeks.org/",
+//     "https://www.google.com/",
+//     "https://www.mygeeks.com/"
+// ]
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Node.js Utility Module: The Util module 
+// in node.js provides access to various utility functions. 
+const util = require('util');
+// There are various utility modules available 
+// in the node.js module library. The modules 
+// are extremely useful in developing node-based 
+// web applications.
+
+// OS Module
+//DNS Module
+//// Domain Module
+
+
+// The util.callbackify() method is an inbuilt 
+// application programming interface of the util 
+// module which is used to run an asynchronous 
+// function and get a callback in the node.js.
+
+// The util.callbackify() method is an inbuilt 
+// application programming interface of the util 
+// module which is used to run an asynchronous 
+// function and get a callback in the node.js.
+util.callbackify( async_function )
+// async_function: It is required parameter, 
+// signifies an original async function.
+// Return Value: It returns a promise as 
+// an error-first callback style function. 
+// which takes (err, ret) => {} as parameter, 
+// first argument of which is error or rejection 
+// reason, possibly null(when promise is resolved), 
+// and the second argument is the resolved value.
+
+const util = require('util'); 
+// Async function to be called 
+// from util.callbackify() method 
+async function async_function() { 
+    return 'message from async function'; 
+} 
+// Calling callbackify() 
+const callback_function =  
+        util.callbackify(async_function); 
+// Listener for callback_function 
+callback_function((err, ret) => { 
+    if (err) throw err; 
+    console.log(ret); 
+}); 
+// Output: 
+// message from async function
+
+// Allocating util module 
+const util = require('util'); 
+// Async function to be called  
+// from util.callbackify() method 
+async function async_function() { 
+    return Promise.reject(new Error( 
+        'this is an error message!')); 
+} 
+// Calling callbackify() 
+const callback_function = 
+    util.callbackify(async_function); 
+// Listener for callback_function 
+callback_function((err, ret) => { 
+    // If error occurs 
+    if (err && err.hasOwnProperty('reason') 
+        && err.reason === null) { 
+        // Printing error reason 
+        console.log(err.reason); 
+    } else { 
+        console.log(err); 
+    } 
+}); 
+
+// Output: 
+// Error: this is an error message!
+//     at async_function (C:\nodejs\g\util\callbackify_2.js:6:25)
+//     at async_function (util.js:356:13)
+// ......
+
+// util module ... too long have to see on site 
+// but it is ubique so do check it out 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Node.js v8.cachedDataVersionTag() Method
+// The v8.cachedDataVersionTag() method is 
+// an inbuilt application programming interface
+//  of the v8 module which is used to get the
+//  version tag derived from the v8 version.
+v8.cachedDataVersionTag();
+// Parameters: This method does not have any parameters.
+// Return Value: This method returns the version tag from 
+// the v8 version, command-line flags, and detected CPU features.
+// Example 1: The below example illustrates the use of the
+//  v8.cachedDataVersionTag() method in Node.js.
+
+// Accessing v8 module
+const v8 = require('v8');
+// Calling v8.cachedDataVersionTag() 
+tag = v8.cachedDataVersionTag();
+console.log("cache data version tag is " + tag);
+// Output:
+// cache data version tag is 4151506697
+
+// Accessing v8 module
+const v8 = require('v8');
+ 
+// User defined function
+function getTagVersion() {
+    // Initializing with zero
+    let tagVersion = 0;
+    // Calling v8.cachedDataVersionTag()
+    tagVersion = v8.cachedDataVersionTag();
+    return tagVersion;
+}
+// Function call
+let result = getTagVersion();
+// Printing Tag version
+console.log("The Cache Data Version is:", result);
+
+// Node.js v8.getHeapSpaceStatistics() Method
+// The v8.getHeapSpaceStatistics() method is an inbuilt application programming interface of the v8 module which is used to get statistics about heap space derived from the v8 version.
+v8.getHeapSpaceStatistics();
+// Return Value: This method returns an object that contains statistics about version 8 heap space. The returned object usually contains an array of multiple elements, where each element consists of the following fields:
+// space_name: A string represents the name of the heap space.
+// space_size: A number represents the heap space size.
+// space_used_size: A number represents the used heap space size.
+// space_available_size: A number, represents available heap space size.
+// physical_space_size: A number, specifying physical heap space size.
+// Accessing v8 module
+const v8 = require('v8');
+// Calling v8.getHeapSpaceStatistics() 
+console.log(v8.getHeapSpaceStatistics());
+
+// [ { space_name: 'read_only_space',
+//     space_size: 524288,
+//     space_used_size: 35208,
+//     space_available_size: 480376,
+//     physical_space_size: 524288 },
+//   { space_name: 'new_space',
+//     space_size: 2097152,
+//     space_used_size: 975376,
+//     space_available_size: 55792,
+//     physical_space_size: 2097152 },
+//   { space_name: 'old_space',
+//     space_size: 2330624,
+//     space_used_size: 2272448,
+/// ...........
+
+
+
+// Node.js v8.getHeapStatistics() Method
+// The v8.getHeapStatistics() method is an inbuilt application programming interface of the v8 module which is used to get statistics about heap derived from the v8 version.
+v8.getHeapStatistics();
+// total_heap_size: A number, signifies total heap size.
+// total_heap_size_executable: A number, signifies total executable heap size.
+// total_physical_size: A number, signifies total physical size.
+// total_available_size: A number, signifies the total available size.
+// used_heap_size: A number, signifies used heap size.
+// heap_size_limit: A number, signifies heap size limit.
+// malloced_memory: A number, signifies malloced memory.
+// peak_malloced_memory: A number, signifies maximum malloced memory.
+// does_zap_garbage: A number, specifically a boolean, signifies whether the –zap_code_space option is enabled or not.
+// number_of_native_contexts: A number, signifies a number of native contexts or the top-level contexts currently active. Memory leakage might be indicated by measuring the increment of this number over time.
+// number_of_detached_contexts: A number, signifies a number of detached contexts or contexts that were detached and not yet garbage collected. Memory leakage might be indicated if it has non zero value.
+// Return Value: This method returns an object that contains statistics about version 8 heap. The returned object usually contains an array, that consists of following fields:
+
+
+const v8 = require('v8');
+// Calling v8.getHeapStatistics() 
+console.log(v8.getHeapStatistics());
+// Run index.js file using the following command:
+node index.js
+// Output:
+// { total_heap_size: 6537216,
+//   total_heap_size_executable: 1048576,
+//   total_physical_size: 6537216,
+//   total_available_size: 1520717240,
+//   used_heap_size: 4199600,
+//   heap_size_limit: 1526909922,
+//   malloced_memory: 8192,
+//   peak_malloced_memory: 406408,
+//   does_zap_garbage: 0 }
+
+const v8 = require('v8');
+ 
+// Calling v8.getHeapStatistics() 
+stats = v8.getHeapStatistics();
+console.log("Heap Statistics are :");
+console.log("total_heap_size:"+stats['total_heap_size']);
+console.log("used_heap_size:"+stats['used_heap_size']);
+console.log("heap_size_limit:"+stats['heap_size_limit']);
+console.log("does_zap_garbage:"+stats['does_zap_garbage']);
+// Heap Statistics are :
+// total_heap_size:6537216
+// used_heap_size:4200640
+// heap_size_limit:1526909922
+// does_zap_garbage:0
+
+
+// Node.js v8.serialize() Method
+// The v8.serialize() method is an inbuilt application programming interface of the v8 module which is used to serialize any type of data into a buffer using default serializer.
+// Syntax:
+v8.serialize(value);
+// Parameters: This method one parameter as described below and mentioned above.
+// value: This is a required parameter, refers to any type of data to be serialized by default serializer
+// Return Value: This method returns a buffer containing serialized data of the passed value.
+
+// Accessing v8 module 
+const v8 = require('v8'); 
+// Calling v8.serialize()  
+console.log(v8.serialize("geeksforgeeks")); 
+// Run index.js file using the following command:
+// Output:
+// <Buffer ff 0d 22 0d 67 65 65 6b 73 66 6f 72 67 65 65 6b 73>
+
+const v8 = require('v8'); 
+// Calling v8.serialize()  
+console.log(v8.serialize("geeksforgeeks")); 
+// Run index.js file using the following command:
+// Output:
+// <Buffer ff 0d 22 0d 67 65 65 6b 73 66 6f 72 67 65 65 6b 73>
+node index.js
+// Example 2: Filename: index.js
+ 
+// Accessing v8 module 
+const v8 = require('v8'); 
+// Calling v8.serialize()  
+serialized_data = v8.serialize("abcdefg"); 
+console.log("\nSerialized data is "); 
+console.log(serialized_data); 
+serialized_data = v8.serialize(58375693); 
+console.log("\nSerialized data is "); 
+console.log(serialized_data); 
+serialized_data = v8.serialize(73847.0234); 
+console.log("\nSerialized data is "); 
+console.log(serialized_data); 
+serialized_data = v8.serialize('\n'); 
+console.log("\nSerialized data is "); 
+console.log(serialized_data); 
+// Output:
+// Serialized data is
+// <Buffer ff 0d 22 07 61 62 63 64 65 66 67>
+
+// Serialized data is
+// <Buffer ff 0d 49 9a f8 d5 37>
+
+// Serialized data is
+// <Buffer ff 0d 4e ac ad d8 5f 70 07 f2 40>
+
+// Serialized data is
+// <Buffer ff 0d 22 01 0a>
+
+
+// Node.js v8.deserialize() Method
+// The v8.deserialize() method is an inbuilt application programming interface of the v8 module which is used to deserialize a buffered data into JS value using default deserializer.
+// Syntax:
+v8.deserialize( buffer );
+// Parameters: This method accepts one parameter as mentioned above and described below:
+// buffer: This is a required parameter, a Buffer / TypedArray / DataView, refers to a buffered data to be deserialized.
+// Return Value: This method returns JS value after deserializing the buffered data.
+
+const v8 = require('v8'); 
+  
+// Calling v8.deserialize()  
+console.log(v8.deserialize(v8.serialize("geeksforgeeks"))); 
+// geeksforgeeks
+
+const v8 = require('v8'); 
+  
+// Calling v8.deserialize()  
+deserialized_data = v8.deserialize(v8.serialize("abcdefg")); 
+console.log("\nDeserialized data is "); 
+console.log(deserialized_data); 
+  
+deserialized_data = v8.deserialize(v8.serialize(58375693)); 
+console.log("\nDeserialized data is "); 
+console.log(deserialized_data); 
+  
+deserialized_data = v8.deserialize(v8.serialize(73847.0234)); 
+console.log("\nDeserialized data is "); 
+console.log(deserialized_data); 
+  
+deserialized_data = v8.deserialize(v8.serialize('Geek')); 
+console.log("\nDeserialized data is "); 
+console.log(deserialized_data); 
+// Run index.js file using the following command:
+node index.js
+// Output:
+// Deserialized data is
+// abcdefg
+
+// Deserialized data is
+// 58375693
+
+// Deserialized data is
+// 73847.0234
+
+// Deserialized data is
+// Geek
+
+// Node.js v8.Serializer.writeHeader() Method
+// The v8.Serializer.writeHeader() method is an inbuilt application programming interface of the v8.Serializer module, is used to write out a header, that contains the serialization format version.
+// Syntax:
+v8.Serializer.writeHeader();
+// Parameters: This method does not have any parameters.
+// Return Value: This method does not return anything but writes a header to the internal buffer.
+
+const v8 = require('v8'); 
+const serializer = new v8.Serializer(); 
+// Calling v8.serializer.writeHeader()  
+console.log(serializer.releaseBuffer()); 
+console.log(serializer.writeHeader()); 
+console.log(serializer.releaseBuffer()); 
+// Run index.js file using the following command:
+node index.js
+// Output:
+// <Buffer >
+// undefined
+// <Buffer ff 0d>
+
+const v8 = require('v8'); 
+const serializer = new v8.Serializer(); 
+// Calling v8.serializer.writeHeader()  
+console.log(serializer.writeHeader());
+// Run index.js file using the following command:
+node index.js
+// Output:
+// undefined
+
+// The v8.Serializer.writeValue() method is an inbuilt application programming interface of the v8.Serializer module which is used to write the serialized data of JS value to the internal buffer.
+// Syntax:
+v8.Serializer.writeValue(Value);
+
+// Node.js v8.Serializer.releaseBuffer() Method
+// The v8.Serializer.releaseBuffer() method is an inbuilt application programming interface of the v8.Serializer module which is used to get content of the internal buffer.
+// Syntax:
+v8.Serializer.releaseBuffer();
+const v8 = require('v8'); 
+const serializer = new v8.Serializer(); 
+  
+// Calling v8.serializer.releaseBuffer()  
+console.log(serializer.releaseBuffer()); 
+console.log(serializer.writeHeader()); 
+console.log(serializer.releaseBuffer()); 
+// Run index.js file using the following command:
+node index.js
+// Output:
+// <Buffer >
+// undefined
+// <Buffer ff 0d>
+
+// Node.js v8.Serializer.writeUint32() Method
+// The v8.Serializer.writeUint32() method is an inbuilt application programming interface of the v8.Serializer module, which is used to write the raw 32-bit integer value to the internal buffer. For use inside of custom serializer._writeHostObject().
+// Syntax:
+v8.Serializer.writeUint32( value );
+// Parameters: This method accepts single parameter as mentioned above and described below.
+// value: It is a required parameter, refers to a 32-bit integer to be written to the internal buffer.
+// Return Value: This method does not return anything but writes a raw 32-bit integer value to the internal buffer.
+
+const v8 = require('v8'); 
+const serializer = new v8.Serializer(); 
+// Calling v8.serializer.writeUint32()  
+// The undefined will be logged in  
+// console as this function does not 
+// return anything 
+console.log(serializer.writeUint32(5783)); 
+console.log(serializer.releaseBuffer()); 
+// Undefined
+// <Buffer 97 2d>
+
+// Node.js v8.Serializer.writeUint64() Method
+// The v8.Serializer.writeUint64() method is an inbuilt application programming interface of the v8.Serializer module which is used to write a raw 64-bit integer value to the internal buffer by splitting into high and low 32-bit integers. For use inside of custom serializer._writeHostObject()method .
+// Syntax:
+v8.Serializer.writeUint64(Value_high, Value_low);
+
+const serializer = new v8.Serializer(); 
+// Calling v8.serializer.writeUint64()  
+console.log(serializer.releaseBuffer()); 
+serializer.writeUint64(29698, 3847); 
+console.log(serializer.releaseBuffer()); 
+// Trying to write two 64 bit numbers 
+// one after another 
+serializer.writeUint64(29698, 3847); 
+serializer.writeUint64(29698, 3847); 
+console.log(serializer.releaseBuffer()); 
+// Reading after write 
+// Calling v8.serializer.writeUint64()  
+serializer.writeUint64(6783, 348072); 
+// Calling v8.deserializer.readUint64()  
+const deserializer = new 
+    v8.Deserializer(serializer.releaseBuffer()); 
+console.log(deserializer.readUint64()); 
+// Output:
+// <Buffer >
+// <Buffer 87 9e 80 80 a0 80 1d>
+// <Buffer 87 9e 80 80 a0 80 1d 87 9e 80 80 a0 80 1d>
+// [ 6783, 348072 ]
+
+// Node.js v8.Serializer.writeDouble() Method
+// The v8.Serializer.writeDouble() method is an inbuilt application programming interface of the v8.Serializer module which is used to write a JS number value to the internal buffer. For use inside of custom serializer._writeHostObject().
+// Syntax:
+v8.Serializer.writeDouble( Value );
+// Parameters: This method accepts single parameter as mentioned above and described below:
+// value: It is required parameter, refers to JS number value to be written to the internal buffer.
+// Return Value: This method does not return anything but writes a JS number value to the internal buffer.
+
+const v8 = require('v8'); 
+const serializer = new v8.Serializer(); 
+  
+// Calling v8.serializer.writeRawBytes()  
+console.log(serializer.releaseBuffer()); 
+// User defined Function 
+function writeDoubleData(data) { 
+    serializer.writeDouble(data); 
+    console.log(serializer.releaseBuffer()); 
+} 
+// Function Call 
+writeDoubleData(123.44); 
+// Output:
+// <Buffer >
+// <Buffer 5c 8f c2 f5 28 dc 5e 40>
+
+// Node.js v8.Deserializer.readHeader() Method
+// The v8.Deserializer.readHeader() method is an inbuilt application programming interface of the v8.Deserializer module which is used to read the header and validate it, to ensure that contains a valid serialization format version.
+// Syntax:
+v8.Deserializer.readHeader();
+// Return Value: This method reads the header buffer 
+// at deserializer and validates it. It returns true 
+// on the valid header, otherwise throws an error.
+
+
+// Accessing v8 module 
+const v8 = require('v8');
+const serializer = new v8.Serializer();
+// Calling v8.Deserializer.readHeader()  
+console.log(serializer.releaseBuffer());
+serializer.writeHeader();
+const deserializer = new v8.Deserializer(
+    serializer.releaseBuffer());
+console.log(deserializer.readHeader());
+
+console.log(serializer.releaseBuffer());
+// Run index.js file using the following command:
+node index.js
+// Output:
+// <Buffer >
+// true
+// <Buffer >
+// Example 2: Filename: index.js
+
+// Accessing v8 module 
+const v8 = require('v8');
+const serializer = new v8.Serializer();
+// Calling v8.serializer.writeHeader()  
+serializer.writeHeader();
+// Calling v8.deserializer.readHeader()  
+const deserializer = new v8.Deserializer(
+    serializer.releaseBuffer());
+if (deserializer.readHeader()) {
+    console.log("It is a valid header!");
+} else {
+    console.log("It is not a valid header!");
+}
+// Run index.js file using the following command:
+node index.js
+// Output:
+// It is a valid header!
+
+// Node.js v8.Deserializer.readValue() Method
+// The v8.Deserializer.readValue() method is an inbuilt application programming interface of the v8.Deserializer module which is used to read the JS value from serialized data as present in a buffer.
+// Syntax:
+v8.Deserializer.readValue();
+// Parameters: This method does not accept any parameters.
+// Return Value: This method reads JS value from serialized representation as present in a buffer and returns it on successful reading.
+
+const v8 = require('v8'); 
+const serializer = new v8.Serializer(); 
+// Calling v8.serializer.writeValue()  
+console.log(serializer.writeValue("GeeksforGeeks")); 
+// Calling v8.deserializer.readValue()  
+const deserializer = new v8.Deserializer( serializer.releaseBuffer()); 
+              
+console.log(deserializer.readValue()); 
+// Run index.js file using the following command:
+node index.js
+// Output:
+// true
+// GeeksforGeeks
+
+const serializer = new v8.Serializer(); 
+// Calling v8.serializer.writeValue()  
+console.log(serializer.writeValue(839475.3495)); 
+buff = serializer.releaseBuffer(); 
+console.log("buffer data is:"); 
+console.log(buff); 
+  
+// Calling v8.deserializer.readValue()  
+const deserializer = new v8.Deserializer(buff); 
+console.log("deserialized data: " 
+        + deserializer.readValue()); 
+// Run index.js file using the following command:
+node index.js
+// Output:
+// true
+// buffer data is:
+// <Buffer 4e fc a9 f1 b2 66 9e 29 41>
+// deserialized data: 839475.3495
+
+// Node.js v8.Deserializer.readUint64() Method
+// The v8.Deserializer.readUint64() method is an inbuilt application programming interface of the v8.Deserializer module which is used to read a raw 64-bit unsigned integer value from the buffer as an array of 32-bit integers, higher and lower 32-bits separated. For use inside of custom Deserializer._readHostObject().
+// Syntax:
+v8.Deserializer.readUint64();
+// Parameters: This method does not accept any parameters.
+// Return Value: This method reads raw 64-bit unsigned integer value from the buffer as an array of two 32-bits integer, higher and lower 32-bits separated, and returns it.
+
+// Accessing v8 module 
+const v8 = require('v8');
+const serializer = new v8.Serializer();
+
+// Calling v8.serializer.writeUint64()  
+serializer.writeUint64(6783, 348072);
+
+// Calling v8.deserializer.readUint64()  
+const deserializer = new v8.Deserializer(
+        serializer.releaseBuffer());
+
+console.log(deserializer.readUint64());
+// Run index.js file using the following command:
+node index.js
+// Output:
+// [ 6783, 348072 ]
+
+// Example 2: Filename: index.js
+// Accessing v8 module 
+const v8 = require('v8');
+const serializer = new v8.Serializer();
+
+// Calling v8.serializer.writeUint64()  
+serializer.writeUint64(29698, 34752);
+buff = serializer.releaseBuffer();
+console.log("buffer data is:");
+console.log(buff);
+
+
+// Calling v8.deserializer.readUint64()  
+const deserializer = new v8.Deserializer(buff);
+data = deserializer.readUint64();
+console.log("higher 32-bits=%d and lower "
+        + "32-bits=%d ", data[0], data[1]);
+// Run index.js file using the following command:
+node index.js
+// Output:
+// buffer data is:
+// <Buffer c0 8f 82 80 a0 80 1d>
+// higher 32-bits=29698 and lower 32-bits=34752
+
+//..... many more 
+// read node js questions from nodejs-complete reference-geeksforgeeks\36.node js questions
+// nodejs-complete reference-geeksforgeeks\37.API Routing AND AUTHENTICATION
+
+// 										and that is it for node js
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+

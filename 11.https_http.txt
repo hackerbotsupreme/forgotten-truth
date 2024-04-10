@@ -1,0 +1,3544 @@
+// https 
+// Identifying resources on the Web
+// The target of an HTTP request is called a "resource",
+//  whose nature isn't defined further; it can be a document,
+//  a photo, or anything else. Each resource is identified 
+// by a Uniform Resource Identifier (URI) used throughout 
+// HTTP for identifying resources.
+
+// URLs and URNs
+
+// URLs
+// The most common form of URI is the Uniform Resource 
+// Locator (URL), which is known as the web address.
+
+// Any of those URLs can be typed into your browser's
+//  address bar to tell it to load the associated 
+// page (resource).
+
+// URNs
+// A Uniform Resource Name (URN) is a URI that 
+// identifies a resource by name in a particular
+//  namespace.
+
+// URL
+// urn:isbn:9780141036144
+// urn:ietf:rfc:7230
+
+// Scheme or protocol
+// Protocol
+// http:// is the protocol. It indicates which protocol
+//  the browser must use. Usually it is the HTTP protocol
+//  or its secured version, HTTPS. The Web requires one
+//  of these two, but browsers also know how to handle
+//  other protocols such as mailto: (to open a mail 
+// client) or ftp: to handle a file transfer, so don't
+//  be surprised if you see such protocols.
+
+// Scheme	            Description
+// data	                Data URLs
+// file	                Host-specific file names
+// ftp	                File Transfer Protocol
+// http/https	        Hyper text transfer protocol (Secure)
+// javascript	        URL-embedded JavaScript code
+// mailto	            Electronic mail address
+// ssh	                Secure shell
+// tel	                telephone
+// urn	                Uniform Resource Names
+
+// Authority
+// Domaine Name
+// www.example.com is the domain name or authority
+//  that governs the namespace. It indicates which 
+// Web server is being requested. Alternatively, 
+// it is possible to directly use an IP address, 
+// but because it is less convenient, it is not 
+// often used on the Web.
+
+// Port
+// Port
+// :80 is the port in this instance. It indicates 
+// the technical "gate" used to access the resources 
+// on the web server. It is usually omitted if the 
+// web server uses the standard ports of the HTTP 
+// protocol (80 for HTTP and 443 for HTTPS) to grant 
+// access to its resources. Otherwise, it is mandatory.
+
+// Path to the file
+// /path/to/myfile.html is the path to the resource 
+// on the Web server. In the early days of the Web, 
+// a path like this represented a physical file 
+// location on the Web server. Nowadays, it is 
+// mostly an abstraction handled by Web servers 
+// without any physical reality.
+
+// Query
+// Parameters
+// ?key1=value1&key2=value2 are extra parameters 
+// provided to the Web server. Those parameters 
+// are a list of key/value pairs separated with 
+// the & symbol. The Web server can use those 
+// parameters to do extra stuff before returning
+//  the resource to the user. Each Web server has 
+// its own rules regarding parameters, and the only
+//  reliable way to know how a specific Web server 
+// is handling parameters is by asking the Web 
+// server owner.
+
+
+// Fragment
+// Anchor
+// #SomewhereInTheDocument is an anchor to another
+//  part of the resource itself. An anchor 
+// represents a sort of "bookmark" inside the
+//  resource, giving the browser the directions
+//  to show the content located at that "bookmarked"
+//  spot. On an HTML document, for example, the 
+// browser will scroll to the point where the 
+// anchor is defined; on a video or audio document, 
+// the browser will try to go to the time the anchor
+//  represents. It is worth noting that the part 
+// after the #, also known as the fragment identifier, 
+// is never sent to the server with the request.
+
+// MIME types 
+// A media type indicates the nature 
+// and format of a document, file, or assortment of bytes.
+
+// Warning: Browsers use the MIME type, not the file 
+// extension, to determine how to process a URL, so 
+// it's important that web servers send the correct 
+// MIME type in the response's Content-Type header. 
+// If this is not correctly configured, browsers are 
+// likely to misinterpret the contents of files, sites
+//  will not work correctly, and downloaded files may 
+// be mishandled.
+
+// Structure of a MIME type
+// type/subtype
+//  For example, for the MIME type text, the subtype
+//  might be plain (plain text), html (HTML source code)
+// MIME types are case-insensitive but are traditionally 
+// written in lowercase. 
+
+// Types
+
+// Discrete types
+// application
+// audio
+// font
+// image
+// model
+// text
+// video
+
+// Multipart types
+// They represent 
+// a composite document.
+
+// Important MIME types for Web developers
+// text/plain
+// text/css
+// text/html
+// text/javascript
+
+
+// Basics of HTTP
+// Resources and URIs
+// Identifying resources on the Web
+// Data URLs
+// MIME types
+// Flow of an HTTP session
+// HTTP Messages
+// Frame and message structure in HTTP/2
+// Connection management in HTTP/1.x
+// Connection management in HTTP/2
+// Content Negotiation
+
+// HTTP as an application layer protocol, 
+// on top of TCP (transport layer) and IP
+//  (network layer) and below the presentation 
+// layer.It is an application layer 
+// protocol that is sent over TCP, or over 
+// a TLS-encrypted TCP connection. 
+
+// Components of HTTP-based systems
+// requests are sent by one entity, the 
+// user-agent (or a proxy on behalf of it). 
+// Most of the time the user-agent is a Web 
+// browser, but it can be anything, for example, 
+// a robot that crawls the Web to populate 
+// and maintain a search engine index.
+// Each individual request is sent to 
+// a server, which handles it and provides 
+// an answer called the response. Between 
+// the client and the server there are numerous 
+// entities, collectively called proxies, which 
+// perform different operations and act as 
+// gateways or caches.
+
+// Client server chain
+// In reality, there are more computers 
+// between a browser and the server handling 
+// the request: there are routers, modems, 
+// and more. Thanks to the layered design of 
+// the Web, these are hidden in the network 
+// and transport layers. HTTP is on top, at 
+// the application layer. 
+
+// Client: the user-agent
+// The user-agent is any tool that acts 
+// on behalf of the user.
+// The browser is always the entity 
+// initiating the request. It is never
+//  the server . 
+// To display a Web page, the browser 
+// sends an original request to fetch 
+// the HTML document that represents 
+// the page. It then parses this file, 
+// making additional requests corresponding 
+// to execution scripts, layout information
+//  (CSS) to display, and sub-resources 
+// contained within the page (usually 
+// images and videos). The Web browser 
+// then combines these resources to 
+// present the complete document, the 
+// Web page.
+
+// The Web server
+//  a server appears as only a single machine 
+// virtually; but it may actually be a 
+// collection of servers sharing the load
+//  (load balancing), or other software 
+// (such as caches, a database server, 
+// or e-commerce servers), totally or 
+// partially generating the document on demand.
+
+// Proxies
+// Between the Web browser and the server, 
+// numerous computers and machines relay 
+// the HTTP messages.// Those operating at the application layers
+//  are generally called proxies.These can 
+// be transparent, forwarding on the requests 
+// they receive without altering them in any 
+// way, or non-transparent, in which case they 
+// will change the request in some way before 
+// passing it along to the server. Proxies 
+// may perform numerous functions:
+
+// caching (the cache can be public or private, 
+// like the browser cache)
+// filtering (like an antivirus scan or parental controls)
+// load balancing (to allow multiple servers 
+// to serve different requests)
+// authentication (to control access to different resources)
+// logging (allowing the storage of historical information)
+
+// HTTP is stateless, but not sessionless
+// HTTP is stateless: there is no link between 
+// two requests being successively carried out 
+// on the same connection.
+
+// HTTP and connections
+// A connection is controlled at the transport 
+// layer, and therefore fundamentally out of 
+// scope for HTTP. HTTP doesn't require the 
+// underlying transport protocol to be 
+// connection-based; it only requires it 
+// to be reliable, or not lose messages .
+//  Among the two most common transport 
+// protocols on the Internet, TCP is reliable 
+// and UDP isn't. HTTP therefore relies on the 
+// TCP standard, which is connection-based.
+// Before a client and server can exchange 
+// an HTTP request/response pair, they must 
+// establish a TCP connection, a process which 
+// requires several round-trips.
+
+// What can be controlled by HTTP
+// Here is a list of common features controllable with HTTP:
+// Caching
+// Authentication
+// Proxy and tunneling
+// Sessions
+
+// HTTP flow
+// When a client wants to communicate with 
+// a server, either the final server or an 
+// intermediate proxy, it performs the following steps:
+
+// Open a TCP connection: The TCP connection 
+// is used to send a request, or several, and 
+// receive an answer. The client may open a new
+//  connection, reuse an existing connection, or 
+// open several TCP connections to the servers.
+
+// Send an HTTP message: HTTP messages (before HTTP/2) 
+// are human-readable. With HTTP/2, these simple messages
+//  are encapsulated in frames, making them impossible 
+// to read directly, but the principle remains the same. 
+
+// HTTP Messages
+// There are two types of HTTP messages, requests 
+// and responses, each with its own format.
+// both contains headers and body(depends)
+//// HTTP messages are how data is exchanged between 
+// a server and a client.
+// HTTP messages are composed of textual 
+// information encoded in ASCII, and span 
+// over multiple lines.
+// Web developers, or webmasters, rarely craft 
+// these textual HTTP messages themselves: software, 
+// a Web browser, proxy, or Web server, perform 
+// this action. They provide HTTP messages through 
+// config files (for proxies or servers), 
+// APIs (for browsers), or other interfaces.
+
+// A typical HTTP session
+// sessions consist  of three phases:
+
+// The client establishes a TCP connection (or the appropriate 
+// connection if the transport layer is not TCP).
+
+// The client sends its request, and waits for the answer.
+
+// The server processes the request, sending back its answer, 
+// providing a status code and appropriate data.
+
+// Establishing a connection
+// In client-server protocols, it is the client which 
+// establishes the connection. Opening a connection in 
+// HTTP means initiating a connection in the underlying 
+// transport layer, usually this is TCP.
+// With TCP the default port, for an HTTP server on a computer, 
+// is port 80. Other ports can also be used, like 8000 or 8080. 
+
+// Note: The client-server model does not allow the server 
+// to send data to the client without an explicit request for it. 
+// However, various Web APIs enable this use case, including 
+// the Push API, Server-sent events, and the WebSockets API.
+
+// Sending a client request
+// Once the connection is established, the user-agent can send 
+// the request (a user-agent is typically a web browser, but 
+// can be anything else, a crawler, for example). A client 
+// request consists of text directives, separated by CRLF 
+// (carriage return, followed by line feed), divided into 
+// three blocks.
+
+
+// The first line contains a request method followed by its 
+// parameters:
+
+// the path of the document, as an absolute URL without the 
+// protocol or domain name
+
+// the HTTP protocol version
+// Subsequent lines represent an HTTP header, giving the server 
+// information about what type of data is appropriate (for 
+// example, what language, what MIME types), or other data 
+// altering its behavior (for example, not sending an answer 
+// if it is already cached). These HTTP headers form a block 
+// which ends with an empty line.
+
+// The final block is an optional data block, which may contain 
+// further data mainly used by the POST method.
+
+// Example requests
+// Fetching the root page of developer.mozilla.org,
+//  (https://developer.mozilla.org/), and telling the 
+// server that the user-agent would prefer the page in
+//  French, if possible:
+
+// HTTP
+// Copy to Clipboard
+// GET / HTTP/1.1
+// Host: developer.mozilla.org
+// Accept-Language: fr
+
+// Request methods
+// HTTP defines a set of request methods indicating the desired
+//  action to be performed upon a resource.
+
+// Structure of a server response
+// After the connected agent has sent its request, the web 
+// server processes it, and ultimately returns a response. 
+// Similar to a client request, a server response is formed 
+// of text directives, separated by CRLF, though divided into 
+// three blocks:
+
+// The first line, the status line, consists of an 
+// acknowledgment of the HTTP version used, followed by 
+// a response status code (and its brief meaning in 
+// human-readable text).
+
+// Subsequent lines represent specific HTTP headers, giving 
+// the client information about the data sent (for example, 
+// type, data size, compression algorithm used, hints about 
+// caching). Similarly to the block of HTTP headers for a 
+// client request, these HTTP headers form a block ending 
+// with an empty line.
+
+// The final block is a data block, which contains the optional 
+// data.
+
+// Successful web page response:
+// HTTP/1.1 200 OK
+// Content-Type: text/html; charset=utf-8
+// Content-Length: 55743
+// Connection: keep-alive
+// Cache-Control: s-maxage=300, public, max-age=0
+// Content-Language: en-US
+// Date: Thu, 06 Dec 2018 17:37:18 GMT
+// ETag: "2e77ad1dc6ab0b53a2996dfd4653c1c3"
+// Server: meinheld/0.6.1
+// Strict-Transport-Security: max-age=63072000
+// X-Content-Type-Options: nosniff
+// X-Frame-Options: DENY
+// X-XSS-Protection: 1; mode=block
+// Vary: Accept-Encoding,Cookie
+// Age: 7
+
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="utf-8">
+//   <title>A simple webpage</title>
+// </head>
+// <body>
+//   <h1>Simple HTML webpage</h1>
+//   <p>Hello, world!</p>
+// </body>
+// </html>
+// Notification that the requested resource has permanently 
+// moved:
+
+// HTTP
+// Copy to Clipboard
+// HTTP/1.1 301 Moved Permanently
+// Server: Apache/2.4.37 (Red Hat)
+// Content-Type: text/html; charset=utf-8
+// Date: Thu, 06 Dec 2018 17:33:08 GMT
+// Location: https://developer.mozilla.org/ (this is the new link to the resource; it is expected that the user-agent will fetch it)
+// Keep-Alive: timeout=15, max=98
+// Accept-Ranges: bytes
+// Via: Moz-Cache-zlb05
+// Connection: Keep-Alive
+// Content-Length: 325 (the content contains a default page to display if the user-agent is not able to follow the link)
+//........
+
+
+// Response status codes
+// HTTP response status codes indicate if 
+// a specific HTTP request has been successfully 
+// completed. Responses are grouped into five classes: 
+// informational responses, successful responses, 
+// redirects, client errors, and servers errors.
+// 200: OK. The request has succeeded.
+// 301: Moved Permanently. This response code means that the URI of requested resource has been changed.
+// 404: Not Found. The server cannot find the requested resource.
+
+//http security
+// Content Security Policy (CSP)
+// Content Security Policy (CSP) is an added layer of 
+// security that 
+// helps to detect and mitigate certain types of attacks, 
+// including 
+// Cross-Site Scripting (XSS) and data injection attacks. 
+// These attacks 
+// are used for everything from data theft, to site defacement,
+//  to malware distribution.
+
+// standard same-origin policy.
+// To enable CSP, you need to configure your web server to 
+// return the 
+// Content-Security-Policy HTTP header. (Sometimes you may see 
+// mentions of the 
+// X-Content-Security-Policy header, but that's an older version 
+// and you don't need to 
+// specify it anymore.)
+// Alternatively, the <meta> element can be used to configure 
+// a policy, for example:
+// <meta
+//   http-equiv="Content-Security-Policy"
+//   content="default-src 'self'; img-src https://*; child-src 'none';" />
+
+// Threats
+// Mitigating cross-site scripting
+// Mitigating packet sniffing attacks
+
+// Specifying your policy
+// You can use the Content-Security-Policy HTTP header 
+// to specify your policy, like this:
+
+// HTTP
+// Copy to Clipboard
+// Content-Security-Policy: policy
+
+// Strict-Transport-Security
+// The HTTP Strict-Transport-Security response header 
+// (often abbreviated as HSTS) informs browsers that 
+// the site should only be accessed using HTTPS, 
+// and that any future attempts to access it using 
+// HTTP should automatically be converted to HTTPS.
+// Note: This is more secure than simply configuring 
+// a HTTP to HTTPS (301) redirect on your server, where 
+// the initial HTTP connection is still vulnerable 
+// to a man-in-the-middle attack.
+
+// If a website accepts a connection through HTTP and redirects to HTTPS, 
+// visitors may initially communicate with the non-encrypted version of 
+// the site before being redirected, if, for example, the visitor types 
+// http://www.foo.com/ or even just foo.com. This creates an opportunity 
+// for a man-in-the-middle attack. The redirect could be exploited to direct 
+// visitors to a malicious site instead of the secure version of the original site.
+// The HTTP Strict Transport Security header informs the browser 
+// that it should never load a site using HTTP and should automatically 
+// convert all attempts to access the site using HTTP to HTTPS requests instead.
+
+// Note: The Strict-Transport-Security header is ignored by the browser 
+// when your site has only been accessed using HTTP. Once your site is accessed 
+// over HTTPS with no certificate errors, the browser knows your site is HTTPS 
+// capable and will honor the Strict-Transport-Security header. Browsers 
+// do this as attackers may intercept HTTP connections to the site and 
+// inject or remove the header.
+
+// An example scenario
+// You log into a free Wi-Fi access point at an airport and start surfing 
+// the web, visiting your online banking service to check your balance 
+// and pay a couple of bills. Unfortunately, the access point you're using 
+// is actually a hacker's laptop, and they're intercepting your 
+// original HTTP request and redirecting you to a clone of your bank's site 
+// instead of the real thing. Now your private data is exposed to the hacker.
+
+// Strict Transport Security resolves this problem; as long as you've accessed 
+// your bank's website once using HTTPS, and the bank's website uses 
+// Strict Transport Security, your browser will know to automatically use 
+// only HTTPS, which prevents hackers from performing 
+// this sort of man-in-the-middle attack.
+
+// How the browser handles it
+// The first time your site is accessed using HTTPS and it returns 
+// the Strict-Transport-Security header, the browser records this 
+// information, so that future attempts to load the site using HTTP 
+// will automatically use HTTPS instead.
+
+// When the expiration time specified by the Strict-Transport-Security 
+// header elapses, the next attempt to load the site via HTTP will 
+// proceed as normal instead of automatically using HTTPS.
+
+// Whenever the Strict-Transport-Security header is delivered to the 
+// browser, it will update the expiration time for that site, so sites 
+// can refresh this information and prevent the timeout from expiring. 
+// Should it be necessary to disable Strict Transport Security, setting 
+// the max-age to 0 (over an https connection) will immediately expire 
+// the Strict-Transport-Security header, allowing access via http.
+
+// Preloading Strict Transport Security
+// Google maintains an HSTS preload service. By following the guidelines 
+// and successfully submitting your domain, you can ensure that browsers 
+// will connect to your domain only via secure connections. While the 
+// service is hosted by Google, all browsers are using this preload list. 
+// However, it is not part of the HSTS specification and should not be 
+// treated as official.
+
+// HTTP
+// Copy to Clipboard
+// Strict-Transport-Security: max-age=31536000; includeSubDomains
+// Although a max-age of 1 year is acceptable for a domain, two years is 
+// the recommended value as explained on https://hstspreload.org.
+
+// In the following example, max-age is set to 2 years, and is suffixed 
+// with preload, which is necessary for inclusion in all major web browsers' 
+// HSTS preload lists, like Chromium, Edge, and Firefox.
+
+// HTTP
+// Copy to Clipboard
+// Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+// X-Content-Type-Options
+// The X-Content-Type-Options response HTTP header is a marker used 
+// by the server to indicate that the MIME types advertised in the 
+// Content-Type headers should be followed and not be changed. The 
+// header allows you to avoid MIME type sniffing by saying that the 
+// MIME types are deliberately configured.
+
+// Starting with Firefox 72, top-level documents also avoid MIME sniffing 
+// (if Content-type is provided). This can cause HTML web pages to 
+// be downloaded instead of being rendered when they are served with 
+// a MIME type other than text/html. Make sure to set both headers correctly.
+
+// Site security testers usually expect this header to be set.
+
+// Note: X-Content-Type-Options only apply request-blocking due 
+// to nosniff for request destinations of "script" and "style". 
+// However, it also enables Cross-Origin Read Blocking (CORB) protection 
+// for HTML, TXT, JSON and XML files (excluding SVG image/svg+xml).
+
+// Syntax
+// HTTP
+// Copy to Clipboard
+// X-Content-Type-Options: nosniff
+
+// Directives 
+// nosniff
+// Blocks a request if the request destination is of type style and 
+// the MIME type is not text/css, or of type script and the MIME type 
+// is not a JavaScript MIME type.
+
+// X-Frame-Options
+// The X-Frame-Options HTTP response header can be used 
+// to indicate whether a browser should be allowed to render 
+// a page in a <frame>, <iframe>, <embed> or <object>. Sites 
+// can use this to avoid click-jacking attacks, by ensuring 
+// that their content is not embedded into other sites.
+
+// The added security is provided only if the user accessing 
+// the document is using a browser that supports X-Frame-Options.
+
+// Warning: The Content-Security-Policy HTTP header has 
+// a frame-ancestors directive which obsoletes this header 
+// for supporting browsers.
+
+// Syntax
+// There are two possible directives for X-Frame-Options:
+
+// HTTP
+// Copy to Clipboard
+// X-Frame-Options: DENY
+// X-Frame-Options: SAMEORIGIN
+
+// Directives
+// If you specify DENY, not only will the browser attempt 
+// to load the page in a frame fail when loaded from other sites, 
+// attempts to do so will fail when loaded from the same site. 
+// On the other hand, if you specify SAMEORIGIN, you can still 
+// use the page in a frame as long as the site including it in 
+// a frame is the same as the one serving the page.
+
+// DENY
+// The page cannot be displayed in a frame, 
+// regardless of the site attempting to do so.
+
+// SAMEORIGIN
+// The page can only be displayed if all ancestor 
+// frames are same origin to the page itself.
+
+
+// Configuring Express
+// You can use Helmet to configure an Express app to set 
+// the legacy X-Frame-Options header on old browsers.
+
+// Warning: It's recommended to use the Content-Security-Policy 
+// HTTP header with the frame-ancestors directive instead.
+
+// To use Helmet to set X-Frame-Options, add the following to 
+// your server configuration to set the SAMEORIGIN directive:
+
+// JS
+// Copy to Clipboard
+const helmet = require("helmet");
+const app = express();
+app.use(
+  helmet({
+    xFrameOptions: { action: "sameorigin" },
+  }),
+);
+
+// Transport Layer Security (TLS/SSL)
+// Transport Layer Security provides assurances about the confidentiality, 
+// authentication, and integrity of all communications both inside and 
+// outside of Mozilla. To protect our users and networked systems, 
+// the support and use of encrypted communications using TLS is 
+// mandatory for all systems.
+// Websites or API endpoints that only communicate with modern browsers 
+// and systems should use the Mozilla modern TLS configuration.
+// Websites intended for general public consumption should use 
+// the Mozilla intermediate TLS configuration.
+
+// HTTP Strict Transport Security
+// HTTP Strict Transport Security (HSTS) is an HTTP header that notifies 
+// user agents to only connect to a given site over HTTPS, even if the 
+// scheme chosen was HTTP. Browsers that have had HSTS set for a given 
+// site will transparently upgrade all requests to HTTPS. HSTS also tells 
+// the browser to treat TLS and certificate-related errors more strictly 
+// by disabling the ability for users to bypass the error page.
+
+
+// The header consists of one mandatory parameter (max-age) and two 
+// optional parameters (includeSubDomains and preload), separated by semicolons.
+
+// Directives
+// max-age: how long user agents will redirect to HTTPS, in seconds
+// includeSubDomains: whether user agents should upgrade requests on subdomains
+// preload: whether the site should be included in the HSTS preload list
+// max-age must be set to a minimum of six months (15768000), but longer periods 
+// such as two years (63072000) are recommended. Note that once this value is set, 
+// the site must continue to support HTTPS until the expiry time has been reached.
+
+// includeSubDomains notifies the browser that all subdomains of the current origin 
+// should also be upgraded via HSTS. For example, setting includeSubDomains on 
+// domain.example.com will also set it on host1.domain.example.com and 
+// host2.domain.example.com. 
+// Examples
+// # Only connect to this site via HTTPS for the two years (recommended)
+// Strict-Transport-Security: max-age=63072000
+// # Only connect to this site and subdomains via HTTPS for the next two years and also include in the preload list
+// Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+// HTTP Redirections
+// Websites may continue to listen on port 80 (HTTP) so that users do 
+// not get connection errors when typing a URL into their address bar, 
+// as browsers currently connect via HTTP for their initial request. 
+// Sites that listen on port 80 should only redirect to the same resource 
+// on HTTPS. Once the redirection has occurred, HSTS should ensure that all 
+// future attempts go to the site via HTTP are instead sent directly to 
+// the secure site. APIs or websites not intended for public consumption 
+// should disable the use of HTTP entirely.
+
+// Sites should avoid redirections from HTTP to HTTPS on a different host, 
+// as this prevents HSTS from being set. Instead, for example, first 
+// redirect from http://example.com/ to https://example.com/ and then 
+// in a second redirect, redirect from https://example.com/ to https://example.org/
+
+// Examples
+// # Redirect all incoming http requests to the same site and URI on https, 
+// using nginx
+// server {
+//   listen 80;
+//   return 301 https://$host$request_uri;
+// }
+
+// # Redirect for site.example.org from http to https, using Apache
+// <VirtualHost *:80>
+//   ServerName site.example.org
+//   Redirect permanent / https://site.example.org/
+// </VirtualHost>
+
+// Content Security Policy
+// Content Security Policy (CSP) is an HTTP header that allows site operators 
+// fine-grained control over where resources on their site can be loaded from. 
+// The use of this header is the best method to prevent cross-site scripting (XSS) 
+// vulnerabilities. Due to the difficulty in retrofitting CSP into existing websites,
+//  CSP is mandatory for all new websites and is strongly recommended for all 
+// existing high-risk sites.
+
+// The primary benefit of CSP comes from disabling the use of unsafe inline JavaScript. 
+// Inline JavaScript – either reflected or stored – means that improperly escaped 
+// user-inputs can generate code that is interpreted by the web browser as JavaScript. 
+// By using CSP to disable inline JavaScript, you can effectively eliminate almost 
+// all XSS attacks against your site.
+
+// Note that disabling inline JavaScript means that all JavaScript must be loaded 
+// from <script> src tags . Event handlers such as onclick used directly on a tag 
+// will fail to work, as will JavaScript inside <script> tags but not loaded via src. 
+// Furthermore, inline stylesheets using either <style> tags or the style attribute 
+// will also fail to load. As such, care must be taken when designing sites so that 
+// CSP becomes easier to implement.
+
+// Implementation Notes
+// Aiming for default-src https: is a great first goal, as it 
+// disables inline code and requires https.
+
+// For existing websites with large codebases that would require too 
+// much work to disable inline scripts, default-src https: 'unsafe-inline' 
+// is still helpful, as it keeps resources from being accidentally loaded 
+// over http. However, it does not provide any XSS protection.
+
+
+// In lieu of the preferred HTTP header, pages can instead include a 
+// <meta http-equiv=“Content-Security-Policy” content=“…”> tag. If they do, 
+// it should be the first <meta> tag that appears inside <head>.
+
+// Care needs to be taken with data: URIs, as these are unsafe inside 
+// script-src and object-src (or inherited from default-src).
+
+// Similarly, the use of script-src 'self' can be unsafe for sites 
+// with JSONP endpoints. These sites should use a script-src that 
+// includes the path to their JavaScript source folder(s).
+// Unless sites need the ability to execute plugins such as 
+// Flash or Silverlight, they should disable their execution 
+// with object-src 'none'.
+
+
+// Examples
+// # Disable unsafe inline/eval, only allow loading of 
+// resources (images, fonts, scripts, etc.) over https
+// # Note that this does not provide any XSS protection
+// Content-Security-Policy: default-src https:
+
+// <!-- Do the same thing, but with a <meta> tag -->
+// <meta http-equiv="Content-Security-Policy" content="default-src https:">
+
+// # Disable the use of unsafe inline/eval, allow everything else except plugin execution
+// Content-Security-Policy: default-src *; object-src 'none'
+
+// # Disable unsafe inline/eval, only load resources from same origin except also allow images from imgur
+// # Also disables the execution of plugins
+// Content-Security-Policy: default-src 'self'; img-src 'self' https://i.imgur.com; object-src 'none'
+
+// # Disable unsafe inline/eval and plugins, only load scripts and stylesheets from same origin, fonts from google,
+// # and images from same origin and imgur. Sites should aim for policies like this.
+// Content-Security-Policy: default-src 'none'; font-src https://fonts.gstatic.com;
+// 			 img-src 'self' https://i.imgur.com; object-src 'none'; script-src 'self'; style-src 'self'
+
+// # Pre-existing site that uses too much inline code to fix
+// # but wants to ensure resources are loaded only over https and disable plugins
+// Content-Security-Policy: default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'
+
+// # Don't implement the above policy yet; instead just report violations that would have occurred
+// Content-Security-Policy-Report-Only: default-src https:; report-uri /csp-violation-report-endpoint/
+
+// # Disable the loading of any resources and disable framing, recommended for APIs to use
+// Content-Security-Policy: default-src 'none'; frame-ancestors 'none'
+
+// contribute.json
+// contribute.json is a text file placed within the root directory 
+// of a website that describes what it is, where its source exists, 
+// what technologies it uses, and how to reach support and contribute. 
+// contribute.json is a Mozilla standard used to describe all active 
+// Mozilla websites and projects.
+
+// Its existence can greatly speed up the process of bug triage, 
+// particularly for smaller websites with just a handful of maintainers. 
+// It further assists security researchers to find testable websites and 
+// instructs them on where to file their bugs against. As such, 
+// contribute.json is mandatory for all Mozilla websites, and must 
+// be maintained as contributors join and depart projects.
+
+
+// Require subkeys include name, description, bugs, participate 
+// (particularly irc and irc-contacts), and urls.
+
+// Examples
+// {
+//   "name": "Bedrock",
+//     "description": "The app powering www.mozilla.org.",
+//     "repository": {
+//       "url": "https://github.com/mozilla/bedrock",
+//       "license": "MPL2",
+//       "tests": "https://travis-ci.org/mozilla/bedrock/"
+//     },
+//     "participate": {
+//       "home": "https://wiki.mozilla.org/Webdev/GetInvolved/mozilla.org",
+//       "docs": "https://bedrock.readthedocs.io/en/latest/",
+//       "mailing-list": "https://www.mozilla.org/about/forums/#dev-mozilla-org",
+//       "irc": "irc://irc.mozilla.org/#www",
+//       "irc-contacts": [
+//         "someperson1",
+//         "someperson2",
+//         "someperson3"
+//       ]
+//     },
+//     "bugs": {
+//       "list": "https://bugzilla.mozilla.org/describecomponents.cgi?product=www.mozilla.org",
+//       "report": "https://bugzilla.mozilla.org/enter_bug.cgi?product=www.mozilla.org",
+//       "mentored": "https://bugzilla.mozilla.org/buglist.cgi?f1=bug_mentor&o1=isnotempty
+//                    &query_format=advanced&bug_status=NEW&product=www.mozilla.org&list_id=10866041"
+//     },
+//     "urls": {
+//       "prod": "https://www.mozilla.org",
+//       "stage": "https://www.allizom.org",
+//       "dev": "https://www-dev.allizom.org",
+//       "demo1": "https://www-demo1.allizom.org"
+//     },
+//     "keywords": [
+//       "python",
+//       "less-css",
+//       "django",
+//       "html5",
+//       "jquery"
+//     ]
+// }
+
+
+// Cookies
+// All cookies should be created such that their access is as limited 
+// as possible. This can help minimize damage from cross-site scripting 
+// (XSS) vulnerabilities, as these cookies often contain session 
+// identifiers or other sensitive information.
+
+
+// Directives
+// Name: Cookie names may be either be prepended with either 
+// __Secure- or __Host- to prevent cookies from being overwritten 
+// by insecure sources
+// Use __Host- for all cookies needed only on a specific domain 
+// (no subdomains) where Path is set to /
+// Use __Secure- for all other cookies sent from secure origins 
+// (such as HTTPS)
+// Secure: All cookies must be set with the Secure flag, 
+// indicating that they should only be sent over HTTPS
+// HttpOnly: Cookies that don’t require access from JavaScript 
+// should be set with the HttpOnly flag
+// Expiration: Cookies should expire as soon as is necessary: 
+// session identifiers in particular should expire quickly
+// Expires: Sets an absolute expiration date for a given cookie
+// Max-Age: Sets a relative expiration date for a given cookie (not supported by IE <8)
+// Domain: Cookies should only be set with this if they need to 
+// be accessible on other domains, and should be set to the most 
+// restrictive domain possible
+// Path: Cookies should be set to the most restrictive path possible, 
+// but for most applications this will be set to the root directory
+// SameSite: Forbid sending the cookie via cross-origin requests 
+// (such as from <img> tags, etc.), as a strong anti-CSRF measure
+// SameSite=Strict: Only send the cookie when site is directly navigated to
+// SameSite=Lax: Send the cookie when navigating to your site from another site
+
+
+
+// Examples
+// # Session identifier cookie only accessible on this host that gets purged when the user closes their browser
+// Set-Cookie: MOZSESSIONID=980e5da39d4b472b9f504cac9; Path=/; Secure; HttpOnly
+
+// # Session identifier for all example.org sites that expires in 30 days using the __Secure- prefix
+// # This cookie is not sent cross-origin, but is sent when navigating to any Mozilla site from another site
+// Set-Cookie: __Secure-MOZSESSIONID=7307d70a86bd4ab5a00499762; Max-Age=2592000; Domain=example.org; Path=/; Secure; HttpOnly; SameSite=Lax
+
+
+// # Sets a long-lived cookie for the current host, accessible by Javascript, when the user accepts the ToS
+// # This cookie is sent when navigating to your sent from another site, such as by clicking a link
+// Set-Cookie: __Host-ACCEPTEDTOS=true; Expires=Fri, 31 Dec 9999 23:59:59 GMT; Path=/; Secure; SameSite=Lax
+
+// # Session identifier used for a secure site, such as bugzilla.example.org. It isn't sent from cross-origin
+// # requests, nor is it sent when navigating to bugzilla.example.org from another site. Used in conjunction with
+// # other anti-CSRF measures, this is a very strong way to defend your site against CSRF attacks.
+// Set-Cookie: __Host-BMOSESSIONID=YnVnemlsbGE=; Max-Age=2592000; Path=/; Secure; HttpOnly; SameSite=Strict
+
+
+// Cross-origin Resource Sharing
+// Access-Control-Allow-Origin is an HTTP header that defines 
+// which foreign origins are allowed to access the content of 
+// pages on your domain via scripts using methods such as XMLHttpRequest.
+
+// These should not be present unless specifically needed. Use cases 
+// include content delivery networks (CDNs) that provide hosting for 
+// JavaScript/CSS libraries and public API endpoints. If present, 
+// they should be locked down to as few origins and resources as 
+// is needed for proper function. For example, if your server provides 
+// both a website and an API intended for XMLHttpRequest access on a 
+// remote websites, only the API resources should return the 
+// Access-Control-Allow-Origin header. Failure to do so will 
+// allow foreign origins to read the contents of any page on your origin.
+
+// Examples
+// # Allow any site to read the contents of this JavaScript library, so that subresource integrity works
+// Access-Control-Allow-Origin: *
+// # Allow https://random-dashboard.example.org to read the returned results of this API
+// Access-Control-Allow-Origin: https://random-dashboard.example.org
+// <!-- Allow Flash from https://random-dashboard.example.org to read page contents -->
+// <cross-domain-policy xsi:noNamespaceSchemaLocation="http://www.adobe.com/xml/schemas/PolicyFile.xsd">
+//   <allow-access-from domain="random-dashboard.example.org"/>
+//   <site-control permitted-cross-domain-policies="master-only"/>
+//   <allow-http-request-headers-from domain="random-dashboard.example.org" headers="*" secure="true"/>
+// </cross-domain-policy>
+// <!-- The same thing, but for Silverlight-->
+// <?xml version="1.0" encoding="utf-8"?>
+// <access-policy>
+//   <cross-domain-access>
+//     <policy>
+//       <allow-from http-request-headers="*">
+//         <domain uri="https://random-dashboard.example.org"/>
+//       </allow-from>
+//       <grant-to>
+//         <resource path="/" include-subpaths="true"/>
+//       </grant-to>
+//     </policy>
+//   </cross-domain-access>
+// </access-policy>
+
+// CSRF Prevention
+// Cross-site request forgeries are a class of attacks where unauthorized 
+// commands are transmitted to a website from a trusted user. Because they 
+// inherit the users cookies (and hence session information), they appear 
+// to be validly issued commands. A CSRF attack might look like this:
+
+// <!-- Attempt to delete a user's account -->
+// <img src="https://accounts.example.org/management/delete?confirm=true">
+
+// When a user visits a page with that HTML fragment, the browser will 
+// attempt to make a GET request to that URL. If the user is logged in, 
+// the browser will provide their session cookies and the account deletion 
+// attempt will be successful.
+
+
+// While there are a variety of mitigation strategies such as 
+// Origin/Referrer checking and challenge-response systems 
+// (such as CAPTCHA), the most common and transparent method 
+// of CSRF mitigation is through the use of anti-CSRF tokens. 
+// Anti-CSRF tokens prevent CSRF attacks by requiring the existence 
+// of a secret, unique, and unpredictable token on all destructive 
+// changes. These tokens can be set for an entire user session, rotated 
+// on a regular basis, or be created uniquely for each request. Although 
+// SameSite cookies are the best defense against CSRF attacks, they are 
+// not yet fully supported in all browsers and should be used in conjunction 
+// with other anti-CSRF defenses.
+
+// Examples
+// <!-- A secret anti-CSRF token, included in the form to delete an account -->
+// <input type="hidden" name="csrftoken" value="1df93e1eafa42012f9a8aff062eeb1db0380b">
+
+// # Server-side: set an anti-CSRF cookie that JavaScript must send as an X header, which can't be done cross-origin
+// Set-Cookie: CSRFTOKEN=1df93e1eafa42012f9a8aff062eeb1db0380b; Path=/; Secure; SameSite=Strict
+
+// // Client-side, have JavaScript add it as an X header to the XMLHttpRequest
+ var token = readCookie(CSRFTOKEN);                   // read the cookie
+ httpRequest.setRequestHeader('X-CSRF-Token', token); // add it as an X-CSRF-Token header
+
+// Referrer Policy
+// When a user navigates to a site via a hyperlink or a website loads an 
+// external resource, browsers inform the destination site of the origin 
+// of the requests through the use of the HTTP Referer (sic) header. 
+// Although this can be useful for a variety of purposes, it can also 
+// place the privacy of users at risk. HTTP Referrer Policy allows sites 
+// to have fine-grained control over how and when browsers transmit 
+// the HTTP Referer header.
+
+// In normal operation, if a page at https://example.com/page.html contains 
+// <img src="https://not.example.com/image.jpg">, then the browser will 
+// send a request like this:
+
+// GET /image.jpg HTTP/1.1
+// Host: not.example.com
+// Referer: https://example.com/page.html
+
+// In addition to the privacy risks that this entails, the browser 
+// may also transmit internal-use-only URLs that it may not have 
+// intended to reveal. If you as the site operator want to limit 
+// the exposure of this information, you can use HTTP Referrer Policy 
+// to either eliminate the Referer header or reduce the amount of 
+// information that it contains.
+
+// Directives
+// no-referrer: never send the Referer header
+// same-origin: send referrer, but only on requests to the same origin
+// strict-origin: send referrer to all origins, but only the URL without the path (e.g. https://example.com/)
+// strict-origin-when-cross-origin: send full referrer on same origin, URL without the path on foreign origin
+
+// no-referrer-when-downgrade is the default behavior for all 
+// current browsers, and can be used when sites are concerned 
+// about breaking existing systems that rely on the full Referrer 
+// header for their operation.
+
+// Referrer Policy has good support across modern browsers. The 
+// exception is Microsoft Edge, which still supports an older 
+// version of the specification.
+
+// Examples
+// # On example.com, only send the Referer header when loading or linking to other example.com resources
+// Referrer-Policy: same-origin
+
+// # Only send the shortened referrer to a foreign origin, full referrer to a local host
+// Referrer-Policy: strict-origin-when-cross-origin
+
+// # Disable referrers for browsers that don't support strict-origin-when-cross-origin
+// # Uses strict-origin-when-cross-origin for browsers that do
+// Referrer-Policy: no-referrer, strict-origin-when-cross-origin
+
+// <!-- Do the same, but with a meta tag -->
+// <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin">
+
+// <!-- Do the same, but only for a single link -->
+// <a href="https://example.org/" referrerpolicy="no-referrer, strict-origin-when-cross-origin">
+
+
+
+// robots.txt
+// robots.txt is a text file placed within the root directory of a site 
+// that tells robots (such as indexers employed by search engines) how 
+// to behave, by instructing them not to crawl certain paths on the website. 
+// This is particularly useful for reducing load on your website through 
+// disabling the crawling of automatically generated content. It can also 
+// be helpful for preventing the pollution of search results, for resources 
+// that don’t benefit from being searchable.
+
+// Sites may optionally use robots.txt, but should only use it for these 
+// purposes. It should not be used as a way to prevent the disclosure of 
+// private information or to hide portions of a website. Although this does 
+// prevent these sites from appearing in search engines, it does not prevent 
+// its discovery from attackers, as robots.txt is frequently used for reconnaissance.
+
+// Examples
+// # Stop all search engines from crawling this site
+// User-agent: *
+// Disallow: /
+
+// # Using robots.txt to hide certain directories is a terrible idea
+// User-agent: *
+// Disallow: /secret/admin-interface
+
+// Cross-Origin Resource Sharing (CORS)
+// Cross-Origin Resource Sharing (CORS) is an HTTP-header based 
+// mechanism that allows a server to indicate any origins 
+// (domain, scheme, or port) other than its own from which 
+// a browser should permit loading resources. CORS also 
+// relies on a mechanism by which browsers make a "preflight" 
+// request to the server hosting the cross-origin resource, in
+//  order to check that the server will permit the actual 
+// request. In that preflight, the browser sends headers 
+// that indicate the HTTP method and headers that will be
+//  used in the actual request.
+
+// An example of a cross-origin request: the front-end 
+// JavaScript code served from https://domain-a.com uses 
+// fetch() to make a request for https://domain-b.com/data.json.
+
+// For security reasons, browsers restrict cross-origin HTTP 
+// requests initiated from scripts. For example, fetch() and
+//  XMLHttpRequest follow the same-origin policy. This means
+//  that a web application using those APIs can only request
+//  resources from the same origin the application was loaded
+//  from unless the response from other origins includes the
+//  right CORS headers.
+
+
+// What requests use CORS?
+// This cross-origin sharing standard can enable
+//  cross-origin HTTP requests for:
+
+// Invocations of fetch() or XMLHttpRequest, as discussed above.
+// Web Fonts (for cross-domain font usage in @font-face within
+//  CSS), so that servers can deploy TrueType fonts that can 
+// only be loaded cross-origin and used by websites that are 
+// permitted to do so.
+
+// WebGL textures.
+// Images/video frames drawn to a canvas using drawImage().
+// CSS Shapes from images.
+// This is a general article about Cross-Origin Resource 
+// Sharing and includes a discussion of the necessary HTTP 
+// headers.
+
+// Functional overview
+// The Cross-Origin Resource Sharing standard works by adding 
+// new HTTP headers that let servers describe which origins are
+//  permitted to read that information from a web browser.
+//  Additionally, for HTTP request methods that can cause 
+// side-effects on server data (in particular, HTTP methods
+//  other than GET, or POST with certain MIME types), the
+//  specification mandates that browsers "preflight" the 
+// request, soliciting supported methods from the server 
+// with the HTTP OPTIONS request method, and then, upon
+//  "approval" from the server, sending the actual request. 
+// Servers can also inform clients whether "credentials" 
+// (such as Cookies and HTTP Authentication) should be sent
+//  with requests.
+
+// CORS failures result in errors but for security reasons, 
+// specifics about the error are not available to JavaScript. 
+// All the code knows is that an error occurred. The only way 
+// to determine what specifically went wrong is to look at the
+//  browser's console for details.
+
+// Examples of access control scenarios
+// We present three scenarios that demonstrate how Cross-Origin
+//  Resource Sharing works. All these examples use fetch(), 
+// which can make cross-origin requests in any supporting browser.
+
+// Simple requests
+// Some requests don't trigger a CORS preflight. Those are 
+// called simple requests from the obsolete CORS spec
+
+// The motivation is that the <form> element from HTML 4.0 
+// (which predates cross-site fetch() and XMLHttpRequest) 
+// can submit simple requests to any origin, so anyone 
+// writing a server must already be protecting against 
+// cross-site request forgery (CSRF). Under this assumption, 
+// the server doesn't have to opt-in (by responding to 
+// a preflight request) to receive any request that looks 
+// like a form submission, since the threat of CSRF is no 
+// worse than that of form submission. However, the server 
+// still must opt-in using Access-Control-Allow-Origin to 
+// share the response with the script.
+
+
+// A simple request is one that meets all the following 
+// conditions:
+
+// One of the allowed methods:
+// GET
+// HEAD
+// POST
+
+// Apart from the headers automatically set by the user 
+// agent (for example, Connection, User-Agent, or the other 
+// headers defined in the Fetch spec as a forbidden header name), 
+// the only headers which are allowed to be manually set are
+//  those which the Fetch spec defines as a CORS-safelisted 
+// request-header, which are:
+// Accept
+// Accept-Language
+// Content-Language
+// Content-Type (please note the additional requirements below)
+// Range (only with a simple range header value; e.g., bytes=256- or bytes=127-255)
+
+
+// The only type/subtype combinations allowed for the media
+//  type specified in the Content-Type header are:
+// application/x-www-form-urlencoded
+// multipart/form-data
+// text/plain
+
+// If the request is made using an XMLHttpRequest object, 
+// no event listeners are registered on the object returned 
+// by the XMLHttpRequest.upload property used in the request; 
+// that is, given an XMLHttpRequest instance xhr, no code has 
+// called xhr.upload.addEventListener() to add an event listener 
+// to monitor the upload.
+
+// No ReadableStream object is used in the request.
+// Note: WebKit Nightly and Safari Technology Preview place 
+// additional restrictions on the values allowed in the Accept,
+//  Accept-Language, and Content-Language headers. If any of 
+// those headers have "nonstandard" values, WebKit/Safari does 
+// not consider the request to be a "simple request". What 
+// values WebKit/Safari consider "nonstandard" is not documented, 
+// except in the following WebKit bugs:
+
+// Require preflight for non-standard CORS-safelisted request 
+// headers Accept, Accept-Language, and Content-Language
+
+// Allow commas in Accept, Accept-Language, and Content-Language
+//  request headers for simple CORS
+
+// Switch to a blacklist model for restricted Accept headers 
+// in simple CORS requests
+
+
+// For example, suppose web content at https://foo.example 
+// wishes to fetch JSON content from domain https://bar.other. 
+// Code of this sort might be used in JavaScript deployed on 
+// foo.example:
+
+// JS
+// Copy to Clipboard
+const fetchPromise = fetch("https://bar.other");
+
+fetchPromise
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  });
+// This operation performs a simple exchange between the 
+// client and the server, using CORS headers to handle the
+//  privileges:
+
+// Let's look at what the browser will send to the server in 
+// this case:
+// HTTP
+// Copy to Clipboard
+// GET /resources/public-data/ HTTP/1.1
+// Host: bar.other
+// User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0
+// Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+// Accept-Language: en-us,en;q=0.5
+// Accept-Encoding: gzip,deflate
+// Connection: keep-alive
+// Origin: https://foo.example
+
+
+// The request header of note is Origin, which shows that
+//  the invocation is coming from https://foo.example.
+
+// Now let's see how the server responds:
+
+// HTTP
+// Copy to Clipboard
+// HTTP/1.1 200 OK
+// Date: Mon, 01 Dec 2008 00:23:53 GMT
+// Server: Apache/2
+// Access-Control-Allow-Origin: *
+// Keep-Alive: timeout=2, max=100
+// Connection: Keep-Alive
+// Transfer-Encoding: chunked
+// Content-Type: application/xml
+
+// […XML Data…]
+// In response, the server returns a 
+// Access-Control-Allow-Origin header with 
+// Access-Control-Allow-Origin: *, which means that the 
+// resource can be accessed by any origin.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Origin: *
+// This pattern of the Origin and Access-Control-Allow-Origin 
+// headers is the simplest use of the access control protocol. 
+// If the resource owners at https://bar.other wished to 
+// restrict access to the resource to requests only from 
+// https://foo.example (i.e., no domain other 
+// than https://foo.example can access the resource 
+// in a cross-origin manner), they would send:
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Origin: https://foo.example
+// Note: When responding to a credentialed requests request, 
+// the server must specify an origin in the value of the 
+// Access-Control-Allow-Origin header, instead of specifying 
+// the "*" wildcard.
+
+// Preflighted requests
+// Unlike simple requests, for "preflighted" requests the 
+// browser first sends an HTTP request using the OPTIONS 
+// method to the resource on the other origin, in order to 
+// determine if the actual request is safe to send. Such 
+// cross-origin requests are preflighted since they may 
+// have implications for user data.
+// The following is an example of a request that will be 
+// preflighted:
+
+const fetchPromise = fetch("https://bar.other/doc", {
+  method: "POST",
+  mode: "cors",
+  headers: {
+    "Content-Type": "text/xml",
+    "X-PINGOTHER": "pingpong",
+  },
+  body: "<person><name>Arun</name></person>",
+});
+
+fetchPromise.then((response) => {
+  console.log(response.status);
+});
+
+// The example above creates an XML body to send with the 
+// POST request. Also, a non-standard HTTP X-PINGOTHER 
+// request header is set. Such headers are not part of HTTP/1.1,
+//  but are generally useful to web applications. Since the 
+// request uses a Content-Type of text/xml, and since a custom
+//  header is set, this request is preflighted.
+
+
+// Let's look at the full exchange between client and server. 
+// The first exchange is the preflight request/response:
+
+// HTTP
+// Copy to Clipboard
+// OPTIONS /doc HTTP/1.1
+// Host: bar.other
+// User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0
+// Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+// Accept-Language: en-us,en;q=0.5
+// Accept-Encoding: gzip,deflate
+// Connection: keep-alive
+// Origin: https://foo.example
+// Access-Control-Request-Method: POST
+// Access-Control-Request-Headers: X-PINGOTHER, Content-Type
+
+// HTTP/1.1 204 No Content
+// Date: Mon, 01 Dec 2008 01:15:39 GMT
+// Server: Apache/2
+// Access-Control-Allow-Origin: https://foo.example
+// Access-Control-Allow-Methods: POST, GET, OPTIONS
+// Access-Control-Allow-Headers: X-PINGOTHER, Content-Type
+// Access-Control-Max-Age: 86400
+// Vary: Accept-Encoding, Origin
+// Keep-Alive: timeout=2, max=100
+// Connection: Keep-Alive
+// Lines 1 - 10 above represent the preflight request with the 
+// OPTIONS method. The browser determines that it needs to send 
+// this based on the request parameters that the JavaScript 
+// code snippet above was using, so that the server can respond 
+// whether it is acceptable to send the request with the actual 
+// request parameters. OPTIONS is an HTTP/1.1 method that is 
+// used to determine further information from servers, and is 
+// a safe method, meaning that it can't be used to change the 
+// resource. Note that along with the OPTIONS request, two other
+//  request headers are sent (lines 9 and 10 respectively):
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Request-Method: POST
+// Access-Control-Request-Headers: X-PINGOTHER, Content-Type
+// The Access-Control-Request-Method header notifies the server as part of a preflight request that when the actual request is sent, it will do so with a POST request method. The Access-Control-Request-Headers header notifies the server that when the actual request is sent, it will do so with X-PINGOTHER and Content-Type custom headers. Now the server has an opportunity to determine whether it can accept a request under these conditions.
+
+// Lines 12 - 21 above are the response that the server returns,
+//  which indicate that the request method (POST) and request 
+// headers (X-PINGOTHER) are acceptable. Let's have a closer 
+// look at lines 15-18:
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Origin: https://foo.example
+// Access-Control-Allow-Methods: POST, GET, OPTIONS
+// Access-Control-Allow-Headers: X-PINGOTHER, Content-Type
+// Access-Control-Max-Age: 86400
+
+// The server responds with 
+// Access-Control-Allow-Origin: https://foo.example,
+//  restricting access to the requesting origin domain only.
+//  It also responds with Access-Control-Allow-Methods, which 
+// says that POST and GET are valid methods to query the 
+// resource in question (this header is similar to the Allow 
+// response header, but used strictly within the context of 
+// access control).
+
+// The server also sends Access-Control-Allow-Headers with a 
+// value of "X-PINGOTHER, Content-Type", confirming that these 
+// are permitted headers to be used with the actual request. 
+// Like Access-Control-Allow-Methods, 
+// Access-Control-Allow-Headers is a comma-separated list 
+// of acceptable headers.
+
+// Finally, Access-Control-Max-Age gives the value in seconds 
+// for how long the response to the preflight request can be 
+// cached without sending another preflight request. The 
+// default value is 5 seconds. In the present case, the max 
+// age is 86400 seconds (= 24 hours). Note that each browser 
+// has a maximum internal value that takes precedence when the 
+// Access-Control-Max-Age exceeds it.
+
+// Once the preflight request is complete, the real request 
+// is sent:
+
+// HTTP
+// Copy to Clipboard
+// POST /doc HTTP/1.1
+// Host: bar.other
+// User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0
+// Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+// Accept-Language: en-us,en;q=0.5
+// Accept-Encoding: gzip,deflate
+// Connection: keep-alive
+// X-PINGOTHER: pingpong
+// Content-Type: text/xml; charset=UTF-8
+// Referer: https://foo.example/examples/preflightInvocation.html
+// Content-Length: 55
+// Origin: https://foo.example
+// Pragma: no-cache
+// Cache-Control: no-cache
+
+// <person><name>Arun</name></person>
+
+// HTTP/1.1 200 OK
+// Date: Mon, 01 Dec 2008 01:15:40 GMT
+// Server: Apache/2
+// Access-Control-Allow-Origin: https://foo.example
+// Vary: Accept-Encoding, Origin
+// Content-Encoding: gzip
+// Content-Length: 235
+// Keep-Alive: timeout=2, max=99
+// Connection: Keep-Alive
+// Content-Type: text/plain
+
+// [Some XML payload]
+
+
+// Preflighted requests and redirects
+// Not all browsers currently support following redirects after
+//  a preflighted request. If a redirect occurs after such 
+// a request, some browsers currently will report an error
+//  message such as the following:
+
+// The request was redirected to 'https://example.com/foo', 
+// which is disallowed for cross-origin requests that require 
+// preflight. Request requires preflight, which is disallowed 
+// to follow cross-origin redirects.
+
+// The CORS protocol originally required that behavior but was 
+// subsequently changed to no longer require it. However, not 
+// all browsers have implemented the change, and thus still 
+// exhibit the originally required behavior.
+
+
+// Until browsers catch up with the spec, you may be able to 
+// work around this limitation by doing one or both of the 
+// following:
+
+// Change the server-side behavior to avoid the preflight 
+// and/or to avoid the redirect
+
+// Change the request such that it is a simple request that 
+// doesn't cause a preflight
+
+// If that's not possible, then another way is to:
+
+// Make a simple request (using Response.url for the Fetch API, 
+// or XMLHttpRequest.responseURL) to determine what URL the real
+//  preflighted request would end up at.
+
+// Make another request (the real request) using the URL you 
+// obtained from Response.url or XMLHttpRequest.responseURL 
+// in the first step.
+
+// However, if the request is one that triggers a preflight due 
+// to the presence of the Authorization header in the request, 
+// you won't be able to work around the limitation using the 
+// steps above. And you won't be able to work around it at 
+// all unless you have control over the server the request 
+// is being made to.
+
+// Requests with credentials
+// Note: When making credentialed requests to a different 
+// domain, third-party cookie policies will still apply. 
+// The policy is always enforced regardless of any setup on 
+// the server and the client as described in this chapter.
+
+// The most interesting capability exposed by both fetch() or 
+// XMLHttpRequest and CORS is the ability to make "credentialed" 
+// requests that are aware of HTTP cookies and HTTP 
+// Authentication information. By default, in cross-origin 
+// fetch() or XMLHttpRequest calls, browsers will not send 
+// credentials.
+
+// To ask for a fetch() request to include credentials, set 
+// the credentials option in the Request() constructor to 
+// "include".
+
+// To ask for an XMLHttpRequest request to include credentials,
+//  set the XMLHttpRequest.withCredentials property to true.
+
+// In this example, content originally loaded from
+//  https://foo.example makes a simple GET request to 
+// a resource on https://bar.other which sets Cookies. 
+// Content on foo.example might contain JavaScript like this:
+
+// JS
+// Copy to Clipboard
+const url = "https://bar.other/resources/credentialed-content/";
+
+const request = new Request(url, { credentials: "include" });
+
+const fetchPromise = fetch(request);
+fetchPromise.then((response) => console.log(response));
+
+// This code creates a Request object, setting the credentials 
+// option to "include" in the constructor, then passes this 
+// request into fetch(). Since this is a simple GET request, 
+// it is not preflighted but the browser will reject any 
+// response that does not have the
+//  Access-Control-Allow-Credentials: true header, and not 
+// make the response available to the invoking web content.
+
+// Diagram of a simple GET request with
+//  Access-Control-Allow-Credentials
+// Here is a sample exchange between client and server:
+
+// HTTP
+// Copy to Clipboard
+// GET /resources/credentialed-content/ HTTP/1.1
+// Host: bar.other
+// User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0
+// Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+// Accept-Language: en-us,en;q=0.5
+// Accept-Encoding: gzip,deflate
+// Connection: keep-alive
+// Referer: https://foo.example/examples/credential.html
+// Origin: https://foo.example
+// Cookie: pageAccess=2
+
+// HTTP/1.1 200 OK
+// Date: Mon, 01 Dec 2008 01:34:52 GMT
+// Server: Apache/2
+// Access-Control-Allow-Origin: https://foo.example
+// Access-Control-Allow-Credentials: true
+// Cache-Control: no-cache
+// Pragma: no-cache
+// Set-Cookie: pageAccess=3; expires=Wed, 31-Dec-2008 01:34:53 GMT
+// Vary: Accept-Encoding, Origin
+// Content-Encoding: gzip
+// Content-Length: 106
+// Keep-Alive: timeout=2, max=100
+// Connection: Keep-Alive
+// Content-Type: text/plain
+
+// [text/plain payload]
+// Although line 10 contains the Cookie destined for the 
+// content on https://bar.other, if bar.other did not respond
+//  with an Access-Control-Allow-Credentials: true (line 16), 
+// the response would be ignored and not made available to the 
+// web content.
+
+// Preflight requests and credentials
+// CORS-preflight requests must never include credentials. 
+// The response to a preflight request must specify 
+// Access-Control-Allow-Credentials: true to indicate 
+// that the actual request can be made with credentials.
+
+// Note: Some enterprise authentication services require that 
+// TLS client certificates be sent in preflight requests, in 
+// contravention of the Fetch specification.
+
+// Firefox 87 allows this non-compliant behavior to be enabled 
+// by setting the preference: network.cors_preflight.allow_client_cert to true (Firefox bug 1511151). Chromium-based browsers currently always send TLS client certificates in CORS preflight requests (Chrome bug 775438).
+
+// Credentialed requests and wildcards
+// When responding to a credentialed request:
+
+// The server must not specify the "*" wildcard for 
+// the Access-Control-Allow-Origin response-header value, 
+// but must instead specify an explicit origin; for example: 
+// Access-Control-Allow-Origin: https://example.com
+
+// The server must not specify the "*" wildcard for the 
+// Access-Control-Allow-Headers response-header value, but 
+// must instead specify an explicit list of header names; 
+// for example, Access-Control-Allow-Headers: X-PINGOTHER, 
+// Content-Type
+
+// The server must not specify the "*" wildcard for the 
+// Access-Control-Allow-Methods response-header value, 
+// but must instead specify an explicit list of method names; 
+// for example, Access-Control-Allow-Methods: POST, GET
+
+// The server must not specify the "*" wildcard for the 
+// Access-Control-Expose-Headers response-header value, 
+// but must instead specify an explicit list of header 
+// names; for example, Access-Control-Expose-Headers: 
+// Content-Encoding, Kuma-Revision
+
+// If a request includes a credential (most commonly a Cookie 
+// header) and the response includes 
+// an Access-Control-Allow-Origin: * header (that is, with 
+// the wildcard), the browser will block access to the response, 
+// and report a CORS error in the devtools console.
+
+// But if a request does include a credential (like the Cookie 
+// header) and the response includes an actual origin rather 
+// than the wildcard (like, for example, 
+// Access-Control-Allow-Origin: https://example.com), then 
+// the browser will allow access to the response from the 
+// specified origin.
+
+// Also note that any Set-Cookie response header in a response 
+// would not set a cookie if the Access-Control-Allow-Origin 
+// value in that response is the "*" wildcard rather an actual 
+// origin.
+
+// Third-party cookies
+// Note that cookies set in CORS responses are subject to 
+// normal third-party cookie policies. In the example above, 
+// the page is loaded from foo.example but the cookie on line 
+// 19 is sent by bar.other, and would thus not be saved if the 
+// user's browser is configured to reject all third-party 
+// cookies.
+
+// Cookie in the request (line 10) may also be suppressed 
+// in normal third-party cookie policies. The enforced cookie 
+// policy may therefore nullify the capability described in 
+// this chapter, effectively preventing you from making 
+// credentialed requests whatsoever.
+
+// Cookie policy around the SameSite attribute would apply.
+
+// The HTTP response headers
+// This section lists the HTTP response headers that servers 
+// return for access control requests as defined by the 
+// Cross-Origin Resource Sharing specification. The previous 
+// section gives an overview of these in action.
+
+// Access-Control-Allow-Origin
+// A returned resource may have one Access-Control-Allow-Origin
+//  header with the following syntax:
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Origin: <origin> | *
+// Access-Control-Allow-Origin specifies either a single origin
+//  which tells browsers to allow that origin to access the 
+// resource; or else — for requests without credentials — the
+//  "*" wildcard tells browsers to allow any origin to access 
+// the resource.
+
+// For example, to allow code from the origin
+//  https://mozilla.org to access the resource, you can specify:
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Origin: https://mozilla.org
+// Vary: Origin
+// If the server specifies a single origin (that may dynamically
+//  change based on the requesting origin as part of an allowlist) 
+// rather than the "*" wildcard, then the server should also 
+// include Origin in the Vary response header to indicate to 
+// clients that server responses will differ based on the value 
+// of the Origin request header.
+
+// Access-Control-Expose-Headers
+// The Access-Control-Expose-Headers header adds the specified 
+// headers to the allowlist that JavaScript (such as 
+// Response.headers) in browsers is allowed to access.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Expose-Headers: <header-name>[, <header-name>]*
+// For example, the following:
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header
+// …would allow the X-My-Custom-Header 
+// and X-Another-Custom-Header headers to be exposed to 
+// the browser.
+
+// Access-Control-Max-Age
+// The Access-Control-Max-Age header indicates how long the 
+// results of a preflight request can be cached. For an example 
+// of a preflight request, see the above examples.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Max-Age: <delta-seconds>
+// The delta-seconds parameter indicates the number of 
+// seconds the results can be cached.
+
+// Access-Control-Allow-Credentials
+// The Access-Control-Allow-Credentials header indicates 
+// whether or not the response to the request can be exposed 
+// when the credentials flag is true. When used as part of 
+// a response to a preflight request, this indicates whether 
+// or not the actual request can be made using credentials. 
+// Note that simple GET requests are not preflighted, and so 
+// if a request is made for a resource with credentials, if 
+// this header is not returned with the resource, the response 
+// is ignored by the browser and not returned to web content.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Credentials: true
+// Credentialed requests are discussed above.
+
+// Access-Control-Allow-Methods
+// The Access-Control-Allow-Methods header specifies the 
+// method or methods allowed when accessing the resource. 
+// This is used in response to a preflight request. The 
+// conditions under which a request is preflighted are 
+// discussed above.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Methods: <method>[, <method>]*
+// An example of a preflight request is given above, 
+// including an example which sends this header to the browser.
+
+// Access-Control-Allow-Headers
+// The Access-Control-Allow-Headers header is used in response 
+// to a preflight request to indicate which HTTP headers can be 
+// used when making the actual request. This header is the 
+// server side response to the browser's 
+// Access-Control-Request-Headers header.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Allow-Headers: <header-name>[, <header-name>]*
+// The HTTP request headers
+// This section lists headers that clients may use when 
+// issuing HTTP requests in order to make use of the 
+// cross-origin sharing feature. Note that these headers 
+// are set for you when making invocations to servers. 
+// Developers making cross-origin requests do not have 
+// to set any cross-origin sharing request headers 
+// programmatically.
+
+// Origin
+// The Origin header indicates the origin of the cross-origin 
+// access request or preflight request.
+
+// HTTP
+// Copy to Clipboard
+// Origin: <origin>
+// The origin is a URL indicating the server from which the 
+// request is initiated. It does not include any path 
+// information, only the server name.
+
+// Note: The origin value can be null.
+
+// Note that in any access control request, the Origin header 
+// is always sent.
+
+// Access-Control-Request-Method
+// The Access-Control-Request-Method is used when issuing 
+// a preflight request to let the server know what HTTP method 
+// will be used when the actual request is made.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Request-Method: <method>
+// Examples of this usage can be found above.
+
+// Access-Control-Request-Headers
+// The Access-Control-Request-Headers header is used when 
+// issuing a preflight request to let the server know what 
+// HTTP headers will be used when the actual request is made 
+// (for example, by passing them as the headers option to the 
+// Request() constructor). This browser-side header will be 
+// answered by the complementary server-side header of 
+// Access-Control-Allow-Headers.
+
+// HTTP
+// Copy to Clipboard
+// Access-Control-Request-Headers: <field-name>[, <field-name>]*
+// Examples of this usage can be found above.
+
+// Specifications
+// Specification
+// Fetch Standard
+// # http-access-control-allow-origin
+// Browser compatibility
+// Report problems with this compatibility data on GitHub
+// desktop	mobile
+// Chrome
+// Edge
+// Firefox
+// Opera
+// Safari
+// Chrome Android
+// Firefox for Android
+// Opera Android
+// Safari on iOS
+// Samsung Internet
+// WebView Android
+// Access-Control-Allow-Origin
+
+// 4
+// Toggle history	
+// 12
+// Toggle history	
+// 3.5
+// Toggle history	
+// 12
+// Toggle history	
+// 4
+// Toggle history	
+// Yes
+// Toggle history	
+// 4
+// Toggle history	
+// 12
+// Toggle history	
+// 3.2
+// Toggle history	
+// Yes
+// Toggle history	
+// 2
+// Toggle history
+// Legend
+// Tip: you can click/tap on a cell for more information.
+
+// HTTP authentication
+// HTTP provides a general framework for access control and 
+// authentication.
+// The challenge and response flow works like this:
+// The server responds to a client with a 401 (Unauthorized) 
+// response status and provides information on how to authorize 
+// with a WWW-Authenticate response header containing at least 
+// one challenge.
+
+// A client that wants to authenticate itself with the server 
+// can then do so by including an Authorization request header 
+// with the credentials.
+
+// Usually a client will present a password prompt to the user 
+// and will then issue the request including the correct 
+// Authorization header.
+// A sequence diagram illustrating HTTP messages between a client 
+// and a server lifeline.
+
+// Warning: The "Basic" authentication scheme used in the diagram
+//  above sends the credentials encoded but not encrypted. This 
+// would be completely insecure unless the exchange was over a 
+// secure connection (HTTPS/TLS).
+
+
+// Proxy authentication
+// The same challenge and response mechanism can be used for 
+// proxy authentication. As both resource authentication and 
+// proxy authentication can coexist, a different set of headers 
+// and status codes is needed. In the case of proxies, the 
+// challenging status code is 407 (Proxy Authentication Required), 
+// the Proxy-Authenticate response header contains at least one 
+// challenge applicable to the proxy, and the Proxy-Authorization
+//  request header is used for providing the credentials to the 
+// proxy server.
+
+// Access forbidden
+// If a (proxy) server receives invalid credentials, it should 
+// respond with a 401 Unauthorized or with a 407 Proxy 
+// Authentication Required, and the user may send a new 
+// request or replace the Authorization header field.
+
+// If a (proxy) server receives valid credentials that are 
+// inadequate to access a given resource, the server should 
+// respond with the 403 Forbidden status code. Unlike 401 
+// Unauthorized or 407 Proxy Authentication Required, 
+// authentication is impossible for this user and browsers 
+// will not propose a new attempt.
+
+// In all cases, the server may prefer returning a 404 Not 
+// Found status code, to hide the existence of the page to 
+// a user without adequate privileges or not correctly 
+// authenticated.
+
+// Authentication of cross-origin images
+// A potential security hole (that has since been fixed in 
+// browsers) was authentication of cross-site images. From 
+// Firefox 59 onwards, image resources loaded from different 
+// origins to the current document are no longer able to trigger 
+// HTTP authentication dialogs (Firefox bug 1423146), preventing 
+// user credentials being stolen if attackers were able to embed 
+// an arbitrary image into a third-party page.
+
+// Character encoding of HTTP authentication
+// Browsers use utf-8 encoding for usernames and passwords.
+
+// Firefox once used ISO-8859-1, but changed to utf-8 for parity 
+// with other browsers and to avoid potential problems as 
+// described in Firefox bug 1419658.
+
+// WWW-Authenticate and Proxy-Authenticate headers
+// The WWW-Authenticate and Proxy-Authenticate response headers 
+// define the authentication method that should be used to gain 
+// access to a resource. They must specify which authentication 
+// scheme is used, so that the client that wishes to authorize 
+// knows how to provide the credentials.
+
+// The syntax for these headers is the following:
+
+// HTTP
+// Copy to Clipboard
+// WWW-Authenticate: <type> realm=<realm>
+// Proxy-Authenticate: <type> realm=<realm>
+
+// Here, <type> is the authentication scheme ("Basic" is the most 
+// common scheme and introduced below). The realm is used to 
+// describe the protected area or to indicate the scope of 
+// protection. This could be a message like "Access to the 
+// staging site" or similar, so that the user knows to which 
+// space they are trying to get access to.
+
+// Authorization and Proxy-Authorization headers
+// The Authorization and Proxy-Authorization request headers 
+// contain the credentials to authenticate a user agent with 
+// a (proxy) server. Here, the <type> is needed again followed 
+// by the credentials, which can be encoded or encrypted depending 
+// on which authentication scheme is used.
+
+// HTTP
+// Copy to Clipboard
+// Authorization: <type> <credentials>
+// Proxy-Authorization: <type> <credentials>
+
+
+// Authentication schemes
+// The general HTTP authentication framework is the base for 
+// a number of authentication schemes.
+
+// IANA maintains a list of authentication schemes, but there 
+// are other schemes offered by host services, such as Amazon AWS.
+
+// Some common authentication schemes include:
+
+// Basic
+// See RFC 7617, base64-encoded credentials. More information below.
+
+// Bearer
+// See RFC 6750, bearer tokens to access OAuth 2.0-protected resources
+
+// Digest
+// See RFC 7616. Firefox 93 and later support the SHA-256 
+// algorithm. Previous versions only support MD5 hashing 
+// (not recommended).
+
+// HOBA
+// See RFC 7486, Section 3, HTTP Origin-Bound Authentication, 
+// digital-signature-based
+
+// Mutual
+// See RFC 8120
+
+// Negotiate / NTLM
+// See RFC4599
+
+// VAPID
+// See RFC 8292
+
+// SCRAM
+// See RFC 7804
+
+// AWS4-HMAC-SHA256
+// See AWS docs. This scheme is used for AWS3 server authentication.
+
+
+// Schemes can differ in security strength and in their 
+// availability in client or server software.
+
+
+// The "Basic" authentication scheme offers very poor security, 
+// but is widely supported and easy to set up. It is introduced 
+// in more detail below.
+
+// Basic authentication scheme
+// The "Basic" HTTP authentication scheme is defined in RFC 7617, 
+// which transmits credentials as user ID/password pairs, encoded 
+// using base64.
+
+// Security of basic authentication
+// As the user ID and password are passed over the network as 
+// clear text (it is base64 encoded, but base64 is a reversible 
+// encoding), the basic authentication scheme is not secure. 
+// HTTPS/TLS should be used with basic authentication. Without 
+// these additional security enhancements, basic authentication 
+// should not be used to protect sensitive or valuable information.
+
+// Restricting access with Apache and basic authentication
+// To password-protect a directory on an Apache server, you will
+//  need a .htaccess and a .htpasswd file.
+
+// The .htaccess file typically looks like this:
+
+// AuthType Basic
+// AuthName "Access to the staging site"
+// AuthUserFile /path/to/.htpasswd
+// Require valid-user
+// The .htaccess file references a .htpasswd file in which each 
+// line consists of a username and a password separated by a 
+// colon (:). You cannot see the actual passwords as they are 
+// hashed (using MD5-based hashing, in this case). Note that 
+// you can name your .htpasswd file differently if you like, but 
+// keep in mind this file shouldn't be accessible to anyone. 
+// (Apache is usually configured to prevent access to .ht* files).
+
+// APACHECONF
+// Copy to Clipboard
+// aladdin:$apr1$ZjTqBB3f$IF9gdYAGlMrs2fuINjHsz.
+// user2:$apr1$O04r.y2H$/vEkesPhVInBByJUkXitA/
+// Restricting access with Nginx and basic authentication
+// For Nginx, you will need to specify a location that you 
+// are going to protect and the auth_basic directive that provides
+//  the name to the password-protected area. The 
+// auth_basic_user_file directive then points to a .htpasswd 
+// file containing the encrypted user credentials, just like 
+// in the Apache example above.
+
+// APACHECONF
+// Copy to Clipboard
+// location /status {
+//     auth_basic           "Access to the staging site";
+//     auth_basic_user_file /etc/apache2/.htpasswd;
+// }
+// Access using credentials in the URL
+// Many clients also let you avoid the login prompt by using an 
+// encoded URL containing the username and the password like this:
+
+// https://username:password@www.example.com/
+// The use of these URLs is deprecated. In Chrome, the 
+// username:password@ part in URLs is removed from subresource 
+// URLs for security reasons. In Firefox, it is checked if the 
+// site actually requires authentication and if not, Firefox will
+//  warn the user with a prompt "You are about to log in to the 
+// site www.example.com with the username username, but the 
+// website does not require authentication. This may be an 
+// attempt to trick you." In case the site does require 
+// authentication, Firefox will still ask for user confirmation 
+// "You are about to log in to the site www.example.com with the 
+// username username." before sending the credentials to the site.
+//  Note that Firefox sends the request without credentials in 
+// both cases before showing the prompt in order to determine
+//  whether the site requires authentication.
+
+// Compression in HTTP
+// Compression is an important way to increase the 
+// performance of a website. For some documents, size 
+// reduction of up to 70% lowers the bandwidth capacity 
+// needs. Over the years, algorithms also got more efficient,
+//  and new ones are supported by clients and servers.
+// In practice, web developers don't need to implement 
+// compression mechanisms, both browsers and servers have 
+// it implemented already, but they have to be sure that 
+// the server is configured adequately.
+
+// Content negotiation
+// In HTTP, content negotiation is the mechanism that is 
+// used for serving different representations of a resource 
+// to the same URI to help the user agent specify which 
+// representation is best suited for the user (for example, 
+// which document language, which image format, or which 
+// content encoding).
+
+// Note: You'll find some disadvantages of HTTP content 
+// negotiation in a wiki page from WHATWG. HTML provides 
+// alternatives to content negotiation via, for example, 
+// the <source> element.
+
+// Principles of content negotiation
+// A specific document is called a resource. When a client 
+// wants to obtain a resource, the client requests it via 
+// a URL. The server uses this URL to choose one of the 
+// variants available–each variant is called 
+// a representation–and returns a specific representation 
+// to the client. The overall resource, as well as each of 
+// the representations, has a specific URL. Content 
+// negotiation determines how a specific representation 
+// is chosen when the resource is called. There are several 
+// ways of negotiating between the client and the server.
+
+// A client requesting a URL. The server has multiple 
+// resources represented by the URL and sends back 
+// appropriate content based on the request.
+
+// The best-suited representation is identified through 
+// one of two mechanisms:
+
+
+// Specific HTTP headers by the client (server-driven 
+// negotiation or proactive negotiation), which is the 
+// standard way of negotiating a specific kind of resource.
+
+// The 300 (Multiple Choices) or 406 (Not Acceptable), 
+// 415 (Unsupported Media Type) HTTP response codes by 
+// the server (agent-driven negotiation or reactive negotiation), that are used as fallback mechanisms.
+
+// Over the years, other content negotiation proposals, 
+// like transparent content negotiation and the Alternates 
+// header, have been proposed. They failed to get traction 
+// and were abandoned.
+
+// Server-driven content negotiation
+// In server-driven content negotiation, or proactive content 
+// negotiation, the browser (or any other kind of user agent) 
+// sends several HTTP headers along with the URL. These 
+// headers describe the user's preferred choice. The server 
+// uses them as hints and an internal algorithm chooses the 
+// best content to serve to the client. If it can't provide 
+// a suitable resource, it might respond with 406 
+// (Not Acceptable) or 415 (Unsupported Media Type) and 
+// set headers for the types of media that it does support
+//  (e.g., using the Accept-Post or Accept-Patch for POST 
+// and PATCH requests, respectively). The algorithm is 
+// server-specific and not defined in the standard. See 
+// the Apache negotiation algorithm.
+
+// A client requesting a URL with headers denoting a 
+// preference for content types. The server has multiple 
+// resources represented by the URL and sends back the 
+// content for the preferred language and compresses the 
+// request body based, respecting the client's request headers.
+
+
+// The Accept header
+// The Accept header lists the MIME types of media resources 
+// that the agent is willing to process. This is a 
+// comma-separated list of MIME types, each combined 
+// with a quality factor, a parameter that indicates 
+// the relative degree of preference between the different
+//  MIME types.
+
+// The Accept header is defined by the browser, or any other 
+// user agent, and can vary according to the context. For 
+// example, fetching an HTML page or an image, a video, or 
+// a script. It's different when fetching a document entered 
+// in the address bar or an element linked via an <img>,
+//  <video>, or <audio> element. Browsers are free to use 
+// the value of the header that they think is the most 
+// adequate; an exhaustive list of default values for 
+// common browsers is available.
+
+// The Accept-CH header 
+
+
+// The Accept-CH-Lifetime header
+// Note: This is part of an experimental technology called 
+// Client Hints and is only available in Chrome 61 or later.
+
+// The Accept-CH-Lifetime header is used with the 
+// Device-Memory value of the Accept-CH header and indicates 
+// the amount of time the device should opt in to sharing the 
+// device memory with the server. The value is given in 
+// milliseconds and it's optional.
+
+// The Accept-Encoding header
+// The Accept-Encoding header defines the acceptable content 
+// encoding (supported compressions). The value is a q-factor 
+// list (e.g., br, gzip;q=0.8) that indicates the priority of 
+// the encoding values. The default value identity is at the 
+// lowest priority (unless otherwise noted).
+
+
+// Compressing HTTP messages is one of the most important
+//  ways to improve the performance of a website. It shrinks 
+// the size of the data transmitted and makes better use of 
+// the available bandwidth. Browsers always send this header 
+// and the server should be configured to use compression.
+
+// The Accept-Language header
+// The Accept-Language header is used to indicate the 
+// language preference of the user. It's a list of values 
+// with quality factors (e.g., "de, en;q=0.7"). A default 
+// value is often set according to the language of the 
+// graphical interface of the user agent, but most browsers 
+// allow different language preferences to be set.
+
+
+// The User-Agent header
+// Note: Though there are legitimate uses of this header 
+// for selecting content, it's considered bad practice to 
+// rely on it to define what features are supported by the
+//  user agent.
+
+// The User-Agent header identifies the browser sending the 
+// request. This string may contain a space-separated list 
+// of product tokens and comments.
+
+// An HTTP cookie (web cookie, browser cookie) is a 
+// small piece of data that a server sends to a user's 
+// web browser. The browser may store the cookie and send 
+// it back to the same server with later requests. Typically,
+//  an HTTP cookie is used to tell if two requests come from 
+// the same browser—keeping a user logged in, for example. 
+// It remembers stateful information for the stateless HTTP 
+// protocol.
+
+// Cookies are mainly used for three purposes:
+
+// Session management
+// Logins, shopping carts, game scores, or anything else 
+// the server should remember
+
+// Personalization
+// User preferences, themes, and other settings
+
+// Tracking
+// Recording and analyzing user behavior
+
+// Cookies were once used for general client-side storage. 
+// While this made sense when they were the only way to store 
+// data on the client, modern storage APIs are now recommended. 
+// Cookies are sent with every request, so they can worsen 
+// performance (especially for mobile data connections).
+//  Modern APIs for client storage are the Web Storage API 
+// (localStorage and sessionStorage) and IndexedDB.
+// 
+
+// Note: To see stored cookies (and other storage that 
+// a web page can use), you can enable the Storage Inspector 
+// in Developer Tools and select Cookies from the storage tree.
+
+// Creating cookies
+// After receiving an HTTP request, a server can send one 
+// or more Set-Cookie headers with the response. The browser 
+// usually stores the cookie and sends it with requests made 
+// to the same server inside a Cookie HTTP header. You can 
+// specify an expiration date or time period after which the
+//  cookie shouldn't be sent. You can also set additional 
+// restrictions to a specific domain and path to limit where 
+// the cookie is sent. For details about the header attributes 
+// mentioned below, refer to the Set-Cookie reference article.
+
+// The Set-Cookie and Cookie headers
+// The Set-Cookie HTTP response header sends cookies from 
+// the server to the user agent. A simple cookie is set like 
+// this:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: <cookie-name>=<cookie-value>
+// This instructs the server sending headers to tell the 
+// client to store a pair of cookies:
+
+// HTTP
+// Copy to Clipboard
+// HTTP/2.0 200 OK
+// Content-Type: text/html
+// Set-Cookie: yummy_cookie=choco
+// Set-Cookie: tasty_cookie=strawberry
+
+// [page content]
+// Then, with every subsequent request to the server, the 
+// browser sends all previously stored cookies back to the 
+// server using the Cookie header.
+
+// HTTP
+// Copy to Clipboard
+// GET /sample_page.html HTTP/2.0
+// Host: www.example.org
+// Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+// Note: Here's how to use the Set-Cookie header in various 
+// server-side applications:
+// PHP
+// Node.JS
+// Python
+// Ruby on Rails
+
+// Define the lifetime of a cookie
+// Cookies can persist for two different periods, depending
+//  on the attributes used with the Set-Cookie header when 
+// they were created:
+
+// Permanent cookies are deleted at a date specified by the 
+// Expires attribute or after a period prescribed by the 
+// Max-Age attribute.
+
+// Session cookies – cookies without a Max age or Expires 
+// attribute – are deleted when the current session ends. 
+// The browser defines when the "current session" ends, and 
+// some browsers use session restoring when restarting. This 
+// can cause session cookies to last indefinitely.
+
+// For example:
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Thu, 31 Oct 2021 07:28:00 GMT;
+
+
+// If your site authenticates users, it should regenerate 
+// and resend session cookies, even ones that already exist, 
+// whenever a user authenticates. This approach helps prevent
+//  session fixation attacks, where a third party can reuse 
+// a user's session.
+
+// Restrict access to cookies
+// You can ensure that cookies are sent securely and aren't 
+// accessed by unintended parties or scripts in one of two 
+// ways: with the Secure attribute and the HttpOnly attribute.
+
+// A cookie with the Secure attribute is only sent to the 
+// server with an encrypted request over the HTTPS protocol. 
+// It's never sent with unsecured HTTP (except on localhost),
+//  which means man-in-the-middle attackers can't access it 
+// easily. Insecure sites (with http: in the URL) can't set 
+// cookies with the Secure attribute. However, don't assume 
+// that Secure prevents all access to sensitive information 
+// in cookies. For example, someone with access to the client's
+//  hard disk (or JavaScript if the HttpOnly attribute isn't 
+// set) can read and modify the information.
+
+// A cookie with the HttpOnly attribute is inaccessible to 
+// the JavaScript Document.cookie API; it's only sent to the 
+// server. For example, cookies that persist in server-side 
+// sessions don't need to be available to JavaScript and 
+// should have the HttpOnly attribute. This precaution helps
+//  mitigate cross-site scripting (XSS) attacks.
+
+
+// Here's an example:
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
+
+
+
+// Define where cookies are sent
+// The Domain and Path attributes define the scope of 
+// a cookie: what URLs the cookies should be sent to.
+
+// Domain attribute
+// The Domain attribute specifies which server can receive 
+// a cookie.
+
+// If specified, then cookies are available on the server 
+// and its subdomains. For example, if you set
+//  Domain=mozilla.org, cookies are available on mozilla.org
+//  and its subdomains like developer.mozilla.org.
+
+// If the server does not specify a Domain, the cookies are 
+// available on the server but not on its subdomains. 
+// Therefore, specifying Domain is less restrictive than 
+// omitting it. However, it can be helpful when subdomains 
+// need to share information about a user.
+
+// Path attribute
+// The Path attribute indicates a URL path that must exist 
+// in the requested URL in order to send the Cookie header. 
+// The %x2F ("/") character is considered a directory
+//  separator, and subdirectories match as well.
+
+// For example, if you set Path=/docs, these request paths 
+// match:
+
+// /docs
+// /docs/
+// /docs/Web/
+// /docs/Web/HTTP
+
+// But these request paths don't:
+
+// /
+// /docsets
+// /fr/docs
+
+// SameSite attribute
+// The SameSite attribute lets servers specify whether/when 
+// cookies are sent with cross-site requests (where Site is 
+// defined by the registrable domain and the scheme: http or 
+// https). This provides some protection against cross-site
+//  request forgery attacks (CSRF). It takes three possible 
+// values: Strict, Lax, and None.
+
+// With Strict, the browser only sends the cookie with 
+// requests from the cookie's origin site. Lax is similar,
+//  except the browser also sends the cookie when the user
+//  navigates to the cookie's origin site (even if the user 
+// /is coming from a different site). For example, by 
+// following a link from an external site. None specifies 
+// that cookies are sent on both originating and cross-site 
+// requests, but only in secure contexts (i.e., if
+//  SameSite=None then the Secure attribute must also 
+// be set). If no SameSite attribute is set, the cookie 
+// is treated as Lax.
+
+// Here's an example:
+
+// HTTP
+// Copy to Clipboard
+// Set-Cookie: mykey=myvalue; SameSite=Strict
+
+// Note: The standard related to SameSite recently changed 
+// (MDN documents the new behavior above). See the cookies 
+// Browser compatibility table for information about how the
+//  attribute is handled in specific browser versions:
+
+// SameSite=Lax is the new default if SameSite isn't specified. 
+// Previously, cookies were sent for all requests by default.
+
+// Cookies with SameSite=None must now also specify the 
+// Secure attribute (they require a secure context).
+
+// Cookies from the same domain are no longer considered 
+// to be from the same site if sent using a different scheme 
+// (http: or https:).
+
+// Cookie prefixes
+// Because of the design of the cookie mechanism, a server 
+// can't confirm that a cookie was set from a secure origin 
+// or even tell where a cookie was originally set.
+
+// A vulnerable application on a subdomain can set a cookie 
+// with the Domain attribute, which gives access to that 
+// cookie on all other subdomains. This mechanism can be 
+// abused in a session fixation attack. See session fixation 
+// for primary mitigation methods.
+
+// As a defense-in-depth measure, however, you can use cookie 
+// prefixes to assert specific facts about the cookie. Two 
+// prefixes are available:
+
+
+// __Host-
+// If a cookie name has this prefix, it's accepted in a 
+// Set-Cookie header only if it's also marked with the 
+// Secure attribute, was sent from a secure origin, does 
+// not include a Domain attribute, and has the Path attribute
+//  set to /. This way, these cookies can be seen as 
+// "domain-locked".
+
+// __Secure-
+// If a cookie name has this prefix, it's accepted in 
+// a Set-Cookie header only if it's marked with the Secure 
+// attribute and was sent from a secure origin. This is 
+// weaker than the __Host- prefix.
+
+// The browser will reject cookies with these prefixes that 
+// don't comply with their restrictions. Note that this 
+// ensures that subdomain-created cookies with prefixes are 
+// either confined to the subdomain or ignored completely.
+//  As the application server only checks for a specific 
+// cookie name when determining if the user is authenticated 
+// or a CSRF token is correct, this effectively acts as 
+// a defense measure against session fixation.
+
+// Note: On the application server, the web application must 
+// check for the full cookie name including the prefix. User 
+// agents do not strip the prefix from the cookie before 
+// sending it in a request's Cookie header.
+
+// For more information about cookie prefixes and the current
+//  state of browser support, see the Prefixes section of 
+// the Set-Cookie reference article.
+
+// JavaScript access using Document.cookie
+// You can create new cookies via JavaScript using the 
+// Document.cookie property. You can access existing cookies 
+// from JavaScript as well if the HttpOnly flag isn't set.
+
+// JS
+// Copy to Clipboard
+document.cookie = "yummy_cookie=choco";
+document.cookie = "tasty_cookie=strawberry";
+console.log(document.cookie);
+// logs "yummy_cookie=choco; tasty_cookie=strawberry"
+
+// Cookies created via JavaScript can't include the HttpOnly
+//  flag.
+
+// Please note the security issues in the Security section 
+// below. Cookies available to JavaScript can be stolen 
+// through XSS.
+
+// Security
+// Note: When you store information in cookies, keep in 
+// mind that all cookie values are visible to, and can be 
+// changed by, the end user. Depending on the application, 
+// you may want to use an opaque identifier that the server 
+// looks up, or investigate alternative 
+// authentication/confidentiality mechanisms such as JSON 
+// Web Tokens.
+
+// Ways to mitigate attacks involving cookies:
+
+// Use the HttpOnly attribute to prevent access to cookie 
+// values via JavaScript.
+
+// Cookies that are used for sensitive information (such as 
+// indicating authentication) should have a short lifetime, 
+// with the SameSite attribute set to Strict or Lax. (See 
+// SameSite attribute, above.) In browsers that support 
+// SameSite, this ensures that the authentication cookie 
+// isn't sent with cross-site requests. This would make the 
+// request effectively unauthenticated to the application 
+// server.
+
+// Tracking and privacy
+// Third-party cookies
+// A cookie is associated with a particular domain and scheme
+//  (such as http or https), and may also be associated with 
+// subdomains if the Set-Cookie Domain attribute is set. If 
+// the cookie domain and scheme match the current page, the 
+// cookie is considered to be from the same site as the page,
+//  and is referred to as a first-party cookie.
+
+// If the domain and scheme are different, the cookie is not
+//  considered to be from the same site, and is referred to 
+// as a third-party cookie. While the server hosting a web 
+// page sets first-party cookies, the page may contain 
+// components stored on servers in other domains, such as 
+// images or other documents embedded in <iframe>s. These 
+// components may set third-party cookies.
+
+// Note: Third-party cookies are sometimes referred to as 
+// cross-site cookies. This is arguably a more accurate name, 
+// as third-party cookies imply ownership by a third-party
+//  company or organization. However, the behavior and 
+// potential issues are the same whether or not you own 
+// all the involved sites.
+
+// Typical use cases for third-party cookies include sharing 
+// user profile information or collecting analytics across 
+// different related domains. They are also often used for
+//  advertising and tracking users across the web.
+
+// Note: Companies should disclose the types of cookies they 
+// use on their sites for transparency purposes and to comply
+//  with regulations. For example, see Google's notice on the
+//  types of cookies it uses and Mozilla's Websites, 
+// Communications & Cookies Privacy Notice.
+
+// A third-party server can create a profile of a user's 
+// browsing history and habits based on cookies sent to it 
+// by the same browser when accessing multiple sites. 
+// Firefox, by default, blocks third-party cookies that 
+// are known to contain trackers. Third-party cookies 
+// (or just tracking cookies) may also be blocked by other 
+// browser settings or extensions. Cookie blocking can cause 
+// some third-party components (such as social media widgets) 
+// not to function as intended.
+
+// There are some useful features available for developers 
+// who wish to respect user privacy, and minimize third-party
+//  tracking:
+
+// Servers can (and should) set the cookie SameSite attribute
+//  to specify whether or not third-party cookies may be sent.
+
+// Cookies Having Independent Partitioned State (CHIPS) 
+// enables developers to opt-in their cookies to partitioned
+//  storage, with a separate cookie jar per top-level site.
+//  This enables valid non-tracking uses of third-party 
+// cookies to continue working in browsers that do not 
+// allow cookies to be used for third-party tracking.
+
+// Cookie-related regulations
+// Legislation or regulations that cover the use of cookies 
+// include:
+
+// The General Data Privacy Regulation (GDPR) in the European
+//  Union
+// The ePrivacy Directive in the EU
+// The California Consumer Privacy Act
+// These regulations have global reach. They apply to any 
+// site on the World Wide Web that users from these 
+// jurisdictions access (the EU and California, with 
+// the caveat that California's law applies only to 
+// entities with gross revenue over 25 million USD,
+//  among things).
+
+// These regulations include requirements such as:
+
+// Notifying users that your site uses cookies.
+// Allowing users to opt out of receiving some or all cookies.
+// Allowing users to use the bulk of your service 
+// without receiving cookies.
+// There may be other regulations that govern the use of 
+// cookies in your locality. The burden is on you to know 
+// and comply with these regulations. There are companies 
+// that offer "cookie banner" code that helps you comply 
+// with these regulations.
+
+// Other ways to store information in the browser
+// Another approach to storing data in the browser is the 
+// Web Storage API. The window.sessionStorage and 
+// window.localStorage properties correspond to session 
+// and permanent cookies in duration, but have larger 
+// storage limits than cookies, and are never sent to a server.
+//  More structured and larger amounts of data can be stored
+//  using the IndexedDB API, or a library built on it.
+
+// There are some techniques designed to recreate cookies 
+// after they're deleted. These are known as "zombie" cookies. 
+// These techniques violate the principles of user privacy
+//  and user control, may violate data privacy regulations, 
+// and could expose a website using them to legal liability.
+
+// Redirections in HTTP
+// URL redirection, also known as URL forwarding, is 
+// a technique to give more than one URL address to a page,
+//  a form, a whole website, or a web application. HTTP has
+//  a special kind of response, called a HTTP redirect, for 
+// this operation.
+
+// Redirects accomplish numerous goals:
+
+// Temporary redirects during site maintenance or downtime
+// Permanent redirects to preserve existing links/bookmarks 
+// after changing the site's URLs, progress pages when 
+// uploading a file, etc.
+
+// Principle
+// In HTTP, redirection is triggered by a server sending 
+// a special redirect response to a request. Redirect 
+// responses have status codes that start with 3, and 
+// a Location header holding the URL to redirect to.
+
+// When browsers receive a redirect, they immediately load 
+// the new URL provided in the Location header. Besides the 
+// small performance hit of an additional round-trip, users 
+// rarely notice the redirection.
+
+// Initial request goes from client to server. Server 
+// responds with a 301:moved permanently, with the URL for 
+// the redirect. Client makes an a GET request for the new 
+// URL which is returned by the server, with a 200 OK response.
+
+// There are several types of redirects, sorted into three 
+// categories:
+
+// Permanent redirections
+// Temporary redirections
+// Special redirections
+
+// Permanent redirections
+// These redirections are meant to last forever. They imply 
+// that the original URL should no longer be used, and 
+// replaced with the new one. Search engine robots, RSS 
+// readers, and other crawlers will update the original URL 
+// for the resource.
+
+// Code	Text	Method handling	Typical use case
+// 301	Moved Permanently	GET methods unchanged. Others may 
+// or may not be changed to GET. [1]	Reorganization of a 
+// website.
+
+// 308	Permanent Redirect	Method and body not changed.	
+// Reorganization of a website, with non-GET links/operations.
+
+// [1] The specification did not intend to allow method changes, 
+// but there are existing user agents that do change their 
+// method. 308 was created to remove the ambiguity of the 
+// behavior when using non-GET methods.
+
+// Temporary redirections
+// Sometimes the requested resource can't be accessed from 
+// its canonical location, but it can be accessed from another 
+// place. In this case, a temporary redirect can be used.
+
+// Search engine robots and other crawlers don't memorize 
+// the new, temporary URL. Temporary redirections are also 
+// used when creating, updating, or deleting resources, to 
+// show temporary progress pages.
+
+// Code	Text	Method handling	Typical use case
+// 302	Found	GET methods unchanged. Others may or may not be changed to GET. [2]	The Web page is temporarily unavailable for unforeseen reasons.
+// 303	See Other	GET methods unchanged. Others changed to GET (body lost).	Used to redirect after a PUT or a POST, so that refreshing the result page doesn't re-trigger the operation.
+// 307	Temporary Redirect	Method and body not changed	The Web page is temporarily unavailable for unforeseen reasons. Better than 302 when non-GET operations are available on the site.
+
+// [2] The specification did not intend to allow method 
+// changes, but there are existing user agents that do 
+// change their method. 307 was created to remove the 
+// ambiguity of the behavior when using non-GET methods.
+
+// Special redirections
+// 304 (Not Modified) redirects a page to the locally cached 
+// copy (that was stale), and 300 (Multiple Choices) is 
+// a manual redirection: the body, presented by the browser 
+// as a Web page, lists the possible redirections and the 
+// user clicks on one to select it.
+
+// Code	Text	Typical use case
+// 300	Multiple Choices	Not many: the choices are listed in an HTML page in the body. Machine-readable choices are encouraged to be sent as Link headers with rel=alternate.
+// 304	Not Modified	Sent for revalidated conditional requests. Indicates that the cached response is still fresh and can be used.
+
+// Alternative way of specifying redirections
+// HTTP redirects aren't the only way to define redirections. 
+// There are two others:
+
+// HTML redirections with the <meta> element
+// JavaScript redirections via the DOM
+
+// HTML redirections
+// HTTP redirects are the best way to create redirections, 
+// but sometimes you don't have control over the server. In 
+// that case, try a <meta> element with its http-equiv 
+// attribute set to Refresh in the <head> of the page. 
+// When displaying the page, the browser will go to the 
+// indicated URL.
+
+// HTML
+// Copy to Clipboard
+// <head>
+//   <meta http-equiv="Refresh" content="0; URL=https://example.com/" />
+// </head>
+
+// The content attribute should start with a number 
+// indicating how many seconds the browser should wait 
+// before redirecting to the given URL. Always set it to 0 
+// for accessibility compliance.
+
+// Obviously, this method only works with HTML, and cannot 
+// be used for images or other types of content.
+
+// JavaScript redirections
+// Redirections in JavaScript are performed by setting a URL 
+// string to the window.location property, loading the new page:
+
+// JS
+// Copy to Clipboard
+// window.location = "https://example.com/";
+// Like HTML redirections, this can't work on all resources, 
+// and obviously, this will only work on clients that execute 
+// JavaScript. On the other hand, there are more possibilities: 
+// for example, you can trigger the redirect only if some 
+// conditions are met.
+
+// Order of precedence
+// With three ways to trigger redirections, several ways 
+// can be used at the same time. But which is applied first?
+
+// HTTP redirects always execute first — they exist when 
+// there is not even a transmitted page.
+
+// HTML redirects (<meta>) execute if there weren't any HTTP 
+// redirects.
+
+// JavaScript redirects execute last, and only if JavaScript 
+// is enabled.
+
+// When possible, use HTTP redirects and don't add <meta> 
+// element redirects. If someone changes the HTTP redirects 
+// but forgets to change the HTML redirects, the redirects 
+// will no longer be identical, which could cause an infinite 
+// loop or other nightmares.
+
+
+// Use cases
+// There are numerous use cases for redirects, but as 
+// performance is impacted with every redirect, their 
+// use should be kept to a minimum.
+
+// Domain aliasing
+// Ideally, there is one location, and therefore one URL,
+//  for each resource. But there are reasons for alternative 
+// names for a resource:
+
+// Expanding the reach of your site
+// A common case is when a site resides at www.example.com, 
+// but accessing it from example.com should also work.
+//  Redirections for example.com to www.example.com are 
+// thus set up. You might also redirect from common synonyms 
+// or frequent typos of your domains.
+
+// Moving to a new domain
+// For example, your company was renamed, but you want 
+// existing links or bookmarks to still find you under 
+// the new name.
+
+// Forcing HTTPS
+// Requests to the http:// version of your site will 
+// redirect to the https:// version of your site.
+
+// Keeping links alive
+// When you restructure websites, URLs change. Even if you 
+// update your site's links to match the new URLs, you have 
+// no control over the URLs used by external resources.
+
+// You don't want to break these links, as they bring 
+// valuable users and help your SEO, so you set up redirects
+//  from the old URLs to the new ones.
+
+// Note: This technique does work for internal links, but 
+// try to avoid having internal redirects. A redirect has 
+// a significant performance cost (as an extra HTTP request 
+// occurs). If you can avoid it by correcting internal links,
+//  you should fix those links instead.
+
+// Temporary responses to unsafe requests
+// Unsafe requests modify the state of the server and the 
+// user shouldn't resend them unintentionally.
+
+// Typically, you don't want your users to resend PUT, POST 
+// or DELETE requests. If you serve the response as the 
+// result of this request, a simple press of the reload 
+// button will resend the request (possibly after a confirmation 
+// message).
+
+// In this case, the server can send back a 303 (See Other) 
+// response for a URL that will contain the right information. 
+// If the reload button is pressed, only that page is 
+// redisplayed, without replaying the unsafe requests.
+
+// Temporary responses to long requests
+// Some requests may need more time on the server, like
+//  DELETE requests that are scheduled for later processing. 
+// In this case, the response is a 303 (See Other) redirect 
+// that links to a page indicating that the action has been s
+// cheduled, and eventually informs about its progress, or 
+// allows to cancel it.
+
+// Configuring redirects in common servers
+// Apache
+// Redirects can be set either in the server config file 
+// or in the .htaccess of each directory.
+
+// The mod_alias module has Redirect and RedirectMatch 
+// directives that set up 302 redirects by default:
+
+// XML
+// Copy to Clipboard
+// <VirtualHost *:443>
+//   ServerName example.com
+//   Redirect / https://www.example.com
+// </VirtualHost>
+
+// The URL https://example.com/ will be redirected to https://www.example.com/, as will any files or directories under it (https://example.com/some-page will be redirected to https://www.example.com/some-page)
+
+// RedirectMatch does the same, but takes a regular 
+// expression to define a collection of affected URLs:
+
+// RedirectMatch ^/images/(.*)$ https://images.example.com/$1
+// All documents in the images/ directory will redirect 
+// to a different domain.
+
+// If you don't want a temporary redirect, an extra 
+// parameter (either the HTTP status code to use or 
+// the permanent keyword) can be used to set up a 
+// different redirect:
+
+// Redirect permanent / https://www.example.com
+// # …acts the same as:
+// Redirect 301 / https://www.example.com
+
+// The mod_rewrite module can also create redirects. 
+// It is more flexible, but a bit more complex.
+
+// Nginx
+// In Nginx, you create a specific server block for 
+// the content you want to redirect:
+
+// server {
+//   listen 80;
+//   server_name example.com;
+//   return 301 $scheme://www.example.com$request_uri;
+// }
+
+// To apply a redirect to a directory or only certain 
+// pages, use the rewrite directive:
+
+// rewrite ^/images/(.*)$ https://images.example.com/$1 redirect;
+// rewrite ^/images/(.*)$ https://images.example.com/$1 permanent;
+
+// IIS
+// In IIS, you use the <httpRedirect> element to configure 
+// redirections.
+
+// Redirection loops
+// Redirection loops happen when additional redirections 
+// follow the one that has already been followed. In 
+// other words, there is a loop that will never be finished 
+// and no page will ever be found.
+
+// Most of the time this is a server problem, and if the 
+// server can detect it, it will send back a 500 Internal 
+// Server Error. If you encounter such an error soon after
+//  modifying a server configuration, this is likely 
+// a redirection loop.
+
+// Sometimes, the server won't detect it: a redirection 
+// loop can spread over several servers which each don't 
+// have the full picture. In this case, browsers will 
+// detect it and display an error message. Firefox displays:
+
+// Firefox has detected that the server is redirecting 
+// the request for this address in a way that will never 
+// terminate.
+
+// …while Chrome displays:
+
+// This Webpage has a redirect loop
+
+// In both cases, the user can't do much (unless corruption 
+// is happening on their side, like a mismatch of cache or 
+// cookies).
+
+// It is important to avoid redirection loops, as they
+//  completely break the user experience.
+
+// Permissions Policy
+// Permissions Policy provides mechanisms for web developers 
+// to explicitly declare what functionality can and cannot be 
+// used on a website. You define a set of "policies" that 
+// restrict what APIs the site's code can access or modify 
+// the browser's default behavior for certain features. 
+// This allows you to enforce best practices, even as the
+//  codebase evolves — as well as more safely compose
+//  third-party content.
+
+// Permissions Policy is similar to Content Security Policy 
+// but controls features instead of security behavior.
+
+// Examples of what you can do with Permissions Policy:
+
+// Change the default behavior of autoplay on mobile and 
+// third-party videos.
+
+// Restrict a site from using sensitive devices like the 
+// camera, microphone, or speakers.
+
+// Allow iframes to use the Fullscreen API.
+
+// Stop items from being scripted if they are not visible 
+// in the viewport, to improve performance.
+
+// Note: Permissions Policy used to be called Feature Policy. 
+// The name has changed, and so has the HTTP header syntax, 
+// so bear this in mind if you have used Feature Policy in 
+// the past, and check the browser support tables. The
+//  <iframe allow=" ... "> syntax has stayed the same.
+
+// Concepts and usage
+// The web provides functionality and APIs that may have 
+// privacy or security risks if abused. In such cases, 
+// you may wish to strictly limit how functionality is 
+// used on a website. In each case, there should be an 
+// intuitive or non-breaking way for web developers to 
+// detect and handle cases where a feature is disabled.
+
+// Some approaches include:
+
+// "Permission denied" is returned for JavaScript APIs that 
+// require user permission grants.
+
+// JavaScript APIs that provide access to features return 
+// false values or throw an error.
+
+// APIs are not even exposed, as though they don't exist.
+
+// Options that control the feature behavior have different 
+// default values.
+
+// Note: Newly-introduced features may have an explicit API 
+// to signal the state. Existing features that later 
+// integrate with Permissions Policy will typically use 
+// existing mechanisms.
+
+// Permissions Policy allows you to control which origins 
+// can use which features, both on the top-level page and 
+// in embedded <iframe>s. The aim is to enforce best 
+// practices for good user experiences and provide 
+// granular control over sensitive or powerful features 
+// (meaning features that a user is required to give express 
+// permission for usage of, before related code can be executed).
+
+// Permissions Policy provides two ways to specify policies:
+
+// The Permissions-Policy HTTP header, to control feature 
+// usage in received responses and any embedded content 
+// within the page (which includes <iframe>s).
+
+// The <iframe> allow attribute, to control feature usage 
+// only in specific <iframe>s.
+
+// These are separate but related — see Inheritance of 
+// policies for embedded content for details.
+
+// Note: Scripts can programmatically query information about 
+// the permission policy via the FeaturePolicy object located 
+// at either Document.featurePolicy or
+//  HTMLIFrameElement.featurePolicy.
+
+// To control each feature, you write a policy that consists 
+// of:
+
+// A directive that identifies the name of the feature to 
+// control. See the list of the different available directives.
+
+// An allowlist, which is a list of origins that the feature 
+// should be controlled in. You can enable a feature for all 
+// or specific origins, or block its usage in all origins.
+
+// See below for multiple examples.
+
+// Relationship with the Permissions API
+// Permissions Policy and the Permissions API are 
+// closely-related, but different. The features that have 
+// their permissions controlled by both these technologies 
+// overlap.
+
+// Permissions Policy allows a server to set whether a 
+// feature can be used in a particular document (or embedded
+//  <frame>s within it). These are referred to as 
+// policy-controlled features — see the list of Permissions 
+// Policy directives.
+
+// The Permissions API gates access to features based on 
+// user-granted permissions. These features are recorded 
+// in the Permissions Registry.
+
+// The identifying string used for each feature is kept 
+// consistent across both, for example, geolocation for 
+// the Geolocation API. Most of the API features in the 
+// Permissions Registry also have a corresponding Permissions
+//  Policy directive. One exception is the Notifications API.
+
+// Generally when a Permissions Policy blocks the use of 
+// a powerful feature, the user won't even be asked for 
+// permission to use it, and the Permissions API query() 
+// method will return a state value of denied.
+
+// See also Permissions > Relationship to the Permissions 
+// Policy specification.
+
+// Allowlists
+// An allowlist is a list of origins that takes one or more 
+// of the following values contained in parentheses, 
+// separated by spaces:
+
+// *: The feature will be allowed in this document, and all 
+// nested browsing contexts (<iframe>s) regardless of their 
+// origin.
+
+// () (empty allowlist): The feature is disabled in top-level 
+// and nested browsing contexts. The equivalent for <iframe> 
+// allow attributes is 'none'.
+
+// self: The feature will be allowed in this document, and in 
+// all nested browsing contexts (<iframe>s) in the same 
+// origin only. The feature is not allowed in cross-origin 
+// documents in nested browsing contexts. self can be 
+// considered shorthand for https://your-site.example.com. 
+// The equivalent for <iframe> allow attributes is self.
+
+// src: The feature will be allowed in this <iframe>, as 
+// long as the document loaded into it comes from the same 
+// origin as the URL in its src attribute. This value is only 
+// used in the <iframe> allow attribute, and is the default 
+// allowlist value in <iframe>s.
+
+// "<origin>": The feature is allowed for specific origins 
+// (for example, "https://a.example.com"). Origins should 
+// be separated by spaces. Note that origins in <iframe> 
+// allow attributes are not quoted.
+
+// The values * and () may only be used on their own, while 
+// self and src may be used in combination with one or more 
+// origins.
+
+// Note: Directives have a default allowlist, which is always 
+// one of *, self, or none for the Permissions-Policy HTTP 
+// header, and governs the default behavior if they are not 
+// explicitly listed in a policy. These are specified on the 
+// individual directive reference pages. For <iframe> allow 
+// attributes , the default behavior is always src.
+
+// Where supported, you can include wildcards in Permissions 
+// Policy origins. This means that instead of having to 
+// explicitly specify several different subdomains in an 
+// allowlist, you can specify them all in a single origin 
+// with a wildcard.
+
+// So instead of
+
+// HTTP
+// Copy to Clipboard
+// ("https://example.com" "https://a.example.com" "https://b.example.com" "https://c.example.com")
+// You can specify
+
+// HTTP
+// Copy to Clipboard
+// ("https://example.com" "https://*.example.com")
+// Note: "https://*.example.com" does not match
+//  "https://example.com".
+
+// allowlist examples:
+
+// *
+// ()
+// (self)
+// (src)
+// ("https://a.example.com")
+// ("https://a.example.com" "https://b.example.com")
+// (self "https://a.example.com" "https://b.example.com")
+// (src "https://a.example.com" "https://b.example.com")
+// ("https://*.example.com")
+
+// Permissions-Policy header syntax
+// The general syntax looks like this:
+
+// HTTP
+// Copy to Clipboard
+// Permissions-Policy: <directive>=<allowlist>
+// So for example to block all access to geolocation, 
+// you would do this:
+
+// HTTP
+// Copy to Clipboard
+// Permissions-Policy: geolocation=()
+// Or to allow access to a subset of origins, you'd do this:
+
+// HTTP
+// Copy to Clipboard
+// Permissions-Policy: geolocation=(self "https://a.example.com" "https://b.example.com")
+// Several features can be controlled at the same time by 
+// sending the header with a comma-separated list of policies, 
+// or by sending a separate header for each policy.
+
+// For example, the following are equivalent:
+
+// HTTP
+// Copy to Clipboard
+// Permissions-Policy: picture-in-picture=(), geolocation=(self https://example.com), camera=*;
+
+// Permissions-Policy: picture-in-picture=()
+// Permissions-Policy: geolocation=(self https://example.com)
+// Permissions-Policy: camera=*
+
+// Iframe syntax
+// For an <iframe> to have a feature enabled its allowed 
+// origin must also be in the allowlist for the parent page. 
+// Because of this inheritance behavior, it is a good idea 
+// to specify the widest acceptable support for a feature in 
+// the HTTP header, and then specify the subset of support 
+// you need in each <iframe>.
+
+// The general syntax looks like this:
+
+// HTML
+// Copy to Clipboard
+// <iframe src="<origin>" allow="<directive> <allowlist>"></iframe>
+// So for example to block all access to geolocation, you 
+// would do this:
+
+// HTML
+// Copy to Clipboard
+// <iframe src="https://example.com" allow="geolocation 'none'"></iframe>
+// To apply a policy to the current origin and others, you'd 
+// do this:
+
+// HTML
+// Copy to Clipboard
+// <iframe
+//   src="https://example.com"
+//   allow="geolocation 'self' https://a.example.com https://b.example.com"></iframe>
+// This is important: By default, if an <iframe> navigates 
+// to another origin, the policy is not applied to the origin
+//  that the <iframe> navigates to. By listing the origin 
+// that the <iframe> navigates to in the allow attribute, 
+// the Permissions Policy that was applied to the original
+//  <iframe> will be applied to the origin the <iframe> 
+// navigates to.
+
+// Several features can be controlled at the same time by 
+// including a semi-colon-separated list of policy directives
+//  inside the allow attribute.
+
+// HTML
+// Copy to Clipboard
+// <iframe
+//   src="https://example.com"
+//   allow="geolocation 'self' https://a.example.com https://b.example.com; fullscreen 'none'"></iframe>
+
+// It is worth giving the src value a special mention. We 
+// mentioned above that using this allowlist value will mean 
+// that the associated feature will be allowed in this
+//  <iframe>, as long as the document loaded into it comes 
+// from the same origin as the URL in its src attribute. 
+// This value is the default allowlist value for features 
+// listed in allow, so the following are equivalent:
+
+// HTML
+// Copy to Clipboard
+// <iframe src="https://example.com" allow="geolocation 'src'">
+//   <iframe src="https://example.com" allow="geolocation"></iframe
+// ></iframe>
+
+// Note: As you'll have noticed, the syntax for <iframe> 
+// policies is a bit different to the syntax for 
+// Permissions-Policy headers. The former still uses the 
+// same syntax as the older Feature Policy specification, 
+// which was superseded by Permissions Policy.
+
+// Inheritance of policies for embedded content
+// Scripts inherit the policy of their browsing context, 
+// regardless of their origin. That means that top-level 
+// scripts inherit the policy from the main document.
+
+// All <iframe>s inherit the policy of their parent page. 
+// If the <iframe> has an allow attribute and the parent 
+// page has a Permissions-Policy, the policies of the parent 
+// page and the allow attribute are combined, using the most 
+// restrictive subset. For an <iframe> to have a feature 
+// enabled, the origin must be in the allowlist for both 
+// the parent page and the allow attribute.
+
+// Disabling a feature in a policy is a one-way toggle. 
+// If a feature has been disabled for a child frame by its 
+// parent frame, the child cannot re-enable it, and neither 
+// can any of the child's descendants.
+
+// Examples
+// Combining HTTP header and <iframe> policies
+// For example, let's say that we wanted to enable 
+// geolocation usage on our own origin, and in embedded 
+// content coming from our trusted ad network. We could 
+// set up the page-wide Permissions Policy like this:
+
+// HTTP
+// Copy to Clipboard
+// Permissions-Policy: geolocation=(self https://trusted-ad-network.com)
+// Over in our ad <iframe>s, we could set access to 
+// the https://trusted-ad-network.com origin like this:
+
+// HTML
+// Copy to Clipboard
+// <iframe src="https://trusted-ad-network.com" allow="geolocation"></iframe>
+// If a different origin ended up getting loaded into
+//  <iframe>, it would not have access to geolocation:
+
+// HTML
+// Copy to Clipboard
+// <iframe src="https://rogue-origin-example.com" allow="geolocation"></iframe>
+
+// HTTP range requests
+// An HTTP Range request asks the server to send only 
+// a portion of an HTTP message back to a client. Range 
+// requests are useful for clients like media players that
+//  support random access, data tools that know they need 
+// only part of a large file, and download managers that 
+// let the user pause and resume the download.
+
+// Copy to Clipboard
+// curl -I http://i.imgur.com/z4d4kWk.jpg
+// HTTP
+// Copy to Clipboard
+// HTTP/1.1 200 OK
+// …
+// Accept-Ranges: bytes
+// Content-Length: 146515
+
+// In this response, Accept-Ranges: bytes indicates that 
+// bytes can be used as units to define a range. Here the 
+// Content-Length header is also useful as it indicates 
+// the full size of the image to retrieve.
+
+// If sites omit the Accept-Ranges header, they likely don't 
+// support partial requests. Some sites include the header 
+// but give it the explicit value "none" to indicate they 
+// lack support:
+
+// curl -I https://www.youtube.com/watch?v=EwTZ2xpQwpA
+// HTTP
+// Copy to Clipboard
+// HTTP/1.1 200 OK
+// …
+// Accept-Ranges: none
+// A download manager might disable its pause button in 
+// that case.
+
+
+// Requesting a specific range from a server
+// If the server supports range requests, then by including 
+// the Range header in your HTTP request, you can specify 
+// which part or parts of the document you want the server 
+// to return.
+
+// Single part ranges
+// We can request a single range from a resource. Again, 
+// we can test a request by using cURL. The "-H" option will 
+// append a header line to the request, which in this case 
+// is the Range header requesting the first 1024 bytes.
+
+// BASH
+// Copy to Clipboard
+// curl http://i.imgur.com/z4d4kWk.jpg -i -H "Range: bytes=0-1023"
+// The issued request looks like this:
+
+// HTTP
+// Copy to Clipboard
+// GET /z4d4kWk.jpg HTTP/1.1
+// Host: i.imgur.com
+// Range: bytes=0-1023
+
+
+// Multipart ranges
+// The Range header also allows you to get multiple ranges 
+// at once in a multipart document. The ranges are separated 
+// by a comma.
+
+// BASH
+// Copy to Clipboard
+// curl http://www.example.com -i -H "Range: bytes=0-50, 100-150"
+
+// The server responses with the 206 Partial Content 
+// status and a Content-Type: 
+// multipart/byteranges; boundary=3d6b6a416f9b5 header, 
+// indicating that a multipart byterange follows.
+//  Each part contains its own Content-Type and 
+// Content-Range fields and the required boundary 
+// parameter specifies the boundary string used 
+// to separate each body-part.
+
+// HTTP
+// Copy to Clipboard
+// HTTP/1.1 206 Partial Content
+// Content-Type: multipart/byteranges; boundary=3d6b6a416f9b5
+// Content-Length: 282
+
+// --3d6b6a416f9b5
+// Content-Type: text/html
+// Content-Range: bytes 0-50/1270
+
+// Conditional range requests
+// When resuming to request more parts of a resource, 
+// you need to guarantee that the stored resource has 
+// not been modified since the last fragment has been 
+// received.
+
+// The If-Range HTTP request header makes a range request 
+// conditional: if the condition is fulfilled, the range 
+// request will be issued and the server sends back a 206 
+// Partial Content answer with the appropriate body. If 
+// the condition is not fulfilled, the full resource is 
+// sent back, with a 200 OK status. This header can be 
+// used either with a Last-Modified validator, or with an 
+// ETag, but not with both.
+
+// Copy to Clipboard
+// If-Range: Wed, 21 Oct 2015 07:28:00 GMT
+// Partial request responses
+// There are three relevant statuses, when working with 
+// range requests:
+
+// A successful range request elicits a 206 Partial Content 
+// status from the server.
+
+// A range request that is out of bounds will result in 
+// a 416 Requested Range Not Satisfiable status, meaning 
+// that none of the range values overlap the extent of 
+// the resource. For example, the first-byte-pos of every
+//  range might be greater than the resource length.
+
+// If range requests are not supported, an 200 OK status 
+// is sent back and the entire response body is transmitted.
+
+// Comparison to chunked Transfer-Encoding
+// The Transfer-Encoding header allows chunked encoding, 
+// which is useful when larger amounts of data are sent 
+// to the client and the total size of the response is not
+//  known until the request has been fully processed. The 
+// server sends data to the client straight away without 
+// buffering the response or determining the exact length, 
+// which leads to improved latency. Range requests and 
+// chunking are compatible and can be used with or without 
+// each other.
+
+// Compression in HTTP
+// Compression is an important way to increase the 
+// performance of a website. For some documents, size 
+// reduction of up to 70% lowers the bandwidth capacity 
+// needs. Over the years, algorithms also got more efficient,
+//  and new ones are supported by clients and servers.
+
+// In practice, web developers don't need to implement 
+// compression mechanisms, both browsers and servers have 
+// it implemented already, but they have to be sure that 
+// the server is configured adequately. Compression happens 
+// at three different levels:
+
+// first some file formats are compressed with specific 
+// optimized methods,
+
+// then general encryption can happen at the HTTP level (the
+//  resource is transmitted compressed from end to end),
+
+// and finally compression can be defined at the connection 
+// level, between two nodes of an HTTP connection.
+
+// File format compression
+// Each data type has some redundancy, that is wasted space,
+//  in it. If text can typically have as much as 60% redundancy, 
+// this rate can be much higher for some other media like 
+// audio and video. Unlike text, these other media types use 
+// a lot of space to store their data and the need to 
+// optimize storage and regain space was apparent very early.
+//  Engineers designed the optimized compression algorithm 
+// used by file formats designed for this specific purpose. 
+// Compression algorithms used for files can be grouped into 
+// two broad categories:
+
+// Loss-less compression, where the compression-uncompression 
+// cycle doesn't alter the data that is recovered. It matches 
+// (byte to byte) with the original. For images, gif or png 
+// are using lossless compression.
+
+// Lossy compression, where the cycle alters the original 
+// data in a (hopefully) imperceptible way for the user. 
+// Video formats on the Web are lossy; the jpeg image format 
+// is also lossy.
+
+// Some formats can be used for both loss-less or lossy 
+// compression, like webp, and usually lossy algorithm can 
+// be configured to compress more or less, which then of 
+// course leads to less or more quality. For better 
+// performance of a website, it is ideal to compress as 
+// much as possible, while keeping an acceptable level 
+// of quality. For images, an image generated by a tool 
+// could be not optimized enough for the Web; it is 
+// recommended to use tools that will compress as much 
+// as possible with the required quality. There are numerous 
+// tools that are specialized for this.
+
+// Lossy compression algorithms are usually more efficient 
+// than loss-less ones.
+
+// Note: As compression works better on a specific kind 
+// of files, it usually provides nothing to compress them 
+// a second time. In fact, this is often counterproductive 
+// as the cost of the overhead (algorithms usually need a 
+// dictionary that adds to the initial size) can be higher 
+// than the extra gain in compression resulting in a larger file. Do not use the two following techniques for files in a compressed format.
+
+// End-to-end compression
+// For compression, end-to-end compression is where the 
+// largest performance improvements of websites reside. 
+// End-to-end compression refers to a compression of the 
+// body of a message that is done by the server and will 
+// last unchanged until it reaches the client. Whatever 
+// the intermediate nodes are, they leave the body untouched.
+
+// A server sending a compressed HTTP body to a client via 
+// network nodes. The body is not decompressed at any hop 
+// through the network until it reaches the client.
+
+// All modern browsers and servers do support it and the 
+// only thing to negotiate is the compression algorithm to 
+// use. These algorithms are optimized for text. In the 1990s, 
+// compression technology was advancing at a rapid pace and 
+// numerous successive algorithms have been added to the set 
+// of possible choices. Nowadays, only two are relevant: 
+// gzip, the most common one, and br the new challenger.
+
+// To select the algorithm to use, browsers and servers 
+// use proactive content negotiation. The browser sends 
+// an Accept-Encoding header with the algorithm it supports 
+// and its order of precedence, the server picks one, uses 
+// it to compress the body of the response and uses the 
+// Content-Encoding header to tell the browser the algorithm 
+// it has chosen. As content negotiation has been used to 
+// choose a representation based on its encoding, the 
+// server must send a Vary header containing at least 
+// Accept-Encoding alongside this header in the response; 
+// that way, caches will be able to cache the different 
+// representations of the resource.
+
+// A client requesting content with an 'Accept-Encoding: br, 
+// gzip' header. The server responds with a body compressed 
+// using the Brotli algorithm and the required 
+// 'Content-Encoding' and 'Vary' headers.
+
+// As compression brings significant performance 
+// improvements, it is recommended to activate it for all 
+// files, but already compressed ones like images, audio 
+// files and videos.
+
+// Apache supports compression and uses mod_deflate; 
+// for Nginx there is ngx_http_gzip_module; for IIS, 
+// the <httpCompression> element.
+
+// Hop-by-hop compression
+// Hop-by-hop compression, though similar to end-to-end 
+// compression, differs by one fundamental element: the 
+// compression doesn't happen on the resource in the server, 
+// creating a specific representation that is then 
+// transmitted, but on the body of the message between 
+// any two nodes on the path between the client and the 
+// server. Connections between successive intermediate
+//  nodes may apply a different compression.
+
+// A server sending an uncompressed HTTP body to a client 
+// via network nodes. The body is compressed and decompressed
+//  by nodes on the network depending on 'Transfer-Encoding' 
+// headers before it reaches the client.
+
+// To do this, HTTP uses a mechanism similar to the content 
+// negotiation for end-to-end compression: the node 
+// transmitting the request advertizes its will using 
+// the TE header and the other node chooses the adequate 
+// method, applies it, and indicates its choice with the 
+// Transfer-Encoding header.
+
+// A client requesting content from a server with no 
+// compression-related headers. The server responds with 
+// an uncompressed body. The body is compressed and 
+// decompressed by nodes on the network before it reaches 
+// the client.
+
+// In practice, hop-by-hop compression is transparent for 
+// the server and the client, and is rarely used. TE and 
+// Transfer-Encoding are mostly used to send a response 
+// by chunks, allowing to start transmitting a resource 
+// without knowing its length.
+
+// Note that using Transfer-Encoding and compression at the 
+// hop level is so rare that most servers, like Apache, 
+// Nginx, or IIS, have no easy way to configure it. Such 
+// configuration usually happens at the proxy level.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

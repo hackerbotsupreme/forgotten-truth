@@ -1,0 +1,4905 @@
+// js objects 
+console.log("JavaScript Objects")
+// In JavaScript, objects are king. If you 
+// understand objects, you understand JavaScript.
+// In JavaScript, almost "everything" is an object.
+
+// Booleans can be objects (if defined with the new keyword)
+// Numbers can be objects (if defined with the new keyword)
+// Strings can be objects (if defined with the new keyword)
+// Dates are always objects
+// Maths are always objects
+// Regular expressions are always objects
+// Arrays are always objects
+// Functions are always objects
+// Objects are always objects
+// All JavaScript values, except primitives, are objects.
+
+console.log("JavaScript Primitives")
+// A primitive value is a value that has no properties 
+// or methods. and their values cant be changed/immutable .
+// like numbers are numbers , strings are strings , etc. .
+
+// like ,
+// 3.14 is a primitive value
+
+// A primitive data type is data that has a primitive value.
+// JavaScript defines 7 types of primitive data types:
+// ss bb nn u
+// string
+// number
+// boolean
+// null
+// undefined
+// symbol
+// bigint
+
+// Immutable
+// Primitive values are immutable (they are hardcoded and 
+// cannot be changed).
+// if x = 3.14, you can change the value of x, but you 
+// cannot change the value of 3.14.
+
+console.log("A JavaScript object is a collection of named values")
+console.log("The named values, in JavaScript objects, are called properties.")
+console.log("Methods are actions that can be performed on objects.")
+console.log("There are different ways to create new objects:")
+// Create a single object, using an object literal.
+// Create a single object, with the keyword new.
+// Define an object constructor, and then create objects of the constructed type.
+// Create an object using Object.create().
+// Using an Object Literal
+
+// Example
+const person1 = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 50,
+    eyeColor: "blue"
+};
+// this can also be done like this ,
+// Example
+const person2 = {};
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+// Using the JavaScript Keyword new
+// The following example create a new JavaScript object using new Object(), 
+// and then adds 4 properties:
+// Example
+const person3 = new Object();
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+console.log("JavaScript Objects are Mutable")
+console.log("JavaScript Object Properties")
+// Properties are the values associated with a JavaScript 
+// object.
+
+console.log("ccessing JavaScript Properties")
+objectName.property      // person.age
+// or
+objectName["property"]   // person["age"]
+// or
+objectName[expression]   // x = "age"; person[x]
+
+console.log("JavaScript for...in Loop")
+// The JavaScript for...in statement loops through the 
+// properties of an object.
+// Looping through the properties of an object:
+// Example
+const person = {
+    fname: " John",
+    lname: " Doe",
+    age: 25
+};
+for (let x in person) {
+    txt += person[x];
+}
+
+// Deleting Properties
+delete person.age;
+// or
+delete person["age"];
+// important note 
+// The delete kw operator is designed to be used on object 
+//properties. It has no effect on variables or functions.
+
+// Define an object with a property
+var myObject = { property: "Value" };
+console.log(myObject.property);  // Output: "Value"
+// Use delete on the object property
+delete myObject.property;
+console.log(myObject.property);  // Output: undefined
+
+// Define a variable
+var myVariable = "Hello, World!";
+console.log(myVariable);  // Output: "Hello, World!"
+// Use delete on the variable
+delete myVariable;
+console.log(myVariable);  // Output: "Hello, World!"
+
+// The delete operator should not be used on 
+//predefined JavaScript object properties. It can crash 
+//your application.
+
+// Sure, I can illustrate this with an example. Let's try 
+// to use the `delete` operator on a predefined JavaScript object property:
+// Access a predefined property
+console.log(Array.prototype.join);  // Output: function join() { [native code] }
+// Use delete on the predefined property
+delete Array.prototype.join;
+console.log(Array.prototype.join);  // Output: function join() { [native code] }
+
+// Now, while this example doesn't crash the application, 
+// using `delete` on predefined properties can lead to 
+// unpredictable behavior and should generally be avoided. 
+// In some cases, it can cause your application to crash.
+
+myObj = {
+    name: "John",
+    age: 30,
+    cars: {
+        car1: "Ford",
+        car2: "BMW",
+        car3: "Fiat"
+    }
+}
+myObj.cars.car2;
+// or:
+myObj.cars["car2"];
+// or:
+myObj["cars"]["car2"];
+// or:
+let p1 = "cars";
+let p2 = "car2";
+myObj[p1][p2];
+
+console.log('Property Attributes')
+// All properties have a name. In addition they also have a value.
+// The value is one of the property's attributes.
+// Other attributes are: enumerable, configurable, and writable.
+// These attributes define how the property can be accessed 
+//(is it readable?, is it writable?)
+// In JavaScript, all attributes can be read, but only 
+//the value attribute can be changed (and only if the 
+//property is writable).
+
+console.log("Prototype Properties")
+// JavaScript objects inherit the properties of their prototype.
+// The delete keyword does not delete inherited properties, 
+//but if you delete a prototype property, it will affect 
+//all objects inherited from the prototype.
+
+
+console.log("JavaScript Object Methods")
+
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+};
+
+// What is this?
+// In JavaScript, the this keyword refers to an object.
+// Which object depends on how this is being invoked 
+//(used or called).
+
+// important note 
+// In an object method, this refers to the object.
+// Alone, this refers to the global object.
+// In a function, this refers to the global object.
+// In a function, in strict mode, this is undefined.
+// In an event, this refers to the element that received 
+//the event.
+// Methods like call(), apply(), and bind() can refer this 
+//to any object.
+
+console.log("JavaScript Methods")
+// JavaScript methods are actions that can be performed 
+// on objects
+// A JavaScript method is a property containing a function 
+// definition as a value .
+
+console.log("Methods are functions stored as object properties.")
+
+
+How to Display JavaScript Objects?
+// Displaying a JavaScript object will output [object Object].
+
+// 1.Displaying the Object Properties by name
+// 2.Displaying the Object Properties in a Loop
+// 3.Displaying the Object using Object.values()
+// 4.Displaying the Object using JSON.stringify()
+
+// Using Object.values()
+// Any JavaScript object can be converted to an array using Object.values():
+const person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+const myArray = Object.values(person);
+// Using JSON.stringify()
+// Any JavaScript object can be stringified 
+// (converted to a string) with the JavaScript 
+// function JSON.stringify()
+let myString2 = JSON.stringify(person);
+// {"name":"John","age":50,"city":"New York"}
+
+// Stringify Dates
+// JSON.stringify converts dates into strings.
+
+const person = {
+    name: "John",
+    today: new Date()
+};
+let myString = JSON.stringify(person);
+
+// Stringify Functions
+// JSON.stringify will not stringify functions:
+
+const person = {
+    name: "John",
+    age: function () { return 30; }
+};
+let myStringx = JSON.stringify(person);
+// This can be "fixed" if you convert the functions into 
+// strings before stringifying.
+
+const person = {
+    name: "John",
+    age: function () { return 30; }
+};
+person.age = person.age.toString();
+let myStringy = JSON.stringify(person);
+
+// Stringify Arrays
+// It is also possible to stringify JavaScript arrays.
+
+const arr = ["John", "Peter", "Sally", "Jane"];
+let myStringo = JSON.stringify(arr);
+
+// The result will be a string following the JSON notation:
+// ["John","Peter","Sally","Jane"]
+
+JavaScript Object Accessors
+// Getters and setters allow you to define Object Accessors 
+// (Computed Properties).
+
+what is object accessors
+// Object Accessors in JavaScript are methods that get or 
+// set the values of object properties. They are also known 
+// as computed properties.
+// Getters are methods to get the value of a specific 
+// property.
+// Setters are methods to set the value of a specific 
+// property.
+// They provide a way to control how values are set and 
+// retrieved, allowing for additional operations or 
+// computations to be performed in the process. This can 
+// enhance code readability and data safety.
+
+// JavaScript Getter (The get Keyword)
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "en",
+    get lang() {
+        return this.language;
+    }
+};
+person.lang
+
+// JavaScript Setter (The set Keyword)
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "",
+    set lang(lang) {
+        this.language = lang;
+    }
+};
+
+// // Set an object property using a setter:
+person.lang = "en";
+
+// JavaScript Function or Getter?
+// What is the differences between these two examples?
+
+// Example 1
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+};
+person.fullName();
+
+// Example 2
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    get fullName() {
+        return this.firstName + " " + this.lastName;
+    }
+};
+
+// // Display data from the object using a getter:
+document.getElementById("demo").innerHTML = person.fullName;
+
+// The second example provides a simpler syntax.
+
+// Data Quality
+// JavaScript can secure better data quality when using 
+// getters and setters.
+
+// Why Using Getters and Setters?
+// It gives simpler syntax
+// It allows equal syntax for properties and methods
+// It can secure better data quality
+// It is useful for doing things behind-the-scenes
+
+// Object.defineProperty()
+// The Object.defineProperty() method can also be used to 
+// add Getters and Setters
+
+
+// A Counter Example
+// // Define object
+const obj = { counter: 0 };
+
+// // Define setters and getters
+Object.defineProperty(obj, "reset", {
+    get: function () { this.counter = 0; }
+});
+Object.defineProperty(obj, "increment", {
+    get: function () { this.counter++; }
+});
+Object.defineProperty(obj, "decrement", {
+    get: function () { this.counter--; }
+});
+Object.defineProperty(obj, "add", {
+    set: function (value) { this.counter += value; }
+});
+Object.defineProperty(obj, "subtract", {
+    set: function (value) { this.counter -= value; }
+});
+
+// // Play with the counter:
+obj.reset;
+obj.add = 5;
+obj.subtract = 1;
+obj.increment;
+obj.decrement;
+
+
+//JavaScript Object Constructors
+
+// Example
+function Person(first, last, age, eye) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+// It is considered good practice to name constructor 
+// functions with an upper-case first letter.
+
+
+// About this
+// In a constructor function this does not have a value. 
+//It is a substitute for the new object. The value of 
+//this will become the new object when a new object is 
+// created.
+
+// Object Types (Blueprints) (Classes)
+//They only create single objects.
+
+// Sometimes we need a "blueprint" for creating many objects 
+//of the same "type".
+
+// The way to create an "object type", is to use an 
+//object constructor function.
+
+// Objects of the same type are created by calling the 
+//constructor function with the new keyword:
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+
+// What is this?
+// In JavaScript, the this keyword refers to an object.
+// Which object depends on how this is being invoked (used or called).
+// The this keyword refers to different objects depending on how it is used:
+
+// In an object method, this refers to the object.
+// Alone, this refers to the global object.
+// In a function, this refers to the global object.
+// In a function, in strict mode, this is undefined.
+// In an event, this refers to the element that received the event.
+// Methods like call(), apply(), and bind() can refer this to any object.
+
+
+// Adding a Property to an Object
+// Adding a new property to an existing object is easy:
+
+// Example
+myFather.nationality = "English";
+// The property will be added to myFather. Not to myMother. 
+// (Not to any other person objects).
+
+// Adding a Method to an Object
+// Adding a new method to an existing object is easy:
+
+// Example
+myFather.name = function () {
+    return this.firstName + " " + this.lastName;
+};
+// The method will be added to myFather. Not to myMother. 
+//(Not to any other person objects).
+
+// Adding a Property to a Constructor
+// You cannot add a new property to an object constructor 
+//the same way you add a new property to an existing object:
+
+// Example
+Person.nationality = "English";
+// To add a new property to a constructor, you must add 
+// it to the constructor function:
+
+// Example
+function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+    this.nationality = "English";
+}
+// This way object properties can have default values.
+
+// Adding a Method to a Constructor
+// Your constructor function can also define methods:
+function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+    this.name = function () {
+        return this.firstName + " " + this.lastName;
+    };
+}
+// You cannot add a new method to an object constructor 
+// the same way you add a new method to an existing object.
+// Adding methods to an object constructor must be done 
+// inside the constructor function:
+
+function Person(firstName, lastName, age, eyeColor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.eyeColor = eyeColor;
+    this.changeName = function (name) {
+        this.lastName = name;
+    };
+}
+console.log("Built-in JavaScript Constructors")
+// JavaScript has built-in constructors for native objects:
+
+// new String()    // A new String object
+// new Number()    // A new Number object
+// new Boolean()   // A new Boolean object
+// new Object()    // A new Object object
+// new Array()     // A new Array object
+// new RegExp()    // A new RegExp object
+// new Function()  // A new Function object
+// new Date()      // A new Date object
+// The Math() object is not in the list. 
+//Math is a global object. 
+//The new keyword cannot be used on Math.
+
+
+// As you can see above, JavaScript has object versions 
+// of the primitive data types String, Number, and Boolean. 
+// But there is no reason to create complex objects. 
+// Primitive values are much faster:
+// Use string literals "" instead of new String().
+// Use number literals 50 instead of new Number().
+// Use boolean literals true / false instead of new Boolean().
+// Use object literals {} instead of new Object().
+// Use array literals [] instead of new Array().
+// Use pattern literals /()/ instead of new RegExp().
+
+// Use function expressions () {} instead of new Function().
+// Example
+let x1 = "";             // new primitive string
+let x2 = 0;              // new primitive number
+let x3 = false;          // new primitive boolean
+
+const x4 = {};           // new Object object
+const x5 = [];           // new Array object
+const x6 = /()/          // new RegExp object
+const x7 = function () { }; // new function
+
+console.log("String Objects")
+firstName = "John"
+firstName = new String("John")
+
+
+console.log("Number Objects")
+x = 30
+x = new Number(30)
+
+
+console.log("Boolean Objects")
+x = false
+x = new Boolean(false)
+
+console.log("JavaScript Object Prototypes")
+// All JavaScript objects inherit properties and methods 
+// from a prototype.
+// Example
+function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+}
+const myFather = new Person("John", "Doe", 50, "blue");
+const mymother = new Person("Sally", "Rally", 48, "green");
+
+// We also learned that you can not add a new property 
+// to an existing object constructor.
+// To add a new property to a constructor, you must 
+// add it to the constructor function:
+// All JavaScript objects inherit properties and methods 
+// from a prototype:
+
+// Date objects inherit from Date.prototype
+// Array objects inherit from Array.prototype
+// Person objects inherit from Person.prototype
+
+// The Object.prototype is on the top of 
+// the prototype inheritance chain,as everything is object
+// Date objects, Array objects, and Person objects 
+//inherit from Object.prototype.
+
+// Using the prototype Property
+// The JavaScript prototype property allows you 
+// to add new properties to object constructors
+
+// Only modify your own prototypes. Never modify 
+//the prototypes of standard JavaScript objects.
+
+console.log("JavaScript Iterables")
+// Iterable objects are objects that can be iterated over 
+//with for..of.
+// Technically, iterables must implement the Symbol.iterator 
+//method.
+
+console.log("Iterating Over a String")
+// You can use a for..of loop to iterate over the 
+//elements of a string:
+// Example
+for (const x of "W3Schools") {
+    // code block to be executed
+}
+// Iterating Over an Array
+// You can use a for..of loop to iterate over the elements 
+// of an Array:
+// Example
+for (const x of [1, 2, 3, 4, 5]) {
+    // code block to be executed
+}
+
+flg
+// JavaScript Iterators
+// The iterator protocol defines how to produce a 
+// sequence of values from an object.
+
+// An object becomes an iterator when it implements a 
+// next() method.
+
+// The next() method must return an object with 
+// two properties:
+// value (the next value)
+// done (true or false)
+
+// value	            The value returned by the iterator
+// (Can be omitted if done is true)
+// done	                true if the iterator has completed
+// false if the iterator has produced a new value
+
+
+// Home Made Iterable
+// This iterable returns never ending: 
+// 10,20,30,40,.... Everytime next() is called:
+
+// Example
+// // Home Made Iterable
+function myNumbers() {
+    let n = 0;
+    return {
+        next: function () {
+            n += 10;
+            return { value: n, done: false };
+        }
+    };
+}
+
+// // Create Iterable
+const n = myNumbers();
+n.next(); // Returns 10
+n.next(); // Returns 20
+n.next(); // Returns 30
+
+// The problem with a home made iterable:
+// It does not support the JavaScript for..of statement.
+// A JavaScript iterable is an object that has a 
+// Symbol.iterator.
+// The Symbol.iterator is a function that returns a next() 
+// function.
+// An iterable can be iterated over with the code: 
+// for (const x of iterable) { }
+
+// Example
+// // Create an Object
+myNumbers = {};
+// // Make it Iterable
+myNumbers[Symbol.iterator] = function () {
+    let n = 0;
+    done = false;
+    return {
+        next() {
+            n += 10;
+            if (n == 100) { done = true }
+            return { value: n, done: done };
+        }
+    };
+}
+// Now you can use for..of
+for (const num of myNumbers) {
+    // Any Code Here
+}
+// The Symbol.iterator method is called automatically 
+// by for..of.
+
+// But we can also do it "manually":
+let iterator = myNumbers[Symbol.iterator]();
+while (true) {
+    const result = iterator.next();
+    if (result.done) break;
+    // Any Code Here
+}
+
+
+console.log("JavaScript Sets")
+// A JavaScript Set is a collection of unique values.
+// Each value can only occur once in a Set.
+// A Set can hold any value of any data type.
+
+// Set Methods
+// Method	                Description
+// new Set()	            Creates a new Set
+// add()	                Adds a new element to the Set
+// delete()	                Removes an element from a Set
+// has()	                Returns true if a value exists
+// clear()	                Removes all elements from a Set
+// forEach()	            Invokes a callback for each element
+// values()	                Returns an Iterator with all the values in a Set
+// keys()	                Same as values()
+// entries()	            Returns an Iterator with the [value,value] pairs from a Set
+
+// Property	            Description
+// size	                Returns the number elements in a Set
+
+// The new Set() Method
+// Pass an Array to the new Set() constructor:
+// Example
+// // Create a Set
+const letters = new Set(["a", "b", "c"]);
+
+// Create a Set and add literal values:
+// Example
+// // Create a Set
+const letters = new Set();
+// // Add Values to the Set
+letters.add("a");
+letters.add("b");
+letters.add("c");
+flg
+// Create a Set and add variables:
+// Example
+// // Create Variables
+const a = "a";
+const b = "b";
+const c = "c";
+// // Create a Set
+const letterss = new Set();
+// // Add Variables to the Set
+letterss.add(a);
+letterss.add(b);
+letterss.add(c);
+// The add() Method
+// Example
+letterss.add("d");
+letterss.add("e");
+
+// The forEach() Method
+// The forEach() method invokes a function for each Set 
+// // Create a Set
+const letters = new Set(["a", "b", "c"]);
+// // List all entries
+let text = "";
+letters.forEach(function (value) {
+    text += value;
+})
+
+// The values() Method
+// The values() method returns an Iterator object containing 
+// all the values in a Set:
+// Example
+letters.values()   // Returns [object Set Iterator]
+// Now you can use the Iterator object to access the 
+// elements:
+// Example
+// // Create an Iterator
+const myIterator = letters.values();
+// // List all Values
+let text = "";
+for (const entry of myIterator) {
+    text += entry;
+}
+
+// The keys() Method
+// A Set has no keys.
+// keys() returns the same as values().
+// This makes Sets compatible with Maps.
+// Example
+letters.keys()   // Returns [object Set Iterator]
+
+// The entries() Method
+// A Set has no keys.
+// entries() returns [value,value] pairs instead 
+// of [key,value] pairs.
+
+// This makes Sets compatible with Maps:
+// Example
+// // Create an Iterator
+const myIterator = letters.entries();
+// // List all Entries
+let text = "";
+for (const entry of myIterator) {
+    text += entry;
+}
+
+// Sets are Objects
+// For a Set, typeof returns object:
+typeof letters;      // Returns object
+// For a Set, instanceof Set returns true:
+letters instanceof Set;  // Returns true
+
+console.log("JavaScript Maps")
+// A Map holds key-value pairs where the keys 
+// can be any datatype.
+// A Map remembers the original insertion order of the keys.
+// A Map has a property that represents the size of the map.
+
+// Map Methods
+// Method	    Description
+// new Map()	Creates a new Map object
+// set()	    Sets the value for a key in a Map
+// get()	    Gets the value for a key in a Map
+// clear()	    Removes all the elements from a Map
+// delete()	    Removes a Map element specified by a key
+// has()	    Returns true if a key exists in a Map
+// forEach()	Invokes a callback for each key/value pair in a Map
+// entries()	Returns an iterator object with the [key, value] pairs in a Map
+// keys()	    Returns an iterator object with the keys in a Map
+// values()	    Returns an iterator object of the values in a Map
+
+// Property	            Description
+// size	                Returns the number of Map elements
+
+// new Map()
+// You can create a Map by passing an Array to the 
+// new Map() constructor
+// Example
+// // Create a Map
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+]);
+
+// Map.set()
+// You can add elements to a Map with the set() method:
+// Example
+// // Create a Map
+const fruits = new Map();
+// // Set Map Values
+fruits.set("apples", 500);
+fruits.set("bananas", 300);
+fruits.set("oranges", 200);
+// The set() method can also be used to change existing Map values:
+// Example
+fruits.set("apples", 500);
+// Map.get()
+// The get() method gets the value of a key in a Map:
+// Example
+fruits.get("apples");    // Returns 500
+// Map.size
+// The size property returns the number of elements in a Map:
+// Example
+fruits.size;
+// Map.delete()
+// The delete() method removes a Map element:
+// Example
+fruits.delete("apples");
+// Map.clear()
+// The clear() method removes all the elements from a Map:
+// Example
+fruits.clear();
+// Map.has()
+// The has() method returns true if a key exists in a Map:
+// Example
+fruits.has("apples");
+// Try This:
+fruits.delete("apples");
+fruits.has("apples");
+// Maps are Objects
+// typeof returns object.
+// Example
+// // Returns object:
+typeof fruits;
+// instanceof Map returns true:
+// Example
+// // Returns true:
+fruits instanceof Map;
+
+
+
+// JavaScript Objects vs Maps
+// Differences between JavaScript Objects and Maps:
+// Object	                            Map
+// Not directly iterable	            Directly iterable
+// Do not have a size property	        Have a size property
+// Keys must be Strings (or Symbols)	Keys can be any datatype
+// Keys are not well ordered	        Keys are ordered by insertion
+// Have default keys	                Do not have default keys
+
+
+// Map.forEach()
+// The forEach() method invokes a callback for 
+// each key/value pair in a Map:
+// Example
+// // List all entries
+let text = "";
+fruits.forEach(function (value, key) {
+    text += key + ' = ' + value;
+})
+// Map.entries()
+// The entries() method returns an iterator object with 
+// the [key,values] in a Map:
+// Example
+// // List all entries
+let text = "";
+for (const x of fruits.entries()) {
+    text += x;
+}
+Map.keys()
+// The keys() method returns an iterator object with the keys in a Map:
+
+// Example
+// // List all keys
+let text = "";
+for (const x of fruits.keys()) {
+    text += x;
+}
+Map.values()
+// The values() method returns an iterator object with the values in a Map:
+
+// Example
+// // List all values
+let text = "";
+for (const x of fruits.values()) {
+    text += x;
+}
+
+
+// Example
+// // Sum all values
+let total = 0;
+for (const x of fruits.values()) {
+    total += x;
+}
+// Objects as Keys
+// Being able to use objects as keys is an important Map feature.
+// Example
+// // Create Objects
+const apples = { name: 'Apples' };
+const bananas = { name: 'Bananas' };
+const oranges = { name: 'Oranges' };
+
+// Create a Map
+const fruits = new Map();
+
+// // Add new Elements to the Map
+fruits.set(apples, 500);
+fruits.set(bananas, 300);
+fruits.set(oranges, 200);
+// Remember: The key is an object (apples), 
+// not a string ("apples")
+// Example
+fruits.get("apples");  // Returns undefined
+
+
+
+console.log("JavaScript ES5 Object Methods")
+// ECMAScript 5 (2009) added a lot of new Object Methods to JavaScript.
+
+// Managing Objects
+// Create object with an existing object as prototype
+Object.create()
+
+// Adding or changing an object property
+Object.defineProperty(object, property, descriptor)
+
+// Adding or changing object properties
+Object.defineProperties(object, descriptors)
+
+// Accessing Properties
+Object.getOwnPropertyDescriptor(object, property)
+
+// Returns all properties as an array
+Object.getOwnPropertyNames(object)
+
+// Accessing the prototype
+Object.getPrototypeOf(object)
+
+// Returns enumerable properties as an array
+Object.keys(object)
+
+
+
+// Protecting Objects
+// Prevents adding properties to an object
+Object.preventExtensions(object)
+
+// Returns true if properties can be added to an object
+Object.isExtensible(object)
+
+// Prevents changes of object properties (not values)
+Object.seal(object)
+
+// Returns true if object is sealed
+Object.isSealed(object)
+
+// Prevents any changes to an object
+Object.freeze(object)
+
+// Returns true if object is frozen
+Object.isFrozen(object)
+
+
+// Changing a Property Value
+// Syntax
+Object.defineProperty(object, property, {value : value})
+// This example changes a property value:
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "EN"
+};
+// // Change a property
+Object.defineProperty(person, "language", { value: "NO" });
+
+
+
+// Changing Meta Data
+// ES5 allows the following property meta data to be changed:
+writable : true      // Property value can be changed
+enumerable : true    // Property can be enumerated
+configurable : true  // Property can be reconfigured
+writable : false     // Property value can not be changed
+enumerable : false   // Property can be not enumerated
+configurable : false // Property can be not reconfigured
+// ES5 allows getters and setters to be changed:
+// Defining a getter
+get: function() { return language }
+// Defining a setter
+set: function(value) { language = value }
+
+
+
+
+// This example makes language read-only:
+Object.defineProperty(person, "language", {writable:false});
+// This example makes language not enumerable:
+Object.defineProperty(person, "language", {enumerable:false});
+// Listing All Properties
+// This example list all properties of an object:
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "EN"
+};
+Object.defineProperty(person, "language", { enumerable: false });
+Object.getOwnPropertyNames(person);  // Returns an array of properties
+// Listing Enumerable Properties
+
+// This example list only the enumerable properties of an object:
+// Example
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "EN"
+};
+Object.defineProperty(person, "language", { enumerable: false });
+Object.keys(person);  // Returns an array of enumerable properties
+// Adding a Property
+
+// This example adds a new property to an object:\
+// Example
+// Create an object:
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "EN" 
+};
+// Add a property
+Object.defineProperty(person, "year", { value: "2008" });
+// Adding Getters and Setters
+// The Object.defineProperty() method can also be used 
+// to add Getters and Setters:
+// Example
+//Create an object
+const person = { firstName: "John", lastName: "Doe" };
+// Define a getter
+Object.defineProperty(person, "fullName", {
+    get: function () { return this.firstName + " " + this.lastName; }
+});
+
+// A Counter Example
+// Example
+// Define object
+const obj = { counter: 0 };
+// Define setters
+Object.defineProperty(obj, "reset", {
+    get: function () { this.counter = 0; }
+});
+Object.defineProperty(obj, "increment", {
+    get: function () { this.counter++; }
+});
+Object.defineProperty(obj, "decrement", {
+    get: function () { this.counter--; }
+});
+Object.defineProperty(obj, "add", {
+    set: function (value) { this.counter += value; }
+});
+Object.defineProperty(obj, "subtract", {
+    set: function (i) { this.counter -= i; }
+});
+// Play with the counter:
+obj.reset;
+obj.add = 5;
+obj.subtract = 1;
+obj.increment;
+obj.decrement;
+
+
+// The __proto__ property is deprecated and should not be 
+// used. The Object.getPrototypeOf() and 
+// Object.setPrototypeOf() alternatives are static methods.
+// The propertyIsEnumerable() and hasOwnProperty() methods
+//  can be replaced with the Object.getOwnPropertyDescriptor() 
+// and Object.hasOwn() static methods, respectively.
+
+// The isPrototypeOf() method can usually be replaced with
+//  instanceof, if you are checking the prototype property
+//  of a constructor.
+
+
+const obj = {
+  foo: 1,
+  propertyIsEnumerable() {
+    return false;
+  },
+};
+
+obj.propertyIsEnumerable("foo"); // false; unexpected result
+Object.prototype.propertyIsEnumerable.call(obj, "foo"); // true; expected result
+
+// null-prototype objects
+// Almost all objects in JavaScript ultimately inherit
+//  from Object.prototype . However, you may create null-prototype objects 
+// using Object.create(null) or the object initializer 
+// syntax with __proto__: null  You can also 
+// change the prototype of an existing object to null 
+// by calling Object.setPrototypeOf(obj, null).
+const obj = Object.create(null);
+const obj2 = { __proto__: null };
+// An object with a null prototype can behave in unexpected 
+// ways, because it doesn't inherit any object methods from 
+// Object.prototype.
+
+const normalObj = {}; // create a normal object
+const nullProtoObj = Object.create(null); // create an object with "null" prototype
+
+console.log(`normalObj is: ${normalObj}`); // shows "normalObj is: [object Object]"
+console.log(`nullProtoObj is: ${nullProtoObj}`); // throws error: Cannot convert object to primitive value
+
+alert(normalObj); // shows [object Object]
+alert(nullProtoObj); // throws error: Cannot convert object to primitive value
+// Other methods will fail as well.
+normalObj.valueOf(); // shows {}
+nullProtoObj.valueOf(); // throws error: nullProtoObj.valueOf is not a function
+
+normalObj.hasOwnProperty("p"); // shows "true"
+nullProtoObj.hasOwnProperty("p"); // throws error: nullProtoObj.hasOwnProperty is not a function
+
+normalObj.constructor; // shows "Object() { [native code] }"
+nullProtoObj.constructor; // shows "undefined"
+
+nullProtoObj.toString = Object.prototype.toString; // since new object lacks toString, add the original generic one back
+
+console.log(nullProtoObj.toString()); // shows "[object Object]"
+console.log(`nullProtoObj is: ${nullProtoObj}`); // shows "nullProtoObj is: [object Object]"
+
+const ages = { alice: 18, bob: 27 };
+
+function hasPerson(name) {
+  return name in ages;
+}
+
+function getAge(name) {
+  return ages[name];
+}
+
+hasPerson("hasOwnProperty"); // true
+getAge("toString"); // [Function: toString]
+
+
+// Constructor
+Object()
+// Turns the input into an object.
+
+// Static methods
+Object.assign()
+// Copies the values of all enumerable own properties from 
+// one or more source objects to a target object.
+
+Object.create()
+// Creates a new object with the specified prototype object 
+// and properties.
+
+Object.defineProperties()
+// Adds the named properties described by the given 
+// descriptors to an object.
+
+Object.defineProperty()
+// Adds the named property described by a given descriptor
+//  to an object.
+
+Object.entries()
+// Returns an array containing all of the [key, value] pairs
+//  of a given object's own enumerable string properties.
+
+Object.freeze()
+// Freezes an object. Other code cannot delete or change 
+// its properties.
+
+Object.fromEntries()
+// Returns a new object from an iterable of [key, value] pairs. 
+// (This is the reverse of Object.entries).
+
+Object.getOwnPropertyDescriptor()
+// Returns a property descriptor for a named property on an
+//  object.
+
+Object.getOwnPropertyDescriptors()
+// Returns an object containing all own property descriptors 
+// for an object.
+
+Object.getOwnPropertyNames()
+// Returns an array containing the names of all of the given
+//  object's own enumerable and non-enumerable properties.
+
+Object.getOwnPropertySymbols()
+// Returns an array of all symbol properties found directly
+//  upon a given object.
+
+Object.getPrototypeOf()
+// Returns the prototype (internal [[Prototype]] property) 
+// of the specified object.
+
+Object.groupBy()
+// Groups the elements of a given iterable according to 
+// the string values returned by a provided callback function. 
+// The returned object has separate properties for each 
+// group, containing arrays with the elements in the group.
+
+Object.hasOwn()
+// Returns true if the specified object has the indicated
+//  property as its own property, or false if the property 
+// is inherited or does not exist.
+
+Object.is()
+// Compares if two values are the same value. Equates 
+// all NaN values (which differs from both IsLooselyEqual
+//  used by == and IsStrictlyEqual used by ===).
+
+
+Object.isExtensible()
+// Determines if extending of an object is allowed.
+
+Object.isFrozen()
+// Determines if an object was frozen.
+
+Object.isSealed()
+// Determines if an object is sealed.
+
+Object.keys()
+// Returns an array containing the names of all of 
+// the given object's own enumerable string properties.
+
+Object.preventExtensions()
+// Prevents any extensions of an object.
+
+Object.seal()
+// Prevents other code from deleting properties of an object.
+
+Object.setPrototypeOf()
+// Sets the object's prototype (its internal [[Prototype]] property).
+
+Object.values()
+// Returns an array containing the values that correspond
+//  to all of a given object's own enumerable string properties.
+
+// Instance properties
+// These properties are defined on Object.prototype and
+//  shared by all Object instances.
+
+Object.prototype.__proto__ Deprecated
+// Points to the object which was used as prototype when 
+// the object was instantiated.
+
+Object.prototype.constructor
+// The constructor function that created the instance 
+// object. For plain Object instances, the initial value 
+// is the Object constructor. Instances of other constructors
+//  each inherit the constructor property from their
+//  respective Constructor.prototype object.
+
+
+// Instance methods
+Object.prototype.__defineGetter__() 
+// Deprecated
+// Associates a function with a property that, when accessed,
+//  executes that function and returns its return value.
+
+Object.prototype.__defineSetter__()
+//  Deprecated
+// Associates a function with a property that, when set, 
+// executes that function which modifies the property.
+
+Object.prototype.__lookupGetter__()
+//  Deprecated
+// Returns the function bound as a getter to the specified 
+// property.
+
+Object.prototype.__lookupSetter__
+// () Deprecated
+// Returns the function bound as a setter to the specified
+//  property.
+
+Object.prototype.hasOwnProperty()
+// Returns a boolean indicating whether an object contains
+//  the specified property as a direct property of that
+//  object and not inherited through the prototype chain.
+
+Object.prototype.isPrototypeOf()
+// Returns a boolean indicating whether the object this
+//  method is called upon is in the prototype chain of 
+// the specified object.
+
+Object.prototype.propertyIsEnumerable()
+// Returns a boolean indicating whether the specified 
+// property is the object's enumerable own property.
+
+Object.prototype.toLocaleString()
+// Calls toString().
+
+Object.prototype.toString()
+// Returns a string representation of the object.
+
+Object.prototype.valueOf()
+// Returns the primitive value of the specified object.
+
+// Constructing empty objects
+// The following example creates empty objects using the
+//  new keyword with different arguments:
+const o1 = new Object();
+const o2 = new Object(undefined);
+const o3 = new Object(null);
+// Using Object() constructor to turn primitives into 
+// an Object of their respective type
+// You can use the Object() constructor to create an object
+//  wrapper of a primitive value.
+
+// Object.prototype.constructor
+// The constructor data property of an Object instance 
+// returns a reference to the constructor function that 
+// created the instance object. Note that the value of this 
+// property is a reference to the function itself, not 
+// a string containing the function's name.
+
+// Property attributes of Object.prototype.constructor
+// Writable	                yes
+// Enumerable	              no
+// Configurable	            yes
+
+// Any object will have a constructor property on its [[Prototype]]. 
+// Objects created with literals will also have a constructor
+//  property that points to the constructor type for that 
+// object — for example, array literals create Array objects,
+//  and object literals create plain objects.
+
+const o1 = {};
+o1.constructor === Object; // true
+
+const o2 = new Object();
+o2.constructor === Object; // true
+
+const a1 = [];
+a1.constructor === Array; // true
+
+const a2 = new Array();
+a2.constructor === Array; // true
+
+const n = 3;
+n.constructor === Number; // true
+// Note that constructor usually comes from the constructor's
+//  prototype property. If you have a longer prototype chain,
+//  you can usually expect every object in the chain to have 
+// a constructor property.
+
+const o = new TypeError(); // Inheritance: TypeError -> Error -> Object
+const proto = Object.getPrototypeOf;
+
+Object.hasOwn(o, "constructor"); // false
+proto(o).constructor === TypeError; // true
+proto(proto(o)).constructor === Error; // true
+proto(proto(proto(o))).constructor === Object; // true
+
+// Assigning the constructor property to an object
+// One can assign the constructor property of non-primitives.
+const arr = [];
+arr.constructor = String;
+arr.constructor === String; // true
+arr instanceof String; // false
+arr instanceof Array; // true
+
+const foo = new Foo();
+foo.constructor = "bar";
+foo.constructor === "bar"; // true
+
+// This does not overwrite the old constructor property 
+// — it was originally present on the instance's [[Prototype]], 
+// not as its own property.
+const arr = [];
+Object.hasOwn(arr, "constructor"); // false
+Object.hasOwn(Object.getPrototypeOf(arr), "constructor"); // true
+
+arr.constructor = String;
+Object.hasOwn(arr, "constructor"); // true — the instance property shadows the one on its prototype
+// But even when Object.getPrototypeOf(a).constructor is 
+// re-assigned, it won't change other behaviors of the object. 
+// For example, the behavior of instanceof is controlled by 
+// Symbol.hasInstance, not constructor:
+
+const arr = [];
+arr.constructor = String;
+arr instanceof String; // false
+arr instanceof Array; // true
+
+// There is nothing protecting the constructor property 
+// from being re-assigned or shadowed, so using it to 
+// detect the type of a variable should usually be avoided 
+// in favor of less fragile ways like instanceof and 
+// Symbol.toStringTag for objects, or typeof for primitives.
+
+// Changing the constructor of a constructor function's prototype
+// Every constructor has a prototype property, which will 
+// become the instance's [[Prototype]] when called via 
+// the new operator. ConstructorFunction.prototype.constructor 
+// will therefore become a property on the instance's [[Prototype]], 
+// as previously demonstrated.
+
+// However, if ConstructorFunction.prototype is re-assigned,
+//  the constructor property will be lost. For example, 
+// the following is a common way to create an inheritance 
+// pattern:
+
+function Parent() {
+  // …
+}
+Parent.prototype.parentMethod = function () {};
+
+function Child() {
+  Parent.call(this); // Make sure everything is initialized properly
+}
+// Pointing the [[Prototype]] of Child.prototype to Parent.prototype
+Child.prototype = Object.create(Parent.prototype);
+
+// The constructor of instances of Child will be Parent due 
+// to Child.prototype being re-assigned.
+
+// This is usually not a big deal — the language almost 
+// never reads the constructor property of an object. The 
+// only exception is when using @@species to create new 
+// instances of a class, but such cases are rare, and you
+//  should be using the extends syntax to subclass builtins
+//  anyway.
+
+// However, ensuring that Child.prototype.constructor always
+//  points to Child itself is crucial when some caller is 
+// using constructor to access the original class from an 
+// instance. Take the following case: the object has the
+//  create() method to create itself.
+
+
+function Parent() {
+  // …
+}
+function CreatedConstructor() {
+  Parent.call(this);
+}
+
+CreatedConstructor.prototype = Object.create(Parent.prototype);
+
+CreatedConstructor.prototype.create = function () {
+  return new this.constructor();
+};
+
+new CreatedConstructor().create().create(); // TypeError: new CreatedConstructor().create().create is undefined, since constructor === Parent
+
+// In the example above, an exception is thrown, since 
+// the constructor links to Parent. To avoid this, just
+//  assign the necessary constructor you are going to use.
+
+// JS
+// Copy to Clipboard
+function Parent() {
+  // …
+}
+function CreatedConstructor() {
+  // …
+}
+
+CreatedConstructor.prototype = Object.create(Parent.prototype, {
+  // Return original constructor to Child
+  constructor: {
+    value: CreatedConstructor,
+    enumerable: false, // Make it non-enumerable, so it won't appear in `for...in` loop
+    writable: true,
+    configurable: true,
+  },
+});
+
+CreatedConstructor.prototype.create = function () {
+  return new this.constructor();
+};
+
+new CreatedConstructor().create().create(); // it's pretty fine
+// Note that when manually adding the constructor property, 
+// it's crucial to make the property non-enumerable, so 
+// constructor won't be visited in for...in loops — as 
+// it normally isn't.
+
+// If the code above looks like too much boilerplate,
+//  you may also consider using Object.setPrototypeOf() to
+//  manipulate the prototype chain.
+
+function Parent() {
+  // …
+}
+function CreatedConstructor() {
+  // …
+}
+
+Object.setPrototypeOf(CreatedConstructor.prototype, Parent.prototype);
+
+CreatedConstructor.prototype.create = function () {
+  return new this.constructor();
+};
+
+new CreatedConstructor().create().create(); // still works without re-creating constructor property
+// Object.setPrototypeOf() comes with its potential 
+// performance downsides because all previously created 
+// objects involved in the prototype chain have to be 
+// re-compiled; but if the above initialization code happens
+//  before Parent or CreatedConstructor are constructed, the
+//  effect should be minimal.
+
+// Let's consider one more involved case.
+
+function ParentWithStatic() {}
+
+ParentWithStatic.startPosition = { x: 0, y: 0 }; // Static member property
+ParentWithStatic.getStartPosition = function () {
+  return this.startPosition;
+};
+
+function Child(x, y) {
+  this.position = { x, y };
+}
+
+Child.prototype = Object.create(ParentWithStatic.prototype, {
+  // Return original constructor to Child
+  constructor: {
+    value: Child,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  },
+});
+
+Child.prototype.getOffsetByInitialPosition = function () {
+  const position = this.position;
+  // Using this.constructor, in hope that getStartPosition exists as a static method
+  const startPosition = this.constructor.getStartPosition();
+
+  return {
+    offsetX: startPosition.x - position.x,
+    offsetY: startPosition.y - position.y,
+  };
+};
+
+new Child(1, 1).getOffsetByInitialPosition();
+// Error: this.constructor.getStartPosition is undefined, since the
+// constructor is Child, which doesn't have the 
+// getStartPosition static method
+// For this example to work properly, we can reassign 
+// the Parent's static properties to Child:
+
+// // JS
+// // Copy to Clipboard
+// …
+Object.assign(Child, ParentWithStatic); // Notice that we assign it before we create() a prototype below
+Child.prototype = Object.create(ParentWithStatic.prototype, {
+  // Return original constructor to Child
+  constructor: {
+    value: Child,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  },
+});
+// …
+// But even better, we can make the constructor functions 
+// themselves extend each other, as classes' extends do.
+
+// JS
+// Copy to Clipboard
+function ParentWithStatic() {}
+
+ParentWithStatic.startPosition = { x: 0, y: 0 }; // Static member property
+ParentWithStatic.getStartPosition = function () {
+  return this.startPosition;
+};
+
+function Child(x, y) {
+  this.position = { x, y };
+}
+
+// Properly create inheritance!
+Object.setPrototypeOf(Child.prototype, ParentWithStatic.prototype);
+Object.setPrototypeOf(Child, ParentWithStatic);
+
+Child.prototype.getOffsetByInitialPosition = function () {
+  const position = this.position;
+  const startPosition = this.constructor.getStartPosition();
+
+  return {
+    offsetX: startPosition.x - position.x,
+    offsetY: startPosition.y - position.y,
+  };
+};
+
+console.log(new Child(1, 1).getOffsetByInitialPosition()); // { offsetX: -1, offsetY: -1 }
+// Again, using Object.setPrototypeOf() may have adverse 
+// performance effects, so make sure it happens immediately 
+// after the constructor declaration and before any instances 
+// are created — to avoid objects being "tainted".
+
+// Object.assign()
+// The Object.assign() static method copies all enumerable
+//  own properties from one or more source objects to a
+//  target object. It returns the modified target object.
+Object.assign(target, source1, source2, /* …, */ sourceN)
+// target
+// The target object — what to apply the sources' properties 
+// to, which is returned after it is modified.
+
+// source1, …, sourceN
+// The source object(s) — objects containing the properties
+//  you want to apply.
+
+// Properties in the target object are overwritten by 
+// properties in the sources if they have the same key. 
+// Later sources' properties overwrite earlier ones.
+
+// The Object.assign() method only copies enumerable and 
+// own properties from a source object to a target object.
+//  It uses [[Get]] on the source and [[Set]] on the target, 
+// so it will invoke getters and setters. Therefore it 
+// assigns properties, versus copying or defining new 
+// properties. This may make it unsuitable for merging new 
+// properties into a prototype if the merge sources contain 
+// getters.
+
+// For copying property definitions (including their 
+// enumerability) into prototypes, use 
+// Object.getOwnPropertyDescriptor() and Object.defineProperty() instead.
+
+// Warning for Deep Clone
+// For deep cloning, we need to use alternatives like 
+// structuredClone(), because Object.assign() copies
+//  property values.
+// If the source value is a reference to an object, it 
+// only copies the reference value.
+
+const obj1 = { a: 0, b: { c: 0 } };
+const obj2 = Object.assign({}, obj1);
+console.log(obj2); // { a: 0, b: { c: 0 } }
+
+obj1.a = 1;
+console.log(obj1); // { a: 1, b: { c: 0 } }
+console.log(obj2); // { a: 0, b: { c: 0 } }
+
+obj2.a = 2;
+console.log(obj1); // { a: 1, b: { c: 0 } }
+console.log(obj2); // { a: 2, b: { c: 0 } }
+
+obj2.b.c = 3;
+console.log(obj1); // { a: 1, b: { c: 3 } }
+console.log(obj2); // { a: 2, b: { c: 3 } }
+
+// Deep Clone
+const obj3 = { a: 0, b: { c: 0 } };
+const obj4 = structuredClone(obj3);
+obj3.a = 4;
+obj3.b.c = 4;
+console.log(obj4); // { a: 0, b: { c: 0 } }
+Merging objects
+JS
+Copy to Clipboard
+const o1 = { a: 1 };
+const o2 = { b: 2 };
+const o3 = { c: 3 };
+
+const obj = Object.assign(o1, o2, o3);
+console.log(obj); // { a: 1, b: 2, c: 3 }
+console.log(o1); // { a: 1, b: 2, c: 3 }, target object itself is changed.
+Merging objects with same properties
+JS
+Copy to Clipboard
+const o1 = { a: 1, b: 1, c: 1 };
+const o2 = { b: 2, c: 2 };
+const o3 = { c: 3 };
+
+const obj = Object.assign({}, o1, o2, o3);
+console.log(obj); // { a: 1, b: 2, c: 3 }
+// The properties are overwritten by other objects that 
+// have the same properties later in the parameters order.
+
+// Object.create()
+// The Object.create() static method creates a new object, 
+// using an existing object as the prototype of the newly
+//  created object.
+Object.create(proto)
+Object.create(proto, propertiesObject)
+
+// propertiesObject Optional
+// If specified and not undefined, an object whose 
+// enumerable own properties specify property descriptors
+//  to be added to the newly-created object, with the 
+// corresponding property names. These properties correspond
+//  to the second argument of Object.defineProperties().
+
+// Return value
+// A new object with the specified prototype object and 
+// properties.
+
+function Shape() {
+  this.x = 0;
+  this.y = 0;
+}
+
+// superclass method
+Shape.prototype.move = function (x, y) {
+  this.x += x;
+  this.y += y;
+  console.info("Shape moved.");
+};
+
+// Rectangle - subclass
+function Rectangle() {
+  Shape.call(this); // call super constructor.
+}
+// subclass extends superclass
+Rectangle.prototype = Object.create(Shape.prototype, {
+  // If you don't set Rectangle.prototype.constructor to Rectangle,
+  // it will take the prototype.constructor of Shape (parent).
+  // To avoid that, we set the prototype.constructor to Rectangle (child).
+  constructor: {
+    value: Rectangle,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  },
+});
+
+const rect = new Rectangle();
+
+console.log("Is rect an instance of Rectangle?", rect instanceof Rectangle); // true
+console.log("Is rect an instance of Shape?", rect instanceof Shape); // true
+rect.move(1, 1); // Logs 'Shape moved.'
+
+// Object.defineProperties()
+// The Object.defineProperties() static method defines 
+// new or modifies existing properties directly on an object,
+//  returning the object.
+
+// Syntax
+Object.defineProperties(obj, props)
+// obj
+// The object on which to define or modify properties.
+
+// Data descriptors and accessor descriptors may optionally
+//  contain the following keys:
+
+// configurable
+// true if and only if the type of this property descriptor
+//  may be changed and if the property may be deleted from
+//  the corresponding object. Defaults to false.
+
+// enumerable
+// true if and only if this property shows up during
+//  enumeration of the properties on the corresponding 
+// object. Defaults to false.
+
+// A data descriptor also has the following optional keys:
+
+// value
+// The value associated with the property. Can be any valid
+//  JavaScript value (number, object, function, etc.).
+//  Defaults to undefined.
+
+// writable
+// true if and only if the value associated with the property
+//  may be changed with an assignment operator. Defaults to 
+// false.
+
+
+// An accessor descriptor also has the following optional 
+// keys:
+
+// get
+// A function which serves as a getter for the property,
+//  or undefined if there is no getter. The function's return
+//  value will be used as the value of the property. Defaults
+//  to undefined.
+
+// set
+// A function which serves as a setter for the property, 
+// or undefined if there is no setter. The function will
+//  receive as its only argument the new value being assigned 
+// to the property. Defaults to undefined.
+
+// If a descriptor has neither of value, writable, get and 
+// set keys, it is treated as a data descriptor. If a 
+// descriptor has both value or writable and get or set 
+// keys, an exception is thrown.
+
+// Using Object.defineProperties
+const obj = {};
+Object.defineProperties(obj, {
+  property1: {
+    value: true,
+    writable: true,
+  },
+  property2: {
+    value: "Hello",
+    writable: false,
+  },
+  // etc. etc.
+});
+
+// Object.defineProperty()
+// The Object.defineProperty() static method defines 
+// a new property directly on an object, or modifies 
+// an existing property on an object, and returns 
+// the object.
+
+// Syntax
+Object.defineProperty(obj, prop, descriptor)
+// obj
+// The object on which to define the property.
+
+// prop
+// A string or Symbol specifying the key of the property 
+// to be defined or modified.
+
+// descriptor
+// The descriptor for the property being defined or modified.
+
+// Object.defineProperty() allows a precise addition to
+//  or modification of a property on an object. Normal 
+// property addition through assignment creates properties
+//  which show up during property enumeration (for...in, 
+// Object.keys(), etc.), whose values may be changed and 
+// which may be deleted. This method allows these extra 
+// details to be changed from their defaults. By default, 
+// properties added using Object.defineProperty() are not
+//  writable, not enumerable, and not configurable. In
+//  addition, Object.defineProperty() uses the
+//  [[DefineOwnProperty]] internal method, instead of
+//  [[Set]], so it does not invoke setters, even when the
+//  property is already present.
+
+// Property descriptors present in objects come in two main 
+// flavors: data descriptors and accessor descriptors. A data
+//  descriptor is a property with a value that may or may not
+//  be writable. An accessor descriptor is a property
+//  described by a getter-setter pair of functions. 
+// A descriptor must be one of these two flavors; it cannot 
+// be both.
+
+// Both data and accessor descriptors are objects. They share
+//  the following optional keys (please note: the defaults 
+// mentioned here are in the case of defining properties
+//  using Object.defineProperty()):
+
+// configurable
+// when this is set to false,
+
+// the type of this property cannot be changed between 
+// data property and accessor property, and
+// the property may not be deleted, and
+// other attributes of its descriptor cannot be changed 
+// (however, if it's a data descriptor with writable: true,
+//  the value can be changed, and writable can be changed to
+//  false).
+// Defaults to false.
+
+// enumerable
+// true if and only if this property shows up during 
+// enumeration of the properties on the corresponding object.
+//  Defaults to false.
+
+// A data descriptor also has the following optional keys:
+
+// value
+// The value associated with the property. Can be any valid
+//  JavaScript value (number, object, function, etc.). 
+// Defaults to undefined.
+
+// writable
+// true if the value associated with the property may be 
+// changed with an assignment operator. Defaults to false.
+
+// An accessor descriptor also has the following optional 
+// keys:
+
+// get
+// A function which serves as a getter for the property,
+//  or undefined if there is no getter. When the property 
+// is accessed, this function is called without arguments 
+// and with this set to the object through which the property
+//  is accessed (this may not be the object on which the
+//  property is defined due to inheritance). The return 
+// value will be used as the value of the property. Defaults 
+// to undefined.
+
+// set
+// A function which serves as a setter for the property,
+//  or undefined if there is no setter. When the property
+//  is assigned, this function is called with one argument
+//  (the value being assigned to the property) and with this
+//  set to the object through which the property is assigned.
+//  Defaults to undefined.
+
+// If a descriptor doesn't have any of the value, writable,
+//  get, and set keys, it is treated as a data descriptor.
+//  If a descriptor has both [value or writable] and [get 
+// or set] keys, an exception is thrown.
+
+// These attributes are not necessarily the descriptor's 
+// own properties. Inherited properties will be considered
+//  as well. In order to ensure these defaults are preserved,
+//  you might freeze existing objects in the descriptor 
+// object's prototype chain upfront, specify all options 
+// explicitly, or create a null-prototype object.
+
+
+const obj = {};
+// 1. Using a null prototype: no inherited properties
+const descriptor = Object.create(null);
+descriptor.value = "static";
+
+// not enumerable, not configurable, not writable as defaults
+Object.defineProperty(obj, "key", descriptor);
+
+// 2. Being explicit by using a throw-away object literal with all attributes present
+Object.defineProperty(obj, "key2", {
+  enumerable: false,
+  configurable: false,
+  writable: false,
+  value: "static",
+});
+
+// 3. Recycling same object
+function withValue(value) {
+  const d =
+    withValue.d ||
+    (withValue.d = {
+      enumerable: false,
+      writable: false,
+      configurable: false,
+      value,
+    });
+
+  // avoiding duplicate operation for assigning value
+  if (d.value !== value) d.value = value;
+
+  return d;
+}
+// // and
+Object.defineProperty(obj, "key", withValue("static"));
+
+// if freeze is available, prevents adding or
+// removing the object prototype properties
+// (value, get, set, enumerable, writable, configurable)
+(Object.freeze || Object)(Object.prototype);
+
+// When the property already exists, Object.defineProperty() 
+// attempts to modify the property according to the values 
+// in the descriptor and the property's current configuration.
+
+// Creating a property
+// When the property specified doesn't exist in the object, 
+// Object.defineProperty() creates a new property as described.
+//  Fields may be omitted from the descriptor and default 
+// values for those fields are inputted.
+
+const o = {}; // Creates a new object
+
+// Example of an object property added
+// with defineProperty with a data property descriptor
+Object.defineProperty(o, "a", {
+  value: 37,
+  writable: true,
+  enumerable: true,
+  configurable: true,
+});
+// 'a' property exists in the o object and its value is 37
+
+// Example of an object property added
+// with defineProperty with an accessor property descriptor
+let bValue = 38;
+Object.defineProperty(o, "b", {
+  get() {
+    return bValue;
+  },
+  set(newValue) {
+    bValue = newValue;
+  },
+  enumerable: true,
+  configurable: true,
+});
+o.b; // 38
+// 'b' property exists in the o object and its value is 38
+// The value of o.b is now always identical to bValue,
+// unless o.b is redefined
+
+// You cannot try to mix both:
+Object.defineProperty(o, "conflict", {
+  value: 0x9f91102,
+  get() {
+    return 0xdeadbeef;
+  },
+});
+// throws a TypeError: value appears
+// only in data descriptors,
+// get appears only in accessor descriptors
+// Modifying a property
+// When modifying an existing property, the current property
+//  configuration determines if the operator succeeds, does
+//  nothing, or throws a TypeError.
+
+// Writable attribute
+// When the writable property attribute is false, 
+// the property is said to be "non-writable". It cannot be
+//  reassigned. Trying to write to a non-writable property
+//  doesn't change it and results in an error in strict mode.
+
+// JS
+// Copy to Clipboard
+const o = {}; // Creates a new object
+
+Object.defineProperty(o, "a", {
+  value: 37,
+  writable: false,
+});
+
+console.log(o.a); // 37
+o.a = 25; // No error thrown
+// (it would throw in strict mode,
+// even if the value had been the same)
+console.log(o.a); // 37; the assignment didn't work
+
+// strict mode
+(() => {
+  "use strict";
+  const o = {};
+  Object.defineProperty(o, "b", {
+    value: 2,
+    writable: false,
+  });
+  o.b = 3; // throws TypeError: "b" is read-only
+  return o.b; // returns 2 without the line above
+})();
+// Enumerable attribute
+// The enumerable property attribute defines whether the
+//  property is considered by Object.assign() or the spread
+//  operator. For non-Symbol properties, it also defines
+//  whether it shows up in a for...in loop and Object.keys() 
+// or not. For more information, see Enumerability and 
+// ownership of properties.
+
+// JS
+// Copy to Clipboard
+const o = {};
+Object.defineProperty(o, "a", {
+  value: 1,
+  enumerable: true,
+});
+Object.defineProperty(o, "b", {
+  value: 2,
+  enumerable: false,
+});
+Object.defineProperty(o, "c", {
+  value: 3,
+}); // enumerable defaults to false
+o.d = 4; // enumerable defaults to true when creating a property by setting it
+Object.defineProperty(o, Symbol.for("e"), {
+  value: 5,
+  enumerable: true,
+});
+Object.defineProperty(o, Symbol.for("f"), {
+  value: 6,
+  enumerable: false,
+});
+
+for (const i in o) {
+  console.log(i);
+}
+// Logs 'a' and 'd' (always in that order)
+
+Object.keys(o); // ['a', 'd']
+
+o.propertyIsEnumerable("a"); // true
+o.propertyIsEnumerable("b"); // false
+o.propertyIsEnumerable("c"); // false
+o.propertyIsEnumerable("d"); // true
+o.propertyIsEnumerable(Symbol.for("e")); // true
+o.propertyIsEnumerable(Symbol.for("f")); // false
+
+const p = { ...o };
+p.a; // 1
+p.b; // undefined
+p.c; // undefined
+p.d; // 4
+p[Symbol.for("e")]; // 5
+p[Symbol.for("f")]; // undefined
+// Configurable attribute
+// The configurable attribute controls whether the property
+//  can be deleted from the object and whether its attributes 
+// (other than value and writable) can be changed.
+
+// This example illustrates a non-configurable accessor
+//  property.
+
+// JS
+// Copy to Clipboard
+const o = {};
+Object.defineProperty(o, "a", {
+  get() {
+    return 1;
+  },
+  configurable: false,
+});
+
+Object.defineProperty(o, "a", {
+  configurable: true,
+}); // throws a TypeError
+Object.defineProperty(o, "a", {
+  enumerable: true,
+}); // throws a TypeError
+Object.defineProperty(o, "a", {
+  set() {},
+}); // throws a TypeError (set was undefined previously)
+Object.defineProperty(o, "a", {
+  get() {
+    return 1;
+  },
+}); // throws a TypeError
+// (even though the new get does exactly the same thing)
+Object.defineProperty(o, "a", {
+  value: 12,
+}); // throws a TypeError
+// ('value' can be changed when 'configurable' is false, but only when the property is a writable data property)
+
+console.log(o.a); // 1
+delete o.a; // Nothing happens; throws an error in strict mode
+console.log(o.a); // 1
+// If the configurable attribute of o.a had been true, none
+//  of the errors would be thrown and the property would be 
+// deleted at the end.
+
+// This example illustrates a non-configurable but writable 
+// data property. The property's value can still be changed,
+//  and writable can still be toggled from true to false.
+
+// JS
+// Copy to Clipboard
+const o = {};
+Object.defineProperty(o, "b", {
+  writable: true,
+  configurable: false,
+});
+console.log(o.b); // undefined
+Object.defineProperty(o, "b", {
+  value: 1,
+}); // Even when configurable is false, because the object is writable, we may still replace the value
+console.log(o.b); // 1
+o.b = 2; // We can change the value with assignment operators as well
+console.log(o.b); // 2
+// Toggle the property's writability
+Object.defineProperty(o, "b", {
+  writable: false,
+});
+Object.defineProperty(o, "b", {
+  value: 1,
+}); // TypeError: because the property is neither writable nor configurable, it cannot be modified
+// At this point, there's no way to further modify 'b'
+// or restore its writability
+// This example illustrates a configurable but non-writable data property. The property's value may still be replaced with defineProperty (but not with assignment operators), and writable may be toggled.
+
+// JS
+// Copy to Clipboard
+const o = {};
+Object.defineProperty(o, "b", {
+  writable: false,
+  configurable: true,
+});
+Object.defineProperty(o, "b", {
+  value: 1,
+}); // We can replace the value with defineProperty
+console.log(o.b); // 1
+o.b = 2; // throws TypeError in strict mode: cannot change a non-writable property's value with assignment
+// This example illustrates a non-configurable and non-writable data property. There's no way to update any attribute of the property, including its value.
+
+// JS
+// Copy to Clipboard
+const o = {};
+Object.defineProperty(o, "b", {
+  writable: false,
+  configurable: false,
+});
+Object.defineProperty(o, "b", {
+  value: 1,
+}); // TypeError: the property cannot be modified because it is neither writable nor configurable.
+// Adding properties and default values
+// It is important to consider the way default values of attributes are applied. There is often a difference between using property accessors to assign a value and using Object.defineProperty(), as shown in the example below.
+
+// JS
+// Copy to Clipboard
+const o = {};
+
+o.a = 1;
+// is equivalent to:
+Object.defineProperty(o, "a", {
+  value: 1,
+  writable: true,
+  configurable: true,
+  enumerable: true,
+});
+
+// On the other hand,
+Object.defineProperty(o, "a", { value: 1 });
+// is equivalent to:
+Object.defineProperty(o, "a", {
+  value: 1,
+  writable: false,
+  configurable: false,
+  enumerable: false,
+});
+// Custom setters and getters
+// The example below shows how to implement a self-archiving object. When temperature property is set, the archive array gets a log entry.
+
+// JS
+// Copy to Clipboard
+function Archiver() {
+  let temperature = null;
+  const archive = [];
+
+  Object.defineProperty(this, "temperature", {
+    get() {
+      console.log("get!");
+      return temperature;
+    },
+    set(value) {
+      temperature = value;
+      archive.push({ val: temperature });
+    },
+  });
+
+  this.getArchive = () => archive;
+}
+
+const arc = new Archiver();
+arc.temperature; // 'get!'
+arc.temperature = 11;
+arc.temperature = 13;
+arc.getArchive(); // [{ val: 11 }, { val: 13 }]
+// In this example, a getter always returns the same value.
+
+// JS
+// Copy to Clipboard
+const pattern = {
+  get() {
+    return "I always return this string, whatever you have assigned";
+  },
+  set() {
+    this.myname = "this is my name string";
+  },
+};
+
+function TestDefineSetAndGet() {
+  Object.defineProperty(this, "myproperty", pattern);
+}
+
+const instance = new TestDefineSetAndGet();
+instance.myproperty = "test";
+console.log(instance.myproperty);
+// I always return this string, whatever you have assigned
+
+console.log(instance.myname); // this is my name string
+// Inheritance of properties
+// If an accessor property is inherited, its get and set
+//  methods will be called when the property is accessed 
+// and modified on descendant objects. If these methods 
+// use a variable to store the value, this value will be 
+// shared by all objects.
+
+// JS
+// Copy to Clipboard
+function MyClass() {}
+
+let value;
+Object.defineProperty(MyClass.prototype, "x", {
+  get() {
+    return value;
+  },
+  set(x) {
+    value = x;
+  },
+});
+
+const a = new MyClass();
+const b = new MyClass();
+a.x = 1;
+console.log(b.x); // 1
+// This can be fixed by storing the value in another property. 
+// In get and set methods, this points to the object which 
+// is used to access or modify the property.
+
+// JS
+// Copy to Clipboard
+function MyClass() {}
+
+Object.defineProperty(MyClass.prototype, "x", {
+  get() {
+    return this.storedX;
+  },
+  set(x) {
+    this.storedX = x;
+  },
+});
+
+const a = new MyClass();
+const b = new MyClass();
+a.x = 1;
+console.log(b.x); // undefined
+// Unlike accessor properties, data properties are always 
+// set on the object itself, not on a prototype. However, 
+// if a non-writable data property is inherited, it is still
+//  prevented from being modified on the object.
+
+// JS
+// Copy to Clipboard
+function MyClass() {}
+
+MyClass.prototype.x = 1;
+Object.defineProperty(MyClass.prototype, "y", {
+  writable: false,
+  value: 1,
+});
+
+const a = new MyClass();
+a.x = 2;
+console.log(a.x); // 2
+console.log(MyClass.prototype.x); // 1
+a.y = 2; // Ignored, throws in strict mode
+console.log(a.y); // 1
+console.log(MyClass.prototype.y); // 1
+
+
+// See also
+// Enumerability and ownership of properties
+Object.defineProperties()
+Object.prototype.propertyIsEnumerable()
+Object.getOwnPropertyDescriptor()
+get
+set
+Object.create()
+Reflect.defineProperty()
+
+// Object.entries()
+// The Object.entries() static method returns an array of 
+// a given object's own enumerable string-keyed property
+//  key-value pairs.
+Object.entries(obj)
+
+// Object.entries() returns an array whose elements are 
+// arrays corresponding to the enumerable string-keyed 
+// property key-value pairs found directly upon object. 
+// This is the same as iterating with a for...in loop, 
+// except that a for...in loop enumerates properties in 
+// the prototype chain as well. The order of the array
+//  returned by Object.entries() is the same as that 
+// provided by a for...in loop.
+
+// If you only need the property keys, use Object.keys() 
+// instead. If you only need the property values, use 
+// Object.values() instead.
+
+const obj = { foo: "bar", baz: 42 };
+console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+
+const arrayLike = { 0: "a", 1: "b", 2: "c" };
+console.log(Object.entries(arrayLike)); // [ ['0', 'a'], ['1', 'b'], ['2', 'c'] ]
+
+const randomKeyOrder = { 100: "a", 2: "b", 7: "c" };
+console.log(Object.entries(randomKeyOrder)); // [ ['2', 'b'], ['7', 'c'], ['100', 'a'] ]
+
+// getFoo is a non-enumerable property
+const myObj = Object.create(
+  {},
+  {
+    getFoo: {
+      value() {
+        return this.foo;
+      },
+    },
+  },
+);
+myObj.foo = "bar";
+console.log(Object.entries(myObj)); // [ ['foo', 'bar'] ]
+
+// Using Object.entries() on primitives
+// Non-object arguments are coerced to objects. undefined 
+// and null cannot be coerced to objects and throw 
+// a TypeError upfront. Only strings may have own enumerable
+//  properties, while all other primitives return an empty
+//  array.
+
+// Strings have indices as enumerable own properties
+console.log(Object.entries("foo")); // [ ['0', 'f'], ['1', 'o'], ['2', 'o'] ]
+
+// Other primitives except undefined and null have no own properties
+console.log(Object.entries(100)); // []
+
+// Converting an Object to a Map
+// The Map() constructor accepts an iterable of entries. 
+// With Object.entries, you can easily convert from Object
+//  to Map:
+
+const obj = { foo: "bar", baz: 42 };
+const map = new Map(Object.entries(obj));
+console.log(map); // Map(2) {"foo" => "bar", "baz" => 42}
+
+// Iterating through an Object
+// Using array destructuring, you can iterate through objects
+//  easily.
+
+// Using for...of loop
+const obj = { a: 5, b: 7, c: 9 };
+for (const [key, value] of Object.entries(obj)) {
+  console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+}
+
+// Using array methods
+Object.entries(obj).forEach(([key, value]) => {
+  console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+});
+
+// Object.freeze()
+// The Object.freeze() static method freezes an object. 
+// Freezing an object prevents extensions and makes existing 
+// properties non-writable and non-configurable. A frozen 
+// object can no longer be changed: new properties cannot 
+// be added, existing properties cannot be removed, their 
+// enumerability, configurability, writability, or value
+//  cannot be changed, and the object's prototype cannot 
+// be re-assigned. freeze() returns the same object that
+//  was passed in.
+
+// Freezing an object is the highest integrity level that 
+// JavaScript provides.
+Object.freeze(obj)
+
+// Description
+// Freezing an object is equivalent to preventing extensions 
+// and then changing all existing properties' descriptors' 
+// configurable to false — and for data properties, writable
+//  to false as well. Nothing can be added to or removed from
+//  the properties set of a frozen object. Any attempt to do 
+// so will fail, either silently or by throwing a TypeError 
+// exception (most commonly, but not exclusively, when in 
+// strict mode).
+
+// For data properties of a frozen object, their values 
+// cannot be changed since the writable and configurable 
+// attributes are set to false. Accessor properties (getters
+//  and setters) work the same — the property value returned 
+// by the getter may still change, and the setter can still 
+// be called without throwing errors when setting the 
+// property. Note that values that are objects can still 
+// be modified, unless they are also frozen. As an object,
+//  an array can be frozen; after doing so, its elements 
+// cannot be altered and no elements can be added to or 
+// removed from the array.
+
+// Private properties do not have the concept of property 
+// descriptors. Freezing an object with private properties 
+// does not prevent the values of these private properties 
+// from being changed. (Freezing objects is usually meant 
+// as a security measure against external code, but external
+//  code cannot access private properties anyway.) Private 
+// properties cannot be added or removed from the object, 
+// whether the object is frozen or not.
+
+// freeze() returns the same object that was passed into the 
+// function. It does not create a frozen copy.
+
+// A TypedArray or a DataView with elements will cause 
+// a TypeError, as they are views over memory and will 
+// definitely cause other possible issues:
+
+// Copy to Clipboard
+Object.freeze(new Uint8Array(0)); // No elements
+// Uint8Array []
+
+Object.freeze(new Uint8Array(1)); // Has elements
+// TypeError: Cannot freeze array buffer views with elements
+
+Object.freeze(new DataView(new ArrayBuffer(32))); // No elements
+// DataView {}
+
+Object.freeze(new Float64Array(new ArrayBuffer(64), 63, 0)); // No elements
+// Float64Array []
+
+Object.freeze(new Float64Array(new ArrayBuffer(64), 32, 2)); // Has elements
+// TypeError: Cannot freeze array buffer views with elements
+
+// Note that as the standard three properties (buf.byteLength,
+//  buf.byteOffset and buf.buffer) are read-only (as are 
+// those of an ArrayBuffer or SharedArrayBuffer), there is
+//  no reason for attempting to freeze these properties.
+
+// Unlike Object.seal(), existing properties in objects 
+// frozen with Object.freeze() are made immutable and data
+//  properties cannot be re-assigned.
+
+// Examples
+// Freezing objects
+const obj = {
+  prop() {},
+  foo: "bar",
+};
+
+// Before freezing: new properties may be added,
+// and existing properties may be changed or removed
+obj.foo = "baz";
+obj.lumpy = "woof";
+delete obj.prop;
+
+// Freeze.
+const o = Object.freeze(obj);
+
+// The return value is just the same object we passed in.
+o === obj; // true
+
+// The object has become frozen.
+Object.isFrozen(obj); // === true
+
+// Now any changes will fail
+obj.foo = "quux"; // silently does nothing
+// silently doesn't add the property
+obj.quaxxor = "the friendly duck";
+
+// In strict mode such attempts will throw TypeErrors
+function fail() {
+  "use strict";
+  obj.foo = "sparky"; // throws a TypeError
+  delete obj.foo; // throws a TypeError
+  delete obj.quaxxor; // returns true since attribute 'quaxxor' was never added
+  obj.sparky = "arf"; // throws a TypeError
+}
+
+fail();
+
+// Attempted changes through Object.defineProperty;
+// both statements below throw a TypeError.
+Object.defineProperty(obj, "ohai", { value: 17 });
+Object.defineProperty(obj, "foo", { value: "eit" });
+
+// It's also impossible to change the prototype
+// both statements below will throw a TypeError.
+Object.setPrototypeOf(obj, { x: 20 });
+obj.__proto__ = { x: 20 };
+
+// Freezing arrays
+// JS
+// Copy to Clipboard
+const a = [0];
+Object.freeze(a); // The array cannot be modified now.
+
+a[0] = 1; // fails silently
+
+// In strict mode such attempt will throw a TypeError
+function fail() {
+  "use strict";
+  a[0] = 1;
+}
+
+fail();
+
+// Attempted to push
+a.push(2); // throws a TypeError
+// The object being frozen is immutable. However, it is not
+//  necessarily constant. The following example shows that 
+// a frozen object is not constant (freeze is shallow).
+
+// JS
+// Copy to Clipboard
+const obj1 = {
+  internal: {},
+};
+
+Object.freeze(obj1);
+obj1.internal.a = "aValue";
+
+obj1.internal.a; // 'aValue'
+// To be a constant object, the entire reference graph 
+// (direct and indirect references to other objects) must 
+// reference only immutable frozen objects. The object being 
+// frozen is said to be immutable because the entire object 
+// state (values and references to other objects) within the
+//  whole object is fixed. Note that strings, numbers, and 
+// booleans are always immutable and that Functions and
+//  Arrays are objects.
+
+// What is "shallow freeze"?
+// The result of calling Object.freeze(object) only applies 
+// to the immediate properties of object itself and will 
+// prevent future property addition, removal or value 
+// re-assignment operations only on object. If the value
+//  of those properties are objects themselves, those 
+// objects are not frozen and may be the target of property
+//  addition, removal or value re-assignment operations.
+
+// JS
+// Copy to Clipboard
+const employee = {
+  name: "Mayank",
+  designation: "Developer",
+  address: {
+    street: "Rohini",
+    city: "Delhi",
+  },
+};
+
+Object.freeze(employee);
+
+employee.name = "Dummy"; // fails silently in non-strict mode
+employee.address.city = "Noida"; // attributes of child object can be modified
+
+console.log(employee.address.city); // "Noida"
+// To make an object immutable, recursively freeze each 
+// non-primitive property (deep freeze). Use the pattern 
+// on a case-by-case basis based on your design when you 
+// know the object contains no cycles in the reference 
+// graph, otherwise an endless loop will be triggered.
+//  An enhancement to deepFreeze() would be to have an 
+// internal function that receives a path (e.g. an Array) 
+// argument so you can suppress calling deepFreeze() 
+// recursively when an object is in the process of being 
+// made immutable. You still run a risk of freezing an
+//  object that shouldn't be frozen, such as window.
+
+// JS
+// Copy to Clipboard
+function deepFreeze(object) {
+  // Retrieve the property names defined on object
+  const propNames = Reflect.ownKeys(object);
+
+  // Freeze properties before freezing self
+  for (const name of propNames) {
+    const value = object[name];
+
+    if ((value && typeof value === "object") || typeof value === "function") {
+      deepFreeze(value);
+    }
+  }
+
+  return Object.freeze(object);
+}
+
+const obj2 = {
+  internal: {
+    a: null,
+  },
+};
+
+deepFreeze(obj2);
+
+obj2.internal.a = "anotherValue"; // fails silently in non-strict mode
+obj2.internal.a; // null
+
+// Object.getOwnPropertyDescriptor()
+// The Object.getOwnPropertyDescriptor() static method 
+// returns an object describing the configuration of a 
+// specific property on a given object (that is, one directly 
+// present on an object and not in the object's prototype 
+// chain). The object returned is mutable but mutating it 
+// has no effect on the original property's configuration.
+
+Object.getOwnPropertyDescriptor(obj, prop)
+
+// This method permits examination of the precise 
+// description of a property. A property in JavaScript 
+// consists of either a string-valued name or a Symbol 
+// and a property descriptor. Further information about 
+// property descriptor types and their attributes can be 
+// found in Object.defineProperty().
+
+// A property descriptor is a record with some of the 
+// following attributes:
+
+// value
+// The value associated with the property (data descriptors 
+// only).
+
+// writable
+// true if and only if the value associated with the property
+//  may be changed (data descriptors only).
+
+// get
+// A function which serves as a getter for the property, or 
+// undefined if there is no getter (accessor descriptors only).
+
+// set
+// A function which serves as a setter for the property, 
+// or undefined if there is no setter (accessor descriptors 
+// only).
+
+// configurable
+// true if and only if the type of this property descriptor 
+// may be changed and if the property may be deleted from
+//  the corresponding object.
+
+// enumerable
+// true if and only if this property shows up during 
+// enumeration of the properties on the corresponding object.
+
+
+// Using Object.getOwnPropertyDescriptor()
+let o, d;
+
+o = {
+  get foo() {
+    return 17;
+  },
+};
+d = Object.getOwnPropertyDescriptor(o, "foo");
+console.log(d);
+// {
+//   configurable: true,
+//   enumerable: true,
+//   get: [Function: get foo],
+//   set: undefined
+// }
+
+o = { bar: 42 };
+d = Object.getOwnPropertyDescriptor(o, "bar");
+console.log(d);
+// {
+//   configurable: true,
+//   enumerable: true,
+//   value: 42,
+//   writable: true
+// }
+
+o = { [Symbol.for("baz")]: 73 };
+d = Object.getOwnPropertyDescriptor(o, Symbol.for("baz"));
+console.log(d);
+// {
+//   configurable: true,
+//   enumerable: true,
+//   value: 73,
+//   writable: true
+// }
+
+o = {};
+Object.defineProperty(o, "qux", {
+  value: 8675309,
+  writable: false,
+  enumerable: false,
+});
+d = Object.getOwnPropertyDescriptor(o, "qux");
+console.log(d);
+// {
+//   value: 8675309,
+//   writable: false,
+//   enumerable: false,
+//   configurable: false
+// }
+
+// Non-object coercion
+// In ES5, if the first argument to this method is not 
+// an object (a primitive), then it will cause a TypeError. 
+// In ES2015, a non-object first argument will be coerced 
+// to an object at first.
+
+// JS
+// Copy to Clipboard
+Object.getOwnPropertyDescriptor("foo", 0);
+// TypeError: "foo" is not an object  // ES5 code
+
+Object.getOwnPropertyDescriptor("foo", 0);
+// Object returned by ES2015 code: {
+//   configurable: false,
+//   enumerable: true,
+//   value: "f",
+//   writable: false
+// }
+
+// Object.getOwnPropertyDescriptors()
+// The Object.getOwnPropertyDescriptors() static method 
+// returns all own property descriptors of a given object.
+
+// Syntax
+Object.getOwnPropertyDescriptors(obj)
+
+// Description
+// This method permits examination of the precise 
+// description of all own properties of an object. 
+// A property in JavaScript consists of either 
+// a string-valued name or a Symbol and a property 
+// descriptor. Further information about property 
+// descriptor types and their attributes can be found 
+// in Object.defineProperty().
+
+// A property descriptor is a record with some of the 
+// following attributes:
+
+// value
+// The value associated with the property (data descriptors 
+// only).
+
+// writable
+// true if and only if the value associated with the property 
+// may be changed (data descriptors only).
+
+// get
+// A function which serves as a getter for the property, 
+// or undefined if there is no getter (accessor descriptors 
+// only).
+
+// set
+// A function which serves as a setter for the property, 
+// or undefined if there is no setter (accessor descriptors 
+// only).
+
+// configurable
+// true if and only if the type of this property descriptor 
+// may be changed and if the property may be deleted from 
+// the corresponding object.
+
+// enumerable
+// true if and only if this property shows up during 
+// enumeration of the properties on the corresponding object.
+
+
+// Creating a shallow copy
+// Whereas the Object.assign() method will only copy 
+// enumerable and own properties from a source object 
+// to a target object, you are able to use this method 
+// and Object.create() for a shallow copy between two 
+// unknown objects:
+
+Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj),
+);
+
+// Creating a subclass
+// A typical way of creating a subclass is to define the 
+// subclass, set its prototype to an instance of the 
+// superclass, and then define properties on that instance.
+//  This can get awkward especially for getters and setters. 
+// Instead, you can use this code to set the prototype:
+
+function superclass() {}
+superclass.prototype = {
+  // Define the superclass constructor, methods, and properties here
+};
+function subclass() {}
+subclass.prototype = Object.create(superclass.prototype, {
+  // Define the subclass constructor, methods, and properties here
+});
+
+// Object.getOwnPropertyNames()
+// The Object.getOwnPropertyNames() static method returns 
+// an array of all properties (including non-enumerable 
+// properties except for those which use Symbol) found 
+// directly in a given object.
+
+// Syntax
+Object.getOwnPropertyNames(obj)
+
+// Object.getOwnPropertyNames() returns an array whose 
+// elements are strings corresponding to the enumerable 
+// and non-enumerable properties found directly in a given 
+// object obj. The ordering of the enumerable properties in 
+// the array is consistent with the ordering exposed by 
+// a for...in loop (or by Object.keys()) over the properties 
+// of the object. The non-negative integer keys of the object 
+// (both enumerable and non-enumerable) are added in 
+// ascending order to the array first, followed by the string 
+// keys in the order of insertion.
+
+// In ES5, if the argument to this method is not an object 
+// (a primitive), then it will cause a TypeError. In ES2015,
+//  a non-object argument will be coerced to an object.
+
+// Using Object.getOwnPropertyNames()
+const arr = ["a", "b", "c"];
+console.log(Object.getOwnPropertyNames(arr).sort());
+// ["0", "1", "2", "length"]
+
+// Array-like object
+const obj = { 0: "a", 1: "b", 2: "c" };
+console.log(Object.getOwnPropertyNames(obj).sort());
+// ["0", "1", "2"]
+
+Object.getOwnPropertyNames(obj).forEach((val, idx, array) => {
+  console.log(`${val} -> ${obj[val]}`);
+});
+// 0 -> a
+// 1 -> b
+// 2 -> c
+
+// non-enumerable property
+const myObj = Object.create(
+  {},
+  {
+    getFoo: {
+      value() {
+        return this.foo;
+      },
+      enumerable: false,
+    },
+  },
+);
+myObj.foo = 1;
+
+console.log(Object.getOwnPropertyNames(myObj).sort()); // ["foo", "getFoo"]
+
+// If you want only the enumerable properties, see
+//  Object.keys() or use a for...in loop (note that 
+// this will also return enumerable properties found 
+// along the prototype chain for the object unless the
+//  latter is filtered with Object.hasOwn()).
+
+// Items on the prototype chain are not listed:
+function ParentClass() {}
+ParentClass.prototype.inheritedMethod = function () {};
+
+function ChildClass() {
+  this.prop = 5;
+  this.method = function () {};
+}
+ChildClass.prototype = new ParentClass();
+ChildClass.prototype.prototypeMethod = function () {};
+
+console.log(Object.getOwnPropertyNames(new ChildClass()));
+// ["prop", "method"]
+
+// Get non-enumerable properties only
+// This uses the Array.prototype.filter() function to 
+// 
+// remove the enumerable keys (obtained with Object.keys())
+//  from a list of all keys (obtained with 
+// Object.getOwnPropertyNames()) thus giving only the 
+// non-enumerable keys as output.
+
+const target = myObject;
+const enumAndNonenum = Object.getOwnPropertyNames(target);
+const enumOnly = new Set(Object.keys(target));
+const nonenumOnly = enumAndNonenum.filter((key) => !enumOnly.has(key));
+
+console.log(nonenumOnly);
+
+// Object.getPrototypeOf()
+// The Object.getPrototypeOf() static method returns the 
+// prototype (i.e. the value of the internal [[Prototype]] 
+// property) of the specified object.
+
+// Syntax
+Object.getPrototypeOf(obj)
+
+const proto = {};
+const obj = Object.create(proto);
+Object.getPrototypeOf(obj) === proto; // true
+// Non-object coercion
+// In ES5, it will throw a TypeError exception if the obj 
+// parameter isn't an object. In ES2015, the parameter will 
+// be coerced to an Object.
+
+// JS
+// Copy to Clipboard
+Object.getPrototypeOf("foo");
+// TypeError: "foo" is not an object (ES5 code)
+Object.getPrototypeOf("foo");
+
+// Object.hasOwn()
+// The Object.hasOwn() static method returns true if the
+//  specified object has the indicated property as its own 
+// property. If the property is inherited, or does not exist,
+//  the method returns false.
+// Note: Object.hasOwn() is intended as a replacement for 
+// Object.prototype.hasOwnProperty().
+
+
+Object.hasOwn(obj, prop)
+// obj
+// The JavaScript object instance to test.
+// prop
+// The String name or Symbol of the property to test.
+
+// Return value
+// true if the specified object has directly defined the 
+// specified property. Otherwise false
+
+// Description
+// The Object.hasOwn() method returns true if the specified 
+// property is a direct property of the object — even if 
+// the property value is null or undefined. The method 
+// returns false if the property is inherited, or has not 
+// been declared at all. Unlike the in operator, this method 
+// does not check for the specified property in the object's 
+// prototype chain.
+
+// It is recommended over Object.prototype.hasOwnProperty() 
+// because it works for null-prototype objects and with 
+// objects that have overridden the inherited hasOwnProperty() 
+// method. While it is possible to workaround these problems 
+// by calling Object.prototype.hasOwnProperty() on an
+//  external object, Object.hasOwn() is more intuitive.
+
+// Using hasOwn to test for a property's existence
+// The following code shows how to determine whether the 
+// example object contains a property named prop.
+
+const example = {};
+Object.hasOwn(example, "prop"); // false - 'prop' has not been defined
+
+example.prop = "exists";
+Object.hasOwn(example, "prop"); // true - 'prop' has been defined
+
+example.prop = null;
+Object.hasOwn(example, "prop"); // true - own property exists with value of null
+
+example.prop = undefined;
+Object.hasOwn(example, "prop"); // true - own property exists with value of undefined
+
+// Direct vs. inherited properties
+// The following example differentiates between direct 
+// properties and properties inherited through the prototype 
+// chain:
+const example = {};
+example.prop = "exists";
+
+// `hasOwn` will only return true for direct properties:
+Object.hasOwn(example, "prop"); // true
+Object.hasOwn(example, "toString"); // false
+Object.hasOwn(example, "hasOwnProperty"); // false
+
+// The `in` operator will return true for direct or inherited properties:
+"prop" in example; // true
+"toString" in example; // true
+"hasOwnProperty" in example; // true
+// Iterating over the properties of an object
+// To iterate over the enumerable properties of an object, 
+// you should use:
+const example = { foo: true, bar: true };
+for (const name of Object.keys(example)) {
+  // …
+}
+// But if you need to use for...in, you can use 
+// Object.hasOwn() to skip the inherited properties:
+const example = { foo: true, bar: true };
+for (const name in example) {
+  if (Object.hasOwn(example, name)) {
+    // …
+  }
+}
+// Checking if an Array index exists
+// The elements of an Array are defined as direct properties,
+//  so you can use hasOwn() method to check whether 
+// a particular index exists:
+
+// Problematic cases for hasOwnProperty
+// This section demonstrates that hasOwn() is immune to the 
+// problems that affect hasOwnProperty. Firstly, it can be 
+// used with objects that have reimplemented hasOwnProperty():
+
+const foo = {
+  hasOwnProperty() {
+    return false;
+  },
+  bar: "The dragons be out of office",
+};
+
+if (Object.hasOwn(foo, "bar")) {
+  console.log(foo.bar); // true - re-implementation of hasOwnProperty() does not affect Object
+}
+// It can also be used with null-prototype objects. These do 
+// not inherit from Object.prototype, and so hasOwnProperty() 
+// is inaccessible.
+
+const foo = Object.create(null);
+foo.prop = "exists";
+if (Object.hasOwn(foo, "prop")) {
+  console.log(foo.prop); // true - works irrespective of how the object is created.
+}
+
+// Object.prototype.hasOwnProperty()
+// The hasOwnProperty() method of Object instances returns 
+// a boolean indicating whether this object has the specified 
+// property as its own property (as opposed to inheriting it).
+
+// Note: Object.hasOwn() is recommended over hasOwnProperty(), 
+// in browsers where it is supported.
+hasOwnProperty(prop)
+
+// Object.prototype.hasOwnProperty()
+// The hasOwnProperty() method of Object instances returns 
+// a boolean indicating whether this object has the specified 
+// property as its own property (as opposed to inheriting it).
+
+// Note: Object.hasOwn() is recommended over hasOwnProperty(), 
+// in browsers where it is supported.
+
+// Try it
+
+// Syntax
+hasOwnProperty(prop)
+
+// The hasOwnProperty() method returns true if the specified property 
+// is a direct property of the object — even if the value is null or 
+// undefined. The method returns false if the property is inherited, 
+// or has not been declared at all. Unlike the in operator, this method
+//  does not check for the specified property in the object's prototype chain.
+
+// The method can be called on most JavaScript objects, because most objects 
+// descend from Object, and hence inherit its methods. For example Array is 
+// an Object, so you can use hasOwnProperty() method to check whether an index exists:
+
+const fruits = ["Apple", "Banana", "Watermelon", "Orange"];
+fruits.hasOwnProperty(3); // true ('Orange')
+fruits.hasOwnProperty(4); // false - not defined
+// The method will not be available in objects where it is reimplemented, 
+// or on null-prototype objects (as these don't inherit from Object.prototype). 
+// Examples for these cases are given below.
+
+// Examples
+// Using hasOwnProperty to test for an own property's existence
+// The following code shows how to determine whether the example object 
+// contains a property named prop.
+
+const example = {};
+example.hasOwnProperty("prop"); // false
+
+example.prop = "exists";
+example.hasOwnProperty("prop"); // true - 'prop' has been defined
+
+example.prop = null;
+example.hasOwnProperty("prop"); // true - own property exists with value of null
+
+example.prop = undefined;
+example.hasOwnProperty("prop"); // true - own property exists with value of undefined
+// Direct vs. inherited properties
+// The following example differentiates between direct properties and 
+// properties inherited through the prototype chain:
+
+const example = {};
+example.prop = "exists";
+
+// `hasOwnProperty` will only return true for direct properties:
+example.hasOwnProperty("prop"); // true
+example.hasOwnProperty("toString"); // false
+example.hasOwnProperty("hasOwnProperty"); // false
+
+// The `in` operator will return true for direct or inherited properties:
+"prop" in example; // true
+"toString" in example; // true
+"hasOwnProperty" in example; // true
+// Iterating over the properties of an object
+// The following example shows how to iterate over the enumerable 
+// properties of an object without executing on inherited properties.
+
+const buz = {
+    fog: "stack",
+};
+
+for (const name in buz) {
+    if (buz.hasOwnProperty(name)) {
+        console.log(`this is fog (${name}) for sure. Value: ${buz[name]}`);
+    } else {
+        console.log(name); // toString or something else
+    }
+}
+// Note that the for...in loop only iterates enumerable items: 
+// the absence of non-enumerable properties emitted from the loop 
+// does not imply that hasOwnProperty itself is confined strictly 
+// to enumerable items. You can iterate over non-enumerable properties 
+// with Object.getOwnPropertyNames().
+
+// Using hasOwnProperty as a property name
+// JavaScript does not protect the property name hasOwnProperty; an object 
+// that has a property with this name may return incorrect results:
+
+const foo = {
+    hasOwnProperty() {
+        return false;
+    },
+    bar: "Here be dragons",
+};
+
+foo.hasOwnProperty("bar"); // re-implementation always returns false
+// The recommended way to overcome this problem is to instead use 
+// Object.hasOwn() (in browsers that support it). Other alternatives 
+// include using an external hasOwnProperty:
+
+const foo = { bar: "Here be dragons" };
+
+// Use Object.hasOwn() method - recommended
+Object.hasOwn(foo, "bar"); // true
+
+// Use the hasOwnProperty property from the Object prototype
+Object.prototype.hasOwnProperty.call(foo, "bar"); // true
+
+// Use another Object's hasOwnProperty
+// and call it with 'this' set to foo
+({}).hasOwnProperty.call(foo, "bar"); // true
+// Note that in the first two cases there are no newly created objects.
+
+// Objects created with Object.create(null)
+// null-prototype objects do not inherit from Object.prototype, 
+// making hasOwnProperty() inaccessible.
+
+const foo = Object.create(null);
+foo.prop = "exists";
+foo.hasOwnProperty("prop"); // Uncaught TypeError: foo.hasOwnProperty is not a function
+// The solutions in this case are the same as for the previous section:
+// use Object.hasOwn() by preference, otherwise use an external object's
+//  hasOwnProperty().
+
+// Object.is()
+// The Object.is() static method determines whether two 
+// values are the same value.
+
+// Syntax
+Object.is(value1, value2)
+
+// Description
+// Object.is() determines whether two values are the same 
+// value. Two values are the same if one of the following 
+// holds:
+// both undefined
+// both null
+// both true or both false
+// both strings of the same length with the same characters in the same order
+// both the same object (meaning both values reference the same object in memory)
+// both BigInts with the same numeric value
+// both symbols that reference the same symbol value
+// both numbers and
+// both +0
+// both -0
+// both NaN
+// or both non-zero, not NaN, and have the same value
+
+// Object.is() is not equivalent to the == operator. 
+// The == operator applies various coercions to both sides 
+// (if they are not the same type) before testing for
+//  equality (resulting in such behavior as "" == false 
+// being true), but Object.is() doesn't coerce either value.
+
+// Object.is() is also not equivalent to the === operator.
+//  The only difference between Object.is() and === is in 
+// their treatment of signed zeros and NaN values. 
+// The === operator (and the == operator) treats the 
+// number values -0 and +0 as equal, but treats NaN as not
+//  equal to each other.
+
+// Using Object.is()
+// Case 1: Evaluation result is the same as using ===
+Object.is(25, 25); // true
+Object.is("foo", "foo"); // true
+Object.is("foo", "bar"); // false
+Object.is(null, null); // true
+Object.is(undefined, undefined); // true
+Object.is(window, window); // true
+Object.is([], []); // false
+const foo = { a: 1 };
+const bar = { a: 1 };
+const sameFoo = foo;
+Object.is(foo, foo); // true
+Object.is(foo, bar); // false
+Object.is(foo, sameFoo); // true
+
+// Case 2: Signed zero
+Object.is(0, -0); // false
+Object.is(+0, -0); // false
+Object.is(-0, -0); // true
+
+// Case 3: NaN
+Object.is(NaN, 0 / 0); // true
+Object.is(NaN, Number.NaN); // true
+
+// Object.isExtensible()
+// The Object.isExtensible() static method determines if 
+// an object is extensible (whether it can have new 
+// properties added to it).
+
+// Syntax
+Object.isExtensible(obj)
+
+// Objects are extensible by default: they can have new 
+// properties added to them, and their [[Prototype]] can 
+// be re-assigned. An object can be marked as non-extensible 
+// using one of Object.preventExtensions(), Object.seal(), 
+// Object.freeze(), or Reflect.preventExtensions().
+
+// Examples
+// Using Object.isExtensible
+// New objects are extensible.
+const empty = {};
+Object.isExtensible(empty); // true
+
+// They can be made un-extensible
+Object.preventExtensions(empty);
+Object.isExtensible(empty); // false
+
+// Sealed objects are by definition non-extensible.
+const sealed = Object.seal({});
+Object.isExtensible(sealed); // false
+
+// Frozen objects are also by definition non-extensible.
+const frozen = Object.freeze({});
+Object.isExtensible(frozen); // false
+
+// Object.isFrozen()
+// The Object.isFrozen() static method determines if an 
+// object is frozen.
+
+// Syntax
+Object.isFrozen(obj)
+
+// Object.prototype.isPrototypeOf()
+// The isPrototypeOf() method of Object instances checks 
+// if this object exists in another object's prototype chain.
+
+// Note: isPrototypeOf() differs from the instanceof 
+// operator. In the expression object instanceof AFunction,
+//  object's prototype chain is checked against 
+// AFunction.prototype, not against AFunction itself.
+
+// Syntax
+isPrototypeOf(object)
+
+// All objects that inherit from Object.prototype (that is, 
+// all except null-prototype objects) inherit the
+//  isPrototypeOf() method. This method allows you to check 
+// whether or not the object exists within another object's
+//  prototype chain. If the object passed as the parameter
+//  is not an object (i.e. a primitive), the method directly
+//  returns false. Otherwise, the this value is converted
+//  to an object, and the prototype chain of object is
+//  searched for the this value, until the end of the 
+// chain is reached or the this value is found.
+
+// Using isPrototypeOf()
+// This example demonstrates that Baz.prototype, 
+// Bar.prototype, Foo.prototype and Object.prototype exist in
+//  the prototype chain for object baz:
+
+class Foo {}
+class Bar extends Foo {}
+class Baz extends Bar {}
+
+const foo = new Foo();
+const bar = new Bar();
+const baz = new Baz();
+
+// prototype chains:
+// foo: Foo --> Object
+// bar: Bar --> Foo --> Object
+// baz: Baz --> Bar --> Foo --> Object
+console.log(Baz.prototype.isPrototypeOf(baz)); // true
+console.log(Baz.prototype.isPrototypeOf(bar)); // false
+console.log(Baz.prototype.isPrototypeOf(foo)); // false
+console.log(Bar.prototype.isPrototypeOf(baz)); // true
+console.log(Bar.prototype.isPrototypeOf(foo)); // false
+console.log(Foo.prototype.isPrototypeOf(baz)); // true
+console.log(Foo.prototype.isPrototypeOf(bar)); // true
+console.log(Object.prototype.isPrototypeOf(baz)); // true
+// The isPrototypeOf() method — along with the instanceof 
+// operator — comes in particularly handy if you have code 
+// that can only function when dealing with objects
+//  descended from a specific prototype chain; e.g., 
+// to guarantee that certain methods or properties will
+//  be present on that object.
+
+// For example, to execute some code that's only safe to 
+// run if a baz object has Foo.prototype in its prototype
+//  chain, you can do this:
+
+if (Foo.prototype.isPrototypeOf(baz)) {
+  // do something safe
+}
+// However, Foo.prototype existing in baz's prototype chain 
+// doesn't imply baz was created using Foo as its constructor. 
+// For example, baz could be directly assigned with 
+// Foo.prototype as its prototype. In this case, if 
+// your code reads private fields of Foo from baz, it would 
+// still fail:
+
+class Foo {
+  #value = "foo";
+  static getValue(x) {
+    return x.#value;
+  }
+}
+
+const baz = { __proto__: Foo.prototype };
+
+if (Foo.prototype.isPrototypeOf(baz)) {
+  console.log(Foo.getValue(baz)); // TypeError: Cannot read private member #value from an object whose class did not declare it
+}
+// The same applies to instanceof. If you need to read 
+// private fields in a secure way, offer a branded check 
+// method using in instead.
+
+class Foo {
+  #value = "foo";
+  static getValue(x) {
+    return x.#value;
+  }
+  static isFoo(x) {
+    return #value in x;
+  }
+}
+
+const baz = { __proto__: Foo.prototype };
+
+if (Foo.isFoo(baz)) {
+  // Doesn't run, because baz is not a Foo
+  console.log(Foo.getValue(baz));
+}
+
+// Object.keys()
+// The Object.keys() static method returns an array of 
+// a given object's own enumerable string-keyed property 
+// names.
+
+// Syntax
+Object.keys(obj)
+
+// Object.keys() returns an array whose elements are strings
+//  corresponding to the enumerable string-keyed property 
+// names found directly upon object. This is the same as 
+// iterating with a for...in loop, except that a for...in 
+// loop enumerates properties in the prototype chain as well
+// . The order of the array returned by Object.keys() is 
+// the same as that provided by a for...in loop.
+
+// If you need the property values, use Object.values() 
+// instead. If you need both the property keys and values,
+//  use Object.entries() instead.
+
+// Examples
+// Using Object.keys()
+// Simple array
+const arr = ["a", "b", "c"];
+console.log(Object.keys(arr)); // ['0', '1', '2']
+
+// Array-like object
+const obj = { 0: "a", 1: "b", 2: "c" };
+console.log(Object.keys(obj)); // ['0', '1', '2']
+
+// Array-like object with random key ordering
+const anObj = { 100: "a", 2: "b", 7: "c" };
+console.log(Object.keys(anObj)); // ['2', '7', '100']
+
+// Object.preventExtensions()
+// The Object.preventExtensions() static method prevents 
+// new properties from ever being added to an object (i.e.
+//  prevents future extensions to the object). It also 
+// prevents the object's prototype from being re-assigned.
+
+// Syntax
+Object.preventExtensions(obj)
+
+// An object is extensible if new properties can be added 
+// to it. Object.preventExtensions() marks an object as 
+// no longer extensible, so that it will never have
+//  properties beyond the ones it had at the time it was
+//  marked as non-extensible. Note that the properties of
+//  a non-extensible object, in general, may still be
+//  deleted. Attempting to add new properties to a 
+// non-extensible object will fail, either silently or,
+//  in strict mode, throwing a TypeError.
+
+// Unlike Object.seal() and Object.freeze(),
+//  Object.preventExtensions() invokes an intrinsic 
+// JavaScript behavior and cannot be replaced with 
+// a composition of several other operations. It also has
+//  its Reflect counterpart (which only exists for intrinsic 
+// operations), Reflect.preventExtensions().
+
+// Object.preventExtensions() only prevents addition of own
+//  properties. Properties can still be added to the object
+//  prototype.
+
+// This method makes the [[Prototype]] of the target 
+// immutable; any [[Prototype]] re-assignment will throw
+//  a TypeError. This behavior is specific to the internal
+//  [[Prototype]] property; other properties of the target
+//  object will remain mutable.
+
+// There is no way to make an object extensible again once 
+// it has been made non-extensible.
+
+// Using Object.preventExtensions
+// Object.preventExtensions returns the object
+// being made non-extensible.
+const obj = {};
+const obj2 = Object.preventExtensions(obj);
+obj === obj2; // true
+
+// Objects are extensible by default.
+const empty = {};
+Object.isExtensible(empty); // true
+
+// They can be made un-extensible
+Object.preventExtensions(empty);
+Object.isExtensible(empty); // false
+
+// Object.defineProperty throws when adding
+// a new property to a non-extensible object.
+const nonExtensible = { removable: true };
+Object.preventExtensions(nonExtensible);
+Object.defineProperty(nonExtensible, "new", {
+  value: 8675309,
+}); // throws a TypeError
+
+// In strict mode, attempting to add new properties
+// to a non-extensible object throws a TypeError.
+function fail() {
+  "use strict";
+  // throws a TypeError
+  nonExtensible.newProperty = "FAIL";
+}
+fail();
+// A non-extensible object's prototype is immutable:
+
+const fixed = Object.preventExtensions({});
+// throws a 'TypeError'.
+fixed.__proto__ = { oh: "hai" };
+
+// Object.prototype.propertyIsEnumerable()
+// The propertyIsEnumerable() method of Object instances 
+// returns a boolean indicating whether the specified 
+// property is this object's enumerable own property.
+
+// Syntax
+propertyIsEnumerable(prop)
+
+// All objects that inherit from Object.prototype (that is,
+//  all except null-prototype objects) inherit the 
+// propertyIsEnumerable() method. This method determines
+//  if the specified property, string or symbol, is an 
+// enumerable own property of the object. If the object 
+// does not have the specified property, this method returns 
+// false.
+
+// This method is equivalent 
+// to Object.getOwnPropertyDescriptor(obj, prop)?.enumerable ?? false.
+
+// Using propertyIsEnumerable()
+// The following example shows the use of 
+// propertyIsEnumerable() on objects and arrays.
+
+const o = {};
+const a = [];
+o.prop = "is enumerable";
+a[0] = "is enumerable";
+
+o.propertyIsEnumerable("prop"); // true
+a.propertyIsEnumerable(0); // true
+// User-defined vs. built-in objects
+// Most built-in properties are non-enumerable by default,
+//  while user-created object properties are often 
+// enumerable, unless explicitly designated otherwise.
+
+// JS
+// Copy to Clipboard
+const a = ["is enumerable"];
+
+a.propertyIsEnumerable(0); // true
+a.propertyIsEnumerable("length"); // false
+
+Math.propertyIsEnumerable("random"); // false
+globalThis.propertyIsEnumerable("Math"); // false
+// Direct vs. inherited properties
+// Only enumerable own properties cause 
+// propertyIsEnumerable() to return true, although all 
+// enumerable properties, including inherited ones, 
+// are visited by the for...in loop.
+
+const o1 = {
+  enumerableInherited: "is enumerable",
+};
+Object.defineProperty(o1, "nonEnumerableInherited", {
+  value: "is non-enumerable",
+  enumerable: false,
+});
+const o2 = {
+  // o1 is the prototype of o2
+  __proto__: o1,
+  enumerableOwn: "is enumerable",
+};
+Object.defineProperty(o2, "nonEnumerableOwn", {
+  value: "is non-enumerable",
+  enumerable: false,
+});
+
+o2.propertyIsEnumerable("enumerableInherited"); // false
+o2.propertyIsEnumerable("nonEnumerableInherited"); // false
+o2.propertyIsEnumerable("enumerableOwn"); // true
+o2.propertyIsEnumerable("nonEnumerableOwn"); // false
+// Testing symbol properties
+// Symbol properties are also supported by
+//  propertyIsEnumerable(). Note that most enumeration
+//  methods only visit string properties; enumerability
+//  of symbol properties is only useful when using
+//  Object.assign() or spread syntax. For more information,
+//  see Enumerability and ownership of properties.
+
+// JS
+// Copy to Clipboard
+const sym = Symbol("enumerable");
+const sym2 = Symbol("non-enumerable");
+const o = {
+  [sym]: "is enumerable",
+};
+Object.defineProperty(o, sym2, {
+  value: "is non-enumerable",
+  enumerable: false,
+});
+
+o.propertyIsEnumerable(sym); // true
+o.propertyIsEnumerable(sym2); // false
+
+// Usage with null-prototype objects
+// Because null-prototype objects do not inherit from
+//  Object.prototype, they do not inherit the
+//  propertyIsEnumerable() method. You must call
+//  Object.prototype.propertyIsEnumerable with the object 
+// as this instead.
+
+// JS
+// Copy to Clipboard
+const o = {
+  __proto__: null,
+  enumerableOwn: "is enumerable",
+};
+
+o.propertyIsEnumerable("enumerableOwn"); // TypeError: o.propertyIsEnumerable is not a function
+Object.prototype.propertyIsEnumerable.call(o, "enumerableOwn"); // true
+// Alternatively, you may use
+//  Object.getOwnPropertyDescriptor() instead, which also 
+// helps to distinguish between non-existent properties 
+// and actually non-enumerable properties.
+
+const o = {
+  __proto__: null,
+  enumerableOwn: "is enumerable",
+};
+
+Object.getOwnPropertyDescriptor(o, "enumerableOwn")?.enumerable; // true
+Object.getOwnPropertyDescriptor(o, "nonExistent")?.enumerable; // undefined
+
+// Object.setPrototypeOf()
+// The Object.setPrototypeOf() static method sets the 
+// prototype (i.e., the internal [[Prototype]] property)
+//  of a specified object to another object or null.
+Object.setPrototypeOf(obj, prototype)
+
+// Object.setPrototypeOf() is generally considered the
+//  proper way to set the prototype of an object. You 
+// should always use it in favor of the deprecated
+//  Object.prototype.__proto__ accessor.
+
+// If the obj parameter is not an object (e.g. number, 
+// string, etc.), this method does nothing — without
+//  coercing it to an object or attempting to set its
+//  prototype — and directly returns obj as a primitive
+//  value. If prototype is the same value as the prototype 
+// of obj, then obj is directly returned, without causing
+//  a TypeError even when obj has immutable prototype.
+
+// For security concerns, there are certain built-in objects
+//  that are designed to have an immutable prototype. This
+//  prevents prototype pollution attacks, especially
+//  proxy-related ones. The core language only specifies 
+// Object.prototype as an immutable prototype exotic object,
+//  whose prototype is always null. In browsers, window and 
+// location are two other very common examples.
+
+Object.isExtensible(Object.prototype); // true; you can add more properties
+Object.setPrototypeOf(Object.prototype, {}); // TypeError: Immutable prototype object '#<Object>' cannot have their prototype set
+Object.setPrototypeOf(Object.prototype, null); // No error; the prototype of `Object.prototype` is already `null`
+
+
+// Pseudoclassical inheritance using Object.setPrototypeOf()
+// Inheritance in JS using classes.
+
+class Human {}
+class SuperHero extends Human {}
+
+const superMan = new SuperHero();
+// However, if we want to implement subclasses without 
+// using class, we can do the following:
+
+function Human(name, level) {
+  this.name = name;
+  this.level = level;
+}
+
+function SuperHero(name, level) {
+  Human.call(this, name, level);
+}
+
+Object.setPrototypeOf(SuperHero.prototype, Human.prototype);
+
+// Set the `[[Prototype]]` of `SuperHero.prototype`
+// to `Human.prototype`
+// To set the prototypal inheritance chain
+
+Human.prototype.speak = function () {
+  return `${this.name} says hello.`;
+};
+
+SuperHero.prototype.fly = function () {
+  return `${this.name} is flying.`;
+};
+
+const superMan = new SuperHero("Clark Kent", 1);
+
+console.log(superMan.fly());
+console.log(superMan.speak());
+// The similarity between classical inheritance (with
+//  classes) and pseudoclassical inheritance (with 
+// constructors' prototype property) as done above is 
+// mentioned in Inheritance chains.
+
+// Since function constructors' prototype property is 
+// writable, you can reassign it to a new object created
+//  with Object.create() to achieve the same inheritance 
+// chain as well. There are caveats to watch out when using
+//  create(), such as remembering to re-add the constructor
+//  property.
+
+// In the example below, which also uses classes, SuperHero 
+// is made to inherit from Human without using extends by 
+// using setPrototypeOf() instead.
+
+// Warning: It is not advisable to use setPrototypeOf() 
+// /instead of extends due to performance and readability
+//  reasons.
+
+// JS
+// Copy to Clipboard
+class Human {}
+class SuperHero {}
+
+// Set the instance properties
+Object.setPrototypeOf(SuperHero.prototype, Human.prototype);
+
+// Hook up the static properties
+Object.setPrototypeOf(SuperHero, Human);
+
+const superMan = new SuperHero();
+
+// Object.prototype.toString()
+// The toString() method of Object instances returns 
+// a string representing this object. This method is
+//  meant to be overridden by derived objects for custom
+//  type coercion logic.
+
+// Overriding toString for custom objects
+// You can create a function to be called in place of the 
+// default toString() method. The toString() function you
+//  create should return a string value. If it returns an
+//  object and the method is called implicitly during type
+//  conversion, then its result is ignored and the value of a
+//  related method, valueOf(), is used instead, or a 
+// TypeError is thrown if none of these methods return 
+// a primitive.
+
+// The following code defines a Dog class.
+
+class Dog {
+  constructor(name, breed, color, sex) {
+    this.name = name;
+    this.breed = breed;
+    this.color = color;
+    this.sex = sex;
+  }
+}
+// If you call the toString() method, either explicitly or
+//  implicitly, on an instance of Dog, it returns the default
+//  value inherited from Object:
+
+const theDog = new Dog("Gabby", "Lab", "chocolate", "female");
+
+theDog.toString(); // "[object Object]"
+`${theDog}`; // "[object Object]"
+// The following code overrides the default toString()
+//  method. This method generates a string containing the
+//  name, breed, color, and sex of the object.
+
+class Dog {
+  constructor(name, breed, color, sex) {
+    this.name = name;
+    this.breed = breed;
+    this.color = color;
+    this.sex = sex;
+  }
+  toString() {
+    return `Dog ${this.name} is a ${this.sex} ${this.color} ${this.breed}`;
+  }
+}
+// With the preceding code in place, any time an instance 
+// of Dog is used in a string context, JavaScript
+//  automatically calls the toString() method.
+
+const theDog = new Dog("Gabby", "Lab", "chocolate", "female");
+
+`${theDog}`; // "Dog Gabby is a female chocolate Lab"
+
+// Using toString() to detect object class
+// toString() can be used with every object and (by 
+// default) allows you to get its class.
+
+
+const toString = Object.prototype.toString;
+
+toString.call(new Date()); // [object Date]
+toString.call(new String()); // [object String]
+// Math has its Symbol.toStringTag
+toString.call(Math); // [object Math]
+
+toString.call(undefined); // [object Undefined]
+toString.call(null); // [object Null]
+
+// Using toString() in this way is unreliable; objects
+//  can change the behavior of Object.prototype.toString() 
+// by defining a Symbol.toStringTag property, leading to 
+// unexpected results. For example:
+
+const myDate = new Date();
+Object.prototype.toString.call(myDate); // [object Date]
+
+myDate[Symbol.toStringTag] = "myDate";
+Object.prototype.toString.call(myDate); // [object myDate]
+
+Date.prototype[Symbol.toStringTag] = "prototype polluted";
+Object.prototype.toString.call(new Date()); // 
+
+// Object.values()
+// The Object.values() static method returns an array of 
+// a given object's own enumerable string-keyed property 
+// values.
+
+// Syntax
+Object.values(obj)
+
+// Object.values() returns an array whose elements are 
+// values of enumerable string-keyed properties found 
+// directly upon object. This is the same as iterating 
+// with a for...in loop, except that a for...in loop 
+// enumerates properties in the prototype chain as well.
+//  The order of the array returned by Object.values()
+//  is the same as that provided by a for...in loop.
+
+// If you need the property keys, use Object.keys() instead.
+//  If you need both the property keys and values, use 
+// Object.entries() instead.
+
+const obj = { foo: "bar", baz: 42 };
+console.log(Object.values(obj)); // ['bar', 42]
+
+// Array-like object
+const arrayLikeObj1 = { 0: "a", 1: "b", 2: "c" };
+console.log(Object.values(arrayLikeObj1)); // ['a', 'b', 'c']
+
+// Array-like object with random key ordering
+// When using numeric keys, the values are returned in the keys' numerical order
+const arrayLikeObj2 = { 100: "a", 2: "b", 7: "c" };
+console.log(Object.values(arrayLikeObj2)); // ['b', 'c', 'a']
+
+// getFoo is a non-enumerable property
+const myObj = Object.create(
+  {},
+  {
+    getFoo: {
+      value() {
+        return this.foo;
+      },
+    },
+  },
+);
+myObj.foo = "bar";
+console.log(Object.values(myObj)); // ['bar']
+
+/ Using Object.values() on primitives
+// Non-object arguments are coerced to objects. undefined
+//  and null cannot be coerced to objects and throw a 
+// TypeError upfront. Only strings may have own enumerable
+//  properties, while all other primitives return an empty
+//  array.
+
+// JS
+// Copy to Clipboard
+// Strings have indices as enumerable own properties
+console.log(Object.values("foo")); // ['f', 'o', 'o']
+
+// Other primitives except undefined and null have no own properties
+console.log(Object.values(100)); // []
+
+
+// inheritence and prototype chain 
+// References > JavaScript > Inheritance and the prototype chain
+
+
+console.log("Inheritance and the prototype chain")
+// In programming, inheritance refers to passing down 
+// characteristics from a parent to a child so that a 
+// new piece of code can reuse and build upon the features
+//  of an existing one.JavaScript implements inheritance by 
+// using objects.Each object has an internal link to another 
+// object called its prototype.That prototype object has a 
+// prototype of its own, and so on until an object is 
+// reached with null as its prototype.By definition, 
+// null has no prototype and acts as the final link in 
+// this prototype chain.It is possible to mutate any
+//  member of the prototype chain or even swap out the 
+// prototype at runtime, so concepts like static dispatching 
+// do not exist in JavaScript.
+
+// JavaScript is a bit confusing for developers experienced 
+// in class- based languages(like Java or C++), as it is 
+// dynamic and does not have static types.While this 
+// confusion is often considered to be one of JavaScript's 
+// weaknesses, the prototypal inheritance model itself is, 
+// in fact, more powerful than the classic model. It is, 
+// for example, fairly trivial to build a classic model on 
+// top of a prototypal model — which is how classes are 
+// implemented.
+
+// Although classes are now widely adopted and have become 
+// a new paradigm in JavaScript, classes do not bring a new 
+// inheritance pattern.While classes abstract most of the 
+// prototypal mechanism away, understanding how prototypes 
+// work under the hood is still useful.
+
+console.log("Inheritance with the prototype chain")
+
+// Inheriting properties
+// JavaScript objects are dynamic "bags" of properties
+// (referred to as own properties).JavaScript objects have
+//  a link to a prototype object.When trying to access a 
+// property of an object, the property will not only be 
+// sought on the object but on the prototype of the object, 
+// the prototype of the prototype, and so on until either a 
+// property with a matching name is found or the end of the 
+// prototype chain is reached.
+
+// Note: Following the ECMAScript standard, the notation 
+// someObject.[[Prototype]] is used to designate the 
+// prototype of someObject.The[[Prototype]] internal 
+// slot can be accessed and modified with the 
+// Object.getPrototypeOf() and Object.setPrototypeOf() 
+// functions respectively.This is equivalent to the 
+// JavaScript accessor __proto__ which is non - standard 
+// but de - facto implemented by many JavaScript 
+// engines.To prevent confusion while keeping it succinct, 
+// in our notation we will avoid using obj.__proto__ but 
+// use obj.[[Prototype]] instead.This corresponds to 
+// Object.getPrototypeOf(obj).
+
+// It should not be confused with the func.prototype 
+// property of functions, which instead specifies 
+// the[[Prototype]] to be assigned to all instances 
+// of objects created by the given function when used 
+// as a constructor.We will discuss the prototype property 
+// of constructor functions in a later section.
+
+// There are several ways to specify the[[Prototype]] of 
+// an object, which are listed in a later section.For now, 
+// we will use the __proto__ syntax for illustration.It's 
+// worth noting that the { __proto__: ... } syntax is 
+// different from the obj.__proto__ accessor: the former 
+// is standard and not deprecated.
+
+// In an object literal like { a: 1, b: 2, __proto__: c }, 
+// the value c(which has to be either null or another object)
+//  will become the[[Prototype]] of the object represented by 
+// the literal, while the other keys like a and b will become 
+// the own properties of the object.This syntax reads very 
+// naturally, since[[Prototype]] is just an 
+// "internal property" of the object.
+
+// Here is what happens when trying to access a property:
+
+
+const o = {
+    a: 1,
+    b: 2,
+    // __proto__ sets the [[Prototype]]. It's specified here
+    // as another object literal.
+    __proto__: {
+        b: 3,
+        c: 4,
+    },
+};
+
+// // o.[[Prototype]] has properties b and c.
+// // o.[[Prototype]].[[Prototype]] is Object.prototype (we will explain
+// // what that means later).
+// // Finally, o.[[Prototype]].[[Prototype]].[[Prototype]] is null.
+// // This is the end of the prototype chain, as null,
+// // by definition, has no [[Prototype]].
+// // Thus, the full prototype chain looks like:
+// // { a: 1, b: 2 } ---> { b: 3, c: 4 } ---> Object.prototype ---> null
+
+console.log(o.a); // 1
+// // Is there an 'a' own property on o? Yes, and its value is 1.
+
+console.log(o.b); // 2
+// // Is there a 'b' own property on o? Yes, and its value is 2.
+// // The prototype also has a 'b' property, but it's not visited.
+// // This is called Property Shadowing
+
+console.log(o.c); // 4
+// // Is there a 'c' own property on o? No, check its prototype.
+// // Is there a 'c' own property on o.[[Prototype]]? Yes, its value is 4.
+
+console.log(o.d); // undefined
+// // Is there a 'd' own property on o? No, check its prototype.
+// // Is there a 'd' own property on o.[[Prototype]]? No, check its prototype.
+// // o.[[Prototype]].[[Prototype]] is Object.prototype and
+// // there is no 'd' property by default, check its prototype.
+// // o.[[Prototype]].[[Prototype]].[[Prototype]] is null, stop searching,
+// // no property found, return undefined.
+// Setting a property to an object creates an own property.The only exception to the getting and setting behavior rules is when it's intercepted by a getter or setter.
+
+// Similarly, you can create longer prototype chains, and a property will be sought on all of them.
+
+const o1 = {
+    a: 1,
+    b: 2,
+    // __proto__ sets the [[Prototype]]. It's specified here
+    // as another object literal.
+    __proto__: {
+        b: 3,
+        c: 4,
+        __proto__: {
+            d: 5,
+        },
+    },
+};
+
+// { a: 1, b: 2 } ---> { b: 3, c: 4 } ---> { d: 5 } ---> Object.prototype ---> null
+
+console.log(o1.d); // 5
+
+
+console.log("Inheriting methods")
+// JavaScript does not have "methods" in the form that 
+// class-based languages define them.In JavaScript, any 
+// function can be added to an object in the form of a 
+// property.An inherited function acts just as any other 
+// property, including property shadowing as shown 
+// above(in this case, a form of method overriding).
+
+// When an inherited function is executed, the value of this 
+// points to the inheriting object, not to the prototype 
+// object where the function is an own property.
+
+
+const parent = {
+    value: 2,
+    method() {
+        return this.value + 1;
+    },
+};
+
+console.log(parent.method()); // 3
+// // When calling parent.method in this case, 'this' refers 
+// to parent
+
+// // child is an object that inherits from parent
+const child = {
+    __proto__: parent,
+};
+console.log(child.method()); // 3
+// // When child.method is called, 'this' refers to child.
+// // So when child inherits the method of parent,
+// // The property 'value' is sought on child. However, since child
+// // doesn't have an own property called 'value', the property is
+// // found on the [[Prototype]], which is parent.value.
+
+child.value = 4; // assign the value 4 to the property 'value' on child.
+// // This shadows the 'value' property on parent.
+// // The child object now looks like:
+// // { value: 4, __proto__: { value: 2, method: [Function] } }
+console.log(child.method()); // 5
+// // Since child now has the 'value' property, 'this.value' means
+// // child.value instead
+
+console.log("Constructors")
+// The power of prototypes is that we can reuse a set 
+// of properties if they should be present on every 
+// instance — especially for methods.Suppose we are to 
+// create a series of boxes, where each box is an object 
+// that contains a value which can be accessed through 
+// a getValue function. A naive implementation would be:
+
+
+const boxes = [
+    { value: 1, getValue() { return this.value; } },
+    { value: 2, getValue() { return this.value; } },
+    { value: 3, getValue() { return this.value; } },
+];
+// This is subpar, because each instance has its own 
+// function property that does the same thing, which is 
+// redundant and unnecessary.Instead, we can move getValue 
+// to the[[Prototype]] of all boxes:
+
+const boxPrototype = {
+    getValue() {
+        return this.value;
+    },
+};
+
+const boxes = [
+    { value: 1, __proto__: boxPrototype },
+    { value: 2, __proto__: boxPrototype },
+    { value: 3, __proto__: boxPrototype },
+];
+// This way, all boxes' getValue method will refer to the 
+// same function, lowering memory usage. However, manually 
+// binding the __proto__ for every object creation is still 
+// very inconvenient. This is when we would use a constructor 
+// function, which automatically sets the [[Prototype]] for 
+// every object manufactured. Constructors are functions 
+// called with new.
+
+
+// // A constructor function
+function Box(value) {
+    this.value = value;
+}
+
+// // Properties all boxes created from the Box() constructor
+// // will have
+Box.prototype.getValue = function () {
+    return this.value;
+};
+
+const boxes = [new Box(1), new Box(2), new Box(3)];
+// We say that new Box(1) is an instance created from the 
+// Box constructor function.Box.prototype is not much 
+// different from the boxPrototype object we created 
+// previously — it's just a plain object. Every instance 
+// created from a constructor function will automatically 
+// have the constructor's prototype property as 
+// its[[Prototype]] — that is, 
+// Object.getPrototypeOf(new Box()) === Box.prototype.Constructor.prototype 
+// by default has one own property: constructor, 
+// which references the constructor function itself — 
+// that is, Box.prototype.constructor === Box.This allows 
+// one to access the original constructor from any instance.
+
+//Note: If a non - primitive is returned from the constructor 
+// function, that value will become the result of the 
+// new expression.In this case the[[Prototype]] may not 
+// be correctly bound — but this should not happen much 
+// in practice.
+// The above constructor function can be rewritten in 
+// classes as:
+
+
+class Box {
+    constructor(value) {
+        this.value = value;
+    }
+
+    // Methods are created on Box.prototype
+    getValue() {
+        return this.value;
+    }
+}
+// Classes are syntax sugar over constructor functions, 
+// which means you can still manipulate Box.prototype to 
+// change the behavior of all instances.However, because 
+// classes are designed to be an abstraction over the 
+// underlying prototype mechanism, we will use the more - l
+// ightweight constructor function syntax for this tutorial 
+// to fully demonstrate how prototypes work.
+// Because Box.prototype references the same object as 
+// the[[Prototype]] of all instances, we can change the 
+// behavior of all instances by mutating Box.prototype.
+
+
+function Box(value) {
+    this.value = value;
+}
+Box.prototype.getValue = function () {
+    return this.value;
+};
+const box = new Box(1);
+
+// // Mutate Box.prototype after an instance has already 
+// been created
+Box.prototype.getValue = function () {
+    return this.value + 1;
+};
+box.getValue(); // 2
+// A corollary is, re - assigning 
+// Constructor.prototype(Constructor.prototype = ...) 
+// is a bad idea for two reasons:
+
+//The[[Prototype]] of instances created before the 
+// reassignment is now referencing a different object 
+// from the[[Prototype]] of instances created after the 
+// reassignment — mutating one's [[Prototype]] no longer
+//  mutates the other.
+// Unless you manually re - set the constructor property, 
+// the constructor function can no longer be traced from 
+// instance.constructor, which may break user 
+// expectation.Some built -in operations will read 
+// the constructor property as well, and if it is not set, 
+// they may not work as expected.
+// Constructor.prototype is only useful when constructing 
+// instances.It has nothing to do with 
+// Constructor.[[Prototype]], which is the constructor 
+// function's own prototype, which is Function.prototype 
+// — that is, Object.getPrototypeOf(Constructor) === Function.prototype.
+
+console.log("Implicit constructors of literals")
+// Some literal syntaxes in JavaScript create instances 
+// that implicitly set the[[Prototype]].For example:
+
+
+// // Object literals (without the `__proto__` key) automatically
+// // have `Object.prototype` as their `[[Prototype]]`
+const object = { a: 1 };
+// Object.getPrototypeOf(object) === Object.prototype; // true
+
+// // Array literals automatically have `Array.prototype` as their `[[Prototype]]`
+const array = [1, 2, 3];
+// Object.getPrototypeOf(array) === Array.prototype; // true
+
+// // RegExp literals automatically have `RegExp.prototype` as their `[[Prototype]]`
+const regexp = /abc/;
+// Object.getPrototypeOf(regexp) === RegExp.prototype; // true
+// We can "de-sugar" them into their constructor form.
+
+// js
+const array = new Array(1, 2, 3);
+const regexp = new RegExp("abc");
+// For example, "array methods" like map() are simply methods defined on Array.prototype, which is why they are automatically available on all array instances.
+
+//Warning: There is one misfeature that used to be 
+// prevalent — extending Object.prototype or one of the 
+// other built -in prototypes.An example of this misfeature 
+// is, defining Array.prototype.myMethod = function () {... }
+//  and then using myMethod on all array instances.
+
+//This misfeature is called monkey patching.Doing monkey 
+// patching risks forward compatibility, because if the 
+// language adds this method in the future but with a 
+// different signature, your code will break. It has led 
+// to incidents like the SmooshGate, and can be a great 
+// nuisance for the language to advance since JavaScript 
+// tries to "not break the web".
+
+// The only good reason for extending a built -in prototype 
+// is to backport the features of newer JavaScript engines, 
+// like Array.prototype.forEach.
+
+// It may be interesting to note that due to historical 
+// reasons, some built -in constructors' prototype property 
+// are instances themselves. For example, Number.prototype 
+// is a number 0, Array.prototype is an empty array, and 
+// RegExp.prototype is /(?:)/.
+
+// JS
+// Copy to Clipboard
+Number.prototype + 1; // 1
+Array.prototype.map((x) => x + 1); // []
+String.prototype + "a"; // "a"
+RegExp.prototype.source; // "(?:)"
+Function.prototype(); // Function.prototype is a no-op function by itself
+// However, this is not the case for user - defined 
+// constructors, nor for modern constructors like Map.
+
+//     JS
+// Copy to Clipboard
+Map.prototype.get(1);
+// // Uncaught TypeError: get method called on incompatible Map.prototype
+// Building longer inheritance chains
+// The Constructor.prototype property will become 
+// the[[Prototype]] of the constructor's instances,
+//  as-is — including Constructor.prototype's 
+// own[[Prototype]].By default, Constructor.prototype 
+// is a plain object — that is, 
+// Object.getPrototypeOf(Constructor.prototype) === Object.prototype.The only exception is Object.prototype itself, whose[[Prototype]] is null — that is, Object.getPrototypeOf(Object.prototype) === null.Therefore, a typical constructor will build the following prototype chain:
+
+// JS
+// Copy to Clipboard
+function Constructor() { }
+
+const obj = new Constructor();
+// // obj ---> Constructor.prototype ---> Object.prototype ---> null
+// To build longer prototype chains, we can set the[[Prototype]] of Constructor.prototype via the Object.setPrototypeOf() function.
+
+// JS
+// Copy to Clipboard
+function Base() { }
+function Derived() { }
+// Set the `[[Prototype]]` of `Derived.prototype`
+// to `Base.prototype`
+Object.setPrototypeOf(Derived.prototype, Base.prototype);
+
+const obj = new Derived();
+// obj ---> Derived.prototype ---> Base.prototype ---> Object.prototype ---> null
+// In class terms, this is equivalent to using the extends 
+// syntax.
+
+//     JS
+// Copy to Clipboard
+class Base { }
+class Derived extends Base { }
+
+// const obj = new Derived();
+// // obj ---> Derived.prototype ---> Base.prototype ---> Object.prototype ---> null
+// You may also see some legacy code using Object.create() 
+// to build the inheritance chain.However, because this 
+// reassigns the prototype property and removes the 
+// constructor property, it can be more error - prone, 
+// while performance gains may not be apparent if the 
+// constructors haven't created any instances yet.
+
+// JS
+// Copy to Clipboard
+function Base() { }
+function Derived() { }
+// Re-assigns `Derived.prototype` to a new object
+// with `Base.prototype` as its `[[Prototype]]`
+// DON'T DO THIS — use Object.setPrototypeOf to mutate it instead
+Derived.prototype = Object.create(Base.prototype);
+
+
+console.log("Inspecting prototypes: a deeper dive")
+// Let's look at what happens behind the scenes in a bit 
+// more detail.
+
+// In JavaScript, as mentioned above, functions are able 
+// to have properties.All functions have a special property 
+// named prototype.Please note that the code below is free 
+// - standing(it is safe to assume there is no other 
+// JavaScript on the webpage other than the below code).For 
+// the best learning experience, it is highly recommended 
+// that you open a console, navigate to the "console" tab, 
+// copy - and - paste in the below JavaScript code, and 
+// run it by pressing the Enter / Return key. (The console 
+// is included in most web browser's Developer Tools. More 
+// information is available for Firefox Developer Tools, 
+// Chrome DevTools, and Edge DevTools.)
+
+// JS
+// Copy to Clipboard
+function doSomething() { }
+console.log(doSomething.prototype);
+// It does not matter how you declare the function; a
+// function in JavaScript will always have a default
+// prototype property — with one exception: an arrow
+// function doesn't have a default prototype property:
+const doSomethingFromArrowFunction = () => { };
+console.log(doSomethingFromArrowFunction.prototype);
+
+
+// As seen above, doSomething() has a default prototype 
+// property, as demonstrated by the console.After running 
+// this code, the console should have displayed an object 
+// that looks similar to this.
+
+// {
+//     constructor: ƒ doSomething(),
+//     [[Prototype]]: {
+//     constructor: ƒ Object(),
+//     hasOwnProperty: ƒ hasOwnProperty(),
+//     isPrototypeOf: ƒ isPrototypeOf(),
+//     propertyIsEnumerable: ƒ propertyIsEnumerable(),
+//     toLocaleString: ƒ toLocaleString(),
+//     toString: ƒ toString(),
+//     valueOf: ƒ valueOf()
+//     }
+// }
+
+// Note: The Chrome console uses[[Prototype]] to denote 
+// the object's prototype, following the spec's terms; 
+// Firefox uses < prototype >.For consistency we will 
+// use[[Prototype]].
+
+// We can add properties to the prototype of 
+// doSomething(), as shown below.
+
+//     JS
+// Copy to Clipboard
+function doSomething() { }
+doSomething.prototype.foo = "bar";
+console.log(doSomething.prototype);
+// This results in:
+
+// {
+//     foo: "bar",
+//         constructor: ƒ doSomething(),
+//             [[Prototype]]: {
+//     constructor: ƒ Object(),
+//     hasOwnProperty: ƒ hasOwnProperty(),
+//     isPrototypeOf: ƒ isPrototypeOf(),
+//     propertyIsEnumerable: ƒ propertyIsEnumerable(),
+//     toLocaleString: ƒ toLocaleString(),
+//     toString: ƒ toString(),
+//     valueOf: ƒ valueOf()
+//     }
+// }
+// We can now use the new operator to create an instance 
+// of doSomething() based on this prototype.To use the
+//  new operator, call the function normally except prefix 
+// it with new.Calling a function with the new operator 
+// returns an object that is an instance of the function. 
+// Properties can then be added onto this object.
+
+// Try the following code:
+
+// JS
+// Copy to Clipboard
+function doSomething() { }
+doSomething.prototype.foo = "bar"; // add a property onto the prototype
+const doSomeInstancing = new doSomething();
+doSomeInstancing.prop = "some value"; // add a property onto the object
+console.log(doSomeInstancing);
+// This results in an output similar to the following:
+
+// {
+//     prop: "some value",
+//         [[Prototype]]: {
+//         foo: "bar",
+//     constructor: ƒ doSomething(),
+//                 [[Prototype]]: {
+//          constructor: ƒ Object(),
+//          hasOwnProperty: ƒ hasOwnProperty(),
+//          isPrototypeOf: ƒ isPrototypeOf(),
+//          propertyIsEnumerable: ƒ propertyIsEnumerable(),
+//          toLocaleString: ƒ toLocaleString(),
+//          toString: ƒ toString(),
+//          valueOf: ƒ valueOf()
+//         }
+//     }
+// }
+
+
+// As seen above, the[[Prototype]] of doSomeInstancing is 
+// doSomething.prototype.But, what does this do? When you 
+// access a property of doSomeInstancing, the runtime first 
+// looks to see if doSomeInstancing has that property.
+
+// If doSomeInstancing does not have the property, then 
+// the runtime looks for the property in 
+// doSomeInstancing.[[Prototype]](a.k.a.doSomething.prototype).
+// If doSomeInstancing.[[Prototype]] has the property being 
+// looked for, then that property on 
+// doSomeInstancing.[[Prototype]] is used.
+
+//Otherwise, if doSomeInstancing.[[Prototype]] does not 
+// have the property, then 
+// doSomeInstancing.[[Prototype]].[[Prototype]] is checked 
+// for the property.By default, the[[Prototype]] of any 
+// function's prototype property is Object.prototype. 
+// So, doSomeInstancing.[[Prototype]].[[Prototype]] 
+// (a.k.a. doSomething.prototype.[[Prototype]] 
+// (a.k.a. Object.prototype)) is then looked through for 
+// the property being searched for.
+
+// If the property is not found in 
+// doSomeInstancing.[[Prototype]].[[Prototype]], 
+// then doSomeInstancing.[[Prototype]].[[Prototype]].[[Prototype]] 
+// is looked through.However, there is a problem: 
+// doSomeInstancing.[[Prototype]].[[Prototype]].[[Prototype]] does not exist, because Object.prototype.[[Prototype]] is null.Then, and only then, after the entire prototype chain of[[Prototype]]'s is looked through, the runtime asserts that the property does not exist and conclude that the value at the property is undefined.
+
+// Let's try entering some more code into the console:
+
+// JS
+// Copy to Clipboard
+function doSomething() { }
+doSomething.prototype.foo = "bar";
+const doSomeInstancing = new doSomething();
+doSomeInstancing.prop = "some value";
+console.log("doSomeInstancing.prop:     ", doSomeInstancing.prop);
+console.log("doSomeInstancing.foo:      ", doSomeInstancing.foo);
+console.log("doSomething.prop:          ", doSomething.prop);
+console.log("doSomething.foo:           ", doSomething.foo);
+console.log("doSomething.prototype.prop:", doSomething.prototype.prop);
+console.log("doSomething.prototype.foo: ", doSomething.prototype.foo);
+
+// This results in the following:
+
+// doSomeInstancing.prop:      some value
+// doSomeInstancing.foo: bar
+// doSomething.prop: undefined
+// doSomething.foo: undefined
+// doSomething.prototype.prop: undefined
+// doSomething.prototype.foo: bar
+// Different ways of creating and mutating prototype chains
+// We have encountered many ways to create objects and 
+// change their prototype chains.We will systematically 
+// summarize the different ways, comparing each approach's 
+// pros and cons.
+
+// Objects created with syntax constructs
+// JS
+// Copy to Clipboard
+const o = { a: 1 };
+// The newly created object o has Object.prototype as its [[Prototype]]
+// Object.prototype has null as its prototype.
+// o ---> Object.prototype ---> null
+
+const b = ["yo", "whadup", "?"];
+// Arrays inherit from Array.prototype
+// (which has methods indexOf, forEach, etc.)
+// The prototype chain looks like:
+// b ---> Array.prototype ---> Object.prototype ---> null
+
+function f() {
+    return 2;
+}
+// Functions inherit from Function.prototype
+// (which has methods call, bind, etc.)
+// f ---> Function.prototype ---> Object.prototype ---> null
+
+const p = { b: 2, __proto__: o };
+// It is possible to point the newly created object's [[Prototype]] to
+// another object via the __proto__ literal property. (Not to be confused
+// with Object.prototype.__proto__ accessors)
+// p ---> o ---> Object.prototype ---> null
+
+
+// Pros and cons of using the __proto__ key in object initializers
+// Pro(s)	Supported in all modern engines.Pointing the __proto__ key to something that is not an object only fails silently without throwing an exception.Contrary to the Object.prototype.__proto__ setter, __proto__ in object literal initializers is standardized and optimized, and can even be more performant than Object.create.Declaring extra own properties on the object at creation is more ergonomic than Object.create.
+// Con(s)	Not supported in IE10 and below.Likely to be confused with Object.prototype.__proto__ accessors for people unaware of the difference.
+// With constructor functions
+// JS
+// Copy to Clipboard
+function Graph() {
+    this.vertices = [];
+    this.edges = [];
+}
+
+Graph.prototype.addVertex = function (v) {
+    this.vertices.push(v);
+};
+
+const g = new Graph();
+// g is an object with own properties 'vertices' and 'edges'.
+// g.[[Prototype]] is the value of Graph.prototype when new Graph() is executed.
+
+
+// Pros and cons of using constructor functions
+// Pro(s)	Supported in all engines — going all the way back to IE 5.5.Also, it is very fast, very standard, and very JIT - optimizable.
+// Con(s)
+// In order to use this method, the function in question must be initialized.During this initialization, the constructor may store unique information that must be generated per - object.This unique information would only be generated once, potentially leading to problems.
+// The initialization of the constructor may put unwanted methods onto the object.
+// Both of those are generally not problems in practice.
+
+// With Object.create()
+// Calling Object.create() creates a new object.The[[Prototype]] of this object is the first argument of the function:
+
+//     JS
+// Copy to Clipboard
+const a = { a: 1 };
+// a ---> Object.prototype ---> null
+
+const b = Object.create(a);
+// b ---> a ---> Object.prototype ---> null
+console.log(b.a); // 1 (inherited)
+
+const c = Object.create(b);
+// c ---> b ---> a ---> Object.prototype ---> null
+
+const d = Object.create(null);
+// d ---> null (d is an object that has null directly as its prototype)
+console.log(d.hasOwnProperty);
+// undefined, because d doesn't inherit from Object.prototype
+
+
+// Pros and cons of Object.create
+// Pro(s)	Supported in all modern engines.Allows directly setting[[Prototype]] of an object at creation time, which permits the runtime to further optimize the object.Also allows the creation of objects without a prototype, using Object.create(null).
+// Con(s)	Not supported in IE8 and below.However, as Microsoft has discontinued extended support for systems running IE8 and below, that should not be a concern for most applications.Additionally, the slow object initialization can be a performance black hole if using the second argument, because each object - descriptor property has its own separate descriptor object.When dealing with hundreds of thousands of object descriptors in the form of objects, that lag time might become a serious issue.
+// With classes
+
+// JS
+// Copy to Clipboard
+class Rectangle {
+    constructor(height, width) {
+        this.name = "Rectangle";
+        this.height = height;
+        this.width = width;
+    }
+}
+
+class FilledRectangle extends Rectangle {
+    constructor(height, width, color) {
+        super(height, width);
+        this.name = "Filled rectangle";
+        this.color = color;
+    }
+}
+
+const filledRectangle = new FilledRectangle(5, 10, "blue");
+// filledRectangle ---> FilledRectangle.prototype ---> Rectangle.prototype ---> Object.prototype ---> null
+
+
+// Pros and cons of classes
+// Pro(s)	Supported in all modern engines.Very high readability and maintainability.Private properties are a feature with no trivial replacement in prototypal inheritance.
+//     Con(s)	Classes, especially with private properties, are less optimized than traditional ones(although engine implementors are working to improve this).Not supported in older environments and transpilers are usually needed to use classes in production.
+
+
+console.log("With Object.setPrototypeOf()")
+// While all methods above will set the prototype chain at object creation time, Object.setPrototypeOf() allows mutating the[[Prototype]] internal property of an existing object.
+
+//JS
+// Copy to Clipboard
+const obj = { a: 1 };
+const anotherObj = { b: 2 };
+Object.setPrototypeOf(obj, anotherObj);
+// obj ---> anotherObj ---> Object.prototype ---> null
+
+
+// Pros and cons of Object.setPrototypeOf
+// Pro(s)	Supported in all modern engines.Allows the dynamic manipulation of an object's prototype and can even force a prototype on a prototype-less object created with Object.create(null).
+// Con(s)	Ill - performing.Should be avoided if it's possible to set the prototype at object creation time. Many engines optimize the prototype and try to guess the location of the method in memory when calling an instance in advance; but setting the prototype dynamically disrupts all those optimizations. It might cause some engines to recompile your code for de-optimization, to make it work according to the specs. Not supported in IE8 and below.
+
+
+// With the __proto__ accessor
+// All objects inherit the Object.prototype.__proto__ setter, which can be used to set the[[Prototype]] of an existing object(if the __proto__ key is not overridden on the object).
+
+// Warning: Object.prototype.__proto__ accessors are non - standard and deprecated.You should almost always use Object.setPrototypeOf instead.
+
+//     JS
+// Copy to Clipboard
+const obj = {};
+// DON'T USE THIS: for example only.
+obj.__proto__ = { barProp: "bar val" };
+obj.__proto__.__proto__ = { fooProp: "foo val" };
+console.log(obj.fooProp);
+console.log(obj.barProp);
+
+
+// Pros and cons of setting the __proto__ property
+// Pro(s)	Supported in all modern engines.Setting __proto__ to something that is not an object only fails silently.It does not throw an exception.
+// Con(s)	Non - performant and deprecated.Many engines optimize the prototype and try to guess the location of the method in the memory when calling an instance in advance; but setting the prototype dynamically disrupts all those optimizations and can even force some engines to recompile for de - optimization of your code, to make it work according to the specs.Not supported in IE10 and below.The __proto__ setter is normative optional, so it may not work across all platforms.You should almost always use Object.setPrototypeOf instead.
+//Performance
+// The lookup time for properties that are high up on the prototype chain can have a negative impact on the performance, and this may be significant in the code where performance is critical.Additionally, trying to access nonexistent properties will always traverse the full prototype chain.
+
+// Also, when iterating over the properties of an object, every enumerable property that is on the prototype chain will be enumerated.To check whether an object has a property defined on itself and not somewhere on its prototype chain, it is necessary to use the hasOwnProperty or Object.hasOwn methods.All objects, except those with null as [[Prototype]], inherit hasOwnProperty from Object.prototype — unless it has been overridden further down the prototype chain.To give you a concrete example, let's take the above graph example code to illustrate it:
+
+// JS
+// Copy to Clipboard
+function Graph() {
+    this.vertices = [];
+    this.edges = [];
+}
+
+Graph.prototype.addVertex = function (v) {
+    this.vertices.push(v);
+};
+
+const g = new Graph();
+// g ---> Graph.prototype ---> Object.prototype ---> null
+
+g.hasOwnProperty("vertices"); // true
+Object.hasOwn(g, "vertices"); // true
+
+g.hasOwnProperty("nope"); // false
+Object.hasOwn(g, "nope"); // false
+
+g.hasOwnProperty("addVertex"); // false
+Object.hasOwn(g, "addVertex"); // false
+
+Object.getPrototypeOf(g).hasOwnProperty("addVertex"); // true
+
+// Note: It is not enough to check whether a property 
+// is undefined.The property might very well exist, but 
+// its value just happens to be set to undefined.
+
+//     Conclusion
+// JavaScript may be a bit confusing for developers coming 
+// from Java or C++, as it's all dynamic, all runtime, and 
+// it has no static types at all. Everything is either an 
+// object (instance) or a function (constructor), and even 
+// functions themselves are instances of the Function 
+// constructor. Even the "classes" as syntax constructs are 
+// just constructor functions at runtime.
+
+// All constructor functions in JavaScript have a special 
+// property called prototype, which works with the new 
+// operator.The reference to the prototype object is copied 
+// to the internal[[Prototype]] property of the new 
+// instance.For example, when you do const a1 = new A(), 
+// JavaScript (after creating the object in memory and 
+// before running function A() with this defined to it) 
+// sets a1.[[Prototype]] = A.prototype.When you then access 
+// properties of the instance, JavaScript first checks 
+// whether they exist on that object directly, and if not, 
+// it looks in [[Prototype]]. [[Prototype]] is looked at 
+// recursively, i.e.a1.doSomething, 
+// Object.getPrototypeOf(a1).doSomething,
+//  Object.getPrototypeOf(Object.getPrototypeOf(a1)).doSomething etc., 
+// until it's found or Object.getPrototypeOf returns null. 
+// This means that all properties defined on prototype are 
+// effectively shared by all instances, and you can even 
+// later change parts of prototype and have the changes 
+// appear in all existing instances.
+
+// If, in the example above, you do const a1 = new A(); 
+// const a2 = new A();, then a1.doSomething would actually 
+// refer to Object.getPrototypeOf(a1).doSomething — which 
+// is the same as the A.prototype.doSomething you defined, 
+// i.e.Object.getPrototypeOf(a1).doSomething === Object.getPrototypeOf(a2).doSomething === A.prototype.doSomething.
+
+// It is essential to understand the prototypal inheritance 
+// model before writing complex code that makes use of it.
+// Also, be aware of the length of the prototype chains 
+// in your code and break them up if necessary to avoid 
+// possible performance problems.Further, the native 
+// prototypes should never be extended unless it is for 
+// the sake of compatibility with newer JavaScript features.
+
+
+// Enumerability and ownership of properties
+// Every property in JavaScript objects can be classified by 
+// three factors:
+
+// Enumerable or non - enumerable;
+
+// String or symbol;
+// Own property or inherited property from the 
+// prototype chain.
+// Enumerable properties are those properties whose internal
+//  enumerable flag is set to true, which is the default for 
+// properties created via simple assignment or via a property 
+// initializer.Properties defined via Object.defineProperty 
+// and such are not enumerable by default. Most iteration 
+// means(such as for...in loops and Object.keys) only visit 
+// enumerable keys.
+
+// Ownership of properties is determined by whether the 
+// property belongs to the object directly and not to its 
+// prototype chain.
+
+// All properties, enumerable or not, string or symbol, own 
+// or inherited, can be accessed with dot notation or bracket 
+// notation.In this section, we will focus on JavaScript means 
+// that visit a group of object properties one - by - one.
+
+// Querying object properties
+// There are four built -in ways to query a property of an 
+// object.They all support both string and symbol keys.The 
+// following table summarizes when each method returns true.
+
+//                          Enumerable, own	        Enumerable, inherited	    Non - enumerable, own	    Non - enumerable, inherited
+// propertyIsEnumerable()	true ✅	                false ❌	                    false ❌	                    false ❌
+// hasOwnProperty()	        true ✅	                false ❌	                    true ✅	                    false ❌
+// Object.hasOwn()	        true ✅	                false ❌	                    true ✅	                    false ❌
+// in                       true ✅	                true ✅	                    true ✅	                    true ✅
+
+// Traversing object properties
+// There are many methods in JavaScript that traverse a group 
+// of properties of an object.Sometimes, these properties are 
+// returned as an array; sometimes, they are iterated 
+// one - by - one in a loop; sometimes, they are used for 
+// constructing or mutating another object.The following 
+// table summarizes when a property may be visited.
+
+// Methods that only visit string properties or only symbol 
+// properties will have an extra note. ✅ means a property of 
+// this type will be visited; ❌ means it will not.
+
+//                  Enumerable, own	        Enumerable, inherited	    Non - enumerable, own	    Non - enumerable, inherited
+// Object.keys
+// Object.values
+// Object.entries	✅// (strings)	        ❌	                        ❌	                        ❌
+// Object.getOwnPropertyNames	✅(strings)	❌	                        ✅(strings)	                ❌
+// Object.getOwnPropertySymbols	✅(symbols)	❌	                        ✅(symbols)	                ❌
+// Object.getOwnPropertyDescriptors	✅	    ❌	                        ✅	                        ❌
+// Reflect.ownKeys	        ✅	            ❌	                        ✅	                        ❌
+// for...in	                ✅(strings)	    ✅  (strings)	            ❌	                        ❌
+// Object.assign(After the first parameter✅	❌	                        ❌	                        ❌
+// Object spread	            ✅	        ❌	                        ❌	                        ❌
+
+// Obtaining properties by enumerability / ownership
+// Note that this is not the most efficient algorithm for 
+// all cases, but useful for a quick demonstration.
+
+// Detection can occur by SimplePropertyRetriever.theGetMethodYouWant(obj).includes(prop)
+// Iteration can occur by SimplePropertyRetriever.theGetMethodYouWant(obj).forEach((value, prop) => { }); (or use filter(), map(), etc.)
+// JS
+// Copy to Clipboard
+const SimplePropertyRetriever = {
+    getOwnEnumerables(obj) {
+        return this._getPropertyNames(obj, true, false, this._enumerable);
+        // Or could use for...in filtered with Object.hasOwn or just this: return Object.keys(obj);
+    },
+    getOwnNonenumerables(obj) {
+        return this._getPropertyNames(obj, true, false, this._notEnumerable);
+    },
+    getOwnEnumerablesAndNonenumerables(obj) {
+        return this._getPropertyNames(
+            obj,
+            true,
+            false,
+            this._enumerableAndNotEnumerable,
+        );
+        // Or just use: return Object.getOwnPropertyNames(obj);
+    },
+    getPrototypeEnumerables(obj) {
+        return this._getPropertyNames(obj, false, true, this._enumerable);
+    },
+    getPrototypeNonenumerables(obj) {
+        return this._getPropertyNames(obj, false, true, this._notEnumerable);
+    },
+    getPrototypeEnumerablesAndNonenumerables(obj) {
+        return this._getPropertyNames(
+            obj,
+            false,
+            true,
+            this._enumerableAndNotEnumerable,
+        );
+    },
+    getOwnAndPrototypeEnumerables(obj) {
+        return this._getPropertyNames(obj, true, true, this._enumerable);
+        // Or could use unfiltered for...in
+    },
+    getOwnAndPrototypeNonenumerables(obj) {
+        return this._getPropertyNames(obj, true, true, this._notEnumerable);
+    },
+    getOwnAndPrototypeEnumerablesAndNonenumerables(obj) {
+        return this._getPropertyNames(
+            obj,
+            true,
+            true,
+            this._enumerableAndNotEnumerable,
+        );
+    },
+    // Private static property checker callbacks
+    _enumerable(obj, prop) {
+        return Object.prototype.propertyIsEnumerable.call(obj, prop);
+    },
+    _notEnumerable(obj, prop) {
+        return !Object.prototype.propertyIsEnumerable.call(obj, prop);
+    },
+    _enumerableAndNotEnumerable(obj, prop) {
+        return true;
+    },
+    // Inspired by http://stackoverflow.com/a/8024294/271577
+    _getPropertyNames(obj, iterateSelf, iteratePrototype, shouldInclude) {
+        const props = [];
+        do {
+            if (iterateSelf) {
+                Object.getOwnPropertyNames(obj).forEach((prop) => {
+                    if (props.indexOf(prop) === -1 && shouldInclude(obj, prop)) {
+                        props.push(prop);
+                    }
+                });
+            }
+            if (!iteratePrototype) {
+                break;
+            }
+            iterateSelf = true;
+            obj = Object.getPrototypeOf(obj);
+        } while (obj);
+        return props;
+    },
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

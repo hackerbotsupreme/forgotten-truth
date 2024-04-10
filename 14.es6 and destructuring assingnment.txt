@@ -1,0 +1,1508 @@
+// es6 geeksforgeeks 
+
+// There are three concepts in Object-Oriented Programming 
+// Object, Class, and Methods. ES6 JavaScript supports 
+// Object-Oriented programming components. 
+
+// Object: A real-time object entity means the presentation 
+// of any entity in real-time.
+// Class: It is the before the plan of creating any objects 
+// which is known as the blueprint of any objects which 
+// you want to create.
+// Methods: It communicates between the objects.
+// The class contains the Constructors and Functions. The 
+// Constructors take responsibility for allocating memory 
+// for the objects of the class. The function takes 
+// responsibility of the action of the objects. Combing 
+// these two Constructor and Functions to make the Class. 
+
+// In the ES6 to create any class, you need to use the class 
+// keyword.
+
+// Syntax: Declaring Class: 
+// class Class_name {  
+// }
+
+// Class Expressions: 
+// var var_name = new Class_name {  
+// }
+
+
+// The below example will illustrate the ES6 Classes:
+
+// Example: This example shows the use of ES6 classes.
+
+// js
+class gfg {
+    // Constructor 
+    constructor(name, estd, rank) {
+        this.n = name;
+        this.e = estd;
+        this.r = rank;
+    }
+
+    // Function
+    decreaserank() {
+        this.r -= 1;
+    }
+}
+const geeks = new gfg("geeks", 2009, 43)
+
+geeks.decreaserank();
+
+console.log(geeks.r); //Output 42
+// Output: The example given above declares a class ‘gfg’. 
+// The class’s constructor takes three arguments – name, 
+// estd, and rank respectively.The ‘this’ keyword refers 
+// to the current instance of the class. The geeks() function 
+// in the class, print the values of the rank.
+
+// 42
+
+// Class inheritance: The ES6 Class supports the inheritance.
+// Inheritance has the courage to create entities from 
+// existing entities.There are two types of Class in ES6: 
+// parent class/super class: The class extended to create 
+// new class are known as a parent class or super class.
+// child / sub classes: The class are newly created are 
+// known as child or sub class. Sub class inherit all 
+// the properties from parent class except constructor
+// Syntax:
+
+// class child_name extends parent_name
+// Example: This example shows the inheritance in classes.
+
+
+class geeks {
+    constructor(g) {
+        this.Character = g
+    }
+}
+class GeeksforGeeks extends geeks {
+    disp() {
+        console.log("No of Character:  " + this.Character)
+    }
+}
+var obj = new GeeksforGeeks(13);
+obj.disp()
+// Output: 
+// No of Character: 13
+
+// Inheritance divided into three types: 
+// Single Inheritance: Every class can be extend from 
+// one parent class.
+// Multiple Inheritance: A class can inherit from multiple 
+// classes.ES6 doesn’t support multiple inheritance.
+// Multi - level Inheritance: A class can inherit from 
+//another class (via) which inherit from the parent class.
+
+// class Child extends Root
+// class Leaf extends Child
+// So the leaf extends root indirectly
+
+// Super Keyword: This keyword helps child class to invoke 
+// the parent class data.
+            // super.object
+// Example: This example shows the use of the super keyword in ES6.
+
+
+class GeeksforGeeks {
+    doPrint() {
+        console.log("This doPrint() from Parent called.")
+    }
+}
+class gfg extends GeeksforGeeks {
+    doPrint() {
+        super.doPrint()
+        console.log("This doPrint() is printing a string.")
+    }
+}
+var obj = new gfg()
+obj.doPrint()
+// Output: 
+
+// This doPrint() from Parent called.
+// This doPrint() is printing a string.
+
+
+// ES6 Merge Objects
+
+// In this article, we are going to learn 
+// how to merge two objects in JavaScript.
+
+// We can merge two JavaScript Objects in ES6 by using 
+// the two popular methods. The methods are listed below: 
+
+// Object.assign() method
+// Object spread syntax method
+
+// Using Object.assign() method: Using this method, we can 
+// merge two or more objects into one object. Object.assign() 
+// method makes a copy of a new object after copying all 
+// properties from source objects and then return that object.
+
+// Syntax: 
+// Object.assign(target, Object1, Object2, ...)
+
+// Example 1: In this example, we have taken two objects 
+// ‘obj1’ and ‘obj2’, and then passed them into object.assign() 
+// as an argument and stored them in ‘Object’ after merging. 
+// After that, we printed all keys and values of a merged 
+// object using the for-of-loop and document.write() function. 
+
+
+// An Object
+var obj1 = { 1: "Geeks", 2: "for" };
+var obj2 = { 3: "Geeks" };
+
+// Using Object.assign()
+Object.assign(obj1, obj2);
+
+// Printing object
+for (var key of Object.keys(obj1)) {
+    console.log(key + " => " + obj1[key])
+}
+// Output:
+
+// 1 => Geeks
+// 2 => for
+// 3 => Geeks
+
+// Example 2: In this example, we are going to see how 
+// Object.assign() function handled the same properties 
+// in objects
+
+
+let gfg_courses = {
+    CIP: 7000,
+    DSA: 2500,
+    Data_Science: 4500,
+    Web_Dev: 8900
+};
+
+let gfg_live = {
+    Frontend: 9000,
+    Backend: 9500,
+    FullStack: 11000,
+    Web_Dev: 9000
+};
+
+// Using Object.assign()
+let gfg = Object.assign(gfg_courses, gfg_live);
+
+// Printing object
+for (var key of Object.keys(gfg)) {
+    console.log(key + " => " + gfg[key])
+}
+// Output: In the above code we have merged two objects 
+// ‘gfg_courses’ and ‘gfg_live’ into ‘gfg’ object and printed 
+// all keys and values.In the output, we can see that when 
+// objects have the same properties then the preference is 
+// given to the later - defined object.
+
+// CIP => 7000
+// DSA => 2500
+// Data_Science => 4500
+// Web_Dev => 9000
+// Frontend => 9000
+// Backend => 9500
+// FullStack => 11000
+// Using spread(…) operator: In this method, we are going 
+// to use the spread(…) operator to merge two or more 
+// objects.
+
+// Syntax:
+
+var objClone = { ...Object1, ...Object2 };
+// Example: In this example, we have followed the same 
+// procedure as same in the previous example but instead 
+// of using object.assign() function we have used the spread 
+// operator to merge the objects and then print their key 
+// and values.This is to be noted that when two objects 
+// have the same properties then they will perform the 
+// same as in the above method.
+
+
+// An Object
+var obj1 = { 1: "Geeks", 2: "for" };
+var obj2 = { 3: "Geeks" };
+
+// Using Object spread syntax
+var obj = { ...obj1, ...obj2 };
+
+// Printing object
+for (var key of Object.keys(obj)) {
+    console.log(key + " => " + obj[key])
+}
+// Output:
+
+// 1 => Geeks
+// 2 => for
+// 3 => Geeks
+
+// An expression is a special kind of statement that 
+// evaluates to a value. Every expression consists of 
+
+// Operands: Represents the data.
+// Operator: which performs certain operations on operands.
+
+// Consider the following expression – 2 / 3, in the 
+// expression, 2 and 3 are operands and the symbol /is 
+// the operator.
+
+
+// JavaScript supports the following types of operators: 
+// Arithmetic Operators
+// Relational Operators
+// Logical Operators
+// Bitwise Operators
+// Assignment Operators
+// Type Operators
+// Miscellaneous Operators
+// Arithmetic Operators: As we know these are the basic 
+// mathematical operators available in JavaScript ES6.
+
+
+// Operator	Function
+// Addition(+)	Returns sum of the operands.
+// Subtraction(-)	Returns the difference of the values.
+// Multiplication(*)	Returns the product of the values.
+// Division(/)	Performs division and returns the quotient.
+// Modulus(%)	Performs division and returns the remainder.
+// Increment(++)	Increases the value of the variable by one.
+// Decrement(- -)	Decreases the value of the variable by one.
+// Example:
+var num1 = 10.5
+var num2 = 2.5
+
+document.write("Sum : " + (num1 + num2) + "<br>");
+
+document.write("Difference : " + (num1 - num2) + "<br>")
+
+document.write("Product : " + num1 * num2 + "<br>")
+
+document.write("Quotient : " + num1 / num2 + "<br>")
+
+document.write("Remainder : " + num1 % num2 + "<br>")
+
+// pre-increment
+document.write("Value of num1 after pre-increment : "
+    + (++num1) + "<br>")
+
+// post-increment
+document.write("Value of num1 after post-increment : "
+    + (num1++) + "<br>")
+
+// pre-decrement
+document.write("Value of num2 after pre-decrement : "
+    + (--num2) + "<br>")
+
+// post-decrement
+document.write("Value of num2 after post-decrement : "
+    + (num2--) + "<br>")
+// Output:
+
+
+// Sum: 13
+// Difference: 8
+// Product: 26.25
+// Quotient: 4.2
+// Remainder: 0.5
+// Value of num1 after pre - increment : 11.5
+// Value of num1 after post - increment : 11.5
+// Value of num2 after pre - decrement : 1.5
+// Value of num2 after post - decrement : 1.5
+// Relational Operators: An operator that compares two 
+// values.Relational operators are sometimes called 
+// comparison operators.
+
+
+// Operator	Function
+//     > Returns true if the left operand is greater than 
+// right else, false.
+
+// < Returns true if the left operand is lesser than right 
+// else, false.
+
+// >= Returns true if the left operand is greater than or 
+// equal to right else, false.
+
+// <= Returns true if the left operand is lesser than or 
+// equal to right else, false.
+
+// == Returns true if both the operands are same else, 
+// false./ td >
+
+// == Returns true if both the operands are the same else, 
+// false.
+
+// != Returns true if both the operands are not same else, 
+// false.
+
+
+// Example:
+
+document.write("11>12 : " + (11 > 12) + "<br>");
+
+document.write("11<12 : " + (11 < 12) + "<br>")
+
+document.write("12>=11 : " + (12 >= 11) + "<br>")
+
+document.write("12<=12 : " + (12 <= 12) + "<br>")
+
+document.write("11==11 : " + (11 == 11) + "<br>")
+
+document.write("11!=11 : " + (11 != 11) + "<br>")
+Output:
+
+
+// 11 > 12 : false
+// 11 = 11 : true
+// 12 <= 12 : true
+// 11 == 11 : true
+// 11 != 11 : false
+// Logical Operators: Logical operators are used to combine 
+// two or more relational statements.
+
+
+// Operator	Function
+// And(&&)	Return true if all the relational statements 
+// combined with && are true, else false.
+//Or(||)	Return true if at least one of the relational 
+// statements combined with || is true, else false.<
+//Not(!)	Returns the inverse of the relational statement’s 
+// result.
+//             Example:
+
+
+
+
+// Returns true as every statement is true.
+document.write("13>12 && 12>11 && 9==9 : "
+    + (13 > 12 && 12 > 11 && 9 == 9) + "<br>");
+
+// Returns false as 11>12 is false.
+document.write("11>12 && 12>11 && 9==9 : "
+    + (11 > 12 && 12 > 11 && 9 == 9) + "<br>")
+
+// As one true statement is enough to return.
+document.write("11>12 || 12>11 || 9==9 : "
+    + (11 > 12 || 12 > 11 || 9 == 9) + "<br>")
+
+// Returns false as 11>12 is not true.
+document.write("11>12 && (12>11 || 9==9) : "
+    + (11 > 12 && (12 > 11 || 9 == 9)) + "<br>")
+// Output:
+
+
+// 13 > 12 && 12 > 11 && 9 == 9 : true
+// 11 > 12 && 12 > 11 && 9 == 9 : false
+// 11 > 12 || 12 > 11 || 9 == 9 : true
+// 11 > 12 && (12 > 11 || 9 == 9) : false
+
+
+// Bitwise Operators: A bitwise operator is an operator used to perform bitwise operations on bit patterns or binary numerals that involve the manipulation of individual bits. 
+
+// Operator	Function
+// Bitwise AND(&)	Compares each bit of the first operand to the corresponding bit of the second operand.If both bits are 0, the corresponding result bit is set to 0, else 1.
+// Bitwise OR(|)	Compares each bit of the first operand to the corresponding bit of the second operand.If both bits are 1, the corresponding result bit is set to 1, else 0.
+// Bitwise XOR(^)	Inverts the bits of its corresponding operand
+// Left shift(<<)	Will shift the ‘n’ number of bits to the left side, and n bits with the value 0 will be filled on the right side.Example: x = 2, t = 4, x << t, for easy evaluation it performs x * (2 ^ n)=2 * (2 ^ 4).
+// Right shift(>>)	Will shift the ‘n’ number of bits to the right side, and ‘n’ bits with the value 0 will be filled on the left side.Example: x = 2, t = 4, x >> t, for easy evaluation it performs t / (2 ^ n)=2 / (2 ^ 4).
+// Zero - fill right shift	Shifts a in binary representation b(< 32) bits to the right, discarding bits shifted off, and shifting in zeroes from the left
+// Example:
+
+
+
+document.write("2&3 : " + (2 & 3) + "<br>");
+document.write("2|3 : " + (2 | 3) + "<br>");
+document.write("2^3 : " + (2 ^ 3) + "<br>");
+document.write("~4 : " + (~4) + "<br>");
+document.write("2<<3 : " + (2 << 3) + "<br>");
+document.write("2>>3 : " + (2 >> 3) + "<br>");
+// Output:
+
+
+// 2 & 3 : 2
+// 2 | 3 : 3
+// 2 ^ 3 : 1
+// ~4 : -5
+// 2 <> 3 : 0
+// Assignment Operators: An assignment operator is the operator used to assign a new value to the variable, property, event or indexer element.
+
+// Operator	Function
+// Simple Assignment(=)	Assigns the value of the right operand to left operand.
+// Add and Assignment(+=)	It adds the right operand to the left operand and assigns the result to the left operand.
+// Subtract and Assignment(-=)	It subtracts the right operand from the left operand and assigns the result to the left operand.
+// Multiply and Assignment(*=)	It multiplies the right operand with the left operand and assigns the result to the left operand.
+// Divide and Assignment(/=)	It divides the left operand with the right operand and assigns the result to the left operand.
+// Example: 
+
+
+
+var a = 12;
+var b = 10;
+a = b;
+document.write("a = b : " + a + "<br>");
+
+a += b;
+document.write("a += b : " + a + "<br>")
+
+a -= b;
+document.write("a -= b : " + a + "<br>")
+
+a *= b;
+document.write("a *= b : " + a + "<br>")
+
+a /= b;
+document.write("a /= b : " + a + "<br>")
+// Output:
+
+
+// a = b : 10
+// a += b : 20
+// a -= b : 10
+// a *= b : 100
+// a /= b : 10
+// Type Operators: It is a unary operator.This operator 
+// returns the data type of the operand.
+//     Syntax:
+
+
+typeof (operand)
+// Example:
+
+
+
+var a = 12;
+var b = "Geeks";
+var b = "Geeks";
+var c = true;
+var d = String;
+
+document.write("a is " + typeof (a) + "<br>");
+
+document.write("b is " + typeof (b) + "<br>")
+document.write("c is : " + typeof (c) + "<br>")
+document.write("d is : " + typeof (d) + "<br>")
+// Output: 
+
+
+// a is number
+// b is string
+// c is: boolean
+// d is: function
+//Miscellaneous Operators:These are the operators that, does 
+// different operators when used at different types of 
+// occasions.
+
+
+// Operator	Function
+// Negation operator(-)	Changes the sign of a value.
+// Concatenation operator(+) +, when applied to strings it appends them.
+// Conditional Operator(?)	It can use as a ternary operator.
+//     Example:
+
+
+
+var a = "GeeksforGeeks=>";
+var b = "A Computer science portal.";
+var c = true;
+var d = 9;
+
+// Concatenation
+document.write("a+b : " + a + b + "<br>");
+
+// Ternary Operator
+var c = 2 > 3 ? "yes is 2>3" : "No, It is not."
+document.write("2>3 :" + c + "<br>")
+
+// Negation
+d = -d;
+document.write("d = -d : " + d + "<br>")
+// Output:
+
+
+// a + b : GeeksforGeeks => A Computer science portal.
+// 2 > 3 : No, It is not.
+// d = -d : -9
+
+//C:\Users\rekha\OneDrive\Desktop\js-topics-code-main\js_Entirity\2.Absolute_knowledge---References\MDN Web Docs Glossary- Definitions of Web-related terms\41.IIFE
+
+
+console.log("IIFE mdn in MDN Web Docs Glossary")
+// MDN Web Docs Glossary: Definitions of Web-related terms > IIFE
+/////////////////////////////////////////////////////]]
+
+
+let a = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(456)
+    }, 4000)
+  })
+}
+
+(async () => {
+  let b = await a()
+  console.log(b)
+  let c = await a()
+  console.log(c)
+  let d = await a()
+  console.log(d)
+})()
+  //
+  console.log(d) // Throws error
+
+  // function is made as expression using () - so function 
+  //does not require name 
+  // and its this function is now a js expression so we 
+  //can execute it immediately using ()
+  // yeah and it cant be reused also 
+  // (function(){
+  //protect inner code from access , protects global scope 
+  // })();
+
+  // An IIFE (Immediately Invoked Function Expression)
+  // is a JavaScript function that runs as soon as it is 
+  //defined
+      (function () {
+          // …
+      })();
+
+
+  (() => {
+      // …
+  })();
+
+
+  (async () => {
+      // …
+  })();
+
+  // It is a design pattern which is also known as a 
+  //Self-Executing Anonymous Function and contains two major 
+  //parts:
+
+  // The first is the anonymous function with lexical scope 
+  //enclosed within the Grouping Operator (). This prevents 
+  //accessing variables within the IIFE idiom as well as 
+  //polluting the global scope.
+  // The second part creates the immediately invoked function 
+  //expression () through which the JavaScript engine will 
+  //directly interpret the function.
+
+  // Use cases
+  // Avoid polluting the global namespace
+  // Because our application could include many functions and 
+  //global variables from different source files, it's 
+  //important to limit the number of global variables. 
+  //If we have some initiation code that we don't need to 
+  //use again, we could use the IIFE pattern. As we will not 
+  //reuse the code again, using IIFE in this case is better 
+  //than using a function declaration or a function expression.
+
+  (() => {
+    // some initiation code
+    let firstVariable;
+    let secondVariable;
+  })();
+
+// firstVariable and secondVariable will be discarded after 
+//the function is executed.
+
+// Execute an async function
+// An async IIFE allows you to use await and for-await even 
+//in older browsers and JavaScript runtimes that have no 
+//top-level await:
+
+const getFileStream = async (url) => {
+  // implementation
+};
+
+(async () => {
+  const stream = await getFileStream("https://domain.name/path/file.ext");
+  for await (const chunk of stream) {
+    console.log({ chunk });
+  }
+})();
+
+// The module pattern
+// We would also use IIFE to create private and public 
+//variables and methods. For a more sophisticated use 
+// of the module pattern and other use of IIFE, you 
+// could see the book Learning JavaScript Design 
+// Patterns by Addy Osmani.
+
+// JS
+// Copy to Clipboard
+const makeWithdraw = (balance) =>
+  ((copyBalance) => {
+    let balance = copyBalance; // This variable is private
+    const doBadThings = () => {
+      console.log("I will do bad things with your money");
+    };
+    doBadThings();
+    return {
+      withdraw(amount) {
+        if (balance >= amount) {
+          balance -= amount;
+          return balance;
+        }
+        return "Insufficient money";
+      },
+    };
+  })(balance);
+
+const firstAccount = makeWithdraw(100); // "I will do bad things with your money"
+console.log(firstAccount.balance); // undefined
+console.log(firstAccount.withdraw(20)); // 80
+console.log(firstAccount.withdraw(30)); // 50
+console.log(firstAccount.doBadThings); // undefined; this method is private
+const secondAccount = makeWithdraw(20); // "I will do bad things with your money"
+console.log(secondAccount.withdraw(30)); // "Insufficient money"
+console.log(secondAccount.withdraw(20)); // 0
+// For loop with var before ES6
+// We could see the following use of IIFE in some old 
+// code, before the introduction of the statements let
+//  and const in ES6 and the block scope. With the 
+// statement var, we have only function scopes and 
+// the global scope. Suppose we want to create 2 buttons 
+// with the texts Button 0 and Button 1 and when we 
+// click them, we would like them to alert 0 and 1. 
+// The following code doesn't work:
+
+// JS
+// Copy to Clipboard
+for (var i = 0; i < 2; i++) {
+  const button = document.createElement("button");
+  button.innerText = `Button ${i}`;
+  button.onclick = function () {
+    console.log(i);
+  };
+  document.body.appendChild(button);
+}
+console.log(i); // 2
+// When clicked, both Button 0 and Button 1 alert 2 
+// because i is global, with the last value 2. To 
+// fix this problem before ES6, we could use the IIFE pattern:
+
+// JS
+// Copy to Clipboard
+for (var i = 0; i < 2; i++) {
+  const button = document.createElement("button");
+  button.innerText = `Button ${i}`;
+  button.onclick = (function (copyOfI) {
+    return function () {
+      console.log(copyOfI);
+    };
+  })(i);
+  document.body.appendChild(button);
+}
+console.log(i); // 2
+// When clicked, Buttons 0 and 1 alert 0 and 1. The 
+// variable i is globally defined. Using the 
+// statement let, we could simply do:
+
+// JS
+// Copy to Clipboard
+for (let i = 0; i < 2; i++) {
+  const button = document.createElement("button");
+  button.innerText = `Button ${i}`;
+  button.onclick = function () {
+    console.log(i);
+  };
+  document.body.appendChild(button);
+}
+console.log(i); // Uncaught ReferenceError: i is not defined.
+// When clicked, these buttons alert 0 and 1.
+
+
+// Self-Executing Anonymous Function
+// A JavaScript function that runs as soon as it is defined.
+//Also known as an IIFE (Immediately Invoked Function Expression).
+// *****************************************************************************
+
+// from coderdost 
+// next is IIFE (immediately invoked function Expression )
+
+
+// js objects
+// objects are some of the most important data structures in js
+
+//creating object
+let car = {
+  // objects aare made up of key value pairs
+  color:'red',
+  model : "2022",
+  company: "tesla",
+}
+cosole.log(car)
+// for this object we can say , we have three properties
+
+// accessing object / reaading values
+// we have 2 ways
+console.log(car['color']) // using [] / third brackets  // tesla
+console.log(car.model) // using dot //tesla
+
+// now the difference
+
+ley propertyName = 'color'
+console.log(car[propertyName]) //black
+console.log(car.propertyName)
+undefined // computed  // have to use direct property name
+
+// the benefit is when we will use array syntax like
+//""""propertyName""""  , we are able to pass variables
+// means we can cahnge the values in the future or i can say
+//i can calculate the value dynaically
+// dot/. searches the exact value as it is means we can not
+//change that in future
+// and this is the main difference between dot and bracket
+//notation
+
+
+// this means the difference is
+// we can dynamically access the properties in the situations
+//where  we dont know the variable names exactly
+// but on he other side to use the . method we need to know
+//the exact name of property to access/read the value
+
+let student = {
+  name: 'John',
+  age: 16,
+  grade: '10th',
+  subjects: ['Math', 'Science', 'English']
+};
+
+let properties = ['name', 'age', 'grade', 'subjects'];
+
+for (let i = 0; i < properties.length; i++) {
+  console.log(student[properties[i]]);
+}
+// John
+// 16
+// 10th
+// [ 'Math', 'Science', 'English' ]
+
+// This example demonstrates the advantage of bracket
+//notation: it allows you to dynamically access properties
+//of an object. This can be particularly useful when you need
+//to iterate over an object’s properties or when the exact
+//property you need to access may change during the execution
+//of your program. With dot notation, you would need to know
+//the exact property name at the time you’re writing the code,
+//which is not always possible or convenient.
+// However, note that with dot notation, you have to know the
+//exact property name at the time you’re writing the code.
+//You cannot use a variable to access a property with dot
+//notation. This is why bracket notation can be more flexible
+//in certain situations, as it allows for dynamic property
+//access. Dot notation is more straightforward and easier
+//to read when you know exactly which property you need to access.
+
+
+
+
+// modifying
+// 'modify' the object properties
+
+car.color =  'Brown'
+car.['color'] =  'Brown'
+console.log(car.color)
+
+// delete properties
+console.log(car.color)
+delete car.color
+delete car.["color"]
+console.log(car.color)
+
+// delete property always return true
+
+let returnValue = delete  car.color
+console.log(returnValue)// true
+
+// function vs method
+
+ley ageCalculate = function(birthYear){
+  let age = 2023 - birthYear
+  console.log('current age is', age)
+}
+ageCalculate(2003)
+// it is a function
+
+// then what is a method ?
+// when a function is inside of an object its called an method
+// so method --> is nothing but a object property(key)/function
+//that is defined/declared inside of an object
+// method -> it is nothing but object property (key) holding
+//function as a value
+
+//example
+let person = {
+  ageCalculate : function(birthYear=2000){
+      let age = 2023-birthYear
+      return age
+      // it is not function by itself but when called it
+// does behaves exactly like a function
+  }
+}
+console.log('current age is ${person.ageCalculate()}') // parenthesis bcz it is a function
+// note ageCalculate is not function by itself , its a method called when it is called
+
+
+// this keyword
+
+// in each methd we have an access of special keyword called
+// "this"
+
+
+// "this" keyword represent the object. 'calling' the 'method'
+// in which "this" is "present"
+
+// "this" are special types of keywords that are used in case
+//of methods . methods are the functions that are running in
+//context of function
+
+// example
+
+let person = {
+  firstName : "Harry",
+  lastName : "Brook",
+  city : "Delhi",
+  birthYear:1988,
+  Education : "software engineer"
+  getSummary : function(){
+//        return `harry brrok lived in Delhi, he is
+// siftware engineer and his birthyesr is 1998`
+        return `${this.firstName} ${this.lastName}
+live in ${this.city}. his birthyear is  ${this.birthYear} `
+  }
+}
+console.log(person.getSummary())
+// look at the scenario , in the getSummary we have hardcoded
+//the summary of this person
+// which means if any info changes in future about this person
+//this info/summary is gonna be invalid
+// and that's where the keyword "this" comes in play so we will write
+// `${this.firstName} ${this.lastName} live in ${this.city}.
+//his birthyear is  ${this.birthYear} `
+// and this keyword always represent same object .
+
+// so step1 : check in which method we use "this" keyword
+// step2: owner  of that method (who is calling those method )
+
+
+// which means if we need to access properties,keys in the
+//same object then we will use "this" keyword .
+
+
+// foreach method of array
+
+// its another type of loop which we used to traverse over the array
+
+
+
+let dishes = ['biryani','channy','pasta','soyabin']
+
+
+//using for loop
+for(let i=0;i<dishes.length;i++){
+  console.log(dishes[i])
+}
+
+// using foreach method - much easier method
+// dishes.foreach(function(element){ // function as parameter
+//- its also a callback function
+//   console.log(element) // this element is representing
+//the element that its iterating
+// })
+// and there is no condition bcz this function moves on
+//its own to the next elements present in the series
+// and this style of programming is called functional programming .
+
+
+// objects inside array
+
+let blockList = [{userName:"john",reason:"Abusive Content"},{userName:"paul",reason:"CopyRight Content"}]
+// so basically we created two arrays inside the array
+//that's why blockList will be called array of objects
+
+console.log(blockList)
+
+for(let i=0;i<blockList.length;i++){
+  console.log(blockList[i])
+  console.log(`User ${blockList[i].userName}
+//Blocked Due to this reason ${blockList[i].reason}`)
+}
+// this will print elements/each array of that element 
+
+
+//////////////////////////////////////////////////////////////////
+
+
+// Destructuring assignment
+// The destructuring assignment syntax is a JavaScript 
+//expression that makes it possible to unpack values from 
+//arrays, or properties from objects, into distinct variables.
+
+// Try it
+// JavaScript Demo: Expressions - Destructuring assignment
+
+let a, b, rest;
+[a, b] = [10, 20];
+
+console.log(a);
+// Expected output: 10
+
+console.log(b);
+// Expected output: 20
+
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+
+console.log(rest);
+// Expected output: Array [30, 40, 50]
+
+// > 10
+// > 20
+// > Array [30, 40, 50]
+
+// Syntax
+// const [a, b] = array;
+// const [a, , b] = array;
+// const [a = aDefault, b] = array;
+// const [a, b, ...rest] = array;
+// const [a, , b, ...rest] = array;
+// const [a, b, ...{ pop, push }] = array;
+// const [a, b, ...[c, d]] = array;
+
+// const { a, b } = obj;
+// const { a: a1, b: b1 } = obj;
+// const { a: a1 = aDefault, b = bDefault } = obj;
+// const { a, b, ...rest } = obj;
+// const { a: a1, b: b1, ...rest } = obj;
+// const { [key]: a } = obj;
+
+// let a, b, a1, b1, c, d, rest, pop, push;
+// [a, b] = array;
+// [a, , b] = array;
+// [a = aDefault, b] = array;
+// [a, b, ...rest] = array;
+// [a, , b, ...rest] = array;
+// [a, b, ...{ pop, push }] = array;
+// [a, b, ...[c, d]] = array;
+
+// ({ a, b } = obj); // parentheses are required
+// ({ a: a1, b: b1 } = obj);
+// ({ a: a1 = aDefault, b = bDefault } = obj);
+// ({ a, b, ...rest } = obj);
+// ({ a: a1, b: b1, ...rest } = obj);
+
+
+// Description
+// The object and array literal expressions provide an easy 
+//way to create ad hoc packages of data.
+const x = [1, 2, 3, 4, 5];
+
+// The destructuring assignment uses similar syntax but uses 
+//it on the left-hand side of the assignment instead. It 
+//defines which values to unpack from the sourced variable.
+
+const x = [1, 2, 3, 4, 5];
+const [y, z] = x;
+console.log(y); // 1
+console.log(z); // 2
+
+// Similarly, you can destructure objects on the left-hand 
+//side of the assignment.
+
+const obj = { a: 1, b: 2 };
+const { a, b } = obj;
+// is equivalent to:
+// const a = obj.a;
+// const b = obj.b;
+
+// This capability is similar to features present in languages 
+//such as Perl and Python.
+
+// For features specific to array or object destructuring, 
+//refer to the individual examples below.
+
+// Binding and assignment
+// For both object and array destructuring, there are two 
+//kinds of destructuring patterns: binding pattern and 
+//assignment pattern, with slightly different syntaxes.
+
+// In binding patterns, the pattern starts with a declaration 
+//keyword (var, let, or const). Then, each individual property 
+//must either be bound to a variable or further destructured.
+
+const obj = { a: 1, b: { c: 2 } };
+const {
+    a,
+    b: { c: d },
+} = obj;
+// Two variables are bound: `a` and `d`
+// All variables share the same declaration, so if you want 
+//some variables to be re - assignable but others to be read 
+//- only, you may have to destructure twice — once with let, 
+//once with const.
+
+const obj = { a: 1, b: { c: 2 } };
+const { a } = obj; // a is constant
+let {
+    b: { c: d },
+} = obj; // d is re-assignable
+
+
+// In many other syntaxes where the language binds a variable
+// for you, you can use a binding destructuring pattern.These include:
+// The looping variable of for...in for...of, and for await...of loops;
+// Function parameters;
+// The catch binding variable.
+// In assignment patterns, the pattern does not start with a 
+//keyword.Each destructured property is assigned to a target 
+//of assignment — which may either be declared beforehand with 
+//var or let, or is a property of another object — in general, 
+//anything that can appear on the left - hand side of an 
+//assignment expression.
+
+const numbers = [];
+const obj = { a: 1, b: 2 };
+({ a: numbers[0], b: numbers[1] } = obj);
+// The properties `a` and `b` are assigned to properties 
+//of `numbers`
+
+// Note: The parentheses(... ) around the assignment 
+//statement are required when using object literal 
+//destructuring assignment without a declaration.
+//{ a, b } = { a: 1, b: 2 } is not valid stand-alone 
+//syntax, as the { a, b } on the left - hand side is 
+//considered a block and not an object literal according 
+//to the rules of expression statements.However, 
+//({ a, b } = { a: 1, b: 2 }) is valid, as is 
+//const { a, b } = { a: 1, b: 2 }.
+// If your coding style does not include trailing 
+//semicolons, the(... ) expression needs to be preceded by 
+//a semicolon, or it may be used to execute a function on 
+//the previous line.
+
+
+// Note that the equivalent binding pattern of the code 
+//above is not valid syntax:
+
+const numbers = [];
+const obj = { a: 1, b: 2 };
+const { a: numbers[0], b: numbers[1] } = obj;
+
+// This is equivalent to:
+//   const numbers[0] = obj.a;
+//   const numbers[1] = obj.b;
+// Which definitely is not valid.
+
+
+// You can only use assignment patterns as the left - 
+//hand side of the assignment operator.You cannot use them 
+//with compound assignment operators such as += or *=.
+
+
+// Default value
+// Each destructured property can have a default value.The 
+//default value is used when the property is not present, 
+//or has value undefined.It is not used if the property has 
+//value null.
+
+const [a = 1] = []; // a is 1
+const { b = 2 } = { b: undefined }; // b is 2
+const { c = 2 } = { c: null }; // c is null
+
+// The default value can be any expression.It will only be 
+//evaluated when necessary.
+
+const { b = console.log("hey") } = { b: 2 };
+// Does not log anything, because `b` is defined and there's no need
+// to evaluate the default value.
+
+// Rest property
+// You can end a destructuring pattern with a rest property 
+// ...rest.This pattern will store all remaining properties 
+//of the object or array into a new object or array.
+
+const { a, ...others } = { a: 1, b: 2, c: 3 };
+console.log(others); // { b: 2, c: 3 }
+
+const [first, ...others2] = [1, 2, 3];
+console.log(others2); // [2, 3]
+
+// The rest property must be the last in the pattern, 
+//and must not have a trailing comma.
+
+const [a, ...b,] = [1, 2, 3];
+
+// SyntaxError: rest element may not have a trailing comma
+// Always consider using rest operator as the last element
+
+// Examples
+// Array destructuring
+// Basic variable assignment
+const foo = ["one", "two", "three"];
+
+const [red, yellow, green] = foo;
+console.log(red); // "one"
+console.log(yellow); // "two"
+console.log(green); // "three"
+
+// Destructuring with more elements than the source
+// In an array destructuring from an array of length N 
+//specified on the right - hand side of the assignment, 
+//if the number of variables specified on the left - 
+//hand side of the assignment is greater than N, only the 
+//first N variables are assigned values.The values of the 
+//remaining variables will be undefined.
+
+const foo = ["one", "two"];
+
+const [red, yellow, green, blue] = foo;
+console.log(red); // "one"
+console.log(yellow); // "two"
+console.log(green); // undefined
+console.log(blue); // undefined
+
+
+// Swapping variables
+// Two variables values can be swapped 
+// in one destructuring expression.
+// Without destructuring assignment, swapping two values 
+//requires a temporary variable
+
+let a = 1;
+let b = 3;
+
+[a, b] = [b, a];
+console.log(a); // 3
+console.log(b); // 1
+
+const arr = [1, 2, 3];
+[arr[2], arr[1]] = [arr[1], arr[2]];
+console.log(arr); // [1, 3, 2]
+
+
+// Parsing an array returned from a function
+// It's always been possible to return an array from 
+//a function. Destructuring can make working with an 
+//array return value more concise.
+// In this example, f() returns the values[1, 2] as 
+//its output, which can be parsed in a single line with 
+//destructuring.
+
+function f() {
+    return [1, 2];
+}
+
+const [a, b] = f();
+console.log(a); // 1
+console.log(b); // 2
+
+// Ignoring some returned values
+// You can ignore return values that you're not 
+//interested in:
+
+function f() {
+    return [1, 2, 3];
+}
+
+const [a, , b] = f();
+console.log(a); // 1
+console.log(b); // 3
+
+const [c] = f();
+console.log(c); // 1
+
+// You can also ignore all returned values:
+
+[, ,] = f();
+
+// Using a binding pattern as the rest property
+// The rest property of array destructuring assignment 
+// can be another 
+//array or object binding pattern.The inner destructuring 
+//destructures from the array created after collecting 
+//the rest elements, so you cannot access any properties 
+//present on the original iterable in this way.
+
+const [a, b, ...{ length }] = [1, 2, 3];
+console.log(a, b, length); // 1 2 1
+
+const [a, b, ...[c, d]] = [1, 2, 3, 4];
+console.log(a, b, c, d); // 1 2 3 4
+
+// These binding patterns can even be nested, as long 
+//as each rest property is the last in the list.
+
+const [a, b, ...[c, d, ...[e, f]]] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c, d, e, f); // 1 2 3 4 5 6
+
+// On the other hand, object destructuring can only have 
+//an identifier as the rest property.
+
+const { a, ...{ b } } = { a: 1, b: 2 };
+// SyntaxError: `...` must be followed by an identifier 
+//in declaration contexts
+
+let a, b;
+({ a, ...{ b } } = { a: 1, b: 2 });
+// SyntaxError: `...` must be followed by an assignable 
+//reference in assignment contexts
+
+// Using array destructuring on any iterable
+// Array destructuring calls the iterable protocol of the 
+//right - hand side.Therefore, any iterable, not necessarily 
+//arrays, can be destructured.
+
+const [a, b] = new Map([
+    [1, 2],
+    [3, 4],
+]);
+console.log(a, b); // [1, 2] [3, 4]
+
+// Non - iterables cannot be destructured as arrays.
+
+const obj = { 0: "a", 1: "b", length: 2 };
+const [a, b] = obj;
+// TypeError: obj is not iterable
+
+// Iterables are only iterated until all bindings are assigned.
+
+const obj = {
+    *[Symbol.iterator]() {
+        for (const v of [0, 1, 2, 3]) {
+            console.log(v);
+            yield v;
+        }
+    },
+};
+const [a, b] = obj; // Only logs 0 and 1
+
+// The rest binding is eagerly evaluated and creates a new 
+//array, instead of using the old iterable.
+
+const obj = {
+    *[Symbol.iterator]() {
+        for (const v of [0, 1, 2, 3]) {
+            console.log(v);
+            yield v;
+        }
+    },
+};
+const [a, b, ...rest] = obj; // Logs 0 1 2 3
+console.log(rest); // [2, 3] (an array)
+
+// Object destructuring
+// Basic assignment
+const user = {
+    id: 42,
+    isVerified: true,
+};
+
+const { id, isVerified } = user;
+
+console.log(id); // 42
+console.log(isVerified); // true
+
+// Assigning to new variable names
+// A property can be unpacked from an object and assigned 
+//to a variable with a different name than the object property.
+
+const o = { p: 42, q: true };
+const { p: foo, q: bar } = o;
+
+console.log(foo); // 42
+console.log(bar); // true
+
+// Here, for example, const { p: foo } = o takes from the 
+//object o the property named p and assigns it to a local 
+//variable named foo.
+
+// Assigning to new variable names and providing default values
+// A property can be both
+
+// Unpacked from an object and assigned to a variable with a different name.
+// Assigned a default value in case the unpacked value is undefined.
+
+const { a: aa = 10, b: bb = 5 } = { a: 3 };
+
+console.log(aa); // 3
+console.log(bb); // 5
+
+
+// Unpacking properties from objects passed as a function parameter
+// Objects passed into function parameters can also be unpacked 
+//into variables, which may then be accessed within the 
+//function body. As for object assignment, the destructuring 
+//syntax allows for the new variable to have the same name 
+//or a different name than the original property, and to 
+//assign default values for the case when the original object 
+//does not define the property.
+
+// Consider this object, which contains information about 
+//a user.
+
+const user = {
+    id: 42,
+    displayName: "jdoe",
+    fullName: {
+        firstName: "Jane",
+        lastName: "Doe",
+    },
+};
+
+// Here we show how to unpack a property of the passed 
+//object into a variable with the same name.The parameter 
+//value { id } indicates that the id property of the object 
+//passed to the function should be unpacked into a variable 
+//with the same name, which can then be used within the 
+//function.
+
+function userId({ id }) {
+    return id;
+}
+
+console.log(userId(user)); // 42
+
+// You can define the name of the unpacked variable.Here 
+//we unpack the property named displayName, and rename 
+//it to dname for use within the function body.
+
+function userDisplayName({ displayName: dname }) {
+    return dname;
+}
+
+console.log(userDisplayName(user)); // "jdoe"
+
+// Nested object and array destructuring
+
+const metadata = {
+    title: "Scratchpad",
+    translations: [
+        {
+            locale: "de",
+            localizationTags: [],
+            lastEdit: "2014-04-14T08:43:37",
+            url: "/de/docs/Tools/Scratchpad",
+            title: "JavaScript-Umgebung",
+        },
+    ],
+    url: "/en-US/docs/Tools/Scratchpad",
+};
+
+const {
+    title: englishTitle, // rename
+    translations: [
+        {
+            title: localeTitle, // rename
+        },
+    ],
+} = metadata;
+
+console.log(englishTitle); // "Scratchpad"
+console.log(localeTitle); // "JavaScript-Umgebung"
+
+// For of iteration and destructuring
+
+const people = [
+    {
+        name: "Mike Smith",
+        family: {
+            mother: "Jane Smith",
+            father: "Harry Smith",
+            sister: "Samantha Smith",
+        },
+        age: 35,
+    },
+    {
+        name: "Tom Jones",
+        family: {
+            mother: "Norah Jones",
+            father: "Richard Jones",
+            brother: "Howard Jones",
+        },
+        age: 25,
+    },
+];
+
+for (const {
+    name: n,
+    family: { father: f },
+} of people) {
+    console.log(`Name: ${n}, Father: ${f}`);
+}
+
+// "Name: Mike Smith, Father: Harry Smith"
+// "Name: Tom Jones, Father: Richard Jones"
+
+// Computed object property names and destructuring
+// Computed property names, like on object literals, 
+//can be used with destructuring.
+
+const key = "z";
+const { [key]: foo } = { z: "bar" };
+
+console.log(foo); // "bar"
+
+// Destructuring primitive values
+// Object destructuring is almost equivalent to property 
+//accessing.This means if you try to destruct a primitive 
+//value, the value will get wrapped into the corresponding 
+//wrapper object and the property is accessed on the wrapper 
+//object.
+
+const { a, toFixed } = 1;
+console.log(a, toFixed); // undefined ƒ toFixed() { [native code] }
+
+// Same as accessing properties, destructuring null or 
+//undefined throws a TypeError.
+
+const { a } = undefined;
+// TypeError: Cannot destructure property 'a' of 
+//'undefined' as it is undefined.
+const { b } = null;
+// TypeError: Cannot destructure property 'b' of 'null' 
+//as it is null.
+
+// This happens even when the pattern is empty.
+
+const { } = null; // TypeError: Cannot destructure 
+//'null' as it is null.
+
+// Combined array and object destructuring
+// Array and object destructuring can be combined.Say 
+//you want the third element in the array props below, 
+//and then you want the name property in the object, you 
+//can do the following:
+
+const props = [
+    { id: 1, name: "Fizz" },
+    { id: 2, name: "Buzz" },
+    { id: 3, name: "FizzBuzz" },
+];
+
+const [, , { name }] = props;
+
+console.log(name); // "FizzBuzz"
+
+//   The prototype chain is looked up when the object is 
+//deconstructed When deconstructing an object, if a property 
+//is not accessed in itself, it will continue to look up 
+//along the prototype chain.
+
+const obj = {
+    self: "123",
+    __proto__: {
+        prot: "456",
+    },
+};
+const { self, prot } = obj;
+
+console.log(self); // "123"
+console.log(prot); // "456"
+
