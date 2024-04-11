@@ -1,0 +1,18 @@
+MongoDB Aggregation $limit
+
+Aggregation $limit
+This aggregation stage limits 
+the number of documents passed 
+to the next stage.
+
+Example
+In this example, we are using 
+the "sample_mflix" database 
+loaded from our sample data in 
+the Intro to Aggregations section.
+
+db.movies.aggregate([ { $limit: 1 } ])
+
+This will return the 1 movie 
+from the collection.
+

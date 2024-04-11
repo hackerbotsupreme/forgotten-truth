@@ -1,0 +1,935 @@
+// MongoDB Getting Started
+
+// MongoDB
+// MongoDB is a document 
+// database and can be 
+// installed locally or 
+// hosted in the cloud.
+
+// SQL vs Document Databases
+
+// SQL databases are considered 
+// relational databases. They 
+// store related data in 
+// separate tables. When 
+// data is needed, it is 
+// queried from multiple 
+// tables to join the data 
+// Wback together.
+
+// MongoDB is a document 
+// database which is often 
+// referred to as a 
+// non-relational database. 
+// This does not mean that 
+// relational data cannot 
+// be stored in document 
+// databases. It means 
+// that relational data 
+// is stored differently. 
+// A better way to refer 
+// to it is as a non-tabular 
+// database.
+
+// MongoDB stores data in 
+// flexible documents. 
+// Instead of having multiple 
+// tables you can simply 
+// keep all of your related 
+// data together. This makes 
+// reading your data very fast.
+
+// You can still have multiple 
+// groups of data too. In 
+// MongoDB, instead of tables 
+// these are called collections.
+
+// Local vs Cloud Database
+// MongoDB can be installed 
+// locally, which will all1ow 
+// you to host your own MongoDB 
+// server on your hardware. 
+// This requires you to manage 
+// your server, upgrades, and 
+// any other maintenance.
+
+// You can download and use the 
+// MongoDB open source Community 
+// Server on your hardware for free.
+
+// However, for this course 
+// we are going o use MongoDB 
+// Atlas, a cloud database 
+// platform. This is much easier 
+// than hosting your own local database.
+
+// To be able to experiment with 
+// the code examples, you will 
+// need access to a MongoDB 
+// database.
+
+// Sign up for a free MongoDB 
+// Atlas account to get started.
+
+// Creating a Cluster
+// After you have created your 
+// account, set up a free 
+// "Shared Cluster" then 
+// choose your preferred 
+// cloud provider and region.
+
+// By default, MongoDB Atlas 
+// is completely locked down 
+// and has no external access.
+
+// You will need to set up 
+// a user and add your IP 
+// address to the list of 
+// allowed IP addresses.
+
+// Under "Database Access", 
+// create a new user and 
+// keep track of the username 
+// and password.
+
+// Next, under "Network Access", 
+// add your current IP address 
+// to allow access from your 
+// computer.
+
+// Install MongoDB Shell (mongosh)
+// There are many ways to 
+// connect to your MongoDB 
+// database.
+
+// We will start by using 
+// the MongoDB Shell, mongosh.
+
+// Use the official instructions 
+// to install mongosh on your 
+// operating system.
+
+// To verify that it has been 
+// installed properly, open 
+// your terminal and type:
+// mongosh --version
+
+// You should see that the 
+// latest verion is 
+// installed.
+
+// The version used 
+// in this tutorial 
+// is v1.3.1.
+
+// Connect to the database
+// To connect to your database, 
+// you will need your database 
+// specific connection string.
+
+// In the MongoDB Atlas dashboard, 
+// under "Databases", click the 
+// "Connect" button for your Cluster.
+
+// Next, choose "Connect with 
+// the MongoDB Shell".
+
+// Copy your connection string.
+
+// Example
+// Your connection string 
+// should look similar to this:
+
+// mongosh "mongodb+srv://cluster0.ex4ht.mongodb.net/myFirstDatabase" --apiVersion 1 --username YOUR_USER_NAME
+
+// Paste your connection string 
+// into your terminal and press enter.
+
+// You will be prompted to enter 
+// your database user password 
+// that you created earlier.
+
+// You are now connected to 
+// the database!
+
+// What Next?
+// In the following sections we 
+// will use 'mongosh' to create, 
+// read, update, and delete (CRUD) 
+// items in your database.
+
+// After getting the basics down, 
+// we will move on to using 
+// MongoDB with other backend 
+// technologies like Node.js.
+
+
+// MongoDB Query API
+
+// MongoDB Query API
+// The MongoDB Query API 
+// is the way you will 
+// interact with your data.
+
+// The MongoDB Query API 
+// can be used two ways:
+
+// CRUD Operations
+// Aggregation Pipelines
+// MongoDB Query API Uses
+// You can use the MongoDB 
+// Query API to perform:
+
+// Adhoc queries with mongosh, 
+// Compass, VS Code, or a 
+// MongoDB driver for the 
+// programming language you use.
+
+// Data transformations using 
+// aggregation pipelines.
+
+// Document join support to 
+// combine data from 
+// different collections.
+
+// Graph and geospatial queries.
+// Full-text search.
+// Indexing to improve 
+// MongoDB query performance.
+// Time series analysis.
+// Let's get started!
+
+
+// MongoDB mongosh Create Collection
+
+// Create Collection using mongosh
+// There are 2 ways to create a collection.
+
+// Method 1
+// You can create a collection using 
+// the createCollection() database method.
+
+// Example
+db.createCollection("posts")
+// Method 2
+// You can also create a collection 
+// during the insert process.
+
+// Example
+// We are here assuming object is 
+// a valid JavaScript object 
+// containing post data:
+
+db.posts.insertOne(object)
+// This will create the "posts" 
+// collection if it does not 
+// already exist.
+
+// Remember: In MongoDB, 
+// a collection is not actually 
+// created until it gets content!
+
+// MongoDB mongosh Insert
+// Insert Documents
+// There are 2 methods to insert 
+// documents into a MongoDB database.
+
+// To insert a single document(single object), 
+// use the insertOne() method.
+insertOne()
+
+// This method inserts a 
+// single object into the 
+// database.
+
+// Note: When typing in the 
+// shell, after opening an 
+// object with curly braces 
+// "{" you can press enter 
+// to start a new line in 
+// the editor without 
+// executing the command. 
+// The command will execute 
+// when you press enter after 
+// closing the braces.
+
+// Example
+db.posts.insertOne({
+  title: "Post Title 1",
+  body: "Body of post.",
+  category: "News"
+})
+
+// Note: If you try to insert 
+// documents into a collection 
+// that does not exist, MongoDB 
+// will create the collection 
+// automatically.
+
+// To insert multiple documents 
+// at once, use the insertMany() 
+// method.
+insertMany()
+// This method inserts an array 
+// of objects into the database.
+
+// Example
+db.posts.insertMany([  
+  {
+    title: "Post Title 2",
+    body: "Body of post.",
+    category: "Event"
+  },
+  {
+    title: "Post Title 3",
+    body: "Body of post.",
+    category: "Technology"
+  },
+  {
+    title: "Post Title 4",
+    body: "Body of post.",
+    category: "Event"
+  }
+])
+
+
+
+// MongoDB mongosh Find
+// Find Data
+// There are 2 methods to find 
+// and select data from a MongoDB 
+// collection, find() and findOne().
+
+// to find 
+// and select data from a collection 
+// in MongoDB, we can use the find() 
+// method.
+find()
+
+// This method accepts a query 
+// object. If left empty, all 
+// documents will be returned.
+db.posts.find()
+
+// Example
+// To select only one document, 
+// we can use the findOne() method.
+findOne()
+
+// This method accepts a query object. 
+// If left empty, it will return 
+// the first document it finds.
+
+// Note: This method only returns 
+// the first match it finds.
+
+Example
+db.posts.findOne()
+Querying Data
+To query, or filter, data we 
+can include a query in our 
+find() or findOne() methods.
+
+Example
+db.posts.find( {category: "News"} )
+// Projection
+// Both find methods accept a 
+// second parameter called projection.
+
+// This parameter is an object that 
+// describes which fields to include 
+// in the results.
+
+// Note: This parameter is optional. 
+// If omitted, all fields will be 
+// included in the results.
+
+Example
+This example will only display 
+the title and date fields in 
+the results.
+
+db.posts.find({}, {title: 1, date: 1})
+Notice that the _id field is 
+also included. This field is 
+always included unless 
+specifically excluded.
+
+We use a 1 to include a field 
+and 0 to exclude a field.
+
+Example
+This time, let's exclude the _id field.
+
+db.posts.find({}, {_id: 0, title: 1, date: 1})
+
+Note: You cannot use both 0 and 1 in 
+the same object. The only exception 
+is the _id field. You should either 
+specify the fields you would like 
+to include or the fields you would 
+like to exclude.
+
+Let's exclude the date category field. 
+All other fields will be included 
+in the results.
+
+Example
+db.posts.find({}, {category: 0})
+
+We will get an error if we try to 
+specify both 0 and 1 in the same object.
+
+Example
+db.posts.find({}, {title: 1, date: 0})
+
+
+MongoDB mongosh Update
+
+Update Document
+// To update an existing 
+// document we can use the 
+// updateOne() or updateMany() 
+// methods.
+
+The first parameter is a 
+query object to define which 
+document or documents should 
+be updated.
+
+The second parameter is an 
+object defining the updated data.
+
+updateOne()
+The updateOne() method will 
+update the first document that 
+is found matching the provided 
+query.
+
+Let's see what the "like" count 
+for the post with the title of 
+"Post Title 1":
+
+Example
+db.posts.find( { title: "Post Title 1" } ) 
+Now let's update the "likes" on 
+this post to 2. To do this, we 
+need to use the $set operator.
+
+Example
+db.posts.updateOne( { title: "Post Title 1" }, { $set: { likes: 2 } } ) 
+Check the document again and 
+you'll see that the "like" 
+have been updated.
+
+Example
+db.posts.find( { title: "Post Title 1" } ) 
+Insert if not found
+If you would like to insert the 
+document if it is not found, 
+you can use the upsert option.
+
+Example
+Update the document, but 
+if not found insert it:
+
+db.posts.updateOne( 
+  { title: "Post Title 5" }, 
+  {
+    $set: 
+      {
+        title: "Post Title 5",
+        body: "Body of post.",
+        category: "Event",
+        likes: 5,
+        tags: ["news", "events"],
+        date: Date()
+      }
+  }, 
+  { upsert: true }
+)
+
+updateMany()
+// The updateMany() method 
+// will update all documents 
+// that match the provided query.
+
+Example
+Update likes on all documents by 1. 
+For this we will use 
+the $inc (increment) operator:
+
+db.posts.updateMany({}, { $inc: { likes: 1 } })
+
+Now check the likes in all of 
+the documents and you will see 
+that they have all been 
+incremented by 1.
+
+
+MongoDB mongosh Delete
+
+// Delete Documents
+// We can delete documents by 
+// using the methods deleteOne() 
+// or deleteMany().
+
+These methods accept a query 
+object. The matching documents 
+will be deleted.
+
+deleteOne()
+The deleteOne() method will 
+delete the first document 
+that matches the query provided.
+
+Example
+db.posts.deleteOne({ title: "Post Title 5" })
+
+deleteMany()
+The deleteMany() method will 
+delete all documents that match 
+the query provided.
+
+Example
+db.posts.deleteMany({ category: "Technology" })
+
+
+// MongoDB Query Operators
+
+// MongoDB Query Operators
+// There are many query operators 
+// that can be used to compare and 
+// reference document fields.
+
+// Comparison
+// The following operators can be 
+// used in queries to compare values:
+// $eq: Values are equal
+// $ne: Values are not equal
+// $gt: Value is greater than another value
+// $gte: Value is greater than or equal to another value
+// $lt: Value is less than another value
+// $lte: Value is less than or equal to another value
+// $in: Value is matched within an array
+
+// Logical
+// The following operators can 
+// logically compare multiple queries.
+// $and: Returns documents where both queries match
+// $or: Returns documents where either query matches
+// $nor: Returns documents where both queries fail to match
+// $not: Returns documents where the query does not match
+
+// Evaluation
+// The following operators assist 
+// in evaluating documents.
+// $regex: Allows the use of regular expressions when evaluating field values
+// $text: Performs a text search
+// $where: Uses a JavaScript expression to match documents
+
+
+// MongoDB Update Operators
+
+// MongoDB Update Operators
+// There are many update operators 
+// that can be used during 
+// document updates.
+
+// Fields
+// The following operators can 
+// be used to update fields:
+
+// $currentDate: Sets the field value to the current date
+// $inc: Increments the field value
+// $rename: Renames the field
+// $set: Sets the value of a field
+// $unset: Removes the field from the document
+
+// Array
+// The following operators 
+// assist with updating arrays.
+
+// $addToSet: Adds distinct elements to an array
+// $pop: Removes the first or last element of an array
+// $pull: Removes all elements from an array that match the query
+// $push: Adds an element to an array
+
+
+// Indexing & Search
+// MongoDB Atlas comes with a full-text 
+// search engine that can be used to 
+// search for documents in a collection.
+
+// Creating an Index
+// We'll use the Atlas dashboard to 
+// create an index on the "sample_mflix" 
+// database from the sample data that 
+// we loaded in the Intro to 
+// Aggregations section.
+
+// From the Atlas dashboard, click 
+// on your Cluster name then the Search tab.
+
+// Click on the Create Search Index button.
+
+// Use the Visual Editor and click Next.
+
+// Name your index, choose the Database 
+// and Collection you want to index 
+// and click Next.
+
+// If you name your index "default" 
+// you will not have to specify the 
+// index name in the $search 
+// pipeline stage.
+
+// Choose the sample_mflix database 
+// and the movies collection.
+
+// Click Create Search Index and wait 
+// for the index to complete.
+
+// Running a Query
+// To use our search index, we will 
+// use the $search operator in our 
+// aggregation pipeline.
+
+// Example
+// db.movies.aggregate([
+//   {
+//     $search: {
+//       index: "default", // optional unless you named your index something other than "default"
+//       text: {
+//         query: "star wars",
+//         path: "title"
+//       },
+//     },
+//   },
+//   {
+//     $project: {
+//       title: 1,
+//       year: 1,
+//     }
+//   }
+// ])
+
+
+// The first stage of this aggregation 
+// pipeline will return all documents 
+// in the movies collection that 
+// contain the word "star" or "wars" 
+// in the title field.
+
+// The second stage will project the 
+// title and year fields from 
+// each document.
+
+
+// MongoDB Schema Validation
+
+// Schema Validation
+// By default MongoDB has a flexible 
+// schema. This means that there is 
+// no strict schema validation set 
+// up initially.
+
+// Schema validation rules can be 
+// created in order to ensure that 
+// all documents a collection share 
+// a similar structure.
+
+// Schema Validation
+
+// MongoDB supports JSON Schema validation. 
+// The $jsonSchema operator allows us 
+// to define our document structure.
+
+// Example
+db.createCollection("posts", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [ "title", "body" ],
+      properties: {
+        title: {
+          bsonType: "string",
+          description: "Title of post - Required."
+        },
+        body: {
+          bsonType: "string",
+          description: "Body of post - Required."
+        },
+        category: {
+          bsonType: "string",
+          description: "Category of post - Optional."
+        },
+        likes: {
+          bsonType: "int",
+          description: "Post like count. Must be an integer - Optional."
+        },
+        tags: {
+          bsonType: ["string"],
+          description: "Must be an array of strings - Optional."
+        },
+        date: {
+          bsonType: "date",
+          description: "Must be a date - Optional."
+        }
+      }
+    }
+  }
+})
+
+// This will create the posts 
+// collection in the current 
+// database and specify the JSON 
+// Schema validation requirements 
+// for the collection.
+
+
+
+// MongoDB Data API
+
+// MongoDB Data API
+// The MongoDB Data API can be used 
+// to query and update data in a 
+// MongoDB database without the need 
+// for language specific drivers.
+
+// Language drivers should be used 
+// when possible, but the MongoDB 
+// Data API comes in handy when 
+// drivers are not available or 
+// drivers are overkill for 
+// the application.
+
+// Read & Write with the MongoDB Data API
+// The MongoDB Data API is a 
+// pre-configured set of HTTPS 
+// endpoints that can be used 
+// to read and write data to 
+// a MongoDB Atlas database.
+
+// With the MongoDB Data API, 
+// you can create, read, update, 
+// delete, or aggregate documents 
+// in a MongoDB Atlas database.
+
+// Cluster Configuration
+// In order to use the Data API, 
+// you must first enable the 
+// functionality from the Atlas UI.
+
+// From the MongoDB Atlas dashboard, 
+// navigate to Data API in the left menu.
+
+// Select the data source(s) you would 
+// like to enable the API on and click 
+// Enable the Data API.
+
+// Access Level
+// By default, no access is granted. 
+// Select the access level you'd like 
+// to grant the Data API. The choices 
+// are: No Access, Read Only, Read and 
+// Write, or Custom Access.
+
+// Data API Key
+// In order to authenticate with the 
+// Data API, you must first create 
+// a Data API key.
+
+// Click Create API Key, enter 
+// a name for the key, then 
+// click Generate API Key.
+
+// Be sure to copy the API key and 
+// save it somewhere safe. You will 
+// not get another chance to see 
+// this key again.
+
+// Sending a Data API Request
+// We can now use the Data API 
+// to send a request to the database.
+
+// In the next example, we'll 
+// use curl to find the first 
+// document in the movies 
+// collection of our sample_mflix 
+// database. We loaded this sample 
+// data in the Intro to 
+// Aggregations section.
+
+// To run this example, you'll need 
+// your App Id, API Key, and Cluster name.
+
+// You can find your App Id in the 
+// URL Endpoint field of the Data 
+// API page in the MongoDB Atlas UI.
+
+// Example
+// curl --location --request POST 'https://data.mongodb-api.com/app/<DATA API APP ID>/endpoint/data/v1/action/findOne' \
+// --header 'Content-Type: application/json' \
+// --header 'Access-Control-Request-Headers: *' \
+// --header 'api-key: <DATA API KEY>' \
+// --data-raw '{
+//     "dataSource":"<CLUSTER NAME>",
+//     "database":"sample_mflix",
+//     "collection":"movies",
+//     "projection": {"title": 1}
+// }'
+
+
+// Data API Endpoints
+// In the previous example, we 
+// used the findOne endpoint 
+// in our URL.
+
+// There are several endpoints available 
+// for use with the Data API.
+
+// All endpoints start with the Base URL: 
+// https://data.mongodb-api.com/app/<Data API App ID>/endpoint/data/v1/action/
+
+// Find a Single Document
+// Endpoint
+
+// POST Base_URL/findOne
+// The findOne endpoint is used to 
+// find a single document in a collection.
+
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "filter": <query filter>,
+//   "projection": <projection>
+// }
+
+// Find Multiple Documents
+// Endpoint
+// POST Base_URL/find
+// The find endpoint is used to find 
+// multiple documents in a collection.
+
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "filter": <query filter>,
+//   "projection": <projection>,
+//   "sort": <sort expression>,
+//   "limit": <number>,
+//   "skip": <number>
+// }
+
+// Insert a Single Document
+// Endpoint
+// POST Base_URL/insertOne
+// The insertOne endpoint is used to 
+// insert a single document into 
+// a collection.
+
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "document": <document>
+// }
+
+
+// Insert Multiple Documents
+// Endpoint
+// POST Base_URL/insertMany
+// The insertMany endpoint is used 
+// to insert multiple documents 
+// into a collection.
+
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "documents": [<document>, <document>, ...]
+// }
+
+
+// Update a Single Document
+// Endpoint
+// POST Base_URL/updateOne
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "filter": <query filter>,
+//   "update": <update expression>,
+//   "upsert": true|false
+// }
+
+
+// Update Multiple Documents
+// Endpoint
+// POST Base_URL/updateMany
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "filter": <query filter>,
+//   "update": <update expression>,
+//   "upsert": true|false
+// }
+
+
+
+// Delete a Single Document
+// Endpoint
+// POST Base_URL/deleteOne
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "filter": <query filter>
+// }
+
+
+// Delete Multiple Documents
+// Endpoint
+// POST Base_URL/deleteMany
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "filter": <query filter>
+// }
+
+
+// Aggregate Documents
+// Endpoint
+// POST Base_URL/aggregate
+// Request Body
+// Example
+// {
+//   "dataSource": "<data source name>",
+//   "database": "<database name>",
+//   "collection": "<collection name>",
+//   "pipeline": [<pipeline expression>, ...]
+// }
+
+
+

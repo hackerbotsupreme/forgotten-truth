@@ -1,0 +1,23 @@
+MongoDB Aggregation $group
+
+Aggregation $group
+This aggregation stage groups 
+documents by the unique _id 
+expression provided.
+
+Don't confuse this _id expression 
+with the _id ObjectId provided 
+to each document.
+
+Example
+In this example, we are using 
+the "sample_airbnb" database 
+loaded from our sample data in 
+the Intro to Aggregations section.
+
+db.listingsAndReviews.aggregate(
+    [ { $group : { _id : "$property_type" } } ]
+)
+
+This will return the distinct 
+values from the property_type field.

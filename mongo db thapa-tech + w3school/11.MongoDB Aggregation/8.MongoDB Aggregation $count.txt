@@ -1,0 +1,28 @@
+MongoDB Aggregation $count
+
+Aggregation $count
+This aggregation stage 
+counts the total amount 
+of documents passed from 
+the previous stage.
+
+Example
+In this example, we are 
+using the "sample_restaurants" 
+database loaded from our sample 
+data in the Intro to 
+Aggregations section.
+
+db.restaurants.aggregate([
+  {
+    $match: { "cuisine": "Chinese" }
+  },
+  {
+    $count: "totalChinese"
+  }
+])
+
+This will return the number 
+of documents at the $count 
+stage as a field called 
+"totalChinese".
