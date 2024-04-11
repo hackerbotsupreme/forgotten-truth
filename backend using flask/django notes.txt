@@ -1,0 +1,4000 @@
+Django Tutorial | Learn Django Framework
+Last Updated : 05 Apr, 2024
+This tutorial also provides you with Django projects to help you apply your knowledge and build some cool web applications. These projects not only provide you with experience in building with the Django framework but will also add value to your resume. This Python Django tutorial teaches basic to advanced Django concepts for backend development. Learn topics like forms, templates, views, ORM, etc.
+
+Python Django
+Python-based web framework Django allows you to create efficient web applications quickly. It is also called batteries included web framework Django because It provides built-in features for everything including Django Admin Interface, default database – SQLlite3, etc.
+
+Django Tutorial
+
+When you’re building a website, you always need a similar set of components: a way to handle user authentication (signing up, signing in, signing out), a management panel for your website, forms, a way to upload files, etc. Django Python gives you ready-made components to use for rapid development. There any many more benefits of using the Django framework. Let’s look at some other reasons why you should learn Python Frameworks in Django.
+
+Table of Content
+
+Why Use Django Framework?
+Getting Started with Django
+Django Views
+Django URLs
+Django Templates
+Django Models
+Django Forms
+Misc
+Django Projects
+Online Django Quiz
+Python Django Interview Question
+FAQs on Django Tutorial
+Why Use Django Framework?
+Excellent documentation and high scalability.
+Used by Top MNCs and Companies, such as Instagram, Disqus, Spotify, Youtube, Bitbucket, Dropbox, etc. and the list is never-ending.
+Web framework Django is easy to learn, rapid development, and Batteries fully included.
+The last but not least reason to learn Django in Python, It has a huge library and features such as Web Scraping, Machine Learning, Image Processing, Scientific Computing, etc. One can integrate all this with web applications and do lots and lots of advanced stuff.
+Prerequisites to Learn Django
+Web framework Django based on Python. You have good knowledge about Python. Some other concepts you should be familiar with are:
+
+Understanding of Syntax of Python.
+Understanding of importing and exporting modules is required in the project development phase.
+Understanding Python path concepts to access the data, images or any kind of data.
+Knowledge of Object Oriented concepts as it reduces the code repetition with classes and objects.
+Knowledge about HTML, CSS, JavaScript are very important. As they are the building block of Web development.
+Knowledge about Data Structures like Tuple and List are important.
+Getting Started with Django
+Django Introduction and Installation
+When to Use Django? Comparison with other Development Stacks
+Django Project MVT Structure
+Django Basics
+Create an App in Django
+Create a Basic Project using MVT in Django
+Django Views
+In Django, views are the backbone of handling user requests and rendering responses. There are two primary paradigms for implementing views: Function Based Views (FBVs) and Class Based Views (CBVs). Function Based Views offer simplicity and directness, allowing developers to define views as Python functions. Within this paradigm, common functionalities like creating, listing, displaying details, updating, and deleting objects are implemented as separate functions.
+
+While both paradigms have their merits, the choice between FBVs and CBVs ultimately depends on factors such as project requirements, development preferences, and scalability concerns.
+
+Function Based Views
+Create View
+List View
+Detail View
+Update View
+Delete View
+Class Based Generic Views Django
+Createview
+ListView
+DetailView
+UpdateView
+DeleteView
+FormView
+Class Based vs Function Based Views
+Django URLs
+In Django, URL patterns serve as a crucial mechanism for directing incoming requests to the appropriate views within your web application. With the flexibility of regular expressions, Django’s URL dispatcher allows you to define patterns that match specific URL patterns and route them to corresponding views. When dealing with GET parameters passed through URLs in Django, accessing these parameters within views is straightforward, enabling efficient handling of user inputs and customization of responses.
+
+Django URL patterns
+Get parameters passed by urls in Django
+URL Validator in Django
+URL Shortener with Django
+Django URLResolver error
+Django Templates
+In Django, URLs play a crucial role in navigating through different views and templates within your web application. When working with Django templates, several key concepts enhance the flexibility and functionality of your frontend. Template filters allow you to manipulate variables displayed in your templates, enabling transformations like date formatting or string manipulation.
+
+Template Filters
+Template Tags
+variables
+Boolean Operators
+for loop
+if – Django Templates
+Template Inheritance
+Django Models
+Models serve as the backbone of database operations, facilitating seamless management of data. This guide delves into various aspects of Django Models, starting from the fundamental operations of inserting, updating, and deleting data using the Object-Relational Mapping (ORM) provided by Django.
+
+Here, You’ll learn how to create a basic app model, initialize migrations, and execute them to synchronize your database schema. Moreover, we delve into built-in field validations, ensuring data integrity and consistency, while also delving into the customization of these validations to suit specific application requirements.
+
+ORM – Inserting, Updating & Deleting Data
+Basic App Model – Makemigrations and Migrate
+model data types and fields list
+Add the slug field inside Django Model
+Intermediate fields in Django
+Uploading images in Django
+Render Model in Django Admin Interface
+Change Object Display Name using __str__ function – Django Models
+Built-in Field Validations – Django Models
+Custom Field Validations in Django Models
+How to use Django Field Choices ?
+Overriding the save method – Django
+Django Forms
+To start, you can create a form using Django Forms by defining a class that inherits from Django’s forms.Form class. Within this class, you can specify the fields you want to include in your form using various field types provided by Django, such as CharField, IntegerField, EmailField, etc. Once you’ve defined your form, you can render HTML forms in Django using both GET and POST methods. Django’s built-in template tags and filters make it easy to render forms in your HTML templates while ensuring security and CSRF protection.
+
+Django Forms offer a wide range of field types to cater to different data types and validation requirements. Additionally, you can customize the appearance and behavior of form fields by using form field custom widgets, allowing you to enhance user experience and tailor forms to your specific needs.
+
+How to create a form using Django Forms ?
+Render HTML Forms (GET & POST) in Django
+Django Form Fields
+form field custom widgets
+Initial form data – Django Forms
+ModelForm – Create form from Models
+Render Form Fields Manually
+Django Formsets
+Django ModelFormSets
+Misc
+Handling Ajax request in Django
+User groups with Custom permissions in Django
+Django Admin Interface
+Extending and customizing django-allauth
+Django – Dealing with warnings
+Sessions framework using django
+Django Sign Up and login with confirmation Email
+After completing the tutorial and building some projects you might be interested in starting your career in Django development. We have provided a guide, that will help you in building your career as Django developer.
+
+Django Projects
+Google authentication and Fetching mails from scratch
+ToDo webapp using Django
+Django News App
+Weather app using Django
+College Management System Using Django
+E-Commerce Website Using Django
+Creating Word Counter App Using Django
+Youtube Video Downloader Using Django
+Voting System Project Using Django
+Online Django Quiz
+Test your Django knowledge by answering quiz questions. The quiz questions are meant to test your understanding of Django concepts.
+
+Take Django Quiz
+
+Python Django Interview Question
+Interviews are most important aspect of job recruitment and you need to prepare for interviews if you want to get job sooner. We have compiled some of the most asked interview questions for Django Developers.
+
+Visit the page Top 50 Django Interview Questions and Answers to check for interview questions.
+
+FAQs on Django Tutorial
+Is Django easy to learn
+Web framework Django is relatively easy to learn, if you have prior experience with Python.
+
+Is Django for frontend or backend?
+Django is a open-source framework that is used for backend development of web application.
+
+What are the Features of Django ?
+Versatile which allows us to develop any kind of web page.
+It is scalable
+It is extremely fast.
+Secure thereby helping developers.
+It comes along with content administrations, authentications.
+What is Django Architecture ?
+Django is based on MVT(Model View Template architecture) which is based on the MVC(Model View Controller architecture). The common difference between them is that Django take care of controller part.
+
+What is the difference between Flask and Django ?
+Django	Flask
+Supports large projects.	Supports smaller projects.
+Templates, Admin and ORM is built-in.	Templates, Admin and ORM requires to be installed.
+Not easy to as compare to Flask.	It is easy to learn.
+Complete Web development no need any third party tools.	User can choose any third party tools according to their needs.
+Does not support visual debugging.	Supports visual debugging.
+Inbuilt bootstrapping tool .	Bootstrapping tools are not available.
+Name some companies that uses Django ?
+Some companies that uses Django are: Instagram, DISCUS, Mozilla Firefox, Youtube, Instagram, Reddit etc. are using web framework Django.
+
+
+
+django basics 
+
+Django Basics
+Last Updated : 18 Apr, 2023
+Django is a Python-based web framework which allows you to quickly create web application without all of the installation or dependency problems that you normally will find with other frameworks. When you’re building a website, you always need a similar set of components: a way to handle user authentication (signing up, signing in, signing out), a management panel for your website, forms, a way to upload files, etc. Django gives you ready-made components to use.django-basics
+
+Why Django?
+Django is a rapid web development framework that can be used to develop fully fleshed web applications in a short period of time.
+It’s very easy to switch database in Django framework.
+It has built-in admin interface which makes easy to work with it.
+Django is fully functional framework that requires nothing else.
+It has thousands of additional packages available.
+It is very scalable. For more visit When to Use Django? Comparison with other Development Stacks ?
+Django architecture
+Django is based on MVT (Model-View-Template) architecture. MVT is a software design pattern for developing a web application. MVT Structure has the following three parts – Model: Model is going to act as the interface of your data. It is responsible for maintaining data. It is the logical data structure behind the entire application and is represented by a database (generally relational databases such as MySql, Postgres). View: The View is the user interface — what you see in your browser when you render a website. It is represented by HTML/CSS/Javascript and Jinja files. Template: A template consists of static parts of the desired HTML output as well as some special syntax describing how dynamic content will be inserted. To check more about Django’s architecture, visit Django Project MVT Structure
+
+Installation of Django
+Install python3 if not installed in your system ( according to configuration of your system and OS) from here . Try to download the latest version of python it’s python3.6.4 this time.
+Install pip- Open command prompt and enter following command-
+Install virtual environment- Enter following command in cmd-
+Set Virtual environment- Setting up the virtual environment will allow you to edit the dependency which generally your system wouldn’t allow. Follow these steps to set up a virtual environment-
+Create a virtual environment by giving this command in cmd-
+python -m virtualenv env_site
+Change directory to env_site by this command-
+cd env_site
+Go to Script directory inside env_site and activate virtual environment-
+cd Scripts
+activate
+Install Django- Install django by giving following command-
+pip install django
+To initiate a project of Django on Your PC, open Terminal and Enter the following command
+django-admin startproject projectName
+A New Folder with name projectName will be created. To enter in the project using terminal enter command
+cd projectName
+To create a basic app in your Django project you need to go to directory containing manage.py and from there enter the command :
+python manage.py startapp projectApp
+Now you can see your directory structure as under :
+To consider the app in your project you need to specify your project name in INSTALLED_APPS list as follows in settings.py: 
+# Application definition
+ 
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'projectApp'
+]
+So, we have finally created an app but to render the app using urls we need to include the app in our main project so that urls redirected to that app can be rendered. Let us explore it. Move to projectName-> projectName -> urls.py and add below code in the header
+from django.urls import include 
+Now in the list of URL patterns, you need to specify app name for including your app urls. Here is the code for it – 
+from django.contrib import admin
+from django.urls import path, include
+ 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # Enter the app name in following syntax for this to work
+    path('', include("projectApp.urls")),
+]
+Now You can use the default MVT model to create URLs, models, views, etc. in your app and they will be automatically included in your main project.
+
+Django Installation and Setup
+Last Updated : 10 Apr, 2024
+Installing and setting up Django is a straightforward process. Below are the step-by-step instructions to install Django and set up a new Django project on your system.
+
+Prerequisites: Before installing Django, make sure you have Python installed on your system.
+
+How to Install Django?
+To Install Django in Linux and Mac is similar, here I am showing it in Windows for Linux and Mac just open the terminal in place of the command prompt and go through the following commands.
+
+Step 1: Install Pip
+Open the command prompt and enter the following command-
+
+python -m pip install -U pip
+Install Django
+Install Pip
+
+Step 2: Set Virtual environment:
+Setting up the virtual environment will allow you to edit the dependency which generally your system wouldn’t allow. Follow these steps to set up a virtual environment-
+
+Step 3: Create virtual environment in Django:
+We should first go the directory where we want to create the virtual environment then we type the following command to create virtual environment in django.
+
+python -m venv env_site
+a
+Create Virtual Environment
+
+then we need to activate virtual environment in django
+
+Step 4: Activate the virtual environment:
+Run the activation script located in the bin directory within the virtual environment folder
+
+For Windows:
+.\env_site\Scripts\activate.ps1
+For MacOs/Linux:
+source env_site/bin/activate
+Step 5: Install Django:
+Install django by giving following command
+
+pip install django
+3
+Install Django
+
+Django Setup
+Once Django is installed, we can start to create a new Django project.
+
+Step 1: Start a new Django Project
+Start a project by following command-
+
+django-admin startproject geeks_site
+4
+Start a new Project Django
+
+Step 2: Navigate to the Project Directory
+Change directory to geeks_site
+
+cd geeks_site
+4
+
+Step 3: Start the server
+Start the server by typing following command in cmd-
+
+python manage.py runserver
+5
+Start Django Server
+
+Step 4: Verify Server Status
+To check whether server is running or not go to web browser and enter http://127.0.0.1:8000/ as URL.
+
+
+When to Use Django? Comparison with other Development Stacks
+Last Updated : 17 Jan, 2023
+Prerequisite – Django Introduction and Installation 
+
+When to Use Django and Why? 
+
+After getting to know the basics of Python, one should know when to use Django and why? 
+Django is a high-level python based web framework which allows you to quickly create web applications without all of the installation or dependency problems that you normally will find with other frameworks. 
+
+One should be using Django for web development in the following cases: 
+
+For developing a Web Application or API Backend.
+For Rapid Development of some web application.
+Deploying the application Fast and Scaling it according to your needs
+A Perfect ORM for working with databases instead of database queries
+To develop a secure single-page application for either retrieving data or posting data.
+ 
+Django
+
+MEAN/MERN
+
+Spring
+
+Python	JavaScript	Java
+Open Source	NoSQL Databases	Open Source
+Great Community	Modularity	Powerful
+Easy to Learn	Mongoose	Dependency Injection
+MVT Based	Organized	Stability
+Batteries Included Framework	Dynamic Front End	MVC
+Django is a good choice when:
+1.You need to build a robust, scalable web application with a lot of data. Django’s built-in ORM (Object-Relational Mapping) and support for database migrations make it easy to work with large amounts of data, and its built-in admin interface makes it easy to manage that data.
+2.You need to build an application with a lot of user-facing functionality. Django’s built-in forms, authentication, and authorization make it easy to implement user registration, login, and other common functionality.
+3.You need to get an application up and running quickly. Django’s “batteries-included” philosophy means that it comes with a lot of built-in functionality, so you can get an application up and running quickly without having to write a lot of boilerplate code.
+4.You want to use Python for your backend. Since Django is built on Python, it’s a natural choice if you’re already familiar with the language or want to use it for your backend.
+
+When compared to other development stacks, Django may not be the best choice for certain types of projects. For example:
+1.If you’re building a small, simple website or a single-page application (SPA), a JavaScript-based framework like React or Angular might be a better choice.
+2.If you’re building a real-time, highly-concurrent application, a framework like Node.js might be a better choice since it is built on an event-driven, non-blocking I/O model.
+3.If you’re building a mobile application, you’ll probably want to use a mobile-specific framework like React Native or Xamarin.
+Ultimately, the choice of web development stack will depend on the specific requirements of your project and your team’s expertise. Django is a great choice for many types of web applications, but it may not be the best choice for every project.
+
+Here is an example of a simple Django view function that handles a GET request and returns a template:
+from django.shortcuts import render
+
+def my_view(request):
+    if request.method == 'GET':
+        return render(request, 'mytemplate.html')
+In this example, the my_view function is handling a GET request and using the render shortcut function to return the mytemplate.html template. The template will be rendered with the context data supplied by the view.
+
+Here is an example of a view that handles a POST request and performs some action with the data:
+
+from django.shortcuts import render, redirect
+from .models import MyModel
+
+def my_view(request):
+    if request.method == 'POST':
+        form = MyForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            MyModel.objects.create(**data)
+            return redirect('success_page')
+    else:
+        form = MyForm()
+    return render(request, 'mytemplate.html', {'form': form})
+In this example, the view is handling a POST request, it creates an instance of MyForm with the data from the request, it validates the form and if it’s valid, it creates an object with MyModel with the cleaned data. After that, it redirects the user to a success page.
+If the request method is GET, it creates an empty form and render the template passing the form as context data.
+
+Please note that you need to have the necessary imports and correctly set up models and forms for the above examples to work.
+Also, Django views can also be written as class-based views which are more powerful and flexible.
+
+Also check –
+Django Project MVT Structure
+How to Create a Basic Project using MVT in Django ?
+Companies using Django:
+Instagram
+Disqus
+Pinterest
+Mozilla Firefox
+Spotify
+YouTube
+Conclusion : 
+Django is a rapid web development framework and if you want to get your application built fast within a few days, there is no better framework than Django Web Framework. Django gives all the features included, also called “Batteries Included Framework”. It has a built-in admin interface which makes it easy to work with it.
+
+
+Django Project MVT Structure
+Last Updated : 16 Aug, 2021
+Django is based on MVT (Model-View-Template) architecture. MVT is a software design pattern for developing a web application. 
+
+MVT Structure has the following three parts – 
+
+Model: The model is going to act as the interface of your data. It is responsible for maintaining data. It is the logical data structure behind the entire application and is represented by a database (generally relational databases such as MySql, Postgres). To check more, visit – Django Models 
+
+View: The View is the user interface — what you see in your browser when you render a website. It is represented by HTML/CSS/Javascript and Jinja files. To check more, visit – Django Views. 
+
+Template: A template consists of static parts of the desired HTML output as well as some special syntax describing how dynamic content will be inserted. To check more, visit – Django Templates 
+
+ 
+
+
+
+ Project Structure :
+A Django Project when initialized contains basic files by default such as manage.py, view.py, etc. A simple project structure is enough to create a single-page application. Here are the major files and their explanations. Inside the geeks_site folder ( project folder ) there will be the following files- 
+ 
+
+
+
+manage.py- This file is used to interact with your project via the command line(start the server, sync the database… etc). For getting the full list of commands that can be executed by manage.py type this code in the command window- 
+
+$ python manage.py help
+ folder ( geeks_site ) – This folder contains all the packages of your project. Initially, it contains four files – 
+
+
+
+_init_.py – It is a python package. It is invoked when the package or a module in the package is imported. We usually use this to execute package initialization code, for example for the initialization of package-level data.
+settings.py – As the name indicates it contains all the website settings. In this file, we register any applications we create, the location of our static files, database configuration details, etc.
+urls.py – In this file, we store all links of the project and functions to call.
+wsgi.py – This file is used in deploying the project in WSGI. It is used to help your Django application communicate with the webserver.
+
+
+How to Create a Basic Project using MVT in Django ?
+Last Updated : 18 Nov, 2022
+Prerequisite – Django Project MVT Structure
+ 
+
+Assuming you have gone through the previous article. This article focuses on creating a basic project to render a template using MVT architecture. We will use MVT (Models, Views, Templates) to render data to a local server.
+ 
+
+Create a basic Project: 
+
+To initiate a project of Django on Your PC, open Terminal and Enter the following command 
+django-admin startproject projectName
+A New Folder with the name projectName will be created. To enter in the project using the terminal enter command 
+cd projectName
+Create a new file views.py inside the project folder where settings.py, urls.py and other files are stored and save the following code in it- 
+# HttpResponse is used to
+# pass the information 
+# back to view
+from django.http import HttpResponse
+ 
+# Defining a function which
+# will receive request and
+# perform task depending 
+# upon function definition
+def hello_geeks (request) :
+ 
+    # This will return Hello Geeks
+    # string as HttpResponse
+    return HttpResponse("Hello Geeks")
+
+
+Open urls.py inside project folder (projectName) and add your entry- 
+Import hello_geeks function from views.py file. 
+from projectName.views import hello_geeks
+
+
+Add an entry in url field inside url patterns- 
+path('geek/', hello_geeks), 
+
+
+Now to run the server follow these steps- 
+Open command prompt and change directory to env_site by this command- 
+$ cd env_site
+Go to Script directory inside env_site and activate virtual environment- 
+$ cd Script
+$ activate
+Return to the env_site directory and goto the project directory- 
+$ cd ..
+$ cd geeks_site
+Start the server- Start the server by typing following command in cmd- 
+$ python manage.py runserver
+Checking – Open the browser and type this url- 
+http://127.0.0.1:8000/geek/
+
+
+
+How to Create an App in Django ?
+Last Updated : 22 Dec, 2022
+Prerequisite – How to Create a Basic Project using MVT in Django?
+
+Django is famous for its unique and fully managed app structure. For every functionality, an app can be created like a completely independent module. This article will take you through how to create a basic app and add functionalities using that app.
+For example, if you are creating a Blog, Separate modules should be created for Comments, Posts, Login/Logout, etc. In Django, these modules are known as apps. There is a different app for each task. 
+
+Benefits of using Django apps –
+Django apps are reusable i.e. a Django app can be used with multiple projects.
+We have loosely coupled i.e. almost independent components
+Multiple developers can work on different components
+Debugging and code organization is easy. Django has an excellent debugger tool.
+It has in-built features like admin pages etc, which reduces the effort of building the same from scratch
+Pre-installed apps – 
+
+Django provides some pre-installed apps for users. To see pre-installed apps, navigate to projectName –> projectName –> settings.py 
+In your settings.py file, you will find INSTALLED_APPS. Apps listed in INSTALLED_APPS are provided by Django for the developer’s comfort. 
+
+
+
+Also, Visit :Django ORM – Inserting, Updating & Deleting Data 
+
+Creating an App in Django :
+Let us start building an app. 
+
+Method-1
+To create a basic app in your Django project you need to go to the directory containing manage.py and from there enter the command :
+python manage.py startapp projectApp
+ Method-2
+To create a basic app in your Django project you need to go to the directory containing manage.py and from there enter the command :
+django-admin startapp projectApp
+Now you can see your directory structure as under :
+
+
+To consider the app in your project you need to specify your project name in INSTALLED_APPS list as follows in settings.py:
+
+# Application definition
+ 
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'projectApp'
+]
+So, we have finally created an app but to render the app using URLs we need to include the app in our main project so that URLs redirected to that app can be rendered. Let us explore it. 
+Move to projectName -> projectName -> urls.py and add below code in the header
+
+from django.urls import include
+Now in the list of URL patterns, you need to specify the app name for including your app URLs. Here is the code for it –
+
+from django.contrib import admin
+from django.urls import path, include
+ 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # Enter the app name in following
+    # syntax for this to work
+    path('', include("projectApp.urls")),
+]
+Now You can use the default MVT model to create URLs, models, views, etc. in your app and they will be automatically included in your main project.
+The main feature of Django Apps is independence, every app functions as an independent unit in supporting the main project. 
+
+Now the urls.py in the project file will not access the app’s url.
+
+To run your Django Web application properly the following actions must be taken:-
+
+1. Create a file in the apps directory called urls.py
+
+2. Include the following code:
+
+
+from django.urls import path
+#now import the views.py file into this code
+from . import views
+urlpatterns=[
+  path('',views.index)
+]
+The above code will call or invoke the function which is defined in the views.py file so that it can be seen properly in the Web browser. Here it is assumed that views.py contains the following code :- 
+
+
+from django.http import HttpResponse
+ 
+ 
+def index(request):
+  return HttpResponse("Hello Geeks")
+After adding the above code, go to the settings.py file which is in the project directory, and change the value of ROOT_URLCONF from ‘project.urls’ to ‘app.urls’
+
+From this:-
+
+
+
+To this:
+
+
+
+3. And then you can run the server(127.0.0.1:8000) and you will get the desired output
+
+
+
+Weather app using Django | Python
+Last Updated : 25 May, 2022
+In this tutorial, we will learn how to create a Weather app that uses Django as backend. Django provides a Python Web framework based web framework that allows rapid development and clean, pragmatic design.
+
+Basic Setup –
+Change directory to weather –
+
+cd weather
+Start the server –
+
+python manage.py runserver
+To check whether the server is running or not go to a web browser and enter http://127.0.0.1:8000/ as URL. Now, you can stop the server by pressing
+
+ctrl-c
+Implementation :
+ python manage.py startapp main
+Goto main/ folder by doing :
+
+cd main 
+and create a folder with index.html file: templates/main/index.html
+
+Open the project folder using a text editor. The directory structure should look like this :
+
+
+Now add main app in settings.py
+
+
+Edit urls.py file in weather :
+
+from django.contrib import admin 
+from django.urls import path, include 
+  
+  
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('', include('main.urls')), 
+] 
+edit urls.py file in main :
+
+from django.urls import path 
+from . import views 
+  
+urlpatterns = [ 
+         path('', views.index), 
+] 
+edit views.py in main :
+
+from django.shortcuts import render 
+# import json to load json data to python dictionary 
+import json 
+# urllib.request to make a request to api 
+import urllib.request 
+  
+  
+def index(request): 
+    if request.method == 'POST': 
+        city = request.POST['city'] 
+        ''' api key might be expired use your own api_key 
+            place api_key in place of appid ="your_api_key_here "  '''
+  
+        # source contain JSON data from API 
+  
+        source = urllib.request.urlopen( 
+            'http://api.openweathermap.org/data/2.5/weather?q =' 
+                    + city + '&appid = your_api_key_here').read() 
+  
+        # converting JSON data to a dictionary 
+        list_of_data = json.loads(source) 
+  
+        # data for variable list_of_data 
+        data = { 
+            "country_code": str(list_of_data['sys']['country']), 
+            "coordinate": str(list_of_data['coord']['lon']) + ' '
+                        + str(list_of_data['coord']['lat']), 
+            "temp": str(list_of_data['main']['temp']) + 'k', 
+            "pressure": str(list_of_data['main']['pressure']), 
+            "humidity": str(list_of_data['main']['humidity']), 
+        } 
+        print(data) 
+    else: 
+        data ={} 
+    return render(request, "main/index.html", data) 
+You can get your own API key from : Weather API
+
+Navigate to templates/main/index.html and edit it: link to index.html file
+
+Make migrations and migrate it:
+
+python manage.py makemigrations
+python manage.py migrate
+now let’s run the server to see your weather app.
+
+python manage.py runserver
+
+
+Django Sign Up and login with confirmation Email | Python
+Last Updated : 15 Sep, 2023
+Django by default provides an authentication system configuration. User objects are the core of the authentication system. Today we will implement Django’s authentication system. 
+
+Modules required: Django install, crispy_forms
+
+Django Sign Up and Login with Confirmation Email
+To install crispy_forms you can use the terminal command:
+
+pip install --upgrade django-crispy-forms
+Start a project with the following command –
+
+ django-admin startproject project
+Change directory to project –
+
+ cd project
+Start the server- Start the server by typing the following command in the terminal –
+
+ python manage.py runserver
+To check whether the server is running or not go to a web browser and enter http://127.0.0.1:8000/ as URL. and to stop the server press keys
+
+ctrl+c
+Let’s create an app now called the “user”. 
+
+python manage.py startapp user
+Goto user/ folder by doing: cd user and create a folder templates with files index.html, login.html, Email.html, register.html files.
+ 
+
+
+
+Open the project folder using a text editor. The directory structure should look like this :
+
+
+
+Now add the “user” app and “crispy_form” in your todo_site in settings.py, and add 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+at last of settings.py 
+
+
+
+configure email settings in setting.py:
+
+
+
+place your email and password here.
+
+Edit urls.py file in project
+In this file we provide the path for the login,logout ,register page and include the user.urls to the main project URL file.
+
+from django.contrib import admin
+from django.urls import path, include
+from user import views as user_view
+from django.contrib.auth import views as auth
+ 
+urlpatterns = [
+ 
+    path('admin/', admin.site.urls),
+ 
+    ##### user related path########################## 
+    path('', include('user.urls')),
+    path('login/', user_view.Login, name ='login'),
+    path('logout/', auth.LogoutView.as_view(template_name ='user/index.html'), name ='logout'),
+    path('register/', user_view.register, name ='register'),
+ 
+]
+Edit urls.py in user
+Here we provide the URL path for index view and these views are connected to the main project URL file.
+
+
+from django.urls import path, include
+from django.conf import settings
+from . import views
+from django.conf.urls.static import static
+ 
+urlpatterns = [
+         path('', views.index, name ='index'),
+]
+Edit views.py in user
+Now we will provide the logic and code for the Email system in the views of user app
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserRegisterForm
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
+  
+  
+#################### index####################################### 
+def index(request):
+    return render(request, 'user/index.html', {'title':'index'})
+  
+########### register here ##################################### 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            ######################### mail system #################################### 
+            htmly = get_template('user/Email.html')
+            d = { 'username': username }
+            subject, from_email, to = 'welcome', 'your_email@gmail.com', email
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            ################################################################## 
+            messages.success(request, f'Your account has been created ! You are now able to log in')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'user/register.html', {'form': form, 'title':'register here'})
+  
+################ login forms################################################### 
+def Login(request):
+    if request.method == 'POST':
+  
+        # AuthenticationForm_can_also_be_used__
+  
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password = password)
+        if user is not None:
+            form = login(request, user)
+            messages.success(request, f' welcome {username} !!')
+            return redirect('index')
+        else:
+            messages.info(request, f'account done not exit plz sign in')
+    form = AuthenticationForm()
+    return render(request, 'user/login.html', {'form':form, 'title':'log in'})
+Configure your email here.
+
+Now create a forms.py in user
+Now with help of django form we will create a Registration page for the new user to register and this will mail to registering gmail from the gmail we mention in the settings.py file of the project.
+
+
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+ 
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+    phone_no = forms.CharField(max_length = 20)
+    first_name = forms.CharField(max_length = 20)
+    last_name = forms.CharField(max_length = 20)
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'phone_no', 'password1', 'password2']
+Navigate to templates/user/ and edit files : 
+Index.html file
+
+This file includes metadata, loads external CSS and JavaScript files (Bootstrap and Font Awesome), and uses Django template tags to handle dynamic content. The template features a navigation bar, displays alert messages, and adjusts the page content based on user authentication, showing a personalized welcome message or a login prompt. This code is designed for building user-friendly web interfaces within a Django project.
+
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="project">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="author" content="vinayak sharma">
+ 
+  <title>{{title}}</title>
+ 
+ 
+  <!-- bootstrap file -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- bootstrap file-->
+ 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+ 
+  <!-- main css -->
+  <link rel="stylesheet" type="text/css" href="{% static "index.css" %}" />
+ 
+ 
+  <!-- message here -->
+ 
+  {% if messages %}
+  {% for message in messages %}
+ 
+  <script>
+    alert("{{ message }}");
+  </script>
+ 
+  {% endfor %}
+  {% endif %}
+ 
+  <!--_______________________________________________-->
+ 
+ 
+ 
+</head>
+ 
+<body class="container-fluid">
+ 
+ 
+  <header class="row">
+ 
+    <!-- navbar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">project</a>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNavBar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url "index" %}">Home</a></li>
+ 
+            {% if user.is_authenticated %}
+            <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span>   Logout</a></li>
+            {% else %}
+            <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span>   Sign up</a></li>
+            <li><a href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span>   Log in</a></li>
+            {% endif %}
+ 
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <br/>
+  <br>
+  <br>
+  <div class="row">
+    {% block start %}
+    {% if user.is_authenticated %}
+    <center><h1>welcome back {{user.username}}!</h1></center>
+    {% else %}
+    <center><h1>log in, plz . . .</h1></center>
+    {% endif %}
+    {% endblock %}
+  </div>
+</body>
+ 
+</html>
+Email.html
+
+The provided HTML code is an email template for a registration confirmation message. It uses the Roboto font, has a centered thank-you message with user-specific content (username), and a horizontal line for separation. This template is designed to deliver a visually pleasing and informative confirmation email to users.
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900');
+        </style>
+    </head>
+    <body style="background: #f5f8fa;font-family: 'Roboto', sans-serif;">
+        <div style="width: 90%;max-width:600px;margin: 20px auto;background: #ffffff;">
+            <section style="margin: 0 15px;color:#425b76;">
+                <h2 style="margin: 40px 0 27px 0;text-align: center;">Thank you to registration</h2>
+                <hr style="border:0;border-top: 1px solid rgba(66,91,118,0.3);max-width: 50%">
+                <p style="font-size:15.5px;font-weight: bold;margin:40px 20px 15px 20px;">Hi {{username}}, we have received your details and will process soon.</p>
+            </section>
+        </div>
+    </body>
+</html>
+Login.html
+
+Inside this block, it creates a centered login form with specific styling, including a black border, padding, and a rounded border. The form includes a CSRF token for security and uses the crispy filter to render form fields with enhanced formatting, along with a login button and a link to the registration page.
+
+
+{% extends "user/index.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+ 
+ <div class="content-section col-md-8 col-md-offset-2">
+  <center>
+  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+   <center>
+    <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span>   login</button>
+  </center>
+  <br/>
+  <sub style="text-align: left;"><a href="{% url 'register' %}" style="text-decoration: none; color: blue; padding:2%; cursor:pointer; margin-right:2%;">don't have account,sign up</a></sub>
+  </form>
+</center>
+ </div>
+{% endblock start %}
+Register.html
+
+This file creates a centered sign-up form with specific styling, including a black border, padding, and rounded corners. The form includes a CSRF token for security and uses the crispy filter for enhanced form field rendering, along with a sign-up button and a link to the login page for users with existing accounts.
+
+
+{% extends "user/index.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+ 
+<div class="content-section col-md-8 col-md-offset-2">
+  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+    <center>
+      <button style="background: black; padding:2%; font-size: 2rem; color:white;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-check"></span>   sign up</button>
+    </center>
+    <br />
+    <sub><a href="{% url "login" %}" style="text-decoration: none; color: blue; padding:3%; cursor:pointer;">Already have an account ?</a></sub>
+  </form>
+</div>
+{% endblock start %}
+Make migrations and migrate them. 
+
+python manage.py makemigrations
+python manage.py migrate
+Now you can run the server to see your app.
+
+python manage.py runserver
+
+ ToDo webapp using Django
+Last Updated : 24 Mar, 2023
+Django is a high-level Python Web framework-based web framework that allows rapid development and clean, pragmatic design. today we will create a todo app created to understand the basics of Django. In this web app, one can create notes like Google Keep or Evernote.
+
+Modules required: Django
+
+Basic setup
+Step 1: Start a project with the following command
+
+django-admin startproject todo_site
+Step 2:  Change the directory to todo_site.
+
+cd todo_site
+To check whether the server is running or not go to a 
+
+Let’s create an app now 
+Step 3: Create an app with the following command.
+
+python manage.py startapp todo
+The directory structure should look like this:
+ 
+
+
+ 
+
+Step 4: Now add the todo app in your todo_site in settings.py
+
+
+ 
+
+Step 5: Edit urls.py file in todo_site 
+
+Python3
+from django.contrib import admin
+from django.urls import path
+from todo import views
+ 
+urlpatterns = [
+    #####################home_page###########################################
+    path('', views.index, name="todo"),
+    ####################give id no. item_id name or item_id=i.id ############
+    # pass item_id as primary key to remove that the todo with given id
+    path('del/<str:item_id>', views.remove, name="del"),
+    ########################################################################
+    path('admin/', admin.site.urls),
+]
+Step 6: Edit models.py in todo
+
+Python3
+from django.db import models
+from django.utils import timezone
+ 
+ 
+class Todo(models.Model):
+    title = models.CharField(max_length=100)
+    details = models.TextField()
+    date = models.DateTimeField(default=timezone.now)
+ 
+    def __str__(self):
+        return self.title
+Step 7: Edit views.py in todo
+
+Python3
+from django.shortcuts import render, redirect
+from django.contrib import messages
+ 
+# import todo form and models
+ 
+from .forms import TodoForm
+from .models import Todo
+ 
+###############################################
+ 
+ 
+def index(request):
+ 
+    item_list = Todo.objects.order_by("-date")
+    if request.method == "POST":
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('todo')
+    form = TodoForm()
+ 
+    page = {
+        "forms": form,
+        "list": item_list,
+        "title": "TODO LIST",
+    }
+    return render(request, 'todo/index.html', page)
+ 
+ 
+### function to remove item, it receive todo item_id as primary key from url ##
+def remove(request, item_id):
+    item = Todo.objects.get(id=item_id)
+    item.delete()
+    messages.info(request, "item removed !!!")
+    return redirect('todo')
+Step 8: Now create a forms.py in todo 
+
+Python3
+from django import forms
+from .models import Todo
+ 
+ 
+class TodoForm(forms.ModelForm):
+    class Meta:
+        model = Todo
+        fields = "__all__"
+Step 9: Register models to admin 
+
+
+ 
+
+Step 10: Create templates/todo/index.html 
+
+HTML
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ 
+<head>
+ 
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--style-->
+  <style>
+  .card {
+ 
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
+               0 6px 20px 0 rgba(0,0,0,0.39);
+   background: lightpink;
+   margin-bottom : 5%;
+   border-radius: 25px;
+   padding : 2%;
+   overflow: auto;
+   resize: both;
+   text-overflow: ellipsis;
+  }
+  .card:hover{
+    background: lightblue;
+  }
+ 
+  .submit_form{
+ 
+    text-align: center;
+    padding: 3%;
+    background: pink;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
+                0 6px 20px 0 rgba(0,0,0,0.36);
+  }
+  </style>
+ 
+</head>
+ 
+<body  class="container-fluid">
+ 
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-info">
+    <strong>{{message}}</strong>
+  </div>
+  {% endfor %}
+  {% endif %}
+ 
+  <center class="row">
+    <h1><i>__TODO LIST__</i></h1>
+    <hr />
+  </center>
+ 
+  <div class="row">
+ 
+    <div class="col-md-8">
+ 
+      {% for i in list %}
+      <div class="card">
+        <center><b>{{i.title}}</b></center>
+        <hr/>
+        {{i.date}}
+        <hr/>
+        {{i.details}}
+        <br />
+        <br />
+        <form action="/del/{{i.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+          {% csrf_token %}
+          <button value="remove" type="submit"  class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span>   remove</button>
+        </form>
+      </div>
+      {% endfor%}
+    </div>
+    <div class="col-md-1"> </div>
+    <div class="col-md-3" >
+      <div  class="submit_form">
+      <form  method="POST">
+        {% csrf_token %}
+        {{forms}}
+        <center>
+        <input type="submit" class="btn btn-default" value="submit" />
+      </center>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+ 
+</html>
+Step 11: Migrations Files to the Database
+
+python manage.py makemigrations
+python manage.py migrate
+Step 12: Start the server by typing the following command in the terminal 
+
+python manage.py runserver
+Output:
+
+Open the web browser and enter http://127.0.0.1:8000/ as the URL.
+
+
+
+Setup Sending Email in Django Project
+Last Updated : 29 Nov, 2022
+Haven’t you observed, when you register on some websites, you get mail from that company or institution? The email would be, a verification email or welcome email, account creation successful email or thanks-regard email, etc. For example, when you create a Google account, the first mail you get would be something like, “Hi Xyz, Welcome to Google. Your new account comes with access to Google products, apps, and services…..” Sending these types of emails from your Django application is quite easy. Although you can refer to the documentation to knowing more about sending emails in Django, this is remarkably condensed and made easier. 
+
+How to send simple emails to the registered users of your Django application Illustration of Django emails using an example. Consider a project named geeksforgeeks having an app named geeks. Refer this to create a Django projects and apps. Now let’s demonstrate this in geeksforgeeks project. In your “geeks” app’s settings.py file, enter the following, 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = #sender's email-id
+EMAIL_HOST_PASSWORD = #password associated with above email-id
+In the above code, EMAIL_HOST_USER = ‘xabc6457@gmail.com’ and EMAIL_HOST_PASSWORD = ‘xyz123abc@’ are the lines where you need to add the sender’s mail id and password. xabc6457@gmail.com and xyz123abc@ are just examples. Now to use this in our application, move to views.py and add these lines at the top section as below. 
+
+
+from django.conf import settings
+from django.core.mail import send_mail
+Generally, emails are sent to the users who signup right? So, in the signup view function, add these lines. 
+
+
+subject = 'welcome to GFG world'
+message = f'Hi {user.username}, thank you for registering in geeksforgeeks.'
+email_from = settings.EMAIL_HOST_USER
+recipient_list = [user.email, ]
+send_mail( subject, message, email_from, recipient_list )
+Now we will understand what exactly is happening. Here,
+
+subject refers to the email subject.
+message refers to the email message, the body of the email.
+email_from refers to the sender’s details.This takes the EMAIL_HOST_USER from settings.py file, where you added those lines of code earlier.
+recipient_list is the list of recipients to whom the mail has to be sent that is, whoever registers to your application they receive the email.
+send_mail is an inbuilt Django function that takes subject, message, email_from, and recipient’s list as arguments, this is responsible to send emails.
+After these extra lines of code has been added to your project, you can send emails now. But if you are using Gmail, then the first time you make these changes in your project and run, you might get SMTP error. To correct that- 1-Go to the Google account registered with the sender’s mail address and select Manage your account 
+
+2-Go to security section at the left nav and scroll down. Look for ‘App password’.
+
+3- Inside App password select the any of the option from dropdown and given name as per your wish.
+
+4- Now you will see a code on your screen, copy the code.
+
+5. Paste the code in settings.py where you have declared EMAIL_HOST_PASSWORD. 
+
+6. Finally run the application. Now, register any user to your application, and they will receive mail from the email account you had mentioned. run the application.
+
+
+Django project to create a Comments System
+Last Updated : 02 Nov, 2023
+Commenting on a post is the most common feature a post have and implementing in Django is way more easy than in other frameworks. To implement this feature there are some number of steps which are to be followed but first lets start by creating a new project.
+
+How to create Comment Feature in Django?
+Open command prompt and run the following commands.
+Start a new django project as:
+
+django-admin startproject my_project
+After executing this command you will see following files and folder that django creates for you. To see this folder you can make use of tree command on command prompt or open the folder in an ide, in my case I have used sublime text editor.
+ 
+
+
+
+Create a new app as:
+
+python manage.py startapp portfolio_app
+Django automatically creates files so that you can focus on your task without bothering of other things like making a file and structuring them.
+ 
+
+
+
+In this article we will make a post model to post a picture:
+
+The post consist of following fields:
+
+1.Image
+2.Caption or description
+3.Date posted
+4.Author of the image.
+First, importing the required modules in models.py:
+
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+Now, continuing with models.py module, append the following snippet.
+
+class Post(models.Model):
+    image = models.ImageField(
+        default ="default_foo.png", upload_to ="post_picture")
+    caption = models.TextField()
+    date_posted = models.DateTimeField(default = timezone.now)
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
+ 
+    def __str__(self):
+        return f'{self.author.username}\'s Post- {self.title}'
+ 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if img.height > 400 or img.width > 400:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+Name of the model is post model (it could be any of your choice). Let us understand the details of each filed used.
+
+Image field: This field allows to store image in the database. The default value includes  a default image which I have named as default_foo.png.It is automatically saved when no picture is available or posted by the user. This Image is located in a folder named Media in your my_project directory.  If a user upload a picture, it is uploaded in the directory named post_picture, set by the attribute upload_to.
+
+Caption: This field depicts the description of the image named as caption for the image field.
+
+Date posted: This field takes account of the time and date the image is uploaded. Default value timezone.now saves the time at which this post is created. The time/date is not changed if the post is updated later after the post.
+
+Author: This attribute takes account of the user posted this post. It takes django user as the parameter to do so. The on_delete filed takes care for abnormalities which might happen to the post if a user gets deleted. Models, cascade field deletes all the user related post data simultaneously when a user gets deleted.
+
+__str__ method: These methods are also known as magic methods in python. It takes self as its attributes. This method shows the title information to the django admin at the backend.
+
+save method:This method is override to save the post with user customized values.If we want to save images of a particular size in our database, save method is used to do so. For this ypu have to import PIL in your models.py module to read the image.Open the image by open method into a variable and store it in a particular output size in your database to avoid storage of large images in your database.
+
+After successfully creating the post model run the following commands on the terminal the make and save the changes in database.
+
+python manage.py makemigrations
+python manage.py migrate
+This will make the post table in your database. I’m using django default database. 
+
+For visualizing your tables and database I recommend you to download DB Browser for sqlite which will provide you an interface to view, edit all your schemas.
+
+After implementing your post model now it’s time to implement comment feature on your post.
+
+Make a form in forms.py module to get the data.
+Make a function to save or delete the comment in views.py module.
+Get the comments from the html file.
+Make a form to collect the content of comment in forms.py module. If You don’t have form.py in your django app, then create one .
+
+Django has inbuilt forms to create it and access it directly without writing a new one from scratch.
+
+from django import forms
+from .models import Comment
+ 
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(label ="", widget = forms.Textarea(
+    attrs ={
+        'class':'form-control',
+        'placeholder':'Comment here !',
+        'rows':4,
+        'cols':50
+    }))
+    class Meta:
+        model = Comment
+        fields =['content']
+Moving to the views.py module, to process and save the data coming from html form the following code goes on. I am implementing the comment feature in post detail view, you can use it wherever you want to, the method would be same.
+
+from .forms import CommentForm
+ 
+def post_detailview(request, id):
+   
+  if request.method == 'POST':
+    cf = CommentForm(request.POST or None)
+    if cf.is_valid():
+      content = request.POST.get('content')
+      comment = Comment.objects.create(post = post, user = request.user, content = content)
+      comment.save()
+      return redirect(post.get_absolute_url())
+    else:
+      cf = CommentForm()
+       
+    context ={
+      'comment_form':cf,
+      }
+    return render(request, 'socio / post_detail.html', context)
+Importing CommentForm from forms.py module,  make an object of commentform and check if it is valid. Django provides built-in feature to check the form credentials and format by is_valid method. 
+
+Scraping the content of post  by get method and creating a new  comment by create method followed by Save method saves the data of object created while creating new post in the database.
+
+The cf object is passed into the html by context dictionary to access all the comments in HTML.
+
+Finally, for getting the data from html form, a form tag is used with method used as post, since we have to send the data to the server. The following snippet shows how the value is taken from the form in the html.
+
+{% load crispy_forms_tags %}
+<html>
+  <head>
+  <title></title>
+  </head>
+<body>  
+  <form method="POST">
+    {% csrf_token %}
+    {{comment_form.as_p}}
+  </form>
+</body>
+Here, Csrf_token is used for the security purpose. Django handles the encryption of form through this token.
+
+as_p method is used to show the form in paragraph manner for better visualization.
+
+Output – 
+
+
+Comment box
+
+You can show all the comments through the for loop in HTML. Django provides new HTML language to access data and variables passed in the context in views.py module which contains for loops, if-else conditions etc.
+
+You can view this features in my social media site project in my github.
+
+https://github.com/Shikharm16/social-media-site-using-django
+
+Voting System Project Using Django Framework
+Last Updated : 20 Sep, 2023
+Project Title: Pollster (Voting System) web application using Django framework
+Type of Application (Category): Web application.
+
+Introduction: We will create a pollster (voting system) web application using Django. This application will conduct a series of questions along with many choices. A user will be allowed to give voting for that question by selecting a choice. Based on the answer the total votes will be calculated and it will be displayed to the user. Users can also check the result of the total votes for specific questions on the website directly. We will also build the admin part of this project. Admin user will be allowed to add questions and manage questions in the application. 
+
+pollster-web-app
+
+Pre-requisite: Knowledge of Python and basics of Django Framework. Python should be installed in the system. Visual studio code or any code editor to work on the application. 
+
+Technologies used in the project: Django framework and SQLite database which comes by default with Django.  
+
+Implementation of the Project
+Creating Project
+Step-1: Create an empty folder pollster_project in your directory.
+Step-2: Now switch to your folder and create a virtual environment in this folder using the following command. 
+
+pip install pipenv
+pipenv shell
+Step-3: A Pipfile will be created in your folder from the above step. Now install Django in your folder using the following command. 
+
+pipenv install django
+Step-4: Now we need to establish the Django project. Run the following command in your folder and initiate a Django project. 
+
+django-admin startproject pollster
+A New Folder with name pollster will be created. Switch to the pollster folder using the following command. 
+
+cd pollster
+The folder structure will look something like this. 
+
+
+
+Here you can start the server using the following command and check if the application running or not using your http://127.0.0.1:8000/ in your browser. 
+
+python manage.py runserver
+Step-5: Create an app ‘polls‘ using the following command  
+
+python manage.py startapp polls
+Below is the folder structure after creating ”polls’ app in the project.  
+
+polls-app
+
+Create Models
+Step-1: In your models.py file write the code given below to create two tables in your database. One is ‘Question‘ and the other one is ‘Choice‘. ‘Question’ will have two fields of ‘question_text’ and a ‘pub_date’. Choice has three fields: ‘question’, ‘choice_text’, and ‘votes’. Each Choice is associated with a Question. 
+
+
+from django.db import models
+ 
+# Create your models here.
+ 
+class Question(models.Model):
+    question_text = models.CharField(max_length = 200)
+    pub_date = models.DateTimeField('date published')
+ 
+    def __str__(self):
+        return self.question_text
+ 
+ 
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete = models.CASCADE)
+    choice_text = models.CharField(max_length = 200)
+    votes = models.IntegerField(default = 0)
+ 
+    def __str__(self):
+        return self.choice_text
+Step-2:Go to the settings.py file and in the list, INSTALLED_APPS write down the code below to include the app in our project. This will refer to the polls -> apps.py -> PollsConfig class. 
+
+
+INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+Step-3: We have made changes in our database and created some tables but in order to reflect these changes we need to create migration here and then Django application will stores changes to our models. Run the following command given below to create migrations. 
+
+python manage.py makemigrations polls
+Inside polls->migrations a file 0001_initial.py will be created where you can find the database tables which we have created in our models.py file. Now to insert all the tables in our database run the command given below…  
+
+python manage.py migrate 
+Create an Admin User
+Step-1: Run the command given below to create a user who can login to the admin site. 
+
+python manage.py createsuperuser
+It will prompt username which we need to enter. 
+
+Username: geeks123
+Now it will prompt an email address which again we need to enter here.  
+
+Email address: xyz@example.com
+The final step is to enter the password. We need to enter the password twice, the second time as a confirmation of the first.  
+
+Password: ******
+Password (again): ******
+Superuser created successfully.
+Now we can run the server using the same command python manage.py runserver and we can check our admin panel browsing the URL http://127.0.0.1:8000/admin .  
+
+admin-panel
+
+Step-2: In the admin.py file we will write the code given below to map each question with choices to select. Also, we will write the code to change the site header, site title, and index_title. Once this is done we can add questions and choices for the question from the admin panel.  
+
+
+from django.contrib import admin
+# Register your models here.
+from .models import Question, Choice
+ 
+# admin.site.register(Question)
+# admin.site.register(Choice)
+ 
+admin.site.site_header = "Pollster Admin"
+admin.site.site_title = "Pollster Admin Area"
+admin.site.index_title = "Welcome to the Pollster Admin Area"
+ 
+ 
+class ChoiceInLine(admin.TabularInline):
+    model = Choice
+    extra = 3
+ 
+ 
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [(None, {'fields': ['question_text']}), ('Date Information', {
+        'fields': ['pub_date'], 'classes': ['collapse']}), ]
+    inlines = [ChoiceInLine]
+ 
+ 
+admin.site.register(Question, QuestionAdmin)
+question-choices
+
+Note: We can test the application here by adding some questions and choices for those questions. 
+
+Create Views
+Now we will create the view of our application that will fetch the data from our database and will render the data in the ‘template‘ (we will create ‘template’ folder and the files inside this folder in the next section) of our application to display it to the user. 
+
+Step-1 Open views.py file and write down the code given below. 
+
+
+from django.template import loader
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+ 
+from .models import Question, Choice
+ 
+# Get questions and display them
+ 
+ 
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls / index.html', context)
+ 
+# Show specific question and choices
+ 
+ 
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk = question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls / detail.html', {'question': question})
+ 
+# Get question and display results
+ 
+ 
+def results(request, question_id):
+    question = get_object_or_404(Question, pk = question_id)
+    return render(request, 'polls / results.html', {'question': question})
+ 
+# Vote for a question choice
+ 
+ 
+def vote(request, question_id):
+    # print(request.POST['choice'])
+    question = get_object_or_404(Question, pk = question_id)
+    try:
+        selected_choice = question.choice_set.get(pk = request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'polls / detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('polls:results', args =(question.id, )))
+Step-2: Create a file urls.py inside the pollster->polls folder to define the routing for all the methods we have implemented in views.py file (don’t get confused with the file inside the pollster->pollster->urls.py file). Below is the code of urls.py file… 
+
+
+from django.urls import path
+from . import views
+ 
+app_name = 'polls'
+urlpatterns = [
+    path('', views.index, name ='index'),
+    path('<int:question_id>/', views.detail, name ='detail'),
+    path('<int:question_id>/results/', views.results, name ='results'),
+    path('<int:question_id>/vote/', views.vote, name ='vote'),
+]
+Create Templates
+Step-1: Follow the steps given below to create the front layout of the page. 
+
+Create a folder ‘templates‘ in top-level pollster folder (alongside of polls and pollster) i.e. pollster-> templates.
+Create ‘base.html‘ file inside the template folder. We will define the head, body and navigation bar of our application in this file.
+In the ‘templates’ folder create another folder ‘polls‘. In ‘polls’ folder create three files ‘index.html‘, ‘results.html‘ and ‘detail.html‘.
+The folder structure will look like the image given below (we have highlighted the files which we have created in ‘create views i.e urls.py’ and ‘create template’ section)… 
+
+templates
+
+Step-2: By default Django will search the ‘template’ inside the ‘polls’ app but we have created a global ‘template’ folder which is outside the polls app. So in order to make it work, we need to define the ‘template’ folder path inside the settings.py file. Open settings.py file and add the code given below in the list ‘TEMPLATES’. In order to make the given code work add “import os” in settings.py.
+
+
+TEMPLATES = [
+    {
+        # make changes in DIRS[].
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+Step-3: Open index.html file and write the code given below. This file will display the list of questions which are stored in our database. Also, two buttons will be displayed to the user. One for the voting (we will create a detail.html file for voting) and the other one is to check the results (we will create results.html file for results). 
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center mb-3">Poll Questions</h1>
+{% if latest_question_list %}
+{% for question in latest_question_list %}
+<div class="card-mb-3">
+    <div class="card-body">
+        <p class="lead">{{ question.question_text }}</p>
+        <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary btn-sm">Vote Now</a>
+        <a href="{% url 'polls:results' question.id %}" class="btn btn-secondary btn-sm">Results</a>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<p>No polls available</p>
+{% endif %}
+{% endblock %}
+Step-4: Open detail.html file and write the code given below. This file will be responsible for voting on specific questions. Whatever question a user will select for voting from the list of the question (index.html file), that specific question and the choices for the question will be displayed on this page. A user will be allowed to select one choice and give voting by clicking on the vote button. 
+
+
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'polls:index' %}">Back To Polls</a>
+<h1 class="text-center mb-3">{{ question.question_text }}</h1>
+ 
+{% if error_message %}
+<p class="alert alert-danger">
+    <strong>{{ error_message }}</strong>
+</p>
+{% endif %}
+ 
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+    <div class="form-check">
+        <input type="radio" name="choice" class="form-check-input" id="choice{{ forloop.counter }}"
+            value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+    </div>
+    {% endfor %}
+    <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
+</form>
+{% endblock %}
+Step-5: Open results.html file and write the code given below. This file will display the result of total votes on a specific question whatever question the user will select (from the index.html file) to check the result. 
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-5 text-center">{{ question.question_text }}</h1>
+ 
+<ul class="list-group mb-5">
+    {% for choice in question.choice_set.all %}
+    <li class="list-group-item">
+        {{ choice.choice_text }} <span class="badge badge-success float-right">{{ choice.votes }}
+            vote{{ choice.votes | pluralize }}</span>
+    </li>
+    {% endfor %}
+</ul>
+ 
+<a class="btn btn-secondary" href="{% url 'polls:index' %}">Back To Polls</a>
+<a class="btn btn-dark" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+{% endblock %}
+Step-6: Let’s create the navigation bar for our application. Create a folder ‘partials‘ inside the folder ‘templates’ and then create a file ‘_navbar.html‘ inside the ‘partial’ folder. File structure will be templates->partials->_navbar.html. Write the code given below in this file. 
+
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="/">Pollster</a>
+    </div>
+</nav>
+Step-7: We haven’t included the head and body tag in every single HTML file we have created till now. We can write these codes in just one single file base.html and we can give the layout to our page. We will also bring our navigation bar(_navbar.html file) on this page. So open base.html file inside the ‘template’ folder and write down the code given below. 
+
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Pollster {% block title %}{% endblock %}</title>
+</head>
+ 
+<body>
+    <!--NavBar-->
+    {% include 'partials/_navbar.html'%}
+    <div class="container">
+        <div class="row">
+            <div class=".col-md-6 m-auto">
+                {% block content %}{% endblock%}
+            </div>
+        </div>
+    </div>
+</body>
+ 
+</html>
+Create Landing Page
+The URL http://127.0.0.1:8000/ should display a landing page for our web application. So to create a landing page we will follow the step given below. 
+
+Step-1 Switch to the top-level pollster folder and run the command given below to create an app ‘pages‘. 
+
+python manage.py startapp pages
+Below is the folder structure once the ‘pages’ app will be created. 
+
+pages
+
+Step-2 Open ‘views.py‘ inside ‘pages’ folder i.e. pages->views.py. Write down the code given below to visit on landing page. 
+
+
+from django.shortcuts import render
+ 
+# Create your views here.
+ 
+def index(request):
+    return render(request, 'pages / index.html')
+Step-3 Create urls.py file inside the ‘pages’ folder i.e. pages->urls.py. Write the code given below to define the routing of pages->index.html file (check step-1). 
+
+
+   
+from django.urls import path
+ 
+from . import views
+ 
+urlpatterns = [
+    path('', views.index, name ='index'),
+]
+Step-4 Create a folder ‘pages‘ inside ‘template’ folder. Now inside ‘pages’ folder create a file index.html. Write down the code given below to display the landing page to the users. 
+
+
+{% extends 'base.html' %}
+{% block content %}
+ 
+<div class="card text-center">
+    <div class="card-body">
+        <h1>Welcome To Pollster!</h1>
+        <p>This is an Polling Web Application built with Django</p>
+        <a class="btn btn-dark" href="{% url 'polls:index' %}">
+            View Available Polls</a>
+    </div>
+</div>
+{% endblock %}
+Create routing inside the main urls.py file of the application
+We have created two apps in our application ‘polls‘ and ‘pages‘. We need to define the routing of these two apps inside the main urls.py file which is pollster->pollster->urls.py file. So open the main urls.py file inside the pollster folder and write down the code given below to define the routing of these two apps(‘polls’ and ‘pages’). 
+
+
+from django.contrib import admin
+from django.urls import include, path
+ 
+urlpatterns = [
+    path('', include('pages.urls')),
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
+]
+Testing of the Application
+Admin Frontend
+Step-1 Run the server using the command python manage.py runserver and browse the URL http://127.0.0.1:8000/admin/. Now enter the username and password to login into the system. 
+
+admin-login
+
+Step-2 Click on ‘add’ button next to the ‘Questions’. 
+
+add-questions
+
+Step-2 Now add question and choices for those questions. Also, mention the date and time and then click on the ‘save’ button. You can add as many questions as you want. You will see a list of questions added in the database. 
+
+question-choice-image
+
+User Frontend
+Step-1: Browse the URL http://127.0.0.1:8000/ and you will see the landing page of the application. Click on the “View Available Polls” 
+
+landing-page
+
+Step-2: You will see list of questions with two options ‘Vote Now’ and ‘Results’. From here you need to select one question and click on the ‘Vote Now’ button. 
+
+poll-questions
+
+Step-3: Once this is done select any one choice and click on ‘Vote’ button. You can also go to the previous menu using the ‘Back to Polls’ button on the top. 
+
+vote
+
+You will see the total voting result for the question you have selected. 
+
+results
+
+You can also check the total votes for any question using the option ‘Results’ from the ‘Poll Questions’ page. 
+
+Future Scope
+This project can be used to conduct the online voting system in any field or industry. The project can be expanded and several other features can also be included based on the requirement. People can share the opinion and they can also check the total voting given by many users. 
+
+Project Repository Link
+https://github.com/anuupadhyay/pollster-django-crash
+ 
+
+Determine The Face Tilt Using OpenCV – Python
+Last Updated : 03 Jan, 2023
+In this article, we are going to see how to determine the face tilt using OpenCV in Python.
+
+To achieve this we will be using a popular computer vision library opencv-python. In this program with the help of the OpenCV library, we will detect faces in a live stream from a webcam or a video file and subsequently also determine the angle by how much the face is tilted.
+
+Requirements:
+Install OpenCV for python.
+We will be using two pre-trained  XML classifiers to detect faces and eyes respectively. These classifiers can be downloaded from opencv library or just click the links below.
+Classifier for face detection: haarcascade_frontalface_default.xml
+Classifier for eye detection: haarcascade_eye.xml
+Algorithm:
+First, we detect the face in the webcam feed/video using the above-mentioned haarcascade classifier for the face and make a green color bounding box around it.
+Next, we detect the eyes using a similar haarcascade classifier trained on eyes and make a red color bounding box around each eye.
+In addition to making a box around each eye, we also identify and store the center of each box. Here, we are assuming that the center of the bounding box is the same as the center of the eye.
+For computing the angle of tilt we will assume that the line joining the centers of two eyes is perpendicular to the face.
+We have the coordinates of two centers in terms of (x,y) coordinates. The x-axis is the horizontal axis and y-axis is the vertical axis.
+When two points are given (x_{1}, y_{1})       & (x_{2},y_{2})      , the angle \theta       which the line joining the two points makes with the x-axis can be obtained from geometry using the following expression:
+\theta = \arctan(\frac{x_2 - x_1}{y_2 - y_1})
+
+In our case, the angle made by the line joining the centers of two eyes with the horizontal is computed. The positive angle indicates the right tilt and the negative angle indicates the left tilt.
+Provided a margin of error of 10 degrees (i.e, if the face tilts more than 10 degrees on either side the program will classify as right or left tilt).
+Below is the implementation:
+ 
+import cv2 as cv 
+import numpy as np 
+  
+  
+# 0 for webcam feed ; add "path to file" 
+# for detection in video file 
+capture = cv.VideoCapture(0) 
+face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml') 
+eye_cascade = cv.CascadeClassifier("haarcascade_eye.xml") 
+  
+while True: 
+    ret, frame = capture.read() 
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY) 
+    faces = face_cascade.detectMultiScale(gray, 1.1, 5) 
+    x, y, w, h = 0, 0, 0, 0
+    for (x, y, w, h) in faces: 
+        cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2) 
+        cv.circle(frame, (x + int(w * 0.5), y +
+                          int(h * 0.5)), 4, (0, 255, 0), -1) 
+    eyes = eye_cascade.detectMultiScale(gray[y:(y + h), x:(x + w)], 1.1, 4) 
+    index = 0
+    eye_1 = [None, None, None, None] 
+    eye_2 = [None, None, None, None] 
+    for (ex, ey, ew, eh) in eyes: 
+        if index == 0: 
+            eye_1 = [ex, ey, ew, eh] 
+        elif index == 1: 
+            eye_2 = [ex, ey, ew, eh] 
+        cv.rectangle(frame[y:(y + h), x:(x + w)], (ex, ey), 
+                     (ex + ew, ey + eh), (0, 0, 255), 2) 
+        index = index + 1
+    if (eye_1[0] is not None) and (eye_2[0] is not None): 
+        if eye_1[0] < eye_2[0]: 
+            left_eye = eye_1 
+            right_eye = eye_2 
+        else: 
+            left_eye = eye_2 
+            right_eye = eye_1 
+        left_eye_center = ( 
+            int(left_eye[0] + (left_eye[2] / 2)),  
+          int(left_eye[1] + (left_eye[3] / 2))) 
+          
+        right_eye_center = ( 
+            int(right_eye[0] + (right_eye[2] / 2)), 
+          int(right_eye[1] + (right_eye[3] / 2))) 
+          
+        left_eye_x = left_eye_center[0] 
+        left_eye_y = left_eye_center[1] 
+        right_eye_x = right_eye_center[0] 
+        right_eye_y = right_eye_center[1] 
+  
+        delta_x = right_eye_x - left_eye_x 
+        delta_y = right_eye_y - left_eye_y 
+          
+        # Slope of line formula 
+        angle = np.arctan(delta_y / delta_x)   
+          
+        # Converting radians to degrees 
+        angle = (angle * 180) / np.pi   
+  
+        # Provided a margin of error of 10 degrees 
+        # (i.e, if the face tilts more than 10 degrees 
+        # on either side the program will classify as right or left tilt) 
+        if angle > 10: 
+            cv.putText(frame, 'RIGHT TILT :' + str(int(angle))+' degrees', 
+                       (20, 30), cv.FONT_HERSHEY_SIMPLEX, 1, 
+                       (0, 0, 0), 2, cv.LINE_4) 
+        elif angle < -10: 
+            cv.putText(frame, 'LEFT TILT :' + str(int(angle))+' degrees', 
+                       (20, 30), cv.FONT_HERSHEY_SIMPLEX, 1,  
+                       (0, 0, 0), 2, cv.LINE_4) 
+        else: 
+            cv.putText(frame, 'STRAIGHT :', (20, 30), 
+                       cv.FONT_HERSHEY_SIMPLEX, 1,  
+                       (0, 0, 0), 2, cv.LINE_4) 
+  
+    cv.imshow('Frame', frame) 
+  
+    if cv.waitKey(1) & 0xFF == 27: 
+        break
+capture.release() 
+cv.destroyAllWindows() 
+Output:
+
+
+
+Right and Left Hand Detection Using Python
+Last Updated : 14 Mar, 2024
+In this article, we are going to see how to Detect Hands using Python.
+
+We will use mediapipe and OpenCV libraries in python to detect the Right Hand and Left Hand. We will be using the Hands model from mediapipe solutions to detect hands, it is a palm detection model that operates on the full image and returns an oriented hand bounding box.
+
+Required Libraries
+Mediapipe is Google’s open-source framework, used for media processing. It is cross-platform or we can say it is platform friendly. It can run on Android, iOS, and the web that’s what Cross-platform means, to run everywhere.
+OpenCV is a Python library that is designed to solve computer vision problems. OpenCV supports a wide variety of programming languages such as C++, Python, Java etc. Support for multiple platforms including Windows, Linux, and MacOS.
+Installing required libraries
+pip install mediapipe  
+pip install opencv-python
+Stepwise Implementation
+Step 1: Import all required libraries
+# Importing Libraries 
+import cv2 
+import mediapipe as mp 
+  
+# Used to convert protobuf message  
+# to a dictionary. 
+from google.protobuf.json_format import MessageToDict 
+Step 2: Initializing Hands model
+# Initializing the Model 
+mpHands = mp.solutions.hands 
+hands = mpHands.Hands( 
+    static_image_mode=False, 
+    model_complexity=1, 
+    min_detection_confidence=0.75, 
+    min_tracking_confidence=0.75, 
+    max_num_hands=2) 
+Let us look into the parameters for the Hands Model:
+
+Hands( static_image_mode=False, model_complexity=1 min_detection_confidence=0.75, min_tracking_confidence=0.75, max_num_hands=2 )
+
+Where:
+
+static_image_mode: It is used to specify whether the input image must be static images or as a video stream. The default value is False.
+model_complexity: Complexity of the hand landmark model: 0 or 1. Landmark accuracy, as well as inference latency, generally go up with the model complexity. Default to 1.
+min_detection_confidence: It is used to specify the minimum confidence value with which the detection from the person-detection model needs to be considered as successful. Can specify a value in [0.0,1.0]. The default value is 0.5.
+min_tracking_confidence: It is used to specify the minimum confidence value with which the detection from the landmark-tracking model must be considered as successful. Can specify a value in [0.0,1.0]. The default value is 0.5.
+max_num_hands: Maximum number of hands to detect. Default it is 2.
+Step 3: Hands model process the image and detect hands
+Capture the frames continuously from the camera using OpenCV and then Flip the image around y-axis i.e cv2.flip(image, flip code) and Convert BGR image to an RGB image and make predictions using initialized hands model.
+
+Prediction made by the model is saved in the results variable from which we can access landmarks using results.multi_hand_landmarks, results.multi_handedness  respectively and If hands are present in the frame, check for both hands, if yes then put text “Both Hands” on the image else for a single hand, store MessageToDict() function on label variable. If the label is “Left” put text “Left  Hand”  on the image and if label is “Right” put text “Right Hand”  on the image.
+
+# Start capturing video from webcam 
+cap = cv2.VideoCapture(0) 
+  
+while True: 
+    
+    # Read video frame by frame 
+    success, img = cap.read() 
+  
+    # Flip the image(frame) 
+    img = cv2.flip(img, 1) 
+  
+    # Convert BGR image to RGB image 
+    imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
+  
+    # Process the RGB image 
+    results = hands.process(imgRGB) 
+  
+    # If hands are present in image(frame) 
+    if results.multi_hand_landmarks: 
+  
+        # Both Hands are present in image(frame) 
+        if len(results.multi_handedness) == 2: 
+                # Display 'Both Hands' on the image 
+            cv2.putText(img, 'Both Hands', (250, 50), 
+                        cv2.FONT_HERSHEY_COMPLEX, 0.9, 
+                        (0, 255, 0), 2) 
+  
+        # If any hand present 
+        else: 
+            for i in results.multi_handedness: 
+                
+                # Return whether it is Right or Left Hand 
+                label = MessageToDict(i)[ 
+                    'classification'][0]['label'] 
+  
+                if label == 'Left': 
+                    
+                    # Display 'Left Hand' on left side of window 
+                    cv2.putText(img, label+' Hand', (20, 50), 
+                                cv2.FONT_HERSHEY_COMPLEX, 0.9, 
+                                (0, 255, 0), 2) 
+  
+                if label == 'Right': 
+                    
+                    # Display 'Left Hand' on left side of window 
+                    cv2.putText(img, label+' Hand', (460, 50), 
+                                cv2.FONT_HERSHEY_COMPLEX, 
+                                0.9, (0, 255, 0), 2) 
+  
+    # Display Video and when 'q' is entered, destroy the window 
+    cv2.imshow('Image', img) 
+    if cv2.waitKey(1) & 0xff == ord('q'): 
+        break
+Below is the complete implementation:
+
+# Importing Libraries 
+import cv2 
+import mediapipe as mp 
+  
+# Used to convert protobuf message to a dictionary. 
+from google.protobuf.json_format import MessageToDict 
+  
+# Initializing the Model 
+mpHands = mp.solutions.hands 
+hands = mpHands.Hands( 
+    static_image_mode=False, 
+    model_complexity=1, 
+    min_detection_confidence=0.75, 
+    min_tracking_confidence=0.75, 
+    max_num_hands=2) 
+  
+# Start capturing video from webcam 
+cap = cv2.VideoCapture(0) 
+  
+while True: 
+    # Read video frame by frame 
+    success, img = cap.read() 
+  
+    # Flip the image(frame) 
+    img = cv2.flip(img, 1) 
+  
+    # Convert BGR image to RGB image 
+    imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
+  
+    # Process the RGB image 
+    results = hands.process(imgRGB) 
+  
+    # If hands are present in image(frame) 
+    if results.multi_hand_landmarks: 
+  
+        # Both Hands are present in image(frame) 
+        if len(results.multi_handedness) == 2: 
+                # Display 'Both Hands' on the image 
+            cv2.putText(img, 'Both Hands', (250, 50), 
+                        cv2.FONT_HERSHEY_COMPLEX, 
+                        0.9, (0, 255, 0), 2) 
+  
+        # If any hand present 
+        else: 
+            for i in results.multi_handedness: 
+                
+                # Return whether it is Right or Left Hand 
+                label = MessageToDict(i) 
+                ['classification'][0]['label'] 
+  
+                if label == 'Left': 
+                    
+                    # Display 'Left Hand' on 
+                    # left side of window 
+                    cv2.putText(img, label+' Hand', 
+                                (20, 50), 
+                                cv2.FONT_HERSHEY_COMPLEX,  
+                                0.9, (0, 255, 0), 2) 
+  
+                if label == 'Right': 
+                      
+                    # Display 'Left Hand' 
+                    # on left side of window 
+                    cv2.putText(img, label+' Hand', (460, 50), 
+                                cv2.FONT_HERSHEY_COMPLEX, 
+                                0.9, (0, 255, 0), 2) 
+  
+    # Display Video and when 'q' 
+    # is entered, destroy the window 
+    cv2.imshow('Image', img) 
+    if cv2.waitKey(1) & 0xff == ord('q'): 
+        break
+Output:
+
+
+OUTPUT
+
+Python Web Development With Django
+Last Updated : 03 Apr, 2024
+Python Django is a web framework that allows to quickly create efficient web pages. Django is also called batteries included framework because it provides built-in features such as Django Admin Interface, default database – SQLite3, etc. When you’re building a website, you always need a similar set of components: a way to handle user authentication (signing up, signing in, signing out), a management panel for your website, forms, a way to upload files, etc. Django gives you ready-made components to use.
+
+Why Django Framework?
+Excellent documentation and high scalability.
+Used by Top MNCs and Companies, such as Instagram, Disqus, Spotify, Youtube, Bitbucket, Dropbox, etc. and the list is never-ending.
+Easiest Framework to learn, rapid development, and Batteries fully included. Django is a rapid web development framework that can be used to develop fully fleshed web applications in a short period of time.
+The last but not least reason to learn Django is Python, Python has a huge library and features such as Web Scraping, Machine Learning, Image Processing, Scientific Computing, etc. One can integrate all this with web applications and do lots and lots of advanced stuff.
+Django Architecture
+Django is based on MVT (Model-View-Template) architecture which has the following three parts – 
+
+Model: The model is going to act as the interface of your data. It is responsible for maintaining data. It is the logical data structure behind the entire application and is represented by a database (generally relational databases such as MySql, Postgres).
+View: The View is the user interface that you see in your browser when you render a website. It is represented by HTML/CSS/Javascript and Jinja files.
+Template: A template consists of static parts of the desired HTML output as well as some special syntax describing how dynamic content will be inserted. To check more, visit – Django Templates
+Django Architecture
+
+For more information, refer to Django Project MVT Structure
+
+Setting up the Virtual Environment
+Most of the time when you’ll be working on some Django projects, you’ll find that each project may need a different version of Django. This problem may arise when you install Django in a global or default environment. To overcome this problem we will use virtual environments in Python. This enables us to create multiple different Django environments on a single computer. To create a virtual environment type the below command in the terminal.
+
+python3 -m venv ./name
+Here the name suggests the name of the virtual environment. Let’s create our virtual environment with the name as venv only. So the command to create it will be – 
+
+python3 -m venv ./venv
+After running the above command you will see a folder named venv with the following sub-directories.
+
+Python Django Setting environment
+
+After creating the virtual environment let’s activate it. To activate it type the below command in the terminal.
+
+source ./venv/bin/activate
+In the above command ./ is used to tell the current working directory. 
+
+Note: If you have your virtual environment set up in another location and your terminal opened up in another location, then provide the location to the venv folder i.e. our virtual environment folder.
+
+After you run the above command you should see (venv) at the starting of every line of your terminal as shown in the below image.
+
+python django virtual environment activate
+
+Installing Django
+We can install Django using the pip command. To install this type the below command in the terminal.
+
+pip install django
+python django install
+
+For more information, refer to Django Introduction and Installation
+
+Starting the project
+To initiate a project of Django on Your PC, open Terminal and Enter the following command
+django-admin startproject projectName
+A New Folder with the name projectName will be created. To enter in the project using the terminal enter command
+cd projectName
+Now let’s run the server and see everything is working fine or not. To run the server type the below command in the terminal.
+python manage.py runserver
+After running the server go to http://127.0.0.1:8000/ and you’ll see something like this –
+
+Django runserver
+
+For more information, refer to How to Create a Basic Project using MVT in Django ?
+
+Project Structure
+A Django Project when initialized contains basic files by default such as manage.py, view.py, etc. A simple project structure is enough to create a single-page application. Here are the major files and their explanations. Inside the geeks_site folder ( project folder ) there will be the following files- 
+
+Django project structure
+
+Let’s discuss these files in detail – 
+
+manage.py: This file is used to interact with your project via the command line(start the server, sync the database… etc). For getting the full list of commands that can be executed by manage.py type this code in the command window- 
+
+python manage.py help
+_init_.py: It is a python package. It is invoked when the package or a module in the package is imported. We usually use this to execute package initialization code, for example for the initialization of package-level data.
+settings.py: As the name indicates it contains all the website settings. In this file, we register any applications we create, the location of our static files, database configuration details, etc.
+urls.py: In this file, we store all links of the project and functions to call.
+wsgi.py: This file is used in deploying the project in WSGI. It is used to help your Django application communicate with the webserver.
+Creating an app
+Django is famous for its unique and fully managed app structure. For every functionality, an app can be created like a completely independent module. For example, if you are creating a Blog, Separate modules should be created for Comments, Posts, Login/Logout, etc. In Django, these modules are known as apps. There is a different app for each task. Benefits of using Django apps –
+
+Django apps are reusable i.e. a Django app can be used with multiple projects.
+We have loosely coupled i.e. almost independent components
+Multiple developers can work on different components
+Debugging and code organization are easy. Django has an excellent debugger tool.
+It has in-built features like admin pages etc, which reduces the effort of building the same from scratch
+Django provides some pre-installed apps for users. To see pre-installed apps, navigate to projectName –> projectName –> settings.py. In your settings.py file, you will find INSTALLED_APPS. Apps listed in INSTALLED_APPS are provided by Django for the developer’s comfort.
+
+INSTALLED_APPS = [ 
+    'django.contrib.admin', 
+    'django.contrib.auth', 
+    'django.contrib.contenttypes', 
+    'django.contrib.sessions', 
+    'django.contrib.messages', 
+    'django.contrib.staticfiles', 
+]
+We can also create our own custom apps. To create a basic app in your Django project you need to go to the directory containing manage.py and from there enter the command :
+
+python manage.py startapp projectApp
+Now let’s create an app called gfg_site_app, so the command to create the app would be – 
+
+python manage.py startapp gfg_site_app
+Now you can see your directory structure as under :
+
+Creating app python django
+
+To consider the app in your project you need to specify your project name in the INSTALLED_APPS list as follows in settings.py:
+
+INSTALLED_APPS = [ 
+    'django.contrib.admin', 
+    'django.contrib.auth', 
+    'django.contrib.contenttypes', 
+    'django.contrib.sessions', 
+    'django.contrib.messages', 
+    'django.contrib.staticfiles', 
+    'gfg_site_app.apps.GfgSiteAppConfig', 
+]
+For more information, refer to How to Create an App in Django ?
+
+Django Views
+A view function is a Python function that takes a Web request and returns a Web response. This response can be the HTML contents of a Web page, or a redirect, or a 404 error, or an XML document, or an image, anything that a web browser can display. Django views are part of the user interface — they usually render the HTML/CSS/Javascript in your Template files into what you see in your browser when you render a web page.
+
+django-views
+
+Example: Creating View Function
+from django.http import HttpResponse 
+  
+# create a function 
+def geeks_view(request): 
+      
+    return HttpResponse("<h1>Welcome to GeeksforGeeks</h1>")
+Let’s step through this code one line at a time:
+
+First, we import the class HttpResponse from the django.http module, along with Python’s datetime library.
+Next, we define a function called geeks_view. This is the view function. Each view function takes an HttpRequest object as its first parameter, which is typically named request.
+The view returns an HttpResponse object that contains the generated response. Each view function is responsible for returning an HttpResponse object.
+Note: For more info on HttpRequest and HttpResponse visit – Django Request and Response cycle – HttpRequest and HttpResponse Objects
+
+The above Function will render the text Welcome to GeeksforGeeks as h1 on the page. Now the question that may be arising is at what URL this function will be called and how will we handle such URLs. Don’t worry we will handle URL in the section but in this section let us continue with the Django views only.
+
+Types of Views
+Django views are divided into two major categories:-
+
+Function-Based Views
+Class-Based Views
+django-views-types
+
+Function-Based Views
+Function-based views are writer using a function in python which receives as an argument HttpRequest object and returns an HttpResponse Object. Function-based views are generally divided into 4 basic strategies, i.e., CRUD (Create, Retrieve, Update, Delete). CRUD is the base of any framework one is using for development. 
+
+Refer to the below articles to get more information on Function-Based views – 
+
+Django CRUD (Create, Retrieve, Update, Delete) Function Based Views
+Create View
+List View
+Detail View
+Update View
+Delete View
+Class-Based Views
+Class-based views provide an alternative way to implement views as Python objects instead of functions. They do not replace function-based views, but have certain differences and advantages when compared to function-based views:
+
+Organization of code related to specific HTTP methods (GET, POST, etc.) can be addressed by separate methods instead of conditional branching.
+Object-oriented techniques such as mixins (multiple inheritances) can be used to factor code into reusable components.
+Refer to the below articles to get more information on Class-Based views – 
+
+Class Based Generic Views Django (Create, Retrieve, Update, Delete)
+Createview
+ListView
+DetailView
+UpdateView
+DeleteView
+FormView
+Django URL Patterns
+In Django, each view needs to be mapped to a corresponding URL pattern. This is done via a Python module called URLConf(URL configuration). Every URLConf module must contain a variable urlpatterns which is a set of URL patterns to be matched against the requested URL. These patterns will be checked in sequence until the first match is found. Then the view corresponding to the first match is invoked. If no URL pattern matches, Django invokes an appropriate error handling view.
+
+Now if we see our project we have created an app called gfg_site, the Python module to be used as URLConf is the value of ROOT_URLCONF in gfg_site/settings.py. By default this is set to ‘gfg_site.urls’. Every URLConf module must contain a variable urlpatterns which is a set of URL patterns to be matched against the requested URL. These patterns will be checked in sequence, until the first match is found. Then the view corresponding to the first match is invoked. If no URL pattern matches, Django invokes an appropriate error handling view.
+
+URL patterns
+Here’s a sample code for gfg_site/urls.py:
+
+from django.urls import path 
+from . import views 
+  
+urlpatterns = [ 
+    path('', views.geeks_view, name='geeks_view'), 
+] 
+Including other URLConf modules
+
+It is a good practice to have a URLConf module for every app in Django. This module needs to be included in the root URLConf module as follows:
+
+from django.contrib import admin 
+from django.urls import path, include 
+  
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('', include('gfg_site_app.urls')) 
+] 
+Now if head towards http://127.0.0.1:8000/ then our site will be – 
+
+python django urls
+
+In the above example, include statement will look into the URLpatterns list in the gfg_site_app/urls.py And then it will look into all the paths defined in the url.py file and will call the respective views function.
+
+Till now we have seen how to show HTML on our website. Now let’s suppose we want to use some kind of relational database that, let’s say SQLite for our site and we want to create a table in this database and want to link this database to our website. Don’t worry we will discuss this in the next section.
+
+Django Models
+To tackle the above-said problem Django provides something called Django Models.
+
+ A Django model is the built-in feature that Django uses to create tables, their fields, and various constraints. In short, Django Models is the SQL of Database one uses with Django. SQL (Structured Query Language) is complex and involves a lot of different queries for creating, deleting, updating, or any other stuff related to the database. Django models simplify the tasks and organize tables into models. Generally, each model maps to a single database table.
+
+This section revolves around how one can use Django models to store data in the database conveniently. Moreover, we can use the admin panel of Django to create, update, delete or retrieve fields of a model and various similar operations. Django models provide simplicity, consistency, version control, and advanced metadata handling. Basics of a model include –
+
+Each model is a Python class that subclasses django.db.models.Model.
+Each attribute of the model represents a database field.
+With all of this, Django gives you an automatically-generated database-access API; see Making queries.
+Syntax:
+
+from django.db import models       
+class ModelName(models.Model):
+       field_name = models.Field(**options)
+Example:
+
+# import the standard Django Model 
+# from built-in library 
+from django.db import models 
+from datetime import datetime 
+  
+class GeeksModel(models.Model): 
+  
+    # Field Names 
+    title = models.CharField(max_length=200) 
+    description = models.TextField() 
+    created_on = models.DateTimeField(default=datetime.now) 
+    image = models.ImageField(upload_to="images/%Y/%m/%d") 
+  
+    # rename the instances of the model 
+    # with their title name 
+    def __str__(self) -> str: 
+        return self.title
+Whenever we create a Model, Delete a Model, or update anything in any of models.py of our project. We need to run two commands makemigrations and migrate. makemigrations basically generates the SQL commands for preinstalled apps (which can be viewed in installed apps in settings.py) and your newly created app’s model which you add in installed apps whereas migrate executes those SQL commands in the database file.
+
+So when we run,
+
+Python manage.py makemigrations
+SQL Query to create above Model as a Table is created and
+
+Python manage.py migrate
+creates the table in the database.
+
+Now we have created a model we can perform various operations such as creating a Row for the table or in terms of Django Creating an instance of Model. To know more visit – Django Basic App Model – Makemigrations and Migrate.
+
+Now let’s see how to add data to our newly created SQLite table.
+
+Django CRUD – Inserting, Updating, and Deleting Data
+Django lets us interact with its database models, i.e. add, delete, modify and query objects, using a database-abstraction API called ORM(Object Relational Mapper). We can access the Django ORM by running the following command inside our project directory.
+
+python manage.py shell
+Adding objects
+
+To create an object of model Album and save it into the database, we need to write the following command:
+
+from gfg_site_app.models import GeeksModel 
+  
+obj = GeeksModel(title="GeeksforGeeks", 
+   description="GFG is a portal for computer science students") 
+obj.save()
+Retrieving objects
+
+To retrieve all the objects of a model, we write the following command:
+
+GeeksModel.objects.all()
+Output:
+
+<QuerySet [<GeeksModel: GeeksforGeeks>]>
+Modifying existing objects
+
+We can modify an existing object as follows:
+
+obj = GeeksModel.objects.get(id=1) 
+obj.title = "GFG"
+obj.save() 
+  
+GeeksModel.objects.all()
+Output:
+
+<QuerySet [<GeeksModel: GFG>]>
+Deleting objects
+
+To delete a single object, we need to write the following commands:
+
+obj = GeeksModel.objects.get(id=1) 
+obj.delete() 
+  
+GeeksModel.objects.all()
+Output:
+
+(1, {'gfg_site_app.GeeksModel': 1})
+<QuerySet []>
+Refer to the below articles to get more information about Django Models – 
+
+Django Models
+ORM – Inserting, Updating & Deleting Data
+Basic App Model – Makemigrations and Migrate
+model data types and fields list
+Add the slug field inside Django Model
+Intermediate fields in Django
+Uploading images in Django
+Change Object Display Name using __str__ function – Django Models
+Built-in Field Validations – Django Models
+Custom Field Validations in Django Models
+How to use Django Field Choices ?
+Overriding the save method – Django Models
+Uploading Images in Django
+When defining the models we used the ImageField for uploading images and we wrote the upload_to parameter as upload_to=”images/%Y/%m/%d”) because this will create a directory data structure of the format image>>year>>month>>date so that tracking images may become easier. 
+
+Before uploading the image we need to write the below code in the setting.py file.
+
+MEDIA_ROOT =  BASE_DIR/'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT is for server path to store files in the computer.
+MEDIA_URL is the reference URL for browser to access the files over Http
+In the urls.py we should edit the configuration like this
+
+from django.conf import settings
+from django.conf.urls.static import static
+if settings.DEBUG:
+       urlpatterns += static(settings.MEDIA_URL,
+                             document_root=settings.MEDIA_ROOT)
+Let’s see how to upload data into the model using Django Admin Interface.
+
+Render a model in Django Admin Interface
+To render a model in Django admin, we need to modify app/admin.py. Go to admin.py in geeks_site_app and enter the following code. Import the corresponding model from models.py and register it to the admin interface.
+
+from django.contrib import admin 
+from .models import GeeksModel 
+  
+# Register your models here. 
+admin.site.register(GeeksModel,) 
+Now let’s create a superuser for our project that can have access to the admin area of our site. To create a super user type the below command – 
+
+python manage.py createsuperuser
+django create superuser
+
+Now go to http://127.0.0.1:8000/admin on the browser to access the admin interface panel. 
+
+django admin interface login
+
+Give the username and password created for superuser and then the admin dashboard will open and there we will be able to see our Geeks models that we just created.
+
+django admin dashboard
+
+Note: For more information refer to Render Model in Django Admin Interface.
+
+Now let’s see how to enter data using the admin dashboard. Now clicking on the Geeks Model we will see something like this – 
+
+Django admin interface model
+
+We can click on the Add Geeks Model button on the right top corner and then we will be able to see the fields for adding data. See the below image – 
+
+Django add data using admin
+
+After adding the required data and the image field we will see something like this on our admin dashboard – 
+
+django admin models dashboard
+
+You can also see the media folder in your code editor –
+
+
+
+Connecting Django to different Database
+Django comes built-in with the SQLite database. We can also see this in the DATABASES dictionary in our settings.py file.
+
+DATABASES = { 
+    'default': { 
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': BASE_DIR / 'db.sqlite3', 
+    } 
+}
+If you want to change this to another database you can change the above dictionary. Let’s suppose we want to change this database to PostgreSQL. Assuming the required dependencies are installed and the PostgreSQL is set up then the DATABASES dictionary will look like – 
+
+DATABASES = { 
+   'default': { 
+       'ENGINE': 'django.db.backends.postgresql', 
+       'NAME': ‘<database_name>’, 
+       'USER': '<database_username>', 
+       'PASSWORD': '<password>', 
+       'HOST': '<database_hostname_or_ip>', 
+       'PORT': '<database_port>', 
+   } 
+}
+Refer to the below articles to get more information about connecting Django to different databases – 
+
+How to use PostgreSQL Database in Django?
+Connect Django Project to MongoDB using Django
+Django Templates
+Templates are the third and most important part of Django’s MVT Structure. A template in Django is basically written in HTML, CSS, and Javascript in a .html file. Django framework efficiently handles and generates dynamically HTML web pages that are visible to the end-user. Django mainly functions with a backend so, in order to provide a frontend and provide a layout to our website, we use templates. There are two methods of adding the template to our website depending on our needs.
+
+We can use a single template directory which will be spread over the entire project.
+For each app of our project, we can create a different template directory.
+For our current project, we will create a single template directory that will be spread over the entire project for simplicity. App-level templates are generally used in big projects or in case we want to provide a different layout to each component of our webpage.
+
+Configuration
+
+Django Templates can be configured in app_name/settings.py,  
+
+TEMPLATES = [ 
+    { 
+        # Template backend to be used, For example Jinja   
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', 
+          
+        # directories for templates 
+        'DIRS': [], 
+        'APP_DIRS': True, 
+          
+        # options to configure 
+        'OPTIONS': { 
+            'context_processors': [ 
+                'django.template.context_processors.debug', 
+                'django.template.context_processors.request', 
+                'django.contrib.auth.context_processors.auth', 
+                'django.contrib.messages.context_processors.messages', 
+            ], 
+        }, 
+    }, 
+]
+Now let’s create a template directory and add that directory in the above configuration. After creating the templates folder our directory should look like this – 
+
+python templates directory
+
+Let’s add the location of this directory in our templates dictionary.
+
+TEMPLATES = [ 
+    { 
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', 
+        
+        # adding the location of our templates directory 
+        'DIRS': [BASE_DIR/"templates"], 
+        'APP_DIRS': True, 
+        'OPTIONS': { 
+            'context_processors': [ 
+                'django.template.context_processors.debug', 
+                'django.template.context_processors.request', 
+                'django.contrib.auth.context_processors.auth', 
+                'django.contrib.messages.context_processors.messages', 
+            ], 
+        }, 
+    }, 
+]
+After adding the location of the template directory we will create a simple HTML file and name it as index.html and then we will render this file from our view function.
+
+HTML file:
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    <title>Homepage</title> 
+</head> 
+<body> 
+    <h1>Welcome to Geeksforgeeks</h1> 
+</body> 
+</html> 
+To render this HTML on our site we need to use the render function from the django.shortcuts. Below is the updated view function.
+
+views.py
+
+from django.shortcuts import render 
+  
+# create a function 
+def geeks_view(request): 
+      
+    return render(request, "index.html")
+If we head to our website we will see the HTML data on our site as –
+
+render HTML using Django
+
+The Django Templates not only show static data but also the data from different databases connected to the application through a context dictionary. Let’s see this with an example. We will try to render the content of our database dynamically to our website.
+
+First, let’s update our views.py file. In this file we will get our data from our database and then pass this database as a dictionary to our HTML file.
+
+views.py
+
+from django.shortcuts import render 
+from .models import GeeksModel 
+  
+# create a function 
+def geeks_view(request): 
+      
+    content = GeeksModel.objects.all() 
+    context = { 
+        'content': content 
+    } 
+    return render(request, "index.html", context=context)
+index.html
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    <title>Homepage</title> 
+</head> 
+<body> 
+  
+    {% for data in content %} 
+    <h2>{{data.title}}</h2> 
+    <img src="{{ data.image.url }}" alt=""> 
+      
+<p><strong>Description:</strong>{{data.description}}</p> 
+  
+      
+<p><strong>Created On:</strong>{{data.created_on}}</p> 
+  
+    {% endfor %} 
+  
+</body> 
+</html>
+Our website now looks like this – 
+
+passing context to django templates
+
+Now if we add more data to our site then that data will also be shown to our site without making any changes to our HTML or views.py. Let’s add some data and then see if it works or not.
+
+passing context to django templates
+
+Django template language
+This is one of the most important facilities provided by Django Templates. A Django template is a text document or a Python string marked-up using the Django template language. Some constructs are recognized and interpreted by the template engine. The main ones are variables and tags. As we used for the loop in the above example, we used it as a tag. similarly, we can use various other conditions such as if, else, if-else, empty, etc. The main characteristics of Django Template language are Variables, Tags, Filters, and Comments. 
+
+Variables
+
+Variables output a value from the context, which is a dict-like object mapping keys to values. The context object we sent from the view can be accessed in the template using variables of Django Template. 
+
+Syntax
+
+{{ variable_name }}
+Tags
+
+Tags provide arbitrary logic in the rendering process. For example, a tag can output content, serve as a control structure e.g. an “if” statement or a “for” loop, grab content from a database, or even enable access to other template tags.
+
+Syntax
+
+{% tag_name %}
+Filters
+
+Django Template Engine provides filters that are used to transform the values of variables and tag arguments. We have already discussed major Django Template Tags. Tags can’t modify the value of a variable whereas filters can be used for incrementing the value of a variable or modifying it to one’s own need.
+
+Syntax
+
+{{ variable_name | filter_name }}
+Comments
+
+Template ignores everything between {% comment %} and {% end comment %}. An optional note may be inserted in the first tag. For example, this is useful when commenting out code for documenting why the code was disabled.
+
+Syntax
+
+{% comment 'comment_name' %}
+{% endcomment %}
+Template Inheritance
+The most powerful and thus the most complex part of Django’s template engine is template inheritance. Template inheritance allows you to build a base “skeleton” template that contains all the common elements of your site and defines blocks that child templates can override. extends tag is used for the inheritance of templates in Django. One needs to repeat the same code again and again. Using extends we can inherit templates as well as variables.
+
+Syntax
+
+{% extends 'template_name.html' %} 
+Example: Assume the following directory structure:
+
+dir1/
+   template.html
+   base2.html
+   my/
+       base3.html
+base1.html
+In template.html, the following paths would be valid: 
+
+{% extends "./base2.html" %} 
+{% extends "../base1.html" %} 
+{% extends "./my/base3.html" %}
+Refer to the below articles to get more information about Django Templates – 
+
+Boolean Operators
+for loop
+if – Django Templates
+Template Inheritance
+Django Forms
+When one creates a Form class, the most important part is defining the fields of the form. Each field has custom validation logic, along with a few other hooks. Forms are basically used for taking input from the user in some manner and using that information for logical operations on databases. For example, Registering a user by taking input as his name, email, password, etc. Django maps the fields defined in Django forms into HTML input fields. Django handles three distinct parts of the work involved in forms:
+
+preparing and restructuring data to make it ready for rendering
+creating HTML forms for the data
+receiving and processing submitted forms and data from the client
+flowChart-1
+
+Note: All types of work done by Django forms can be done with advanced HTML stuff, but Django makes it easier and efficient especially the validation part. Once you get hold of Django forms you will just forget about HTML forms.
+
+Creating Django Forms
+Creating a form in Django is completely similar to creating a model, one needs to specify what fields would exist in the form and of what type. For example, to input, a registration form one might need First Name (CharField), Roll Number (IntegerField), and so on. 
+
+To create a Django form, first create a forms.py inside the app folder.
+
+from django import forms 
+  
+class GeeksForm(forms.Form): 
+  
+    title = forms.CharField(max_length=200) 
+    description = forms.CharField(widget=forms.Textarea) 
+    image = forms.ImageField()
+Let’s create a different view function for handling forms and we will map this view function to a different URL. In the above created views.py file import the GeeksForm from the forms.py and create the below function.
+
+views.py
+
+from .forms import GeeksForm 
+  
+def geeks_form(request): 
+    context = {} 
+    context['form'] = GeeksForm 
+    return render(request, "form.html", context=context)
+Map this function to a different URL let’s say we will map this function to the http://127.0.0.1:8000/add/. To do this go to urls.py file of the app and another path for above URL.
+
+urls.py
+
+from django.urls import path 
+from . import views 
+  
+urlpatterns = [ 
+    path('', views.geeks_view, name='geeks_view'), 
+    path('add/', views.geeks_form, name="geeks_form") 
+] 
+Django form fields have several built-in methods to ease the work of the developer but sometimes one needs to implement things manually for customizing User Interface(UI). A form comes with 3 in-built methods that can be used to render Django form fields.  
+
+{{ form.as_table }} will render them as table cells wrapped in <tr> tags
+{{ form.as_p }} will render them wrapped in <p> tags
+{{ form.as_ul }} will render them wrapped in <li> tags
+Now let’s make the form.html for rendering our form.
+
+<form action="" method="POST"> 
+    {% csrf_token %} 
+    {{form.as_p}} 
+    <input type="submit" value="submit"> 
+</form>
+After doing this save all the files and go to http://127.0.0.1:8000/add/ to see the form we created. It should look like this – 
+
+django forms
+
+We can also see that our form is validated automatically. We cannot submit an empty form.
+
+Create Django Form from Models
+Django ModelForm is a class that is used to directly convert a model into a Django form. To create a form directly for our model, dive into forms.py and Enter the following –
+
+from django import forms 
+from .models import GeeksModel 
+  
+class GeeksForm(forms.ModelForm): 
+  
+    class Meta: 
+        model = GeeksModel 
+        fields = ['title', 'description', 'image']
+Now visit http://127.0.0.1:8000/add/ you will see the same form as above but with less code. 
+
+Both the Django forms we created are similar but the only difference is the save() method. Every ModelForm has a save() method which saves the database object from the data bound to the form. In simpler words we will be able to save the data to our database using the ModelForm only. For this change the view method as follow – 
+
+views.py
+
+def geeks_form(request): 
+    if request.method == 'POST': 
+        form = GeeksForm(request.POST, request.FILES) 
+  
+        if form.is_valid(): 
+            form.save() 
+            return redirect("geeks_view") 
+        else: 
+  
+            # uncomment the below line to see errors 
+            # in the form (if any) 
+            # print(form.errors) 
+            return redirect("geeks_form") 
+    else: 
+        context = {} 
+        context['form'] = GeeksForm 
+        return render(request, "form.html", context=context)
+Note: Add enctype= multipart/form-data to our <form> element in our template tag. If we don’t have this then our request.FILES will always be empty and our form will not validate.
+
+ Let’s add some data with our form and see if its get saved in our database or not.
+
+python django forms save
+
+After hitting submit the form gets saved automatically to database. We can verify it from the above GIF.
+
+Refer to the below articles to get more information about Django Forms – 
+
+Django Forms
+How to create a form using Django Forms ?
+Render HTML Forms (GET & POST) in Django
+Django Form Fields
+form field custom widgets
+Initial form data – Django Forms
+ModelForm – Create form from Models
+Render Form Fields Manually
+Django Formsets
+Django ModelFormSets
+More on Django
+Handling Ajax request in Django
+User groups with Custom permissions in Django
+Django Admin Interface
+Extending and customizing django-allauth
+Django – Dealing with warnings
+Sessions framework using django
+Django Sign Up and login with confirmation Email
+How to add Pagination in Django Project?
+How to Deploy Django project on PythonAnywhere?
+Django Projects
+Google authentication and Fetching mails from scratch
+ToDo webapp using Django
+Django News App
+Weather app using Django
+Django project to create a Comments System
+Integrating Facebook Comments Plugin in Django Project
+Translator App Project using Django
+Creating a Basic E-commerce Website for Displaying Products
+
+
+How to Create an App in Django ?
+Last Updated : 22 Dec, 2022
+Prerequisite – How to Create a Basic Project using MVT in Django?
+
+Django is famous for its unique and fully managed app structure. For every functionality, an app can be created like a completely independent module. This article will take you through how to create a basic app and add functionalities using that app.
+For example, if you are creating a Blog, Separate modules should be created for Comments, Posts, Login/Logout, etc. In Django, these modules are known as apps. There is a different app for each task. 
+
+Benefits of using Django apps –
+Django apps are reusable i.e. a Django app can be used with multiple projects.
+We have loosely coupled i.e. almost independent components
+Multiple developers can work on different components
+Debugging and code organization is easy. Django has an excellent debugger tool.
+It has in-built features like admin pages etc, which reduces the effort of building the same from scratch
+Pre-installed apps – 
+
+Django provides some pre-installed apps for users. To see pre-installed apps, navigate to projectName –> projectName –> settings.py 
+In your settings.py file, you will find INSTALLED_APPS. Apps listed in INSTALLED_APPS are provided by Django for the developer’s comfort. 
+
+
+
+Also, Visit :Django ORM – Inserting, Updating & Deleting Data 
+
+Creating an App in Django :
+Let us start building an app. 
+
+Method-1
+To create a basic app in your Django project you need to go to the directory containing manage.py and from there enter the command :
+python manage.py startapp projectApp
+ Method-2
+To create a basic app in your Django project you need to go to the directory containing manage.py and from there enter the command :
+django-admin startapp projectApp
+Now you can see your directory structure as under :
+
+
+To consider the app in your project you need to specify your project name in INSTALLED_APPS list as follows in settings.py:
+
+# Application definition
+ 
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'projectApp'
+]
+So, we have finally created an app but to render the app using URLs we need to include the app in our main project so that URLs redirected to that app can be rendered. Let us explore it. 
+Move to projectName -> projectName -> urls.py and add below code in the header
+
+from django.urls import include
+Now in the list of URL patterns, you need to specify the app name for including your app URLs. Here is the code for it –
+
+from django.contrib import admin
+from django.urls import path, include
+ 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # Enter the app name in following
+    # syntax for this to work
+    path('', include("projectApp.urls")),
+]
+Now You can use the default MVT model to create URLs, models, views, etc. in your app and they will be automatically included in your main project.
+The main feature of Django Apps is independence, every app functions as an independent unit in supporting the main project. 
+
+Now the urls.py in the project file will not access the app’s url.
+
+To run your Django Web application properly the following actions must be taken:-
+
+1. Create a file in the apps directory called urls.py
+
+2. Include the following code:
+
+
+from django.urls import path
+#now import the views.py file into this code
+from . import views
+urlpatterns=[
+  path('',views.index)
+]
+The above code will call or invoke the function which is defined in the views.py file so that it can be seen properly in the Web browser. Here it is assumed that views.py contains the following code :- 
+
+
+from django.http import HttpResponse
+ 
+ 
+def index(request):
+  return HttpResponse("Hello Geeks")
+After adding the above code, go to the settings.py file which is in the project directory, and change the value of ROOT_URLCONF from ‘project.urls’ to ‘app.urls’
+
+From this:-
+
+
+
+To this:
+
+
+
+3. And then you can run the server(127.0.0.1:8000) and you will get the desired output
+
+
+
+
+Weather app using Django | Python
+Last Updated : 25 May, 2022
+In this tutorial, we will learn how to create a Weather app that uses Django as backend. Django provides a Python Web framework based web framework that allows rapid development and clean, pragmatic design.
+
+Basic Setup –
+Change directory to weather –
+
+cd weather
+Start the server –
+
+python manage.py runserver
+To check whether the server is running or not go to a web browser and enter http://127.0.0.1:8000/ as URL. Now, you can stop the server by pressing
+
+ctrl-c
+Implementation :
+ python manage.py startapp main
+Goto main/ folder by doing :
+
+cd main 
+and create a folder with index.html file: templates/main/index.html
+
+Open the project folder using a text editor. The directory structure should look like this :
+
+
+Now add main app in settings.py
+
+
+Edit urls.py file in weather :
+
+from django.contrib import admin 
+from django.urls import path, include 
+  
+  
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('', include('main.urls')), 
+] 
+edit urls.py file in main :
+
+from django.urls import path 
+from . import views 
+  
+urlpatterns = [ 
+         path('', views.index), 
+] 
+edit views.py in main :
+
+from django.shortcuts import render 
+# import json to load json data to python dictionary 
+import json 
+# urllib.request to make a request to api 
+import urllib.request 
+  
+  
+def index(request): 
+    if request.method == 'POST': 
+        city = request.POST['city'] 
+        ''' api key might be expired use your own api_key 
+            place api_key in place of appid ="your_api_key_here "  '''
+  
+        # source contain JSON data from API 
+  
+        source = urllib.request.urlopen( 
+            'http://api.openweathermap.org/data/2.5/weather?q =' 
+                    + city + '&appid = your_api_key_here').read() 
+  
+        # converting JSON data to a dictionary 
+        list_of_data = json.loads(source) 
+  
+        # data for variable list_of_data 
+        data = { 
+            "country_code": str(list_of_data['sys']['country']), 
+            "coordinate": str(list_of_data['coord']['lon']) + ' '
+                        + str(list_of_data['coord']['lat']), 
+            "temp": str(list_of_data['main']['temp']) + 'k', 
+            "pressure": str(list_of_data['main']['pressure']), 
+            "humidity": str(list_of_data['main']['humidity']), 
+        } 
+        print(data) 
+    else: 
+        data ={} 
+    return render(request, "main/index.html", data) 
+You can get your own API key from : Weather API
+
+Navigate to templates/main/index.html and edit it: link to index.html file
+
+Make migrations and migrate it:
+
+python manage.py makemigrations
+python manage.py migrate
+now let’s run the server to see your weather app.
+
+python manage.py runserver
+
+
+
+Django Sign Up and login with confirmation Email | Python
+Last Updated : 15 Sep, 2023
+Django by default provides an authentication system configuration. User objects are the core of the authentication system. Today we will implement Django’s authentication system. 
+
+Modules required: Django install, crispy_forms
+
+Django Sign Up and Login with Confirmation Email
+To install crispy_forms you can use the terminal command:
+
+pip install --upgrade django-crispy-forms
+Start a project with the following command –
+
+ django-admin startproject project
+Change directory to project –
+
+ cd project
+Start the server- Start the server by typing the following command in the terminal –
+
+ python manage.py runserver
+To check whether the server is running or not go to a web browser and enter http://127.0.0.1:8000/ as URL. and to stop the server press keys
+
+ctrl+c
+Let’s create an app now called the “user”. 
+
+python manage.py startapp user
+Goto user/ folder by doing: cd user and create a folder templates with files index.html, login.html, Email.html, register.html files.
+ 
+
+
+
+Open the project folder using a text editor. The directory structure should look like this :
+
+
+
+Now add the “user” app and “crispy_form” in your todo_site in settings.py, and add 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+at last of settings.py 
+
+
+
+configure email settings in setting.py:
+
+
+
+place your email and password here.
+
+Edit urls.py file in project
+In this file we provide the path for the login,logout ,register page and include the user.urls to the main project URL file.
+
+from django.contrib import admin
+from django.urls import path, include
+from user import views as user_view
+from django.contrib.auth import views as auth
+ 
+urlpatterns = [
+ 
+    path('admin/', admin.site.urls),
+ 
+    ##### user related path########################## 
+    path('', include('user.urls')),
+    path('login/', user_view.Login, name ='login'),
+    path('logout/', auth.LogoutView.as_view(template_name ='user/index.html'), name ='logout'),
+    path('register/', user_view.register, name ='register'),
+ 
+]
+Edit urls.py in user
+Here we provide the URL path for index view and these views are connected to the main project URL file.
+
+
+from django.urls import path, include
+from django.conf import settings
+from . import views
+from django.conf.urls.static import static
+ 
+urlpatterns = [
+         path('', views.index, name ='index'),
+]
+Edit views.py in user
+Now we will provide the logic and code for the Email system in the views of user app
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserRegisterForm
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
+  
+  
+#################### index####################################### 
+def index(request):
+    return render(request, 'user/index.html', {'title':'index'})
+  
+########### register here ##################################### 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            ######################### mail system #################################### 
+            htmly = get_template('user/Email.html')
+            d = { 'username': username }
+            subject, from_email, to = 'welcome', 'your_email@gmail.com', email
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            ################################################################## 
+            messages.success(request, f'Your account has been created ! You are now able to log in')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'user/register.html', {'form': form, 'title':'register here'})
+  
+################ login forms################################################### 
+def Login(request):
+    if request.method == 'POST':
+  
+        # AuthenticationForm_can_also_be_used__
+  
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password = password)
+        if user is not None:
+            form = login(request, user)
+            messages.success(request, f' welcome {username} !!')
+            return redirect('index')
+        else:
+            messages.info(request, f'account done not exit plz sign in')
+    form = AuthenticationForm()
+    return render(request, 'user/login.html', {'form':form, 'title':'log in'})
+Configure your email here.
+
+Now create a forms.py in user
+Now with help of django form we will create a Registration page for the new user to register and this will mail to registering gmail from the gmail we mention in the settings.py file of the project.
+
+
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+ 
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+    phone_no = forms.CharField(max_length = 20)
+    first_name = forms.CharField(max_length = 20)
+    last_name = forms.CharField(max_length = 20)
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'phone_no', 'password1', 'password2']
+Navigate to templates/user/ and edit files : 
+Index.html file
+
+This file includes metadata, loads external CSS and JavaScript files (Bootstrap and Font Awesome), and uses Django template tags to handle dynamic content. The template features a navigation bar, displays alert messages, and adjusts the page content based on user authentication, showing a personalized welcome message or a login prompt. This code is designed for building user-friendly web interfaces within a Django project.
+
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="project">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="author" content="vinayak sharma">
+ 
+  <title>{{title}}</title>
+ 
+ 
+  <!-- bootstrap file -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- bootstrap file-->
+ 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+ 
+  <!-- main css -->
+  <link rel="stylesheet" type="text/css" href="{% static "index.css" %}" />
+ 
+ 
+  <!-- message here -->
+ 
+  {% if messages %}
+  {% for message in messages %}
+ 
+  <script>
+    alert("{{ message }}");
+  </script>
+ 
+  {% endfor %}
+  {% endif %}
+ 
+  <!--_______________________________________________-->
+ 
+ 
+ 
+</head>
+ 
+<body class="container-fluid">
+ 
+ 
+  <header class="row">
+ 
+    <!-- navbar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">project</a>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNavBar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url "index" %}">Home</a></li>
+ 
+            {% if user.is_authenticated %}
+            <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span>   Logout</a></li>
+            {% else %}
+            <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span>   Sign up</a></li>
+            <li><a href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span>   Log in</a></li>
+            {% endif %}
+ 
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <br/>
+  <br>
+  <br>
+  <div class="row">
+    {% block start %}
+    {% if user.is_authenticated %}
+    <center><h1>welcome back {{user.username}}!</h1></center>
+    {% else %}
+    <center><h1>log in, plz . . .</h1></center>
+    {% endif %}
+    {% endblock %}
+  </div>
+</body>
+ 
+</html>
+Email.html
+
+The provided HTML code is an email template for a registration confirmation message. It uses the Roboto font, has a centered thank-you message with user-specific content (username), and a horizontal line for separation. This template is designed to deliver a visually pleasing and informative confirmation email to users.
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900');
+        </style>
+    </head>
+    <body style="background: #f5f8fa;font-family: 'Roboto', sans-serif;">
+        <div style="width: 90%;max-width:600px;margin: 20px auto;background: #ffffff;">
+            <section style="margin: 0 15px;color:#425b76;">
+                <h2 style="margin: 40px 0 27px 0;text-align: center;">Thank you to registration</h2>
+                <hr style="border:0;border-top: 1px solid rgba(66,91,118,0.3);max-width: 50%">
+                <p style="font-size:15.5px;font-weight: bold;margin:40px 20px 15px 20px;">Hi {{username}}, we have received your details and will process soon.</p>
+            </section>
+        </div>
+    </body>
+</html>
+Login.html
+
+Inside this block, it creates a centered login form with specific styling, including a black border, padding, and a rounded border. The form includes a CSRF token for security and uses the crispy filter to render form fields with enhanced formatting, along with a login button and a link to the registration page.
+
+
+{% extends "user/index.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+ 
+ <div class="content-section col-md-8 col-md-offset-2">
+  <center>
+  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+   <center>
+    <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span>   login</button>
+  </center>
+  <br/>
+  <sub style="text-align: left;"><a href="{% url 'register' %}" style="text-decoration: none; color: blue; padding:2%; cursor:pointer; margin-right:2%;">don't have account,sign up</a></sub>
+  </form>
+</center>
+ </div>
+{% endblock start %}
+Register.html
+
+This file creates a centered sign-up form with specific styling, including a black border, padding, and rounded corners. The form includes a CSRF token for security and uses the crispy filter for enhanced form field rendering, along with a sign-up button and a link to the login page for users with existing accounts.
+
+
+{% extends "user/index.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+ 
+<div class="content-section col-md-8 col-md-offset-2">
+  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+    <center>
+      <button style="background: black; padding:2%; font-size: 2rem; color:white;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-check"></span>   sign up</button>
+    </center>
+    <br />
+    <sub><a href="{% url "login" %}" style="text-decoration: none; color: blue; padding:3%; cursor:pointer;">Already have an account ?</a></sub>
+  </form>
+</div>
+{% endblock start %}
+Make migrations and migrate them. 
+
+python manage.py makemigrations
+python manage.py migrate
+Now you can run the server to see your app.
+
+python manage.py runserver
+
+ 
+
+Setup Sending Email in Django Project
+Last Updated : 29 Nov, 2022
+Haven’t you observed, when you register on some websites, you get mail from that company or institution? The email would be, a verification email or welcome email, account creation successful email or thanks-regard email, etc. For example, when you create a Google account, the first mail you get would be something like, “Hi Xyz, Welcome to Google. Your new account comes with access to Google products, apps, and services…..” Sending these types of emails from your Django application is quite easy. Although you can refer to the documentation to knowing more about sending emails in Django, this is remarkably condensed and made easier. 
+
+How to send simple emails to the registered users of your Django application Illustration of Django emails using an example. Consider a project named geeksforgeeks having an app named geeks. Refer this to create a Django projects and apps. Now let’s demonstrate this in geeksforgeeks project. In your “geeks” app’s settings.py file, enter the following, 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = #sender's email-id
+EMAIL_HOST_PASSWORD = #password associated with above email-id
+In the above code, EMAIL_HOST_USER = ‘xabc6457@gmail.com’ and EMAIL_HOST_PASSWORD = ‘xyz123abc@’ are the lines where you need to add the sender’s mail id and password. xabc6457@gmail.com and xyz123abc@ are just examples. Now to use this in our application, move to views.py and add these lines at the top section as below. 
+
+
+from django.conf import settings
+from django.core.mail import send_mail
+Generally, emails are sent to the users who signup right? So, in the signup view function, add these lines. 
+
+
+subject = 'welcome to GFG world'
+message = f'Hi {user.username}, thank you for registering in geeksforgeeks.'
+email_from = settings.EMAIL_HOST_USER
+recipient_list = [user.email, ]
+send_mail( subject, message, email_from, recipient_list )
+Now we will understand what exactly is happening. Here,
+
+subject refers to the email subject.
+message refers to the email message, the body of the email.
+email_from refers to the sender’s details.This takes the EMAIL_HOST_USER from settings.py file, where you added those lines of code earlier.
+recipient_list is the list of recipients to whom the mail has to be sent that is, whoever registers to your application they receive the email.
+send_mail is an inbuilt Django function that takes subject, message, email_from, and recipient’s list as arguments, this is responsible to send emails.
+After these extra lines of code has been added to your project, you can send emails now. But if you are using Gmail, then the first time you make these changes in your project and run, you might get SMTP error. To correct that- 1-Go to the Google account registered with the sender’s mail address and select Manage your account 
+
+2-Go to security section at the left nav and scroll down. Look for ‘App password’.
+
+3- Inside App password select the any of the option from dropdown and given name as per your wish.
+
+4- Now you will see a code on your screen, copy the code.
+
+5. Paste the code in settings.py where you have declared EMAIL_HOST_PASSWORD. 
+
+6. Finally run the application. Now, register any user to your application, and they will receive mail from the email account you had mentioned. run the application.
+
+
+
+Voting System Project Using Django Framework
+Last Updated : 20 Sep, 2023
+Project Title: Pollster (Voting System) web application using Django framework
+Type of Application (Category): Web application.
+
+Introduction: We will create a pollster (voting system) web application using Django. This application will conduct a series of questions along with many choices. A user will be allowed to give voting for that question by selecting a choice. Based on the answer the total votes will be calculated and it will be displayed to the user. Users can also check the result of the total votes for specific questions on the website directly. We will also build the admin part of this project. Admin user will be allowed to add questions and manage questions in the application. 
+
+pollster-web-app
+
+Pre-requisite: Knowledge of Python and basics of Django Framework. Python should be installed in the system. Visual studio code or any code editor to work on the application. 
+
+Technologies used in the project: Django framework and SQLite database which comes by default with Django.  
+
+Implementation of the Project
+Creating Project
+Step-1: Create an empty folder pollster_project in your directory.
+Step-2: Now switch to your folder and create a virtual environment in this folder using the following command. 
+
+pip install pipenv
+pipenv shell
+Step-3: A Pipfile will be created in your folder from the above step. Now install Django in your folder using the following command. 
+
+pipenv install django
+Step-4: Now we need to establish the Django project. Run the following command in your folder and initiate a Django project. 
+
+django-admin startproject pollster
+A New Folder with name pollster will be created. Switch to the pollster folder using the following command. 
+
+cd pollster
+The folder structure will look something like this. 
+
+
+
+Here you can start the server using the following command and check if the application running or not using your http://127.0.0.1:8000/ in your browser. 
+
+python manage.py runserver
+Step-5: Create an app ‘polls‘ using the following command  
+
+python manage.py startapp polls
+Below is the folder structure after creating ”polls’ app in the project.  
+
+polls-app
+
+Create Models
+Step-1: In your models.py file write the code given below to create two tables in your database. One is ‘Question‘ and the other one is ‘Choice‘. ‘Question’ will have two fields of ‘question_text’ and a ‘pub_date’. Choice has three fields: ‘question’, ‘choice_text’, and ‘votes’. Each Choice is associated with a Question. 
+
+
+from django.db import models
+ 
+# Create your models here.
+ 
+class Question(models.Model):
+    question_text = models.CharField(max_length = 200)
+    pub_date = models.DateTimeField('date published')
+ 
+    def __str__(self):
+        return self.question_text
+ 
+ 
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete = models.CASCADE)
+    choice_text = models.CharField(max_length = 200)
+    votes = models.IntegerField(default = 0)
+ 
+    def __str__(self):
+        return self.choice_text
+Step-2:Go to the settings.py file and in the list, INSTALLED_APPS write down the code below to include the app in our project. This will refer to the polls -> apps.py -> PollsConfig class. 
+
+
+INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+Step-3: We have made changes in our database and created some tables but in order to reflect these changes we need to create migration here and then Django application will stores changes to our models. Run the following command given below to create migrations. 
+
+python manage.py makemigrations polls
+Inside polls->migrations a file 0001_initial.py will be created where you can find the database tables which we have created in our models.py file. Now to insert all the tables in our database run the command given below…  
+
+python manage.py migrate 
+Create an Admin User
+Step-1: Run the command given below to create a user who can login to the admin site. 
+
+python manage.py createsuperuser
+It will prompt username which we need to enter. 
+
+Username: geeks123
+Now it will prompt an email address which again we need to enter here.  
+
+Email address: xyz@example.com
+The final step is to enter the password. We need to enter the password twice, the second time as a confirmation of the first.  
+
+Password: ******
+Password (again): ******
+Superuser created successfully.
+Now we can run the server using the same command python manage.py runserver and we can check our admin panel browsing the URL http://127.0.0.1:8000/admin .  
+
+admin-panel
+
+Step-2: In the admin.py file we will write the code given below to map each question with choices to select. Also, we will write the code to change the site header, site title, and index_title. Once this is done we can add questions and choices for the question from the admin panel.  
+
+
+from django.contrib import admin
+# Register your models here.
+from .models import Question, Choice
+ 
+# admin.site.register(Question)
+# admin.site.register(Choice)
+ 
+admin.site.site_header = "Pollster Admin"
+admin.site.site_title = "Pollster Admin Area"
+admin.site.index_title = "Welcome to the Pollster Admin Area"
+ 
+ 
+class ChoiceInLine(admin.TabularInline):
+    model = Choice
+    extra = 3
+ 
+ 
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [(None, {'fields': ['question_text']}), ('Date Information', {
+        'fields': ['pub_date'], 'classes': ['collapse']}), ]
+    inlines = [ChoiceInLine]
+ 
+ 
+admin.site.register(Question, QuestionAdmin)
+question-choices
+
+Note: We can test the application here by adding some questions and choices for those questions. 
+
+Create Views
+Now we will create the view of our application that will fetch the data from our database and will render the data in the ‘template‘ (we will create ‘template’ folder and the files inside this folder in the next section) of our application to display it to the user. 
+
+Step-1 Open views.py file and write down the code given below. 
+
+
+from django.template import loader
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+ 
+from .models import Question, Choice
+ 
+# Get questions and display them
+ 
+ 
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls / index.html', context)
+ 
+# Show specific question and choices
+ 
+ 
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk = question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls / detail.html', {'question': question})
+ 
+# Get question and display results
+ 
+ 
+def results(request, question_id):
+    question = get_object_or_404(Question, pk = question_id)
+    return render(request, 'polls / results.html', {'question': question})
+ 
+# Vote for a question choice
+ 
+ 
+def vote(request, question_id):
+    # print(request.POST['choice'])
+    question = get_object_or_404(Question, pk = question_id)
+    try:
+        selected_choice = question.choice_set.get(pk = request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'polls / detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('polls:results', args =(question.id, )))
+Step-2: Create a file urls.py inside the pollster->polls folder to define the routing for all the methods we have implemented in views.py file (don’t get confused with the file inside the pollster->pollster->urls.py file). Below is the code of urls.py file… 
+
+
+from django.urls import path
+from . import views
+ 
+app_name = 'polls'
+urlpatterns = [
+    path('', views.index, name ='index'),
+    path('<int:question_id>/', views.detail, name ='detail'),
+    path('<int:question_id>/results/', views.results, name ='results'),
+    path('<int:question_id>/vote/', views.vote, name ='vote'),
+]
+Create Templates
+Step-1: Follow the steps given below to create the front layout of the page. 
+
+Create a folder ‘templates‘ in top-level pollster folder (alongside of polls and pollster) i.e. pollster-> templates.
+Create ‘base.html‘ file inside the template folder. We will define the head, body and navigation bar of our application in this file.
+In the ‘templates’ folder create another folder ‘polls‘. In ‘polls’ folder create three files ‘index.html‘, ‘results.html‘ and ‘detail.html‘.
+The folder structure will look like the image given below (we have highlighted the files which we have created in ‘create views i.e urls.py’ and ‘create template’ section)… 
+
+templates
+
+Step-2: By default Django will search the ‘template’ inside the ‘polls’ app but we have created a global ‘template’ folder which is outside the polls app. So in order to make it work, we need to define the ‘template’ folder path inside the settings.py file. Open settings.py file and add the code given below in the list ‘TEMPLATES’. In order to make the given code work add “import os” in settings.py.
+
+
+TEMPLATES = [
+    {
+        # make changes in DIRS[].
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+Step-3: Open index.html file and write the code given below. This file will display the list of questions which are stored in our database. Also, two buttons will be displayed to the user. One for the voting (we will create a detail.html file for voting) and the other one is to check the results (we will create results.html file for results). 
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center mb-3">Poll Questions</h1>
+{% if latest_question_list %}
+{% for question in latest_question_list %}
+<div class="card-mb-3">
+    <div class="card-body">
+        <p class="lead">{{ question.question_text }}</p>
+        <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary btn-sm">Vote Now</a>
+        <a href="{% url 'polls:results' question.id %}" class="btn btn-secondary btn-sm">Results</a>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<p>No polls available</p>
+{% endif %}
+{% endblock %}
+Step-4: Open detail.html file and write the code given below. This file will be responsible for voting on specific questions. Whatever question a user will select for voting from the list of the question (index.html file), that specific question and the choices for the question will be displayed on this page. A user will be allowed to select one choice and give voting by clicking on the vote button. 
+
+
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'polls:index' %}">Back To Polls</a>
+<h1 class="text-center mb-3">{{ question.question_text }}</h1>
+ 
+{% if error_message %}
+<p class="alert alert-danger">
+    <strong>{{ error_message }}</strong>
+</p>
+{% endif %}
+ 
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+    <div class="form-check">
+        <input type="radio" name="choice" class="form-check-input" id="choice{{ forloop.counter }}"
+            value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+    </div>
+    {% endfor %}
+    <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
+</form>
+{% endblock %}
+Step-5: Open results.html file and write the code given below. This file will display the result of total votes on a specific question whatever question the user will select (from the index.html file) to check the result. 
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-5 text-center">{{ question.question_text }}</h1>
+ 
+<ul class="list-group mb-5">
+    {% for choice in question.choice_set.all %}
+    <li class="list-group-item">
+        {{ choice.choice_text }} <span class="badge badge-success float-right">{{ choice.votes }}
+            vote{{ choice.votes | pluralize }}</span>
+    </li>
+    {% endfor %}
+</ul>
+ 
+<a class="btn btn-secondary" href="{% url 'polls:index' %}">Back To Polls</a>
+<a class="btn btn-dark" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+{% endblock %}
+Step-6: Let’s create the navigation bar for our application. Create a folder ‘partials‘ inside the folder ‘templates’ and then create a file ‘_navbar.html‘ inside the ‘partial’ folder. File structure will be templates->partials->_navbar.html. Write the code given below in this file. 
+
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="/">Pollster</a>
+    </div>
+</nav>
+Step-7: We haven’t included the head and body tag in every single HTML file we have created till now. We can write these codes in just one single file base.html and we can give the layout to our page. We will also bring our navigation bar(_navbar.html file) on this page. So open base.html file inside the ‘template’ folder and write down the code given below. 
+
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Pollster {% block title %}{% endblock %}</title>
+</head>
+ 
+<body>
+    <!--NavBar-->
+    {% include 'partials/_navbar.html'%}
+    <div class="container">
+        <div class="row">
+            <div class=".col-md-6 m-auto">
+                {% block content %}{% endblock%}
+            </div>
+        </div>
+    </div>
+</body>
+ 
+</html>
+Create Landing Page
+The URL http://127.0.0.1:8000/ should display a landing page for our web application. So to create a landing page we will follow the step given below. 
+
+Step-1 Switch to the top-level pollster folder and run the command given below to create an app ‘pages‘. 
+
+python manage.py startapp pages
+Below is the folder structure once the ‘pages’ app will be created. 
+
+pages
+
+Step-2 Open ‘views.py‘ inside ‘pages’ folder i.e. pages->views.py. Write down the code given below to visit on landing page. 
+
+
+from django.shortcuts import render
+ 
+# Create your views here.
+ 
+def index(request):
+    return render(request, 'pages / index.html')
+Step-3 Create urls.py file inside the ‘pages’ folder i.e. pages->urls.py. Write the code given below to define the routing of pages->index.html file (check step-1). 
+
+
+   
+from django.urls import path
+ 
+from . import views
+ 
+urlpatterns = [
+    path('', views.index, name ='index'),
+]
+Step-4 Create a folder ‘pages‘ inside ‘template’ folder. Now inside ‘pages’ folder create a file index.html. Write down the code given below to display the landing page to the users. 
+
+
+{% extends 'base.html' %}
+{% block content %}
+ 
+<div class="card text-center">
+    <div class="card-body">
+        <h1>Welcome To Pollster!</h1>
+        <p>This is an Polling Web Application built with Django</p>
+        <a class="btn btn-dark" href="{% url 'polls:index' %}">
+            View Available Polls</a>
+    </div>
+</div>
+{% endblock %}
+Create routing inside the main urls.py file of the application
+We have created two apps in our application ‘polls‘ and ‘pages‘. We need to define the routing of these two apps inside the main urls.py file which is pollster->pollster->urls.py file. So open the main urls.py file inside the pollster folder and write down the code given below to define the routing of these two apps(‘polls’ and ‘pages’). 
+
+
+from django.contrib import admin
+from django.urls import include, path
+ 
+urlpatterns = [
+    path('', include('pages.urls')),
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
+]
+Testing of the Application
+Admin Frontend
+Step-1 Run the server using the command python manage.py runserver and browse the URL http://127.0.0.1:8000/admin/. Now enter the username and password to login into the system. 
+
+admin-login
+
+Step-2 Click on ‘add’ button next to the ‘Questions’. 
+
+add-questions
+
+Step-2 Now add question and choices for those questions. Also, mention the date and time and then click on the ‘save’ button. You can add as many questions as you want. You will see a list of questions added in the database. 
+
+question-choice-image
+
+User Frontend
+Step-1: Browse the URL http://127.0.0.1:8000/ and you will see the landing page of the application. Click on the “View Available Polls” 
+
+landing-page
+
+Step-2: You will see list of questions with two options ‘Vote Now’ and ‘Results’. From here you need to select one question and click on the ‘Vote Now’ button. 
+
+poll-questions
+
+Step-3: Once this is done select any one choice and click on ‘Vote’ button. You can also go to the previous menu using the ‘Back to Polls’ button on the top. 
+
+vote
+
+You will see the total voting result for the question you have selected. 
+
+results
+
+You can also check the total votes for any question using the option ‘Results’ from the ‘Poll Questions’ page. 
+
+Future Scope
+This project can be used to conduct the online voting system in any field or industry. The project can be expanded and several other features can also be included based on the requirement. People can share the opinion and they can also check the total voting given by many users. 
+
+Project Repository Link
+https://github.com/anuupadhyay/pollster-django-crash
+ 
+
+Youtube video downloader using Django
+Last Updated : 25 May, 2022
+In this article, we will see how to make a YouTube video downloader tool in Django. We will be using pytube module for that.
+
+Prerequisite:
+
+pytube: It is python’s lightweight and dependency-free module, which is used to download YouTube Videos.
+Django: It is python’s framework to make web-applications.
+Here, we will be using Django as a backend along with pytube module to create this tool. We can install pytube module by typing the below command in the terminal.
+
+pip install pytube
+So, let’s dive in to make our YouTube video downloader tool.
+
+First, we will create an HTML design (form) where the user can come and enter the URL of a video which he/she wants to download. We will use Django’s POST method to get that URL (because it is secure). We also need to use csrf token if we are using the POST method. Syntax for csrf token is: 
+
+{% csrf_token %}
+<!DOCTYPE html> 
+<html> 
+<body> 
+  
+<h1>Youtube video downloader</h1> 
+  
+  
+<form action="" method="post"> 
+  {% csrf_token %} 
+  
+  <label for="link">Enter URL:</label> 
+  <input type="text" id="link" name="link"><br><br> 
+  <input type="submit" value="Submit"> 
+</form> 
+  
+</body> 
+</html>
+ 
+
+ 
+
+Now, it’s time to create a function that receives the video link and downloads that video. You need to import function YouTube from module pytube in views.py file.  Now we can define the function to download video.
+
+ 
+
+views.py
+
+ 
+
+# importing all the required modules 
+from django.shortcuts import render, redirect 
+from pytube import *
+  
+  
+# defining function 
+def youtube(request): 
+  
+    # checking whether request.method is post or not 
+    if request.method == 'POST': 
+        
+        # getting link from frontend 
+        link = request.POST['link'] 
+        video = YouTube(link) 
+  
+        # setting video resolution 
+        stream = video.streams.get_lowest_resolution() 
+          
+        # downloads video 
+        stream.download() 
+  
+        # returning HTML page 
+        return render(request, 'youtube.html') 
+    return render(request, 'youtube.html')
+ 
+
+ 
+
+Now, we have to define the URL (path) for this function inside urls.py.
+
+ 
+
+from django.contrib import admin 
+from django.urls import path 
+from . import views 
+  
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('youtube', views.youtube, name='youtube'), 
+]
+ 
+
+ 
+
+That is it for the coding part, now you can run the project by python manage.py runserver and head over to http://localhost:8000/youtube to see the output.
+
+ 
+
+Output:
+
+ 
+
+
+
+ 
+
+When you click on submit a video will be downloaded in your Django project’s directory.
+
+ 
+
+Python Text to Speech and Vice-Versa
+
+web scraping 
+opencv projects 
+automating boring stuff using python 
+

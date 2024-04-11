@@ -542,6 +542,7 @@ fetch("https://example.com", {
 
 
 // Note: Browsers should not send credentials 
+
 // in preflight requests irrespective of this 
 // setting. For more information see: CORS 
 // Requests with credentials.
